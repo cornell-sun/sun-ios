@@ -11,6 +11,7 @@
 		5006AFFE1EA9625000F58549 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5006AFFD1EA9625000F58549 /* ViewController.swift */; };
 		5006B0031EA9625000F58549 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5006B0021EA9625000F58549 /* Assets.xcassets */; };
 		5006B00E1EA963A900F58549 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5006B00D1EA963A900F58549 /* Default-568h@2x.png */; };
+		5006B24D1EADA37F00F58549 /* PostObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5006B24C1EADA37E00F58549 /* PostObject.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +21,7 @@
 		5006B0021EA9625000F58549 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5006B0071EA9625000F58549 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5006B00D1EA963A900F58549 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		5006B24C1EADA37E00F58549 /* PostObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PostObject.swift; path = "Cornell Sun/PostObject.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -37,6 +39,7 @@
 			isa = PBXGroup;
 			children = (
 				5006B00D1EA963A900F58549 /* Default-568h@2x.png */,
+				5006B24E1EADA38400F58549 /* Objects */,
 				5006AFFA1EA9625000F58549 /* Cornell Sun */,
 				5006AFF91EA9625000F58549 /* Products */,
 			);
@@ -59,6 +62,14 @@
 				5006B0071EA9625000F58549 /* Info.plist */,
 			);
 			path = "Cornell Sun";
+			sourceTree = "<group>";
+		};
+		5006B24E1EADA38400F58549 /* Objects */ = {
+			isa = PBXGroup;
+			children = (
+				5006B24C1EADA37E00F58549 /* PostObject.swift */,
+			);
+			name = Objects;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -134,6 +145,7 @@
 			files = (
 				5006AFFE1EA9625000F58549 /* ViewController.swift in Sources */,
 				5006AFFC1EA9625000F58549 /* AppDelegate.swift in Sources */,
+				5006B24D1EADA37F00F58549 /* PostObject.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
