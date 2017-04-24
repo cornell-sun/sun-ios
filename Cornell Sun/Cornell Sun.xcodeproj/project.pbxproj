@@ -12,9 +12,11 @@
 		5006B0031EA9625000F58549 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5006B0021EA9625000F58549 /* Assets.xcassets */; };
 		5006B00E1EA963A900F58549 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5006B00D1EA963A900F58549 /* Default-568h@2x.png */; };
 		5006B24D1EADA37F00F58549 /* PostObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5006B24C1EADA37E00F58549 /* PostObject.swift */; };
+		F252229F2922831926DB3A6C /* Pods_Cornell_Sun.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DBAAD519F3C5A2D044960CA /* Pods_Cornell_Sun.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3DBAAD519F3C5A2D044960CA /* Pods_Cornell_Sun.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cornell_Sun.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5006AFF81EA9625000F58549 /* Cornell Sun.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Cornell Sun.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5006AFFB1EA9625000F58549 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5006AFFD1EA9625000F58549 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -22,6 +24,8 @@
 		5006B0071EA9625000F58549 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5006B00D1EA963A900F58549 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		5006B24C1EADA37E00F58549 /* PostObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PostObject.swift; path = "Cornell Sun/PostObject.swift"; sourceTree = "<group>"; };
+		79D08546F469CBFA91B516C4 /* Pods-Cornell Sun.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cornell Sun.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Cornell Sun/Pods-Cornell Sun.debug.xcconfig"; sourceTree = "<group>"; };
+		A733FA4C43777F59F6F0F8B3 /* Pods-Cornell Sun.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cornell Sun.release.xcconfig"; path = "Pods/Target Support Files/Pods-Cornell Sun/Pods-Cornell Sun.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +33,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F252229F2922831926DB3A6C /* Pods_Cornell_Sun.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -42,6 +47,8 @@
 				5006B24E1EADA38400F58549 /* Objects */,
 				5006AFFA1EA9625000F58549 /* Cornell Sun */,
 				5006AFF91EA9625000F58549 /* Products */,
+				6FF0DFD245B42D7BBFBC46CA /* Pods */,
+				C0B2C074512AC5316E8D48D8 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -72,6 +79,23 @@
 			name = Objects;
 			sourceTree = "<group>";
 		};
+		6FF0DFD245B42D7BBFBC46CA /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				79D08546F469CBFA91B516C4 /* Pods-Cornell Sun.debug.xcconfig */,
+				A733FA4C43777F59F6F0F8B3 /* Pods-Cornell Sun.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		C0B2C074512AC5316E8D48D8 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3DBAAD519F3C5A2D044960CA /* Pods_Cornell_Sun.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -79,9 +103,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5006B00A1EA9625000F58549 /* Build configuration list for PBXNativeTarget "Cornell Sun" */;
 			buildPhases = (
+				28AF993F02CE442DBACE904A /* [CP] Check Pods Manifest.lock */,
 				5006AFF41EA9625000F58549 /* Sources */,
 				5006AFF51EA9625000F58549 /* Frameworks */,
 				5006AFF61EA9625000F58549 /* Resources */,
+				5D796D343FAE3F7BC75A78B1 /* [CP] Embed Pods Frameworks */,
+				74EBFA210DC6D01883DE7F2A /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -137,6 +164,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		28AF993F02CE442DBACE904A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		5D796D343FAE3F7BC75A78B1 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Cornell Sun/Pods-Cornell Sun-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		74EBFA210DC6D01883DE7F2A /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Cornell Sun/Pods-Cornell Sun-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		5006AFF41EA9625000F58549 /* Sources */ = {
@@ -247,6 +322,7 @@
 		};
 		5006B00B1EA9625000F58549 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 79D08546F469CBFA91B516C4 /* Pods-Cornell Sun.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = "Cornell Sun/Info.plist";
@@ -259,6 +335,7 @@
 		};
 		5006B00C1EA9625000F58549 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A733FA4C43777F59F6F0F8B3 /* Pods-Cornell Sun.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = "Cornell Sun/Info.plist";
