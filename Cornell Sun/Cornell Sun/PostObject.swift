@@ -15,13 +15,13 @@ class PostObject: NSObject {
     var title: String
     var content: String
     var excerpt: String
-    var author: Int
+    var author: AuthorObject
     var categories: [Int]
     var tags: [Int]
     var authorObject: Int //Replace Int with object mindy creates
     var mediaLink: String
     
-    init(id: Int, datePosted: Date, link: String, title: String, content: String, excerpt: String, author: Int, categories: [Int], tags: [Int], authorObject: Int, mediaLink: String) {
+    init(id: Int, datePosted: Date, link: String, title: String, content: String, excerpt: String, author: AuthorObject, categories: [Int], tags: [Int], authorObject: Int, mediaLink: String) {
         self.id = id
         self.datePosted = datePosted
         self.link = link
