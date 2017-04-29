@@ -7,4 +7,5 @@ target 'Cornell Sun' do
 
   # Pods for Cornell Sun
   pod 'SDWebImage', '~>3.8'
+  pod 'TRON', '~> 3.0.1'
 end

@@ -1,14 +1,29 @@
 PODS:
+  - Alamofire (4.4.0)
   - SDWebImage (3.8.2):
     - SDWebImage/Core (= 3.8.2)
   - SDWebImage/Core (3.8.2)
+  - SwiftyJSON (3.1.4)
+  - TRON (3.0.1):
+    - Alamofire (~> 4.1)
+    - TRON/SwiftyJSON (= 3.0.1)
+  - TRON/Core (3.0.1):
+    - Alamofire (~> 4.1)
+  - TRON/SwiftyJSON (3.0.1):
+    - Alamofire (~> 4.1)
+    - SwiftyJSON (~> 3.1)
+    - TRON/Core
 
 DEPENDENCIES:
   - SDWebImage (~> 3.8)
+  - TRON (~> 3.0.1)
 
 SPEC CHECKSUMS:
+  Alamofire: dc44b1600b800eb63da6a19039a0083d62a6a62d
   SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
+  SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
+  TRON: 6b4e8bfc5d5d50d3b5b579e8109ccc4029c1681c
 
-PODFILE CHECKSUM: 764ce607157e91c9dc2e60a98061016d19651e26
+PODFILE CHECKSUM: 5ca4dcdcf867acc37d5ab8223b42dd88302c9f2e
 
 COCOAPODS: 1.1.1

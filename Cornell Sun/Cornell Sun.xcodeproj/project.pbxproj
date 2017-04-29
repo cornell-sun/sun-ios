@@ -13,6 +13,7 @@
 		5006B0031EA9625000F58549 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5006B0021EA9625000F58549 /* Assets.xcassets */; };
 		5006B00E1EA963A900F58549 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5006B00D1EA963A900F58549 /* Default-568h@2x.png */; };
 		5006B24D1EADA37F00F58549 /* PostObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5006B24C1EADA37E00F58549 /* PostObject.swift */; };
+		507744EF1EB532690079D80D /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 507744EE1EB532690079D80D /* Network.swift */; };
 		50A898121EAEC93B0099CFA9 /* AuthorObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50A898111EAEC93B0099CFA9 /* AuthorObject.swift */; };
 		F252229F2922831926DB3A6C /* Pods_Cornell_Sun.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DBAAD519F3C5A2D044960CA /* Pods_Cornell_Sun.framework */; };
 /* End PBXBuildFile section */
@@ -27,6 +28,7 @@
 		5006B0071EA9625000F58549 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5006B00D1EA963A900F58549 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		5006B24C1EADA37E00F58549 /* PostObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PostObject.swift; path = "Cornell Sun/PostObject.swift"; sourceTree = "<group>"; };
+		507744EE1EB532690079D80D /* Network.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		50A898111EAEC93B0099CFA9 /* AuthorObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AuthorObject.swift; path = "Cornell Sun/AuthorObject.swift"; sourceTree = "<group>"; };
 		79D08546F469CBFA91B516C4 /* Pods-Cornell Sun.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cornell Sun.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Cornell Sun/Pods-Cornell Sun.debug.xcconfig"; sourceTree = "<group>"; };
 		A733FA4C43777F59F6F0F8B3 /* Pods-Cornell Sun.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cornell Sun.release.xcconfig"; path = "Pods/Target Support Files/Pods-Cornell Sun/Pods-Cornell Sun.release.xcconfig"; sourceTree = "<group>"; };
@@ -48,8 +50,9 @@
 			isa = PBXGroup;
 			children = (
 				5006B00D1EA963A900F58549 /* Default-568h@2x.png */,
-				5006B24E1EADA38400F58549 /* Objects */,
 				5006AFFA1EA9625000F58549 /* Cornell Sun */,
+				5006B24E1EADA38400F58549 /* Objects */,
+				507744F01EB5326D0079D80D /* Utilities */,
 				5006AFF91EA9625000F58549 /* Products */,
 				6FF0DFD245B42D7BBFBC46CA /* Pods */,
 				C0B2C074512AC5316E8D48D8 /* Frameworks */,
@@ -83,6 +86,14 @@
 				5006B24C1EADA37E00F58549 /* PostObject.swift */,
 			);
 			name = Objects;
+			sourceTree = "<group>";
+		};
+		507744F01EB5326D0079D80D /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				507744EE1EB532690079D80D /* Network.swift */,
+			);
+			name = Utilities;
 			sourceTree = "<group>";
 		};
 		6FF0DFD245B42D7BBFBC46CA /* Pods */ = {
@@ -225,6 +236,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				507744EF1EB532690079D80D /* Network.swift in Sources */,
 				5006AFFE1EA9625000F58549 /* ViewController.swift in Sources */,
 				5006AFFC1EA9625000F58549 /* AppDelegate.swift in Sources */,
 				5006B24D1EADA37F00F58549 /* PostObject.swift in Sources */,
