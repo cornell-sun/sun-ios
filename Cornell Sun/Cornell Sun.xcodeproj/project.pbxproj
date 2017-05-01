@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0C3695591EB6D9A900430C09 /* TestCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C3695581EB6D9A900430C09 /* TestCollectionViewController.swift */; };
 		5006AFFC1EA9625000F58549 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5006AFFB1EA9625000F58549 /* AppDelegate.swift */; };
 		5006AFFE1EA9625000F58549 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5006AFFD1EA9625000F58549 /* ViewController.swift */; };
 		5006B0031EA9625000F58549 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5006B0021EA9625000F58549 /* Assets.xcassets */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0C3695581EB6D9A900430C09 /* TestCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestCollectionViewController.swift; sourceTree = "<group>"; };
 		3DBAAD519F3C5A2D044960CA /* Pods_Cornell_Sun.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cornell_Sun.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5006AFF81EA9625000F58549 /* Cornell Sun.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Cornell Sun.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5006AFFB1EA9625000F58549 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -66,6 +68,7 @@
 			isa = PBXGroup;
 			children = (
 				5006AFFB1EA9625000F58549 /* AppDelegate.swift */,
+				0C3695581EB6D9A900430C09 /* TestCollectionViewController.swift */,
 				5006AFFD1EA9625000F58549 /* ViewController.swift */,
 				5006B0021EA9625000F58549 /* Assets.xcassets */,
 				5006B0071EA9625000F58549 /* Info.plist */,
@@ -224,6 +227,7 @@
 				5006AFFE1EA9625000F58549 /* ViewController.swift in Sources */,
 				5006AFFC1EA9625000F58549 /* AppDelegate.swift in Sources */,
 				5006B24D1EADA37F00F58549 /* PostObject.swift in Sources */,
+				0C3695591EB6D9A900430C09 /* TestCollectionViewController.swift in Sources */,
 				50A898121EAEC93B0099CFA9 /* AuthorObject.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
