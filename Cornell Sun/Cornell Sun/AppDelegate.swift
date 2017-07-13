@@ -12,7 +12,7 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    let redirectScheme = "cornellsun"
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -22,6 +22,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         
         return true
+    }
+    
+    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+        if url.scheme == redirectScheme {
+            /* 
+             For handling redirects: https://developers.tune.com/sdk/deep-linking-to-your-mobile-app-from-your-website/
+             Basically, the website has to have Javascript embedded that will redirect to cornell://article-id-etc
+             and then we can handle the article id here and display the correct story in app
+             */
+            return true
+        }
+        return false
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
