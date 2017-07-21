@@ -20,19 +20,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.rootViewController = ViewController()
         window?.makeKeyAndVisible()
         
-        
         return true
     }
     
+    /** 
+     Receive a universal link redirect and handle it properly. Uses Handoff.
+     https://developer.apple.com/library/content/documentation/General/Conceptual/AppSearch/UniversalLinks.html#//apple_ref/doc/uid/TP40016308-CH12-SW2
+     */
+    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
+        
+        return false
+    }
+    
+    /**
+     Handles opening the url separately (eg. opening cornellsun.com in Safari)
+     */
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
-        if url.scheme == redirectScheme {
-            /* 
-             For handling redirects: https://developers.tune.com/sdk/deep-linking-to-your-mobile-app-from-your-website/
-             Basically, the website has to have Javascript embedded that will redirect to cornell://article-id-etc
-             and then we can handle the article id here and display the correct story in app
-             */
-            return true
-        }
         return false
     }
 
