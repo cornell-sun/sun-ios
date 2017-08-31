@@ -20,6 +20,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = ViewController()
         window?.makeKeyAndVisible()
+
+        API.request(target: .recentPosts, success: { (response) in
+            // parse your data
+            do {
+                //XCTAssert(5==5)
+//                let posts: [PostObject] = try response.mapJSON() as! [PostObject]
+//               print(posts)
+                // do something with Posts
+            } catch {
+                // can't parse data, show error
+            }
+        }, error: { (error) in
+            // error from Wordpress
+        }, failure: { (error) in
+            // show Moya error
+        })
         
         return true
     }

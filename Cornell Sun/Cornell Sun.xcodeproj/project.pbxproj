@@ -220,7 +220,7 @@
 					};
 					DCD870EB1F256B7B00B98AF8 = {
 						CreatedOnToolsVersion = 9.0;
-						DevelopmentTeam = WZTZHV82W3;
+						DevelopmentTeam = 3C8UBDMMME;
 						TestTargetID = 5006AFF71EA9625000F58549;
 					};
 				};
@@ -494,7 +494,6 @@
 				INFOPLIST_FILE = "Cornell Sun/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.cornellsun.app;
-
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "ae057116-5be3-4759-9388-b52c8a6209b5";
 				PROVISIONING_PROFILE_SPECIFIER = "match Development com.cornellsun.app";
@@ -550,6 +549,7 @@
 				DCD870F41F256B7B00B98AF8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

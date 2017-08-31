@@ -20,7 +20,7 @@ enum SunAPI {
 }
 
 extension SunAPI: TargetType {
-    var baseURL: URL { return URL(string: "http://cornellsun.com//wp-json/wp/v2")! }
+    var baseURL: URL { return URL(string: "http://cornellsun.com/wp-json/wp/v2")! }
 
     var path: String {
         switch self {
