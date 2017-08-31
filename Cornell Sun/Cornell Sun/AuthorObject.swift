@@ -7,27 +7,23 @@
 //
 
 import Foundation
-import UIKit
-import TRON
-import SwiftyJSON
+import Mapper
 
-class AuthorObject: NSObject, JSONDecodable {
-    var id: Int = 0
-    var name: String = ""
-    var link: String = ""
-    var bio: String = ""
-    var avatarLink: String = ""
-    
+class AuthorObject: Mappable {
+    var id: Int
+    var name: String
+    var link: String
+    var bio: String
+    var avatarLink: String
 
-    required init(json: JSON) throws {
-        super.init()
-        self.id = json["id"].intValue
-        self.name = json["name"].stringValue
-        self.link = json["link"].stringValue
-        self.bio = json["description"].stringValue
-        self.avatarLink = json["avatar_urls"]["96"].stringValue
+    required init(map: Mapper) throws {
+        try id = map.from("id")
+        try name = map.from("name")
+        try link = map.from("link")
+        try bio = map.from("description")
+        try avatarLink = map.from("avatar_urls.96")
     }
-    
+
     init(id: Int, name: String, link: String, bio: String, avatarLink: String) {
         self.id = id
         self.name = name
