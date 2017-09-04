@@ -18,12 +18,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = ViewController()
+        window?.rootViewController = FeedCollectionViewController()
         window?.makeKeyAndVisible()
 
         API.request(target: .recentPosts, success: { (response) in
             // parse your data
             do {
+                print(try response.mapJSON())
                 //XCTAssert(5==5)
 //                let posts: [PostObject] = try response.mapJSON() as! [PostObject]
 //               print(posts)

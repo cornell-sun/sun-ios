@@ -8,6 +8,7 @@ target 'Cornell Sun' do
   pod 'SDWebImage', '~>3.8'
   pod 'Moya'
   pod 'Moya-ModelMapper', '4.0.0'
+  pod 'IGListKit', '~> 3.0'
 
   target 'Cornell SunTests' do
       inherit! :search_paths

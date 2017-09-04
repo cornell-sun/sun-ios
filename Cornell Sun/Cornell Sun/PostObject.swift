@@ -8,8 +8,9 @@
 
 import Foundation
 import Mapper
+import IGListKit
 
-class PostObject: Mappable {
+class PostObject: Mappable, ListDiffable {
     var id: Int
     var datePosted: Date
     var link: String
@@ -45,6 +46,17 @@ class PostObject: Mappable {
         self.categories = categories
         self.tags = tags
         self.mediaLink = mediaLink
+    }
+
+    func diffIdentifier() -> NSObjectProtocol {
+        return title as NSObjectProtocol
+    }
+
+    func isEqual(toDiffableObject object: ListDiffable?) -> Bool {
+        if self === object { return true }
+        else {
+            return false
+        }
     }
    
 }
