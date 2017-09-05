@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import LGSideMenuController
 
 class ViewController: UIViewController {
 
@@ -14,6 +15,12 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         view.backgroundColor = .white
+        
+        navigationItem.leftBarButtonItem =  UIBarButtonItem(title: "Menu",
+                                                            style: .plain,
+                                                            target: self,
+                                                            action: #selector(showLeftViewAnimated(_:)))
+
     }
 
     override func didReceiveMemoryWarning() {

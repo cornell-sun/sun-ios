@@ -6,7 +6,7 @@
         "apps": [],
         "details": [
             {
-                "appID": "appIDhere.com.cornellsun.Cornell-Sun",
+                "appID": "appIDhere.com.cornellsun.app",
                 "paths": ["*"]
             },
         ]

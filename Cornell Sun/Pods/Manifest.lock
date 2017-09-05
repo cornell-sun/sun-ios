@@ -1,14 +1,17 @@
 PODS:
+  - LGSideMenuController (2.1.1)
   - SDWebImage (3.8.2):
     - SDWebImage/Core (= 3.8.2)
   - SDWebImage/Core (3.8.2)
 
 DEPENDENCIES:
+  - LGSideMenuController
   - SDWebImage (~> 3.8)
 
 SPEC CHECKSUMS:
+  LGSideMenuController: ae40c80983ab8b8801c7cef0a6804d43aaa72d45
   SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
 
-PODFILE CHECKSUM: 764ce607157e91c9dc2e60a98061016d19651e26
+PODFILE CHECKSUM: e01db73daee35e3137b59886bc3f8b53dd919f22
 
 COCOAPODS: 1.1.1
