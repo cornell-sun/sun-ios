@@ -15,7 +15,7 @@ class AuthorObject: NSObject {
     var link: String
     var bio: String
     var avatarLink: String
-    
+
     init(id: Int, name: String, link: String, bio: String, avatarLink: String) {
         self.id = id
         self.name = name
