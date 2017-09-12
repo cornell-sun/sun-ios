@@ -19,7 +19,7 @@ class PostObject: NSObject {
     var categories: [Int]
     var tags: [Int]
     var mediaLink: String
-    
+
     init(id: Int, datePosted: Date, link: String, title: String, content: String, excerpt: String, author: AuthorObject, categories: [Int], tags: [Int], mediaLink: String) {
         self.id = id
         self.datePosted = datePosted
@@ -32,7 +32,5 @@ class PostObject: NSObject {
         self.tags = tags
         self.mediaLink = mediaLink
     }
-    
-    
-    
+
 }

@@ -22,7 +22,7 @@ class TestCollectionViewController: UICollectionViewController, UICollectionView
         collectionView?.dataSource = self
         collectionView?.delegate = self
         collectionView?.backgroundColor = .clear
-        
+
         if let colView = collectionView {
             view.addSubview(colView)
         }
@@ -38,7 +38,6 @@ class TestCollectionViewController: UICollectionViewController, UICollectionView
         return 1
     }
 
-
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
         return posts.count
@@ -46,28 +45,28 @@ class TestCollectionViewController: UICollectionViewController, UICollectionView
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
-        
+
         // replace this
         let imageView = UIImageView()
         imageView.clipsToBounds = true
         cell.contentMode = .scaleAspectFill
         cell.backgroundView = imageView
-        
+
         return cell
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
+
         return CGSize(width: view.frame.width, height: view.frame.height)
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        
+
         return 0
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-    
+
         return 0
     }
 }
