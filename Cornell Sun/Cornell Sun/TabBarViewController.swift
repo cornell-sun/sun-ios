@@ -22,11 +22,11 @@ class TabBarViewController: UITabBarController {
         delegate = self
         setupTabs()
     }
-    
+
     func setupTabs() {
         // replace each tab with a specified ViewController,
         // these are just placeholders
-        
+
         let leftMenuOneTableViewController = UITableViewController(style: .plain)
         let tabOneNavigationController = UINavigationController(rootViewController: ViewController())
         let tabOneSideMenuController = LGSideMenuController(rootViewController: tabOneNavigationController,
@@ -36,7 +36,7 @@ class TabBarViewController: UITabBarController {
         tabOneSideMenuController.leftViewPresentationStyle = .slideAbove
         let tabOneTabBarItem = UITabBarItem(title: "News", image: nil, selectedImage: nil)
         tabOneSideMenuController.tabBarItem = tabOneTabBarItem
-        
+
         let leftMenuTwoTableViewController = UITableViewController(style: .plain)
         let tabTwoNavigationController = UINavigationController(rootViewController: ViewController())
         let tabTwoSideMenuController = LGSideMenuController(rootViewController: tabTwoNavigationController,
@@ -46,7 +46,7 @@ class TabBarViewController: UITabBarController {
         tabTwoSideMenuController.leftViewPresentationStyle = .slideAbove
         let tabTwoTabBarItem = UITabBarItem(title: "Bookmarks", image: nil, selectedImage: nil)
         tabTwoSideMenuController.tabBarItem = tabTwoTabBarItem
-        
+
         let leftMenuThreeTableViewController = UITableViewController(style: .plain)
         let tabThreeNavigationController = UINavigationController(rootViewController: ViewController())
         let tabThreeSideMenuController = LGSideMenuController(rootViewController: tabThreeNavigationController,
@@ -67,11 +67,10 @@ class TabBarViewController: UITabBarController {
         let tabFourTabBarItem = UITabBarItem(title: "Settings", image: nil, selectedImage: nil)
         tabFourSideMenuController.tabBarItem = tabFourTabBarItem
 
-        
         viewControllers = [tabOneSideMenuController, tabTwoSideMenuController, tabThreeSideMenuController, tabFourSideMenuController]
         selectedIndex = 0
     }
-    
+
     func setupSideMenuController(rootViewController: UINavigationController) {
         let leftMenuTableViewController = UITableViewController(style: .plain)
         let sideMenuController = LGSideMenuController(rootViewController: rootViewController,
@@ -90,6 +89,5 @@ class TabBarViewController: UITabBarController {
 
 extension TabBarViewController: UITabBarControllerDelegate {
     override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
-        
     }
 }
