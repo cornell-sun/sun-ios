@@ -32,9 +32,8 @@ extension ArticleSectionController {
 
     override func cellForItem(at index: Int) -> UICollectionViewCell {
         let cell = collectionContext!.dequeueReusableCell(of: ArticleCell.self, for: self, at: index) as! ArticleCell
-        cell.backgroundColor = .red
+        cell.backgroundColor = .lightGray
         cell.post = entry
-
 
         return cell
     }

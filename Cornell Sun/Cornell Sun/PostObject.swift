@@ -11,6 +11,12 @@ import Mapper
 import IGListKit
 
 class PostObject: Mappable, ListDiffable {
+    private let wpDateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "YYYY-MM-DD'T'HH:mm:ss"     // "2016-01-29T01:45:33"
+        return formatter
+    }()
+
     var id: Int
     var datePosted: Date
     var link: String
@@ -34,7 +40,33 @@ class PostObject: Mappable, ListDiffable {
         try tags = map.from("tags")
         try mediaLink = map.from("_links.wp:featuredmedia.0.href")
     }
-    
+
+    init? (data: Dictionary<String, AnyObject>, mediaLink: String) {
+        guard
+        let id = data["id"] as? Int,
+        let dateString = data["date"] as? String,
+        let date = wpDateFormatter.date(from: dateString),
+        let titleDictionary = data["title"] as? [String:Any],
+        let title = titleDictionary["rendered"] as? String,
+        let contentDictionary = data["content"] as? [String: Any],
+        let content = contentDictionary["rendered"] as? String,
+        let link = data["link"] as? String
+            else {
+                return nil
+    }
+        self.id = id
+        self.datePosted = date
+        self.title = title
+        self.content = content
+        self.link = link
+        self.excerpt = "excerpt"
+        self.authorId = 111
+        self.categories = [0]
+        self.tags = [1,2,3]
+        self.mediaLink = mediaLink
+    }
+
+
     init(id: Int, datePosted: Date, link: String, title: String, content: String, excerpt: String, authorId: Int, categories: [Int], tags: [Int], mediaLink: String) {
         self.id = id
         self.datePosted = datePosted

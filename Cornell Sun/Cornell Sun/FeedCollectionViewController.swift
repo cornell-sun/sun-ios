@@ -10,7 +10,6 @@ import UIKit
 import IGListKit
 
 class FeedCollectionViewController: ViewController {
-    let singlePost = PostObject(id: 0, datePosted: Date(), link: "http://cornellsun.com/2017/08/31/womens-soccer-remains-winless-against-syracuse-with-season-opening-loss/", title: "WomenU2019s Soccer Remains Winless Against Syracuse With Season-Opening Loss", content: "hi", excerpt: "hi2", authorId: 9, categories: [1,2], tags: [1], mediaLink: "http://cornellsun.com/wp-content/uploads/2017/08/DSC_1320-768x513.jpg")
     var feedData: [PostObject] = []
 
     let collectionView: UICollectionView = {
@@ -26,10 +25,62 @@ class FeedCollectionViewController: ViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        feedData = [singlePost]
+
         view.addSubview(collectionView)
         adapter.collectionView = collectionView
         adapter.dataSource = self
+        
+        API.request(target: .recentPosts, success: { (response) in
+            // parse your data
+            do {
+                let jsonResult = try JSONSerialization.jsonObject(with: response.data, options: [])
+                if let postArray = jsonResult as? [Dictionary<String, Any>] {
+                    for postDictionary in postArray {
+                        guard
+                            let links = postDictionary["_links"] as? [String: Any],
+                            let media = links["wp:featuredmedia"] as? [[String: Any]],
+                            var mediaUrl = media[0]["href"] as? String
+                            else {
+                                return
+                        }
+                        print(mediaUrl)
+                        mediaUrl = (mediaUrl as NSString).lastPathComponent
+                        API.request(target: .media(mediaId: mediaUrl), success: { (response2) in
+                            do {
+                                let mediaJsonResult = try JSONSerialization.jsonObject(with: response2.data, options: [])
+                                if let mediaObject = mediaJsonResult as? [String: Any],
+                                let mediaDetails = mediaObject["media_details"] as? [String: Any],
+                                let sizes = mediaDetails["sizes"] as? [String: Any],
+                                let rectThumbnail = sizes["rect_thumb"] as? [String: Any],
+                                let sourceUrl = rectThumbnail["source_url"] as? String {
+                                    if let post = PostObject(data: postDictionary as Dictionary<String, AnyObject>, mediaLink: sourceUrl) {
+                                        self.feedData.append(post)
+                                    }
+                                }
+                                self.adapter.performUpdates(animated: true, completion: nil)
+                            }
+                            catch {
+
+                            }
+                            }, error: { (error) in
+                                print("error", error)
+                        }, failure: { (error) in
+                            print("moya error", error)
+                            })
+                    }
+
+                }
+
+            } catch {
+                print("could not parse")
+                // can't parse data, show error
+            }
+        }, error: { (error) in
+            // error from Wordpress
+        }, failure: { (error) in
+            // show Moya error
+        })
+
     }
 
     override func viewDidLayoutSubviews() {
@@ -57,7 +108,7 @@ class FeedCollectionViewController: ViewController {
 
 extension FeedCollectionViewController: ListAdapterDataSource {
     func objects(for listAdapter: ListAdapter) -> [ListDiffable] {
-        return feedData as! [ListDiffable]
+        return feedData
     }
 
     func listAdapter(_ listAdapter: ListAdapter, sectionControllerFor object: Any) -> ListSectionController {

@@ -17,6 +17,10 @@ enum SunAPI {
 
     //Authors
     case author(authorId: Int)
+
+    //images
+    case media(mediaId: String)
+
 }
 
 extension SunAPI: TargetType {
@@ -30,6 +34,8 @@ extension SunAPI: TargetType {
             return "/posts"
         case .author(let authorId):
             return "/users/\(authorId)"
+        case .media(let mediaId):
+            return "/media/" + mediaId
         }
     }
 
@@ -62,10 +68,7 @@ extension SunAPI: TargetType {
     var task: Task {
         return .request
     }
-
-
 }
-
 
 
 

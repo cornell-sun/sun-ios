@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import PINRemoteImage
+import PINCache
 
 class ArticleCell: UICollectionViewCell {
     var post: PostObject? {
@@ -33,7 +35,8 @@ class ArticleCell: UICollectionViewCell {
 
     func setupHeroImage() {
         if let heroImageUrl = post?.mediaLink {
-            heroImageView.loadImageUsingUrlString(heroImageUrl)
+            heroImageView.pin_setImage(from: URL(string: heroImageUrl)!)
+            //heroImageView.loadImageUsingUrlString(heroImageUrl)
         }
     }
 
@@ -53,6 +56,6 @@ class ArticleCell: UICollectionViewCell {
         addConstraintsWithFormat("H:|-[v0]-|", views: heroImageView)
         addConstraintsWithFormat("H:|-[v0]-|", views: titleLabel)
 
-        addConstraintsWithFormat("V:|-[v0]-[v1]-|", views: heroImageView, titleLabel)
+        addConstraintsWithFormat("V:|-[v0]-60-[v1]-|", views: heroImageView, titleLabel)
     }
 }
