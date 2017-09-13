@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		036FE5BBAB2DFBC062751005 /* Pods_Cornell_SunTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C38BCC6B38BFCC0EC16BF2B /* Pods_Cornell_SunTests.framework */; };
 		0C3695591EB6D9A900430C09 /* TestCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C3695581EB6D9A900430C09 /* TestCollectionViewController.swift */; };
+		0C7D9A8E1F217B510041E1B0 /* apple-app-site-association in Resources */ = {isa = PBXBuildFile; fileRef = 0C7D9A8D1F217B510041E1B0 /* apple-app-site-association */; };
 		5006AFFC1EA9625000F58549 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5006AFFB1EA9625000F58549 /* AppDelegate.swift */; };
 		5006AFFE1EA9625000F58549 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5006AFFD1EA9625000F58549 /* ViewController.swift */; };
 		5006B0031EA9625000F58549 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5006B0021EA9625000F58549 /* Assets.xcassets */; };
@@ -40,6 +41,7 @@
 		0C3695581EB6D9A900430C09 /* TestCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestCollectionViewController.swift; sourceTree = "<group>"; };
 		389771843ED115B12D456CDA /* Pods-Cornell SunTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cornell SunTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Cornell SunTests/Pods-Cornell SunTests.debug.xcconfig"; sourceTree = "<group>"; };
 		3C38BCC6B38BFCC0EC16BF2B /* Pods_Cornell_SunTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cornell_SunTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0C7D9A8D1F217B510041E1B0 /* apple-app-site-association */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "apple-app-site-association"; path = "Cornell Sun/apple-app-site-association"; sourceTree = "<group>"; };
 		3DBAAD519F3C5A2D044960CA /* Pods_Cornell_Sun.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cornell_Sun.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5006AFF81EA9625000F58549 /* Cornell Sun.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Cornell Sun.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5006AFFB1EA9625000F58549 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -87,6 +89,7 @@
 		5006AFEF1EA9625000F58549 = {
 			isa = PBXGroup;
 			children = (
+				0C7D9A8D1F217B510041E1B0 /* apple-app-site-association */,
 				5006B00D1EA963A900F58549 /* Default-568h@2x.png */,
 				5006AFFA1EA9625000F58549 /* Cornell Sun */,
 				5006B24E1EADA38400F58549 /* Objects */,
@@ -184,6 +187,7 @@
 				5006AFF61EA9625000F58549 /* Resources */,
 				5D796D343FAE3F7BC75A78B1 /* [CP] Embed Pods Frameworks */,
 				74EBFA210DC6D01883DE7F2A /* [CP] Copy Pods Resources */,
+				40D130291F61EF250063329A /* SwiftLint */,
 			);
 			buildRules = (
 			);
@@ -262,6 +266,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5006B0031EA9625000F58549 /* Assets.xcassets in Resources */,
+				0C7D9A8E1F217B510041E1B0 /* apple-app-site-association in Resources */,
 				5006B00E1EA963A900F58549 /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -334,6 +339,20 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Cornell SunTests/Pods-Cornell SunTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		40D130291F61EF250063329A /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\nelse\n    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
 		};
 		5D796D343FAE3F7BC75A78B1 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -558,15 +577,15 @@
 			baseConfigurationReference = A733FA4C43777F59F6F0F8B3 /* Pods-Cornell Sun.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = D5T999AFZL;
 				INFOPLIST_FILE = "Cornell Sun/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.cornellsun.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "16688310-fa98-4a18-afde-639148a16b14";
-				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.cornellsun.app";
+				PROVISIONING_PROFILE = "ae057116-5be3-4759-9388-b52c8a6209b5";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development com.cornellsun.app";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Cornell Sun.app/Cornell Sun";

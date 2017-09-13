@@ -67,7 +67,7 @@ class PostObject: Mappable, ListDiffable {
     }
 
 
-    init(id: Int, datePosted: Date, link: String, title: String, content: String, excerpt: String, authorId: Int, categories: [Int], tags: [Int], mediaLink: String) {
+    init(id: Int, datePosted: Date, link: String, title: String, content: String, excerpt: String, author: AuthorObject, categories: [Int], tags: [Int], mediaLink: String) {
         self.id = id
         self.datePosted = datePosted
         self.link = link
