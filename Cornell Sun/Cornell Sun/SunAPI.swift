@@ -69,23 +69,3 @@ extension SunAPI: TargetType {
         return .request
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

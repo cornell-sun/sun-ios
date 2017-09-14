@@ -62,10 +62,9 @@ class PostObject: Mappable, ListDiffable {
         self.excerpt = "excerpt"
         self.authorId = 111
         self.categories = [0]
-        self.tags = [1,2,3]
+        self.tags = [1, 2, 3]
         self.mediaLink = mediaLink
     }
-
 
     init(id: Int, datePosted: Date, link: String, title: String, content: String, excerpt: String, author: AuthorObject, categories: [Int], tags: [Int], mediaLink: String) {
         self.id = id
@@ -74,7 +73,7 @@ class PostObject: Mappable, ListDiffable {
         self.title = title
         self.content = content
         self.excerpt = excerpt
-        self.authorId = authorId
+        self.authorId = 99999
         self.categories = categories
         self.tags = tags
         self.mediaLink = mediaLink
@@ -85,10 +84,9 @@ class PostObject: Mappable, ListDiffable {
     }
 
     func isEqual(toDiffableObject object: ListDiffable?) -> Bool {
-        if self === object { return true }
-        else {
+        if self === object { return true } else {
             return false
         }
     }
-   
+
 }

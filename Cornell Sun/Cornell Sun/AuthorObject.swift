@@ -31,5 +31,5 @@ class AuthorObject: Mappable {
         self.bio = bio
         self.avatarLink = avatarLink
     }
-    
+
 }

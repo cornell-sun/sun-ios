@@ -29,7 +29,7 @@ class FeedCollectionViewController: ViewController {
         view.addSubview(collectionView)
         adapter.collectionView = collectionView
         adapter.dataSource = self
-        
+
         API.request(target: .recentPosts, success: { (response) in
             // parse your data
             do {
@@ -58,8 +58,7 @@ class FeedCollectionViewController: ViewController {
                                     }
                                 }
                                 self.adapter.performUpdates(animated: true, completion: nil)
-                            }
-                            catch {
+                            } catch {
 
                             }
                             }, error: { (error) in
@@ -77,7 +76,7 @@ class FeedCollectionViewController: ViewController {
             }
         }, error: { (error) in
             // error from Wordpress
-        }, failure: { (error) in
+        }, failure: { (_) in
             // show Moya error
         })
 
@@ -92,7 +91,6 @@ class FeedCollectionViewController: ViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
 
     /*
     // MARK: - Navigation
