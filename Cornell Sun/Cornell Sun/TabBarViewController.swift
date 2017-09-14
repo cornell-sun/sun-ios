@@ -28,7 +28,7 @@ class TabBarViewController: UITabBarController {
         // these are just placeholders
 
         let leftMenuOneTableViewController = UITableViewController(style: .plain)
-        let tabOneNavigationController = UINavigationController(rootViewController: ViewController())
+        let tabOneNavigationController = UINavigationController(rootViewController: FeedCollectionViewController())
         let tabOneSideMenuController = LGSideMenuController(rootViewController: tabOneNavigationController,
                                                       leftViewController: leftMenuOneTableViewController,
                                                       rightViewController: nil)
