@@ -17,6 +17,8 @@
 		5006B00E1EA963A900F58549 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5006B00D1EA963A900F58549 /* Default-568h@2x.png */; };
 		5006B24D1EADA37F00F58549 /* PostObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5006B24C1EADA37E00F58549 /* PostObject.swift */; };
 		50A898121EAEC93B0099CFA9 /* AuthorObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50A898111EAEC93B0099CFA9 /* AuthorObject.swift */; };
+		61652CD21F6EF3A500EEFC29 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61652CD11F6EF3A500EEFC29 /* SearchViewController.swift */; };
+		61652CD41F6EF44900EEFC29 /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61652CD31F6EF44900EEFC29 /* SearchTableViewCell.swift */; };
 		DC4308ED1F2558D500ABB31F /* SunAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4308EC1F2558D500ABB31F /* SunAPI.swift */; };
 		DC4308EF1F2563FF00ABB31F /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4308EE1F2563FF00ABB31F /* API.swift */; };
 		DC446C2E1F5D016500D68688 /* FeedCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC446C2D1F5D016500D68688 /* FeedCollectionViewController.swift */; };
@@ -53,6 +55,8 @@
 		5006B00D1EA963A900F58549 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		5006B24C1EADA37E00F58549 /* PostObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PostObject.swift; path = "Cornell Sun/PostObject.swift"; sourceTree = "<group>"; };
 		50A898111EAEC93B0099CFA9 /* AuthorObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AuthorObject.swift; path = "Cornell Sun/AuthorObject.swift"; sourceTree = "<group>"; };
+		61652CD11F6EF3A500EEFC29 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		61652CD31F6EF44900EEFC29 /* SearchTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
 		79D08546F469CBFA91B516C4 /* Pods-Cornell Sun.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cornell Sun.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Cornell Sun/Pods-Cornell Sun.debug.xcconfig"; sourceTree = "<group>"; };
 		8D204AC28FA383322F3630A2 /* Pods-Cornell SunTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cornell SunTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Cornell SunTests/Pods-Cornell SunTests.release.xcconfig"; sourceTree = "<group>"; };
 		A733FA4C43777F59F6F0F8B3 /* Pods-Cornell Sun.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cornell Sun.release.xcconfig"; path = "Pods/Target Support Files/Pods-Cornell Sun/Pods-Cornell Sun.release.xcconfig"; sourceTree = "<group>"; };
@@ -115,10 +119,12 @@
 		5006AFFA1EA9625000F58549 /* Cornell Sun */ = {
 			isa = PBXGroup;
 			children = (
-				5006AFFB1EA9625000F58549 /* AppDelegate.swift */,
-				DC446C2D1F5D016500D68688 /* FeedCollectionViewController.swift */,
 				DC446C331F5D0D1400D68688 /* ArticleCell.swift */,
+				5006AFFB1EA9625000F58549 /* AppDelegate.swift */,
 				DC446C311F5D05FF00D68688 /* ArticleSectionController.swift */,
+				DC446C2D1F5D016500D68688 /* FeedCollectionViewController.swift */,
+				61652CD31F6EF44900EEFC29 /* SearchTableViewCell.swift */,
+				61652CD11F6EF3A500EEFC29 /* SearchViewController.swift */,
 				0CBC2CED1F5E3093003FBB38 /* TabBarViewController.swift */,
 				0C3695581EB6D9A900430C09 /* TestCollectionViewController.swift */,
 				5006AFFD1EA9625000F58549 /* ViewController.swift */,
@@ -325,7 +331,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		29210F3B3E77F09F9D266705 /* [CP] Copy Pods Resources */ = {
@@ -421,7 +427,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -439,10 +445,12 @@
 				DC446C2E1F5D016500D68688 /* FeedCollectionViewController.swift in Sources */,
 				0CBC2CEE1F5E3093003FBB38 /* TabBarViewController.swift in Sources */,
 				50A898121EAEC93B0099CFA9 /* AuthorObject.swift in Sources */,
+				61652CD21F6EF3A500EEFC29 /* SearchViewController.swift in Sources */,
 				DC4308ED1F2558D500ABB31F /* SunAPI.swift in Sources */,
 				DC446C341F5D0D1400D68688 /* ArticleCell.swift in Sources */,
 				DC446C361F5D0DFF00D68688 /* Extensions.swift in Sources */,
 				DC4308EF1F2563FF00ABB31F /* API.swift in Sources */,
+				61652CD41F6EF44900EEFC29 /* SearchTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

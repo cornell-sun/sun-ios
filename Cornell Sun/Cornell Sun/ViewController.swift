@@ -21,6 +21,15 @@ class ViewController: UIViewController {
                                                             target: self,
                                                             action: #selector(showLeftViewAnimated(_:)))
 
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Search",
+                                                            style: .plain,
+                                                            target: self,
+                                                            action: #selector(showSearchViewController))
+
+    }
+
+    func showSearchViewController() {
+        navigationController?.pushViewController(SearchViewController(), animated: true)
     }
 
     override func didReceiveMemoryWarning() {
