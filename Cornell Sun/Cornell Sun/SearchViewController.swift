@@ -78,8 +78,7 @@ extension SearchViewController: UISearchResultsUpdating {
         // TODO: update this - only updates the first cell as of right now
         if searchResults.isEmpty {
             searchResults = [searchText]
-        }
-        else {
+        } else {
             searchResults[0] = searchText
         }
         
