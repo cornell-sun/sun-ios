@@ -9,7 +9,7 @@
 import UIKit
 
 class SearchTableViewCell: UITableViewCell {
-    
+
     // Primary cell text - would typically be the article title
     var resultText: String?
 
