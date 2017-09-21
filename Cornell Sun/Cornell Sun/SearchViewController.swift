@@ -48,7 +48,7 @@ class SearchViewController: UIViewController, UITableViewDelegate {
 }
 
 extension SearchViewController: UITableViewDataSource {
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // Set up custom search result cell
         let cell = tableView.dequeueReusableCell(withIdentifier: "SearchResultCell", for: indexPath)
@@ -63,14 +63,14 @@ extension SearchViewController: UITableViewDataSource {
 }
 
 extension SearchViewController: UISearchControllerDelegate {
-    
+
     func didPresentSearchController(_ searchController: UISearchController) {
         searchController.searchBar.becomeFirstResponder()
     }
 }
 
 extension SearchViewController: UISearchResultsUpdating {
-    
+
     // Called whenever the searchbar becomes first responder and when text is changed
     func updateSearchResults(for searchController: UISearchController) {
         let searchText = searchController.searchBar.text ?? ""

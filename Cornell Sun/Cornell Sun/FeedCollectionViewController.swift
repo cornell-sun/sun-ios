@@ -34,7 +34,7 @@ class FeedCollectionViewController: ViewController {
             // parse your data
             do {
                 let jsonResult = try JSONSerialization.jsonObject(with: response.data, options: [])
-                if let postArray = jsonResult as? [Dictionary<String, Any>] {
+                if let postArray = jsonResult as? [[String: Any]] {
                     for postDictionary in postArray {
                         guard
                             let links = postDictionary["_links"] as? [String: Any],
@@ -53,7 +53,7 @@ class FeedCollectionViewController: ViewController {
                                 let sizes = mediaDetails["sizes"] as? [String: Any],
                                 let rectThumbnail = sizes["rect_thumb"] as? [String: Any],
                                 let sourceUrl = rectThumbnail["source_url"] as? String {
-                                    if let post = PostObject(data: postDictionary as Dictionary<String, AnyObject>, mediaLink: sourceUrl) {
+                                    if let post = PostObject(data: postDictionary as [String: AnyObject], mediaLink: sourceUrl) {
                                         self.feedData.append(post)
                                     }
                                 }

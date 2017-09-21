@@ -9,6 +9,7 @@
 import UIKit
 import PINRemoteImage
 import PINCache
+//import SnapKit
 
 class ArticleCell: UICollectionViewCell {
     var post: PostObject? {

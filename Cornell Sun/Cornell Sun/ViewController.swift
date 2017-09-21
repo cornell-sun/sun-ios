@@ -28,7 +28,7 @@ class ViewController: UIViewController {
 
     }
 
-    func showSearchViewController() {
+    @objc func showSearchViewController() {
         navigationController?.pushViewController(SearchViewController(), animated: true)
     }
 

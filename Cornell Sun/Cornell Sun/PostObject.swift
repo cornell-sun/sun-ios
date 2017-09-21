@@ -41,7 +41,7 @@ class PostObject: Mappable, ListDiffable {
         try mediaLink = map.from("_links.wp:featuredmedia.0.href")
     }
 
-    init? (data: Dictionary<String, AnyObject>, mediaLink: String) {
+    init? (data: [String: AnyObject], mediaLink: String) {
         guard
         let id = data["id"] as? Int,
         let dateString = data["date"] as? String,

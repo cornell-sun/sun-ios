@@ -24,6 +24,14 @@ enum SunAPI {
 }
 
 extension SunAPI: TargetType {
+
+    var headers: [String : String]? {
+        switch self {
+        default:
+            return nil
+        }
+    }
+
     var baseURL: URL { return URL(string: "http://cornellsun.com/wp-json/wp/v2")! }
 
     var path: String {
@@ -66,6 +74,6 @@ extension SunAPI: TargetType {
     }
 
     var task: Task {
-        return .request
+        return Task.requestPlain
     }
 }

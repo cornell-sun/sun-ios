@@ -37,7 +37,7 @@ class ArticleImageView: UIImageView {
 
         URLSession.shared.dataTask(with: url!) { data, _, error in
             if error != nil {
-                print(error) //@todo Crashlytics
+                print(error!) //@todo Crashlytics
                 return
             }
 
