@@ -26,6 +26,8 @@
 		DC446C341F5D0D1400D68688 /* ArticleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC446C331F5D0D1400D68688 /* ArticleCell.swift */; };
 		DC446C361F5D0DFF00D68688 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC446C351F5D0DFF00D68688 /* Extensions.swift */; };
 		DC818D9B1F74CFBB0064AFFA /* SpinnerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC818D9A1F74CFBB0064AFFA /* SpinnerCell.swift */; };
+		DC818D9D1F7553380064AFFA /* ImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC818D9C1F7553380064AFFA /* ImageCell.swift */; };
+		DC818D9F1F7596970064AFFA /* TitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC818D9E1F7596970064AFFA /* TitleCell.swift */; };
 		DCD870EF1F256B7B00B98AF8 /* Cornell_SunTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD870EE1F256B7B00B98AF8 /* Cornell_SunTests.swift */; };
 		DCD870F91F256E2C00B98AF8 /* APITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD870F81F256E2C00B98AF8 /* APITests.swift */; };
 		F252229F2922831926DB3A6C /* Pods_Cornell_Sun.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DBAAD519F3C5A2D044960CA /* Pods_Cornell_Sun.framework */; };
@@ -68,6 +70,8 @@
 		DC446C331F5D0D1400D68688 /* ArticleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleCell.swift; sourceTree = "<group>"; };
 		DC446C351F5D0DFF00D68688 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		DC818D9A1F74CFBB0064AFFA /* SpinnerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinnerCell.swift; sourceTree = "<group>"; };
+		DC818D9C1F7553380064AFFA /* ImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCell.swift; sourceTree = "<group>"; };
+		DC818D9E1F7596970064AFFA /* TitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleCell.swift; sourceTree = "<group>"; };
 		DCD870EC1F256B7B00B98AF8 /* Cornell SunTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Cornell SunTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCD870EE1F256B7B00B98AF8 /* Cornell_SunTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cornell_SunTests.swift; sourceTree = "<group>"; };
 		DCD870F01F256B7B00B98AF8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -133,6 +137,8 @@
 				5006B0021EA9625000F58549 /* Assets.xcassets */,
 				5006B0071EA9625000F58549 /* Info.plist */,
 				DC818D9A1F74CFBB0064AFFA /* SpinnerCell.swift */,
+				DC818D9C1F7553380064AFFA /* ImageCell.swift */,
+				DC818D9E1F7596970064AFFA /* TitleCell.swift */,
 			);
 			path = "Cornell Sun";
 			sourceTree = "<group>";
@@ -460,6 +466,8 @@
 				DC4308ED1F2558D500ABB31F /* SunAPI.swift in Sources */,
 				DC446C341F5D0D1400D68688 /* ArticleCell.swift in Sources */,
 				DC446C361F5D0DFF00D68688 /* Extensions.swift in Sources */,
+				DC818D9D1F7553380064AFFA /* ImageCell.swift in Sources */,
+				DC818D9F1F7596970064AFFA /* TitleCell.swift in Sources */,
 				DC4308EF1F2563FF00ABB31F /* API.swift in Sources */,
 				61652CD41F6EF44900EEFC29 /* SearchTableViewCell.swift in Sources */,
 			);
