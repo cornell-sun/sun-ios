@@ -9,6 +9,7 @@
 import Foundation
 import Mapper
 import IGListKit
+import HTMLString
 
 class PostObject: Mappable, ListDiffable {
     private let wpDateFormatter: DateFormatter = {
@@ -56,7 +57,7 @@ class PostObject: Mappable, ListDiffable {
     }
         self.id = id
         self.datePosted = date
-        self.title = title
+        self.title = title.removingHTMLEntities
         self.content = content
         self.link = link
         self.excerpt = "excerpt"
@@ -64,6 +65,8 @@ class PostObject: Mappable, ListDiffable {
         self.categories = [0]
         self.tags = [1, 2, 3]
         self.mediaLink = mediaLink
+
+        print(title)
     }
 
     init(id: Int, datePosted: Date, link: String, title: String, content: String, excerpt: String, author: AuthorObject, categories: [Int], tags: [Int], mediaLink: String) {

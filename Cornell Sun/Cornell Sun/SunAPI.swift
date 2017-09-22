@@ -13,7 +13,7 @@ enum SunAPI {
 
     //Posts
     case post(postId: Int)
-    case recentPosts
+    case posts(page: Int)
 
     //Authors
     case author(authorId: Int)
@@ -38,7 +38,7 @@ extension SunAPI: TargetType {
         switch self {
         case .post(let postId):
             return "/posts/\(postId)"
-        case .recentPosts:
+        case .posts:
             return "/posts"
         case .author(let authorId):
             return "/users/\(authorId)"
@@ -54,26 +54,18 @@ extension SunAPI: TargetType {
         }
     }
 
-    var parameters: [String: Any]? {
-        switch self {
-            //Use for POST Methods
-        default:
-            return nil
-        }
-    }
-
-    //How to encode parameters in the request
-    //You can choose between JSON Encoding (parameters will be set ass object in request body) and URL encoding (parameters will be in URL seperated by & symbol)
-    var parameterEncoding: ParameterEncoding {
-        return JSONEncoding.default
-    }
-
     //Can be used for testing
     var sampleData: Data {
         return Data()
     }
 
     var task: Task {
-        return Task.requestPlain
+        switch self {
+        case .posts(let page):
+            return .requestParameters(parameters: ["page": page], encoding: URLEncoding.default)
+
+        default:
+            return .requestPlain
+        }
     }
 }

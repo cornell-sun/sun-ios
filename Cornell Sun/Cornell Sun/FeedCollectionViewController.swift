@@ -30,7 +30,7 @@ class FeedCollectionViewController: ViewController {
         adapter.collectionView = collectionView
         adapter.dataSource = self
 
-        API.request(target: .recentPosts, success: { (response) in
+        API.request(target: .posts(page: 1), success: { (response) in
             // parse your data
             do {
                 let jsonResult = try JSONSerialization.jsonObject(with: response.data, options: [])
@@ -43,7 +43,6 @@ class FeedCollectionViewController: ViewController {
                             else {
                                 return
                         }
-                        print(mediaUrl)
                         mediaUrl = (mediaUrl as NSString).lastPathComponent
                         API.request(target: .media(mediaId: mediaUrl), success: { (response2) in
                             do {

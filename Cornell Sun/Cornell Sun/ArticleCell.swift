@@ -9,7 +9,7 @@
 import UIKit
 import PINRemoteImage
 import PINCache
-//import SnapKit
+import SnapKit
 
 class ArticleCell: UICollectionViewCell {
     var post: PostObject? {
@@ -54,9 +54,17 @@ class ArticleCell: UICollectionViewCell {
         addSubview(titleLabel)
         addSubview(heroImageView)
 
-        addConstraintsWithFormat("H:|-[v0]-|", views: heroImageView)
-        addConstraintsWithFormat("H:|-[v0]-|", views: titleLabel)
+        heroImageView.snp.makeConstraints { (make) in
+            make.centerX.equalToSuperview()
+            make.top.equalToSuperview().offset(20)
+            make.height.equalTo(self.bounds.height * 0.60)
+            make.width.equalToSuperview().offset(-20)
+        }
 
-        addConstraintsWithFormat("V:|-[v0]-60-[v1]-|", views: heroImageView, titleLabel)
+        titleLabel.snp.makeConstraints { (make) in
+            make.centerX.equalToSuperview()
+            make.bottom.equalToSuperview().offset(-20)
+            make.width.equalToSuperview().offset(-20)
+        }
     }
 }
