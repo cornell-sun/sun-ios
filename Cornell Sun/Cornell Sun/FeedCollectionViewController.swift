@@ -9,9 +9,11 @@
 import UIKit
 import IGListKit
 
-class FeedCollectionViewController: ViewController {
+class FeedCollectionViewController: ViewController, UIScrollViewDelegate {
     var feedData: [PostObject] = []
-
+    var currentPage = 1
+    var loading = false
+    let spinToken = "spinner"
     let collectionView: UICollectionView = {
         let view = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
         view.alwaysBounceVertical = true
@@ -29,9 +31,24 @@ class FeedCollectionViewController: ViewController {
         view.addSubview(collectionView)
         adapter.collectionView = collectionView
         adapter.dataSource = self
+        adapter.scrollViewDelegate = self
+        getPosts(page: currentPage)
+    }
 
-        API.request(target: .posts(page: 1), success: { (response) in
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        collectionView.frame = view.bounds
+    }
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+
+    func getPosts(page: Int) {
+        API.request(target: .posts(page: page), success: { (response) in
             // parse your data
+            self.loading = false
             do {
                 let jsonResult = try JSONSerialization.jsonObject(with: response.data, options: [])
                 if let postArray = jsonResult as? [[String: Any]] {
@@ -48,10 +65,10 @@ class FeedCollectionViewController: ViewController {
                             do {
                                 let mediaJsonResult = try JSONSerialization.jsonObject(with: response2.data, options: [])
                                 if let mediaObject = mediaJsonResult as? [String: Any],
-                                let mediaDetails = mediaObject["media_details"] as? [String: Any],
-                                let sizes = mediaDetails["sizes"] as? [String: Any],
-                                let rectThumbnail = sizes["rect_thumb"] as? [String: Any],
-                                let sourceUrl = rectThumbnail["source_url"] as? String {
+                                    let mediaDetails = mediaObject["media_details"] as? [String: Any],
+                                    let sizes = mediaDetails["sizes"] as? [String: Any],
+                                    let rectThumbnail = sizes["rect_thumb"] as? [String: Any],
+                                    let sourceUrl = rectThumbnail["source_url"] as? String {
                                     if let post = PostObject(data: postDictionary as [String: AnyObject], mediaLink: sourceUrl) {
                                         self.feedData.append(post)
                                     }
@@ -60,11 +77,11 @@ class FeedCollectionViewController: ViewController {
                             } catch {
 
                             }
-                            }, error: { (error) in
-                                print("error", error)
+                        }, error: { (error) in
+                            print("error", error)
                         }, failure: { (error) in
                             print("moya error", error)
-                            })
+                        })
                     }
 
                 }
@@ -73,42 +90,40 @@ class FeedCollectionViewController: ViewController {
                 print("could not parse")
                 // can't parse data, show error
             }
-        }, error: { (_) in
+        }, error: { (error) in
+            print("error in wp", error.localizedDescription)
             // error from Wordpress
         }, failure: { (_) in
+            print("moya error")
             // show Moya error
         })
-
     }
 
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        collectionView.frame = view.bounds
+    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        let distance = scrollView.contentSize.height - (targetContentOffset.pointee.y + scrollView.bounds.height)
+        if !loading && distance < 200 {
+            loading = true
+            adapter.performUpdates(animated: true, completion: nil)
+            currentPage += 1
+            getPosts(page: currentPage)
+        }
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
 
 extension FeedCollectionViewController: ListAdapterDataSource {
     func objects(for listAdapter: ListAdapter) -> [ListDiffable] {
-        return feedData
+        var objects = feedData as [ListDiffable]
+        if loading {
+            objects.append(spinToken as ListDiffable)
+        }
+        return objects
     }
 
     func listAdapter(_ listAdapter: ListAdapter, sectionControllerFor object: Any) -> ListSectionController {
+        if let obj = object as? String, obj == spinToken {
+            return spinnerSectionController()
+        }
         return ArticleSectionController()
     }
 

@@ -26,7 +26,7 @@ extension ArticleSectionController {
     override func sizeForItem(at index: Int) -> CGSize {
         guard let context = collectionContext, entry != nil else {return .zero}
         let width = context.containerSize.width
-
+        
         return CGSize(width: width, height: 300)
     }
 

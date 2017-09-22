@@ -12,6 +12,7 @@ import PINCache
 import SnapKit
 
 class ArticleCell: UICollectionViewCell {
+
     var post: PostObject? {
         didSet {
             titleLabel.text = post?.title
@@ -35,7 +36,8 @@ class ArticleCell: UICollectionViewCell {
     }()
 
     func setupHeroImage() {
-        if let heroImageUrl = post?.mediaLink {
+        if let heroImageUrl = post?.mediaLink, heroImageUrl != "http://i1.wp.com/cornellsun.com/wp-content/uploads/2017/09/Cafézoide-1.jpg?resize=800%2C600" {
+            print(heroImageUrl)
             heroImageView.pin_setImage(from: URL(string: heroImageUrl)!)
             //heroImageView.loadImageUsingUrlString(heroImageUrl)
         }
@@ -44,6 +46,10 @@ class ArticleCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()
+         let cache = PINRemoteImageManager.shared().cache
+        cache.memoryCache.costLimit = UInt(600 * 600 * 150 * UIScreen.main.scale)
+        cache.diskCache.byteLimit = 100 * 1024 * 1024
+        cache.diskCache.ageLimit = 60*60*24*5
     }
 
     required init?(coder aDecoder: NSCoder) {
