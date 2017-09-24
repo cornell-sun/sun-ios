@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import LGSideMenuController
 
 class TabBarViewController: UITabBarController {
 
@@ -27,57 +26,28 @@ class TabBarViewController: UITabBarController {
         // replace each tab with a specified ViewController,
         // these are just placeholders
 
-        let leftMenuOneTableViewController = UITableViewController(style: .plain)
         let tabOneNavigationController = UINavigationController(rootViewController: FeedCollectionViewController())
-        let tabOneSideMenuController = LGSideMenuController(rootViewController: tabOneNavigationController,
-                                                      leftViewController: leftMenuOneTableViewController,
-                                                      rightViewController: nil)
-        tabOneSideMenuController.leftViewWidth = 250.0
-        tabOneSideMenuController.leftViewPresentationStyle = .slideAbove
         let tabOneTabBarItem = UITabBarItem(title: "News", image: nil, selectedImage: nil)
-        tabOneSideMenuController.tabBarItem = tabOneTabBarItem
+        tabOneNavigationController.tabBarItem = tabOneTabBarItem
 
-        let leftMenuTwoTableViewController = UITableViewController(style: .plain)
         let tabTwoNavigationController = UINavigationController(rootViewController: ViewController())
-        let tabTwoSideMenuController = LGSideMenuController(rootViewController: tabTwoNavigationController,
-                                                            leftViewController: leftMenuTwoTableViewController,
-                                                            rightViewController: nil)
-        tabTwoSideMenuController.leftViewWidth = 250.0
-        tabTwoSideMenuController.leftViewPresentationStyle = .slideAbove
-        let tabTwoTabBarItem = UITabBarItem(title: "Bookmarks", image: nil, selectedImage: nil)
-        tabTwoSideMenuController.tabBarItem = tabTwoTabBarItem
+        let tabTwoTabBarItem = UITabBarItem(title: "Sections", image: nil, selectedImage: nil)
+        tabTwoNavigationController.tabBarItem = tabTwoTabBarItem
 
-        let leftMenuThreeTableViewController = UITableViewController(style: .plain)
         let tabThreeNavigationController = UINavigationController(rootViewController: ViewController())
-        let tabThreeSideMenuController = LGSideMenuController(rootViewController: tabThreeNavigationController,
-                                                            leftViewController: leftMenuThreeTableViewController,
-                                                            rightViewController: nil)
-        tabThreeSideMenuController.leftViewWidth = 250.0
-        tabThreeSideMenuController.leftViewPresentationStyle = .slideAbove
-        let tabThreeTabBarItem = UITabBarItem(title: "Notifications", image: nil, selectedImage: nil)
-        tabThreeSideMenuController.tabBarItem = tabThreeTabBarItem
+        let tabThreeTabBarItem = UITabBarItem(title: "Bookmarks", image: nil, selectedImage: nil)
+        tabThreeNavigationController.tabBarItem = tabThreeTabBarItem
 
-        let leftMenuFourTableViewController = UITableViewController(style: .plain)
         let tabFourNavigationController = UINavigationController(rootViewController: ViewController())
-        let tabFourSideMenuController = LGSideMenuController(rootViewController: tabFourNavigationController,
-                                                            leftViewController: leftMenuFourTableViewController,
-                                                            rightViewController: nil)
-        tabFourSideMenuController.leftViewWidth = 250.0
-        tabFourSideMenuController.leftViewPresentationStyle = .slideAbove
-        let tabFourTabBarItem = UITabBarItem(title: "Settings", image: nil, selectedImage: nil)
-        tabFourSideMenuController.tabBarItem = tabFourTabBarItem
+        let tabFourTabBarItem = UITabBarItem(title: "Search", image: nil, selectedImage: nil)
+        tabFourNavigationController.tabBarItem = tabFourTabBarItem
 
-        viewControllers = [tabOneSideMenuController, tabTwoSideMenuController, tabThreeSideMenuController, tabFourSideMenuController]
+        let tabFiveNavigationController = UINavigationController(rootViewController: ViewController())
+        let tabFiveTabBarItem = UITabBarItem(title: "Settings", image: nil, selectedImage: nil)
+        tabFiveNavigationController.tabBarItem = tabFiveTabBarItem
+
+        viewControllers = [tabOneNavigationController, tabTwoNavigationController, tabThreeNavigationController, tabFourNavigationController, tabFiveNavigationController]
         selectedIndex = 0
-    }
-
-    func setupSideMenuController(rootViewController: UINavigationController) {
-        let leftMenuTableViewController = UITableViewController(style: .plain)
-        let sideMenuController = LGSideMenuController(rootViewController: rootViewController,
-                                                      leftViewController: leftMenuTableViewController,
-                                                      rightViewController: nil)
-        sideMenuController.leftViewWidth = view.frame.width * 0.8
-        sideMenuController.leftViewPresentationStyle = .slideAbove
     }
 
     override func didReceiveMemoryWarning() {
