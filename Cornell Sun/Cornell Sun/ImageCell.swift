@@ -8,25 +8,8 @@
 
 import UIKit
 import IGListKit
-import PINRemoteImage
 import SnapKit
-
-func imageSectionController() -> ListSingleSectionController {
-    let configureBlock = { (item: Any, cell: UICollectionViewCell) in
-        guard cell is ImageCell else {
-            return
-        }
-    }
-
-        let sizeBlock = { (item: Any, context: ListCollectionContext?) -> CGSize in
-            guard let context = context else {
-                return .zero
-            }
-            return CGSize(width: context.containerSize.width, height: 150)
-
-        }
-        return ListSingleSectionController(cellClass: ImageCell.self, configureBlock: configureBlock, sizeBlock: sizeBlock)
-    }
+import Kingfisher
 
 final class ImageCell: UICollectionViewCell {
 
@@ -75,7 +58,8 @@ final class ImageCell: UICollectionViewCell {
     func setupHeroImage() {
         if let heroImagelink = post?.mediaLink, let heroImageUrl = URL(string: heroImagelink) {
             //activityView.stopAnimating()
-            heroImageView.pin_setImage(from: heroImageUrl)
+            heroImageView.kf.indicatorType = .activity
+            heroImageView.kf.setImage(with: heroImageUrl)
         }
     }
 }

@@ -1,27 +1,26 @@
 //
-//  TitleCell.swift
+//  LikeCommentCell.swift
 //  Cornell Sun
 //
-//  Created by Austin Astorga on 9/22/17.
+//  Created by Austin Astorga on 10/5/17.
 //  Copyright © 2017 cornell.sun. All rights reserved.
 //
 
 import UIKit
 import SnapKit
 
-final class TitleCell: UICollectionViewCell {
+final class LikeCommentCell: UICollectionViewCell {
 
     var post: PostObject? {
         didSet {
-            titleLabel.text = post?.title
+            commentLabel.text = "\(post!.comments.count) Comments"
         }
     }
 
-    let titleLabel: UILabel = {
+    let commentLabel: UILabel = {
         let label = UILabel()
         label.text = ""
-        label.numberOfLines = 3
-        label.font = .boldSystemFont(ofSize: 22)
+        label.numberOfLines = 1
         return label
     }()
 
@@ -36,10 +35,10 @@ final class TitleCell: UICollectionViewCell {
 
     func setupViews() {
         self.backgroundColor = .white
-        addSubview(titleLabel)
-        titleLabel.snp.makeConstraints { (make) in
-            //make.centerX.equalToSuperview()
-            make.edges.equalToSuperview().inset(UIEdgeInsetsMake(5, 5, 5, 5))
+        addSubview(commentLabel)
+        commentLabel.snp.makeConstraints { (make) in
+            make.centerY.equalToSuperview()
+            make.leftMargin.equalTo(15.5)
         }
     }
 }

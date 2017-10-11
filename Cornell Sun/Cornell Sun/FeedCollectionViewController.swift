@@ -30,6 +30,7 @@ class FeedCollectionViewController: ViewController, UIScrollViewDelegate {
 
         view.addSubview(collectionView)
         adapter.collectionView = collectionView
+        adapter.collectionView?.backgroundColor = UIColor(white: 241.0 / 255.0, alpha: 1.0)
         adapter.dataSource = self
         adapter.scrollViewDelegate = self
         getPosts(page: currentPage)
@@ -46,14 +47,15 @@ class FeedCollectionViewController: ViewController, UIScrollViewDelegate {
     }
 
     func getPosts(page: Int) {
-        API.request(target: .posts(page: page), success: { (response) in
-            // parse your data
+        API.request(target: .posts(page: page)) { (response) in
             self.loading = false
+            guard let response = response else {return}
             do {
                 let jsonResult = try JSONSerialization.jsonObject(with: response.data, options: [])
                 if let postArray = jsonResult as? [[String: Any]] {
                     for postDictionary in postArray {
                         guard
+                            let postId = postDictionary["id"] as? Int,
                             let links = postDictionary["_links"] as? [String: Any],
                             let media = links["wp:featuredmedia"] as? [[String: Any]],
                             var mediaUrl = media[0]["href"] as? String
@@ -61,47 +63,52 @@ class FeedCollectionViewController: ViewController, UIScrollViewDelegate {
                                 return
                         }
                         mediaUrl = (mediaUrl as NSString).lastPathComponent
-                        API.request(target: .media(mediaId: mediaUrl), success: { (response2) in
+                        API.request(target: .media(mediaId: mediaUrl), callback: { (response2) in
+                            guard let response2 = response2 else {return}
                             do {
                                 let mediaJsonResult = try JSONSerialization.jsonObject(with: response2.data, options: [])
-                                if let mediaObject = mediaJsonResult as? [String: Any],
+                                guard
+                                    let mediaObject = mediaJsonResult as? [String: Any],
                                     let mediaDetails = mediaObject["media_details"] as? [String: Any],
                                     let sizes = mediaDetails["sizes"] as? [String: Any],
-                                    let rectThumbnail = sizes["rect_thumb"] as? [String: Any],
-                                    let sourceUrl = rectThumbnail["source_url"] as? String {
-                                    if let post = PostObject(data: postDictionary as [String: AnyObject], mediaLink: sourceUrl) {
-                                        self.feedData.append(post)
-                                    }
-                                }
-                                self.adapter.performUpdates(animated: true, completion: nil)
+                                    let rectThumbnail = sizes["medium_large"] as? [String: Any],
+                                    let sourceUrl = rectThumbnail["source_url"] as? String
+                                    else {return}
+                                    API.request(target: .comments(postId: postId), callback: {(commentRes) in
+                                        do {
+                                        guard let response3 = commentRes else {return}
+                                        let commentJsonResult = try JSONSerialization.jsonObject(with: response3.data, options: [])
+                                        guard let commentObject = commentJsonResult as? [[String: AnyObject]],
+                                            let comments = commentObject.map({ (comment) in
+                                                return CommentObject(data: comment)
+                                            }) as? [CommentObject]
+                                            else {return}
+                                            if let post = PostObject(data: postDictionary as [String: AnyObject], mediaLink: sourceUrl, comments: comments) {
+                                                self.feedData.append(post)
+                                            }
+
+                                            self.adapter.performUpdates(animated: true, completion: nil)
+                                        } catch {
+                                            print("couldnt get comments")
+                                        }
+                                    })
                             } catch {
 
                             }
-                        }, error: { (error) in
-                            print("error", error)
-                        }, failure: { (error) in
-                            print("moya error", error)
                         })
                     }
-
                 }
-
             } catch {
                 print("could not parse")
                 // can't parse data, show error
             }
-        }, error: { (error) in
-            print("error in wp", error.localizedDescription)
-            // error from Wordpress
-        }, failure: { (_) in
-            print("moya error")
-            // show Moya error
-        })
+
+        }
     }
 
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         let distance = scrollView.contentSize.height - (targetContentOffset.pointee.y + scrollView.bounds.height)
-        if !loading && distance < 200 {
+        if !loading && distance < 300 {
             loading = true
             adapter.performUpdates(animated: true, completion: nil)
             currentPage += 1
