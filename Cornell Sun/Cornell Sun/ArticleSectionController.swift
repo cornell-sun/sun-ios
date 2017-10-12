@@ -19,7 +19,43 @@ class ArticleSectionController: ListSectionController {
     }
 }
 
-extension ArticleSectionController {
+extension ArticleSectionController: HeartPressedDelegate, BookmarkPressedDelegate {
+
+    func taptic() {
+        let generator = UIImpactFeedbackGenerator(style: .light)
+        generator.prepare()
+        generator.impactOccurred()
+    }
+
+    func didPressBookmark(_ cell: MenuActionCell) {
+        let correctBookmarkImage = cell.bookmarkButton.currentImage == #imageLiteral(resourceName: "bookmarkPressed") ? #imageLiteral(resourceName: "bookmark") : #imageLiteral(resourceName: "bookmarkPressed")
+        cell.bookmarkButton.setImage(correctBookmarkImage, for: .normal)
+        cell.bookmarkButton.transform = CGAffineTransform(scaleX: 0.6, y: 0.6)
+        taptic()
+        UIView.animate(withDuration: 1.0,
+                       delay: 0,
+                       usingSpringWithDamping: CGFloat(0.40),
+                       initialSpringVelocity: CGFloat(6.0),
+                       options: UIViewAnimationOptions.allowUserInteraction,
+                       animations: {
+                        cell.bookmarkButton.transform = CGAffineTransform.identity
+        })
+    }
+
+    func didPressHeart(_ cell: MenuActionCell) {
+        let correctHeartImage = cell.heartButton.currentImage == #imageLiteral(resourceName: "heartPressed") ? #imageLiteral(resourceName: "heart") : #imageLiteral(resourceName: "heartPressed")
+        cell.heartButton.setImage(correctHeartImage, for: .normal)
+        cell.heartButton.transform = CGAffineTransform(scaleX: 0.6, y: 0.6)
+        taptic()
+        UIView.animate(withDuration: 1.0,
+                       delay: 0,
+                       usingSpringWithDamping: CGFloat(0.40),
+                       initialSpringVelocity: CGFloat(6.0),
+                       options: UIViewAnimationOptions.allowUserInteraction,
+                       animations: {
+                        cell.heartButton.transform = CGAffineTransform.identity
+        })
+    }
 
     override func numberOfItems() -> Int {
         return 5
@@ -38,7 +74,7 @@ extension ArticleSectionController {
             return CGSize(width: width, height: width / 1.92)
         case 3:
             return CGSize(width: width, height: 25)
-            //return entry.comments.isEmpty ? .zero : CGSize(width: width, height: 25)
+        //return entry.comments.isEmpty ? .zero : CGSize(width: width, height: 25)
         case 4:
             return CGSize(width: width, height: 35)
         default:
@@ -70,7 +106,9 @@ extension ArticleSectionController {
             return cell
         case 4:
             // swiftlint:disable:next force_cast
-            let cell = collectionContext!.dequeueReusableCell(of: MenuActionCell.self, for: self, at: index)
+            let cell = collectionContext!.dequeueReusableCell(of: MenuActionCell.self, for: self, at: index) as! MenuActionCell
+            cell.delegate = self
+            cell.bookmarkDelegate = self
             return cell
         default:
             return UICollectionViewCell()
@@ -95,11 +133,13 @@ extension ArticleSectionController {
     }
 
     override func didSelectItem(at index: Int) {
-        if let postUrl = URL(string: entry.link),
-            let currentVC = getCurrentViewController() {
-            let sfVC = SFSafariViewController(url: postUrl, entersReaderIfAvailable: true)
-            currentVC.present(sfVC, animated: true)
+        if index != 4 {
+            if let postUrl = URL(string: entry.link),
+                let currentVC = getCurrentViewController() {
+                let sfVC = SFSafariViewController(url: postUrl, entersReaderIfAvailable: true)
+                currentVC.present(sfVC, animated: true)
 
+            }
         }
     }
 }

@@ -9,19 +9,35 @@
 import UIKit
 import SnapKit
 
+protocol HeartPressedDelegate: class {
+    func didPressHeart(_ cell: MenuActionCell)
+}
+
+protocol BookmarkPressedDelegate: class {
+    func didPressBookmark(_ cell: MenuActionCell)
+}
+
 final class MenuActionCell: UICollectionViewCell {
 
-//    var post: PostObject? {
-//        didSet {
-//            titleLabel.text = post?.title
-//        }
-//    }
+    weak var delegate: HeartPressedDelegate?
+    weak var bookmarkDelegate: BookmarkPressedDelegate?
 
-    let heartImageView: UIImageView = {
-        let image = UIImageView()
-        image.contentMode = .scaleAspectFit
-        image.image = #imageLiteral(resourceName: "heart")
-        return image
+    lazy var heartButton: UIButton = {
+        let button = UIButton(type: .custom)
+        button.imageView?.contentMode = .scaleAspectFit
+        button.setImage(#imageLiteral(resourceName: "heart"), for: .normal)
+        button.addTarget(self, action: #selector(MenuActionCell.heartPressed(_:)), for: .touchUpInside)
+        self.contentView.addSubview(button)
+        return button
+    }()
+
+    lazy var bookmarkButton: UIButton = {
+        let button = UIButton(type: .custom)
+        button.imageView?.contentMode = .scaleAspectFit
+        button.setImage(#imageLiteral(resourceName: "bookmark"), for: .normal)
+        button.addTarget(self, action: #selector(MenuActionCell.bookmarkPressed(_:)), for: .touchUpInside)
+        self.contentView.addSubview(button)
+        return button
     }()
 
     let commentImageView: UIImageView = {
@@ -38,13 +54,6 @@ final class MenuActionCell: UICollectionViewCell {
         return image
     }()
 
-    let bookmarkImageView: UIImageView = {
-        let image = UIImageView()
-        image.contentMode = .scaleAspectFit
-        image.image = #imageLiteral(resourceName: "bookmark")
-        return image
-    }()
-
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()
@@ -54,13 +63,23 @@ final class MenuActionCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
+    @objc func heartPressed(_ button: UIButton) {
+        delegate?.didPressHeart(self)
+    }
+
+    @objc func bookmarkPressed(_ button: UIButton) {
+        bookmarkDelegate?.didPressBookmark(self)
+    }
+
+    override func prepareForReuse() {
+        heartButton.setImage(#imageLiteral(resourceName: "heart"), for: .normal)
+        bookmarkButton.setImage(#imageLiteral(resourceName: "bookmark"), for: .normal)
+    }
+
     func setupViews() {
         self.backgroundColor = .white
-        addSubview(heartImageView)
-        //addSubview(commentImageView)
-        addSubview(shareImageView)
-        addSubview(bookmarkImageView)
-        heartImageView.snp.makeConstraints { (make) in
+        self.contentView.addSubview(shareImageView)
+        heartButton.snp.makeConstraints { (make) in
             make.width.equalTo(28.5)
             make.height.equalTo(28.5)
             make.centerY.equalToSuperview()
@@ -71,17 +90,17 @@ final class MenuActionCell: UICollectionViewCell {
 //            make.width.equalTo(28.5)
 //            make.height.equalTo(25)
 //            make.centerY.equalToSuperview()
-//            make.left.equalTo(heartImageView.snp.right).offset(10)
+//            make.left.equalTo(heartButton.snp.right).offset(10)
 //        }
 
         shareImageView.snp.makeConstraints { (make) in
             make.width.equalTo(28.5)
             make.height.equalTo(30)
             make.centerY.equalToSuperview()
-            make.left.equalTo(heartImageView.snp.right).offset(10)
+            make.left.equalTo(heartButton.snp.right).offset(10)
         }
 
-        bookmarkImageView.snp.makeConstraints { (make) in
+        bookmarkButton.snp.makeConstraints { (make) in
             make.width.equalTo(28.5)
             make.height.equalTo(28.5)
             make.centerY.equalToSuperview()

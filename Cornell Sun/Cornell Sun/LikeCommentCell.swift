@@ -13,7 +13,8 @@ final class LikeCommentCell: UICollectionViewCell {
 
     var post: PostObject? {
         didSet {
-            commentLabel.text = "\(post!.comments.count) Comments"
+            let plural = post!.comments.count > 1 ? "Comments" : "Comment"
+            commentLabel.text = post!.comments.isEmpty ? "" : "\(post!.comments.count) " + plural
         }
     }
 
