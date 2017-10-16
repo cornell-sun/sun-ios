@@ -15,12 +15,20 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         view.backgroundColor = .white
+        title = "The Cornell Daily Sun"
+        self.navigationController?.navigationBar.titleTextAttributes = [
+            NSAttributedStringKey.font: UIFont(name: "Sonnenstrahl-Ausgezeichnet", size: 22)
+        ]
+        /*navigationItem.leftBarButtonItem =  UIBarButtonItem(title: "Menu",
+                                                            style: .plain,
+                                                            target: self,
+                                                            action: #selector(showLeftViewAnimated(_:)))
 
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Search",
+        //navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Search",
                                                             style: .plain,
                                                             target: self,
                                                             action: #selector(showSearchViewController))
-
+         */
     }
 
     @objc func showSearchViewController() {

@@ -10,8 +10,9 @@ import Foundation
 import Mapper
 import IGListKit
 import HTMLString
+import Kingfisher
 
-class PostObject: Mappable, ListDiffable {
+class PostObject: ListDiffable {
     private let wpDateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "YYYY-MM-DD'T'HH:mm:ss"     // "2016-01-29T01:45:33"
@@ -25,24 +26,12 @@ class PostObject: Mappable, ListDiffable {
     var content: String
     var excerpt: String
     var authorId: Int
-    var categories: [Int]
+    var categories: Int
     var tags: [Int]
     var mediaLink: String
+    var comments: [CommentObject]
 
-    required init(map: Mapper) throws {
-        try id = map.from("id")
-        datePosted = Date() //@Todo: get the actual date
-        try link = map.from("link")
-        try title = map.from("title.rendered")
-        try content = map.from("content.rendered")
-        try excerpt = map.from("excerpt.rendered")
-        try authorId = map.from("author")
-        try categories = map.from("categories")
-        try tags = map.from("tags")
-        try mediaLink = map.from("_links.wp:featuredmedia.0.href")
-    }
-
-    init? (data: [String: AnyObject], mediaLink: String) {
+    init? (data: [String: AnyObject], mediaLink: String, comments: [CommentObject]) {
         guard
         let id = data["id"] as? Int,
         let dateString = data["date"] as? String,
@@ -51,25 +40,30 @@ class PostObject: Mappable, ListDiffable {
         let title = titleDictionary["rendered"] as? String,
         let contentDictionary = data["content"] as? [String: Any],
         let content = contentDictionary["rendered"] as? String,
-        let link = data["link"] as? String
+        let link = data["link"] as? String,
+        let categories = data["categories"] as? [Int],
+        let author = data["author"] as? Int
             else {
                 return nil
     }
+        let smallestCategoryNumber = categories.filter { (category) -> Bool in
+            return category > 1
+        }.min() ?? 1
         self.id = id
         self.datePosted = date
         self.title = title.removingHTMLEntities
         self.content = content
         self.link = link
         self.excerpt = "excerpt"
-        self.authorId = 111
-        self.categories = [0]
+        self.authorId = author
+        self.categories = smallestCategoryNumber
         self.tags = [1, 2, 3]
         self.mediaLink = mediaLink
-
-        print(title)
+        self.comments = comments
+        cacheImage(imageLink: mediaLink)
     }
 
-    init(id: Int, datePosted: Date, link: String, title: String, content: String, excerpt: String, author: AuthorObject, categories: [Int], tags: [Int], mediaLink: String) {
+    init(id: Int, datePosted: Date, link: String, title: String, content: String, excerpt: String, author: AuthorObject, categories: [Int], tags: [Int], mediaLink: String, comments: [CommentObject]) {
         self.id = id
         self.datePosted = datePosted
         self.link = link
@@ -77,9 +71,16 @@ class PostObject: Mappable, ListDiffable {
         self.content = content
         self.excerpt = excerpt
         self.authorId = 99999
-        self.categories = categories
+        self.categories = categories.min()!
         self.tags = tags
         self.mediaLink = mediaLink
+        self.comments = comments
+    }
+
+    func cacheImage(imageLink: String) {
+        if let urlImage = URL(string: imageLink) {
+            KingfisherManager.shared.retrieveImage(with: urlImage, options: nil, progressBlock: nil, completionHandler: nil)
+        }
     }
 
     func diffIdentifier() -> NSObjectProtocol {

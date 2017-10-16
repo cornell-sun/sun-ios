@@ -8,6 +8,7 @@
 
 import UIKit
 import LGSideMenuController
+import Kingfisher
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -19,8 +20,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = TabBarViewController()
-
         window?.makeKeyAndVisible()
+
+        //Image cache settings
+        ImageCache.default.maxDiskCacheSize = 50 * 1024 * 1024 //50 mb
+        ImageCache.default.maxCachePeriodInSecond = 60 * 60 * 24 * 4 //4 days until its removed
         return true
     }
 

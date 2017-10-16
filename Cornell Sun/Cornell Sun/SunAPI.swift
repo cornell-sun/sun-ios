@@ -21,6 +21,12 @@ enum SunAPI {
     //images
     case media(mediaId: String)
 
+    //categories
+    case category(categoryId: Int)
+
+    //comments
+    case comments(postId: Int)
+
 }
 
 extension SunAPI: TargetType {
@@ -44,6 +50,10 @@ extension SunAPI: TargetType {
             return "/users/\(authorId)"
         case .media(let mediaId):
             return "/media/" + mediaId
+        case .category(let categoryId):
+            return "/categories/\(categoryId)"
+        case .comments:
+            return "/comments"
         }
     }
 
@@ -63,7 +73,8 @@ extension SunAPI: TargetType {
         switch self {
         case .posts(let page):
             return .requestParameters(parameters: ["page": page], encoding: URLEncoding.default)
-
+        case .comments(let postId):
+            return .requestParameters(parameters: ["post": postId], encoding: URLEncoding.default)
         default:
             return .requestPlain
         }
