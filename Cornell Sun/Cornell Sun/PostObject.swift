@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import Mapper
 import IGListKit
 import HTMLString
 import Kingfisher

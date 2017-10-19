@@ -70,8 +70,6 @@ class CategoryLabel: UILabel {
     }
 }
 
-
-
 let imageCache = NSCache<NSString, UIImage>()
 class ArticleImageView: UIImageView {
     var imageUrlString: String?

@@ -15,7 +15,6 @@ class CommentObject: NSObject {
         return formatter
     }()
 
-
     var id: Int
     var postId: Int
     var authorName: String

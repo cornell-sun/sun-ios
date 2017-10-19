@@ -10,6 +10,15 @@ import UIKit
 import IGListKit
 import SafariServices
 
+// swiftlint:disable:next type_name
+enum cellType: Int {
+    case categoryCell = 0
+    case titleCell = 1
+    case imageCell = 2
+    case likeCommentCell = 3
+    case actionMenuCell = 4
+}
+
 class ArticleSectionController: ListSectionController {
     var entry: PostObject!
 
@@ -64,54 +73,56 @@ extension ArticleSectionController: HeartPressedDelegate, BookmarkPressedDelegat
     override func sizeForItem(at index: Int) -> CGSize {
         guard let context = collectionContext, entry != nil else {return .zero}
         let width = context.containerSize.width
-        switch index {
-        case 0:
+        guard let sizeForItemIndex = cellType(rawValue: index) else {
+            return .zero
+        }
+        switch sizeForItemIndex {
+        case .categoryCell:
             return CGSize(width: width, height: 40)
-        case 1:
+        case .titleCell:
             let height = entry.title.height(withConstrainedWidth: width, font: UIFont.boldSystemFont(ofSize: 22)) //CLUTCH Extension thank stackoverflow gods
             return CGSize(width: width, height: height + 10)
-        case 2:
+        case .imageCell:
             return CGSize(width: width, height: width / 1.92)
-        case 3:
+        case .likeCommentCell:
             return CGSize(width: width, height: 25)
         //return entry.comments.isEmpty ? .zero : CGSize(width: width, height: 25)
-        case 4:
+        case .actionMenuCell:
             return CGSize(width: width, height: 35)
-        default:
-            return .zero
         }
     }
 
     override func cellForItem(at index: Int) -> UICollectionViewCell {
-        switch index {
-        case 0:
+        guard let cellForItemIndex = cellType(rawValue: index) else {
+            return UICollectionViewCell()
+        }
+        switch cellForItemIndex {
+        case .categoryCell:
             // swiftlint:disable:next force_cast
             let cell = collectionContext!.dequeueReusableCell(of: CategoryCell.self, for: self, at: index) as! CategoryCell
             cell.post = entry
             return cell
-        case 1:
+        case .titleCell:
             // swiftlint:disable:next force_cast
             let cell = collectionContext!.dequeueReusableCell(of: TitleCell.self, for: self, at: index) as! TitleCell
             cell.post = entry
             return cell
-        case 2:
+        case .imageCell:
             // swiftlint:disable:next force_cast
             let cell = collectionContext!.dequeueReusableCell(of: ImageCell.self, for: self, at: index) as! ImageCell
             cell.post = entry
             return cell
-        case 3:
+        case .likeCommentCell:
             // swiftlint:disable:next force_cast
             let cell = collectionContext!.dequeueReusableCell(of: LikeCommentCell.self, for: self, at: index) as! LikeCommentCell
             cell.post = entry
             return cell
-        case 4:
+        case .actionMenuCell:
             // swiftlint:disable:next force_cast
             let cell = collectionContext!.dequeueReusableCell(of: MenuActionCell.self, for: self, at: index) as! MenuActionCell
-            cell.delegate = self
+            cell.heartDelegate = self
             cell.bookmarkDelegate = self
             return cell
-        default:
-            return UICollectionViewCell()
         }
     }
 
