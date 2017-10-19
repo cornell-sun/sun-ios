@@ -15,11 +15,10 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         view.backgroundColor = .white
-
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Search",
-                                                            style: .plain,
-                                                            target: self,
-                                                            action: #selector(showSearchViewController))
+        title = "The Cornell Daily Sun"
+        self.navigationController?.navigationBar.titleTextAttributes = [
+            NSAttributedStringKey.font: UIFont(name: "Sonnenstrahl-Ausgezeichnet", size: 22)
+        ]
 
     }
 

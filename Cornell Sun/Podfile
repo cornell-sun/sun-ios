@@ -8,9 +8,14 @@ target 'Cornell Sun' do
   pod 'Moya'
   pod 'Moya-ModelMapper', '5.0.0'
   pod 'IGListKit', '~> 3.1.1'
+<<<<<<< HEAD
   pod 'PINRemoteImage'
+=======
+  pod 'LGSideMenuController'
+>>>>>>> austin/feed
   pod 'SnapKit', '~> 4.0'
   pod 'HTMLString', '~> 4.0'
+  pod 'Kingfisher', '~> 4.0'
 
   target 'Cornell SunTests' do
       inherit! :search_paths

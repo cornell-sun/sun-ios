@@ -1,0 +1,68 @@
+//
+//  CategoryCell.swift
+//  Cornell Sun
+//
+//  Created by Austin Astorga on 9/26/17.
+//  Copyright © 2017 cornell.sun. All rights reserved.
+//
+
+//
+//  TitleCell.swift
+//  Cornell Sun
+//
+//  Created by Austin Astorga on 9/22/17.
+//  Copyright © 2017 cornell.sun. All rights reserved.
+//
+
+import UIKit
+import SnapKit
+
+final class CategoryCell: UICollectionViewCell {
+
+    var post: PostObject? {
+        didSet {
+            getCategory()
+        }
+    }
+
+    let categoryLabel: CategoryLabel = {
+        let label = CategoryLabel()
+        label.text = ""
+        label.numberOfLines = 2
+        return label
+    }()
+
+    let divider: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor(white: 127.0 / 255.0, alpha: 1.0)
+        return view
+    }()
+
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setupViews()
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    func getCategory() {
+        categoryLabel.loadtitleUsingId(post!.categories)
+    }
+
+    func setupViews() {
+        self.backgroundColor = .white
+        addSubview(categoryLabel)
+        addSubview(divider)
+        categoryLabel.snp.makeConstraints { (make) in
+            //make.centerX.equalToSuperview()
+            make.edges.equalToSuperview().inset(UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5))
+        }
+        divider.snp.makeConstraints { (make) in
+            make.height.equalTo(1)
+            make.width.equalToSuperview()
+            make.bottom.equalToSuperview().inset(1)
+        }
+    }
+}

@@ -28,8 +28,17 @@ API.request(target: .recentPosts, success: { (response) in
 struct API {
     static let provider = MoyaProvider<SunAPI>()
 
-    static func request(target: SunAPI, success successCallback: @escaping (Response) -> Void, error errorCallback: @escaping (Swift.Error) -> Void, failure failureCallback: @escaping (MoyaError) -> Void) {
+    static func request(target: SunAPI, callback: @escaping (Response?) -> Void) {
+        requestHelper(target: target, success: callback, error: { (error) in
+            print(error)
+            callback(nil)
+        }) { (moyaError) in
+            print(moyaError)
+            callback(nil)
+        }
+    }
 
+    private static func requestHelper(target: SunAPI, success successCallback: @escaping (Response) -> Void, error errorCallback: @escaping (Swift.Error) -> Void, failure failureCallback: @escaping (MoyaError) -> Void) {
         provider.request(target) { (result) in
             switch result {
             case .success(let response):

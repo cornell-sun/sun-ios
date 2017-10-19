@@ -9,9 +9,11 @@
 import UIKit
 import IGListKit
 
-class FeedCollectionViewController: ViewController {
+class FeedCollectionViewController: ViewController, UIScrollViewDelegate {
     var feedData: [PostObject] = []
-
+    var currentPage = 1
+    var loading = false
+    let spinToken = "spinner"
     let collectionView: UICollectionView = {
         let view = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
         view.alwaysBounceVertical = true
@@ -28,57 +30,10 @@ class FeedCollectionViewController: ViewController {
 
         view.addSubview(collectionView)
         adapter.collectionView = collectionView
+        adapter.collectionView?.backgroundColor = UIColor(white: 241.0 / 255.0, alpha: 1.0)
         adapter.dataSource = self
-
-        API.request(target: .posts(page: 1), success: { (response) in
-            // parse your data
-            do {
-                let jsonResult = try JSONSerialization.jsonObject(with: response.data, options: [])
-                if let postArray = jsonResult as? [[String: Any]] {
-                    for postDictionary in postArray {
-                        guard
-                            let links = postDictionary["_links"] as? [String: Any],
-                            let media = links["wp:featuredmedia"] as? [[String: Any]],
-                            var mediaUrl = media[0]["href"] as? String
-                            else {
-                                return
-                        }
-                        mediaUrl = (mediaUrl as NSString).lastPathComponent
-                        API.request(target: .media(mediaId: mediaUrl), success: { (response2) in
-                            do {
-                                let mediaJsonResult = try JSONSerialization.jsonObject(with: response2.data, options: [])
-                                if let mediaObject = mediaJsonResult as? [String: Any],
-                                let mediaDetails = mediaObject["media_details"] as? [String: Any],
-                                let sizes = mediaDetails["sizes"] as? [String: Any],
-                                let rectThumbnail = sizes["rect_thumb"] as? [String: Any],
-                                let sourceUrl = rectThumbnail["source_url"] as? String {
-                                    if let post = PostObject(data: postDictionary as [String: AnyObject], mediaLink: sourceUrl) {
-                                        self.feedData.append(post)
-                                    }
-                                }
-                                self.adapter.performUpdates(animated: true, completion: nil)
-                            } catch {
-
-                            }
-                            }, error: { (error) in
-                                print("error", error)
-                        }, failure: { (error) in
-                            print("moya error", error)
-                            })
-                    }
-
-                }
-
-            } catch {
-                print("could not parse")
-                // can't parse data, show error
-            }
-        }, error: { (_) in
-            // error from Wordpress
-        }, failure: { (_) in
-            // show Moya error
-        })
-
+        adapter.scrollViewDelegate = self
+        getPosts(page: currentPage)
     }
 
     override func viewDidLayoutSubviews() {
@@ -91,24 +46,91 @@ class FeedCollectionViewController: ViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    /*
-    // MARK: - Navigation
+    func getPosts(page: Int) {
+        API.request(target: .posts(page: page)) { (response) in
+            self.loading = false
+            guard let response = response else {return}
+            do {
+                let jsonResult = try JSONSerialization.jsonObject(with: response.data, options: [])
+                if let postArray = jsonResult as? [[String: Any]] {
+                    for postDictionary in postArray {
+                        guard
+                            let postId = postDictionary["id"] as? Int,
+                            let links = postDictionary["_links"] as? [String: Any],
+                            let media = links["wp:featuredmedia"] as? [[String: Any]],
+                            var mediaUrl = media[0]["href"] as? String
+                            else {
+                                return
+                        }
+                        mediaUrl = (mediaUrl as NSString).lastPathComponent
+                        API.request(target: .media(mediaId: mediaUrl), callback: { (response2) in
+                            guard let response2 = response2 else {return}
+                            do {
+                                let mediaJsonResult = try JSONSerialization.jsonObject(with: response2.data, options: [])
+                                guard
+                                    let mediaObject = mediaJsonResult as? [String: Any],
+                                    let mediaDetails = mediaObject["media_details"] as? [String: Any],
+                                    let sizes = mediaDetails["sizes"] as? [String: Any],
+                                    let rectThumbnail = sizes["medium_large"] as? [String: Any],
+                                    let sourceUrl = rectThumbnail["source_url"] as? String
+                                    else {return}
+                                    API.request(target: .comments(postId: postId), callback: {(commentRes) in
+                                        do {
+                                        guard let response3 = commentRes else {return}
+                                        let commentJsonResult = try JSONSerialization.jsonObject(with: response3.data, options: [])
+                                        guard let commentObject = commentJsonResult as? [[String: AnyObject]],
+                                            let comments = commentObject.map({ (comment) in
+                                                return CommentObject(data: comment)
+                                            }) as? [CommentObject]
+                                            else {return}
+                                            if let post = PostObject(data: postDictionary as [String: AnyObject], mediaLink: sourceUrl, comments: comments) {
+                                                self.feedData.append(post)
+                                            }
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+                                            self.adapter.performUpdates(animated: true, completion: nil)
+                                        } catch {
+                                            print("couldnt get comments")
+                                        }
+                                    })
+                            } catch {
+
+                            }
+                        })
+                    }
+                }
+            } catch {
+                print("could not parse")
+                // can't parse data, show error
+            }
+
+        }
     }
-    */
+
+    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        let distance = scrollView.contentSize.height - (targetContentOffset.pointee.y + scrollView.bounds.height)
+        if !loading && distance < 300 {
+            loading = true
+            adapter.performUpdates(animated: true, completion: nil)
+            currentPage += 1
+            getPosts(page: currentPage)
+        }
+    }
 
 }
 
 extension FeedCollectionViewController: ListAdapterDataSource {
     func objects(for listAdapter: ListAdapter) -> [ListDiffable] {
-        return feedData
+        var objects = feedData as [ListDiffable]
+        if loading {
+            objects.append(spinToken as ListDiffable)
+        }
+        return objects
     }
 
     func listAdapter(_ listAdapter: ListAdapter, sectionControllerFor object: Any) -> ListSectionController {
+        if let obj = object as? String, obj == spinToken {
+            return spinnerSectionController()
+        }
         return ArticleSectionController()
     }
 
