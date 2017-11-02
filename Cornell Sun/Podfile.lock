@@ -1,0 +1,58 @@
+PODS:
+  - Alamofire (4.5.1)
+  - FLAnimatedImage (1.0.12)
+  - HTMLString (4.0.1)
+  - IGListKit (3.1.1):
+    - IGListKit/Default (= 3.1.1)
+  - IGListKit/Default (3.1.1):
+    - IGListKit/Diffing
+  - IGListKit/Diffing (3.1.1)
+  - Kingfisher (4.0.1)
+  - ModelMapper (7.1.0)
+  - Moya (9.0.0):
+    - Moya/Core (= 9.0.0)
+  - Moya-ModelMapper (5.0.0):
+    - Moya-ModelMapper/Core (= 5.0.0)
+  - Moya-ModelMapper/Core (5.0.0):
+    - ModelMapper
+    - Moya (~> 9.0.0)
+  - Moya/Core (9.0.0):
+    - Alamofire (~> 4.1)
+    - Result (~> 3.0)
+  - PINCache (2.3)
+  - PINRemoteImage (2.1.4):
+    - PINRemoteImage/FLAnimatedImage (= 2.1.4)
+  - PINRemoteImage/Core (2.1.4):
+    - PINCache (>= 2.1)
+  - PINRemoteImage/FLAnimatedImage (2.1.4):
+    - FLAnimatedImage (>= 1.0)
+    - PINRemoteImage/Core
+  - Result (3.2.3)
+  - SnapKit (4.0.0)
+
+DEPENDENCIES:
+  - HTMLString (~> 4.0)
+  - IGListKit (~> 3.1.1)
+  - Kingfisher (~> 4.0)
+  - Moya
+  - Moya-ModelMapper (= 5.0.0)
+  - PINRemoteImage
+  - SnapKit (~> 4.0)
+
+SPEC CHECKSUMS:
+  Alamofire: 2d95912bf4c34f164fdfc335872e8c312acaea4a
+  FLAnimatedImage: 4a0b56255d9b05f18b6dd7ee06871be5d3b89e31
+  HTMLString: 8d9a8a8aaf63dd52c5b8cd9a38e14da52f753210
+  IGListKit: cb97f405ae43e59fe1da74271e19427ec20d3c07
+  Kingfisher: b771785e9461ed4b8686d40e7145f9e58100cb24
+  ModelMapper: 0cc9e34061838c0ece4efd6ba3ae147bf7760a1b
+  Moya: cf5e6ee93af526532f92614004b8ad2ea60fd845
+  Moya-ModelMapper: fc14d8c7d6466f11aea83e785c7f2c4c521fead6
+  PINCache: ce36ed282031b92fc7733ffe831f474ff80fddc2
+  PINRemoteImage: 4ac4011c5caefd6befd99758e09becede05d3226
+  Result: 128640a6347e8d2ae48b142556739a2d13f90ce6
+  SnapKit: a42d492c16e80209130a3379f73596c3454b7694
+
+PODFILE CHECKSUM: 4f529c95582590f273a06047eafc1ca21d756b62
+
+COCOAPODS: 1.1.1

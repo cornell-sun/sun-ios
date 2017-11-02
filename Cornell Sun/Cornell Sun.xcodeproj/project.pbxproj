@@ -10,7 +10,11 @@
 		036FE5BBAB2DFBC062751005 /* Pods_Cornell_SunTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C38BCC6B38BFCC0EC16BF2B /* Pods_Cornell_SunTests.framework */; };
 		0C3695591EB6D9A900430C09 /* TestCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C3695581EB6D9A900430C09 /* TestCollectionViewController.swift */; };
 		0C7D9A8E1F217B510041E1B0 /* apple-app-site-association in Resources */ = {isa = PBXBuildFile; fileRef = 0C7D9A8D1F217B510041E1B0 /* apple-app-site-association */; };
+		0CAA2BEC1F954E3200D423FD /* ArticleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CAA2BEB1F954E3200D423FD /* ArticleViewController.swift */; };
 		0CBC2CEE1F5E3093003FBB38 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CBC2CED1F5E3093003FBB38 /* TabBarViewController.swift */; };
+		0CEA0F7A1F99454600607CC7 /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CEA0F791F99454600607CC7 /* Date+.swift */; };
+		0CED4FAD1FAB523F0025EB91 /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CED4FAB1FAB523E0025EB91 /* UIColor+.swift */; };
+		0CED4FAE1FAB523F0025EB91 /* UIFont+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CED4FAC1FAB523F0025EB91 /* UIFont+.swift */; };
 		5006AFFC1EA9625000F58549 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5006AFFB1EA9625000F58549 /* AppDelegate.swift */; };
 		5006AFFE1EA9625000F58549 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5006AFFD1EA9625000F58549 /* ViewController.swift */; };
 		5006B0031EA9625000F58549 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5006B0021EA9625000F58549 /* Assets.xcassets */; };
@@ -51,7 +55,11 @@
 /* Begin PBXFileReference section */
 		0C3695581EB6D9A900430C09 /* TestCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestCollectionViewController.swift; sourceTree = "<group>"; };
 		0C7D9A8D1F217B510041E1B0 /* apple-app-site-association */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "apple-app-site-association"; path = "Cornell Sun/apple-app-site-association"; sourceTree = "<group>"; };
+		0CAA2BEB1F954E3200D423FD /* ArticleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleViewController.swift; sourceTree = "<group>"; };
 		0CBC2CED1F5E3093003FBB38 /* TabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
+		0CEA0F791F99454600607CC7 /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
+		0CED4FAB1FAB523E0025EB91 /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UIColor+.swift"; path = "Cornell Sun/UIColor+.swift"; sourceTree = "<group>"; };
+		0CED4FAC1FAB523F0025EB91 /* UIFont+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UIFont+.swift"; path = "Cornell Sun/UIFont+.swift"; sourceTree = "<group>"; };
 		389771843ED115B12D456CDA /* Pods-Cornell SunTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cornell SunTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Cornell SunTests/Pods-Cornell SunTests.debug.xcconfig"; sourceTree = "<group>"; };
 		3C38BCC6B38BFCC0EC16BF2B /* Pods_Cornell_SunTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cornell_SunTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DBAAD519F3C5A2D044960CA /* Pods_Cornell_Sun.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cornell_Sun.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -140,6 +148,7 @@
 				DC6870031F7D77F700CE2E27 /* Launch Screen.storyboard */,
 				5006AFFB1EA9625000F58549 /* AppDelegate.swift */,
 				DC446C311F5D05FF00D68688 /* ArticleSectionController.swift */,
+				0CAA2BEB1F954E3200D423FD /* ArticleViewController.swift */,
 				DC446C2D1F5D016500D68688 /* FeedCollectionViewController.swift */,
 				61652CD31F6EF44900EEFC29 /* SearchTableViewCell.swift */,
 				61652CD11F6EF3A500EEFC29 /* SearchViewController.swift */,
@@ -172,9 +181,12 @@
 		507744F01EB5326D0079D80D /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				0CED4FAB1FAB523E0025EB91 /* UIColor+.swift */,
+				0CED4FAC1FAB523F0025EB91 /* UIFont+.swift */,
 				DC4308EC1F2558D500ABB31F /* SunAPI.swift */,
 				DC4308EE1F2563FF00ABB31F /* API.swift */,
 				DC446C351F5D0DFF00D68688 /* Extensions.swift */,
+				0CEA0F791F99454600607CC7 /* Date+.swift */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -467,11 +479,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0CEA0F7A1F99454600607CC7 /* Date+.swift in Sources */,
 				DC446C321F5D05FF00D68688 /* ArticleSectionController.swift in Sources */,
 				5006AFFE1EA9625000F58549 /* ViewController.swift in Sources */,
 				5006AFFC1EA9625000F58549 /* AppDelegate.swift in Sources */,
 				DCFC88C41F86B50200A0D8A9 /* ActionMenuCell.swift in Sources */,
 				DC818D9B1F74CFBB0064AFFA /* SpinnerCell.swift in Sources */,
+				0CAA2BEC1F954E3200D423FD /* ArticleViewController.swift in Sources */,
+				0CED4FAE1FAB523F0025EB91 /* UIFont+.swift in Sources */,
 				5006B24D1EADA37F00F58549 /* PostObject.swift in Sources */,
 				DCFC88C81F86C7B000A0D8A9 /* LikeCommentCell.swift in Sources */,
 				DC79719F1F7B30540055A7B2 /* CategoryCell.swift in Sources */,
@@ -482,6 +497,7 @@
 				61652CD21F6EF3A500EEFC29 /* SearchViewController.swift in Sources */,
 				DC4308ED1F2558D500ABB31F /* SunAPI.swift in Sources */,
 				DC446C341F5D0D1400D68688 /* ArticleCell.swift in Sources */,
+				0CED4FAD1FAB523F0025EB91 /* UIColor+.swift in Sources */,
 				DC446C361F5D0DFF00D68688 /* Extensions.swift in Sources */,
 				DC818D9D1F7553380064AFFA /* ImageCell.swift in Sources */,
 				DCFC88C61F86C03700A0D8A9 /* CommentObject.swift in Sources */,

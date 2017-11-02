@@ -22,6 +22,22 @@ extension String {
 
         return ceil(boundingBox.width)
     }
+
+    var htmlToAttributedString: NSAttributedString? {
+        do {
+            return try NSAttributedString(data: Data(utf8),
+                                          options: [.documentType: NSAttributedString.DocumentType.html,
+                                                    .characterEncoding: String.Encoding.utf8.rawValue],
+                                          documentAttributes: nil)
+        } catch {
+            print("error:", error)
+            return  nil
+        }
+    }
+
+    var htmlToString: String {
+        return htmlToAttributedString?.string ?? ""
+    }
 }
 
 extension UIView {
@@ -69,8 +85,6 @@ class CategoryLabel: UILabel {
         }
     }
 }
-
-
 
 let imageCache = NSCache<NSString, UIImage>()
 class ArticleImageView: UIImageView {

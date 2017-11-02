@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import LGSideMenuController
 
 class ViewController: UIViewController {
 
@@ -15,7 +14,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         view.backgroundColor = .white
-        title = "The Cornell Daily Sun"
+        navigationItem.title = "The Cornell Daily Sun"
         self.navigationController?.navigationBar.titleTextAttributes = [
             NSAttributedStringKey.font: UIFont(name: "Sonnenstrahl-Ausgezeichnet", size: 22)
         ]
@@ -29,6 +28,10 @@ class ViewController: UIViewController {
                                                             target: self,
                                                             action: #selector(showSearchViewController))
          */
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        navigationItem.title = "The Cornell Daily Sun"
     }
 
     @objc func showSearchViewController() {

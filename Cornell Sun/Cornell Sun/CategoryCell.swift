@@ -57,7 +57,7 @@ final class CategoryCell: UICollectionViewCell {
         addSubview(divider)
         categoryLabel.snp.makeConstraints { (make) in
             //make.centerX.equalToSuperview()
-            make.edges.equalToSuperview().inset(UIEdgeInsetsMake(5, 5, 5, 5))
+            make.edges.equalToSuperview().inset(UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5))
         }
         divider.snp.makeConstraints { (make) in
             make.height.equalTo(1)
