@@ -23,10 +23,10 @@ public extension Response {
             throw MoyaError.underlying(error, self)
         }
     }
-    
+
     public func map<T: Mappable>(to type: T.Type, keyPath: String?) throws -> T {
         guard let keyPath = keyPath else { return try map(to: type) }
-        
+
         guard let jsonDictionary = try mapJSON() as? NSDictionary,
             let objectDictionary = jsonDictionary.value(forKeyPath:keyPath) as? NSDictionary else {
                 throw MoyaError.jsonMapping(self)
@@ -38,7 +38,7 @@ public extension Response {
             throw MoyaError.underlying(error, self)
         }
     }
-    
+
     public func map<T: Mappable>(to type: [T].Type) throws -> [T] {
         guard let jsonArray = try mapJSON() as? [NSDictionary] else {
             throw MoyaError.jsonMapping(self)
@@ -50,10 +50,10 @@ public extension Response {
             throw MoyaError.underlying(error, self)
         }
     }
-    
+
     public func map<T: Mappable>(to type: [T].Type, keyPath: String?) throws -> [T] {
         guard let keyPath = keyPath else { return try map(to: type) }
-        
+
         guard let jsonDictionary = try mapJSON() as? NSDictionary,
             let objectArray = jsonDictionary.value(forKeyPath:keyPath) as? [NSDictionary] else {
                 throw MoyaError.jsonMapping(self)

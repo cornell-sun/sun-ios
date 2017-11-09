@@ -47,7 +47,7 @@ public protocol ImageProcessor {
     /// the `DefaultImageProcessor`. It is recommended to use a reverse domain name notation
     /// string of your own for the identifier.
     var identifier: String { get }
-    
+
     /// Process an input `ImageProcessItem` item to an image for this processor.
     ///
     /// - parameter item:    Input item which will be processed by `self`
@@ -66,7 +66,7 @@ public protocol ImageProcessor {
 typealias ProcessorImp = ((ImageProcessItem, KingfisherOptionsInfo) -> Image?)
 
 public extension ImageProcessor {
-    
+
     /// Append an `ImageProcessor` to another. The identifier of the new `ImageProcessor` 
     /// will be "\(self.identifier)|>\(another.identifier)".
     ///
@@ -95,7 +95,7 @@ func !=(left: ImageProcessor, right: ImageProcessor) -> Bool {
     return !(left == right)
 }
 
-fileprivate struct GeneralProcessor: ImageProcessor {
+private struct GeneralProcessor: ImageProcessor {
     let identifier: String
     let p: ProcessorImp
     func process(item: ImageProcessItem, options: KingfisherOptionsInfo) -> Image? {
@@ -107,17 +107,17 @@ fileprivate struct GeneralProcessor: ImageProcessor {
 /// Images of .PNG, .JPEG and .GIF format are supported.
 /// If an image is given, `DefaultImageProcessor` will do nothing on it and just return that image.
 public struct DefaultImageProcessor: ImageProcessor {
-    
+
     /// A default `DefaultImageProcessor` could be used across.
     public static let `default` = DefaultImageProcessor()
-    
+
     /// Identifier of the processor.
     /// - Note: See documentation of `ImageProcessor` protocol for more.
     public let identifier = ""
-    
+
     /// Initialize a `DefaultImageProcessor`
     public init() {}
-    
+
     /// Process an input `ImageProcessItem` item to an image for this processor.
     ///
     /// - parameter item:    Input item which will be processed by `self`
@@ -147,11 +147,11 @@ public struct RectCorner: OptionSet {
     public static let bottomLeft = RectCorner(rawValue: 1 << 2)
     public static let bottomRight = RectCorner(rawValue: 1 << 3)
     public static let all: RectCorner = [.topLeft, .topRight, .bottomLeft, .bottomRight]
-    
+
     public init(rawValue: Int) {
         self.rawValue = rawValue
     }
-    
+
     var cornerIdentifier: String {
         if self == .all {
             return ""
@@ -163,17 +163,17 @@ public struct RectCorner: OptionSet {
 /// Processor for making round corner images. Only CG-based images are supported in macOS, 
 /// if a non-CG image passed in, the processor will do nothing.
 public struct RoundCornerImageProcessor: ImageProcessor {
-    
+
     /// Identifier of the processor.
     /// - Note: See documentation of `ImageProcessor` protocol for more.
     public let identifier: String
 
     /// Corner radius will be applied in processing.
     public let cornerRadius: CGFloat
-    
+
     /// The target corners which will be applied rounding.
     public let roundingCorners: RectCorner
-    
+
     /// Target size of output image should be. If `nil`, the image will keep its original size after processing.
     public let targetSize: CGSize?
 
@@ -209,7 +209,7 @@ public struct RoundCornerImageProcessor: ImageProcessor {
             return identifier
         }()
     }
-    
+
     /// Process an input `ImageProcessItem` item to an image for this processor.
     ///
     /// - parameter item:    Input item which will be processed by `self`
@@ -229,7 +229,6 @@ public struct RoundCornerImageProcessor: ImageProcessor {
     }
 }
 
-
 /// Specify how a size adjusts itself to fit a target size.
 ///
 /// - none: Not scale the content.
@@ -243,18 +242,18 @@ public enum ContentMode {
 
 /// Processor for resizing images. Only CG-based images are supported in macOS.
 public struct ResizingImageProcessor: ImageProcessor {
-    
+
     /// Identifier of the processor.
     /// - Note: See documentation of `ImageProcessor` protocol for more.
     public let identifier: String
-    
+
     /// The reference size for resizing operation.
     public let referenceSize: CGSize
-    
+
     /// Target content mode of output image should be.
     /// Default to ContentMode.none
     public let targetContentMode: ContentMode
-    
+
     /// Initialize a `ResizingImageProcessor`.
     ///
     /// - Parameters:
@@ -277,14 +276,14 @@ public struct ResizingImageProcessor: ImageProcessor {
     public init(referenceSize: CGSize, mode: ContentMode = .none) {
         self.referenceSize = referenceSize
         self.targetContentMode = mode
-        
+
         if mode == .none {
             self.identifier = "com.onevcat.Kingfisher.ResizingImageProcessor(\(referenceSize))"
         } else {
             self.identifier = "com.onevcat.Kingfisher.ResizingImageProcessor(\(referenceSize), \(mode))"
         }
     }
-    
+
     /// Process an input `ImageProcessItem` item to an image for this processor.
     ///
     /// - parameter item:    Input item which will be processed by `self`
@@ -306,11 +305,11 @@ public struct ResizingImageProcessor: ImageProcessor {
 /// Processor for adding blur effect to images. `Accelerate.framework` is used underhood for 
 /// a better performance. A simulated Gaussian blur with specified blur radius will be applied.
 public struct BlurImageProcessor: ImageProcessor {
-    
+
     /// Identifier of the processor.
     /// - Note: See documentation of `ImageProcessor` protocol for more.
     public let identifier: String
-    
+
     /// Blur radius for the simulated Gaussian blur.
     public let blurRadius: CGFloat
 
@@ -321,7 +320,7 @@ public struct BlurImageProcessor: ImageProcessor {
         self.blurRadius = blurRadius
         self.identifier = "com.onevcat.Kingfisher.BlurImageProcessor(\(blurRadius))"
     }
-    
+
     /// Process an input `ImageProcessItem` item to an image for this processor.
     ///
     /// - parameter item:    Input item which will be processed by `self`
@@ -343,17 +342,17 @@ public struct BlurImageProcessor: ImageProcessor {
 
 /// Processor for adding an overlay to images. Only CG-based images are supported in macOS.
 public struct OverlayImageProcessor: ImageProcessor {
-    
+
     /// Identifier of the processor.
     /// - Note: See documentation of `ImageProcessor` protocol for more.
     public let identifier: String
-    
+
     /// Overlay color will be used to overlay the input image.
     public let overlay: Color
-    
+
     /// Fraction will be used when overlay the color to image.
     public let fraction: CGFloat
-    
+
     /// Initialize an `OverlayImageProcessor`
     ///
     /// - parameter overlay:  Overlay color will be used to overlay the input image.
@@ -364,7 +363,7 @@ public struct OverlayImageProcessor: ImageProcessor {
         self.fraction = fraction
         self.identifier = "com.onevcat.Kingfisher.OverlayImageProcessor(\(overlay.hex)_\(fraction))"
     }
-    
+
     /// Process an input `ImageProcessItem` item to an image for this processor.
     ///
     /// - parameter item:    Input item which will be processed by `self`
@@ -385,14 +384,14 @@ public struct OverlayImageProcessor: ImageProcessor {
 
 /// Processor for tint images with color. Only CG-based images are supported.
 public struct TintImageProcessor: ImageProcessor {
-    
+
     /// Identifier of the processor.
     /// - Note: See documentation of `ImageProcessor` protocol for more.
     public let identifier: String
-    
+
     /// Tint color will be used to tint the input image.
     public let tint: Color
-    
+
     /// Initialize a `TintImageProcessor`
     ///
     /// - parameter tint: Tint color will be used to tint the input image.
@@ -400,7 +399,7 @@ public struct TintImageProcessor: ImageProcessor {
         self.tint = tint
         self.identifier = "com.onevcat.Kingfisher.TintImageProcessor(\(tint.hex))"
     }
-    
+
     /// Process an input `ImageProcessItem` item to an image for this processor.
     ///
     /// - parameter item:    Input item which will be processed by `self`
@@ -422,23 +421,23 @@ public struct TintImageProcessor: ImageProcessor {
 /// Processor for applying some color control to images. Only CG-based images are supported.
 /// watchOS is not supported.
 public struct ColorControlsProcessor: ImageProcessor {
-    
+
     /// Identifier of the processor.
     /// - Note: See documentation of `ImageProcessor` protocol for more.
     public let identifier: String
-    
+
     /// Brightness changing to image.
     public let brightness: CGFloat
-    
+
     /// Contrast changing to image.
     public let contrast: CGFloat
-    
+
     /// Saturation changing to image.
     public let saturation: CGFloat
-    
+
     /// InputEV changing to image.
     public let inputEV: CGFloat
-    
+
     /// Initialize a `ColorControlsProcessor`
     ///
     /// - parameter brightness: Brightness changing to image.
@@ -452,7 +451,7 @@ public struct ColorControlsProcessor: ImageProcessor {
         self.inputEV = inputEV
         self.identifier = "com.onevcat.Kingfisher.ColorControlsProcessor(\(brightness)_\(contrast)_\(saturation)_\(inputEV))"
     }
-    
+
     /// Process an input `ImageProcessItem` item to an image for this processor.
     ///
     /// - parameter item:    Input item which will be processed by `self`
@@ -474,14 +473,14 @@ public struct ColorControlsProcessor: ImageProcessor {
 /// Processor for applying black and white effect to images. Only CG-based images are supported.
 /// watchOS is not supported.
 public struct BlackWhiteProcessor: ImageProcessor {
-    
+
     /// Identifier of the processor.
     /// - Note: See documentation of `ImageProcessor` protocol for more.
     public let identifier = "com.onevcat.Kingfisher.BlackWhiteProcessor"
-    
+
     /// Initialize a `BlackWhiteProcessor`
     public init() {}
-    
+
     /// Process an input `ImageProcessItem` item to an image for this processor.
     ///
     /// - parameter item:    Input item which will be processed by `self`
@@ -499,20 +498,20 @@ public struct BlackWhiteProcessor: ImageProcessor {
 /// Processor for cropping an image. Only CG-based images are supported.
 /// watchOS is not supported.
 public struct CroppingImageProcessor: ImageProcessor {
-    
+
     /// Identifier of the processor.
     /// - Note: See documentation of `ImageProcessor` protocol for more.
     public let identifier: String
-    
+
     /// Target size of output image should be.
     public let size: CGSize
-    
+
     /// Anchor point from which the output size should be calculate.
     /// The anchor point is consisted by two values between 0.0 and 1.0.
     /// It indicates a related point in current image. 
     /// See `CroppingImageProcessor.init(size:anchor:)` for more.
     public let anchor: CGPoint
-    
+
     /// Initialize a `CroppingImageProcessor`
     ///
     /// - Parameters:
@@ -537,7 +536,7 @@ public struct CroppingImageProcessor: ImageProcessor {
         self.anchor = anchor
         self.identifier = "com.onevcat.Kingfisher.CroppingImageProcessor(\(size)_\(anchor))"
     }
-    
+
     /// Process an input `ImageProcessItem` item to an image for this processor.
     ///
     /// - parameter item:    Input item which will be processed by `self`
@@ -571,16 +570,16 @@ fileprivate extension Color {
         var g: CGFloat = 0
         var b: CGFloat = 0
         var a: CGFloat = 0
-        
+
         getRed(&r, green: &g, blue: &b, alpha: &a)
-        
+
         let rInt = Int(r * 255) << 24
         let gInt = Int(g * 255) << 16
         let bInt = Int(b * 255) << 8
         let aInt = Int(a * 255)
-        
+
         let rgba = rInt | gInt | bInt | aInt
-        
+
         return String(format:"#%08x", rgba)
     }
 }

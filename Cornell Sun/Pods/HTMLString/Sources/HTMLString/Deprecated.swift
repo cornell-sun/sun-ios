@@ -1,7 +1,7 @@
 import Foundation
 
 /// Function to call when a function is unavailable.
-fileprivate func unavailable(_ fn: String = #function, file: StaticString = #file, line: UInt = #line) -> Never {
+private func unavailable(_ fn: String = #function, file: StaticString = #file, line: UInt = #line) -> Never {
     fatalError("[HTMLString] \(fn) is not available.", file: file, line: line)
 }
 

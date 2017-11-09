@@ -27,12 +27,12 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
         tableView.dataSource = self
         view.addSubview(tableView)
     }
-    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // swiftlint:disable:next force_cast
         let cell = tableView.dequeueReusableCell(withIdentifier: "SettingCell", for: indexPath) as! SettingsTableViewCell
@@ -41,12 +41,11 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
         cell.selectionStyle = .none
         return cell
     }
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return settings.count
     }
 
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let setting = settings[indexPath.row]
         if setting.type == SettingType.Clickable {
@@ -55,7 +54,7 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
             }
         }
     }
-    
+
     //*Test* populator for settings array. To be deleted
     func testInit() {
         settings.append(SettingObject(label: "Subscribe", secondary: "", next: SettingsViewController(), secType: .None))
@@ -74,6 +73,3 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
         settings.append(SettingObject(label: "Use Agreement", secondary: "", next: SettingsViewController(), secType: .None))
     }
 }
-
-
-

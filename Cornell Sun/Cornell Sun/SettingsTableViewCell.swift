@@ -12,16 +12,16 @@ import SnapKit
 class SettingsTableViewCell: UITableViewCell {
     var label: UILabel!
     var secondaryView: UIView!
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
     }
-    
+
     func setupCell(setting: SettingObject) {
         let superview = contentView
         label = UILabel()
         contentView.addSubview(label)
-        label.snp.makeConstraints{ (make) -> Void in
+        label.snp.makeConstraints { (make) -> Void in
             make.height.equalTo(20)
             print(UIFont.labelFontSize)
             make.left.equalTo(superview.snp.left).offset(16)

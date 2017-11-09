@@ -15,7 +15,7 @@ class SettingObject {
     var secondaryLabel: String
     var nextController: UIViewController? //ViewController launched on selecting clickable cell
     var secondaryViewType: SecondaryViewType //the secondary view appearing on the right hand side of the cell
-    
+
     init( label: String, secondary: String, next: UIViewController?, secType: SecondaryViewType) {
         settingLabel = label
         secondaryLabel =  secondary
@@ -27,4 +27,3 @@ class SettingObject {
         }
     }
 }
-
