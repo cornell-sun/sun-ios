@@ -19,9 +19,12 @@ protocol BookmarkPressedDelegate: class {
 
 final class MenuActionCell: UICollectionViewCell {
 
-    weak var delegate: HeartPressedDelegate?
+    weak var heartDelegate: HeartPressedDelegate?
     weak var bookmarkDelegate: BookmarkPressedDelegate?
-
+    let imageWidth = 28.5
+    let imageHeight = 28.5
+    let offset = 15.5
+    let shareHeight = 30.0
     lazy var heartButton: UIButton = {
         let button = UIButton(type: .custom)
         button.imageView?.contentMode = .scaleAspectFit
@@ -64,7 +67,7 @@ final class MenuActionCell: UICollectionViewCell {
     }
 
     @objc func heartPressed(_ button: UIButton) {
-        delegate?.didPressHeart(self)
+        heartDelegate?.didPressHeart(self)
     }
 
     @objc func bookmarkPressed(_ button: UIButton) {
@@ -80,10 +83,10 @@ final class MenuActionCell: UICollectionViewCell {
         self.backgroundColor = .white
         self.contentView.addSubview(shareImageView)
         heartButton.snp.makeConstraints { (make) in
-            make.width.equalTo(28.5)
-            make.height.equalTo(28.5)
+            make.width.equalTo(imageWidth)
+            make.height.equalTo(imageHeight)
             make.centerY.equalToSuperview()
-            make.left.equalTo(15.5)
+            make.left.equalTo(offset)
         }
 
 //        commentImageView.snp.makeConstraints { (make) in
@@ -94,17 +97,17 @@ final class MenuActionCell: UICollectionViewCell {
 //        }
 
         shareImageView.snp.makeConstraints { (make) in
-            make.width.equalTo(28.5)
-            make.height.equalTo(30)
+            make.width.equalTo(imageWidth)
+            make.height.equalTo(shareHeight)
             make.centerY.equalToSuperview()
             make.left.equalTo(heartButton.snp.right).offset(10)
         }
 
         bookmarkButton.snp.makeConstraints { (make) in
-            make.width.equalTo(28.5)
-            make.height.equalTo(28.5)
+            make.width.equalTo(imageWidth)
+            make.height.equalTo(imageHeight)
             make.centerY.equalToSuperview()
-            make.right.equalToSuperview().inset(15.5)
+            make.right.equalToSuperview().inset(offset)
         }
     }
 }

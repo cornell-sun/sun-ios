@@ -8,6 +8,7 @@
 
 import UIKit
 import IGListKit
+import SnapKit
 
 func spinnerSectionController() -> ListSingleSectionController {
     let configureBlock = { (item: Any, cell: UICollectionViewCell) in
@@ -35,8 +36,9 @@ final class SpinnerCell: UICollectionViewCell {
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        let bounds = contentView.bounds
-        activityIndicator.center = CGPoint(x: bounds.midX, y: bounds.midY)
+        activityIndicator.snp.makeConstraints { (make) in
+            make.center.equalToSuperview()
+        }
     }
 
 }
