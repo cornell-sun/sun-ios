@@ -41,7 +41,7 @@ class TabBarViewController: UITabBarController {
         let tabFourTabBarItem = UITabBarItem(title: "Search", image: nil, selectedImage: nil)
         tabFourNavigationController.tabBarItem = tabFourTabBarItem
 
-        let tabFiveNavigationController = UINavigationController(rootViewController: ViewController())
+        let tabFiveNavigationController = UINavigationController(rootViewController: SettingsViewController())
         let tabFiveTabBarItem = UITabBarItem(title: "Settings", image: nil, selectedImage: nil)
         tabFiveNavigationController.tabBarItem = tabFiveTabBarItem
 
