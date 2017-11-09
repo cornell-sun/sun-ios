@@ -42,12 +42,6 @@ class ArticleViewController: UIViewController {
         return imageView
     }()
 
-    fileprivate let activityView: UIActivityIndicatorView = {
-        let view = UIActivityIndicatorView(activityIndicatorStyle: .gray)
-        //view.startAnimating()
-        return view
-    }()
-
     convenience init(article: PostObject) {
         self.init()
         setupWithPost(article)
@@ -56,16 +50,11 @@ class ArticleViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .whiteTwo
+        navigationController?.navigationBar.topItem?.title = ""
         setupViews()
         setArticle()
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        guard let tabBarControllerHeight = tabBarController?.tabBar.frame.height else { return }
+        articleScrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: tabBarControllerHeight, right: 0)
     }
 
     func setupWithPost(_ post: PostObject) {
@@ -73,7 +62,7 @@ class ArticleViewController: UIViewController {
     }
 
     func setupViews() {
-        articleScrollView = UIScrollView(frame: view.frame)
+        articleScrollView = UIScrollView(frame: .zero)
         articleScrollView.showsHorizontalScrollIndicator = false
         articleScrollView.isScrollEnabled = true
         view.addSubview(articleScrollView)
@@ -82,10 +71,10 @@ class ArticleViewController: UIViewController {
             make.width.height.equalToSuperview()
         }
 
-        articleView = UIView(frame: view.frame)
+        articleView = UIView(frame: .zero)
         articleScrollView.addSubview(articleView)
         articleView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            make.edges.width.height.equalToSuperview()
         }
 
         categoryLabel = CategoryLabel(frame: .zero)
@@ -108,7 +97,6 @@ class ArticleViewController: UIViewController {
         titleLabel.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(leadingOffset)
             make.top.equalTo(categoryLabel.snp.bottom).offset(titleLabelTopOffset)
-//            make.height.equalTo(titleLabelHeight)
         }
         titleLabel.sizeToFit()
 
@@ -139,7 +127,7 @@ class ArticleViewController: UIViewController {
             make.height.equalTo(imageViewHeight)
         }
 
-        articleBodyTextView = UITextView()
+        articleBodyTextView = UITextView(frame: .zero)
         articleBodyTextView.textColor = .blackThree
         articleBodyTextView.font = .articleBody
         articleBodyTextView.backgroundColor = .clear
@@ -148,9 +136,9 @@ class ArticleViewController: UIViewController {
         articleBodyTextView.contentSize = view.frame.size
         articleView.addSubview(articleBodyTextView)
         articleBodyTextView.snp.makeConstraints { make in
-            make.top.equalTo(heroImageView.snp.bottom).offset(articleBodyOffset)
             make.leading.trailing.equalToSuperview().inset(leadingOffset)
-            make.height.equalToSuperview()
+            make.height.greaterThanOrEqualToSuperview()
+            make.top.equalTo(heroImageView.snp.bottom).offset(articleBodyOffset)
         }
     }
 
@@ -159,22 +147,17 @@ class ArticleViewController: UIViewController {
         setupHeroImage()
         categoryLabel.loadtitleUsingId(post.categories)
         titleLabel.text = post.title
+        timeStampLabel.text = post.datePosted.timeAgoSinceNow()
         articleBodyTextView.text = post.content
         articleBodyTextView.sizeToFit()
-        timeStampLabel.text = post.datePosted.timeAgoSinceNow()
-
-        articleBodyTextView.snp.remakeConstraints { make in
-            make.top.equalTo(heroImageView.snp.bottom).offset(articleBodyOffset)
-            make.leading.trailing.equalToSuperview().inset(leadingOffset)
-            make.height.equalToSuperview()
-        }
-
+        articleBodyTextView.layoutIfNeeded()
+        articleView.sizeToFit()
+        let height = articleBodyTextView.frame.height - imageViewHeight
         articleView.snp.remakeConstraints { make in
-            make.height.equalToSuperview().multipliedBy(5) // need to resize to fit textview
             make.top.width.centerX.equalToSuperview()
-            make.bottom.equalToSuperview().inset(articleBodyInset)
+            make.bottom.equalToSuperview()
+            make.height.equalToSuperview().offset(height)
         }
-
     }
 
     func setAuthorLabel(id: Int) {
@@ -197,5 +180,4 @@ class ArticleViewController: UIViewController {
             heroImageView.kf.setImage(with: heroImageUrl)
         }
     }
-
 }
