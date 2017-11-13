@@ -131,11 +131,21 @@ extension FeedCollectionViewController: ListAdapterDataSource {
         if let obj = object as? String, obj == spinToken {
             return spinnerSectionController()
         }
-        return ArticleSectionController()
+        let articleSC = ArticleSectionController()
+        articleSC.delegate = self
+        return articleSC
     }
 
     func emptyView(for listAdapter: ListAdapter) -> UIView? {
         return nil
     }
 
+}
+
+extension FeedCollectionViewController: TabBarViewControllerDelegate {
+    func articleSectionDidPressOnArticle(_ article: PostObject) {
+        let articleVC = ArticleViewController(article: article)
+        articleVC.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(articleVC, animated: true)
+    }
 }

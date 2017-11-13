@@ -35,7 +35,7 @@ class APITests: XCTestCase {
             } catch {
                 // can't parse data, show error
             }
-        }, error: { (error) in
+        }, error: { (_) in
             // error from Wordpress
         }, failure: { (_) in
             // show Moya error

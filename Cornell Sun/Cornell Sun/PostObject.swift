@@ -14,7 +14,7 @@ import Kingfisher
 class PostObject: ListDiffable {
     private let wpDateFormatter: DateFormatter = {
         let formatter = DateFormatter()
-        formatter.dateFormat = "YYYY-MM-DD'T'HH:mm:ss"     // "2016-01-29T01:45:33"
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"     // "2016-01-29T01:45:33"
         return formatter
     }()
 
@@ -51,7 +51,7 @@ class PostObject: ListDiffable {
         self.id = id
         self.datePosted = date
         self.title = title.removingHTMLEntities
-        self.content = content
+        self.content = content.htmlToString
         self.link = link
         self.excerpt = "excerpt"
         self.authorId = author

@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import LGSideMenuController
 import Kingfisher
 
 @UIApplicationMain

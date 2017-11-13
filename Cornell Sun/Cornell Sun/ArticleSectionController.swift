@@ -10,6 +10,10 @@ import UIKit
 import IGListKit
 import SafariServices
 
+protocol TabBarViewControllerDelegate: class {
+    func articleSectionDidPressOnArticle(_ article: PostObject)
+}
+
 // swiftlint:disable:next type_name
 enum cellType: Int {
     case categoryCell = 0
@@ -21,6 +25,7 @@ enum cellType: Int {
 
 class ArticleSectionController: ListSectionController {
     var entry: PostObject!
+    weak var delegate: TabBarViewControllerDelegate?
 
     override init() {
         super.init()
@@ -156,12 +161,7 @@ extension ArticleSectionController: HeartPressedDelegate, BookmarkPressedDelegat
 
     override func didSelectItem(at index: Int) {
         if index != 4 {
-            if let postUrl = URL(string: entry.link),
-                let currentVC = getCurrentViewController() {
-                let sfVC = SFSafariViewController(url: postUrl, entersReaderIfAvailable: true)
-                currentVC.present(sfVC, animated: true)
-
-            }
+            delegate?.articleSectionDidPressOnArticle(entry)
         }
     }
 }
