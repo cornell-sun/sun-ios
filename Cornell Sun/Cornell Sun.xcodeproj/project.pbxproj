@@ -31,6 +31,8 @@
 		DC818D9F1F7596970064AFFA /* TitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC818D9E1F7596970064AFFA /* TitleCell.swift */; };
 		DC818DA31F75E0CF0064AFFA /* Sonnenstrahl-Ausgezeichnet.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DC818DA21F75E08B0064AFFA /* Sonnenstrahl-Ausgezeichnet.ttf */; };
 		DCB717121FB94BCA00BE4D26 /* KeplerStd-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = DCB717111FB94BCA00BE4D26 /* KeplerStd-Bold.otf */; };
+		DCB717141FB9FE1700BE4D26 /* HeroSectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB717131FB9FE1700BE4D26 /* HeroSectionController.swift */; };
+		DCB717161FBA016400BE4D26 /* TaglineCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB717151FBA016400BE4D26 /* TaglineCell.swift */; };
 		DCD870EF1F256B7B00B98AF8 /* Cornell_SunTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD870EE1F256B7B00B98AF8 /* Cornell_SunTests.swift */; };
 		DCD870F91F256E2C00B98AF8 /* APITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD870F81F256E2C00B98AF8 /* APITests.swift */; };
 		DCFC88C41F86B50200A0D8A9 /* ActionMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFC88C31F86B50200A0D8A9 /* ActionMenuCell.swift */; };
@@ -82,6 +84,8 @@
 		DC818D9E1F7596970064AFFA /* TitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleCell.swift; sourceTree = "<group>"; };
 		DC818DA21F75E08B0064AFFA /* Sonnenstrahl-Ausgezeichnet.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Sonnenstrahl-Ausgezeichnet.ttf"; sourceTree = "<group>"; };
 		DCB717111FB94BCA00BE4D26 /* KeplerStd-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "KeplerStd-Bold.otf"; sourceTree = "<group>"; };
+		DCB717131FB9FE1700BE4D26 /* HeroSectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroSectionController.swift; sourceTree = "<group>"; };
+		DCB717151FBA016400BE4D26 /* TaglineCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaglineCell.swift; sourceTree = "<group>"; };
 		DCD870EC1F256B7B00B98AF8 /* Cornell SunTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Cornell SunTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCD870EE1F256B7B00B98AF8 /* Cornell_SunTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cornell_SunTests.swift; sourceTree = "<group>"; };
 		DCD870F01F256B7B00B98AF8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -142,6 +146,7 @@
 				DC6870031F7D77F700CE2E27 /* Launch Screen.storyboard */,
 				5006AFFB1EA9625000F58549 /* AppDelegate.swift */,
 				DC446C311F5D05FF00D68688 /* ArticleSectionController.swift */,
+				DCB717131FB9FE1700BE4D26 /* HeroSectionController.swift */,
 				DC446C2D1F5D016500D68688 /* FeedCollectionViewController.swift */,
 				61652CD31F6EF44900EEFC29 /* SearchTableViewCell.swift */,
 				61652CD11F6EF3A500EEFC29 /* SearchViewController.swift */,
@@ -157,6 +162,7 @@
 				DCFC88C71F86C7B000A0D8A9 /* LikeCommentCell.swift */,
 				DCFC88C31F86B50200A0D8A9 /* ActionMenuCell.swift */,
 				DC818D9E1F7596970064AFFA /* TitleCell.swift */,
+				DCB717151FBA016400BE4D26 /* TaglineCell.swift */,
 				DC79719E1F7B30540055A7B2 /* CategoryCell.swift */,
 			);
 			path = "Cornell Sun";
@@ -477,6 +483,7 @@
 				DCFC88C41F86B50200A0D8A9 /* ActionMenuCell.swift in Sources */,
 				DC818D9B1F74CFBB0064AFFA /* SpinnerCell.swift in Sources */,
 				5006B24D1EADA37F00F58549 /* PostObject.swift in Sources */,
+				DCB717161FBA016400BE4D26 /* TaglineCell.swift in Sources */,
 				DCFC88C81F86C7B000A0D8A9 /* LikeCommentCell.swift in Sources */,
 				DC79719F1F7B30540055A7B2 /* CategoryCell.swift in Sources */,
 				0C3695591EB6D9A900430C09 /* TestCollectionViewController.swift in Sources */,
@@ -492,6 +499,7 @@
 				DC818D9F1F7596970064AFFA /* TitleCell.swift in Sources */,
 				DC4308EF1F2563FF00ABB31F /* API.swift in Sources */,
 				61652CD41F6EF44900EEFC29 /* SearchTableViewCell.swift in Sources */,
+				DCB717141FB9FE1700BE4D26 /* HeroSectionController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
