@@ -16,7 +16,7 @@ class TabBarViewController: UITabBarController {
         view.backgroundColor = .white
         tabBar.backgroundColor = .white
         tabBar.backgroundImage = UIImage()
-        tabBar.tintColor = .black
+        tabBar.tintColor = .bigRed
         delegate = self
         setupTabs()
     }
@@ -26,23 +26,23 @@ class TabBarViewController: UITabBarController {
         // these are just placeholders
 
         let tabOneNavigationController = UINavigationController(rootViewController: FeedCollectionViewController())
-        let tabOneTabBarItem = UITabBarItem(title: "News", image: nil, selectedImage: nil)
+        let tabOneTabBarItem = UITabBarItem(title: "News", image: #imageLiteral(resourceName: "feedIcon").withRenderingMode(.alwaysOriginal), selectedImage: #imageLiteral(resourceName: "feedIconRed").withRenderingMode(.alwaysOriginal))
         tabOneNavigationController.tabBarItem = tabOneTabBarItem
 
         let tabTwoNavigationController = UINavigationController(rootViewController: ViewController())
-        let tabTwoTabBarItem = UITabBarItem(title: "Sections", image: nil, selectedImage: nil)
+        let tabTwoTabBarItem = UITabBarItem(title: "Sections", image: #imageLiteral(resourceName: "sectionIcon").withRenderingMode(.alwaysOriginal), selectedImage: #imageLiteral(resourceName: "sectionIconRed").withRenderingMode(.alwaysOriginal))
         tabTwoNavigationController.tabBarItem = tabTwoTabBarItem
 
         let tabThreeNavigationController = UINavigationController(rootViewController: ViewController())
-        let tabThreeTabBarItem = UITabBarItem(title: "Bookmarks", image: nil, selectedImage: nil)
+        let tabThreeTabBarItem = UITabBarItem(title: "Bookmarks", image: #imageLiteral(resourceName: "bookmarkIcon").withRenderingMode(.alwaysOriginal), selectedImage: #imageLiteral(resourceName: "bookmarkIconRed").withRenderingMode(.alwaysOriginal))
         tabThreeNavigationController.tabBarItem = tabThreeTabBarItem
 
         let tabFourNavigationController = UINavigationController(rootViewController: ViewController())
-        let tabFourTabBarItem = UITabBarItem(title: "Search", image: nil, selectedImage: nil)
+        let tabFourTabBarItem = UITabBarItem(title: "Search", image: #imageLiteral(resourceName: "searchIcon").withRenderingMode(.alwaysOriginal), selectedImage: #imageLiteral(resourceName: "searchIconRed").withRenderingMode(.alwaysOriginal))
         tabFourNavigationController.tabBarItem = tabFourTabBarItem
 
         let tabFiveNavigationController = UINavigationController(rootViewController: ViewController())
-        let tabFiveTabBarItem = UITabBarItem(title: "Settings", image: nil, selectedImage: nil)
+        let tabFiveTabBarItem = UITabBarItem(title: "Settings", image: #imageLiteral(resourceName: "personSettingsIcon").withRenderingMode(.alwaysOriginal), selectedImage: #imageLiteral(resourceName: "personSettingsIconRed").withRenderingMode(.alwaysOriginal))
         tabFiveNavigationController.tabBarItem = tabFiveTabBarItem
 
         viewControllers = [tabOneNavigationController, tabTwoNavigationController, tabThreeNavigationController, tabFourNavigationController, tabFiveNavigationController]

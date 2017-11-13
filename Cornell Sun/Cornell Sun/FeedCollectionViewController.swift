@@ -145,6 +145,7 @@ extension FeedCollectionViewController: ListAdapterDataSource {
 extension FeedCollectionViewController: TabBarViewControllerDelegate {
     func articleSectionDidPressOnArticle(_ article: PostObject) {
         let articleVC = ArticleViewController(article: article)
+        articleVC.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(articleVC, animated: true)
     }
 }

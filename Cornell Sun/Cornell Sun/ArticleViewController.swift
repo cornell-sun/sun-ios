@@ -9,6 +9,23 @@
 import UIKit
 import HTMLString
 
+enum FontSize {
+    case regular
+    case large
+    case small
+
+    func getFont() -> UIFont {
+        switch self {
+        case .regular:
+            return .articleBody
+        case .large:
+            return .articleBodyLarge
+        case .small:
+            return .articleBodySmall
+        }
+    }
+}
+
 class ArticleViewController: UIViewController {
     let leadingOffset: CGFloat = 17.5
     let categoryLabelTopOffset: CGFloat = 18.5
@@ -20,7 +37,7 @@ class ArticleViewController: UIViewController {
     let timeStampTopOffset: CGFloat = 14.5
     let timeStampHeight: CGFloat = 14
     let authorLabelHeight: CGFloat = 14
-    let articleBodyOffset: CGFloat = 43.5
+    let articleBodyOffset: CGFloat = 25
     let articleBodyInset: CGFloat = 36
 
     var post: PostObject!
@@ -34,6 +51,8 @@ class ArticleViewController: UIViewController {
     var timeStampLabel: UILabel!
     var captionLabel: UILabel!
     var articleBodyTextView: UITextView!
+    var textSizeRightBarButtonItem: UIBarButtonItem!
+    var currentFontSize: FontSize = .regular
 
     let heroImageView: UIImageView = {
         let imageView = UIImageView()
@@ -49,12 +68,28 @@ class ArticleViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .whiteTwo
+        view.backgroundColor = .white
         navigationController?.navigationBar.topItem?.title = ""
+        navigationController?.navigationBar.tintColor = .black
+        textSizeRightBarButtonItem = UIBarButtonItem(title: "Tt", style: .plain, target: self, action: #selector(toggleSize))
+        navigationItem.setRightBarButton(textSizeRightBarButtonItem, animated: true)
         setupViews()
         setArticle()
         guard let tabBarControllerHeight = tabBarController?.tabBar.frame.height else { return }
         articleScrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: tabBarControllerHeight, right: 0)
+    }
+    
+    @objc func toggleSize() {
+        switch currentFontSize {
+        case .regular:
+            currentFontSize = .large
+        case .large:
+            currentFontSize = .small
+        case .small:
+            currentFontSize = .regular
+        }
+        articleBodyTextView.font = currentFontSize.getFont()
+        resizeArticleTextView()
     }
 
     func setupWithPost(_ post: PostObject) {
@@ -90,7 +125,7 @@ class ArticleViewController: UIViewController {
         titleLabel = UILabel(frame: .zero)
         titleLabel.textColor = .blackThree
         titleLabel.font = .articleViewTitle
-        titleLabel.numberOfLines = 3
+        titleLabel.numberOfLines = 4
         titleLabel.lineBreakMode = .byTruncatingTail
         titleLabel.preferredMaxLayoutWidth = view.frame.width - 2 * leadingOffset
         articleView.addSubview(titleLabel)
@@ -129,7 +164,7 @@ class ArticleViewController: UIViewController {
 
         articleBodyTextView = UITextView(frame: .zero)
         articleBodyTextView.textColor = .blackThree
-        articleBodyTextView.font = .articleBody
+        articleBodyTextView.font = currentFontSize.getFont()
         articleBodyTextView.backgroundColor = .clear
         articleBodyTextView.isEditable = false
         articleBodyTextView.isScrollEnabled = false
@@ -149,6 +184,10 @@ class ArticleViewController: UIViewController {
         titleLabel.text = post.title
         timeStampLabel.text = post.datePosted.timeAgoSinceNow()
         articleBodyTextView.text = post.content
+        resizeArticleTextView()
+    }
+    
+    func resizeArticleTextView() {
         articleBodyTextView.sizeToFit()
         articleBodyTextView.layoutIfNeeded()
         articleView.sizeToFit()

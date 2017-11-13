@@ -20,6 +20,14 @@ extension UIFont {
 	@nonobjc class var articleBody: UIFont {
         return UIFont.systemFont(ofSize: 18.0, weight: .medium)
 	}
+    
+    @nonobjc class var articleBodyLarge: UIFont {
+        return UIFont.systemFont(ofSize: 22.0, weight: .medium)
+    }
+    
+    @nonobjc class var articleBodySmall: UIFont {
+        return UIFont.systemFont(ofSize: 14.0, weight: .medium)
+    }
 
 	@nonobjc class var sectionList: UIFont {
         return UIFont.systemFont(ofSize: 17.0, weight: .bold)
