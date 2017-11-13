@@ -20,8 +20,8 @@ final class TitleCell: UICollectionViewCell {
     let titleLabel: UILabel = {
         let label = UILabel()
         label.text = ""
-        label.numberOfLines = 3
-        label.font = .boldSystemFont(ofSize: 22)
+        label.numberOfLines = 4
+        label.font = UIFont(name: "KeplerStd-Bold", size: 22)
         return label
     }()
 
@@ -38,8 +38,8 @@ final class TitleCell: UICollectionViewCell {
         self.backgroundColor = .white
         addSubview(titleLabel)
         titleLabel.snp.makeConstraints { (make) in
-            //make.centerX.equalToSuperview()
-            make.edges.equalToSuperview().inset(UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5))
+            make.centerY.equalToSuperview()
+            make.edges.equalToSuperview().inset(UIEdgeInsets(top: 5, left: 17, bottom: 5, right: 5))
         }
     }
 }

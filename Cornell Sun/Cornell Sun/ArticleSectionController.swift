@@ -33,7 +33,7 @@ class ArticleSectionController: ListSectionController {
     }
 }
 
-extension ArticleSectionController: HeartPressedDelegate, BookmarkPressedDelegate {
+extension ArticleSectionController: HeartPressedDelegate, BookmarkPressedDelegate, SharePressedDelegate {
 
     func taptic() {
         let generator = UIImpactFeedbackGenerator(style: .light)
@@ -71,6 +71,15 @@ extension ArticleSectionController: HeartPressedDelegate, BookmarkPressedDelegat
         })
     }
 
+    func didPressShare() {
+        if let articleLink = URL(string: entry.link) {
+            let title = entry.title
+            let objectToShare = [title, articleLink] as [Any]
+            let activityVC = UIActivityViewController(activityItems: objectToShare, applicationActivities: nil)
+            getCurrentViewController()?.present(activityVC, animated: true, completion: nil)
+        }
+    }
+
     override func numberOfItems() -> Int {
         return 5
     }
@@ -90,7 +99,8 @@ extension ArticleSectionController: HeartPressedDelegate, BookmarkPressedDelegat
         case .imageCell:
             return CGSize(width: width, height: width / 1.92)
         case .likeCommentCell:
-            return CGSize(width: width, height: 25)
+            let hasComments = entry.comments.count > 0
+            return hasComments ? CGSize(width: width, height: 25) : .zero
         //return entry.comments.isEmpty ? .zero : CGSize(width: width, height: 25)
         case .actionMenuCell:
             return CGSize(width: width, height: 35)
@@ -127,6 +137,7 @@ extension ArticleSectionController: HeartPressedDelegate, BookmarkPressedDelegat
             let cell = collectionContext!.dequeueReusableCell(of: MenuActionCell.self, for: self, at: index) as! MenuActionCell
             cell.heartDelegate = self
             cell.bookmarkDelegate = self
+            cell.shareDelegate = self
             return cell
         }
     }

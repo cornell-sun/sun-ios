@@ -34,6 +34,7 @@
 		DC818D9D1F7553380064AFFA /* ImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC818D9C1F7553380064AFFA /* ImageCell.swift */; };
 		DC818D9F1F7596970064AFFA /* TitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC818D9E1F7596970064AFFA /* TitleCell.swift */; };
 		DC818DA31F75E0CF0064AFFA /* Sonnenstrahl-Ausgezeichnet.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DC818DA21F75E08B0064AFFA /* Sonnenstrahl-Ausgezeichnet.ttf */; };
+		DCB717121FB94BCA00BE4D26 /* KeplerStd-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = DCB717111FB94BCA00BE4D26 /* KeplerStd-Bold.otf */; };
 		DCD870EF1F256B7B00B98AF8 /* Cornell_SunTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD870EE1F256B7B00B98AF8 /* Cornell_SunTests.swift */; };
 		DCD870F91F256E2C00B98AF8 /* APITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD870F81F256E2C00B98AF8 /* APITests.swift */; };
 		DCFC88C41F86B50200A0D8A9 /* ActionMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFC88C31F86B50200A0D8A9 /* ActionMenuCell.swift */; };
@@ -88,6 +89,7 @@
 		DC818D9C1F7553380064AFFA /* ImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCell.swift; sourceTree = "<group>"; };
 		DC818D9E1F7596970064AFFA /* TitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleCell.swift; sourceTree = "<group>"; };
 		DC818DA21F75E08B0064AFFA /* Sonnenstrahl-Ausgezeichnet.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Sonnenstrahl-Ausgezeichnet.ttf"; sourceTree = "<group>"; };
+		DCB717111FB94BCA00BE4D26 /* KeplerStd-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "KeplerStd-Bold.otf"; sourceTree = "<group>"; };
 		DCD870EC1F256B7B00B98AF8 /* Cornell SunTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Cornell SunTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCD870EE1F256B7B00B98AF8 /* Cornell_SunTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cornell_SunTests.swift; sourceTree = "<group>"; };
 		DCD870F01F256B7B00B98AF8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -157,6 +159,7 @@
 				5006AFFD1EA9625000F58549 /* ViewController.swift */,
 				5006B0021EA9625000F58549 /* Assets.xcassets */,
 				5006B0071EA9625000F58549 /* Info.plist */,
+				DCB717111FB94BCA00BE4D26 /* KeplerStd-Bold.otf */,
 				DC818DA21F75E08B0064AFFA /* Sonnenstrahl-Ausgezeichnet.ttf */,
 				DC818D9A1F74CFBB0064AFFA /* SpinnerCell.swift */,
 				DC818D9C1F7553380064AFFA /* ImageCell.swift */,
@@ -280,7 +283,7 @@
 						CreatedOnToolsVersion = 8.3.1;
 						DevelopmentTeam = D5T999AFZL;
 						LastSwiftMigration = 0900;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 					};
 					DCD870EB1F256B7B00B98AF8 = {
 						CreatedOnToolsVersion = 9.0;
@@ -313,6 +316,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DCB717121FB94BCA00BE4D26 /* KeplerStd-Bold.otf in Resources */,
 				5006B0031EA9625000F58549 /* Assets.xcassets in Resources */,
 				DC818DA31F75E0CF0064AFFA /* Sonnenstrahl-Ausgezeichnet.ttf in Resources */,
 				DC6870041F7D77F700CE2E27 /* Launch Screen.storyboard in Resources */,
@@ -643,14 +647,15 @@
 			baseConfigurationReference = 79D08546F469CBFA91B516C4 /* Pods-Cornell Sun.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Manual;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = D5T999AFZL;
 				INFOPLIST_FILE = "Cornell Sun/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.cornellsun.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "c714c4e8-0b01-4b4e-a559-03455df4d1e6";
-				PROVISIONING_PROFILE_SPECIFIER = "match Development com.cornellsun.app";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
 				SWIFT_VERSION = 4.0;
 			};
@@ -662,14 +667,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = D5T999AFZL;
 				INFOPLIST_FILE = "Cornell Sun/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.cornellsun.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "ae057116-5be3-4759-9388-b52c8a6209b5";
-				PROVISIONING_PROFILE_SPECIFIER = "match Development com.cornellsun.app";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
