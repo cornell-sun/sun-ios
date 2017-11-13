@@ -20,11 +20,11 @@ extension UIFont {
 	@nonobjc class var articleBody: UIFont {
         return UIFont(name: "Georgia", size: 18)!
 	}
-    
+
     @nonobjc class var articleBodyLarge: UIFont {
         return UIFont(name: "Georgia", size: 22)!
     }
-    
+
     @nonobjc class var articleBodySmall: UIFont {
         return UIFont(name: "Georgia", size: 14)!
     }

@@ -78,7 +78,7 @@ class ArticleViewController: UIViewController {
         guard let tabBarControllerHeight = tabBarController?.tabBar.frame.height else { return }
         articleScrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: tabBarControllerHeight, right: 0)
     }
-    
+
     @objc func toggleSize() {
         switch currentFontSize {
         case .regular:
@@ -186,7 +186,7 @@ class ArticleViewController: UIViewController {
         articleBodyTextView.text = post.content
         resizeArticleTextView()
     }
-    
+
     func resizeArticleTextView() {
         articleBodyTextView.sizeToFit()
         articleBodyTextView.layoutIfNeeded()

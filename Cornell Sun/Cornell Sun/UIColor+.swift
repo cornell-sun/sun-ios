@@ -16,7 +16,7 @@ extension UIColor {
 	@nonobjc class var warmGrey: UIColor {
 		return UIColor(white: 151.0 / 255.0, alpha: 1.0)
 	}
-    
+
     @nonobjc class var darkGrey: UIColor {
         return UIColor(white: 74.0 / 255.0, alpha: 1.0)
     }
