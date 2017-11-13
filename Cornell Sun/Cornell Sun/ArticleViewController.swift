@@ -124,7 +124,7 @@ class ArticleViewController: UIViewController {
 
         titleLabel = UILabel(frame: .zero)
         titleLabel.textColor = .blackThree
-        titleLabel.font = .articleViewTitle
+        titleLabel.font = .articleTitle
         titleLabel.numberOfLines = 4
         titleLabel.lineBreakMode = .byTruncatingTail
         titleLabel.preferredMaxLayoutWidth = view.frame.width - 2 * leadingOffset
@@ -136,7 +136,7 @@ class ArticleViewController: UIViewController {
         titleLabel.sizeToFit()
 
         timeStampLabel = UILabel(frame: .zero)
-        timeStampLabel.textColor = .warmGrey
+        timeStampLabel.textColor = .darkGrey
         timeStampLabel.font = .author
         articleView.addSubview(timeStampLabel)
         timeStampLabel.snp.makeConstraints { make in
@@ -146,7 +146,7 @@ class ArticleViewController: UIViewController {
         }
 
         authorLabel = UILabel(frame: .zero)
-        authorLabel.textColor = .warmGrey
+        authorLabel.textColor = .darkGrey
         authorLabel.font = .author
         articleView.addSubview(authorLabel)
         authorLabel.snp.makeConstraints { make in

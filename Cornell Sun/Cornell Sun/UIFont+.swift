@@ -10,23 +10,23 @@ import UIKit
 extension UIFont {
 
 	@nonobjc class var articleViewTitle: UIFont {
-        return UIFont.systemFont(ofSize: 28.0, weight: .bold)
+        return UIFont(name: "KeplerStd-Bold", size: 22)!
 	}
 
 	@nonobjc class var articleTitle: UIFont {
-        return UIFont.systemFont(ofSize: 21.0, weight: .bold)
+        return UIFont(name: "KeplerStd-Bold", size: 25)!
 	}
 
 	@nonobjc class var articleBody: UIFont {
-        return UIFont.systemFont(ofSize: 18.0, weight: .medium)
+        return UIFont(name: "Georgia", size: 18)!
 	}
     
     @nonobjc class var articleBodyLarge: UIFont {
-        return UIFont.systemFont(ofSize: 22.0, weight: .medium)
+        return UIFont(name: "Georgia", size: 22)!
     }
     
     @nonobjc class var articleBodySmall: UIFont {
-        return UIFont.systemFont(ofSize: 14.0, weight: .medium)
+        return UIFont(name: "Georgia", size: 14)!
     }
 
 	@nonobjc class var sectionList: UIFont {
@@ -34,7 +34,7 @@ extension UIFont {
 	}
 
 	@nonobjc class var articleViewTheme: UIFont {
-        return UIFont.systemFont(ofSize: 14.0, weight: .bold)
+        return UIFont(name: "Georgia-Bold", size: 18)!
 	}
 
 	@nonobjc class var articleTheme: UIFont {
@@ -46,10 +46,10 @@ extension UIFont {
 	}
 
 	@nonobjc class var author: UIFont {
-        return UIFont.systemFont(ofSize: 13.0, weight: .medium)
+        return UIFont(name: "Georgia", size: 13)!
 	}
 
 	@nonobjc class var caption: UIFont {
-        return UIFont.systemFont(ofSize: 13.0, weight: .medium)
+        return UIFont(name: "Georgia", size: 13)!
 	}
 }

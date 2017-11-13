@@ -21,7 +21,7 @@ final class TitleCell: UICollectionViewCell {
         let label = UILabel()
         label.text = ""
         label.numberOfLines = 4
-        label.font = UIFont(name: "KeplerStd-Bold", size: 22)
+        label.font = .articleViewTitle
         return label
     }()
 
