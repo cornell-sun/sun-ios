@@ -17,14 +17,21 @@ protocol BookmarkPressedDelegate: class {
     func didPressBookmark(_ cell: MenuActionCell)
 }
 
+protocol SharePressedDelegate: class {
+    func didPressShare()
+}
+
 final class MenuActionCell: UICollectionViewCell {
 
     weak var heartDelegate: HeartPressedDelegate?
     weak var bookmarkDelegate: BookmarkPressedDelegate?
-    let imageWidth = 28.5
-    let imageHeight = 28.5
+    weak var shareDelegate: SharePressedDelegate?
+
+    let heartWidth = 23.0
+    let shareWidth = 20.0
+    let bookmarkWidth = 15.0
+    let imageHeight = 21.0
     let offset = 15.5
-    let shareHeight = 30.0
     lazy var heartButton: UIButton = {
         let button = UIButton(type: .custom)
         button.imageView?.contentMode = .scaleAspectFit
@@ -50,11 +57,13 @@ final class MenuActionCell: UICollectionViewCell {
         return image
     }()
 
-    let shareImageView: UIImageView = {
-        let image = UIImageView()
-        image.contentMode = .scaleAspectFit
-        image.image = #imageLiteral(resourceName: "share")
-        return image
+    lazy var shareImageView: UIButton = {
+        let button = UIButton(type: .custom)
+        button.imageView?.contentMode = .scaleAspectFit
+        button.setImage(#imageLiteral(resourceName: "share"), for: .normal)
+        button.addTarget(self, action: #selector(MenuActionCell.sharePressed(_:)), for: .touchUpInside)
+        self.contentView.addSubview(button)
+        return button
     }()
 
     override init(frame: CGRect) {
@@ -74,6 +83,10 @@ final class MenuActionCell: UICollectionViewCell {
         bookmarkDelegate?.didPressBookmark(self)
     }
 
+    @objc func sharePressed(_ button: UIButton) {
+        shareDelegate?.didPressShare()
+    }
+
     override func prepareForReuse() {
         heartButton.setImage(#imageLiteral(resourceName: "heart"), for: .normal)
         bookmarkButton.setImage(#imageLiteral(resourceName: "bookmark"), for: .normal)
@@ -81,9 +94,9 @@ final class MenuActionCell: UICollectionViewCell {
 
     func setupViews() {
         self.backgroundColor = .white
-        self.contentView.addSubview(shareImageView)
+
         heartButton.snp.makeConstraints { (make) in
-            make.width.equalTo(imageWidth)
+            make.width.equalTo(heartWidth)
             make.height.equalTo(imageHeight)
             make.centerY.equalToSuperview()
             make.left.equalTo(offset)
@@ -97,14 +110,14 @@ final class MenuActionCell: UICollectionViewCell {
 //        }
 
         shareImageView.snp.makeConstraints { (make) in
-            make.width.equalTo(imageWidth)
-            make.height.equalTo(shareHeight)
+            make.width.equalTo(shareWidth)
+            make.height.equalTo(imageHeight)
             make.centerY.equalToSuperview()
             make.left.equalTo(heartButton.snp.right).offset(10)
         }
 
         bookmarkButton.snp.makeConstraints { (make) in
-            make.width.equalTo(imageWidth)
+            make.width.equalTo(bookmarkWidth)
             make.height.equalTo(imageHeight)
             make.centerY.equalToSuperview()
             make.right.equalToSuperview().inset(offset)
