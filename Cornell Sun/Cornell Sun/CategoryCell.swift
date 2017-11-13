@@ -28,6 +28,7 @@ final class CategoryCell: UICollectionViewCell {
     let categoryLabel: CategoryLabel = {
         let label = CategoryLabel()
         label.text = ""
+        label.font = .systemFont(ofSize: 14, weight: .medium)
         label.numberOfLines = 2
         return label
     }()
@@ -56,8 +57,8 @@ final class CategoryCell: UICollectionViewCell {
         addSubview(categoryLabel)
         addSubview(divider)
         categoryLabel.snp.makeConstraints { (make) in
-            //make.centerX.equalToSuperview()
-            make.edges.equalToSuperview().inset(UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5))
+            make.centerY.equalToSuperview()
+            make.edges.equalToSuperview().inset(UIEdgeInsets(top: 5, left: 17, bottom: 5, right: 5))
         }
         divider.snp.makeConstraints { (make) in
             make.height.equalTo(1)
