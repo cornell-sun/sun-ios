@@ -1,31 +1,24 @@
 //
-//  ArticleSectionController.swift
+//  HeroSectionController.swift
 //  Cornell Sun
 //
-//  Created by Austin Astorga on 9/3/17.
+//  Created by Austin Astorga on 11/13/17.
 //  Copyright © 2017 cornell.sun. All rights reserved.
 //
 
 import UIKit
 import IGListKit
-import SafariServices
-
-protocol TabBarViewControllerDelegate: class {
-    func articleSectionDidPressOnArticle(_ article: PostObject)
-}
 
 // swiftlint:disable:next type_name
-enum cellType: Int {
-    case categoryCell = 0
+enum heroCellType: Int {
+    case imageCell = 0
     case titleCell = 1
-    case imageCell = 2
-    case likeCommentCell = 3
-    case actionMenuCell = 4
+    case taglineCell = 2
+    case actionMenuCell = 3
 }
 
-class ArticleSectionController: ListSectionController {
+class HeroSectionController: ListSectionController {
     var entry: PostObject!
-    weak var delegate: TabBarViewControllerDelegate?
 
     override init() {
         super.init()
@@ -33,7 +26,7 @@ class ArticleSectionController: ListSectionController {
     }
 }
 
-extension ArticleSectionController: HeartPressedDelegate, BookmarkPressedDelegate, SharePressedDelegate {
+extension HeroSectionController: HeartPressedDelegate, BookmarkPressedDelegate, SharePressedDelegate {
 
     func taptic() {
         let generator = UIImpactFeedbackGenerator(style: .light)
@@ -82,41 +75,36 @@ extension ArticleSectionController: HeartPressedDelegate, BookmarkPressedDelegat
     }
 
     override func numberOfItems() -> Int {
-        return 5
+        return 4
     }
 
     override func sizeForItem(at index: Int) -> CGSize {
         guard let context = collectionContext, entry != nil else {return .zero}
         let width = context.containerSize.width
-        guard let sizeForItemIndex = cellType(rawValue: index) else {
+        guard let sizeForItemIndex = heroCellType(rawValue: index) else {
             return .zero
         }
         switch sizeForItemIndex {
-        case .categoryCell:
-            return CGSize(width: width, height: 40)
+        case .imageCell:
+            return CGSize(width: width, height: width / 1.5)
         case .titleCell:
             let height = entry.title.height(withConstrainedWidth: width, font: UIFont.boldSystemFont(ofSize: 22)) //CLUTCH Extension thank stackoverflow gods
-             print(entry.title, " ", height)
-            return CGSize(width: width, height: height + 10)
-        case .imageCell:
-            return CGSize(width: width, height: width / 1.92)
-        case .likeCommentCell:
-            let hasComments = entry.comments.count > 0
-            return hasComments ? CGSize(width: width, height: 25) : .zero
-        //return entry.comments.isEmpty ? .zero : CGSize(width: width, height: 25)
+            return CGSize(width: width, height: height + 5)
+        case .taglineCell:
+            return CGSize(width: width, height: 26)
         case .actionMenuCell:
             return CGSize(width: width, height: 35)
         }
     }
 
     override func cellForItem(at index: Int) -> UICollectionViewCell {
-        guard let cellForItemIndex = cellType(rawValue: index) else {
+        guard let cellForItemIndex = heroCellType(rawValue: index) else {
             return UICollectionViewCell()
         }
         switch cellForItemIndex {
-        case .categoryCell:
+        case .imageCell:
             // swiftlint:disable:next force_cast
-            let cell = collectionContext!.dequeueReusableCell(of: CategoryCell.self, for: self, at: index) as! CategoryCell
+            let cell = collectionContext!.dequeueReusableCell(of: ImageCell.self, for: self, at: index) as! ImageCell
             cell.post = entry
             return cell
         case .titleCell:
@@ -124,14 +112,9 @@ extension ArticleSectionController: HeartPressedDelegate, BookmarkPressedDelegat
             let cell = collectionContext!.dequeueReusableCell(of: TitleCell.self, for: self, at: index) as! TitleCell
             cell.post = entry
             return cell
-        case .imageCell:
+        case .taglineCell:
             // swiftlint:disable:next force_cast
-            let cell = collectionContext!.dequeueReusableCell(of: ImageCell.self, for: self, at: index) as! ImageCell
-            cell.post = entry
-            return cell
-        case .likeCommentCell:
-            // swiftlint:disable:next force_cast
-            let cell = collectionContext!.dequeueReusableCell(of: LikeCommentCell.self, for: self, at: index) as! LikeCommentCell
+            let cell = collectionContext!.dequeueReusableCell(of: TaglineCell.self, for: self, at: index) as! TaglineCell
             cell.post = entry
             return cell
         case .actionMenuCell:
@@ -162,8 +145,5 @@ extension ArticleSectionController: HeartPressedDelegate, BookmarkPressedDelegat
     }
 
     override func didSelectItem(at index: Int) {
-        if index != 4 {
-            delegate?.articleSectionDidPressOnArticle(entry)
-        }
     }
 }

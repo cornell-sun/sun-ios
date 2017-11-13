@@ -11,6 +11,7 @@ import IGListKit
 
 class FeedCollectionViewController: ViewController, UIScrollViewDelegate {
     var feedData: [PostObject] = []
+    var firstPostObject: PostObject!
     var currentPage = 1
     var loading = false
     let spinToken = "spinner"
@@ -84,6 +85,9 @@ class FeedCollectionViewController: ViewController, UIScrollViewDelegate {
                                             }) as? [CommentObject]
                                             else {return}
                                             if let post = PostObject(data: postDictionary as [String: AnyObject], mediaLink: sourceUrl, comments: comments) {
+                                                if self.firstPostObject == nil {
+                                                    self.firstPostObject = post
+                                                }
                                                 self.feedData.append(post)
                                             }
 
@@ -102,7 +106,6 @@ class FeedCollectionViewController: ViewController, UIScrollViewDelegate {
                 print("could not parse")
                 // can't parse data, show error
             }
-
         }
     }
 
@@ -130,6 +133,8 @@ extension FeedCollectionViewController: ListAdapterDataSource {
     func listAdapter(_ listAdapter: ListAdapter, sectionControllerFor object: Any) -> ListSectionController {
         if let obj = object as? String, obj == spinToken {
             return spinnerSectionController()
+        } else if let obj = object as? PostObject, obj.isEqual(toDiffableObject: firstPostObject) {
+            return HeroSectionController()
         }
         let articleSC = ArticleSectionController()
         articleSC.delegate = self
