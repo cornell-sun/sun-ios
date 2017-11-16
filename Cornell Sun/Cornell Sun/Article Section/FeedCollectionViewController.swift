@@ -29,6 +29,10 @@ class FeedCollectionViewController: ViewController, UIScrollViewDelegate {
         return ListAdapter(updater: ListAdapterUpdater(), viewController: self, workingRangeSize: 0)
     }()
 
+    override func viewDidAppear(_ animated: Bool) {
+        //we could possibly have saved posts
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 

@@ -19,9 +19,27 @@ final class RealmManager {
     }
 
     func save(object: Object) {
+        guard let obj = object as? PostObject else { return }
+        let realm = getRealm()
+        if obj.fakeDelete {
+            try! realm.write {
+                obj.didSave = true
+                obj.fakeDelete = false
+            }
+        } else {
+
+            try! realm.write {
+                realm.add(obj)
+                obj.didSave = true
+                obj.fakeDelete = false
+            }
+        }
+    }
+
+    func update(object: PostObject, to: Bool) {
         let realm = getRealm()
         try! realm.write {
-            realm.add(object)
+            object.didSave = to
         }
     }
 

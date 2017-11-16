@@ -50,7 +50,6 @@ extension ArticleSectionController: HeartPressedDelegate, BookmarkPressedDelegat
                        animations: {
                         cell.bookmarkButton.transform = CGAffineTransform.identity
         })
-        entry.didSave = didBookmark
         if didBookmark {
             RealmManager.instance.save(object: entry)
         } else {
