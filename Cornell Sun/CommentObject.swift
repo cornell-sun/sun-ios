@@ -7,11 +7,12 @@
 //
 
 import Foundation
+import UIKit
 
 class CommentObject: NSObject {
     private let wpDateFormatter: DateFormatter = {
         let formatter = DateFormatter()
-        formatter.dateFormat = "YYYY-MM-DD'T'HH:mm:ss"     // "2016-01-29T01:45:33"
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"    // "2016-01-29T01:45:33"
         return formatter
     }()
 
@@ -20,13 +21,15 @@ class CommentObject: NSObject {
     var authorName: String
     var comment: String
     var date: Date
+    var profileImage: UIImage?
 
-    init(id: Int, postId: Int, authorName: String, comment: String, date: Date) {
+    init(id: Int, postId: Int, authorName: String, comment: String, date: Date, image: UIImage) {
         self.id = id
         self.postId = postId
         self.authorName = authorName
         self.comment = comment
         self.date = date
+        self.profileImage = image
     }
 
     init?(data: [String: AnyObject]) {
@@ -46,6 +49,7 @@ class CommentObject: NSObject {
         self.authorName = authorName
         self.comment = comment
         self.date = date
+        self.profileImage = #imageLiteral(resourceName: "emptyProfile") // default egg for now
 
     }
 }
