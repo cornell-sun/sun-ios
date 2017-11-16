@@ -45,7 +45,7 @@ class ArticleViewController: UIViewController {
     // UI Components
     var articleScrollView: UIScrollView!
     var articleView: UIView!
-    var categoryLabel: CategoryLabel!
+    var categoryLabel: UILabel!
     var titleLabel: UILabel!
     var authorLabel: UILabel!
     var timeStampLabel: UILabel!
@@ -112,7 +112,7 @@ class ArticleViewController: UIViewController {
             make.edges.width.height.equalToSuperview()
         }
 
-        categoryLabel = CategoryLabel(frame: .zero)
+        categoryLabel = UILabel(frame: .zero)
         categoryLabel.textColor = .black
         categoryLabel.font = .articleViewTheme
         articleView.addSubview(categoryLabel)
@@ -178,12 +178,12 @@ class ArticleViewController: UIViewController {
     }
 
     func setArticle() {
-        setAuthorLabel(id: post.authorId)
         setupHeroImage()
-        categoryLabel.loadtitleUsingId(post.categories)
+        categoryLabel.text = post.primaryCategory
         titleLabel.text = post.title
         timeStampLabel.text = post.datePosted.timeAgoSinceNow()
         articleBodyTextView.text = post.content
+        authorLabel.text = post.author?.name.removingHTMLEntities.htmlToString
         resizeArticleTextView()
     }
 
@@ -199,22 +199,8 @@ class ArticleViewController: UIViewController {
         }
     }
 
-    func setAuthorLabel(id: Int) {
-        API.request(target: .author(authorId: id)) { response in
-            guard let response = response else { return }
-            do {
-                if let jsonResult = try JSONSerialization.jsonObject(with: response.data, options: []) as? NSDictionary,
-                    let author = AuthorObject.from(jsonResult) {
-                    self.authorLabel.text = "By \(author.name.removingHTMLEntities.htmlToString)"
-                }
-            } catch {
-                print("Could not parse author")
-            }
-        }
-    }
-
     func setupHeroImage() {
-        if let heroImageUrl = URL(string: post.mediaLink) {
+        if let heroImageUrl = URL(string: post.mediumLargeImageLink) {
             heroImageView.kf.indicatorType = .activity
             heroImageView.kf.setImage(with: heroImageUrl)
         }

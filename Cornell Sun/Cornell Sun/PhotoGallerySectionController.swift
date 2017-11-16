@@ -1,23 +1,27 @@
 //
-//  HeroSectionController.swift
+//  PhotoGallerySectionController.swift
 //  Cornell Sun
 //
-//  Created by Austin Astorga on 11/13/17.
+//  Created by Austin Astorga on 11/14/17.
 //  Copyright © 2017 cornell.sun. All rights reserved.
 //
 
 import UIKit
 import IGListKit
+import ImageSlideshow
 
 // swiftlint:disable:next type_name
-enum heroCellType: Int {
-    case imageCell = 0
+enum photoGalleryCellType: Int {
+    case categoryCell = 0
     case titleCell = 1
-    case taglineCell = 2
-    case actionMenuCell = 3
+    case authorCell = 2
+    case photoGalleryCell = 3
+    case captionCell = 4
+    case likeCommentCell = 5
+    case actionMenuCell = 6
 }
 
-class HeroSectionController: ListSectionController {
+class PhotoGallerySectionController: ListSectionController {
     var entry: PostObject!
 
     override init() {
@@ -26,19 +30,14 @@ class HeroSectionController: ListSectionController {
     }
 }
 
-extension HeroSectionController: HeartPressedDelegate, BookmarkPressedDelegate, SharePressedDelegate {
-
-    func taptic() {
-        let generator = UIImpactFeedbackGenerator(style: .light)
-        generator.prepare()
-        generator.impactOccurred()
-    }
+extension PhotoGallerySectionController: HeartPressedDelegate, BookmarkPressedDelegate, SharePressedDelegate, PhotoChangedDelegate {
 
     func didPressBookmark(_ cell: MenuActionCell) {
+        let didBookmark = cell.bookmarkButton.currentImage == #imageLiteral(resourceName: "bookmark") //we should save the bookmark
         let correctBookmarkImage = cell.bookmarkButton.currentImage == #imageLiteral(resourceName: "bookmarkPressed") ? #imageLiteral(resourceName: "bookmark") : #imageLiteral(resourceName: "bookmarkPressed")
         cell.bookmarkButton.setImage(correctBookmarkImage, for: .normal)
         cell.bookmarkButton.transform = CGAffineTransform(scaleX: 0.6, y: 0.6)
-        taptic()
+        taptic(style: .light)
         UIView.animate(withDuration: 1.0,
                        delay: 0,
                        usingSpringWithDamping: CGFloat(0.40),
@@ -47,13 +46,18 @@ extension HeroSectionController: HeartPressedDelegate, BookmarkPressedDelegate, 
                        animations: {
                         cell.bookmarkButton.transform = CGAffineTransform.identity
         })
+        if didBookmark {
+            RealmManager.instance.save(object: entry)
+        } else {
+            RealmManager.instance.delete(object: entry)
+        }
     }
 
     func didPressHeart(_ cell: MenuActionCell) {
         let correctHeartImage = cell.heartButton.currentImage == #imageLiteral(resourceName: "heartPressed") ? #imageLiteral(resourceName: "heart") : #imageLiteral(resourceName: "heartPressed")
         cell.heartButton.setImage(correctHeartImage, for: .normal)
         cell.heartButton.transform = CGAffineTransform(scaleX: 0.6, y: 0.6)
-        taptic()
+        taptic(style: .light)
         UIView.animate(withDuration: 1.0,
                        delay: 0,
                        usingSpringWithDamping: CGFloat(0.40),
@@ -65,7 +69,7 @@ extension HeroSectionController: HeartPressedDelegate, BookmarkPressedDelegate, 
     }
 
     func didPressShare() {
-        taptic()
+        taptic(style: .light)
         if let articleLink = URL(string: entry.link) {
             let title = entry.title
             let objectToShare = [title, articleLink] as [Any]
@@ -74,37 +78,55 @@ extension HeroSectionController: HeartPressedDelegate, BookmarkPressedDelegate, 
         }
     }
 
+    func photoDidChange(_ index: Int) {
+        let captionCell: photoGalleryCellType = .captionCell
+        let captionIndex = captionCell.rawValue
+        if let cell = collectionContext?.cellForItem(at: captionIndex, sectionController: self) as? CaptionCell {
+            cell.updateCaption(index: index)
+        }
+    }
+
     override func numberOfItems() -> Int {
-        return 4
+        return 7
     }
 
     override func sizeForItem(at index: Int) -> CGSize {
         guard let context = collectionContext, entry != nil else {return .zero}
         let width = context.containerSize.width
-        guard let sizeForItemIndex = heroCellType(rawValue: index) else {
+        guard let sizeForItemIndex = photoGalleryCellType(rawValue: index) else {
             return .zero
         }
         switch sizeForItemIndex {
-        case .imageCell:
-            return CGSize(width: width, height: width / 1.5)
+        case .categoryCell:
+            return CGSize(width: width, height: 40)
         case .titleCell:
             let height = entry.title.height(withConstrainedWidth: width, font: UIFont.boldSystemFont(ofSize: 22)) //CLUTCH Extension thank stackoverflow gods
             return CGSize(width: width, height: height + 5)
-        case .taglineCell:
-            return CGSize(width: width, height: 26)
+        case .authorCell:
+            let height = entry.author?.name.height(withConstrainedWidth: width, font: UIFont(name: "Georgia", size: 13)!)
+            return CGSize(width: width, height: height! + 9)
+        case .photoGalleryCell:
+            return CGSize(width: width, height: width / 1.5)
+        case .captionCell:
+            let height = captionMaxHeight(width: width)
+
+            return CGSize(width: width, height: height + 16)
+        case .likeCommentCell:
+            let hasComments = !entry.comments.isEmpty
+            return hasComments ? CGSize(width: width, height: 25) : .zero
         case .actionMenuCell:
             return CGSize(width: width, height: 35)
         }
     }
 
     override func cellForItem(at index: Int) -> UICollectionViewCell {
-        guard let cellForItemIndex = heroCellType(rawValue: index) else {
+        guard let cellForItemIndex = photoGalleryCellType(rawValue: index) else {
             return UICollectionViewCell()
         }
         switch cellForItemIndex {
-        case .imageCell:
+        case .categoryCell:
             // swiftlint:disable:next force_cast
-            let cell = collectionContext!.dequeueReusableCell(of: ImageCell.self, for: self, at: index) as! ImageCell
+            let cell = collectionContext!.dequeueReusableCell(of: CategoryCell.self, for: self, at: index) as! CategoryCell
             cell.post = entry
             return cell
         case .titleCell:
@@ -112,9 +134,25 @@ extension HeroSectionController: HeartPressedDelegate, BookmarkPressedDelegate, 
             let cell = collectionContext!.dequeueReusableCell(of: TitleCell.self, for: self, at: index) as! TitleCell
             cell.post = entry
             return cell
-        case .taglineCell:
+        case .authorCell:
             // swiftlint:disable:next force_cast
-            let cell = collectionContext!.dequeueReusableCell(of: TaglineCell.self, for: self, at: index) as! TaglineCell
+            let cell = collectionContext!.dequeueReusableCell(of: AuthorCell.self, for: self, at: index) as! AuthorCell
+            cell.post = entry
+            return cell
+        case .photoGalleryCell:
+            // swiftlint:disable:next force_cast
+            let cell = collectionContext!.dequeueReusableCell(of: PhotoGalleryCell.self, for: self, at: index) as! PhotoGalleryCell
+            cell.photoGalleryDelegate = self
+            cell.post = entry
+            return cell
+        case .captionCell:
+            // swiftlint:disable:next force_cast
+            let cell = collectionContext!.dequeueReusableCell(of: CaptionCell.self, for: self, at: index) as! CaptionCell
+            cell.post = entry
+            return cell
+        case .likeCommentCell:
+            // swiftlint:disable:next force_cast
+            let cell = collectionContext!.dequeueReusableCell(of: LikeCommentCell.self, for: self, at: index) as! LikeCommentCell
             cell.post = entry
             return cell
         case .actionMenuCell:
@@ -123,6 +161,8 @@ extension HeroSectionController: HeartPressedDelegate, BookmarkPressedDelegate, 
             cell.heartDelegate = self
             cell.bookmarkDelegate = self
             cell.shareDelegate = self
+            cell.setupViews(forBookmarks: false)
+            cell.setBookmarkImage(didSelectBookmark: entry.didSave)
             return cell
         }
     }
@@ -131,19 +171,9 @@ extension HeroSectionController: HeartPressedDelegate, BookmarkPressedDelegate, 
         entry = object as? PostObject
     }
 
-    func getCurrentViewController() -> UIViewController? {
-
-        if let rootController = UIApplication.shared.keyWindow?.rootViewController {
-            var currentController: UIViewController! = rootController
-            while currentController.presentedViewController != nil {
-                currentController = currentController.presentedViewController
-            }
-            return currentController
-        }
-        return nil
-
-    }
-
     override func didSelectItem(at index: Int) {
+        if index == 0 {
+
+        }
     }
 }

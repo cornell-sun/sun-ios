@@ -8,10 +8,13 @@
 
 import UIKit
 import IGListKit
+import Realm
+import RealmSwift
 
 class FeedCollectionViewController: ViewController, UIScrollViewDelegate {
     var feedData: [PostObject] = []
     var firstPostObject: PostObject!
+    var savedPosts: Results<PostObject>!
     var currentPage = 1
     var loading = false
     let spinToken = "spinner"
@@ -34,6 +37,7 @@ class FeedCollectionViewController: ViewController, UIScrollViewDelegate {
         adapter.collectionView?.backgroundColor = UIColor(white: 241.0 / 255.0, alpha: 1.0)
         adapter.dataSource = self
         adapter.scrollViewDelegate = self
+        savedPosts = RealmManager.instance.get()
         getPosts(page: currentPage)
     }
 
@@ -48,6 +52,7 @@ class FeedCollectionViewController: ViewController, UIScrollViewDelegate {
     }
 
     func getPosts(page: Int) {
+        let savedPostIds: [Int] = savedPosts.map({$0.id})
         API.request(target: .posts(page: page)) { (response) in
             self.loading = false
             guard let response = response else {return}
@@ -55,52 +60,17 @@ class FeedCollectionViewController: ViewController, UIScrollViewDelegate {
                 let jsonResult = try JSONSerialization.jsonObject(with: response.data, options: [])
                 if let postArray = jsonResult as? [[String: Any]] {
                     for postDictionary in postArray {
-                        guard
-                            let postId = postDictionary["id"] as? Int,
-                            let links = postDictionary["_links"] as? [String: Any],
-                            let media = links["wp:featuredmedia"] as? [[String: Any]],
-                            var mediaUrl = media[0]["href"] as? String
-                            else {
-                                return
-                        }
-                        mediaUrl = (mediaUrl as NSString).lastPathComponent
-                        API.request(target: .media(mediaId: mediaUrl), callback: { (response2) in
-                            guard let response2 = response2 else {return}
-                            do {
-                                let mediaJsonResult = try JSONSerialization.jsonObject(with: response2.data, options: [])
-                                guard
-                                    let mediaObject = mediaJsonResult as? [String: Any],
-                                    let mediaDetails = mediaObject["media_details"] as? [String: Any],
-                                    let sizes = mediaDetails["sizes"] as? [String: Any],
-                                    let rectThumbnail = sizes["medium_large"] as? [String: Any],
-                                    let sourceUrl = rectThumbnail["source_url"] as? String
-                                    else {return}
-                                    API.request(target: .comments(postId: postId), callback: {(commentRes) in
-                                        do {
-                                        guard let response3 = commentRes else {return}
-                                        let commentJsonResult = try JSONSerialization.jsonObject(with: response3.data, options: [])
-                                        guard let commentObject = commentJsonResult as? [[String: AnyObject]],
-                                            let comments = commentObject.map({ (comment) in
-                                                return CommentObject(data: comment)
-                                            }) as? [CommentObject]
-                                            else {return}
-                                            if let post = PostObject(data: postDictionary as [String: AnyObject], mediaLink: sourceUrl, comments: comments) {
-                                                if self.firstPostObject == nil {
-                                                    self.firstPostObject = post
-                                                }
-                                                self.feedData.append(post)
-                                            }
-
-                                            self.adapter.performUpdates(animated: true, completion: nil)
-                                        } catch {
-                                            print("couldnt get comments")
-                                        }
-                                    })
-                            } catch {
-
+                        if let post = PostObject(data: postDictionary) {
+                            if self.firstPostObject == nil {
+                                self.firstPostObject = post
                             }
-                        })
+                            if savedPostIds.contains(post.id) {
+                                post.didSave = true
+                            }
+                            self.feedData.append(post)
+                        }
                     }
+                    self.adapter.performUpdates(animated: true, completion: nil)
                 }
             } catch {
                 print("could not parse")
@@ -135,6 +105,8 @@ extension FeedCollectionViewController: ListAdapterDataSource {
             return spinnerSectionController()
         } else if let obj = object as? PostObject, obj.isEqual(toDiffableObject: firstPostObject) {
             return HeroSectionController()
+        } else if let obj = object as? PostObject, obj.postType == .photoGallery {
+            return PhotoGallerySectionController()
         }
         let articleSC = ArticleSectionController()
         articleSC.delegate = self

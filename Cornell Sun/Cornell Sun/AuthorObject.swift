@@ -8,27 +8,35 @@
 
 import Foundation
 import Mapper
+import Realm
+import RealmSwift
 
-class AuthorObject: Mappable {
-    var id: Int
-    var name: String
-    var link: String
-    var bio: String
-    var avatarLink: String
+class AuthorObject: Object {
+    @objc dynamic var id: Int = 0
+    @objc dynamic var name: String = ""
+    @objc dynamic var link: String = ""
+    @objc dynamic var bio: String = ""
+    @objc dynamic var avatarLink: String = ""
 
-    required init(map: Mapper) throws {
-        try id = map.from("id")
-        try name = map.from("name")
-        try link = map.from("link")
-        try bio = map.from("description")
-        try avatarLink = map.from("avatar_urls.96")
-    }
 
     init(id: Int, name: String, link: String, bio: String, avatarLink: String) {
+        super.init()
         self.id = id
         self.name = name
         self.link = link
         self.bio = bio
         self.avatarLink = avatarLink
+    }
+
+    required init() {
+        super.init()
+    }
+
+    required init(realm: RLMRealm, schema: RLMObjectSchema) {
+        super.init(realm: realm, schema: schema)
+    }
+
+    required init(value: Any, schema: RLMSchema) {
+        super.init(value: value, schema: schema)
     }
 }

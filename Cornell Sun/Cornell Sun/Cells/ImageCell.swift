@@ -56,7 +56,7 @@ final class ImageCell: UICollectionViewCell {
     }
 
     func setupHeroImage() {
-        if let heroImagelink = post?.mediaLink, let heroImageUrl = URL(string: heroImagelink) {
+        if let heroImagelink = post?.mediumLargeImageLink, let heroImageUrl = URL(string: heroImagelink) {
             //activityView.stopAnimating()
             heroImageView.kf.indicatorType = .activity
             heroImageView.kf.setImage(with: heroImageUrl)

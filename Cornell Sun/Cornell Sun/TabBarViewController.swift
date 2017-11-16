@@ -33,7 +33,7 @@ class TabBarViewController: UITabBarController {
         let tabTwoTabBarItem = UITabBarItem(title: "Sections", image: #imageLiteral(resourceName: "sectionIcon").withRenderingMode(.alwaysOriginal), selectedImage: #imageLiteral(resourceName: "sectionIconRed").withRenderingMode(.alwaysOriginal))
         tabTwoNavigationController.tabBarItem = tabTwoTabBarItem
 
-        let tabThreeNavigationController = UINavigationController(rootViewController: ViewController())
+        let tabThreeNavigationController = UINavigationController(rootViewController: BookmarkCollectionViewController())
         let tabThreeTabBarItem = UITabBarItem(title: "Bookmarks", image: #imageLiteral(resourceName: "bookmarkIcon").withRenderingMode(.alwaysOriginal), selectedImage: #imageLiteral(resourceName: "bookmarkIconRed").withRenderingMode(.alwaysOriginal))
         tabThreeNavigationController.tabBarItem = tabThreeTabBarItem
 

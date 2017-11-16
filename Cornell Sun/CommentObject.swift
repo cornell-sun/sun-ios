@@ -7,21 +7,24 @@
 //
 
 import Foundation
+import RealmSwift
+import Realm
 
-class CommentObject: NSObject {
+class CommentObject: Object {
     private let wpDateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "YYYY-MM-DD'T'HH:mm:ss"     // "2016-01-29T01:45:33"
         return formatter
     }()
 
-    var id: Int
-    var postId: Int
-    var authorName: String
-    var comment: String
-    var date: Date
+    @objc dynamic var id: Int = 0
+    @objc dynamic var postId: Int = 0
+    @objc dynamic var authorName: String = ""
+    @objc dynamic var comment: String = ""
+    @objc dynamic var date: Date = Date()
 
     init(id: Int, postId: Int, authorName: String, comment: String, date: Date) {
+        super.init()
         self.id = id
         self.postId = postId
         self.authorName = authorName
@@ -30,6 +33,7 @@ class CommentObject: NSObject {
     }
 
     init?(data: [String: AnyObject]) {
+        super.init()
         guard
             let id = data["id"] as? Int,
             let postId = data["post"] as? Int,
@@ -48,4 +52,17 @@ class CommentObject: NSObject {
         self.date = date
 
     }
+
+    required init(realm: RLMRealm, schema: RLMObjectSchema) {
+        super.init(realm: realm, schema: schema)
+    }
+
+    required init(value: Any, schema: RLMSchema) {
+        super.init(value: value, schema: schema)
+    }
+
+    required init() {
+        super.init()
+    }
+
 }

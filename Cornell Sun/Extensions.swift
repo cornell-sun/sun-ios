@@ -7,6 +7,41 @@
 //
 
 import UIKit
+import Kingfisher
+
+func captionMaxHeight(width: CGFloat) -> CGFloat {
+     let tmpStr = "A rink attendant collect fish thrown by the Cornell students in a tradition that spans over decades. (Cameron Pollack/ Sun Photography Editor)"
+    return tmpStr.height(withConstrainedWidth: width - 36, font: UIFont(name: "Georgia", size: 13)!)
+}
+
+//func titleMaxHeight(width: CGFloat) -> CGFloat {
+//    let tmpStr = ""
+//    return tmpStr.height(withConstrainedWidth: , font: .bookmarkTitle)
+//}
+
+func getCurrentViewController() -> UIViewController? {
+
+    if let rootController = UIApplication.shared.keyWindow?.rootViewController {
+        var currentController: UIViewController! = rootController
+        while currentController.presentedViewController != nil {
+            currentController = currentController.presentedViewController
+        }
+        return currentController
+    }
+    return nil
+}
+
+func taptic(style: UIImpactFeedbackStyle) {
+    let generator = UIImpactFeedbackGenerator(style: style)
+    generator.prepare()
+    generator.impactOccurred()
+}
+
+func cacheImage(imageLink: String) {
+    if let urlImage = URL(string: imageLink) {
+        KingfisherManager.shared.retrieveImage(with: urlImage, options: nil, progressBlock: nil, completionHandler: nil)
+    }
+}
 
 extension String {
     func height(withConstrainedWidth width: CGFloat, font: UIFont) -> CGFloat {
@@ -50,39 +85,6 @@ extension UIView {
         }
 
         addConstraints(NSLayoutConstraint.constraints(withVisualFormat: format, options: NSLayoutFormatOptions(), metrics: nil, views: viewsDictionary))
-    }
-}
-
-let categoryCache = NSCache<NSNumber, NSString>()
-class CategoryLabel: UILabel {
-    var categoryId: Int?
-
-    func loadtitleUsingId(_ category: Int) {
-        categoryId = category
-        text = nil
-
-        if let categoryFromCache = categoryCache.object(forKey: category as NSNumber) {
-            self.text = categoryFromCache as String
-            return
-        }
-        API.request(target: .category(categoryId: category)) { (response) in
-            guard let response = response else {return}
-            do {
-                // swiftlint:disable:next force_cast
-                let jsonResult = try JSONSerialization.jsonObject(with: response.data, options: []) as! [String: Any]
-                if let categoryName = (jsonResult["name"] as? String)?.removingHTMLEntities {
-                    DispatchQueue.main.async(execute: {
-                        if self.categoryId == category {
-                            self.text = categoryName
-                            print(categoryName)
-                        }
-                        categoryCache.setObject(categoryName as NSString, forKey: category as NSNumber)
-                    })
-                }
-            } catch {
-                return
-            }
-        }
     }
 }
 
