@@ -53,5 +53,4 @@ class PhotoGalleryObject: Object {
         super.init(value: value, schema: schema)
     }
 
-
 }

@@ -18,8 +18,8 @@ class ArticleHeaderView: UIView {
     let imageViewHeight: CGFloat = 250.0
     let imageViewTopOffset: CGFloat = 12.0
     let timeStampTopOffset: CGFloat = 14.5
-    let timeStampHeight: CGFloat = 14
-    let authorLabelHeight: CGFloat = 14
+    let timeStampHeight: CGFloat = 15
+    let authorLabelHeight: CGFloat = 15
     let captionLabelTopOffset: CGFloat = 4
 
     var categoryLabel: UILabel!
@@ -112,7 +112,6 @@ class ArticleHeaderView: UIView {
         authorLabel.text = "By \(post.author!.name.removingHTMLEntities.htmlToString)"
         // add caption text
     }
-
 
     func setupHeroImage(with post: PostObject) {
         if let heroImageUrl = URL(string: post.mediumLargeImageLink) {

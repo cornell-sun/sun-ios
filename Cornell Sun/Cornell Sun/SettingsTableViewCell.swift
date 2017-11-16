@@ -16,7 +16,7 @@ class SettingsTableViewCell: UITableViewCell {
     let offsetLeft = 16
     let offsetRight = -13.5
     let offsetBottom = -7
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
     }

@@ -18,7 +18,6 @@ class AuthorObject: Object {
     @objc dynamic var bio: String = ""
     @objc dynamic var avatarLink: String = ""
 
-
     init(id: Int, name: String, link: String, bio: String, avatarLink: String) {
         super.init()
         self.id = id

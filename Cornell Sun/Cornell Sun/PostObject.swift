@@ -34,7 +34,7 @@ class PostObject: Object, ListDiffable {
     @objc dynamic var title: String = ""
     @objc dynamic var content: String = ""
     @objc dynamic var excerpt: String = ""
-    @objc dynamic var author: AuthorObject? = nil
+    @objc dynamic var author: AuthorObject?
     @objc dynamic var primaryCategory: String = ""
     var categories = List<String>()
     var tags = List<String>()

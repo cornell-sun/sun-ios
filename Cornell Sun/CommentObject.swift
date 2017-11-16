@@ -11,7 +11,6 @@ import UIKit
 import RealmSwift
 import Realm
 
-
 class CommentObject: Object {
     private let wpDateFormatter: DateFormatter = {
         let formatter = DateFormatter()
