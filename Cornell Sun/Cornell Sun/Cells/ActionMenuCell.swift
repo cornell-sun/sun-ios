@@ -31,7 +31,7 @@ final class MenuActionCell: UICollectionViewCell {
     let shareWidth = 20.0
     let bookmarkWidth = 15.0
     let imageHeight = 21.0
-    let offset = 15.5
+    let offset = 18
     lazy var heartButton: UIButton = {
         let button = UIButton(type: .custom)
         button.imageView?.contentMode = .scaleAspectFit
@@ -68,7 +68,6 @@ final class MenuActionCell: UICollectionViewCell {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setupViews()
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -92,7 +91,12 @@ final class MenuActionCell: UICollectionViewCell {
         bookmarkButton.setImage(#imageLiteral(resourceName: "bookmark"), for: .normal)
     }
 
-    func setupViews() {
+    func setBookmarkImage(didSelectBookmark: Bool) {
+        let image = didSelectBookmark ? #imageLiteral(resourceName: "bookmarkPressed") : #imageLiteral(resourceName: "bookmark")
+        bookmarkButton.setImage(image, for: .normal)
+    }
+
+    func setupViews(forBookmarks: Bool) {
         self.backgroundColor = .white
 
         heartButton.snp.makeConstraints { (make) in
@@ -102,25 +106,25 @@ final class MenuActionCell: UICollectionViewCell {
             make.left.equalTo(offset)
         }
 
-//        commentImageView.snp.makeConstraints { (make) in
-//            make.width.equalTo(28.5)
-//            make.height.equalTo(25)
-//            make.centerY.equalToSuperview()
-//            make.left.equalTo(heartButton.snp.right).offset(10)
-//        }
-
-        shareImageView.snp.makeConstraints { (make) in
-            make.width.equalTo(shareWidth)
-            make.height.equalTo(imageHeight)
-            make.centerY.equalToSuperview()
-            make.left.equalTo(heartButton.snp.right).offset(10)
-        }
-
         bookmarkButton.snp.makeConstraints { (make) in
             make.width.equalTo(bookmarkWidth)
             make.height.equalTo(imageHeight)
             make.centerY.equalToSuperview()
             make.right.equalToSuperview().inset(offset)
         }
+
+        shareImageView.snp.makeConstraints { (make) in
+            make.width.equalTo(shareWidth)
+            make.height.equalTo(imageHeight)
+            make.centerY.equalToSuperview()
+
+            if forBookmarks {
+                make.right.equalTo(bookmarkButton.snp.left).offset(-24)
+            } else {
+            make.left.equalTo(heartButton.snp.right).offset(10)
+            }
+        }
+
+        heartButton.isHidden = forBookmarks
     }
 }

@@ -21,12 +21,12 @@ final class CategoryCell: UICollectionViewCell {
 
     var post: PostObject? {
         didSet {
-            getCategory()
+            categoryLabel.text = post?.primaryCategory
         }
     }
 
-    let categoryLabel: CategoryLabel = {
-        let label = CategoryLabel()
+    let categoryLabel: UILabel = {
+        let label = UILabel()
         label.text = ""
         label.font = .systemFont(ofSize: 14, weight: .medium)
         label.numberOfLines = 2
@@ -46,10 +46,6 @@ final class CategoryCell: UICollectionViewCell {
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-
-    func getCategory() {
-        categoryLabel.loadtitleUsingId(post!.categories)
     }
 
     func setupViews() {

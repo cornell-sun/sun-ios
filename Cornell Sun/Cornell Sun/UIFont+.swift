@@ -13,6 +13,10 @@ extension UIFont {
         return UIFont(name: "KeplerStd-Bold", size: 22)!
 	}
 
+    @nonobjc class var bookmarkTitle: UIFont {
+        return UIFont(name: "KeplerStd-Bold", size: 19)!
+    }
+
 	@nonobjc class var articleTitle: UIFont {
         return UIFont(name: "KeplerStd-Bold", size: 25)!
 	}

@@ -22,7 +22,7 @@ class ArticleHeaderView: UIView {
     let authorLabelHeight: CGFloat = 14
     let captionLabelTopOffset: CGFloat = 4
 
-    var categoryLabel: CategoryLabel!
+    var categoryLabel: UILabel!
     var titleLabel: UILabel!
     var authorLabel: UILabel!
     var timeStampLabel: UILabel!
@@ -42,7 +42,7 @@ class ArticleHeaderView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
 
-        categoryLabel = CategoryLabel(frame: .zero)
+        categoryLabel = UILabel(frame: .zero)
         categoryLabel.textColor = .black
         categoryLabel.font = .articleViewTheme
         addSubview(categoryLabel)
@@ -105,30 +105,17 @@ class ArticleHeaderView: UIView {
     }
 
     func setupWithPost(_ post: PostObject) {
-        setAuthorLabel(id: post.authorId)
         setupHeroImage(with: post)
-        categoryLabel.loadtitleUsingId(post.categories)
+        categoryLabel.text = post.primaryCategory
         titleLabel.text = post.title
         timeStampLabel.text = post.datePosted.timeAgoSinceNow()
+        authorLabel.text = "By \(post.author!.name.removingHTMLEntities.htmlToString)"
         // add caption text
     }
 
-    func setAuthorLabel(id: Int) {
-        API.request(target: .author(authorId: id)) { response in
-            guard let response = response else { return }
-            do {
-                if let jsonResult = try JSONSerialization.jsonObject(with: response.data, options: []) as? NSDictionary,
-                    let author = AuthorObject.from(jsonResult) {
-                    self.authorLabel.text = "By \(author.name.removingHTMLEntities.htmlToString)"
-                }
-            } catch {
-                print("Could not parse author")
-            }
-        }
-    }
 
     func setupHeroImage(with post: PostObject) {
-        if let heroImageUrl = URL(string: post.mediaLink) {
+        if let heroImageUrl = URL(string: post.mediumLargeImageLink) {
             heroImageView.kf.indicatorType = .activity
             heroImageView.kf.setImage(with: heroImageUrl)
         }

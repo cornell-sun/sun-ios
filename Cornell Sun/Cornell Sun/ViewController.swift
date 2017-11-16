@@ -16,7 +16,7 @@ class ViewController: UIViewController {
         view.backgroundColor = .white
         navigationItem.title = "The Cornell Daily Sun"
         self.navigationController?.navigationBar.titleTextAttributes = [
-            NSAttributedStringKey.font: UIFont(name: "Sonnenstrahl-Ausgezeichnet", size: 22)
+            NSAttributedStringKey.font: UIFont(name: "Sonnenstrahl-Ausgezeichnet", size: 22)!
         ]
 
         /* navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Search",

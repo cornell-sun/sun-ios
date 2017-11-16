@@ -18,9 +18,10 @@ protocol TabBarViewControllerDelegate: class {
 enum cellType: Int {
     case categoryCell = 0
     case titleCell = 1
-    case imageCell = 2
-    case likeCommentCell = 3
-    case actionMenuCell = 4
+    case authorCell = 2
+    case imageCell = 3
+    case likeCommentCell = 4
+    case actionMenuCell = 5
 }
 
 class ArticleSectionController: ListSectionController {
@@ -35,17 +36,12 @@ class ArticleSectionController: ListSectionController {
 
 extension ArticleSectionController: HeartPressedDelegate, BookmarkPressedDelegate, SharePressedDelegate {
 
-    func taptic() {
-        let generator = UIImpactFeedbackGenerator(style: .light)
-        generator.prepare()
-        generator.impactOccurred()
-    }
-
     func didPressBookmark(_ cell: MenuActionCell) {
+        let didBookmark = cell.bookmarkButton.currentImage == #imageLiteral(resourceName: "bookmark") //we should save the bookmark
         let correctBookmarkImage = cell.bookmarkButton.currentImage == #imageLiteral(resourceName: "bookmarkPressed") ? #imageLiteral(resourceName: "bookmark") : #imageLiteral(resourceName: "bookmarkPressed")
         cell.bookmarkButton.setImage(correctBookmarkImage, for: .normal)
         cell.bookmarkButton.transform = CGAffineTransform(scaleX: 0.6, y: 0.6)
-        taptic()
+        taptic(style: .light)
         UIView.animate(withDuration: 1.0,
                        delay: 0,
                        usingSpringWithDamping: CGFloat(0.40),
@@ -54,13 +50,18 @@ extension ArticleSectionController: HeartPressedDelegate, BookmarkPressedDelegat
                        animations: {
                         cell.bookmarkButton.transform = CGAffineTransform.identity
         })
+        if didBookmark {
+            RealmManager.instance.save(object: entry)
+        } else {
+            RealmManager.instance.delete(object: entry)
+        }
     }
 
     func didPressHeart(_ cell: MenuActionCell) {
         let correctHeartImage = cell.heartButton.currentImage == #imageLiteral(resourceName: "heartPressed") ? #imageLiteral(resourceName: "heart") : #imageLiteral(resourceName: "heartPressed")
         cell.heartButton.setImage(correctHeartImage, for: .normal)
         cell.heartButton.transform = CGAffineTransform(scaleX: 0.6, y: 0.6)
-        taptic()
+        taptic(style: .light)
         UIView.animate(withDuration: 1.0,
                        delay: 0,
                        usingSpringWithDamping: CGFloat(0.40),
@@ -72,7 +73,7 @@ extension ArticleSectionController: HeartPressedDelegate, BookmarkPressedDelegat
     }
 
     func didPressShare() {
-        taptic()
+        taptic(style: .light)
         if let articleLink = URL(string: entry.link) {
             let title = entry.title
             let objectToShare = [title, articleLink] as [Any]
@@ -82,7 +83,7 @@ extension ArticleSectionController: HeartPressedDelegate, BookmarkPressedDelegat
     }
 
     override func numberOfItems() -> Int {
-        return 5
+        return 6
     }
 
     override func sizeForItem(at index: Int) -> CGSize {
@@ -95,15 +96,16 @@ extension ArticleSectionController: HeartPressedDelegate, BookmarkPressedDelegat
         case .categoryCell:
             return CGSize(width: width, height: 40)
         case .titleCell:
-            let height = entry.title.height(withConstrainedWidth: width, font: UIFont.boldSystemFont(ofSize: 22)) //CLUTCH Extension thank stackoverflow gods
-             print(entry.title, " ", height)
+            let height = entry.title.height(withConstrainedWidth: width - 34, font: UIFont.boldSystemFont(ofSize: 22)) //CLUTCH Extension thank stackoverflow gods
             return CGSize(width: width, height: height + 10)
+        case .authorCell:
+            let height = entry.author?.name.height(withConstrainedWidth: width, font: UIFont(name: "Georgia", size: 13)!)
+            return CGSize(width: width, height: height! + 9)
         case .imageCell:
             return CGSize(width: width, height: width / 1.92)
         case .likeCommentCell:
-            let hasComments = entry.comments.count > 0
+            let hasComments = !entry.comments.isEmpty
             return hasComments ? CGSize(width: width, height: 25) : .zero
-        //return entry.comments.isEmpty ? .zero : CGSize(width: width, height: 25)
         case .actionMenuCell:
             return CGSize(width: width, height: 35)
         }
@@ -124,6 +126,11 @@ extension ArticleSectionController: HeartPressedDelegate, BookmarkPressedDelegat
             let cell = collectionContext!.dequeueReusableCell(of: TitleCell.self, for: self, at: index) as! TitleCell
             cell.post = entry
             return cell
+        case .authorCell:
+            // swiftlint:disable:next force_cast
+            let cell = collectionContext!.dequeueReusableCell(of: AuthorCell.self, for: self, at: index) as! AuthorCell
+            cell.post = entry
+            return cell
         case .imageCell:
             // swiftlint:disable:next force_cast
             let cell = collectionContext!.dequeueReusableCell(of: ImageCell.self, for: self, at: index) as! ImageCell
@@ -140,6 +147,8 @@ extension ArticleSectionController: HeartPressedDelegate, BookmarkPressedDelegat
             cell.heartDelegate = self
             cell.bookmarkDelegate = self
             cell.shareDelegate = self
+            cell.setupViews(forBookmarks: false)
+            cell.setBookmarkImage(didSelectBookmark: entry.didSave)
             return cell
         }
     }
@@ -162,7 +171,7 @@ extension ArticleSectionController: HeartPressedDelegate, BookmarkPressedDelegat
     }
 
     override func didSelectItem(at index: Int) {
-        if index != 4 {
+        if index != 5 {
             delegate?.articleSectionDidPressOnArticle(entry)
         }
     }
