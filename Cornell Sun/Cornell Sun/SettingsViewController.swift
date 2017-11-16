@@ -58,7 +58,7 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
 
     //*Test* populator for settings array. To be deleted
     func testInit() {
-        settings.append(SettingObject(label: "Subscribe", secondary: "", next: SettingsViewController(), secType: .none))
+        settings.append(SettingObject(label: "Subscribe", secondary: "", next: nil, secType: .none))
         let notifViewController = SettingsViewController()
         let notifSettings = ["Breaking News", "Opinion", "Sports", "Arts and Entertainment", "Science", "Dining", "Multimedia", "Sunspots"]
         for i in notifSettings {
