@@ -26,15 +26,18 @@ final class RealmManager {
     }
 
     func delete(object: Object) {
+        guard let obj = object as? PostObject else {
+            return
+        }
         let realm = getRealm()
         try! realm.write {
-            realm.delete(object)
+            obj.fakeDelete = true
         }
     }
 
     func get() -> Results<PostObject> {
         let realm = getRealm()
-        let objects = realm.objects(PostObject.self)
+        let objects = realm.objects(PostObject.self).filter("fakeDelete = false")
         return objects
     }
 }

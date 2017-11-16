@@ -27,6 +27,7 @@ class PostObject: Object, ListDiffable {
         return formatter
     }()
 
+    @objc dynamic var fakeDelete = false
     @objc dynamic var id: Int = 0
     @objc dynamic var datePosted: Date = Date()
     @objc dynamic var link: String = ""
