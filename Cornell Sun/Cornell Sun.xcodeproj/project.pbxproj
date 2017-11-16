@@ -16,6 +16,10 @@
 		0CEA0F7A1F99454600607CC7 /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CEA0F791F99454600607CC7 /* Date+.swift */; };
 		0CED4FAD1FAB523F0025EB91 /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CED4FAB1FAB523E0025EB91 /* UIColor+.swift */; };
 		0CED4FAE1FAB523F0025EB91 /* UIFont+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CED4FAC1FAB523F0025EB91 /* UIFont+.swift */; };
+		405F83D81FBE1E2B00360AEB /* SettingObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405F83D71FBE1E2B00360AEB /* SettingObject.swift */; };
+		405F83DA1FBE1E3100360AEB /* SettingEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405F83D91FBE1E3000360AEB /* SettingEnum.swift */; };
+		405F83DC1FBE1E7C00360AEB /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405F83DB1FBE1E7C00360AEB /* SettingsViewController.swift */; };
+		405F83DE1FBE1E8200360AEB /* SettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405F83DD1FBE1E8200360AEB /* SettingsTableViewCell.swift */; };
 		5006AFFC1EA9625000F58549 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5006AFFB1EA9625000F58549 /* AppDelegate.swift */; };
 		5006AFFE1EA9625000F58549 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5006AFFD1EA9625000F58549 /* ViewController.swift */; };
 		5006B0031EA9625000F58549 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5006B0021EA9625000F58549 /* Assets.xcassets */; };
@@ -68,6 +72,10 @@
 		389771843ED115B12D456CDA /* Pods-Cornell SunTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cornell SunTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Cornell SunTests/Pods-Cornell SunTests.debug.xcconfig"; sourceTree = "<group>"; };
 		3C38BCC6B38BFCC0EC16BF2B /* Pods_Cornell_SunTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cornell_SunTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DBAAD519F3C5A2D044960CA /* Pods_Cornell_Sun.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cornell_Sun.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		405F83D71FBE1E2B00360AEB /* SettingObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingObject.swift; sourceTree = "<group>"; };
+		405F83D91FBE1E3000360AEB /* SettingEnum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingEnum.swift; sourceTree = "<group>"; };
+		405F83DB1FBE1E7C00360AEB /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		405F83DD1FBE1E8200360AEB /* SettingsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewCell.swift; sourceTree = "<group>"; };
 		5006AFF81EA9625000F58549 /* Cornell Sun.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Cornell Sun.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5006AFFB1EA9625000F58549 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5006AFFD1EA9625000F58549 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -171,6 +179,8 @@
 				DC446C2D1F5D016500D68688 /* FeedCollectionViewController.swift */,
 				61652CD31F6EF44900EEFC29 /* SearchTableViewCell.swift */,
 				61652CD11F6EF3A500EEFC29 /* SearchViewController.swift */,
+				405F83DD1FBE1E8200360AEB /* SettingsTableViewCell.swift */,
+				405F83DB1FBE1E7C00360AEB /* SettingsViewController.swift */,
 				0CBC2CED1F5E3093003FBB38 /* TabBarViewController.swift */,
 				5006AFFD1EA9625000F58549 /* ViewController.swift */,
 				5006B0021EA9625000F58549 /* Assets.xcassets */,
@@ -191,6 +201,8 @@
 		5006B24E1EADA38400F58549 /* Objects */ = {
 			isa = PBXGroup;
 			children = (
+				405F83D91FBE1E3000360AEB /* SettingEnum.swift */,
+				405F83D71FBE1E2B00360AEB /* SettingObject.swift */,
 				50A898111EAEC93B0099CFA9 /* AuthorObject.swift */,
 				5006B24C1EADA37E00F58549 /* PostObject.swift */,
 				DCFC88C51F86C03700A0D8A9 /* CommentObject.swift */,
@@ -507,7 +519,9 @@
 				0CEA0F7A1F99454600607CC7 /* Date+.swift in Sources */,
 				DC446C321F5D05FF00D68688 /* ArticleSectionController.swift in Sources */,
 				5006AFFE1EA9625000F58549 /* ViewController.swift in Sources */,
+				405F83DE1FBE1E8200360AEB /* SettingsTableViewCell.swift in Sources */,
 				5006AFFC1EA9625000F58549 /* AppDelegate.swift in Sources */,
+				405F83DA1FBE1E3100360AEB /* SettingEnum.swift in Sources */,
 				DCFC88C41F86B50200A0D8A9 /* ActionMenuCell.swift in Sources */,
 				DC818D9B1F74CFBB0064AFFA /* SpinnerCell.swift in Sources */,
 				0CAA2BEC1F954E3200D423FD /* ArticleViewController.swift in Sources */,
@@ -516,6 +530,7 @@
 				DCB717161FBA016400BE4D26 /* TaglineCell.swift in Sources */,
 				0C15F1871FBDD433009724DB /* ArticleHeaderView.swift in Sources */,
 				DCFC88C81F86C7B000A0D8A9 /* LikeCommentCell.swift in Sources */,
+				405F83D81FBE1E2B00360AEB /* SettingObject.swift in Sources */,
 				DC79719F1F7B30540055A7B2 /* CategoryCell.swift in Sources */,
 				DC446C2E1F5D016500D68688 /* FeedCollectionViewController.swift in Sources */,
 				0CBC2CEE1F5E3093003FBB38 /* TabBarViewController.swift in Sources */,
@@ -525,6 +540,7 @@
 				DC446C341F5D0D1400D68688 /* ArticleCell.swift in Sources */,
 				0CED4FAD1FAB523F0025EB91 /* UIColor+.swift in Sources */,
 				DC446C361F5D0DFF00D68688 /* Extensions.swift in Sources */,
+				405F83DC1FBE1E7C00360AEB /* SettingsViewController.swift in Sources */,
 				DC818D9D1F7553380064AFFA /* ImageCell.swift in Sources */,
 				DCFC88C61F86C03700A0D8A9 /* CommentObject.swift in Sources */,
 				0CB00B261FBBAEE800376A94 /* CommentTableViewCell.swift in Sources */,

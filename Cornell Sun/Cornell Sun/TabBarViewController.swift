@@ -41,7 +41,7 @@ class TabBarViewController: UITabBarController {
         let tabFourTabBarItem = UITabBarItem(title: "Search", image: #imageLiteral(resourceName: "searchIcon").withRenderingMode(.alwaysOriginal), selectedImage: #imageLiteral(resourceName: "searchIconRed").withRenderingMode(.alwaysOriginal))
         tabFourNavigationController.tabBarItem = tabFourTabBarItem
 
-        let tabFiveNavigationController = UINavigationController(rootViewController: ViewController())
+        let tabFiveNavigationController = UINavigationController(rootViewController: SettingsViewController())
         let tabFiveTabBarItem = UITabBarItem(title: "Settings", image: #imageLiteral(resourceName: "personSettingsIcon").withRenderingMode(.alwaysOriginal), selectedImage: #imageLiteral(resourceName: "personSettingsIconRed").withRenderingMode(.alwaysOriginal))
         tabFiveNavigationController.tabBarItem = tabFiveTabBarItem
 
