@@ -110,6 +110,7 @@ class ArticleViewController: UIViewController {
         }
 
         articleBodyTextView = UITextView(frame: .zero)
+        articleBodyTextView.isEditable = false
         articleBodyTextView.font = currentFontSize.getFont()
         articleView.addSubview(articleBodyTextView)
         articleBodyTextView.snp.makeConstraints { make in
