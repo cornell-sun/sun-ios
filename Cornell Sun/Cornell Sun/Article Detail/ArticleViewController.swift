@@ -95,15 +95,14 @@ class ArticleViewController: UIViewController {
         articleScrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: tabBarControllerHeight, right: 0)
         view.addSubview(articleScrollView)
         articleScrollView.snp.makeConstraints { make in
-            make.width.lessThanOrEqualToSuperview()
-            make.top.bottom.leading.trailing.equalToSuperview()
+            make.edges.equalToSuperview().inset(UIEdgeInsets.zero)
         }
 
         articleView = UIView()
         articleScrollView.addSubview(articleView)
         articleView.snp.makeConstraints { make in
-            make.width.lessThanOrEqualToSuperview()
-            make.top.bottom.leading.trailing.equalToSuperview()
+            make.edges.equalTo(articleScrollView).inset(UIEdgeInsets.zero)
+            make.width.equalTo(articleScrollView)
         }
 
         articleHeaderView = ArticleHeaderView(article: post, frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 0))
@@ -113,6 +112,26 @@ class ArticleViewController: UIViewController {
             make.height.equalTo(articleHeaderHeight)
         }
 
+        commentsLabel = UILabel(frame: .zero)
+        commentsLabel.text = "Comments"
+        commentsLabel.font = UIFont.systemFont(ofSize: 15.0, weight: .bold)
+        commentsLabel.textColor = .black
+        articleView.addSubview(commentsLabel)
+
+        articleEndSeparator = UILabel(frame: .zero)
+        articleEndSeparator.backgroundColor = .warmGrey
+        articleView.addSubview(articleEndSeparator)
+
+        commentsTableView = UITableView(frame: .zero)
+        articleView.addSubview(commentsTableView)
+        commentsTableView.register(CommentTableViewCell.self, forCellReuseIdentifier: commentReuseIdentifier)
+        commentsTableView.delegate = self
+        commentsTableView.dataSource = self
+        commentsTableView.tableFooterView = UIView()
+        commentsTableView.isScrollEnabled = false
+        commentsTableView.rowHeight = UITableViewAutomaticDimension
+        commentsTableView.estimatedRowHeight = 150
+
         articleBodyTextView = UITextView(frame: .zero)
         articleBodyTextView.isEditable = false
         articleBodyTextView.font = currentFontSize.getFont()
@@ -120,40 +139,20 @@ class ArticleViewController: UIViewController {
         articleBodyTextView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(leadingOffset)
             make.top.equalTo(articleHeaderView.snp.bottom)
-            make.bottom.equalToSuperview().inset(300) // will update this to automatically resize to tableview content
+            make.bottom.equalTo(articleEndSeparator.snp.top) // will update this to automatically resize to tableview content
         }
 
-        articleEndSeparator = UILabel(frame: .zero)
-        articleEndSeparator.backgroundColor = .warmGrey
-        articleView.addSubview(articleEndSeparator)
         articleEndSeparator.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(leadingOffset)
             make.height.equalTo(separatorHeight)
-            make.top.equalTo(articleBodyTextView.snp.bottom).offset(articleSeparatorOffset)
+            make.top.equalTo(articleBodyTextView.snp.bottom)
         }
 
-        commentsLabel = UILabel(frame: .zero)
-        commentsLabel.text = "Comments"
-        commentsLabel.font = UIFont.systemFont(ofSize: 15.0, weight: .bold)
-        commentsLabel.textColor = .black
-        articleView.addSubview(commentsLabel)
         commentsLabel.snp.makeConstraints { make in
             make.top.equalTo(articleEndSeparator.snp.bottom).offset(articleSeparatorOffset)
             make.leading.equalToSuperview().offset(leadingOffset)
         }
 
-        commentsTableView = UITableView(frame: .zero)
-        commentsTableView.register(CommentTableViewCell.self, forCellReuseIdentifier: commentReuseIdentifier)
-        commentsTableView.delegate = self
-        commentsTableView.dataSource = self
-        commentsTableView.tableFooterView = UIView()
-        commentsTableView.isScrollEnabled = false
-        articleView.addSubview(commentsTableView)
-        commentsTableView.snp.makeConstraints { make in
-            make.width.leading.trailing.equalToSuperview()
-            make.top.equalTo(commentsLabel.snp.bottom).offset(articleSeparatorOffset)
-            make.height.equalTo(300)
-        }
     }
 
     func setupWithArticle() {
@@ -165,15 +164,21 @@ class ArticleViewController: UIViewController {
         let comment2 = CommentObject(id: 0, postId: 0, authorName: "Hettie Coleman", comment: "This story was wack! But I will be respectful because that’s how online discourse should be!", date: Date(), image: #imageLiteral(resourceName: "emptyProfile"))
         comments.append(comment1)
         comments.append(comment2)
+        comments.append(comment1)
+        comments.append(comment2)
+        comments.append(comment2)
         commentsTableView.reloadData()
+
+        commentsTableView.snp.makeConstraints { make in
+            make.width.leading.trailing.equalToSuperview()
+            make.top.equalTo(commentsLabel.snp.bottom).offset(articleSeparatorOffset)
+            make.bottom.equalToSuperview()
+            make.height.equalTo(commentsTableView.contentSize.height)
+        }
     }
 }
 
 extension ArticleViewController: UITableViewDelegate, UITableViewDataSource {
-
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 150 // will need to auto resize tableviewcells eventually
-    }
 
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1

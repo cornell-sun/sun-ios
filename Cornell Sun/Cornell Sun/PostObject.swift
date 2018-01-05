@@ -107,7 +107,7 @@ class PostObject: Object, ListDiffable {
         }
         let postCommentsArray: [String: Any] = [:]
 
-        let authorObject = AuthorObject(id: authorId, name: authorName, link: authorLink, bio: bio, avatarLink: avatarLink)
+        let authorObject = AuthorObject(id: authorId, name: authorName.htmlToString, link: authorLink, bio: bio, avatarLink: avatarLink)
 
         var commentsArray: [CommentObject] = []
 
