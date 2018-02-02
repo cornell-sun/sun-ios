@@ -136,9 +136,8 @@ extension BookmarkSectionController: HeartPressedDelegate, BookmarkPressedDelega
     }
 
     override func didSelectItem(at index: Int) {
-        if index != 2 {
+        if bookmarkCellType(rawValue: index) != .actionMenuCell {
             delegate?.articleSectionDidPressOnArticle(entry)
         }
     }
 }
-

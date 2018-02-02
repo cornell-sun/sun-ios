@@ -19,19 +19,16 @@ final class RealmManager {
     }
 
     func save(object: Object) {
+        //attempting to save object to realm for bookmarks
         guard let obj = object as? PostObject else { return }
         let realm = getRealm()
-        if obj.fakeDelete {
-            try! realm.write {
-                obj.didSave = true
-                obj.fakeDelete = false
-            }
-        } else {
-
-            try! realm.write {
+        try! realm.write {
+            obj.didSave = true
+            obj.bookmarkDate = Date()
+            obj.softDelete = false
+            if !obj.bookmarkedThisSession {
+                obj.bookmarkedThisSession = true
                 realm.add(obj)
-                obj.didSave = true
-                obj.fakeDelete = false
             }
         }
     }
@@ -49,13 +46,15 @@ final class RealmManager {
         }
         let realm = getRealm()
         try! realm.write {
-            obj.fakeDelete = true
+            obj.softDelete = true
+            obj.didSave = false
+            obj.bookmarkDate = nil
         }
     }
 
     func get() -> Results<PostObject> {
         let realm = getRealm()
-        let objects = realm.objects(PostObject.self).filter("fakeDelete = false")
+        let objects = realm.objects(PostObject.self).filter("softDelete = false")
         return objects
     }
 }

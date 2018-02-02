@@ -170,10 +170,4 @@ extension PhotoGallerySectionController: HeartPressedDelegate, BookmarkPressedDe
     override func didUpdate(to object: Any) {
         entry = object as? PostObject
     }
-
-    override func didSelectItem(at index: Int) {
-        if index == 0 {
-
-        }
-    }
 }

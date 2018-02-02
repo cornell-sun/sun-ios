@@ -10,6 +10,10 @@ import UIKit
 import SnapKit
 
 final class TitleCell: UICollectionViewCell {
+    var topInset: CGFloat = 5
+    var leftInset: CGFloat = 17
+    var bottomInset: CGFloat = 5
+    var rightInset: CGFloat = 5
 
     var post: PostObject? {
         didSet {
@@ -39,7 +43,7 @@ final class TitleCell: UICollectionViewCell {
         addSubview(titleLabel)
         titleLabel.snp.makeConstraints { (make) in
             make.centerY.equalToSuperview()
-            make.edges.equalToSuperview().inset(UIEdgeInsets(top: 5, left: 17, bottom: 5, right: 17))
+            make.edges.equalToSuperview().inset(UIEdgeInsets(top: topInset, left: leftInset, bottom: bottomInset, right: rightInset))
         }
     }
 }

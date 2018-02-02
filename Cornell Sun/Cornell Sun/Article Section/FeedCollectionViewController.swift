@@ -12,10 +12,11 @@ import Realm
 import RealmSwift
 
 class FeedCollectionViewController: ViewController, UIScrollViewDelegate {
+    var refreshControl = UIRefreshControl()
     var feedData: [PostObject] = []
     var firstPostObject: PostObject!
     var savedPosts: Results<PostObject>!
-    var currentPage = 1
+    var currentPage = 2
     var loading = false
     let spinToken = "spinner"
     let collectionView: UICollectionView = {
@@ -29,20 +30,43 @@ class FeedCollectionViewController: ViewController, UIScrollViewDelegate {
         return ListAdapter(updater: ListAdapterUpdater(), viewController: self, workingRangeSize: 0)
     }()
 
+    override func viewWillAppear(_ animated: Bool) {
+        if !feedData.isEmpty {
+        let savedPostIds: [Int] = savedPosts.map({$0.id})
+        feedData = feedData.map {
+            RealmManager.instance.update(object: $0, to: savedPostIds.contains($0.id))
+            return $0
+        }
+        self.adapter.reloadData(completion: nil)
+        }
+    }
+
     override func viewDidAppear(_ animated: Bool) {
         //we could possibly have saved posts
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        refreshControl.addTarget(self, action: #selector(refreshData), for: .valueChanged)
+
+        navigationItem.title = "The Cornell Daily Sun"
+        self.navigationController?.navigationBar.titleTextAttributes = [
+            NSAttributedStringKey.font: UIFont(name: "Sonnenstrahl-Ausgezeichnet", size: 22)!
+        ]
+        if #available(iOS 11.0, *) {
+            navigationController?.navigationBar.prefersLargeTitles = true
+            self.navigationController?.navigationBar.largeTitleTextAttributes = [
+                NSAttributedStringKey.font: UIFont(name: "Sonnenstrahl-Ausgezeichnet", size: 34)!
+            ]
+        }
 
         view.addSubview(collectionView)
         adapter.collectionView = collectionView
-        adapter.collectionView?.backgroundColor = UIColor(white: 241.0 / 255.0, alpha: 1.0)
+        adapter.collectionView?.backgroundColor = .offWhite
+        adapter.collectionView?.refreshControl = refreshControl
         adapter.dataSource = self
         adapter.scrollViewDelegate = self
         savedPosts = RealmManager.instance.get()
-        getPosts(page: currentPage)
     }
 
     override func viewDidLayoutSubviews() {
@@ -53,6 +77,12 @@ class FeedCollectionViewController: ViewController, UIScrollViewDelegate {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+
+    @objc func refreshData() {
+        currentPage = 1
+        feedData = []
+        getPosts(page: currentPage)
     }
 
     func getPosts(page: Int) {
@@ -74,6 +104,7 @@ class FeedCollectionViewController: ViewController, UIScrollViewDelegate {
                             self.feedData.append(post)
                         }
                     }
+                    self.refreshControl.endRefreshing()
                     self.adapter.performUpdates(animated: true, completion: nil)
                 }
             } catch {

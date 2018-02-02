@@ -13,17 +13,27 @@ import Kingfisher
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    var storyboard: UIStoryboard?
     let redirectScheme = "cornellsun"
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = TabBarViewController()
+        //window?.rootViewController = TabBarViewController()
         window?.makeKeyAndVisible()
+        storyboard = UIStoryboard(name: "Launch Screen", bundle: nil)
+        let rootVC = storyboard?.instantiateInitialViewController()
+        self.window!.rootViewController = rootVC
 
         //Image cache settings
         ImageCache.default.maxDiskCacheSize = 50 * 1024 * 1024 //50 mb
         ImageCache.default.maxCachePeriodInSecond = 60 * 60 * 24 * 4 //4 days until its removed
+
+        setUpData { posts, mainHeadlinePost in
+            let tabBarController = TabBarViewController(with: posts, mainHeadlinePost: mainHeadlinePost)
+            self.window!.rootViewController = tabBarController
+        }
+
         return true
     }
 

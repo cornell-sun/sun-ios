@@ -99,8 +99,8 @@ extension ArticleSectionController: HeartPressedDelegate, BookmarkPressedDelegat
             let height = entry.title.height(withConstrainedWidth: width - 34, font: UIFont.boldSystemFont(ofSize: 22)) //CLUTCH Extension thank stackoverflow gods
             return CGSize(width: width, height: height + 10)
         case .authorCell:
-            let height = entry.author?.name.height(withConstrainedWidth: width, font: UIFont(name: "Georgia", size: 13)!)
-            return CGSize(width: width, height: height! + 9)
+            guard let height = entry.author?.name.height(withConstrainedWidth: width, font: .articleSection) else { return .zero}
+            return CGSize(width: width, height: height + 9)
         case .imageCell:
             return CGSize(width: width, height: width / 1.92)
         case .likeCommentCell:
@@ -171,7 +171,7 @@ extension ArticleSectionController: HeartPressedDelegate, BookmarkPressedDelegat
     }
 
     override func didSelectItem(at index: Int) {
-        if index != 5 {
+        if cellType(rawValue: index) != .actionMenuCell {
             delegate?.articleSectionDidPressOnArticle(entry)
         }
     }

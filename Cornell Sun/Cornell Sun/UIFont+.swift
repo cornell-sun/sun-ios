@@ -33,6 +33,14 @@ extension UIFont {
         return UIFont(name: "Georgia", size: 14)!
     }
 
+    @nonobjc class var articleSection: UIFont {
+        return UIFont(name: "Georgia", size: 14)!
+    }
+
+    @nonobjc class var authorCell: UIFont {
+        return UIFont(name: "Georgia", size: 13)!
+    }
+
 	@nonobjc class var sectionList: UIFont {
         return UIFont.systemFont(ofSize: 17.0, weight: .bold)
 	}

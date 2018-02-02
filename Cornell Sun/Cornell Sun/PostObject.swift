@@ -27,14 +27,18 @@ class PostObject: Object, ListDiffable {
         return formatter
     }()
 
-    @objc dynamic var fakeDelete = false
+    @objc dynamic var softDelete = false
+    @objc dynamic var bookmarkDate: Date?
+    @objc dynamic var didSave = false
+    @objc dynamic var bookmarkedThisSession = false
+
     @objc dynamic var id: Int = 0
     @objc dynamic var datePosted: Date = Date()
     @objc dynamic var link: String = ""
     @objc dynamic var title: String = ""
     @objc dynamic var content: String = ""
     @objc dynamic var excerpt: String = ""
-    @objc dynamic var author: AuthorObject? = nil
+    @objc dynamic var author: AuthorObject?
     @objc dynamic var primaryCategory: String = ""
     var categories = List<String>()
     var tags = List<String>()
@@ -44,7 +48,6 @@ class PostObject: Object, ListDiffable {
     @objc dynamic var thumbnailImageLink: String = ""
     @objc dynamic var fullImageLink: String = ""
     @objc dynamic var typeEnum = postTypeEnum.article.rawValue
-    @objc dynamic var didSave = false
     var postType: postTypeEnum {
         get {
             return postTypeEnum(rawValue: typeEnum)!

@@ -113,7 +113,6 @@ class ArticleHeaderView: UIView {
         // add caption text
     }
 
-
     func setupHeroImage(with post: PostObject) {
         if let heroImageUrl = URL(string: post.mediumLargeImageLink) {
             heroImageView.kf.indicatorType = .activity

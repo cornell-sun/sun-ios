@@ -11,6 +11,10 @@ import SnapKit
 
 final class BookmarkCell: UICollectionViewCell {
 
+    var insetConstant: CGFloat = 18
+    var offsetConstant: CGFloat = 12
+    var imageViewWidthHeight: CGFloat = 100
+
     var post: PostObject? {
         didSet {
             titleLabel.text = post?.title
@@ -77,30 +81,30 @@ final class BookmarkCell: UICollectionViewCell {
         addSubview(divider)
         imageView.snp.makeConstraints { (make) in
             make.centerY.equalToSuperview()
-            make.left.equalToSuperview().inset(18)
-            make.width.height.equalTo(100)
+            make.left.equalToSuperview().inset(insetConstant)
+            make.width.height.equalTo(imageViewWidthHeight)
         }
 
         titleLabel.snp.makeConstraints { (make) in
             make.top.equalTo(imageView.snp.top)
-            make.left.equalTo(imageView.snp.right).offset(12)
-            make.right.equalToSuperview().inset(18)
+            make.left.equalTo(imageView.snp.right).offset(offsetConstant)
+            make.right.equalToSuperview().inset(insetConstant)
         }
 
         authorLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(imageView.snp.right).offset(12)
+            make.left.equalTo(imageView.snp.right).offset(offsetConstant)
             make.bottom.equalTo(imageView.snp.bottom)
         }
 
         timeStampLabel.snp.makeConstraints { (make) in
-            make.right.equalToSuperview().inset(18)
+            make.right.equalToSuperview().inset(insetConstant)
             make.bottom.equalTo(imageView.snp.bottom)
         }
 
         divider.snp.makeConstraints { (make) in
             make.height.equalTo(1)
-            make.left.equalToSuperview().inset(18)
-            make.right.equalToSuperview().inset(18)
+            make.left.equalToSuperview().inset(insetConstant)
+            make.right.equalToSuperview().inset(insetConstant)
             make.bottom.equalToSuperview().inset(1)
         }
     }
