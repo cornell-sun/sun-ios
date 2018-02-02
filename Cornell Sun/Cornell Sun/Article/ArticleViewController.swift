@@ -8,6 +8,7 @@
 
 import UIKit
 import HTMLString
+import SafariServices
 
 enum FontSize {
     case regular
@@ -131,6 +132,7 @@ class ArticleViewController: UIViewController {
         articleBodyTextView = UITextView(frame: .zero)
         articleBodyTextView.isEditable = false
         articleBodyTextView.font = currentFontSize.getFont()
+        articleBodyTextView.delegate = self
         articleView.addSubview(articleBodyTextView)
         articleBodyTextView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(leadingOffset)
@@ -152,7 +154,11 @@ class ArticleViewController: UIViewController {
     }
 
     func setupWithArticle() {
-        articleBodyTextView.text = post.content
+        // how to insert images into text
+        let paragraphStyle = NSMutableParagraphStyle()
+        let attrContent = NSMutableAttributedString(attributedString: post.attrContent)
+        attrContent.addAttribute(NSAttributedStringKey.paragraphStyle, value: paragraphStyle, range: NSMakeRange(0, post.attrContent.length))
+        articleBodyTextView.attributedText = attrContent
         articleBodyTextView.isScrollEnabled = false
         articleBodyTextView.setNeedsUpdateConstraints()
         // hardcoded comments
@@ -191,4 +197,13 @@ extension ArticleViewController: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
 
+}
+
+extension ArticleViewController: UITextViewDelegate {
+
+    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
+        let safariVC = SFSafariViewController(url: URL)
+        present(safariVC, animated: true, completion: nil) // TODO: detect if it's a Sun article and display that article instead
+        return false
+    }
 }

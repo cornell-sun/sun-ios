@@ -33,6 +33,7 @@ class PostObject: Object, ListDiffable {
     @objc dynamic var link: String = ""
     @objc dynamic var title: String = ""
     @objc dynamic var content: String = ""
+    var attrContent: NSAttributedString = NSAttributedString()
     @objc dynamic var excerpt: String = ""
     @objc dynamic var author: AuthorObject?
     @objc dynamic var primaryCategory: String = ""
@@ -136,7 +137,16 @@ class PostObject: Object, ListDiffable {
         self.id = id
         self.datePosted = date
         self.title = title.removingHTMLEntities
-        self.content = content.htmlToString
+        self.content = content
+
+        let modifiedFont = "<span style=\"font-family: 'Georgia', 'Times', 'serif'; font-size: 18\">\(content)</span>"
+        if let attributedString = try? NSMutableAttributedString(
+            data: modifiedFont.data(using: .utf8, allowLossyConversion: true)!,
+            options: [NSAttributedString.DocumentReadingOptionKey.documentType: NSAttributedString.DocumentType.html, NSAttributedString.DocumentReadingOptionKey.characterEncoding: String.Encoding.utf8.rawValue],
+            documentAttributes: nil) {
+            self.attrContent = attributedString
+        }
+
         self.link = link
         self.excerpt = excerpt
         self.primaryCategory = primaryCategory.removingHTMLEntities
