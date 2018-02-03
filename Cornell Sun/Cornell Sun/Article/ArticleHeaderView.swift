@@ -12,15 +12,16 @@ import SnapKit
 class ArticleHeaderView: UIView {
     let leadingOffset: CGFloat = 17.5
     let categoryLabelTopOffset: CGFloat = 18.5
-    let categoryLabelHeight: CGFloat = 18
+    let categoryLabelHeight: CGFloat = 20
     let titleLabelTopOffset: CGFloat = 12.0
     let titleLabelHeight: CGFloat = 100
-    let imageViewHeight: CGFloat = 250.0
+    let imageViewHeight: CGFloat = 200.0
     let imageViewTopOffset: CGFloat = 12.0
     let timeStampTopOffset: CGFloat = 14.5
     let timeStampHeight: CGFloat = 15
     let authorLabelHeight: CGFloat = 15
     let captionLabelTopOffset: CGFloat = 4
+    let captionLabelBottomOffset: CGFloat = 9.5
 
     var categoryLabel: UILabel!
     var titleLabel: UILabel!
@@ -55,14 +56,9 @@ class ArticleHeaderView: UIView {
         titleLabel = UILabel(frame: .zero)
         titleLabel.textColor = .blackThree
         titleLabel.font = .articleTitle
-        titleLabel.preferredMaxLayoutWidth = frame.width - 2 * leadingOffset
         titleLabel.numberOfLines = 4
         titleLabel.lineBreakMode = .byTruncatingTail
         addSubview(titleLabel)
-        titleLabel.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview().inset(leadingOffset)
-            make.top.equalTo(categoryLabel.snp.bottom).offset(titleLabelTopOffset)
-        }
 
         timeStampLabel = UILabel(frame: .zero)
         timeStampLabel.textColor = .darkGrey
@@ -92,12 +88,10 @@ class ArticleHeaderView: UIView {
         }
 
         captionLabel = UILabel(frame: .zero)
+        captionLabel.font = .caption
+        captionLabel.textColor = .darkGrey
+        captionLabel.numberOfLines = 0
         addSubview(captionLabel)
-        captionLabel.snp.makeConstraints { make in
-            make.top.equalTo(heroImageView.snp.bottom).offset(captionLabelTopOffset)
-            make.leading.trailing.equalToSuperview().inset(leadingOffset)
-        }
-
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -108,9 +102,22 @@ class ArticleHeaderView: UIView {
         setupHeroImage(with: post)
         categoryLabel.text = post.primaryCategory
         titleLabel.text = post.title
+        titleLabel.snp.makeConstraints { make in
+            let height = titleLabel.text!.height(withConstrainedWidth: UIScreen.main.bounds.width, font: .articleTitle)
+            make.height.equalTo(height)
+            make.leading.trailing.equalToSuperview().inset(leadingOffset)
+            make.top.equalTo(categoryLabel.snp.bottom).offset(titleLabelTopOffset)
+        }
         timeStampLabel.text = post.datePosted.timeAgoSinceNow()
         authorLabel.text = "By \(post.author!.name.removingHTMLEntities.htmlToString)"
-        // add caption text
+        captionLabel.text = post.caption
+        captionLabel.snp.makeConstraints { make in
+            make.top.equalTo(heroImageView.snp.bottom).offset(captionLabelTopOffset)
+            make.leading.trailing.equalToSuperview().inset(leadingOffset)
+            let height = post.caption.height(withConstrainedWidth: UIScreen.main.bounds.width - 2 * leadingOffset, font: .caption) + captionLabelBottomOffset
+            make.height.equalTo(height)
+            make.bottom.equalToSuperview()
+        }
     }
 
     func setupHeroImage(with post: PostObject) {

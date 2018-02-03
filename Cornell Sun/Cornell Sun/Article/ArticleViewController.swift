@@ -131,8 +131,15 @@ class ArticleViewController: UIViewController {
 
         articleBodyTextView = UITextView(frame: .zero)
         articleBodyTextView.isEditable = false
+        articleBodyTextView.textContainer.lineFragmentPadding = 0
         articleBodyTextView.font = currentFontSize.getFont()
         articleBodyTextView.delegate = self
+        articleBodyTextView.isScrollEnabled = false
+        articleBodyTextView.isUserInteractionEnabled = false
+        articleBodyTextView.linkTextAttributes = [
+            NSAttributedStringKey.foregroundColor.rawValue: UIColor.lightBlue,
+            NSAttributedStringKey.underlineColor.rawValue : UIColor.clear
+        ]
         articleView.addSubview(articleBodyTextView)
         articleBodyTextView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(leadingOffset)
