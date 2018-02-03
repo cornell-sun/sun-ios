@@ -52,6 +52,14 @@ final class RealmManager {
         }
     }
 
+    func clearOldBookmarks() {
+        let realm = getRealm()
+        let objects = realm.objects(PostObject.self).filter("didSave = false")
+        try! realm.write {
+        realm.delete(objects)
+        }
+    }
+
     func get() -> Results<PostObject> {
         let realm = getRealm()
         let objects = realm.objects(PostObject.self).filter("softDelete = false")

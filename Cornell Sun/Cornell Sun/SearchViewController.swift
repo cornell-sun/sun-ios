@@ -11,33 +11,44 @@ import UIKit
 class SearchViewController: UIViewController, UITableViewDelegate {
 
     var tableView: UITableView!
-    let searchController = UISearchController()
+    let searchController = UISearchController(searchResultsController: nil)
+    let dimView = UIView()
     var searchResults: [String] = ["Current Text", "Search Result 1", "Search Result 2", "Search Result 3", "..."]
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        title = "Search"
         view.backgroundColor = .white
 
         // Set up table view for search results
-        tableView = UITableView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height))
+        tableView = UITableView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height))
         tableView.register(SearchTableViewCell.self, forCellReuseIdentifier: "SearchResultCell")
+        tableView.tableFooterView = UIView()
         tableView.delegate = self
         tableView.dataSource = self
         view.addSubview(tableView)
 
+        dimView.frame = tableView.frame
+        dimView.backgroundColor = .black
+        dimView.alpha = 0.0
+        view.addSubview(dimView)
         // Set up the searchController delegate and the presentation view
-        searchController.searchResultsUpdater = self
+        searchController.searchBar.delegate = self
         searchController.delegate = self
-        searchController.dimsBackgroundDuringPresentation = false
         searchController.definesPresentationContext = true
+        searchController.dimsBackgroundDuringPresentation = false
 
-        // Could also make the middle element of the navbar equal to this
-        tableView.tableHeaderView = searchController.searchBar
+        if #available(iOS 11, *) {
+            navigationItem.searchController = searchController
+            navigationController?.navigationBar.prefersLargeTitles = true
+            navigationItem.hidesSearchBarWhenScrolling = false
+        } else {
+            navigationItem.titleView = searchController.searchBar
+        }
     }
 
     override func viewDidAppear(_ animated: Bool) {
-        self.searchController.isActive = true
+        //self.searchController.isActive = true
     }
 
     override func didReceiveMemoryWarning() {
@@ -67,21 +78,23 @@ extension SearchViewController: UISearchControllerDelegate {
     func didPresentSearchController(_ searchController: UISearchController) {
         searchController.searchBar.becomeFirstResponder()
     }
+
 }
 
-extension SearchViewController: UISearchResultsUpdating {
+extension SearchViewController: UISearchBarDelegate {
 
-    // Called whenever the searchbar becomes first responder and when text is changed
-    func updateSearchResults(for searchController: UISearchController) {
-        let searchText = searchController.searchBar.text ?? ""
-
-        // update this - only updates the first cell as of right now
-        if searchResults.isEmpty {
-            searchResults = [searchText]
-        } else {
-            searchResults[0] = searchText
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        UIView.animate(withDuration: 0.3) {
+            self.dimView.alpha = 0.5
         }
+    }
 
-        tableView.reloadData()
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        dimView.alpha = 0.0
+    }
+
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        print("search button pressed", searchBar.text ?? "")
+        dimView.alpha = 0.0
     }
 }

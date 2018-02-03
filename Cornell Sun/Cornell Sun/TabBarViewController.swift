@@ -55,7 +55,7 @@ class TabBarViewController: UITabBarController {
         let tabThreeTabBarItem = UITabBarItem(title: "Bookmarks", image: #imageLiteral(resourceName: "bookmarkIcon").withRenderingMode(.alwaysOriginal), selectedImage: #imageLiteral(resourceName: "bookmarkIconRed").withRenderingMode(.alwaysOriginal))
         tabThreeNavigationController.tabBarItem = tabThreeTabBarItem
 
-        let tabFourNavigationController = UINavigationController(rootViewController: ViewController())
+        let tabFourNavigationController = UINavigationController(rootViewController: SearchViewController())
         let tabFourTabBarItem = UITabBarItem(title: "Search", image: #imageLiteral(resourceName: "searchIcon").withRenderingMode(.alwaysOriginal), selectedImage: #imageLiteral(resourceName: "searchIconRed").withRenderingMode(.alwaysOriginal))
         tabFourNavigationController.tabBarItem = tabFourTabBarItem
 

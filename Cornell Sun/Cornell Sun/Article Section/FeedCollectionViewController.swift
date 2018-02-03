@@ -31,6 +31,10 @@ class FeedCollectionViewController: ViewController, UIScrollViewDelegate {
     }()
 
     override func viewWillAppear(_ animated: Bool) {
+        navigationItem.title = "The Cornell Daily Sun"
+        self.navigationController?.navigationBar.titleTextAttributes = [
+            NSAttributedStringKey.font: UIFont(name: "Sonnenstrahl-Ausgezeichnet", size: 22)!
+        ]
         if !feedData.isEmpty {
         let savedPostIds: [Int] = savedPosts.map({$0.id})
         feedData = feedData.map {
@@ -48,17 +52,12 @@ class FeedCollectionViewController: ViewController, UIScrollViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         refreshControl.addTarget(self, action: #selector(refreshData), for: .valueChanged)
-
-        navigationItem.title = "The Cornell Daily Sun"
-        self.navigationController?.navigationBar.titleTextAttributes = [
-            NSAttributedStringKey.font: UIFont(name: "Sonnenstrahl-Ausgezeichnet", size: 22)!
-        ]
-        if #available(iOS 11.0, *) {
-            navigationController?.navigationBar.prefersLargeTitles = true
-            self.navigationController?.navigationBar.largeTitleTextAttributes = [
-                NSAttributedStringKey.font: UIFont(name: "Sonnenstrahl-Ausgezeichnet", size: 34)!
-            ]
-        }
+//        if #available(iOS 11.0, *) {
+//            navigationController?.navigationBar.prefersLargeTitles = true
+//            self.navigationController?.navigationBar.largeTitleTextAttributes = [
+//                NSAttributedStringKey.font: UIFont(name: "Sonnenstrahl-Ausgezeichnet", size: 38)!
+//            ]
+//        }
 
         view.addSubview(collectionView)
         adapter.collectionView = collectionView
