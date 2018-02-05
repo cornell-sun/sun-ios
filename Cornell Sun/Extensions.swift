@@ -11,37 +11,6 @@ import Kingfisher
 import Realm
 import RealmSwift
 
-var headlinePost: PostObject?
-func setUpData(callback: @escaping ([PostObject], PostObject?) -> Void) {
-    let savedPosts: Results<PostObject> = RealmManager.instance.get()
-    let savedPostIds: [Int] = savedPosts.map({$0.id})
-    var postObjects: [PostObject] = []
-    API.request(target: .posts(page: 1)) { (response) in
-        guard let response = response else {return callback(postObjects, headlinePost) }
-        do {
-            let jsonResult = try JSONSerialization.jsonObject(with: response.data, options: [])
-            if let postArray = jsonResult as? [[String: Any]] {
-                for postDictionary in postArray {
-                    if let post = PostObject(data: postDictionary) {
-                        if headlinePost == nil {
-                            headlinePost = post
-                        }
-                        if savedPostIds.contains(post.id) {
-                            post.didSave = true
-                        }
-                        postObjects.append(post)
-                    }
-                }
-            }
-            callback(postObjects, headlinePost)
-        } catch {
-            print("could not parse")
-            callback(postObjects, headlinePost)
-            // can't parse data, show error
-        }
-    }
-}
-
 func captionMaxHeight(width: CGFloat) -> CGFloat {
      let tmpStr = "A rink attendant collect fish thrown by the Cornell students in a tradition that spans over decades. (Cameron Pollack/ Sun Photography Editor)"
     return tmpStr.height(withConstrainedWidth: width - 36, font: UIFont(name: "Georgia", size: 13)!)

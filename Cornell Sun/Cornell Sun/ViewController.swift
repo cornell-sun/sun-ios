@@ -31,7 +31,7 @@ class ViewController: UIViewController {
     }
 
     @objc func showSearchViewController() {
-        navigationController?.pushViewController(SearchViewController(), animated: true)
+        navigationController?.pushViewController(SearchViewController(fetchTrending: true), animated: true)
     }
 
     override func didReceiveMemoryWarning() {

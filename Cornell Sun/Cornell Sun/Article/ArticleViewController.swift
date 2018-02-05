@@ -64,6 +64,10 @@ class ArticleViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        if #available(iOS 11, *) {
+            navigationItem.largeTitleDisplayMode = .never
+        }
+        navigationController?.setNavigationBarHidden(false, animated: false)
         view.backgroundColor = .white
         navigationController?.navigationBar.topItem?.title = ""
         navigationController?.navigationBar.tintColor = .black

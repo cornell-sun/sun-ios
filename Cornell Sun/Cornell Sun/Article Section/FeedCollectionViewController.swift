@@ -16,7 +16,7 @@ class FeedCollectionViewController: ViewController, UIScrollViewDelegate {
     var feedData: [PostObject] = []
     var firstPostObject: PostObject!
     var savedPosts: Results<PostObject>!
-    var currentPage = 2
+    var currentPage = 1
     var loading = false
     let spinToken = "spinner"
     let collectionView: UICollectionView = {
@@ -85,30 +85,12 @@ class FeedCollectionViewController: ViewController, UIScrollViewDelegate {
     }
 
     func getPosts(page: Int) {
-        let savedPostIds: [Int] = savedPosts.map({$0.id})
-        API.request(target: .posts(page: page)) { (response) in
-            self.loading = false
-            guard let response = response else {return}
-            do {
-                let jsonResult = try JSONSerialization.jsonObject(with: response.data, options: [])
-                if let postArray = jsonResult as? [[String: Any]] {
-                    for postDictionary in postArray {
-                        if let post = PostObject(data: postDictionary) {
-                            if self.firstPostObject == nil {
-                                self.firstPostObject = post
-                            }
-                            if savedPostIds.contains(post.id) {
-                                post.didSave = true
-                            }
-                            self.feedData.append(post)
-                        }
-                    }
-                    self.refreshControl.endRefreshing()
-                    self.adapter.performUpdates(animated: true, completion: nil)
-                }
-            } catch {
-                print("could not parse")
-                // can't parse data, show error
+        fetchPosts(target: .posts(page: page)) { posts, error in
+            if error == nil {
+                self.loading = false
+                self.feedData.append(contentsOf: posts)
+                self.refreshControl.endRefreshing()
+                self.adapter.performUpdates(animated: true, completion: nil)
             }
         }
     }
