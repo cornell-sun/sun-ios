@@ -198,7 +198,6 @@ extension SearchViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // Only count the relevant results, likely capped around 10 - 15 or async infinite scroll
         return trendingTopics.count
     }
 
@@ -232,6 +231,7 @@ extension SearchViewController: UISearchBarDelegate {
     }
 
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.endEditing(true)
         collectionView.snp.remakeConstraints { make in
             make.edges.equalToSuperview()
         }
