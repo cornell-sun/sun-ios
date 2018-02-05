@@ -104,10 +104,13 @@ class SearchViewController: UIViewController, UITableViewDelegate {
         adapter.dataSource = self
         adapter.scrollViewDelegate = self
 
-        dimView.frame = tableView.frame
         dimView.backgroundColor = .black
         dimView.alpha = 0.0
         view.addSubview(dimView)
+
+        dimView.snp.makeConstraints { make in
+            make.edges.equalTo(tableView.snp.edges)
+        }
 
         // Set up the searchController delegate and the presentation view
         searchController.searchBar.delegate = self
