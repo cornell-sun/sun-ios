@@ -6,14 +6,6 @@
 //  Copyright © 2017 cornell.sun. All rights reserved.
 //
 
-//
-//  TitleCell.swift
-//  Cornell Sun
-//
-//  Created by Austin Astorga on 9/22/17.
-//  Copyright © 2017 cornell.sun. All rights reserved.
-//
-
 import UIKit
 import SnapKit
 
