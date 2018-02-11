@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		036FE5BBAB2DFBC062751005 /* Pods_Cornell_SunTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C38BCC6B38BFCC0EC16BF2B /* Pods_Cornell_SunTests.framework */; };
 		0C15F1871FBDD433009724DB /* ArticleHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C15F1861FBDD433009724DB /* ArticleHeaderView.swift */; };
+		0C736C54202F96E000E9D92E /* ImageAttachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C736C53202F96E000E9D92E /* ImageAttachment.swift */; };
 		0C7D9A8E1F217B510041E1B0 /* apple-app-site-association in Resources */ = {isa = PBXBuildFile; fileRef = 0C7D9A8D1F217B510041E1B0 /* apple-app-site-association */; };
 		0CAA2BEC1F954E3200D423FD /* ArticleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CAA2BEB1F954E3200D423FD /* ArticleViewController.swift */; };
 		0CB00B261FBBAEE800376A94 /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CB00B251FBBAEE800376A94 /* CommentTableViewCell.swift */; };
@@ -70,6 +71,7 @@
 
 /* Begin PBXFileReference section */
 		0C15F1861FBDD433009724DB /* ArticleHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleHeaderView.swift; sourceTree = "<group>"; };
+		0C736C53202F96E000E9D92E /* ImageAttachment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageAttachment.swift; sourceTree = "<group>"; };
 		0C7D9A8D1F217B510041E1B0 /* apple-app-site-association */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "apple-app-site-association"; path = "Cornell Sun/apple-app-site-association"; sourceTree = "<group>"; };
 		0CAA2BEB1F954E3200D423FD /* ArticleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleViewController.swift; sourceTree = "<group>"; };
 		0CB00B251FBBAEE800376A94 /* CommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
@@ -235,6 +237,7 @@
 				DC4308EE1F2563FF00ABB31F /* API.swift */,
 				DC446C351F5D0DFF00D68688 /* Extensions.swift */,
 				0CEA0F791F99454600607CC7 /* Date+.swift */,
+				0C736C53202F96E000E9D92E /* ImageAttachment.swift */,
 			);
 			name = Utilities;
 			path = ..;
@@ -612,6 +615,7 @@
 				DC446C361F5D0DFF00D68688 /* Extensions.swift in Sources */,
 				DC6561D51FBACA8800C5062D /* PhotoGallerySectionController.swift in Sources */,
 				405F83DC1FBE1E7C00360AEB /* SettingsViewController.swift in Sources */,
+				0C736C54202F96E000E9D92E /* ImageAttachment.swift in Sources */,
 				DC818D9D1F7553380064AFFA /* ImageCell.swift in Sources */,
 				DCFC88C61F86C03700A0D8A9 /* CommentObject.swift in Sources */,
 				0CB00B261FBBAEE800376A94 /* CommentTableViewCell.swift in Sources */,

@@ -152,10 +152,11 @@ class PostObject: Object, ListDiffable {
                     let image = attachment.image(forBounds: attachment.bounds, textContainer: NSTextContainer(), characterIndex: range.location)!
                     if image.size.width > UIScreen.main.bounds.width - 35 {
                         let newImage = image.resizeImage(scale: UIScreen.main.bounds.width/(image.size.width - 35))
-                        let newAttachment = NSTextAttachment()
+                        let newAttachment = ImageAttachment()
                         newAttachment.image = newImage
                         attributedString.addAttribute(NSAttributedStringKey.attachment, value: newAttachment, range: range)
                     }
+
                 }
             })
             self.attrContent = attributedString

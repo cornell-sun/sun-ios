@@ -135,10 +135,10 @@ class ArticleViewController: UIViewController {
         articleBodyTextView.font = currentFontSize.getFont()
         articleBodyTextView.delegate = self
         articleBodyTextView.isScrollEnabled = false
-        articleBodyTextView.isUserInteractionEnabled = false
+//        articleBodyTextView.isUserInteractionEnabled = false
         articleBodyTextView.linkTextAttributes = [
             NSAttributedStringKey.foregroundColor.rawValue: UIColor.lightBlue,
-            NSAttributedStringKey.underlineColor.rawValue : UIColor.clear
+            NSAttributedStringKey.underlineColor.rawValue: UIColor.clear
         ]
         articleView.addSubview(articleBodyTextView)
         articleBodyTextView.snp.makeConstraints { make in
@@ -179,9 +179,8 @@ class ArticleViewController: UIViewController {
         commentsTableView.reloadData()
 
         commentsTableView.snp.makeConstraints { make in
-            make.width.leading.trailing.equalToSuperview()
+            make.width.leading.trailing.bottom.equalToSuperview()
             make.top.equalTo(commentsLabel.snp.bottom).offset(articleSeparatorOffset)
-            make.bottom.equalToSuperview()
             make.height.equalTo(commentsTableView.contentSize.height)
         }
     }
