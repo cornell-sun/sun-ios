@@ -15,7 +15,7 @@ class ArticleHeaderView: UIView {
     let categoryLabelHeight: CGFloat = 20
     let titleLabelTopOffset: CGFloat = 12.0
     let titleLabelHeight: CGFloat = 100
-    let imageViewHeight: CGFloat = 200.0
+    let imageViewHeight: CGFloat = 250.0
     let imageViewTopOffset: CGFloat = 12.0
     let timeStampTopOffset: CGFloat = 14.5
     let timeStampHeight: CGFloat = 15
