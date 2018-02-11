@@ -35,7 +35,7 @@ final class CategoryCell: UICollectionViewCell {
 
     let divider: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor(white: 127.0 / 255.0, alpha: 1.0)
+        view.backgroundColor = .dividerGray
         return view
     }()
 
