@@ -10,6 +10,9 @@ import UIKit
 
 class TabBarViewController: UITabBarController {
 
+    var posts: [PostObject]!
+    var headlinePost: PostObject?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -21,11 +24,26 @@ class TabBarViewController: UITabBarController {
         setupTabs()
     }
 
+    init(with postObjects: [PostObject], mainHeadlinePost: PostObject?) {
+        posts = postObjects
+        headlinePost = mainHeadlinePost
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
     func setupTabs() {
         // replace each tab with a specified ViewController,
         // these are just placeholders
 
-        let tabOneNavigationController = UINavigationController(rootViewController: FeedCollectionViewController())
+        let feedVC = FeedCollectionViewController()
+        feedVC.feedData = posts
+        if let mainHeadlinePost = headlinePost {
+            feedVC.firstPostObject = mainHeadlinePost
+        }
+        let tabOneNavigationController = UINavigationController(rootViewController: feedVC)
         let tabOneTabBarItem = UITabBarItem(title: "News", image: #imageLiteral(resourceName: "feedIcon").withRenderingMode(.alwaysOriginal), selectedImage: #imageLiteral(resourceName: "feedIconRed").withRenderingMode(.alwaysOriginal))
         tabOneNavigationController.tabBarItem = tabOneTabBarItem
 
@@ -37,7 +55,8 @@ class TabBarViewController: UITabBarController {
         let tabThreeTabBarItem = UITabBarItem(title: "Bookmarks", image: #imageLiteral(resourceName: "bookmarkIcon").withRenderingMode(.alwaysOriginal), selectedImage: #imageLiteral(resourceName: "bookmarkIconRed").withRenderingMode(.alwaysOriginal))
         tabThreeNavigationController.tabBarItem = tabThreeTabBarItem
 
-        let tabFourNavigationController = UINavigationController(rootViewController: ViewController())
+        let searchVC = SearchViewController(fetchTrending: true)
+        let tabFourNavigationController = UINavigationController(rootViewController: searchVC)
         let tabFourTabBarItem = UITabBarItem(title: "Search", image: #imageLiteral(resourceName: "searchIcon").withRenderingMode(.alwaysOriginal), selectedImage: #imageLiteral(resourceName: "searchIconRed").withRenderingMode(.alwaysOriginal))
         tabFourNavigationController.tabBarItem = tabFourTabBarItem
 

@@ -6,14 +6,6 @@
 //  Copyright © 2017 cornell.sun. All rights reserved.
 //
 
-//
-//  TitleCell.swift
-//  Cornell Sun
-//
-//  Created by Austin Astorga on 9/22/17.
-//  Copyright © 2017 cornell.sun. All rights reserved.
-//
-
 import UIKit
 import SnapKit
 
@@ -35,7 +27,7 @@ final class CategoryCell: UICollectionViewCell {
 
     let divider: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor(white: 127.0 / 255.0, alpha: 1.0)
+        view.backgroundColor = .dividerGray
         return view
     }()
 

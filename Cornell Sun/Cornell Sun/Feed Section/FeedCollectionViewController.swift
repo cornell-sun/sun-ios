@@ -12,6 +12,8 @@ import Realm
 import RealmSwift
 
 class FeedCollectionViewController: ViewController, UIScrollViewDelegate {
+    let FONTSIZE:CGFloat = 22.0
+    var refreshControl = UIRefreshControl()
     var feedData: [PostObject] = []
     var firstPostObject: PostObject!
     var savedPosts: Results<PostObject>!
@@ -29,20 +31,42 @@ class FeedCollectionViewController: ViewController, UIScrollViewDelegate {
         return ListAdapter(updater: ListAdapterUpdater(), viewController: self, workingRangeSize: 0)
     }()
 
+    override func viewWillAppear(_ animated: Bool) {
+        navigationItem.title = "The Cornell Daily Sun"
+        self.navigationController?.navigationBar.titleTextAttributes = [
+            NSAttributedStringKey.font: UIFont(name: "Sonnenstrahl-Ausgezeichnet", size: FONTSIZE)!
+        ]
+        if !feedData.isEmpty {
+            let savedPostIds: [Int] = savedPosts.map({$0.id})
+            feedData = feedData.map {
+                RealmManager.instance.update(object: $0, to: savedPostIds.contains($0.id))
+                return $0
+            }
+            self.adapter.reloadData(completion: nil)
+        }
+    }
+
     override func viewDidAppear(_ animated: Bool) {
         //we could possibly have saved posts
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        refreshControl.addTarget(self, action: #selector(refreshData), for: .valueChanged)
+        //        if #available(iOS 11.0, *) {
+        //            navigationController?.navigationBar.prefersLargeTitles = true
+        //            self.navigationController?.navigationBar.largeTitleTextAttributes = [
+        //                NSAttributedStringKey.font: UIFont(name: "Sonnenstrahl-Ausgezeichnet", size: 38)!
+        //            ]
+        //        }
 
         view.addSubview(collectionView)
         adapter.collectionView = collectionView
-        adapter.collectionView?.backgroundColor = UIColor(white: 241.0 / 255.0, alpha: 1.0)
+        adapter.collectionView?.backgroundColor = .offWhite
+        adapter.collectionView?.refreshControl = refreshControl
         adapter.dataSource = self
         adapter.scrollViewDelegate = self
         savedPosts = RealmManager.instance.get()
-        getPosts(page: currentPage)
     }
 
     override func viewDidLayoutSubviews() {
@@ -55,30 +79,19 @@ class FeedCollectionViewController: ViewController, UIScrollViewDelegate {
         // Dispose of any resources that can be recreated.
     }
 
+    @objc func refreshData() {
+        currentPage = 1
+        feedData = []
+        getPosts(page: currentPage)
+    }
+
     func getPosts(page: Int) {
-        let savedPostIds: [Int] = savedPosts.map({$0.id})
-        API.request(target: .posts(page: page)) { (response) in
-            self.loading = false
-            guard let response = response else {return}
-            do {
-                let jsonResult = try JSONSerialization.jsonObject(with: response.data, options: [])
-                if let postArray = jsonResult as? [[String: Any]] {
-                    for postDictionary in postArray {
-                        if let post = PostObject(data: postDictionary) {
-                            if self.firstPostObject == nil {
-                                self.firstPostObject = post
-                            }
-                            if savedPostIds.contains(post.id) {
-                                post.didSave = true
-                            }
-                            self.feedData.append(post)
-                        }
-                    }
-                    self.adapter.performUpdates(animated: true, completion: nil)
-                }
-            } catch {
-                print("could not parse")
-                // can't parse data, show error
+        fetchPosts(target: .posts(page: page)) { posts, error in
+            if error == nil {
+                self.loading = false
+                self.feedData.append(contentsOf: posts)
+                self.refreshControl.endRefreshing()
+                self.adapter.performUpdates(animated: true, completion: nil)
             }
         }
     }

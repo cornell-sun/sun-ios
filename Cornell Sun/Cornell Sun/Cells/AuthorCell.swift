@@ -11,6 +11,8 @@ import SnapKit
 
 final class AuthorCell: UICollectionViewCell {
 
+    let insetConstant: CGFloat = 17
+
     var post: PostObject? {
         didSet {
             authorLabel.text = post?.author?.name
@@ -31,7 +33,7 @@ final class AuthorCell: UICollectionViewCell {
         let label = UILabel()
         label.text = ""
         label.numberOfLines = 1
-        label.font = UIFont(name: "Georgia", size: 13)
+        label.font = .authorCell
         label.textColor = .darkGrey
         return label
     }()
@@ -51,12 +53,12 @@ final class AuthorCell: UICollectionViewCell {
         addSubview(timeStampLabel)
         authorLabel.snp.makeConstraints { (make) in
             make.top.equalToSuperview()
-            make.left.equalToSuperview().inset(17)
+            make.left.equalToSuperview().inset(insetConstant)
         }
 
         timeStampLabel.snp.makeConstraints { (make) in
             make.top.equalToSuperview()
-            make.right.equalToSuperview().inset(17)
+            make.right.equalToSuperview().inset(insetConstant)
         }
     }
 }

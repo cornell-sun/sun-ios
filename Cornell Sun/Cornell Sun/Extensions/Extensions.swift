@@ -8,16 +8,13 @@
 
 import UIKit
 import Kingfisher
+import Realm
+import RealmSwift
 
 func captionMaxHeight(width: CGFloat) -> CGFloat {
      let tmpStr = "A rink attendant collect fish thrown by the Cornell students in a tradition that spans over decades. (Cameron Pollack/ Sun Photography Editor)"
     return tmpStr.height(withConstrainedWidth: width - 36, font: UIFont(name: "Georgia", size: 13)!)
 }
-
-//func titleMaxHeight(width: CGFloat) -> CGFloat {
-//    let tmpStr = ""
-//    return tmpStr.height(withConstrainedWidth: , font: .bookmarkTitle)
-//}
 
 func getCurrentViewController() -> UIViewController? {
 

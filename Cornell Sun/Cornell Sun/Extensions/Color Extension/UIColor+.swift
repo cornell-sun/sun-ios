@@ -9,6 +9,14 @@ import UIKit
 
 extension UIColor {
 
+    @nonobjc class var dividerGray: UIColor {
+        return UIColor(white: 127.0 / 255.0, alpha: 1.0)
+    }
+
+    @nonobjc class var trendingBlue: UIColor {
+        return UIColor(red: 0.0 / 255.0, green: 144.0 / 255.0, blue: 255.0 / 255.0, alpha: 1.0)
+    }
+
     @nonobjc class var offWhite: UIColor {
         return UIColor(white: 241.0 / 255.0, alpha: 1.0)
     }

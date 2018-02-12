@@ -74,7 +74,8 @@ final class PhotoGalleryCell: UICollectionViewCell {
     }
     func setUpImages() {
         var kingfisherSource: [KingfisherSource] = []
-        for photoGalleryObject in post!.photoGalleryObjects {
+        guard let photoGalleryObjects = post?.photoGalleryObjects else { return }
+        for photoGalleryObject in photoGalleryObjects {
             let source = KingfisherSource(urlString: photoGalleryObject.fullImageLink)
             kingfisherSource.append(source!)
         }

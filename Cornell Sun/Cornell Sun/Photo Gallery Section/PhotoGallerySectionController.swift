@@ -1,32 +1,28 @@
 //
-//  ArticleSectionController.swift
+//  PhotoGallerySectionController.swift
 //  Cornell Sun
 //
-//  Created by Austin Astorga on 9/3/17.
+//  Created by Austin Astorga on 11/14/17.
 //  Copyright © 2017 cornell.sun. All rights reserved.
 //
 
 import UIKit
 import IGListKit
-import SafariServices
-
-protocol TabBarViewControllerDelegate: class {
-    func articleSectionDidPressOnArticle(_ article: PostObject)
-}
+import ImageSlideshow
 
 // swiftlint:disable:next type_name
-enum cellType: Int {
+enum photoGalleryCellType: Int {
     case categoryCell = 0
     case titleCell = 1
     case authorCell = 2
-    case imageCell = 3
-    case likeCommentCell = 4
-    case actionMenuCell = 5
+    case photoGalleryCell = 3
+    case captionCell = 4
+    case likeCommentCell = 5
+    case actionMenuCell = 6
 }
 
-class ArticleSectionController: ListSectionController {
+class PhotoGallerySectionController: ListSectionController {
     var entry: PostObject!
-    weak var delegate: TabBarViewControllerDelegate?
 
     override init() {
         super.init()
@@ -34,7 +30,7 @@ class ArticleSectionController: ListSectionController {
     }
 }
 
-extension ArticleSectionController: HeartPressedDelegate, BookmarkPressedDelegate, SharePressedDelegate {
+extension PhotoGallerySectionController: HeartPressedDelegate, BookmarkPressedDelegate, SharePressedDelegate, PhotoChangedDelegate {
 
     func didPressBookmark(_ cell: MenuActionCell) {
         let didBookmark = cell.bookmarkButton.currentImage == #imageLiteral(resourceName: "bookmark") //we should save the bookmark
@@ -82,27 +78,39 @@ extension ArticleSectionController: HeartPressedDelegate, BookmarkPressedDelegat
         }
     }
 
+    func photoDidChange(_ index: Int) {
+        let captionCell: photoGalleryCellType = .captionCell
+        let captionIndex = captionCell.rawValue
+        if let cell = collectionContext?.cellForItem(at: captionIndex, sectionController: self) as? CaptionCell {
+            cell.updateCaption(index: index)
+        }
+    }
+
     override func numberOfItems() -> Int {
-        return 6
+        return 7
     }
 
     override func sizeForItem(at index: Int) -> CGSize {
         guard let context = collectionContext, entry != nil else {return .zero}
         let width = context.containerSize.width
-        guard let sizeForItemIndex = cellType(rawValue: index) else {
+        guard let sizeForItemIndex = photoGalleryCellType(rawValue: index) else {
             return .zero
         }
         switch sizeForItemIndex {
         case .categoryCell:
             return CGSize(width: width, height: 40)
         case .titleCell:
-            let height = entry.title.height(withConstrainedWidth: width - 34, font: UIFont.boldSystemFont(ofSize: 22)) //CLUTCH Extension thank stackoverflow gods
-            return CGSize(width: width, height: height + 10)
+            let height = entry.title.height(withConstrainedWidth: width, font: UIFont.boldSystemFont(ofSize: 22)) //CLUTCH Extension thank stackoverflow gods
+            return CGSize(width: width, height: height + 5)
         case .authorCell:
             let height = entry.author?.name.height(withConstrainedWidth: width, font: UIFont(name: "Georgia", size: 13)!)
             return CGSize(width: width, height: height! + 9)
-        case .imageCell:
-            return CGSize(width: width, height: width / 1.92)
+        case .photoGalleryCell:
+            return CGSize(width: width, height: width / 1.5)
+        case .captionCell:
+            let height = captionMaxHeight(width: width)
+
+            return CGSize(width: width, height: height + 16)
         case .likeCommentCell:
             let hasComments = !entry.comments.isEmpty
             return hasComments ? CGSize(width: width, height: 25) : .zero
@@ -112,7 +120,7 @@ extension ArticleSectionController: HeartPressedDelegate, BookmarkPressedDelegat
     }
 
     override func cellForItem(at index: Int) -> UICollectionViewCell {
-        guard let cellForItemIndex = cellType(rawValue: index) else {
+        guard let cellForItemIndex = photoGalleryCellType(rawValue: index) else {
             return UICollectionViewCell()
         }
         switch cellForItemIndex {
@@ -131,9 +139,15 @@ extension ArticleSectionController: HeartPressedDelegate, BookmarkPressedDelegat
             let cell = collectionContext!.dequeueReusableCell(of: AuthorCell.self, for: self, at: index) as! AuthorCell
             cell.post = entry
             return cell
-        case .imageCell:
+        case .photoGalleryCell:
             // swiftlint:disable:next force_cast
-            let cell = collectionContext!.dequeueReusableCell(of: ImageCell.self, for: self, at: index) as! ImageCell
+            let cell = collectionContext!.dequeueReusableCell(of: PhotoGalleryCell.self, for: self, at: index) as! PhotoGalleryCell
+            cell.photoGalleryDelegate = self
+            cell.post = entry
+            return cell
+        case .captionCell:
+            // swiftlint:disable:next force_cast
+            let cell = collectionContext!.dequeueReusableCell(of: CaptionCell.self, for: self, at: index) as! CaptionCell
             cell.post = entry
             return cell
         case .likeCommentCell:
@@ -155,24 +169,5 @@ extension ArticleSectionController: HeartPressedDelegate, BookmarkPressedDelegat
 
     override func didUpdate(to object: Any) {
         entry = object as? PostObject
-    }
-
-    func getCurrentViewController() -> UIViewController? {
-
-        if let rootController = UIApplication.shared.keyWindow?.rootViewController {
-            var currentController: UIViewController! = rootController
-            while currentController.presentedViewController != nil {
-                currentController = currentController.presentedViewController
-            }
-            return currentController
-        }
-        return nil
-
-    }
-
-    override func didSelectItem(at index: Int) {
-        if index != 5 {
-            delegate?.articleSectionDidPressOnArticle(entry)
-        }
     }
 }

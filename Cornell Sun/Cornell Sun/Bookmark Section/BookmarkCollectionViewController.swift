@@ -60,7 +60,11 @@ class BookmarkCollectionViewController: ViewController, UIScrollViewDelegate {
 
 extension BookmarkCollectionViewController: ListAdapterDataSource {
     func objects(for listAdapter: ListAdapter) -> [ListDiffable] {
-        return realmData.map { $0 }
+        let bookmarkedPosts = realmData.map {$0}
+        return bookmarkedPosts.sorted { (post1, post2) -> Bool in
+            guard let post1Date = post1.bookmarkDate, let post2Date = post2.bookmarkDate else {return false}
+            return post1Date.compare(post2Date) == .orderedDescending
+        }
     }
 
     func listAdapter(_ listAdapter: ListAdapter, sectionControllerFor object: Any) -> ListSectionController {

@@ -1,36 +1,33 @@
 //
-//  BookmarkCell.swift
+//  SearchCell.swift
 //  Cornell Sun
 //
-//  Created by Austin Astorga on 11/16/17.
-//  Copyright © 2017 cornell.sun. All rights reserved.
+//  Created by Austin Astorga on 2/4/18.
+//  Copyright © 2018 cornell.sun. All rights reserved.
 //
 
 import UIKit
 import SnapKit
 
-final class BookmarkCell: UICollectionViewCell {
+final class SearchCell: UICollectionViewCell {
 
     let insetConstant: CGFloat = 18
     let offsetConstant: CGFloat = 12
-    let imageViewWidthHeight: CGFloat = 100
+    let imageViewWidthHeight: CGFloat = 90
+    let timeLabelOffset: CGFloat = -8
 
     var post: PostObject? {
         didSet {
-            titleLabel.text = post?.title
-            authorLabel.text = post?.author?.name
-            timeStampLabel.text = post?.datePosted.timeAgoSinceNow()
+            if let post = post {
+            authorLabel.text = post.author?.name
+            timeStampLabel.text = post.datePosted.timeAgoSinceNow()
+            var content = post.content.removingHTMLEntities
+            content = content.replacingOccurrences(of: "\n", with: "")
+            contentLabel.text = content
             setupImage()
+            }
         }
     }
-
-    let titleLabel: UILabel = {
-        let label = UILabel()
-        label.text = ""
-        label.numberOfLines = 4
-        label.font = .bookmarkTitle
-        return label
-    }()
 
     let imageView: UIImageView = {
         let imageView = UIImageView()
@@ -57,10 +54,13 @@ final class BookmarkCell: UICollectionViewCell {
         return label
     }()
 
-    let divider: UIView = {
-        let view = UIView()
-        view.backgroundColor = .warmGrey
-        return view
+    let contentLabel: UILabel = {
+        let label = UILabel()
+        label.text = ""
+        label.numberOfLines = 0
+        label.font = UIFont(name: "Georgia", size: 13)
+        label.textColor = .black
+        return label
     }()
 
     override init(frame: CGRect) {
@@ -75,37 +75,31 @@ final class BookmarkCell: UICollectionViewCell {
     func setupViews() {
         self.backgroundColor = .white
         addSubview(imageView)
-        addSubview(titleLabel)
         addSubview(authorLabel)
         addSubview(timeStampLabel)
-        addSubview(divider)
+        addSubview(contentLabel)
+
         imageView.snp.makeConstraints { (make) in
             make.centerY.equalToSuperview()
-            make.left.equalToSuperview().inset(insetConstant)
+            make.trailing.equalToSuperview().inset(insetConstant)
             make.width.height.equalTo(imageViewWidthHeight)
         }
 
-        titleLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(imageView.snp.top)
-            make.left.equalTo(imageView.snp.right).offset(offsetConstant)
-            make.right.equalToSuperview().inset(insetConstant)
-        }
-
         authorLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(imageView.snp.right).offset(offsetConstant)
-            make.bottom.equalTo(imageView.snp.bottom)
+            make.leading.equalToSuperview().inset(insetConstant)
+            make.top.equalTo(imageView.snp.top)
         }
 
         timeStampLabel.snp.makeConstraints { (make) in
-            make.right.equalToSuperview().inset(insetConstant)
-            make.bottom.equalTo(imageView.snp.bottom)
+            make.trailing.equalTo(imageView.snp.leading).offset(timeLabelOffset)
+            make.top.equalTo(imageView.snp.top)
         }
 
-        divider.snp.makeConstraints { (make) in
-            make.height.equalTo(1)
-            make.left.equalToSuperview().inset(insetConstant)
-            make.right.equalToSuperview().inset(insetConstant)
-            make.bottom.equalToSuperview().inset(1)
+        contentLabel.snp.makeConstraints { make in
+            make.leading.equalToSuperview().inset(insetConstant)
+            make.trailing.equalTo(imageView.snp.leading).offset(timeLabelOffset)
+            make.bottom.equalTo(imageView.snp.bottom)
+            make.top.equalTo(authorLabel.snp.bottom).offset(offsetConstant)
         }
     }
 
