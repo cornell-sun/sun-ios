@@ -11,9 +11,9 @@ import SnapKit
 
 final class BookmarkCell: UICollectionViewCell {
 
-    var insetConstant: CGFloat = 18
-    var offsetConstant: CGFloat = 12
-    var imageViewWidthHeight: CGFloat = 100
+    let insetConstant: CGFloat = 18
+    let offsetConstant: CGFloat = 12
+    let imageViewWidthHeight: CGFloat = 100
 
     var post: PostObject? {
         didSet {

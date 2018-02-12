@@ -11,7 +11,7 @@ import SnapKit
 
 final class AuthorCell: UICollectionViewCell {
 
-    var insetConstant: CGFloat = 17
+    let insetConstant: CGFloat = 17
 
     var post: PostObject? {
         didSet {

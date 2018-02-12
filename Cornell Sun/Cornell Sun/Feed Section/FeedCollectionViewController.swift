@@ -12,6 +12,7 @@ import Realm
 import RealmSwift
 
 class FeedCollectionViewController: ViewController, UIScrollViewDelegate {
+    let FONTSIZE:CGFloat = 22.0
     var refreshControl = UIRefreshControl()
     var feedData: [PostObject] = []
     var firstPostObject: PostObject!
@@ -33,15 +34,15 @@ class FeedCollectionViewController: ViewController, UIScrollViewDelegate {
     override func viewWillAppear(_ animated: Bool) {
         navigationItem.title = "The Cornell Daily Sun"
         self.navigationController?.navigationBar.titleTextAttributes = [
-            NSAttributedStringKey.font: UIFont(name: "Sonnenstrahl-Ausgezeichnet", size: 22)!
+            NSAttributedStringKey.font: UIFont(name: "Sonnenstrahl-Ausgezeichnet", size: FONTSIZE)!
         ]
         if !feedData.isEmpty {
-        let savedPostIds: [Int] = savedPosts.map({$0.id})
-        feedData = feedData.map {
-            RealmManager.instance.update(object: $0, to: savedPostIds.contains($0.id))
-            return $0
-        }
-        self.adapter.reloadData(completion: nil)
+            let savedPostIds: [Int] = savedPosts.map({$0.id})
+            feedData = feedData.map {
+                RealmManager.instance.update(object: $0, to: savedPostIds.contains($0.id))
+                return $0
+            }
+            self.adapter.reloadData(completion: nil)
         }
     }
 
@@ -52,12 +53,12 @@ class FeedCollectionViewController: ViewController, UIScrollViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         refreshControl.addTarget(self, action: #selector(refreshData), for: .valueChanged)
-//        if #available(iOS 11.0, *) {
-//            navigationController?.navigationBar.prefersLargeTitles = true
-//            self.navigationController?.navigationBar.largeTitleTextAttributes = [
-//                NSAttributedStringKey.font: UIFont(name: "Sonnenstrahl-Ausgezeichnet", size: 38)!
-//            ]
-//        }
+        //        if #available(iOS 11.0, *) {
+        //            navigationController?.navigationBar.prefersLargeTitles = true
+        //            self.navigationController?.navigationBar.largeTitleTextAttributes = [
+        //                NSAttributedStringKey.font: UIFont(name: "Sonnenstrahl-Ausgezeichnet", size: 38)!
+        //            ]
+        //        }
 
         view.addSubview(collectionView)
         adapter.collectionView = collectionView

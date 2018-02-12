@@ -22,6 +22,9 @@ class SearchViewController: UIViewController, UITableViewDelegate {
     var endOfResults = false
     var loading = false
     var trendingTopics: [String] = []
+    let TRENDINGLABEL_LEADING: CGFloat = 12
+    let TRENDINGLABEL_TOP_BOTTOM_TRAILING: CGFloat = 8
+    let DISTANCE: CGFloat = 300.0
 
     let collectionView: UICollectionView = {
         let view = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
@@ -118,10 +121,6 @@ class SearchViewController: UIViewController, UITableViewDelegate {
         searchController.dimsBackgroundDuringPresentation = false
     }
 
-    override func viewDidAppear(_ animated: Bool) {
-        //self.searchController.isActive = true
-    }
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -153,7 +152,7 @@ extension SearchViewController: UIScrollViewDelegate, ListAdapterDataSource {
 
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         let distance = scrollView.contentSize.height - (targetContentOffset.pointee.y + scrollView.bounds.height)
-        if !loading && distance < 300 && !collectionView.isHidden && !endOfResults {
+        if !loading && distance < DISTANCE && !collectionView.isHidden && !endOfResults {
             loading = true
             adapter.performUpdates(animated: true, completion: nil)
             currentPage += 1
@@ -184,9 +183,9 @@ extension SearchViewController: UITableViewDataSource {
         headerView.contentView.addSubview(trendingLabel)
 
         trendingLabel.snp.makeConstraints { make in
-            make.leading.equalToSuperview().inset(12)
-            make.top.bottom.equalToSuperview().inset(8)
-            make.trailing.lessThanOrEqualToSuperview().inset(8)
+            make.leading.equalToSuperview().inset(TRENDINGLABEL_LEADING)
+            make.top.bottom.equalToSuperview().inset(TRENDINGLABEL_TOP_BOTTOM_TRAILING)
+            make.trailing.lessThanOrEqualToSuperview().inset(TRENDINGLABEL_TOP_BOTTOM_TRAILING)
         }
 
         return headerView
@@ -247,10 +246,10 @@ extension SearchViewController: UISearchBarDelegate {
         endOfResults = false
         searchBar.setShowsCancelButton(false, animated: true)
         dimView.alpha = 0.0
-        self.searchData = []
-        self.tableView.isHidden = true
-        self.adapter.performUpdates(animated: false)
-        self.collectionView.isHidden = false
+        searchData = []
+        tableView.isHidden = true
+        adapter.performUpdates(animated: false)
+        collectionView.isHidden = false
         fetchPosts(target: .search(query: query, page: currentPage)) { posts, error in
             if error == nil {
                 self.searchData = posts

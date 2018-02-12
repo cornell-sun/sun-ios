@@ -11,10 +11,10 @@ import SnapKit
 
 final class SearchCell: UICollectionViewCell {
 
-    var insetConstant: CGFloat = 18
-    var offsetConstant: CGFloat = 12
-    var imageViewWidthHeight: CGFloat = 90
-    var timeLabelOffset: CGFloat = -8
+    let insetConstant: CGFloat = 18
+    let offsetConstant: CGFloat = 12
+    let imageViewWidthHeight: CGFloat = 90
+    let timeLabelOffset: CGFloat = -8
 
     var post: PostObject? {
         didSet {

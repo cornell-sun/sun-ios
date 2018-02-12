@@ -10,13 +10,15 @@ import UIKit
 import IGListKit
 
 // swiftlint:disable:next type_name
-enum searchCellType: Int {
+enum SearchCellType: Int {
     case categoryCell = 0
     case titleCell = 1
     case previewCell = 2
 }
 
 class SearchSectionController: ListSectionController {
+    let CATEGORYCELLHEIGHT: CGFloat = 40
+    let PREVIEWCELLHEIGHT: CGFloat = 100
 
     var entry: PostObject!
     weak var delegate: TabBarViewControllerDelegate?
@@ -33,22 +35,22 @@ class SearchSectionController: ListSectionController {
     override func sizeForItem(at index: Int) -> CGSize {
         guard let context = collectionContext, entry != nil else {return .zero}
         let width = context.containerSize.width
-        guard let sizeForItemIndex = searchCellType(rawValue: index) else {
+        guard let sizeForItemIndex = SearchCellType(rawValue: index) else {
             return .zero
         }
         switch sizeForItemIndex {
         case .categoryCell:
-            return CGSize(width: width, height: 40)
+            return CGSize(width: width, height: CATEGORYCELLHEIGHT)
         case .titleCell:
             let height = entry.title.height(withConstrainedWidth: width - 34, font: UIFont.boldSystemFont(ofSize: 22)) //CLUTCH Extension thank stackoverflow gods
             return CGSize(width: width, height: height + 10)
         case .previewCell:
-            return CGSize(width: width, height: 100)
+            return CGSize(width: width, height: PREVIEWCELLHEIGHT)
         }
     }
 
     override func cellForItem(at index: Int) -> UICollectionViewCell {
-        guard let cellForItemIndex = searchCellType(rawValue: index) else {
+        guard let cellForItemIndex = SearchCellType(rawValue: index) else {
             return UICollectionViewCell()
         }
 
