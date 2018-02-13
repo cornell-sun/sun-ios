@@ -18,6 +18,9 @@ enum SunAPI {
     case post(postId: Int)
     case posts(page: Int)
 
+    //section
+    case section(section: Int, page: Int)
+
     //Authors
     case author(authorId: Int)
 
@@ -49,7 +52,7 @@ extension SunAPI: TargetType {
     var baseURL: URL { return URL(string: "http://cornellsun.com/wp-json")! }
     var path: String {
         switch self {
-        case .posts, .search, .post:
+        case .posts, .search, .post, .section:
             return "\(defaultPath)/posts"
         case .author(let authorId):
             return "\(defaultPath)/users/\(authorId)"
@@ -86,6 +89,8 @@ extension SunAPI: TargetType {
             return .requestParameters(parameters: ["post": postId], encoding: URLEncoding.default)
         case .search(let query, let page):
             return .requestParameters(parameters: ["search": query, "page": page], encoding: URLEncoding.default)
+        case .section(let section, let page):
+            return .requestParameters(parameters: ["categories": section, "page": page], encoding: URLEncoding.default)
         default:
             return .requestPlain
         }
