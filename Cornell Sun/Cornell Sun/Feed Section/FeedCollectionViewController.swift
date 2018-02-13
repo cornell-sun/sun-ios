@@ -12,7 +12,7 @@ import Realm
 import RealmSwift
 
 class FeedCollectionViewController: ViewController, UIScrollViewDelegate {
-    let FONTSIZE:CGFloat = 22.0
+    let FONTSIZE: CGFloat = 22.0
     var refreshControl = UIRefreshControl()
     var feedData: [PostObject] = []
     var firstPostObject: PostObject!

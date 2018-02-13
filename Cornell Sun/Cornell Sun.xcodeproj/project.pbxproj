@@ -31,6 +31,8 @@
 		DC0A883C1FBA531000F2BCBB /* BookmarkCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0A883B1FBA531000F2BCBB /* BookmarkCollectionViewController.swift */; };
 		DC0A883E1FBA6B8200F2BCBB /* BookmarkSectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0A883D1FBA6B8200F2BCBB /* BookmarkSectionController.swift */; };
 		DC0A88401FBA84E700F2BCBB /* AuthorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0A883F1FBA84E700F2BCBB /* AuthorCell.swift */; };
+		DC34DEF3203216690010DF9A /* SectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC34DEF2203216690010DF9A /* SectionViewController.swift */; };
+		DC34DEF520321C6D0010DF9A /* SectionCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC34DEF420321C6D0010DF9A /* SectionCollectionViewController.swift */; };
 		DC4308ED1F2558D500ABB31F /* SunAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4308EC1F2558D500ABB31F /* SunAPI.swift */; };
 		DC4308EF1F2563FF00ABB31F /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4308EE1F2563FF00ABB31F /* API.swift */; };
 		DC446C2E1F5D016500D68688 /* FeedCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC446C2D1F5D016500D68688 /* FeedCollectionViewController.swift */; };
@@ -104,6 +106,8 @@
 		DC0A883B1FBA531000F2BCBB /* BookmarkCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkCollectionViewController.swift; sourceTree = "<group>"; };
 		DC0A883D1FBA6B8200F2BCBB /* BookmarkSectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkSectionController.swift; sourceTree = "<group>"; };
 		DC0A883F1FBA84E700F2BCBB /* AuthorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorCell.swift; sourceTree = "<group>"; };
+		DC34DEF2203216690010DF9A /* SectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionViewController.swift; sourceTree = "<group>"; };
+		DC34DEF420321C6D0010DF9A /* SectionCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionCollectionViewController.swift; sourceTree = "<group>"; };
 		DC4308EC1F2558D500ABB31F /* SunAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunAPI.swift; sourceTree = "<group>"; };
 		DC4308EE1F2563FF00ABB31F /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		DC446C2D1F5D016500D68688 /* FeedCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCollectionViewController.swift; sourceTree = "<group>"; };
@@ -193,6 +197,7 @@
 				5006AFFB1EA9625000F58549 /* AppDelegate.swift */,
 				DC6870031F7D77F700CE2E27 /* Launch Screen.storyboard */,
 				DCECA9911FBE2D8700BAB2EA /* Feed Section */,
+				DC34DEF1203215FE0010DF9A /* Sections Section */,
 				DCA02C062026580100CBE97F /* Search Section */,
 				DCECA9941FBE2E1D00BAB2EA /* Bookmark Section */,
 				DC34DEEA2032137C0010DF9A /* Settings Section */,
@@ -325,6 +330,15 @@
 				0CEA0F791F99454600607CC7 /* Date+.swift */,
 			);
 			path = "Date Extension";
+			sourceTree = "<group>";
+		};
+		DC34DEF1203215FE0010DF9A /* Sections Section */ = {
+			isa = PBXGroup;
+			children = (
+				DC34DEF2203216690010DF9A /* SectionViewController.swift */,
+				DC34DEF420321C6D0010DF9A /* SectionCollectionViewController.swift */,
+			);
+			path = "Sections Section";
 			sourceTree = "<group>";
 		};
 		DCA02C062026580100CBE97F /* Search Section */ = {
@@ -677,12 +691,14 @@
 				0CAA2BEC1F954E3200D423FD /* ArticleViewController.swift in Sources */,
 				0CED4FAE1FAB523F0025EB91 /* UIFont+.swift in Sources */,
 				5006B24D1EADA37F00F58549 /* PostObject.swift in Sources */,
+				DC34DEF520321C6D0010DF9A /* SectionCollectionViewController.swift in Sources */,
 				DCB717161FBA016400BE4D26 /* TaglineCell.swift in Sources */,
 				DC0A88401FBA84E700F2BCBB /* AuthorCell.swift in Sources */,
 				0C15F1871FBDD433009724DB /* ArticleHeaderView.swift in Sources */,
 				DCFC88C81F86C7B000A0D8A9 /* LikeCommentCell.swift in Sources */,
 				405F83D81FBE1E2B00360AEB /* SettingObject.swift in Sources */,
 				DC79719F1F7B30540055A7B2 /* CategoryCell.swift in Sources */,
+				DC34DEF3203216690010DF9A /* SectionViewController.swift in Sources */,
 				DC0A883A1FBA2DEE00F2BCBB /* PhotoGalleryCell.swift in Sources */,
 				DC446C2E1F5D016500D68688 /* FeedCollectionViewController.swift in Sources */,
 				0CBC2CEE1F5E3093003FBB38 /* TabBarViewController.swift in Sources */,
