@@ -33,7 +33,7 @@ class ArticleViewController: UIViewController {
     let articleBodyInset: CGFloat = 36
     let articleSeparatorOffset: CGFloat = 15
     let separatorHeight: CGFloat = 1.5
-    let articleHeaderHeight: CGFloat = 450
+//    let articleHeaderHeight: CGFloat = 450
     let commentReuseIdentifier = "CommentReuseIdentifier"
 
     var post: PostObject!
@@ -110,7 +110,7 @@ class ArticleViewController: UIViewController {
         articleView.addSubview(articleHeaderView)
         articleHeaderView.snp.makeConstraints { make in
             make.leading.trailing.width.top.equalToSuperview()
-            make.height.equalTo(articleHeaderHeight)
+//            make.height.equalTo(articleHeaderHeight)
         }
 
         commentsLabel = UILabel(frame: .zero)

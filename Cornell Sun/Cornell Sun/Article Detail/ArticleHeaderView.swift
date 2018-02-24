@@ -56,7 +56,7 @@ class ArticleHeaderView: UIView {
         titleLabel = UILabel(frame: .zero)
         titleLabel.textColor = .blackThree
         titleLabel.font = .articleTitle
-        titleLabel.numberOfLines = 4
+        titleLabel.numberOfLines = 6
         titleLabel.lineBreakMode = .byTruncatingTail
         addSubview(titleLabel)
 
@@ -103,8 +103,6 @@ class ArticleHeaderView: UIView {
         categoryLabel.text = post.primaryCategory
         titleLabel.text = post.title
         titleLabel.snp.makeConstraints { make in
-            let height = titleLabel.text!.height(withConstrainedWidth: UIScreen.main.bounds.width, font: .articleTitle)
-            make.height.equalTo(height)
             make.leading.trailing.equalToSuperview().inset(leadingOffset)
             make.top.equalTo(categoryLabel.snp.bottom).offset(titleLabelTopOffset)
         }

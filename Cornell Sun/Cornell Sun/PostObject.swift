@@ -159,7 +159,6 @@ class PostObject: Object, ListDiffable {
                         newAttachment.image = newImage
                         attributedString.addAttribute(NSAttributedStringKey.attachment, value: newAttachment, range: range)
                     }
-
                 }
             })
             self.attrContent = attributedString
