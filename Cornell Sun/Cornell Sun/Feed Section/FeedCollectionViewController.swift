@@ -20,6 +20,7 @@ class FeedCollectionViewController: ViewController, UIScrollViewDelegate {
     var currentPage = 1
     var loading = false
     let spinToken = "spinner"
+    let adToken = "ad"
     let collectionView: UICollectionView = {
         let view = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
         view.alwaysBounceVertical = true
@@ -111,6 +112,7 @@ class FeedCollectionViewController: ViewController, UIScrollViewDelegate {
 extension FeedCollectionViewController: ListAdapterDataSource {
     func objects(for listAdapter: ListAdapter) -> [ListDiffable] {
         var objects = feedData as [ListDiffable]
+        objects.insert(adToken as ListDiffable, at: 2)
         if loading {
             objects.append(spinToken as ListDiffable)
         }
@@ -124,6 +126,8 @@ extension FeedCollectionViewController: ListAdapterDataSource {
             return HeroSectionController()
         } else if let obj = object as? PostObject, obj.postType == .photoGallery {
             return PhotoGallerySectionController()
+        } else if let obj = object as? String, obj == adToken {
+            return AdSectionController()
         }
         let articleSC = ArticleSectionController()
         articleSC.delegate = self

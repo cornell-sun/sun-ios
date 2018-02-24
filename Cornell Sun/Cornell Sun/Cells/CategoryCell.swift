@@ -16,6 +16,14 @@ final class CategoryCell: UICollectionViewCell {
             categoryLabel.text = post?.primaryCategory
         }
     }
+    
+    var adLabel: String? {
+        didSet {
+            if let text = adLabel {
+                categoryLabel.text = text
+            }
+        }
+    }
 
     let categoryLabel: UILabel = {
         let label = UILabel()

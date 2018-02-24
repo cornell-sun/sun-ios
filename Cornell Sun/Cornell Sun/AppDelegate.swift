@@ -8,6 +8,7 @@
 
 import UIKit
 import Kingfisher
+import GoogleMobileAds
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -31,7 +32,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         setUpData { posts, mainHeadlinePost in
             let tabBarController = TabBarViewController(with: posts, mainHeadlinePost: mainHeadlinePost)
             self.window!.rootViewController = tabBarController
+            
         }
+        
+        //Initialize Google Mobile Ads SDKAds
+        GADMobileAds.configure(withApplicationID: "ca-app-pub-3940256099942544/2934735716")
 
         return true
     }
