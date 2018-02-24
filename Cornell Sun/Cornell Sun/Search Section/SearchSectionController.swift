@@ -9,7 +9,6 @@
 import UIKit
 import IGListKit
 
-// swiftlint:disable:next type_name
 enum SearchCellType: Int {
     case categoryCell = 0
     case titleCell = 1

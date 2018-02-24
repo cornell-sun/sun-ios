@@ -59,6 +59,7 @@ class PostObject: Object, ListDiffable {
 
     convenience init?(data: [String: Any]) {
         self.init()
+        guard let postDict = data["post_info_dict"] as? [String: Any] else { return }
         guard
         let id = data["id"] as? Int,
         let dateString = data["date"] as? String,
@@ -70,20 +71,20 @@ class PostObject: Object, ListDiffable {
         let excerptDictionary = data["excerpt"] as? [String: Any],
         let excerpt = excerptDictionary["rendered"] as? String,
         let link = data["link"] as? String,
-        let categoriesArray = data["category_strings"] as? [String],
-        let primaryCategory = data["primary_category"] as? String,
+        let categoriesArray = postDict["category_strings"] as? [String],
+        let primaryCategory = postDict["primary_category"] as? String,
         let authorId = data["author"] as? Int,
-        let postTypeString = data["post_type_enum"] as? String,
+        let postTypeString = postDict["post_type_enum"] as? String,
         let postTypeEnum = postTypeEnum(rawValue: postTypeString),
-        let featuredMediaDictionary = data["featured_media_url_string"] as? [String: Any],
+        let featuredMediaDictionary = postDict["featured_media_url_string"] as? [String: Any],
         let mediumLargeDictionary = featuredMediaDictionary["medium_large"] as? [String: Any],
         let thumbnailDictionary = featuredMediaDictionary["thumbnail"] as? [String: Any],
         let fullDictionary = featuredMediaDictionary["full"] as? [String: Any],
         let mediumLargeImageLink = mediumLargeDictionary["url"] as? String,
         let thumbnailImageLink = thumbnailDictionary["url"] as? String,
         let fullImageLink = fullDictionary["url"] as? String,
-        let tagsArray = data["tag_strings"] as? [String],
-        let authorDictionary = data["author_dict"] as? [Any]
+        let tagsArray = postDict["tag_strings"] as? [String],
+        let authorDictionary = postDict["author_dict"] as? [Any]
         else {
             print("going to return nil")
             return nil
@@ -98,11 +99,11 @@ class PostObject: Object, ListDiffable {
         //Author Processing
         if let authorEntry = authorDictionary.first as? [String: Any], let name = authorEntry["name"] as? String {
             authorName = name
-            if let avatarUrl = authorEntry["avatar_url"] as? String, let authorBio = authorEntry["bio"] as? String, let link = authorEntry["link"] as? String {
-                authorLink = link
-                bio = authorBio
-                avatarLink = avatarUrl
-            }
+//            if let avatarUrl = authorEntry["avatar_url"] as? String, let authorBio = authorEntry["bio"] as? String, let link = authorEntry["link"] as? String {
+//                authorLink = link
+//                bio = authorBio
+//                avatarLink = avatarUrl
+//            }
         }
         let postCommentsArray: [String: Any] = [:]
 
@@ -113,7 +114,7 @@ class PostObject: Object, ListDiffable {
         for comment in postCommentsArray {
         }
 
-        if postTypeEnum == .photoGallery, let postAttachmentsArray = data["post_attachments_meta"] as? [Any] {
+        if postTypeEnum == .photoGallery, let postAttachmentsArray = postDict["post_attachments_meta"] as? [Any] {
             //process photogallery stuff
             for postAttachment in postAttachmentsArray {
                 guard
