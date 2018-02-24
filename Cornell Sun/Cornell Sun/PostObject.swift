@@ -68,12 +68,7 @@ class PostObject: Object, ListDiffable {
         let date = wpDateFormatter.date(from: dateString),
         let titleDictionary = data["title"] as? [String: Any],
         let title = titleDictionary["rendered"] as? String,
-<<<<<<< HEAD
         let content = postDict["post_content_no_srcset"] as? String,
-=======
-        let contentDictionary = data["content"] as? [String: Any],
-        let content = data["post_content_no_srcset"] as? String,
->>>>>>> b1d9746b46ce80eb06698ef4784fa2d642f2f0c3
         let excerptDictionary = data["excerpt"] as? [String: Any],
         let excerpt = excerptDictionary["rendered"] as? String,
         let link = data["link"] as? String,
@@ -82,13 +77,8 @@ class PostObject: Object, ListDiffable {
         let authorId = data["author"] as? Int,
         let postTypeString = postDict["post_type_enum"] as? String,
         let postTypeEnum = postTypeEnum(rawValue: postTypeString),
-<<<<<<< HEAD
         let featuredMediaDictionary = postDict["featured_media_url_string"] as? [String: Any],
         let featuredMediaCaption = postDict["featured_media_caption"] as? String,
-=======
-        let featuredMediaCaption = data["featured_media_caption"] as? String,
-        let featuredMediaDictionary = data["featured_media_url_string"] as? [String: Any],
->>>>>>> b1d9746b46ce80eb06698ef4784fa2d642f2f0c3
         let mediumLargeDictionary = featuredMediaDictionary["medium_large"] as? [String: Any],
         let thumbnailDictionary = featuredMediaDictionary["thumbnail"] as? [String: Any],
         let fullDictionary = featuredMediaDictionary["full"] as? [String: Any],
@@ -169,10 +159,6 @@ class PostObject: Object, ListDiffable {
                         newAttachment.image = newImage
                         attributedString.addAttribute(NSAttributedStringKey.attachment, value: newAttachment, range: range)
                     }
-<<<<<<< HEAD
-=======
-
->>>>>>> b1d9746b46ce80eb06698ef4784fa2d642f2f0c3
                 }
             })
             self.attrContent = attributedString

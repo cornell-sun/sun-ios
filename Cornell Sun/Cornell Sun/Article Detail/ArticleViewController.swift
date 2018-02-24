@@ -177,9 +177,6 @@ class ArticleViewController: UIViewController {
         let comment2 = CommentObject(id: 0, postId: 0, authorName: "Hettie Coleman", comment: "This story was wack! But I will be respectful because that’s how online discourse should be!", date: Date(), image: #imageLiteral(resourceName: "emptyProfile"))
         comments.append(comment1)
         comments.append(comment2)
-        comments.append(comment1)
-        comments.append(comment2)
-        comments.append(comment2)
         commentsTableView.reloadData()
 
         commentsTableView.snp.makeConstraints { make in
