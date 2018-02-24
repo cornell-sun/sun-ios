@@ -38,6 +38,7 @@ class PostObject: Object, ListDiffable {
     @objc dynamic var title: String = ""
     @objc dynamic var content: String = ""
     var attrContent: NSAttributedString = NSAttributedString()
+    var caption: String = ""
     @objc dynamic var excerpt: String = ""
     @objc dynamic var author: AuthorObject?
     @objc dynamic var primaryCategory: String = ""
@@ -67,8 +68,7 @@ class PostObject: Object, ListDiffable {
         let date = wpDateFormatter.date(from: dateString),
         let titleDictionary = data["title"] as? [String: Any],
         let title = titleDictionary["rendered"] as? String,
-        let contentDictionary = data["content"] as? [String: Any],
-        let content = contentDictionary["rendered"] as? String,
+        let content = postDict["post_content_no_srcset"] as? String,
         let excerptDictionary = data["excerpt"] as? [String: Any],
         let excerpt = excerptDictionary["rendered"] as? String,
         let link = data["link"] as? String,
@@ -78,6 +78,7 @@ class PostObject: Object, ListDiffable {
         let postTypeString = postDict["post_type_enum"] as? String,
         let postTypeEnum = postTypeEnum(rawValue: postTypeString),
         let featuredMediaDictionary = postDict["featured_media_url_string"] as? [String: Any],
+        let featuredMediaCaption = postDict["featured_media_caption"] as? String,
         let mediumLargeDictionary = featuredMediaDictionary["medium_large"] as? [String: Any],
         let thumbnailDictionary = featuredMediaDictionary["thumbnail"] as? [String: Any],
         let fullDictionary = featuredMediaDictionary["full"] as? [String: Any],
@@ -142,12 +143,24 @@ class PostObject: Object, ListDiffable {
         self.datePosted = date
         self.title = title.removingHTMLEntities
         self.content = content
+        self.caption = featuredMediaCaption
 
-        let modifiedFont = "<span style=\"font-family: 'Georgia', 'Times', 'serif'; font-size: 18\">\(content)</span>"
+        let modifiedFont = "<link rel='stylesheet' id='awpcp-frontend-style-css'  href='http://cornellsun.com/wp-content/plugins/another-wordpress-classifieds-plugin/resources/css/awpcpstyle.css?ver=3.6.5' type='text/css' media='all'/><span style=\"font-family: 'Georgia', 'Times', 'serif';font-size: 18\">\(content)</span>"
         if let attributedString = try? NSMutableAttributedString(
             data: modifiedFont.data(using: .utf8, allowLossyConversion: true)!,
             options: [NSAttributedString.DocumentReadingOptionKey.documentType: NSAttributedString.DocumentType.html, NSAttributedString.DocumentReadingOptionKey.characterEncoding: String.Encoding.utf8.rawValue],
             documentAttributes: nil) {
+            attributedString.enumerateAttribute(NSAttributedStringKey.attachment, in: NSMakeRange(0, attributedString.length), options: .init(rawValue: 0), using: { (value, range, _) in
+                if let attachment = value as? NSTextAttachment {
+                    let image = attachment.image(forBounds: attachment.bounds, textContainer: NSTextContainer(), characterIndex: range.location)!
+                    if image.size.width > UIScreen.main.bounds.width - 35 {
+                        let newImage = image.resizeImage(scale: UIScreen.main.bounds.width/(image.size.width - 35))
+                        let newAttachment = NSTextAttachment()
+                        newAttachment.image = newImage
+                        attributedString.addAttribute(NSAttributedStringKey.attachment, value: newAttachment, range: range)
+                    }
+                }
+            })
             self.attrContent = attributedString
         }
 

@@ -135,8 +135,15 @@ class ArticleViewController: UIViewController {
 
         articleBodyTextView = UITextView(frame: .zero)
         articleBodyTextView.isEditable = false
+        articleBodyTextView.textContainer.lineFragmentPadding = 0
         articleBodyTextView.font = currentFontSize.getFont()
         articleBodyTextView.delegate = self
+        articleBodyTextView.isScrollEnabled = false
+        articleBodyTextView.isUserInteractionEnabled = false
+        articleBodyTextView.linkTextAttributes = [
+            NSAttributedStringKey.foregroundColor.rawValue: UIColor.lightBlue,
+            NSAttributedStringKey.underlineColor.rawValue : UIColor.clear
+        ]
         articleView.addSubview(articleBodyTextView)
         articleBodyTextView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(leadingOffset)
@@ -169,9 +176,6 @@ class ArticleViewController: UIViewController {
         let comment1 = CommentObject(id: 0, postId: 0, authorName: "Brendan Elliott", comment: "Great Story! I really enjoyed reading about the perserverance of the current candidate, despite the stressful election.", date: Date(), image: #imageLiteral(resourceName: "brendan"))
         let comment2 = CommentObject(id: 0, postId: 0, authorName: "Hettie Coleman", comment: "This story was wack! But I will be respectful because that’s how online discourse should be!", date: Date(), image: #imageLiteral(resourceName: "emptyProfile"))
         comments.append(comment1)
-        comments.append(comment2)
-        comments.append(comment1)
-        comments.append(comment2)
         comments.append(comment2)
         commentsTableView.reloadData()
 
