@@ -33,7 +33,8 @@ class ArticleViewController: UIViewController {
     let articleBodyInset: CGFloat = 36
     let articleSeparatorOffset: CGFloat = 15
     let separatorHeight: CGFloat = 1.5
-//    let articleHeaderHeight: CGFloat = 450
+    let articleTextViewOffset: CGFloat = 7
+    let shareBarHeight: CGFloat = 50
     let commentReuseIdentifier = "CommentReuseIdentifier"
 
     var post: PostObject!
@@ -48,6 +49,7 @@ class ArticleViewController: UIViewController {
     var commentsLabel: UILabel!
     var commentsTableView: UITableView!
     var articleEndSeparator: UILabel!
+    var shareBarView: ShareBarView!
 
     var currentFontSize: FontSize = .regular
 
@@ -110,7 +112,6 @@ class ArticleViewController: UIViewController {
         articleView.addSubview(articleHeaderView)
         articleHeaderView.snp.makeConstraints { make in
             make.leading.trailing.width.top.equalToSuperview()
-//            make.height.equalTo(articleHeaderHeight)
         }
 
         commentsLabel = UILabel(frame: .zero)
@@ -139,7 +140,9 @@ class ArticleViewController: UIViewController {
         articleBodyTextView.font = currentFontSize.getFont()
         articleBodyTextView.delegate = self
         articleBodyTextView.isScrollEnabled = false
-//        articleBodyTextView.isUserInteractionEnabled = false
+        if #available(iOS 11.0, *) {
+            articleBodyTextView.textDragInteraction?.isEnabled = false
+        }
         articleBodyTextView.linkTextAttributes = [
             NSAttributedStringKey.foregroundColor.rawValue: UIColor.lightBlue,
             NSAttributedStringKey.underlineColor.rawValue: UIColor.clear
@@ -147,7 +150,7 @@ class ArticleViewController: UIViewController {
         articleView.addSubview(articleBodyTextView)
         articleBodyTextView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(leadingOffset)
-            make.top.equalTo(articleHeaderView.snp.bottom)
+            make.top.equalTo(articleHeaderView.snp.bottom).offset(articleTextViewOffset)
             make.bottom.equalTo(articleEndSeparator.snp.top) // will update this to automatically resize to tableview content
         }
 
@@ -162,13 +165,21 @@ class ArticleViewController: UIViewController {
             make.leading.equalToSuperview().offset(leadingOffset)
         }
 
+        shareBarView = ShareBarView()
+        shareBarView.delegate = self
+        view.addSubview(shareBarView)
+        shareBarView.snp.makeConstraints { make in
+            make.height.equalTo(shareBarHeight)
+            make.bottom.width.leading.trailing.equalToSuperview()
+        }
+
     }
 
     func setupWithArticle() {
         // how to insert images into text
         let paragraphStyle = NSMutableParagraphStyle()
         let attrContent = NSMutableAttributedString(attributedString: post.attrContent)
-        attrContent.addAttribute(NSAttributedStringKey.paragraphStyle, value: paragraphStyle, range: NSMakeRange(0, post.attrContent.length))
+        attrContent.addAttribute(NSAttributedStringKey.paragraphStyle, value: paragraphStyle, range: NSRange(location: 0, length: post.attrContent.length))
         articleBodyTextView.attributedText = attrContent
         articleBodyTextView.isScrollEnabled = false
         articleBodyTextView.setNeedsUpdateConstraints()
@@ -213,4 +224,40 @@ extension ArticleViewController: UITextViewDelegate {
         present(safariVC, animated: true, completion: nil) // TODO: detect if it's a Sun article and display that article instead
         return false
     }
+
+}
+
+extension ArticleViewController: ShareBarViewDelegate {
+
+    func shareBarDidPressShare(_ view: ShareBarView) {
+        taptic(style: .light)
+        if let articleLink = URL(string: post.link) {
+            let title = post.title
+            let objectToShare = [title, articleLink] as [Any]
+            let activityVC = UIActivityViewController(activityItems: objectToShare, applicationActivities: nil)
+            present(activityVC, animated: true, completion: nil)
+        }
+    }
+
+    func shareBarDidPressBookmark(_ view: ShareBarView) {
+        let didBookmark = view.bookmarkButton.currentImage == #imageLiteral(resourceName: "bookmark")
+        let correctBookmarkImage = view.bookmarkButton.currentImage == #imageLiteral(resourceName: "bookmarkPressed") ? #imageLiteral(resourceName: "bookmark") : #imageLiteral(resourceName: "bookmarkPressed")
+        view.bookmarkButton.setImage(correctBookmarkImage, for: .normal)
+        view.bookmarkButton.transform = CGAffineTransform(scaleX: 0.6, y: 0.6)
+        taptic(style: .light)
+        UIView.animate(withDuration: 1.0,
+                       delay: 0,
+                       usingSpringWithDamping: CGFloat(0.40),
+                       initialSpringVelocity: CGFloat(6.0),
+                       options: UIViewAnimationOptions.allowUserInteraction,
+                       animations: {
+                        view.bookmarkButton.transform = CGAffineTransform.identity
+        })
+        if didBookmark {
+            RealmManager.instance.save(object: post)
+        } else {
+            RealmManager.instance.delete(object: post)
+        }
+    }
+
 }
