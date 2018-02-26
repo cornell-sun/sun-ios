@@ -131,8 +131,6 @@ class ArticleHeaderView: UIView {
         captionLabel.snp.makeConstraints { make in
             make.top.equalTo(heroImageView.snp.bottom).offset(captionLabelTopOffset)
             make.leading.trailing.equalToSuperview().inset(leadingOffset)
-//            let height = post.caption.height(withConstrainedWidth: UIScreen.main.bounds.width - 2 * leadingOffset, font: .caption) + captionLabelBottomOffset
-//            make.height.equalTo(height)
         }
         creditsLabel.text = post.credits
     }
