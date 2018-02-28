@@ -156,6 +156,7 @@ class PostObject: Object, ListDiffable {
             documentAttributes: nil) {
             attributedString.enumerateAttribute(NSAttributedStringKey.attachment, in: NSRange(location: 0, length: attributedString.length), options: .init(rawValue: 0), using: { (value, range, _) in
                 if let attachment = value as? NSTextAttachment {
+                    // try making a blank image attachment and then add image to that?
                     let image = attachment.image(forBounds: attachment.bounds, textContainer: NSTextContainer(), characterIndex: range.location)!
                     if image.size.width > UIScreen.main.bounds.width - 35 {
                         let newImage = image.resizeImage(scale: UIScreen.main.bounds.width/(image.size.width - 35))

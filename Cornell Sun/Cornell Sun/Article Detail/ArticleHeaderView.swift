@@ -127,7 +127,7 @@ class ArticleHeaderView: UIView {
         }
         timeStampLabel.text = readableDateFormatter.string(from: post.datePosted)
         authorLabel.text = "By \(post.author!.name.removingHTMLEntities.htmlToString)"
-        captionLabel.text = post.caption
+        captionLabel.text = post.caption.htmlToString
         captionLabel.snp.makeConstraints { make in
             make.top.equalTo(heroImageView.snp.bottom).offset(captionLabelTopOffset)
             make.leading.trailing.equalToSuperview().inset(leadingOffset)

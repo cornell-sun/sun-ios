@@ -181,7 +181,6 @@ class ArticleViewController: UIViewController {
         let attrContent = NSMutableAttributedString(attributedString: post.attrContent)
         attrContent.addAttribute(NSAttributedStringKey.paragraphStyle, value: paragraphStyle, range: NSRange(location: 0, length: post.attrContent.length))
         articleBodyTextView.attributedText = attrContent
-        articleBodyTextView.isScrollEnabled = false
         articleBodyTextView.setNeedsUpdateConstraints()
 
         shareBarView.bookmarkButton.setImage(post.bookmarkedThisSession ? #imageLiteral(resourceName: "bookmarkPressed") : #imageLiteral(resourceName: "bookmark"), for: .normal)
