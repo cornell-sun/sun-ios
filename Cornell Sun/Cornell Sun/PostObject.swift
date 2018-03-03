@@ -37,9 +37,8 @@ class PostObject: Object, ListDiffable {
     @objc dynamic var link: String = ""
     @objc dynamic var title: String = ""
     @objc dynamic var content: String = ""
-    var attrContent: NSAttributedString = NSAttributedString()
-    var caption: String = ""
-    var credits: String = ""
+    @objc dynamic var caption: String = ""
+    @objc dynamic var credits: String = ""
     @objc dynamic var excerpt: String = ""
     @objc dynamic var author: AuthorObject?
     @objc dynamic var primaryCategory: String = ""
@@ -144,30 +143,9 @@ class PostObject: Object, ListDiffable {
         self.id = id
         self.datePosted = date
         self.title = title.removingHTMLEntities
-        self.content = content
+        self.content = "<span style=\"font-family: 'Georgia', 'Times', 'serif';font-size: 18\">\(content)</span>"
         self.caption = featuredMediaCaption
         self.credits = featuredMediaCredit
-
-        let modifiedFont = "<span style=\"font-family: 'Georgia', 'Times', 'serif';font-size: 18\">\(content)</span>"
-        let addLineBreaks = modifiedFont.replacingOccurrences(of: "</p>", with: "</p><br>")
-        if let attributedString = try? NSMutableAttributedString(
-            data: addLineBreaks.data(using: .utf8, allowLossyConversion: true)!,
-            options: [NSAttributedString.DocumentReadingOptionKey.documentType: NSAttributedString.DocumentType.html, NSAttributedString.DocumentReadingOptionKey.characterEncoding: String.Encoding.utf8.rawValue],
-            documentAttributes: nil) {
-            attributedString.enumerateAttribute(NSAttributedStringKey.attachment, in: NSRange(location: 0, length: attributedString.length), options: .init(rawValue: 0), using: { (value, range, _) in
-                if let attachment = value as? NSTextAttachment {
-                    // try making a blank image attachment and then add image to that?
-                    let image = attachment.image(forBounds: attachment.bounds, textContainer: NSTextContainer(), characterIndex: range.location)!
-                    if image.size.width > UIScreen.main.bounds.width - 35 {
-                        let newImage = image.resizeImage(scale: UIScreen.main.bounds.width/(image.size.width - 35))
-                        let newAttachment = ImageAttachment()
-                        newAttachment.image = newImage
-                        attributedString.addAttribute(NSAttributedStringKey.attachment, value: newAttachment, range: range)
-                    }
-                }
-            })
-            self.attrContent = attributedString
-        }
 
         self.link = link
         self.excerpt = excerpt
@@ -208,6 +186,29 @@ class PostObject: Object, ListDiffable {
         if self === object { return true } else {
             return false
         }
+    }
+
+    func attributedContentString() -> NSAttributedString {
+        let addLineBreaks = content.replacingOccurrences(of: "</p>", with: "</p><br>")
+        if let attributedString = try? NSMutableAttributedString(
+            data: addLineBreaks.data(using: .utf8, allowLossyConversion: true)!,
+            options: [NSAttributedString.DocumentReadingOptionKey.documentType: NSAttributedString.DocumentType.html, NSAttributedString.DocumentReadingOptionKey.characterEncoding: String.Encoding.utf8.rawValue],
+            documentAttributes: nil) {
+            attributedString.enumerateAttribute(NSAttributedStringKey.attachment, in: NSRange(location: 0, length: attributedString.length), options: .init(rawValue: 0), using: { (value, range, _) in
+                if let attachment = value as? NSTextAttachment {
+                    // try making a blank image attachment and then add image to that?
+                    let image = attachment.image(forBounds: attachment.bounds, textContainer: NSTextContainer(), characterIndex: range.location)!
+                    if image.size.width > UIScreen.main.bounds.width - 35 {
+                        let newImage = image.resizeImage(scale: UIScreen.main.bounds.width/(image.size.width - 35))
+                        let newAttachment = ImageAttachment()
+                        newAttachment.image = newImage
+                        attributedString.addAttribute(NSAttributedStringKey.attachment, value: newAttachment, range: range)
+                    }
+                }
+            })
+            return attributedString
+        }
+        return NSAttributedString(string: "")
     }
 
 }

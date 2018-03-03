@@ -151,7 +151,7 @@ class ArticleViewController: UIViewController {
         articleBodyTextView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(leadingOffset)
             make.top.equalTo(articleHeaderView.snp.bottom).offset(articleTextViewOffset)
-            make.bottom.equalTo(articleEndSeparator.snp.top) // will update this to automatically resize to tableview content
+            make.bottom.equalTo(articleEndSeparator.snp.top)
         }
 
         articleEndSeparator.snp.makeConstraints { make in
@@ -178,12 +178,13 @@ class ArticleViewController: UIViewController {
     func setupWithArticle() {
         // how to insert images into text
         let paragraphStyle = NSMutableParagraphStyle()
-        let attrContent = NSMutableAttributedString(attributedString: post.attrContent)
-        attrContent.addAttribute(NSAttributedStringKey.paragraphStyle, value: paragraphStyle, range: NSRange(location: 0, length: post.attrContent.length))
+        let content = post.attributedContentString()
+        let attrContent = NSMutableAttributedString(attributedString: content)
+        attrContent.addAttribute(NSAttributedStringKey.paragraphStyle, value: paragraphStyle, range: NSRange(location: 0, length: content.length))
         articleBodyTextView.attributedText = attrContent
         articleBodyTextView.setNeedsUpdateConstraints()
 
-        shareBarView.bookmarkButton.setImage(post.bookmarkedThisSession ? #imageLiteral(resourceName: "bookmarkPressed") : #imageLiteral(resourceName: "bookmark"), for: .normal)
+        shareBarView.bookmarkButton.setImage(post.didSave ? #imageLiteral(resourceName: "bookmarkPressed") : #imageLiteral(resourceName: "bookmark"), for: .normal)
         // hardcoded comments
         let comment1 = CommentObject(id: 0, postId: 0, authorName: "Brendan Elliott", comment: "Great Story! I really enjoyed reading about the perserverance of the current candidate, despite the stressful election.", date: Date(), image: #imageLiteral(resourceName: "brendan"))
         let comment2 = CommentObject(id: 0, postId: 0, authorName: "Hettie Coleman", comment: "This story was wack! But I will be respectful because that’s how online discourse should be!", date: Date(), image: #imageLiteral(resourceName: "emptyProfile"))
