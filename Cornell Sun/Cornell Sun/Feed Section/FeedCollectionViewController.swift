@@ -18,9 +18,12 @@ class FeedCollectionViewController: ViewController, UIScrollViewDelegate {
     var firstPostObject: PostObject!
     var savedPosts: Results<PostObject>!
     var currentPage = 1
+    var adIndex = 7
     var loading = false
     let spinToken = "spinner"
-    let adToken = "ad"
+    var adCount = 1
+    var adDict = [String: Int]()
+    var currAdToken = ""
     let collectionView: UICollectionView = {
         let view = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
         view.alwaysBounceVertical = true
@@ -89,8 +92,9 @@ class FeedCollectionViewController: ViewController, UIScrollViewDelegate {
     func getPosts(page: Int) {
         fetchPosts(target: .posts(page: page)) { posts, error in
             if error == nil {
-                self.loading = false
+                    self.loading = false
                 self.feedData.append(contentsOf: posts)
+//                self.feedData.insert(adToken, at: adIndex*page)
                 self.refreshControl.endRefreshing()
                 self.adapter.performUpdates(animated: true, completion: nil)
             }
@@ -112,10 +116,25 @@ class FeedCollectionViewController: ViewController, UIScrollViewDelegate {
 extension FeedCollectionViewController: ListAdapterDataSource {
     func objects(for listAdapter: ListAdapter) -> [ListDiffable] {
         var objects = feedData as [ListDiffable]
-        objects.insert(adToken as ListDiffable, at: 2)
+        objects = mergeAds(feed: objects)
         if loading {
             objects.append(spinToken as ListDiffable)
+        } 
+
+        return objects
+    }
+    
+    func mergeAds(feed: [ListDiffable]) -> [ListDiffable] {
+        var objects = feed
+        currAdToken = "adToken\(adCount)"
+        adDict[currAdToken] = adCount
+        adCount += 1
+        for (adtoken, adcount) in adDict {
+            if(adcount <= currentPage) {
+                objects.insert(adtoken as ListDiffable, at: adIndex*adcount)
+            }
         }
+        print(adCount)
         return objects
     }
 
@@ -126,7 +145,7 @@ extension FeedCollectionViewController: ListAdapterDataSource {
             return HeroSectionController()
         } else if let obj = object as? PostObject, obj.postType == .photoGallery {
             return PhotoGallerySectionController()
-        } else if let obj = object as? String, obj == adToken {
+        } else if let obj = object as? String, adDict[obj] != nil {
             return AdSectionController()
         }
         let articleSC = ArticleSectionController()
