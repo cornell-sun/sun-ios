@@ -12,7 +12,7 @@ import Realm
 import RealmSwift
 
 class FeedCollectionViewController: ViewController, UIScrollViewDelegate {
-    let FONTSIZE:CGFloat = 22.0
+    let FONTSIZE: CGFloat = 22.0
     var refreshControl = UIRefreshControl()
     var feedData: [PostObject] = []
     var firstPostObject: PostObject!
@@ -138,7 +138,8 @@ extension FeedCollectionViewController: ListAdapterDataSource {
 
 extension FeedCollectionViewController: TabBarViewControllerDelegate {
     func articleSectionDidPressOnArticle(_ article: PostObject) {
-        let articleVC = ArticleViewController(article: article)
+//        let articleVC = ArticleViewController(article: article)
+        let articleVC = ArticleStackViewController(post: article)
         articleVC.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(articleVC, animated: true)
     }

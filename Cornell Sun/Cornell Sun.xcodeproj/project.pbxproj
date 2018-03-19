@@ -11,6 +11,7 @@
 		0C15F1871FBDD433009724DB /* ArticleHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C15F1861FBDD433009724DB /* ArticleHeaderView.swift */; };
 		0C736C54202F96E000E9D92E /* ImageAttachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C736C53202F96E000E9D92E /* ImageAttachment.swift */; };
 		0C7D9A8E1F217B510041E1B0 /* apple-app-site-association in Resources */ = {isa = PBXBuildFile; fileRef = 0C7D9A8D1F217B510041E1B0 /* apple-app-site-association */; };
+		0CA26A1B205F41A6004759D1 /* ArticleStackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CA26A1A205F41A6004759D1 /* ArticleStackViewController.swift */; };
 		0CAA2BEC1F954E3200D423FD /* ArticleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CAA2BEB1F954E3200D423FD /* ArticleViewController.swift */; };
 		0CB00B261FBBAEE800376A94 /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CB00B251FBBAEE800376A94 /* CommentTableViewCell.swift */; };
 		0CB1EBCE2041ED9100DD8777 /* ShareBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CB1EBCD2041ED9100DD8777 /* ShareBarView.swift */; };
@@ -77,6 +78,7 @@
 		0C15F1861FBDD433009724DB /* ArticleHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleHeaderView.swift; sourceTree = "<group>"; };
 		0C736C53202F96E000E9D92E /* ImageAttachment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageAttachment.swift; sourceTree = "<group>"; };
 		0C7D9A8D1F217B510041E1B0 /* apple-app-site-association */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "apple-app-site-association"; path = "Cornell Sun/apple-app-site-association"; sourceTree = "<group>"; };
+		0CA26A1A205F41A6004759D1 /* ArticleStackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleStackViewController.swift; sourceTree = "<group>"; };
 		0CAA2BEB1F954E3200D423FD /* ArticleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleViewController.swift; sourceTree = "<group>"; };
 		0CB00B251FBBAEE800376A94 /* CommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
 		0CB1EBCD2041ED9100DD8777 /* ShareBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareBarView.swift; sourceTree = "<group>"; };
@@ -163,6 +165,7 @@
 			isa = PBXGroup;
 			children = (
 				0CAA2BEB1F954E3200D423FD /* ArticleViewController.swift */,
+				0CA26A1A205F41A6004759D1 /* ArticleStackViewController.swift */,
 				0C15F1861FBDD433009724DB /* ArticleHeaderView.swift */,
 				0CB00B251FBBAEE800376A94 /* CommentTableViewCell.swift */,
 				0CB1EBCD2041ED9100DD8777 /* ShareBarView.swift */,
@@ -713,6 +716,7 @@
 				0C736C54202F96E000E9D92E /* ImageAttachment.swift in Sources */,
 				DC818D9D1F7553380064AFFA /* ImageCell.swift in Sources */,
 				DCFC88C61F86C03700A0D8A9 /* CommentObject.swift in Sources */,
+				0CA26A1B205F41A6004759D1 /* ArticleStackViewController.swift in Sources */,
 				DCA02C0C2027E0F500CBE97F /* NetworkingHelpers.swift in Sources */,
 				0CB00B261FBBAEE800376A94 /* CommentTableViewCell.swift in Sources */,
 				DC818D9F1F7596970064AFFA /* TitleCell.swift in Sources */,

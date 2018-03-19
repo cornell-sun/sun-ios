@@ -222,8 +222,8 @@ extension ArticleViewController: UITableViewDelegate, UITableViewDataSource {
 extension ArticleViewController: UITextViewDelegate {
 
     func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
-        let safariVC = SFSafariViewController(url: URL)
-        present(safariVC, animated: true, completion: nil) // TODO: detect if it's a Sun article and display that article instead
+        let safariViewController = SFSafariViewController(url: URL)
+        present(safariViewController, animated: true, completion: nil) // TODO: detect if it's a Sun article and display that article instead
         return false
     }
 
