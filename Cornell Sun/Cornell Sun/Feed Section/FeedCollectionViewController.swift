@@ -94,7 +94,6 @@ class FeedCollectionViewController: ViewController, UIScrollViewDelegate {
             if error == nil {
                     self.loading = false
                 self.feedData.append(contentsOf: posts)
-//                self.feedData.insert(adToken, at: adIndex*page)
                 self.refreshControl.endRefreshing()
                 self.adapter.performUpdates(animated: true, completion: nil)
             }
@@ -120,7 +119,6 @@ extension FeedCollectionViewController: ListAdapterDataSource {
         if loading {
             objects.append(spinToken as ListDiffable)
         } 
-
         return objects
     }
     
@@ -134,7 +132,6 @@ extension FeedCollectionViewController: ListAdapterDataSource {
                 objects.insert(adtoken as ListDiffable, at: adIndex*adcount)
             }
         }
-        print(adCount)
         return objects
     }
 

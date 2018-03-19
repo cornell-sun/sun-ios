@@ -36,6 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         //Initialize Google Mobile Ads SDKAds
+        //@TODO change ad ID from test ad to our specific ID
         GADMobileAds.configure(withApplicationID: "ca-app-pub-3940256099942544/2934735716")
 
         return true
