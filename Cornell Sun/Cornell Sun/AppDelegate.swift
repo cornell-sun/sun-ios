@@ -22,17 +22,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.makeKeyAndVisible()
         storyboard = UIStoryboard(name: "Launch Screen", bundle: nil)
         let rootVC = storyboard?.instantiateInitialViewController()
-        self.window!.rootViewController = rootVC
+        window?.rootViewController = rootVC
 
         //Image cache settings
         ImageCache.default.maxDiskCacheSize = 50 * 1024 * 1024 //50 mb
         ImageCache.default.maxCachePeriodInSecond = 60 * 60 * 24 * 4 //4 days until its removed
 
+        let userDefaults = UserDefaults.standard
         setUpData { posts, mainHeadlinePost in
             let tabBarController = TabBarViewController(with: posts, mainHeadlinePost: mainHeadlinePost)
             self.window!.rootViewController = tabBarController
+            if !userDefaults.bool(forKey: hasOnboardedKey) {
+                let onboardingViewController = OnboardingPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
+                self.window?.rootViewController?.present(onboardingViewController, animated: false, completion: nil)
+            }
         }
-
         return true
     }
 

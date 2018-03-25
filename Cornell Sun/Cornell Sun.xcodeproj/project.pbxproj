@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		036FE5BBAB2DFBC062751005 /* Pods_Cornell_SunTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C38BCC6B38BFCC0EC16BF2B /* Pods_Cornell_SunTests.framework */; };
+		0C0C190F20672DB000C3C504 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C0C190E20672DB000C3C504 /* Constants.swift */; };
+		0C0D2FE72060462500BC77E9 /* OnboardingPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C0D2FE62060462500BC77E9 /* OnboardingPageViewController.swift */; };
+		0C0D2FE9206048BA00BC77E9 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C0D2FE8206048BA00BC77E9 /* OnboardingViewController.swift */; };
 		0C15F1871FBDD433009724DB /* ArticleHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C15F1861FBDD433009724DB /* ArticleHeaderView.swift */; };
 		0C736C54202F96E000E9D92E /* ImageAttachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C736C53202F96E000E9D92E /* ImageAttachment.swift */; };
 		0C7D9A8E1F217B510041E1B0 /* apple-app-site-association in Resources */ = {isa = PBXBuildFile; fileRef = 0C7D9A8D1F217B510041E1B0 /* apple-app-site-association */; };
@@ -75,6 +78,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0C0C190E20672DB000C3C504 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		0C0D2FE62060462500BC77E9 /* OnboardingPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPageViewController.swift; sourceTree = "<group>"; };
+		0C0D2FE8206048BA00BC77E9 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		0C15F1861FBDD433009724DB /* ArticleHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleHeaderView.swift; sourceTree = "<group>"; };
 		0C736C53202F96E000E9D92E /* ImageAttachment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageAttachment.swift; sourceTree = "<group>"; };
 		0C7D9A8D1F217B510041E1B0 /* apple-app-site-association */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "apple-app-site-association"; path = "Cornell Sun/apple-app-site-association"; sourceTree = "<group>"; };
@@ -161,6 +167,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0C0D2FE52060461000BC77E9 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				0C0D2FE62060462500BC77E9 /* OnboardingPageViewController.swift */,
+				0C0D2FE8206048BA00BC77E9 /* OnboardingViewController.swift */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
 		0C15F1851FBDD1A5009724DB /* Article Detail */ = {
 			isa = PBXGroup;
 			children = (
@@ -209,6 +224,7 @@
 			children = (
 				5006AFFB1EA9625000F58549 /* AppDelegate.swift */,
 				DC6870031F7D77F700CE2E27 /* Launch Screen.storyboard */,
+				0C0D2FE52060461000BC77E9 /* Onboarding */,
 				DCECA9911FBE2D8700BAB2EA /* Feed Section */,
 				DCA02C062026580100CBE97F /* Search Section */,
 				DCECA9941FBE2E1D00BAB2EA /* Bookmark Section */,
@@ -332,6 +348,7 @@
 				DC34DEEE2032141B0010DF9A /* Color Extension */,
 				DC34DEF0203214580010DF9A /* Date Extension */,
 				DC446C351F5D0DFF00D68688 /* Extensions.swift */,
+				0C0C190E20672DB000C3C504 /* Constants.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -716,12 +733,15 @@
 				0C736C54202F96E000E9D92E /* ImageAttachment.swift in Sources */,
 				DC818D9D1F7553380064AFFA /* ImageCell.swift in Sources */,
 				DCFC88C61F86C03700A0D8A9 /* CommentObject.swift in Sources */,
+				0C0D2FE72060462500BC77E9 /* OnboardingPageViewController.swift in Sources */,
 				0CA26A1B205F41A6004759D1 /* ArticleStackViewController.swift in Sources */,
 				DCA02C0C2027E0F500CBE97F /* NetworkingHelpers.swift in Sources */,
 				0CB00B261FBBAEE800376A94 /* CommentTableViewCell.swift in Sources */,
 				DC818D9F1F7596970064AFFA /* TitleCell.swift in Sources */,
+				0C0D2FE9206048BA00BC77E9 /* OnboardingViewController.swift in Sources */,
 				DC4308EF1F2563FF00ABB31F /* API.swift in Sources */,
 				61652CD41F6EF44900EEFC29 /* SearchTableViewCell.swift in Sources */,
+				0C0C190F20672DB000C3C504 /* Constants.swift in Sources */,
 				DCB717141FB9FE1700BE4D26 /* HeroSectionController.swift in Sources */,
 				DCECA9901FBDFB7300BAB2EA /* BookmarkCell.swift in Sources */,
 			);
