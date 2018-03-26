@@ -18,6 +18,7 @@ enum SecondaryViewType {
 
 enum ArticleContentType { // did someone say OCaml???
     case text(NSAttributedString)
-    case image(UIImage)
+    case image(String)
+    case imageCredit(String)
     case caption(String)
 }

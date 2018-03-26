@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftSoup
 
 class ArticleStackViewController: UIViewController {
 
@@ -57,10 +58,41 @@ class ArticleStackViewController: UIViewController {
             make.top.width.equalToSuperview()
         }
 
+        setup()
+    }
+
+    func createArticleContentType(content: String) -> [ArticleContentType] {
+        var sections: [ArticleContentType] = []
+        guard let doc: Document = try? SwiftSoup.parse(content) else { return sections }
+        guard let elements = try? doc.getAllElements() else { return sections }
+
+        for element in elements {
+
+            if element.tag().toString() == "p" {
+                guard let text = try? element.text() else { continue }
+                guard let html = try? element.outerHtml() else { continue }
+                if element.hasClass("wp-media-credit") {
+                    sections.append(.imageCredit(text))
+                } else if element.hasClass("wp-caption-text") {
+                    sections.append(.caption(text))
+                } else {
+                    sections.append(.text(html.convertHtml()))
+                }
+
+            } else if element.tag().toString() == "img" {
+                guard let src = try? element.select("img[src]") else { continue }
+                guard let srcUrl = try? src.attr("src").description else { continue }
+                cacheImage(imageLink: srcUrl) //cache the image
+                sections.append(.image(srcUrl))
+            }
+        }
+        return sections
     }
 
     func setup() {
         // try setting up multiple views and splitting into array, then setting up views
+        let sections = createArticleContentType(content: post.content)
+        print(sections)
     }
 
 }

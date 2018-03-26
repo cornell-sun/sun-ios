@@ -263,7 +263,8 @@ extension SearchViewController: UISearchBarDelegate {
 }
 extension SearchViewController: TabBarViewControllerDelegate {
     func articleSectionDidPressOnArticle(_ article: PostObject) {
-        let articleVC = ArticleViewController(article: article)
+        //let articleVC = ArticleViewController(article: article)
+        let articleVC = ArticleStackViewController(post: article)
         articleVC.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(articleVC, animated: true)
     }
