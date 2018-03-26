@@ -85,8 +85,7 @@ extension BookmarkCollectionViewController: ListAdapterDataSource {
 
 extension BookmarkCollectionViewController: TabBarViewControllerDelegate {
     func articleSectionDidPressOnArticle(_ article: PostObject) {
-        let articleVC = ArticleViewController()
-        articleVC.post = article
+        let articleVC = ArticleStackViewController(post: article)
         articleVC.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(articleVC, animated: true)
     }

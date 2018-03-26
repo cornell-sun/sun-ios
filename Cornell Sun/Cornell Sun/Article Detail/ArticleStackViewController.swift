@@ -8,6 +8,24 @@
 
 import UIKit
 import SwiftSoup
+import SafariServices
+
+enum FontSize {
+    case regular
+    case large
+    case small
+
+    func getFont() -> UIFont {
+        switch self {
+        case .regular:
+            return .articleBody
+        case .large:
+            return .articleBodyLarge
+        case .small:
+            return .articleBodySmall
+        }
+    }
+}
 
 class ArticleStackViewController: UIViewController {
 
@@ -18,14 +36,20 @@ class ArticleStackViewController: UIViewController {
     let separatorHeight: CGFloat = 1.5
     let articleTextViewOffset: CGFloat = 7
     let shareBarHeight: CGFloat = 50
+    let imageViewHeight: CGFloat = 250
+    let captionTopOffset: CGFloat = 4
+    let captionBottomInset: CGFloat = 24
+
     let commentReuseIdentifier = "CommentReuseIdentifier"
 
     var post: PostObject!
     var comments: [CommentObject]! = []
+    var views: [UIView] = []
 
     var scrollView: UIScrollView!
     var stackView: UIStackView!
     var headerView: ArticleHeaderView!
+    var shareBarView: ShareBarView!
 
     convenience init(post: PostObject) {
         self.init()
@@ -36,16 +60,20 @@ class ArticleStackViewController: UIViewController {
         super.viewDidLoad()
 
         view.backgroundColor = .white
+        navigationController?.navigationBar.topItem?.title = ""
+        navigationController?.navigationBar.tintColor = .black
+
         scrollView = UIScrollView()
         view.addSubview(scrollView)
         scrollView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            make.leading.trailing.top.equalToSuperview()
+            make.bottom.equalToSuperview().inset(shareBarHeight)
         }
 
         stackView = UIStackView()
         stackView.alignment = .fill
         stackView.axis = .vertical
-        stackView.distribution = .equalSpacing
+        stackView.distribution = .fill
         stackView.spacing = 0
         scrollView.addSubview(stackView)
         stackView.snp.makeConstraints { make in
@@ -58,6 +86,14 @@ class ArticleStackViewController: UIViewController {
             make.top.width.equalToSuperview()
         }
 
+        shareBarView = ShareBarView()
+        shareBarView.delegate = self
+        view.addSubview(shareBarView)
+        shareBarView.snp.makeConstraints { make in
+            make.height.equalTo(shareBarHeight)
+            make.bottom.width.leading.trailing.equalToSuperview()
+        }
+
         setup()
     }
 
@@ -67,32 +103,162 @@ class ArticleStackViewController: UIViewController {
         guard let elements = try? doc.getAllElements() else { return sections }
 
         for element in elements {
-
             if element.tag().toString() == "p" {
-                guard let text = try? element.text() else { continue }
-                guard let html = try? element.outerHtml() else { continue }
-                if element.hasClass("wp-media-credit") {
-                    sections.append(.imageCredit(text))
-                } else if element.hasClass("wp-caption-text") {
-                    sections.append(.caption(text))
-                } else {
-                    sections.append(.text(html.convertHtml()))
-                }
-
+                guard let pItem = parsePTag(element: element) else { continue }
+                sections.append(pItem)
             } else if element.tag().toString() == "img" {
-                guard let src = try? element.select("img[src]") else { continue }
-                guard let srcUrl = try? src.attr("src").description else { continue }
-                cacheImage(imageLink: srcUrl) //cache the image
-                sections.append(.image(srcUrl))
+                guard let imgItem = parseImg(element: element) else { continue }
+                sections.append(imgItem)
             }
         }
         return sections
     }
 
+    func parsePTag(element: Element) -> ArticleContentType? {
+        guard let text = try? element.text() else { return nil }
+        guard let html = try? element.outerHtml() else { return nil }
+        if element.hasClass("wp-media-credit") {
+            return .imageCredit(text)
+        } else if element.hasClass("wp-caption-text") {
+            return .caption(text)
+        } else {
+            return .text(html.convertHtml())
+        }
+    }
+
+    func parseImg(element: Element) -> ArticleContentType? {
+        guard let src = try? element.select("img[src]") else { return nil }
+        guard let srcUrl = try? src.attr("src").description else { return nil }
+        cacheImage(imageLink: srcUrl) //cache the image
+        return .image(srcUrl)
+    }
+
+    /// Sets up the content in the stack view by parsing each section.
     func setup() {
-        // try setting up multiple views and splitting into array, then setting up views
         let sections = createArticleContentType(content: post.content)
-        print(sections)
+        for section in sections {
+            switch section {
+            case .caption(let caption):
+                setupCaptionLabel(caption: caption)
+            case .image(let urlString):
+                setupImageView(imageURLString: urlString)
+            case .imageCredit(let credit):
+                setupImageCredit(credit: credit)
+            case .text(let attrString):
+                setupArticleText(text: attrString)
+            }
+        }
+    }
+
+    func setupCaptionLabel(caption: String) {
+        let view = UIView()
+        let label = UILabel()
+        label.text = caption
+        label.font = .caption
+        label.textColor = .darkGrey
+        label.numberOfLines = 0
+        view.addSubview(label)
+        stackView.addArrangedSubview(view)
+        label.snp.makeConstraints({ make in
+            make.top.equalToSuperview()
+            make.leading.trailing.equalToSuperview().inset(leadingOffset)
+            make.bottom.equalToSuperview().inset(captionBottomInset)
+        })
+    }
+
+    func setupImageView(imageURLString: String) {
+        let view = UIView()
+        let imageView = UIImageView()
+        imageView.layer.masksToBounds = true
+        imageView.contentMode = .scaleAspectFit
+        imageView.kf.setImage(with: URL(string: imageURLString))
+        view.addSubview(imageView)
+        stackView.addArrangedSubview(view)
+        imageView.snp.makeConstraints({ make in
+            make.leading.trailing.equalToSuperview()
+            make.top.bottom.equalToSuperview()
+            make.height.equalTo(imageViewHeight)
+        })
+    }
+
+    func setupImageCredit(credit: String) {
+        let view = UIView()
+        let creditLabel = UILabel()
+        creditLabel.numberOfLines = 0
+        creditLabel.text = credit
+        creditLabel.textColor = .warmGrey
+        creditLabel.font = .credits
+        view.addSubview(creditLabel)
+        stackView.addArrangedSubview(view)
+        creditLabel.snp.makeConstraints({ make in
+            make.top.equalToSuperview().inset(captionTopOffset)
+            make.bottom.equalToSuperview()
+            make.leading.trailing.equalToSuperview().inset(leadingOffset)
+        })
+    }
+
+    func setupArticleText(text: NSAttributedString) {
+        let view = UIView()
+        let textView = UITextView()
+        textView.attributedText = text
+        textView.textContainer.lineFragmentPadding = 0
+        textView.font = .articleBody
+        textView.textColor = .black
+        textView.delegate = self
+        textView.isScrollEnabled = false
+        textView.isEditable = false
+        if #available(iOS 11.0, *) {
+            textView.textDragInteraction?.isEnabled = false
+        }
+        view.addSubview(textView)
+        stackView.addArrangedSubview(view)
+        textView.snp.makeConstraints({ make in
+            make.top.bottom.equalToSuperview()
+            make.leading.trailing.equalToSuperview().inset(leadingOffset)
+        })
+    }
+}
+
+extension ArticleStackViewController: ShareBarViewDelegate {
+
+    func shareBarDidPressShare(_ view: ShareBarView) {
+        taptic(style: .light)
+        if let articleLink = URL(string: post.link) {
+            let title = post.title
+            let objectToShare = [title, articleLink] as [Any]
+            let activityVC = UIActivityViewController(activityItems: objectToShare, applicationActivities: nil)
+            present(activityVC, animated: true, completion: nil)
+        }
+    }
+
+    func shareBarDidPressBookmark(_ view: ShareBarView) {
+        let didBookmark = view.bookmarkButton.currentImage == #imageLiteral(resourceName: "bookmark")
+        let correctBookmarkImage = view.bookmarkButton.currentImage == #imageLiteral(resourceName: "bookmarkPressed") ? #imageLiteral(resourceName: "bookmark") : #imageLiteral(resourceName: "bookmarkPressed")
+        view.bookmarkButton.setImage(correctBookmarkImage, for: .normal)
+        view.bookmarkButton.transform = CGAffineTransform(scaleX: 0.6, y: 0.6)
+        taptic(style: .light)
+        UIView.animate(withDuration: 1.0,
+                       delay: 0,
+                       usingSpringWithDamping: CGFloat(0.4),
+                       initialSpringVelocity: CGFloat(6.0),
+                       options: UIViewAnimationOptions.allowUserInteraction,
+                       animations: {
+                        view.bookmarkButton.transform = CGAffineTransform.identity
+        })
+        if didBookmark {
+            RealmManager.instance.save(object: post)
+        } else {
+            RealmManager.instance.delete(object: post)
+        }
+    }
+}
+
+extension ArticleStackViewController: UITextViewDelegate {
+
+    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
+        let safariViewController = SFSafariViewController(url: URL)
+        present(safariViewController, animated: true, completion: nil) // TODO: detect if it's a Sun article and display that article instead
+        return false
     }
 
 }

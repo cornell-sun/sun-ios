@@ -1,5 +1,5 @@
 //
-//  SettingEnum.swift
+//  Enums.swift
 //  Cornell Sun
 //
 //  Created by Aditya Dwivedi on 10/27/17.
@@ -16,7 +16,7 @@ enum SecondaryViewType {
     case none, label, toggle //Can add more if needed
 }
 
-enum ArticleContentType { // did someone say OCaml???
+enum ArticleContentType {
     case text(NSAttributedString)
     case image(String)
     case imageCredit(String)
