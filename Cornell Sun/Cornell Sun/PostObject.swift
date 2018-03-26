@@ -12,6 +12,7 @@ import HTMLString
 import Kingfisher
 import RealmSwift
 import Realm
+import SwiftSoup
 
 // swiftlint:disable:next type_name
 enum postTypeEnum: String {
@@ -57,8 +58,13 @@ class PostObject: Object, ListDiffable {
         }
     }
 
-    convenience init?(data: [String: Any]) {
+    convenience init?(dictionary: [String: Any]) {
         self.init()
+        var data: [String: Any] = [:]
+
+        for (key, value) in dictionary {
+            data[key.lowercased()] = value
+        }
         guard let postDict = data["post_info_dict"] as? [String: Any] else { return }
         guard
         let id = data["id"] as? Int,
@@ -88,6 +94,12 @@ class PostObject: Object, ListDiffable {
         else {
             print("going to return nil")
             return nil
+        }
+
+        guard let doc: Document = try? SwiftSoup.parse(content) else { return }
+        guard let elements = try? doc.getAllElements() else { return }
+        for element in elements {
+            print(element)
         }
         var photoGalleryObjects: [PhotoGalleryObject] = []
 
@@ -169,17 +181,13 @@ class PostObject: Object, ListDiffable {
     }
 
     func diffIdentifier() -> NSObjectProtocol {
-        var idDiff = -9999999
-        if !isInvalidated {
-            idDiff = id
-        }
-        return idDiff as NSObjectProtocol
+        return id as NSObjectProtocol
     }
 
     func isEqual(toDiffableObject object: ListDiffable?) -> Bool {
-        if self === object { return true } else {
-            return false
-        }
+        guard self !== object else { return true }
+        guard let object = object as? PostObject else { return false }
+        return self.id == object.id
     }
 
 }

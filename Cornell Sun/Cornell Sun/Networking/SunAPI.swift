@@ -38,6 +38,8 @@ enum SunAPI {
 
     case search(query: String, page: Int)
 
+    //featured post
+    case featured
 }
 
 extension SunAPI: TargetType {
@@ -64,6 +66,8 @@ extension SunAPI: TargetType {
             return "\(defaultPath)/comments"
         case .trending:
             return "\(backendPath)/trending"
+        case .featured:
+            return "\(backendPath)/featured"
         }
     }
 

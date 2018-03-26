@@ -14,12 +14,14 @@ import ImageSlideshow
 enum heroCellType: Int {
     case imageCell = 0
     case titleCell = 1
-    case taglineCell = 2
-    case actionMenuCell = 3
+    case authorCell = 2
+    case taglineCell = 3
+    case actionMenuCell = 4
 }
 
 class HeroSectionController: ListSectionController {
     var entry: PostObject!
+    weak var delegate: TabBarViewControllerDelegate?
 
     override init() {
         super.init()
@@ -27,7 +29,7 @@ class HeroSectionController: ListSectionController {
     }
 }
 
-extension HeroSectionController: HeartPressedDelegate, BookmarkPressedDelegate, SharePressedDelegate {
+extension HeroSectionController: BookmarkPressedDelegate, SharePressedDelegate {
 
     func didPressBookmark(_ cell: MenuActionCell) {
         let correctBookmarkImage = cell.bookmarkButton.currentImage == #imageLiteral(resourceName: "bookmarkPressed") ? #imageLiteral(resourceName: "bookmark") : #imageLiteral(resourceName: "bookmarkPressed")
@@ -44,21 +46,6 @@ extension HeroSectionController: HeartPressedDelegate, BookmarkPressedDelegate, 
         })
     }
 
-    func didPressHeart(_ cell: MenuActionCell) {
-        let correctHeartImage = cell.heartButton.currentImage == #imageLiteral(resourceName: "heartPressed") ? #imageLiteral(resourceName: "heart") : #imageLiteral(resourceName: "heartPressed")
-        cell.heartButton.setImage(correctHeartImage, for: .normal)
-        cell.heartButton.transform = CGAffineTransform(scaleX: 0.6, y: 0.6)
-        taptic(style: .light)
-        UIView.animate(withDuration: 1.0,
-                       delay: 0,
-                       usingSpringWithDamping: CGFloat(0.40),
-                       initialSpringVelocity: CGFloat(6.0),
-                       options: UIViewAnimationOptions.allowUserInteraction,
-                       animations: {
-                        cell.heartButton.transform = CGAffineTransform.identity
-        })
-    }
-
     func didPressShare() {
         taptic(style: .light)
         if let articleLink = URL(string: entry.link) {
@@ -70,7 +57,7 @@ extension HeroSectionController: HeartPressedDelegate, BookmarkPressedDelegate, 
     }
 
     override func numberOfItems() -> Int {
-        return 4
+        return 5
     }
 
     override func sizeForItem(at index: Int) -> CGSize {
@@ -84,9 +71,15 @@ extension HeroSectionController: HeartPressedDelegate, BookmarkPressedDelegate, 
             return CGSize(width: width, height: width / 1.5)
         case .titleCell:
             let height = entry.title.height(withConstrainedWidth: width, font: UIFont.boldSystemFont(ofSize: 22)) //CLUTCH Extension thank stackoverflow gods
-            return CGSize(width: width, height: height + 5)
+            return CGSize(width: width, height: height + 10)
+        case .authorCell:
+            guard let height = entry.author?.name.height(withConstrainedWidth: width, font: .articleSection) else { return .zero}
+            return CGSize(width: width, height: height)
         case .taglineCell:
-            return CGSize(width: width, height: 26)
+            let lineHeight: CGFloat = UIFont.articleSection.lineHeight * 4.0
+            let height = entry.excerpt.removingHTMLEntities.height(withConstrainedWidth: width, font: .articleSection)
+            let correctHeight = lineHeight <= height ? lineHeight : height
+            return CGSize(width: width, height: correctHeight)
         case .actionMenuCell:
             return CGSize(width: width, height: 35)
         }
@@ -107,6 +100,11 @@ extension HeroSectionController: HeartPressedDelegate, BookmarkPressedDelegate, 
             let cell = collectionContext!.dequeueReusableCell(of: TitleCell.self, for: self, at: index) as! TitleCell
             cell.post = entry
             return cell
+        case .authorCell:
+            // swiftlint:disable:next force_cast
+            let cell = collectionContext!.dequeueReusableCell(of: AuthorCell.self, for: self, at: index) as! AuthorCell
+            cell.post = entry
+            return cell
         case .taglineCell:
             // swiftlint:disable:next force_cast
             let cell = collectionContext!.dequeueReusableCell(of: TaglineCell.self, for: self, at: index) as! TaglineCell
@@ -115,9 +113,9 @@ extension HeroSectionController: HeartPressedDelegate, BookmarkPressedDelegate, 
         case .actionMenuCell:
             // swiftlint:disable:next force_cast
             let cell = collectionContext!.dequeueReusableCell(of: MenuActionCell.self, for: self, at: index) as! MenuActionCell
-            cell.heartDelegate = self
             cell.bookmarkDelegate = self
             cell.shareDelegate = self
+            cell.post = entry
             cell.setupViews(forBookmarks: false)
             return cell
         }
@@ -128,8 +126,8 @@ extension HeroSectionController: HeartPressedDelegate, BookmarkPressedDelegate, 
     }
 
     override func didSelectItem(at index: Int) {
-        if index == 0 {
-
+        if heroCellType(rawValue: index) != .actionMenuCell {
+            delegate?.articleSectionDidPressOnArticle(entry)
         }
     }
 }

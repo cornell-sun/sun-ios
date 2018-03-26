@@ -64,4 +64,8 @@ extension UIFont {
 	@nonobjc class var caption: UIFont {
         return UIFont(name: "Georgia", size: 13)!
 	}
+
+    @nonobjc class var time: UIFont {
+        return UIFont.systemFont(ofSize: 11, weight: .medium)
+    }
 }

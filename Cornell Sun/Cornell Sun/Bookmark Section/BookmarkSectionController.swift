@@ -27,7 +27,7 @@ class BookmarkSectionController: ListSectionController {
     }
 }
 
-extension BookmarkSectionController: HeartPressedDelegate, BookmarkPressedDelegate, SharePressedDelegate {
+extension BookmarkSectionController: BookmarkPressedDelegate, SharePressedDelegate {
 
     func taptic() {
         let generator = UIImpactFeedbackGenerator(style: .light)
@@ -49,21 +49,6 @@ extension BookmarkSectionController: HeartPressedDelegate, BookmarkPressedDelega
                         cell.bookmarkButton.transform = CGAffineTransform.identity
         })
         RealmManager.instance.delete(object: entry)
-    }
-
-    func didPressHeart(_ cell: MenuActionCell) {
-        let correctHeartImage = cell.heartButton.currentImage == #imageLiteral(resourceName: "heartPressed") ? #imageLiteral(resourceName: "heart") : #imageLiteral(resourceName: "heartPressed")
-        cell.heartButton.setImage(correctHeartImage, for: .normal)
-        cell.heartButton.transform = CGAffineTransform(scaleX: 0.6, y: 0.6)
-        taptic()
-        UIView.animate(withDuration: 1.0,
-                       delay: 0,
-                       usingSpringWithDamping: CGFloat(0.40),
-                       initialSpringVelocity: CGFloat(6.0),
-                       options: UIViewAnimationOptions.allowUserInteraction,
-                       animations: {
-                        cell.heartButton.transform = CGAffineTransform.identity
-        })
     }
 
     func didPressShare() {
@@ -122,9 +107,9 @@ extension BookmarkSectionController: HeartPressedDelegate, BookmarkPressedDelega
         case .actionMenuCell:
             // swiftlint:disable:next force_cast
             let cell = collectionContext!.dequeueReusableCell(of: MenuActionCell.self, for: self, at: index) as! MenuActionCell
-            cell.heartDelegate = self
             cell.bookmarkDelegate = self
             cell.shareDelegate = self
+            cell.post = entry
             cell.setupViews(forBookmarks: true)
             cell.setBookmarkImage(didSelectBookmark: entry.didSave)
             return cell

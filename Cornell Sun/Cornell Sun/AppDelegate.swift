@@ -28,7 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         ImageCache.default.maxDiskCacheSize = 50 * 1024 * 1024 //50 mb
         ImageCache.default.maxCachePeriodInSecond = 60 * 60 * 24 * 4 //4 days until its removed
 
-        setUpData { posts, mainHeadlinePost in
+        prepareInitialPosts { posts, mainHeadlinePost in
             let tabBarController = TabBarViewController(with: posts, mainHeadlinePost: mainHeadlinePost)
             self.window!.rootViewController = tabBarController
         }

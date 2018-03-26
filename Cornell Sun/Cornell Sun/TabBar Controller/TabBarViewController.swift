@@ -41,7 +41,7 @@ class TabBarViewController: UITabBarController {
         let feedVC = FeedCollectionViewController()
         feedVC.feedData = posts
         if let mainHeadlinePost = headlinePost {
-            feedVC.firstPostObject = mainHeadlinePost
+            feedVC.headlinePost = mainHeadlinePost
         }
         let tabOneNavigationController = UINavigationController(rootViewController: feedVC)
         let tabOneTabBarItem = UITabBarItem(title: "News", image: #imageLiteral(resourceName: "feedIcon").withRenderingMode(.alwaysOriginal), selectedImage: #imageLiteral(resourceName: "feedIconRed").withRenderingMode(.alwaysOriginal))

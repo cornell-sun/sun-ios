@@ -22,10 +22,13 @@ class SectionViewController: UIViewController {
     var tableView: UITableView!
     var sections: [Sections] = [.opinion(id: 3), .sports(id: 4), .arts(id: 5), .science(id: 6), .dining(id: 7), .multimedia(id: 9)]
 
+    override func viewWillAppear(_ animated: Bool) {
+        title = "Sections"
+        navigationController?.navigationBar.barTintColor = .white
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Sections"
-
         tableView = UITableView()
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "sectionCell")
         tableView.tableFooterView = UIView()

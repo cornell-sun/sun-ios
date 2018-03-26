@@ -12,8 +12,18 @@ import IGListKit
 class SectionCollectionViewController: UIViewController, UIScrollViewDelegate {
 
     var sectionSelected: Sections!
+    var emptySpinnerView = UIView()
+    let spinner = UIActivityIndicatorView(activityIndicatorStyle: .gray)
     var refreshControl = UIRefreshControl()
-    var feedData: [PostObject] = []
+    var feedData: [PostObject] = [] {
+        didSet {
+            if feedData.isEmpty {
+                spinner.startAnimating()
+            } else {
+                spinner.stopAnimating()
+            }
+        }
+    }
     var loading = false
     let spinToken = "spinner"
 
@@ -58,6 +68,8 @@ class SectionCollectionViewController: UIViewController, UIScrollViewDelegate {
         navigationController?.navigationBar.topItem?.title = ""
         navigationController?.navigationBar.tintColor = .black
 
+        emptySpinnerView.addSubview(spinner)
+
         view.addSubview(collectionView)
         adapter.collectionView = collectionView
         adapter.collectionView?.backgroundColor = .offWhite
@@ -67,6 +79,10 @@ class SectionCollectionViewController: UIViewController, UIScrollViewDelegate {
 
         collectionView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
+        }
+
+        spinner.snp.makeConstraints { make in
+            make.center.equalToSuperview()
         }
     }
 
@@ -90,6 +106,10 @@ extension SectionCollectionViewController: ListAdapterDataSource {
             return spinnerSectionController()
         } else if let obj = object as? PostObject, obj.postType == .photoGallery {
             return PhotoGallerySectionController()
+        } else if let obj = object as? PostObject, obj.isEqual(toDiffableObject: feedData[0]) {
+            let heroSC = HeroSectionController()
+            heroSC.delegate = self
+            return heroSC
         }
         let articleSC = ArticleSectionController()
         articleSC.delegate = self
@@ -97,7 +117,10 @@ extension SectionCollectionViewController: ListAdapterDataSource {
     }
 
     func emptyView(for listAdapter: ListAdapter) -> UIView? {
-        return nil
+        if feedData.isEmpty {
+            spinner.startAnimating()
+        }
+        return emptySpinnerView
     }
 }
 
