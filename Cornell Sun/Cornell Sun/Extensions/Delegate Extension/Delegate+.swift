@@ -26,7 +26,7 @@ func pressedBookmark(_ cell: MenuActionCell, entry: PostObject) {
     taptic(style: .light)
     UIView.animate(withDuration: 1.0,
                    delay: 0,
-                   usingSpringWithDamping: CGFloat(0.40),
+                   usingSpringWithDamping: CGFloat(0.4),
                    initialSpringVelocity: CGFloat(6.0),
                    options: UIViewAnimationOptions.allowUserInteraction,
                    animations: {
