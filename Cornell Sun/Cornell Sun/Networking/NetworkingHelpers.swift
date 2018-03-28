@@ -31,7 +31,7 @@ func fetchPosts(target: SunAPI, completion: @escaping PostObjectCompletionBlock)
             let jsonResult = try JSONSerialization.jsonObject(with: response.data, options: [])
             if let postArray = jsonResult as? [[String: Any]] {
                 for postDictionary in postArray {
-                    if let post = PostObject(dictionary: postDictionary) {
+                    if let post = PostObject(data: postDictionary) {
                         if savedPostIds.contains(post.id) {
                             post.didSave = true
                         }
@@ -71,23 +71,25 @@ func prepareInitialPosts(callback: @escaping ([PostObject], PostObject?) -> Void
     let group = DispatchGroup()
 
     // uncomment when backend is fixed
-//    group.enter()
-//    API.request(target: .featured) { (response) in
-//        if let response = response {
-//            do {
-//                let json = try JSONSerialization.jsonObject(with: response.data, options: [])
-//                if let postDictionary = json as? [String: Any], let post = PostObject(dictionary: postDictionary) {
-//                    if savedPostIds.contains(post.id) {
-//                        post.didSave = true
-//                    }
-//                    headlinePost = post
-//                }
-//            } catch {
-//                fatalError()
-//            }
-//        }
-//        group.leave()
-//    }
+    group.enter()
+    API.request(target: .featured) { (response) in
+        if let response = response {
+            do {
+                let json = try JSONSerialization.jsonObject(with: response.data, options: [])
+                if let postDictionary = json as? [String: Any], let post = PostObject(data: postDictionary) {
+                    if savedPostIds.contains(post.id) {
+                        post.didSave = true
+                    }
+                    headlinePost = post
+                } else {
+                    print("could not parse featured post")
+                }
+            } catch {
+                fatalError()
+            }
+        }
+        group.leave()
+    }
 
     group.enter()
     API.request(target: .posts(page: 1)) { (response) in
@@ -97,13 +99,9 @@ func prepareInitialPosts(callback: @escaping ([PostObject], PostObject?) -> Void
                 let json = try JSONSerialization.jsonObject(with: response.data, options: [])
                 if let postArray = json as? [[String: Any]] {
                     for postDictionary in postArray {
-                        if let post = PostObject(dictionary: postDictionary) {
+                        if let post = PostObject(data: postDictionary) {
                             if savedPostIds.contains(post.id) {
                                 post.didSave = true
-                            }
-                            //temporary
-                            if headlinePost == nil {
-                                headlinePost = post
                             }
                             postObjects.append(post)
                         }

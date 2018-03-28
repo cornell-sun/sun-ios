@@ -24,6 +24,7 @@ class SectionCollectionViewController: UIViewController, UIScrollViewDelegate {
             }
         }
     }
+
     var loading = false
     let spinToken = "spinner"
 
@@ -42,6 +43,9 @@ class SectionCollectionViewController: UIViewController, UIScrollViewDelegate {
         super.init(nibName: nil, bundle: nil)
         sectionSelected = section
         title = sectionTitle
+        navigationController?.navigationBar.titleTextAttributes = [
+            NSAttributedStringKey.font: UIFont.systemFont(ofSize: 16, weight: .medium)
+        ]
         var sectionID = 0
         switch section {
         case .opinion(let id), .arts(let id), .dining(let id), .multimedia(let id), .science(let id), .sports(let id):
@@ -67,6 +71,7 @@ class SectionCollectionViewController: UIViewController, UIScrollViewDelegate {
         view.backgroundColor = .white
         navigationController?.navigationBar.topItem?.title = ""
         navigationController?.navigationBar.tintColor = .black
+
 
         emptySpinnerView.addSubview(spinner)
 
@@ -110,6 +115,7 @@ extension SectionCollectionViewController: ListAdapterDataSource {
             let heroSC = HeroSectionController()
             heroSC.delegate = self
             return heroSC
+
         }
         let articleSC = ArticleSectionController()
         articleSC.delegate = self
@@ -121,6 +127,7 @@ extension SectionCollectionViewController: ListAdapterDataSource {
             spinner.startAnimating()
         }
         return emptySpinnerView
+
     }
 }
 

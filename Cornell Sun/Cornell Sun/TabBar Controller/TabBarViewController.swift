@@ -41,6 +41,7 @@ class TabBarViewController: UITabBarController {
         let feedVC = FeedCollectionViewController()
         feedVC.feedData = posts
         if let mainHeadlinePost = headlinePost {
+            print("setting mainHeadlinePost to feedVC")
             feedVC.headlinePost = mainHeadlinePost
         }
         let tabOneNavigationController = UINavigationController(rootViewController: feedVC)

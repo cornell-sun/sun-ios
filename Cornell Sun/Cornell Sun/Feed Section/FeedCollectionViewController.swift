@@ -13,6 +13,7 @@ import RealmSwift
 
 class FeedCollectionViewController: ViewController, UIScrollViewDelegate {
     var isFirstRun = true
+
     var loading = false
 
     var currentPage = 1
@@ -86,7 +87,13 @@ class FeedCollectionViewController: ViewController, UIScrollViewDelegate {
 
 extension FeedCollectionViewController: ListAdapterDataSource {
     func objects(for listAdapter: ListAdapter) -> [ListDiffable] {
+
         var objects: [ListDiffable] = feedData
+
+        if let mainPost = headlinePost {
+            objects = [mainPost] + objects
+        }
+
         if loading {
             objects.append(spinToken as ListDiffable)
         }
