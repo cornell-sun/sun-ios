@@ -13,15 +13,17 @@ final class TaglineCell: UICollectionViewCell {
 
     var post: PostObject? {
         didSet {
-            taglineLabel.text = "This is where the tagline goes! Wow!"
+            if let post = post {
+            taglineLabel.text = post.excerpt.removingHTMLEntities.replacingOccurrences(of: "<[^>]+>", with: "", options: .regularExpression, range: nil)
+            }
         }
     }
 
     let taglineLabel: UILabel = {
         let label = UILabel()
         label.text = ""
-        label.numberOfLines = 1
-        label.font = UIFont(name: "Georgia", size: 14)
+        label.numberOfLines = 3
+        label.font = .articleSection
         return label
     }()
 

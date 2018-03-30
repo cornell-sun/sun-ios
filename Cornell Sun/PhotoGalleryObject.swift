@@ -38,7 +38,9 @@ class PhotoGalleryObject: Object {
         self.authorName = authorName
         self.fullImageLink = fullImageLink
 
-        cacheImage(imageLink: fullImageLink)
+        DispatchQueue.main.async {
+            cacheImage(imageLink: fullImageLink)
+        }
     }
 
     required init() {

@@ -59,21 +59,22 @@ class PostObject: Object, ListDiffable {
 
     convenience init?(data: [String: Any]) {
         self.init()
-        guard let postDict = data["post_info_dict"] as? [String: Any] else { return }
+
+        guard let postDict = data["post_info_dict"] as? [String: Any] else { return nil }
         guard
-        let id = data["id"] as? Int,
-        let dateString = data["date"] as? String,
+        let id = postDict["id"] as? Int,
+        let dateString = postDict["date"] as? String,
         let date = wpDateFormatter.date(from: dateString),
-        let titleDictionary = data["title"] as? [String: Any],
+        let titleDictionary = postDict["title"] as? [String: Any],
         let title = titleDictionary["rendered"] as? String,
-        let contentDictionary = data["content"] as? [String: Any],
+        let contentDictionary = postDict["content"] as? [String: Any],
         let content = contentDictionary["rendered"] as? String,
-        let excerptDictionary = data["excerpt"] as? [String: Any],
+        let excerptDictionary = postDict["excerpt"] as? [String: Any],
         let excerpt = excerptDictionary["rendered"] as? String,
-        let link = data["link"] as? String,
+        let link = postDict["link"] as? String,
         let categoriesArray = postDict["category_strings"] as? [String],
         let primaryCategory = postDict["primary_category"] as? String,
-        let authorId = data["author"] as? Int,
+        let authorId = postDict["author"] as? Int,
         let postTypeString = postDict["post_type_enum"] as? String,
         let postTypeEnum = postTypeEnum(rawValue: postTypeString),
         let featuredMediaDictionary = postDict["featured_media_url_string"] as? [String: Any],
@@ -89,6 +90,7 @@ class PostObject: Object, ListDiffable {
             print("going to return nil")
             return nil
         }
+
         var photoGalleryObjects: [PhotoGalleryObject] = []
 
         var authorName = "Unknown"
@@ -169,17 +171,13 @@ class PostObject: Object, ListDiffable {
     }
 
     func diffIdentifier() -> NSObjectProtocol {
-        var idDiff = -9999999
-        if !isInvalidated {
-            idDiff = id
-        }
-        return idDiff as NSObjectProtocol
+        return id as NSObjectProtocol
     }
 
     func isEqual(toDiffableObject object: ListDiffable?) -> Bool {
-        if self === object { return true } else {
-            return false
-        }
+        guard self !== object else { return true }
+        guard let object = object as? PostObject else { return false }
+        return self.id == object.id
     }
 
 }

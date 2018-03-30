@@ -16,6 +16,7 @@ target 'Cornell Sun' do
   pod 'ImageSlideshow/Kingfisher', :git=> 'https://github.com/AAAstorga/ImageSlideshow.git', :commit => 'bec5f17bd71d32d289378e1ba787a55cfa80bcce'
   pod 'RealmSwift'
   pod 'Google-Mobile-Ads-SDK'
+  pod 'SwiftSoup'
 
   target 'Cornell SunTests' do
       inherit! :search_paths

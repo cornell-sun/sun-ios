@@ -9,7 +9,7 @@
 import UIKit
 import IGListKit
 
-enum adCellType: Int {
+enum AdCellType: Int {
     case categoryCell = 0
     case adImageCell = 1
 }
@@ -30,7 +30,7 @@ extension AdSectionController {
     override func sizeForItem(at index: Int) -> CGSize {
         guard let context = collectionContext else {return .zero}
         let width = context.containerSize.width
-        guard let sizeForItemIndex = adCellType(rawValue: index) else {
+        guard let sizeForItemIndex = AdCellType(rawValue: index) else {
             return .zero
         }
         switch sizeForItemIndex {
@@ -42,7 +42,7 @@ extension AdSectionController {
     }
     
     override func cellForItem(at index: Int) -> UICollectionViewCell {
-        guard let cellForItemIndex = adCellType(rawValue: index) else {
+        guard let cellForItemIndex = AdCellType(rawValue: index) else {
             return UICollectionViewCell()
         }
         switch cellForItemIndex {

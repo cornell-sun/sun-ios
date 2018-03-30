@@ -30,25 +30,10 @@ class PhotoGallerySectionController: ListSectionController {
     }
 }
 
-extension PhotoGallerySectionController: HeartPressedDelegate, BookmarkPressedDelegate, SharePressedDelegate, PhotoChangedDelegate {
+extension PhotoGallerySectionController: BookmarkPressedDelegate, SharePressedDelegate, PhotoChangedDelegate {
 
     func didPressBookmark(_ cell: MenuActionCell) {
         pressedBookmark(cell, entry: entry)
-    }
-
-    func didPressHeart(_ cell: MenuActionCell) {
-        let correctHeartImage = cell.heartButton.currentImage == #imageLiteral(resourceName: "heartPressed") ? #imageLiteral(resourceName: "heart") : #imageLiteral(resourceName: "heartPressed")
-        cell.heartButton.setImage(correctHeartImage, for: .normal)
-        cell.heartButton.transform = CGAffineTransform(scaleX: 0.6, y: 0.6)
-        taptic(style: .light)
-        UIView.animate(withDuration: 1.0,
-                       delay: 0,
-                       usingSpringWithDamping: CGFloat(0.40),
-                       initialSpringVelocity: CGFloat(6.0),
-                       options: UIViewAnimationOptions.allowUserInteraction,
-                       animations: {
-                        cell.heartButton.transform = CGAffineTransform.identity
-        })
     }
 
     func didPressShare() {
@@ -78,7 +63,7 @@ extension PhotoGallerySectionController: HeartPressedDelegate, BookmarkPressedDe
             return CGSize(width: width, height: 40)
         case .titleCell:
             let height = entry.title.height(withConstrainedWidth: width, font: UIFont.boldSystemFont(ofSize: 22)) //CLUTCH Extension thank stackoverflow gods
-            return CGSize(width: width, height: height + 5)
+            return CGSize(width: width, height: height + 10)
         case .authorCell:
             let height = entry.author?.name.height(withConstrainedWidth: width, font: UIFont(name: "Georgia", size: 13)!)
             return CGSize(width: width, height: height! + 9)
@@ -135,9 +120,9 @@ extension PhotoGallerySectionController: HeartPressedDelegate, BookmarkPressedDe
         case .actionMenuCell:
             // swiftlint:disable:next force_cast
             let cell = collectionContext!.dequeueReusableCell(of: MenuActionCell.self, for: self, at: index) as! MenuActionCell
-            cell.heartDelegate = self
             cell.bookmarkDelegate = self
             cell.shareDelegate = self
+            cell.post = entry
             cell.setupViews(forBookmarks: false)
             cell.setBookmarkImage(didSelectBookmark: entry.didSave)
             return cell

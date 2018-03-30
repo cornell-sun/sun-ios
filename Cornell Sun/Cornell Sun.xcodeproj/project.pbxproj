@@ -35,12 +35,15 @@
 		DC0A883C1FBA531000F2BCBB /* BookmarkCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0A883B1FBA531000F2BCBB /* BookmarkCollectionViewController.swift */; };
 		DC0A883E1FBA6B8200F2BCBB /* BookmarkSectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0A883D1FBA6B8200F2BCBB /* BookmarkSectionController.swift */; };
 		DC0A88401FBA84E700F2BCBB /* AuthorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0A883F1FBA84E700F2BCBB /* AuthorCell.swift */; };
+		DC34DEF3203216690010DF9A /* SectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC34DEF2203216690010DF9A /* SectionViewController.swift */; };
+		DC34DEF520321C6D0010DF9A /* SectionCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC34DEF420321C6D0010DF9A /* SectionCollectionViewController.swift */; };
 		DC4308ED1F2558D500ABB31F /* SunAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4308EC1F2558D500ABB31F /* SunAPI.swift */; };
 		DC4308EF1F2563FF00ABB31F /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4308EE1F2563FF00ABB31F /* API.swift */; };
 		DC446C2E1F5D016500D68688 /* FeedCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC446C2D1F5D016500D68688 /* FeedCollectionViewController.swift */; };
 		DC446C321F5D05FF00D68688 /* ArticleSectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC446C311F5D05FF00D68688 /* ArticleSectionController.swift */; };
 		DC446C361F5D0DFF00D68688 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC446C351F5D0DFF00D68688 /* Extensions.swift */; };
 		DC4FED232027F05A004F435E /* SearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4FED222027F05A004F435E /* SearchCell.swift */; };
+		DC556AC520602E6900475B7D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC556AC420602E6900475B7D /* Constants.swift */; };
 		DC6561D31FBAC45900C5062D /* PhotoGalleryObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6561D21FBAC45900C5062D /* PhotoGalleryObject.swift */; };
 		DC6561D51FBACA8800C5062D /* PhotoGallerySectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6561D41FBACA8800C5062D /* PhotoGallerySectionController.swift */; };
 		DC6561D71FBACE7D00C5062D /* CaptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6561D61FBACE7D00C5062D /* CaptionCell.swift */; };
@@ -111,12 +114,15 @@
 		DC0A883B1FBA531000F2BCBB /* BookmarkCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkCollectionViewController.swift; sourceTree = "<group>"; };
 		DC0A883D1FBA6B8200F2BCBB /* BookmarkSectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkSectionController.swift; sourceTree = "<group>"; };
 		DC0A883F1FBA84E700F2BCBB /* AuthorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorCell.swift; sourceTree = "<group>"; };
+		DC34DEF2203216690010DF9A /* SectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionViewController.swift; sourceTree = "<group>"; };
+		DC34DEF420321C6D0010DF9A /* SectionCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionCollectionViewController.swift; sourceTree = "<group>"; };
 		DC4308EC1F2558D500ABB31F /* SunAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunAPI.swift; sourceTree = "<group>"; };
 		DC4308EE1F2563FF00ABB31F /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		DC446C2D1F5D016500D68688 /* FeedCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCollectionViewController.swift; sourceTree = "<group>"; };
 		DC446C311F5D05FF00D68688 /* ArticleSectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleSectionController.swift; sourceTree = "<group>"; };
 		DC446C351F5D0DFF00D68688 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		DC4FED222027F05A004F435E /* SearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCell.swift; sourceTree = "<group>"; };
+		DC556AC420602E6900475B7D /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		DC6561D21FBAC45900C5062D /* PhotoGalleryObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoGalleryObject.swift; sourceTree = "<group>"; };
 		DC6561D41FBACA8800C5062D /* PhotoGallerySectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoGallerySectionController.swift; sourceTree = "<group>"; };
 		DC6561D61FBACE7D00C5062D /* CaptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptionCell.swift; sourceTree = "<group>"; };
@@ -216,6 +222,7 @@
 				5006AFFB1EA9625000F58549 /* AppDelegate.swift */,
 				34C558282041E42A00E62CE8 /* Ad Section */,
 				DCECA9911FBE2D8700BAB2EA /* Feed Section */,
+				DC34DEF1203215FE0010DF9A /* Sections Section */,
 				DCA02C062026580100CBE97F /* Search Section */,
 				DCECA9941FBE2E1D00BAB2EA /* Bookmark Section */,
 				DC34DEEA2032137C0010DF9A /* Settings Section */,
@@ -339,6 +346,7 @@
 				DC34DEEE2032141B0010DF9A /* Color Extension */,
 				DC34DEF0203214580010DF9A /* Date Extension */,
 				DC446C351F5D0DFF00D68688 /* Extensions.swift */,
+				DC556AC420602E6900475B7D /* Constants.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -349,6 +357,15 @@
 				0CEA0F791F99454600607CC7 /* Date+.swift */,
 			);
 			path = "Date Extension";
+			sourceTree = "<group>";
+		};
+		DC34DEF1203215FE0010DF9A /* Sections Section */ = {
+			isa = PBXGroup;
+			children = (
+				DC34DEF2203216690010DF9A /* SectionViewController.swift */,
+				DC34DEF420321C6D0010DF9A /* SectionCollectionViewController.swift */,
+			);
+			path = "Sections Section";
 			sourceTree = "<group>";
 		};
 		DCA02C062026580100CBE97F /* Search Section */ = {
@@ -622,6 +639,7 @@
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftSoup/SwiftSoup.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -640,6 +658,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftSoup.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -704,17 +723,20 @@
 				0CAA2BEC1F954E3200D423FD /* ArticleViewController.swift in Sources */,
 				0CED4FAE1FAB523F0025EB91 /* UIFont+.swift in Sources */,
 				5006B24D1EADA37F00F58549 /* PostObject.swift in Sources */,
+				DC34DEF520321C6D0010DF9A /* SectionCollectionViewController.swift in Sources */,
 				DCB717161FBA016400BE4D26 /* TaglineCell.swift in Sources */,
 				DC0A88401FBA84E700F2BCBB /* AuthorCell.swift in Sources */,
 				0C15F1871FBDD433009724DB /* ArticleHeaderView.swift in Sources */,
 				DCFC88C81F86C7B000A0D8A9 /* LikeCommentCell.swift in Sources */,
 				405F83D81FBE1E2B00360AEB /* SettingObject.swift in Sources */,
 				DC79719F1F7B30540055A7B2 /* CategoryCell.swift in Sources */,
+				DC34DEF3203216690010DF9A /* SectionViewController.swift in Sources */,
 				DC0A883A1FBA2DEE00F2BCBB /* PhotoGalleryCell.swift in Sources */,
 				DC446C2E1F5D016500D68688 /* FeedCollectionViewController.swift in Sources */,
 				0CBC2CEE1F5E3093003FBB38 /* TabBarViewController.swift in Sources */,
 				50A898121EAEC93B0099CFA9 /* AuthorObject.swift in Sources */,
 				DC695D8B1FBB897600C6C62F /* RealmManager.swift in Sources */,
+				DC556AC520602E6900475B7D /* Constants.swift in Sources */,
 				61652CD21F6EF3A500EEFC29 /* SearchViewController.swift in Sources */,
 				DC4308ED1F2558D500ABB31F /* SunAPI.swift in Sources */,
 				0CED4FAD1FAB523F0025EB91 /* UIColor+.swift in Sources */,
