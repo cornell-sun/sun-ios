@@ -33,6 +33,7 @@ final class MenuActionCell: UICollectionViewCell {
     let bookmarkWidth = 15.0
     let imageHeight = 21.0
     let offset = 18
+    let bookmarkOffset = -24.0
 
     lazy var timeStampLabel: UILabel = {
         let label = UILabel()
@@ -112,7 +113,7 @@ final class MenuActionCell: UICollectionViewCell {
             make.width.equalTo(shareWidth)
             make.height.equalTo(imageHeight)
             make.centerY.equalToSuperview()
-            make.right.equalTo(bookmarkButton.snp.left).offset(-24)
+            make.right.equalTo(bookmarkButton.snp.left).offset(bookmarkOffset)
         }
     }
 }

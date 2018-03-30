@@ -20,7 +20,7 @@ class FeedCollectionViewController: ViewController, UIScrollViewDelegate {
     let spinToken = "spinner"
 
     var feedData: [PostObject] = []
-     var savedPostIds: [Int] = []
+    var savedPostIds: [Int] = []
     var headlinePost: PostObject!
 
     var refreshControl = UIRefreshControl()

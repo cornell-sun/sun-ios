@@ -52,9 +52,7 @@ extension ArticleSectionController: BookmarkPressedDelegate, SharePressedDelegat
         })
         if didBookmark {
             RealmManager.instance.save(object: entry)
-            //RealmManager.instance.update(object: entry, to: true)
         } else {
-            //RealmManager.instance.update(object: entry, to: false)
             RealmManager.instance.delete(object: entry)
         }
     }

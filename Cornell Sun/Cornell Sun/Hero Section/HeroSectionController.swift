@@ -61,7 +61,7 @@ extension HeroSectionController: BookmarkPressedDelegate, SharePressedDelegate {
     }
 
     override func sizeForItem(at index: Int) -> CGSize {
-        guard let context = collectionContext, entry != nil else {return .zero}
+        guard let context = collectionContext, entry != nil else {return .zero }
         let width = context.containerSize.width
         guard let sizeForItemIndex = heroCellType(rawValue: index) else {
             return .zero
@@ -73,7 +73,7 @@ extension HeroSectionController: BookmarkPressedDelegate, SharePressedDelegate {
             let height = entry.title.height(withConstrainedWidth: width, font: UIFont.boldSystemFont(ofSize: 22)) //CLUTCH Extension thank stackoverflow gods
             return CGSize(width: width, height: height + 10)
         case .authorCell:
-            guard let height = entry.author?.name.height(withConstrainedWidth: width, font: .articleSection) else { return .zero}
+            guard let height = entry.author?.name.height(withConstrainedWidth: width, font: .articleSection) else { return .zero }
             return CGSize(width: width, height: height)
         case .taglineCell:
             let lineHeight: CGFloat = UIFont.articleSection.lineHeight * 4.0

@@ -11,6 +11,8 @@ import SnapKit
 
 final class CategoryCell: UICollectionViewCell {
 
+    var categoryLabelLeading = 17.0
+
     var post: PostObject? {
         didSet {
             categoryLabel.text = post?.primaryCategory
@@ -46,7 +48,7 @@ final class CategoryCell: UICollectionViewCell {
         addSubview(divider)
         categoryLabel.snp.makeConstraints { (make) in
             make.centerY.equalToSuperview()
-            make.leading.equalTo(17)
+            make.leading.equalTo(categoryLabelLeading)
         }
         divider.snp.makeConstraints { (make) in
             make.height.equalTo(1)

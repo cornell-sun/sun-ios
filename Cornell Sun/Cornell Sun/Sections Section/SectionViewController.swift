@@ -82,7 +82,6 @@ extension SectionViewController: UITableViewDataSource, UITableViewDelegate {
         cell.textLabel?.text = sectionToString(section: sections[indexPath.row])
         cell.textLabel?.font = .systemFont(ofSize: 17, weight: .semibold)
         cell.accessoryView = UIImageView(image: #imageLiteral(resourceName: "disclosureArrow"))
-        //cell.accessoryType = .disclosureIndicator
         return cell
     }
 

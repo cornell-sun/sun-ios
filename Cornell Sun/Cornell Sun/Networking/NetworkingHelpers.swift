@@ -69,17 +69,14 @@ func prepareInitialPosts(callback: @escaping ([PostObject], PostObject?) -> Void
     var postObjects: [PostObject] = []
 
     let group = DispatchGroup()
-
-    // uncomment when backend is fixed
+    
     group.enter()
     API.request(target: .featured) { (response) in
         if let response = response {
             do {
                 let json = try JSONSerialization.jsonObject(with: response.data, options: [])
                 if let postDictionary = json as? [String: Any], let post = PostObject(data: postDictionary) {
-                    if savedPostIds.contains(post.id) {
-                        post.didSave = true
-                    }
+                    post.didSave = savedPostIds.contains(post.id)
                     headlinePost = post
                 } else {
                     print("could not parse featured post")
