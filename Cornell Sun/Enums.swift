@@ -16,9 +16,27 @@ enum SecondaryViewType {
     case none, label, toggle //Can add more if needed
 }
 
+enum FontSize {
+    case regular
+    case large
+    case small
+
+    func getFont() -> UIFont {
+        switch self {
+        case .regular:
+            return .articleBody
+        case .large:
+            return .articleBodyLarge
+        case .small:
+            return .articleBodySmall
+        }
+    }
+}
+
 enum ArticleContentType {
     case text(NSAttributedString)
     case image(String)
     case imageCredit(String)
     case caption(String)
+    case blockquote(String)
 }

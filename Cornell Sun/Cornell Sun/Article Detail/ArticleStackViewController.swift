@@ -10,23 +10,6 @@ import UIKit
 import SwiftSoup
 import SafariServices
 
-enum FontSize {
-    case regular
-    case large
-    case small
-
-    func getFont() -> UIFont {
-        switch self {
-        case .regular:
-            return .articleBody
-        case .large:
-            return .articleBodyLarge
-        case .small:
-            return .articleBodySmall
-        }
-    }
-}
-
 class ArticleStackViewController: UIViewController {
 
     let leadingOffset: CGFloat = 17.5
@@ -62,6 +45,9 @@ class ArticleStackViewController: UIViewController {
         view.backgroundColor = .white
         navigationController?.navigationBar.topItem?.title = ""
         navigationController?.navigationBar.tintColor = .black
+        if #available(iOS 11.0, *) {
+            navigationController?.navigationBar.prefersLargeTitles = false
+        }
 
         scrollView = UIScrollView()
         view.addSubview(scrollView)
@@ -109,6 +95,9 @@ class ArticleStackViewController: UIViewController {
             } else if element.tag().toString() == "img" {
                 guard let imgItem = parseImg(element: element) else { continue }
                 sections.append(imgItem)
+            } else if element.tag().toString() == "aside" {
+                guard let blockquote = parseAside(element: element) else { continue }
+                sections.append(blockquote)
             }
         }
         return sections
@@ -133,6 +122,14 @@ class ArticleStackViewController: UIViewController {
         return .image(srcUrl)
     }
 
+    func parseAside(element: Element) -> ArticleContentType? {
+        guard let text = try? element.text() else { return nil}
+        if element.hasClass("module") && text != "" {
+            return .blockquote(text.htmlToString)
+        }
+        return nil
+    }
+
     /// Sets up the content in the stack view by parsing each section.
     func setup() {
         let sections = createArticleContentType(content: post.content)
@@ -146,6 +143,8 @@ class ArticleStackViewController: UIViewController {
                 setupImageCredit(credit: credit)
             case .text(let attrString):
                 setupArticleText(text: attrString)
+            case .blockquote(let string):
+                setupBlockquote(text: string)
             }
         }
     }
@@ -159,11 +158,11 @@ class ArticleStackViewController: UIViewController {
         label.numberOfLines = 0
         view.addSubview(label)
         stackView.addArrangedSubview(view)
-        label.snp.makeConstraints({ make in
+        label.snp.makeConstraints { make in
             make.top.equalToSuperview()
             make.leading.trailing.equalToSuperview().inset(leadingOffset)
             make.bottom.equalToSuperview().inset(captionBottomInset)
-        })
+        }
     }
 
     func setupImageView(imageURLString: String) {
@@ -174,11 +173,11 @@ class ArticleStackViewController: UIViewController {
         imageView.kf.setImage(with: URL(string: imageURLString))
         view.addSubview(imageView)
         stackView.addArrangedSubview(view)
-        imageView.snp.makeConstraints({ make in
+        imageView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
             make.top.bottom.equalToSuperview()
             make.height.equalTo(imageViewHeight)
-        })
+        }
     }
 
     func setupImageCredit(credit: String) {
@@ -190,11 +189,11 @@ class ArticleStackViewController: UIViewController {
         creditLabel.font = .credits
         view.addSubview(creditLabel)
         stackView.addArrangedSubview(view)
-        creditLabel.snp.makeConstraints({ make in
+        creditLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().inset(captionTopOffset)
             make.bottom.equalToSuperview()
             make.leading.trailing.equalToSuperview().inset(leadingOffset)
-        })
+        }
     }
 
     func setupArticleText(text: NSAttributedString) {
@@ -212,10 +211,49 @@ class ArticleStackViewController: UIViewController {
         }
         view.addSubview(textView)
         stackView.addArrangedSubview(view)
-        textView.snp.makeConstraints({ make in
+        textView.snp.makeConstraints { make in
             make.top.bottom.equalToSuperview()
             make.leading.trailing.equalToSuperview().inset(leadingOffset)
-        })
+        }
+    }
+
+    func setupBlockquote(text: String) {
+        let view = UIView()
+        let textView = UITextView()
+        textView.text = text
+        textView.textContainer.lineFragmentPadding = 0
+        textView.font = .articleViewTheme
+        textView.textColor = .black
+        textView.textAlignment = .center
+        textView.isScrollEnabled = false
+        textView.isEditable = false
+        if #available(iOS 11.0, *) {
+            textView.textDragInteraction?.isEnabled = false
+        }
+        view.addSubview(textView)
+        stackView.addArrangedSubview(view)
+        let topLine = UILabel()
+        topLine.backgroundColor = .dividerGray
+        view.addSubview(topLine)
+        topLine.snp.makeConstraints { make in
+            make.top.equalToSuperview()
+            make.height.equalTo(1)
+            make.leading.trailing.equalToSuperview()
+        }
+        let bottomLine = UILabel()
+        bottomLine.backgroundColor = .darkGrey
+        view.addSubview(bottomLine)
+        bottomLine.snp.makeConstraints { make in
+            make.bottom.equalToSuperview().inset(leadingOffset)
+            make.height.equalTo(5)
+            make.centerX.equalToSuperview()
+            make.width.equalTo(100)
+        }
+        textView.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(leadingOffset)
+            make.leading.trailing.equalToSuperview().inset(leadingOffset)
+            make.bottom.equalTo(bottomLine.snp.top).offset(-leadingOffset)
+        }
     }
 }
 
