@@ -41,7 +41,7 @@ class SearchSectionController: ListSectionController {
         case .categoryCell:
             return CGSize(width: width, height: CATEGORYCELLHEIGHT)
         case .titleCell:
-            let height = entry.title.height(withConstrainedWidth: width - 34, font: UIFont.boldSystemFont(ofSize: 22)) //CLUTCH Extension thank stackoverflow gods
+            let height = entry.title.height(withConstrainedWidth: width - 34, font: .articleTitle) //CLUTCH Extension thank stackoverflow gods
             return CGSize(width: width, height: height + 10)
         case .previewCell:
             return CGSize(width: width, height: PREVIEWCELLHEIGHT)

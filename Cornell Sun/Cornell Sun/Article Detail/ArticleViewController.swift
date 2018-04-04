@@ -19,9 +19,9 @@ enum FontSize {
         case .regular:
             return .articleBody
         case .large:
-            return .articleBodyLarge
+            return UIFont.articleBody.withSize(22)
         case .small:
-            return .articleBodySmall
+            return UIFont.articleBody.withSize(14)
         }
     }
 }
@@ -124,7 +124,7 @@ class ArticleViewController: UIViewController {
         }
 
         articleEndSeparator = UILabel(frame: .zero)
-        articleEndSeparator.backgroundColor = .warmGrey
+        articleEndSeparator.backgroundColor = .black40
         articleView.addSubview(articleEndSeparator)
         articleEndSeparator.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(leadingOffset)
@@ -134,7 +134,7 @@ class ArticleViewController: UIViewController {
 
         commentsLabel = UILabel(frame: .zero)
         commentsLabel.text = "Comments"
-        commentsLabel.font = UIFont.systemFont(ofSize: 15.0, weight: .bold)
+        commentsLabel.font = .secondaryHeader
         commentsLabel.textColor = .black
         articleView.addSubview(commentsLabel)
         commentsLabel.snp.makeConstraints { make in

@@ -19,7 +19,8 @@ class TabBarViewController: UITabBarController {
         view.backgroundColor = .white
         tabBar.backgroundColor = .white
         tabBar.backgroundImage = UIImage()
-        tabBar.tintColor = .bigRed
+        tabBar.tintColor = .brick
+        tabBar.unselectedItemTintColor = .black
         delegate = self
         setupTabs()
     }

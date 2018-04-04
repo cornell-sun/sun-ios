@@ -44,7 +44,7 @@ class SectionCollectionViewController: UIViewController, UIScrollViewDelegate {
         sectionSelected = section
         title = sectionTitle
         navigationController?.navigationBar.titleTextAttributes = [
-            NSAttributedStringKey.font: UIFont.systemFont(ofSize: 16, weight: .medium)
+            NSAttributedStringKey.font: UIFont.headerTitle
         ]
         var sectionID = 0
         switch section {
@@ -77,7 +77,7 @@ class SectionCollectionViewController: UIViewController, UIScrollViewDelegate {
 
         view.addSubview(collectionView)
         adapter.collectionView = collectionView
-        adapter.collectionView?.backgroundColor = .offWhite
+        adapter.collectionView?.backgroundColor = .white
         adapter.collectionView?.refreshControl = refreshControl
         adapter.dataSource = self
         adapter.scrollViewDelegate = self

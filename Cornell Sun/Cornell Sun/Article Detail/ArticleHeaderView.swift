@@ -44,7 +44,7 @@ class ArticleHeaderView: UIView {
 
         categoryLabel = UILabel(frame: .zero)
         categoryLabel.textColor = .black
-        categoryLabel.font = .articleViewTheme
+        categoryLabel.font = .secondaryHeader
         addSubview(categoryLabel)
         categoryLabel.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(leadingOffset)
@@ -53,7 +53,7 @@ class ArticleHeaderView: UIView {
         }
 
         titleLabel = UILabel(frame: .zero)
-        titleLabel.textColor = .blackThree
+        titleLabel.textColor = .black90
         titleLabel.font = .articleTitle
         titleLabel.preferredMaxLayoutWidth = frame.width - 2 * leadingOffset
         titleLabel.numberOfLines = 4
@@ -65,8 +65,8 @@ class ArticleHeaderView: UIView {
         }
 
         timeStampLabel = UILabel(frame: .zero)
-        timeStampLabel.textColor = .darkGrey
-        timeStampLabel.font = .author
+        timeStampLabel.textColor = .black90
+        timeStampLabel.font = .photoCaption
         addSubview(timeStampLabel)
         timeStampLabel.snp.makeConstraints { make in
             make.trailing.equalToSuperview().inset(leadingOffset)
@@ -75,8 +75,8 @@ class ArticleHeaderView: UIView {
         }
 
         authorLabel = UILabel(frame: .zero)
-        authorLabel.textColor = .darkGrey
-        authorLabel.font = .author
+        authorLabel.textColor = .black90
+        authorLabel.font = .photoCaption
         addSubview(authorLabel)
         authorLabel.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(leadingOffset)

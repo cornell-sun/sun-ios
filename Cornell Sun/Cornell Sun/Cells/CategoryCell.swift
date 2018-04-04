@@ -30,14 +30,14 @@ final class CategoryCell: UICollectionViewCell {
     let categoryLabel: UILabel = {
         let label = UILabel()
         label.text = ""
-        label.font = .systemFont(ofSize: 14, weight: .medium)
+        label.font = .secondaryHeader
         label.numberOfLines = 2
         return label
     }()
 
     let divider: UIView = {
         let view = UIView()
-        view.backgroundColor = .dividerGray
+        view.backgroundColor = .black40
         return view
     }()
 

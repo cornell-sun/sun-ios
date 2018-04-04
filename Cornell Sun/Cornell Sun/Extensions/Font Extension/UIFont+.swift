@@ -9,63 +9,52 @@ import UIKit
 
 extension UIFont {
 
-	@nonobjc class var articleViewTitle: UIFont {
-        return UIFont(name: "KeplerStd-Bold", size: 22)!
-	}
-
-    @nonobjc class var bookmarkTitle: UIFont {
-        return UIFont(name: "KeplerStd-Bold", size: 19)!
+    class var settingsPageHeader: UIFont {
+        return UIFont(name: "SanFranciscoDisplay-Bold", size: 36.0)!
     }
 
-	@nonobjc class var articleTitle: UIFont {
-        return UIFont(name: "KeplerStd-Bold", size: 25)!
-	}
-
-	@nonobjc class var articleBody: UIFont {
-        return UIFont(name: "Georgia", size: 18)!
-	}
-
-    @nonobjc class var articleBodyLarge: UIFont {
-        return UIFont(name: "Georgia", size: 22)!
+    class var articleTitle: UIFont {
+        return UIFont(name: "KeplerStd-Bold", size: 23.0)!
     }
 
-    @nonobjc class var articleBodySmall: UIFont {
-        return UIFont(name: "Georgia", size: 14)!
+    class var articleBody: UIFont {
+        return UIFont(name: "Georgia", size: 18.0)!
     }
 
-    @nonobjc class var articleSection: UIFont {
-        return UIFont(name: "Georgia", size: 14)!
+    class var headerTitle: UIFont {
+        return UIFont.systemFont(ofSize: 16, weight: .bold)
     }
 
-    @nonobjc class var authorCell: UIFont {
-        return UIFont(name: "Georgia", size: 13)!
+    class var listText: UIFont {
+        return UIFont.systemFont(ofSize: 16, weight: .medium)
     }
 
-	@nonobjc class var sectionList: UIFont {
-        return UIFont.systemFont(ofSize: 17.0, weight: .bold)
-	}
+    class var blockQuote: UIFont {
+        return UIFont(name: "Georgia-Bold", size: 18.0)!
+    }
 
-	@nonobjc class var articleViewTheme: UIFont {
-        return UIFont(name: "Georgia-Bold", size: 18)!
-	}
+    class var listSubtext: UIFont {
+        return UIFont.systemFont(ofSize: 14, weight: .regular)
+    }
 
-	@nonobjc class var articleTheme: UIFont {
-        return UIFont.systemFont(ofSize: 14.0, weight: .medium)
-	}
+    class var secondaryHeader: UIFont {
+        return UIFont.systemFont(ofSize: 14, weight: .semibold)
+    }
 
-	@nonobjc class var likesAndComments: UIFont {
-        return UIFont.systemFont(ofSize: 14.0, weight: .medium)
-	}
-
-	@nonobjc class var author: UIFont {
-        return UIFont(name: "Georgia", size: 13)!
-	}
-
-	@nonobjc class var caption: UIFont {
-        return UIFont(name: "Georgia", size: 13)!
-	}
-
-    @nonobjc class var time: UIFont {
+    class var cellInformationText: UIFont {
         return UIFont.systemFont(ofSize: 11, weight: .medium)
     }
+
+    class var photoCaption: UIFont {
+        return UIFont(name: "Georgia", size: 14.0)!
+    }
+
+    class var photoCaptionCredit: UIFont {
+        return UIFont(name: "Georgia", size: 11.0)!
+    }
+
+    class var subSecondaryHeader: UIFont {
+        return UIFont.systemFont(ofSize: 11, weight: .regular)
+    }
+
 }

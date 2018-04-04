@@ -40,7 +40,7 @@ final class SearchCell: UICollectionViewCell {
         let label = UILabel()
         label.text = ""
         label.numberOfLines = 1
-        label.font = UIFont(name: "Georgia", size: 13)
+        label.font = .photoCaption
         label.textColor = .black
         return label
     }()
@@ -49,7 +49,7 @@ final class SearchCell: UICollectionViewCell {
         let label = UILabel()
         label.text = ""
         label.numberOfLines = 1
-        label.font = UIFont(name: "Georgia", size: 13)
+        label.font = .photoCaption
         label.textColor = .black
         return label
     }()
@@ -58,7 +58,7 @@ final class SearchCell: UICollectionViewCell {
         let label = UILabel()
         label.text = ""
         label.numberOfLines = 0
-        label.font = UIFont(name: "Georgia", size: 13)
+        label.font = .photoCaption
         label.textColor = .black
         return label
     }()

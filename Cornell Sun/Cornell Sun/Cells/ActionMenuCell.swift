@@ -39,7 +39,7 @@ final class MenuActionCell: UICollectionViewCell {
         let label = UILabel()
         label.text = ""
         label.numberOfLines = 1
-        label.font = .time
+        label.font = .cellInformationText
         self.contentView.addSubview(label)
         return label
     }()

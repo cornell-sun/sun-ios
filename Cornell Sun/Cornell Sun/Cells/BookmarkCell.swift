@@ -14,12 +14,12 @@ final class BookmarkCell: UICollectionViewCell {
     let insetConstant: CGFloat = 18
     let offsetConstant: CGFloat = 12
     let imageViewWidthHeight: CGFloat = 100
+    let titleBottomInset: CGFloat = 8.5
 
     var post: PostObject? {
         didSet {
             titleLabel.text = post?.title
             authorLabel.text = post?.author?.name
-            timeStampLabel.text = post?.datePosted.timeAgoSinceNow()
             setupImage()
         }
     }
@@ -28,7 +28,8 @@ final class BookmarkCell: UICollectionViewCell {
         let label = UILabel()
         label.text = ""
         label.numberOfLines = 4
-        label.font = .bookmarkTitle
+        label.font = .articleTitle
+        label.textAlignment = .left
         return label
     }()
 
@@ -43,23 +44,14 @@ final class BookmarkCell: UICollectionViewCell {
         let label = UILabel()
         label.text = ""
         label.numberOfLines = 1
-        label.font = UIFont(name: "Georgia", size: 13)
-        label.textColor = .black
-        return label
-    }()
-
-    let timeStampLabel: UILabel = {
-        let label = UILabel()
-        label.text = ""
-        label.numberOfLines = 1
-        label.font = UIFont(name: "Georgia", size: 13)
+        label.font = .cellInformationText
         label.textColor = .black
         return label
     }()
 
     let divider: UIView = {
         let view = UIView()
-        view.backgroundColor = .warmGrey
+        view.backgroundColor = .black40
         return view
     }()
 
@@ -77,7 +69,6 @@ final class BookmarkCell: UICollectionViewCell {
         addSubview(imageView)
         addSubview(titleLabel)
         addSubview(authorLabel)
-        addSubview(timeStampLabel)
         addSubview(divider)
         imageView.snp.makeConstraints { (make) in
             make.centerY.equalToSuperview()
@@ -85,20 +76,17 @@ final class BookmarkCell: UICollectionViewCell {
             make.width.height.equalTo(imageViewWidthHeight)
         }
 
+        authorLabel.snp.makeConstraints { (make) in
+            make.left.equalTo(imageView.snp.right).offset(offsetConstant)
+            make.bottom.equalTo(imageView.snp.bottom)
+            make.height.equalTo(13)
+        }
+
         titleLabel.snp.makeConstraints { (make) in
             make.top.equalTo(imageView.snp.top)
             make.left.equalTo(imageView.snp.right).offset(offsetConstant)
             make.right.equalToSuperview().inset(insetConstant)
-        }
-
-        authorLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(imageView.snp.right).offset(offsetConstant)
-            make.bottom.equalTo(imageView.snp.bottom)
-        }
-
-        timeStampLabel.snp.makeConstraints { (make) in
-            make.right.equalToSuperview().inset(insetConstant)
-            make.bottom.equalTo(imageView.snp.bottom)
+            make.bottom.lessThanOrEqualTo(authorLabel.snp.top).offset(-titleBottomInset)
         }
 
         divider.snp.makeConstraints { (make) in
