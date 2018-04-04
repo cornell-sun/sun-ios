@@ -24,7 +24,6 @@ class SectionCollectionViewController: UIViewController, UIScrollViewDelegate {
             }
         }
     }
-
     var loading = false
     let spinToken = "spinner"
 
@@ -72,7 +71,6 @@ class SectionCollectionViewController: UIViewController, UIScrollViewDelegate {
         navigationController?.navigationBar.topItem?.title = ""
         navigationController?.navigationBar.tintColor = .black
 
-
         emptySpinnerView.addSubview(spinner)
 
         view.addSubview(collectionView)
@@ -115,7 +113,6 @@ extension SectionCollectionViewController: ListAdapterDataSource {
             let heroSC = HeroSectionController()
             heroSC.delegate = self
             return heroSC
-
         }
         let articleSC = ArticleSectionController()
         articleSC.delegate = self
@@ -127,7 +124,6 @@ extension SectionCollectionViewController: ListAdapterDataSource {
             spinner.startAnimating()
         }
         return emptySpinnerView
-
     }
 }
 

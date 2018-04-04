@@ -67,7 +67,7 @@ class FeedCollectionViewController: ViewController, UIScrollViewDelegate {
         view.addSubview(collectionView)
 
         adapter.collectionView = collectionView
-        adapter.collectionView?.backgroundColor = .black20
+        adapter.collectionView?.backgroundColor = .black5
         adapter.collectionView?.refreshControl = refreshControl
         adapter.dataSource = self
         adapter.scrollViewDelegate = self
