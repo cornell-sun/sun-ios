@@ -10,20 +10,17 @@ import Foundation
 import UIKit
 
 class SettingObject {
-    var type: SettingType = .unclickable
+    var type: SettingType
     var settingLabel: String
-    var secondaryLabel: String
     var nextController: UIViewController? //ViewController launched on selecting clickable cell
-    var secondaryViewType: SecondaryViewType //the secondary view appearing on the right hand side of the cell
-
-    init( label: String, secondary: String, next: UIViewController?, secType: SecondaryViewType) {
+    
+    init( label: String, next: UIViewController?, setType: SettingType) {
         settingLabel = label
-        secondaryLabel =  secondary
-        secondaryViewType = secType
-        nextController = nil
-        if let controller = next {
-            nextController = controller
-            type = .clickable
-        }
+        nextController = next
+        type = setType
+    }
+    
+    func isClickable() -> Bool {
+        return !(nextController == nil)
     }
 }

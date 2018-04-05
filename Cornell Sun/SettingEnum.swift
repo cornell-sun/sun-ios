@@ -9,8 +9,9 @@
 import Foundation
 
 enum SettingType {
-    case clickable, unclickable
+    case none, contactus, feedback, history, appteam, masthead, rate, privacy
 }
-enum SecondaryViewType {
-    case none, label, toggle //Can add more if needed
+
+enum DisplaySettingType {
+    case contactus, feedback, history, appteam, masthead, rate, none, privacy
 }
