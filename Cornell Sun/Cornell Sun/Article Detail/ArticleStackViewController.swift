@@ -33,6 +33,7 @@ class ArticleStackViewController: UIViewController {
     var stackView: UIStackView!
     var headerView: ArticleHeaderView!
     var shareBarView: ShareBarView!
+    var commentsTableView: UITableView!
 
     convenience init(post: PostObject) {
         self.init()
@@ -81,6 +82,27 @@ class ArticleStackViewController: UIViewController {
         }
 
         setup()
+        setupComments()
+    }
+
+    /// Sets up the content in the stack view by parsing each section.
+    func setup() {
+        let sections = createArticleContentType(content: post.content)
+        for section in sections {
+            switch section {
+            case .caption(let caption):
+                setupCaptionLabel(caption: caption)
+            case .image(let urlString):
+                setupImageView(imageURLString: urlString)
+            case .imageCredit(let credit):
+                setupImageCredit(credit: credit)
+            case .text(let attrString):
+                setupArticleText(text: attrString)
+            case .blockquote(let string):
+                setupBlockquote(text: string)
+            }
+        }
+
     }
 
     func createArticleContentType(content: String) -> [ArticleContentType] {
@@ -105,13 +127,19 @@ class ArticleStackViewController: UIViewController {
 
     func parsePTag(element: Element) -> ArticleContentType? {
         guard let text = try? element.text() else { return nil }
-        guard let html = try? element.outerHtml() else { return nil }
         if element.hasClass("wp-media-credit") {
             return .imageCredit(text)
         } else if element.hasClass("wp-caption-text") {
             return .caption(text)
         } else {
-            return .text(html.convertHtml())
+            // replace <p> </p> with <span> </span> because of weird iOS html to string bugs
+            guard let openPRegex = try? NSRegularExpression(pattern: "<p[^>]*>"),
+                let closePRegex = try? NSRegularExpression(pattern: "</p[^>]*>"),
+                let outerHtml = try? element.outerHtml() else { return nil }
+
+            var htmlString = openPRegex.stringByReplacingMatches(in: outerHtml, options: [], range: NSRange(location: 0, length: outerHtml.count), withTemplate: "<span>")
+            htmlString = closePRegex.stringByReplacingMatches(in: htmlString, options: [], range: NSRange(location: 0, length: htmlString.count), withTemplate: "</span>")
+            return .text(htmlString.htmlToAttributedString)
         }
     }
 
@@ -128,25 +156,6 @@ class ArticleStackViewController: UIViewController {
             return .blockquote(text.htmlToString)
         }
         return nil
-    }
-
-    /// Sets up the content in the stack view by parsing each section.
-    func setup() {
-        let sections = createArticleContentType(content: post.content)
-        for section in sections {
-            switch section {
-            case .caption(let caption):
-                setupCaptionLabel(caption: caption)
-            case .image(let urlString):
-                setupImageView(imageURLString: urlString)
-            case .imageCredit(let credit):
-                setupImageCredit(credit: credit)
-            case .text(let attrString):
-                setupArticleText(text: attrString)
-            case .blockquote(let string):
-                setupBlockquote(text: string)
-            }
-        }
     }
 
     func setupCaptionLabel(caption: String) {
@@ -175,7 +184,8 @@ class ArticleStackViewController: UIViewController {
         stackView.addArrangedSubview(view)
         imageView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
-            make.top.bottom.equalToSuperview()
+            make.top.equalToSuperview().offset(captionBottomInset)
+            make.bottom.equalToSuperview()
             make.height.equalTo(imageViewHeight)
         }
     }
@@ -224,37 +234,68 @@ class ArticleStackViewController: UIViewController {
         textView.textContainer.lineFragmentPadding = 0
         textView.font = .articleViewTheme
         textView.textColor = .black
-        textView.textAlignment = .center
+        textView.textAlignment = .left
         textView.isScrollEnabled = false
         textView.isEditable = false
         if #available(iOS 11.0, *) {
             textView.textDragInteraction?.isEnabled = false
         }
         view.addSubview(textView)
+        let leftLine = UILabel()
+        leftLine.backgroundColor = .black
+        view.addSubview(leftLine)
         stackView.addArrangedSubview(view)
-        let topLine = UILabel()
-        topLine.backgroundColor = .dividerGray
-        view.addSubview(topLine)
-        topLine.snp.makeConstraints { make in
-            make.top.equalToSuperview()
-            make.height.equalTo(1)
-            make.leading.trailing.equalToSuperview()
-        }
-        let bottomLine = UILabel()
-        bottomLine.backgroundColor = .darkGrey
-        view.addSubview(bottomLine)
-        bottomLine.snp.makeConstraints { make in
-            make.bottom.equalToSuperview().inset(leadingOffset)
-            make.height.equalTo(5)
-            make.centerX.equalToSuperview()
-            make.width.equalTo(100)
+        leftLine.snp.makeConstraints { make in
+            make.leading.equalToSuperview().offset(leadingOffset)
+            make.top.bottom.equalToSuperview().inset(leadingOffset)
+            make.width.equalTo(1)
         }
         textView.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(leadingOffset)
-            make.leading.trailing.equalToSuperview().inset(leadingOffset)
-            make.bottom.equalTo(bottomLine.snp.top).offset(-leadingOffset)
+            make.leading.equalTo(leftLine.snp.trailing).offset(leadingOffset)
+            make.trailing.equalToSuperview().inset(leadingOffset)
+            make.bottom.equalToSuperview().offset(-leadingOffset)
         }
     }
+
+    func setupComments() {
+        setupCommentsTableView()
+        getComments(postID: post.id) { comments, error in
+            if error == nil {
+                self.comments = comments
+                self.commentsTableView.reloadData()
+            }
+        }
+    }
+
+    func setupCommentsTableView() {
+        let view = UIView()
+        commentsTableView = UITableView()
+        commentsTableView.delegate = self
+        commentsTableView.dataSource = self
+        commentsTableView.rowHeight = UITableViewAutomaticDimension
+        commentsTableView.register(CommentTableViewCell.self, forCellReuseIdentifier: commentReuseIdentifier)
+        commentsTableView.estimatedRowHeight = 100
+        view.addSubview(commentsTableView)
+        stackView.addArrangedSubview(view)
+        commentsTableView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+    }
+}
+
+extension ArticleStackViewController: UITableViewDelegate, UITableViewDataSource {
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return comments.count
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: commentReuseIdentifier, for: indexPath) as? CommentTableViewCell else { return CommentTableViewCell() }
+        cell.setup(for: comments[indexPath.row])
+        return cell
+    }
+
 }
 
 extension ArticleStackViewController: ShareBarViewDelegate {

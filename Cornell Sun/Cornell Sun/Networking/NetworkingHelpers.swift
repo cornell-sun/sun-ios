@@ -18,6 +18,7 @@ enum APIErrors: Error {
 
 typealias PostObjectCompletionBlock = (_ posts: [PostObject], _ error: APIErrors?) -> Void
 typealias TrendingCompletionBlock = (_ trending: [String], _ error: APIErrors?) -> Void
+typealias CommentsCompletionBlock = (_ comments: [CommentObject], _ error: APIErrors?) -> Void
 let savedPosts: Results<PostObject> = RealmManager.instance.get()
 
 func fetchPosts(target: SunAPI, completion: @escaping PostObjectCompletionBlock) {
@@ -61,6 +62,27 @@ func getTrending(completion: @escaping TrendingCompletionBlock) {
         } catch {
             print("could not parse")
             completion([String](), .parsingError)
+        }
+    }
+}
+
+func getComments(postID: Int, completion: @escaping CommentsCompletionBlock) {
+    API.request(target: .comments(postId: postID)) { response in
+        guard let response = response else { return }
+        do {
+            let jsonResult = try JSONSerialization.jsonObject(with: response.data, options: [])
+            if let rawCommentsArray = jsonResult as? [[String: AnyObject]] {
+                var commentsArray = [CommentObject]()
+                rawCommentsArray.forEach {
+                    if let comment = CommentObject(data: $0) {
+                        commentsArray.append(comment)
+                    }
+                }
+                completion(commentsArray, nil)
+            }
+        } catch {
+            print("error parsing comments")
+            completion([CommentObject](), .parsingError)
         }
     }
 }
