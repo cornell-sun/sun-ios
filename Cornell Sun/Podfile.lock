@@ -1,5 +1,5 @@
 PODS:
-  - Alamofire (4.5.1)
+  - Alamofire (4.7.1)
   - FLAnimatedImage (1.0.12)
   - Google-Mobile-Ads-SDK (7.30.0)
   - HTMLString (4.0.1)
@@ -14,8 +14,8 @@ PODS:
   - ImageSlideshow/Kingfisher (1.4.1):
     - ImageSlideshow/Core
     - Kingfisher (> 3.0)
-  - Kingfisher (4.2.0)
-  - ModelMapper (7.3.0)
+  - Kingfisher (4.6.4)
+  - ModelMapper (8.0.0)
   - Moya (9.0.0):
     - Moya/Core (= 9.0.0)
   - Moya-ModelMapper (5.0.0):
@@ -26,6 +26,7 @@ PODS:
   - Moya/Core (9.0.0):
     - Alamofire (~> 4.1)
     - Result (~> 3.0)
+  - OneSignal (2.8.2)
   - PINCache (2.3)
   - PINRemoteImage (2.1.4):
     - PINRemoteImage/FLAnimatedImage (= 2.1.4)
@@ -34,11 +35,11 @@ PODS:
   - PINRemoteImage/FLAnimatedImage (2.1.4):
     - FLAnimatedImage (>= 1.0)
     - PINRemoteImage/Core
-  - Realm (3.0.2):
-    - Realm/Headers (= 3.0.2)
-  - Realm/Headers (3.0.2)
-  - RealmSwift (3.0.2):
-    - Realm (= 3.0.2)
+  - Realm (3.3.1):
+    - Realm/Headers (= 3.3.1)
+  - Realm/Headers (3.3.1)
+  - RealmSwift (3.3.1):
+    - Realm (= 3.3.1)
   - Result (3.2.4)
   - SnapKit (4.0.0)
   - SwiftSoup (1.7.1)
@@ -52,10 +53,31 @@ DEPENDENCIES:
   - Kingfisher (~> 4.0)
   - Moya
   - Moya-ModelMapper (= 5.0.0)
+  - OneSignal (< 3.0, >= 2.6.2)
   - PINRemoteImage
   - RealmSwift
   - SnapKit (~> 4.0)
   - SwiftSoup
+
+SPEC REPOS:
+  https://github.com/CocoaPods/Specs.git:
+    - Alamofire
+    - FLAnimatedImage
+    - Google-Mobile-Ads-SDK
+    - HTMLString
+    - IGListKit
+    - Kingfisher
+    - ModelMapper
+    - Moya
+    - Moya-ModelMapper
+    - OneSignal
+    - PINCache
+    - PINRemoteImage
+    - Realm
+    - RealmSwift
+    - Result
+    - SnapKit
+    - SwiftSoup
 
 EXTERNAL SOURCES:
   ImageSlideshow:
@@ -68,24 +90,25 @@ CHECKOUT OPTIONS:
     :git: https://github.com/AAAstorga/ImageSlideshow.git
 
 SPEC CHECKSUMS:
-  Alamofire: 2d95912bf4c34f164fdfc335872e8c312acaea4a
+  Alamofire: 68d7d521118d49c615a8d2214d87cdf525599d30
   FLAnimatedImage: 4a0b56255d9b05f18b6dd7ee06871be5d3b89e31
   Google-Mobile-Ads-SDK: 7404f68120ae8682afeb5af001fbf4aad731c78e
   HTMLString: 8d9a8a8aaf63dd52c5b8cd9a38e14da52f753210
   IGListKit: cb97f405ae43e59fe1da74271e19427ec20d3c07
   ImageSlideshow: 1a742794b9e6fd388a3d2bd36cb063c6e564d6aa
-  Kingfisher: 9ee7e788d8ba07c3f21ce0d43f33cec310a4f781
-  ModelMapper: b70d373f224fc8cfc4da67b483db163a6cd05fe6
+  Kingfisher: 68498a706e46c2a050b0c9572f100e5db407f6e0
+  ModelMapper: a258c5f8e1422e0e826c8265a3e89ae1b329c3a6
   Moya: cf5e6ee93af526532f92614004b8ad2ea60fd845
   Moya-ModelMapper: fc14d8c7d6466f11aea83e785c7f2c4c521fead6
+  OneSignal: ab5c509192ca8390bdd3570a6261e6decf4c79c1
   PINCache: ce36ed282031b92fc7733ffe831f474ff80fddc2
   PINRemoteImage: 4ac4011c5caefd6befd99758e09becede05d3226
-  Realm: 6f23fd1f178a09342eac21bfa7c2bf4312a7a180
-  RealmSwift: 695393add1b8f9d5fa75dd16e6355cf3935f71e2
+  Realm: 63ebf4903b446b0bdf2131244eb1e1549925c724
+  RealmSwift: f28fe8507bdfb8f1c924962401b83e7b9d7abb5c
   Result: d2d07204ce72856f1fd9130bbe42c35a7b0fea10
   SnapKit: a42d492c16e80209130a3379f73596c3454b7694
   SwiftSoup: 277f7ef548826e0ca7603a06b30d4a5df3ee0587
 
-PODFILE CHECKSUM: 2ff961c22308738cdf8a0b74a31cb7e4cbcd0bad
+PODFILE CHECKSUM: 92941d8817e59b37b421e08e813e46077bba7a8f
 
-COCOAPODS: 1.4.0
+COCOAPODS: 1.5.0

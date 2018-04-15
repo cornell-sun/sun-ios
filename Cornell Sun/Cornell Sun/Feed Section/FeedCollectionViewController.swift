@@ -12,9 +12,6 @@ import Realm
 import RealmSwift
 
 class FeedCollectionViewController: ViewController, UIScrollViewDelegate {
-
-    var isFirstRun = true
-
     var loading = false
 
     var currentPage = 1
@@ -24,10 +21,10 @@ class FeedCollectionViewController: ViewController, UIScrollViewDelegate {
     var adDict = [String: Int]()
     var currAdToken = ""
 
-
     var feedData: [PostObject] = []
     var savedPostIds: [Int] = []
     var headlinePost: PostObject!
+    var isFirstRun = true
 
     var refreshControl = UIRefreshControl()
 
@@ -107,10 +104,10 @@ extension FeedCollectionViewController: ListAdapterDataSource {
 
         if loading {
             objects.append(spinToken as ListDiffable)
-        } 
+        }
         return objects
     }
-    
+
     func mergeAds(feed: [ListDiffable]) -> [ListDiffable] {
         var objects = feed
         currAdToken = "adToken\(adCount)"
@@ -177,7 +174,7 @@ extension FeedCollectionViewController {
 
 extension FeedCollectionViewController: TabBarViewControllerDelegate {
     func articleSectionDidPressOnArticle(_ article: PostObject) {
-        let articleVC = ArticleViewController(article: article)
+        let articleVC = ArticleStackViewController(post: article)
         articleVC.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(articleVC, animated: true)
     }

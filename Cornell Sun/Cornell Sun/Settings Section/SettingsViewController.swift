@@ -8,6 +8,18 @@
 
 import UIKit
 
+enum NotificationType: String {
+    case breakingNews = "breaking-news"
+    case opinion = "opinion"
+    case sports = "sports"
+    case artsAndEntertainment = "arts-and-entertainment"
+    case science = "science"
+    case dining = "dining"
+    case multimedia = "multimedia"
+    case localNews = "local-news"
+    case sunspots = "sunspots"
+}
+
 class SettingsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     var tableView: UITableView!
     var settings: [SettingObject] = []
@@ -60,9 +72,9 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
     func testInit() {
         settings.append(SettingObject(label: "Subscribe", secondary: "", next: nil, secType: .none))
         let notifViewController = SettingsViewController()
-        let notifSettings = ["Breaking News", "Opinion", "Sports", "Arts and Entertainment", "Science", "Dining", "Multimedia", "Sunspots"]
+        let notifSettings: [(String, NotificationType)] = [("Breaking News", .breakingNews), ("Local News", .localNews),("Opinion", .opinion), ("Sports", .sports), ("Sunspots", .sunspots), ("Multimedia", .multimedia), ("Arts and Entertainment", .artsAndEntertainment), ("Science", .science), ("Dining", .dining)]
         for i in notifSettings {
-            notifViewController.settings.append(SettingObject(label: i, secondary: "", next: nil, secType: .toggle))
+            notifViewController.settings.append(SettingObject(label: i.0, secondary: "", next: nil, secType: .toggle, notifType: i.1))
         }
         settings.append(SettingObject(label: "Notification", secondary: "", next: notifViewController, secType: .none))
         settings.append(SettingObject(label: "Font Size", secondary: "Normal", next: nil, secType: .label))

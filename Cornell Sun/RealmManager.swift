@@ -49,6 +49,7 @@ final class RealmManager {
             obj.softDelete = true
             obj.didSave = false
             obj.bookmarkDate = nil
+            obj.bookmarkedThisSession = false
         }
     }
 
