@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import OneSignal
 
 class OnboardingPageViewController: UIPageViewController {
 
@@ -74,16 +75,19 @@ class OnboardingPageViewController: UIPageViewController {
     }
 
     @objc func dismissOnboarding() {
-        let userDefaults = UserDefaults.standard
-        userDefaults.setValue(true, forKey: hasOnboardedKey)
-        loadingIndicator.startAnimating()
-        setUpData { posts, mainHeadlinePost in
-            let tabBarController = TabBarViewController(with: posts, mainHeadlinePost: mainHeadlinePost)
-            guard let appDelegate = UIApplication.shared.delegate, let window = appDelegate.window else { return }
-            window?.rootViewController = tabBarController
-            self.loadingIndicator.stopAnimating()
-            self.dismiss(animated: true, completion: nil)
-        }
+        OneSignal.promptForPushNotifications(userResponse: { accepted in
+            print("User accepted notifications: \(accepted)")
+            let userDefaults = UserDefaults.standard
+            userDefaults.setValue(true, forKey: hasOnboardedKey)
+            self.loadingIndicator.startAnimating()
+            prepareInitialPosts { posts, mainHeadlinePost in
+                let tabBarController = TabBarViewController(with: posts, mainHeadlinePost: mainHeadlinePost)
+                guard let appDelegate = UIApplication.shared.delegate, let window = appDelegate.window else { return }
+                window?.rootViewController = tabBarController
+                self.loadingIndicator.stopAnimating()
+                self.dismiss(animated: true, completion: nil)
+            }
+        })
     }
 
 }

@@ -9,10 +9,6 @@
 import UIKit
 import SnapKit
 
-protocol HeartPressedDelegate: class {
-    func didPressHeart(_ cell: MenuActionCell)
-}
-
 protocol BookmarkPressedDelegate: class {
     func didPressBookmark(_ cell: MenuActionCell)
 }
@@ -23,7 +19,12 @@ protocol SharePressedDelegate: class {
 
 final class MenuActionCell: UICollectionViewCell {
 
-    weak var heartDelegate: HeartPressedDelegate?
+    var post: PostObject? {
+        didSet {
+            timeStampLabel.text = post?.datePosted.timeAgoSinceNow()
+        }
+    }
+
     weak var bookmarkDelegate: BookmarkPressedDelegate?
     weak var shareDelegate: SharePressedDelegate?
 
@@ -32,13 +33,15 @@ final class MenuActionCell: UICollectionViewCell {
     let bookmarkWidth = 15.0
     let imageHeight = 21.0
     let offset = 18
-    lazy var heartButton: UIButton = {
-        let button = UIButton(type: .custom)
-        button.imageView?.contentMode = .scaleAspectFit
-        button.setImage(#imageLiteral(resourceName: "heart"), for: .normal)
-        button.addTarget(self, action: #selector(MenuActionCell.heartPressed(_:)), for: .touchUpInside)
-        self.contentView.addSubview(button)
-        return button
+    let bookmarkOffset = -24.0
+
+    lazy var timeStampLabel: UILabel = {
+        let label = UILabel()
+        label.text = ""
+        label.numberOfLines = 1
+        label.font = .time
+        self.contentView.addSubview(label)
+        return label
     }()
 
     lazy var bookmarkButton: UIButton = {
@@ -74,10 +77,6 @@ final class MenuActionCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
-    @objc func heartPressed(_ button: UIButton) {
-        heartDelegate?.didPressHeart(self)
-    }
-
     @objc func bookmarkPressed(_ button: UIButton) {
         bookmarkDelegate?.didPressBookmark(self)
     }
@@ -87,7 +86,6 @@ final class MenuActionCell: UICollectionViewCell {
     }
 
     override func prepareForReuse() {
-        heartButton.setImage(#imageLiteral(resourceName: "heart"), for: .normal)
         bookmarkButton.setImage(#imageLiteral(resourceName: "bookmark"), for: .normal)
     }
 
@@ -99,11 +97,9 @@ final class MenuActionCell: UICollectionViewCell {
     func setupViews(forBookmarks: Bool) {
         self.backgroundColor = .white
 
-        heartButton.snp.makeConstraints { (make) in
-            make.width.equalTo(heartWidth)
-            make.height.equalTo(imageHeight)
+        timeStampLabel.snp.makeConstraints { (make) in
+            make.leading.equalTo(offset)
             make.centerY.equalToSuperview()
-            make.left.equalTo(offset)
         }
 
         bookmarkButton.snp.makeConstraints { (make) in
@@ -117,14 +113,7 @@ final class MenuActionCell: UICollectionViewCell {
             make.width.equalTo(shareWidth)
             make.height.equalTo(imageHeight)
             make.centerY.equalToSuperview()
-
-            if forBookmarks {
-                make.right.equalTo(bookmarkButton.snp.left).offset(-24)
-            } else {
-            make.left.equalTo(heartButton.snp.right).offset(10)
-            }
+            make.right.equalTo(bookmarkButton.snp.left).offset(bookmarkOffset)
         }
-
-        heartButton.isHidden = forBookmarks
     }
 }

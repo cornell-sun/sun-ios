@@ -17,7 +17,9 @@ final class TitleCell: UICollectionViewCell {
 
     var post: PostObject? {
         didSet {
-            titleLabel.text = post?.title
+            if let post = post {
+                titleLabel.text = post.title
+            }
         }
     }
 
@@ -43,7 +45,8 @@ final class TitleCell: UICollectionViewCell {
         addSubview(titleLabel)
         titleLabel.snp.makeConstraints { (make) in
             make.centerY.equalToSuperview()
-            make.edges.equalToSuperview().inset(UIEdgeInsets(top: topInset, left: leftInset, bottom: bottomInset, right: rightInset))
+            make.leading.equalTo(leftInset)
+            make.trailing.equalToSuperview().inset(rightInset)
         }
     }
 }

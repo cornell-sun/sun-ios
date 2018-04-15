@@ -8,6 +8,8 @@
 
 import UIKit
 import Kingfisher
+import GoogleMobileAds
+import OneSignal
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -18,6 +20,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+
+        let onesignalInitSettings = [kOSSettingsKeyAutoPrompt: false]
+
+        OneSignal.initWithLaunchOptions(launchOptions,
+                                        appId: "c7e28bf2-698c-4a07-b56c-f2077e43c1b4",
+                                        handleNotificationAction: nil,
+                                        settings: onesignalInitSettings)
+
+        OneSignal.inFocusDisplayType = OSNotificationDisplayType.notification
+
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
         storyboard = UIStoryboard(name: "Launch Screen", bundle: nil)
@@ -33,15 +45,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let onboardingViewController = OnboardingPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
             self.window?.rootViewController?.present(onboardingViewController, animated: false, completion: nil)
         } else {
-            setUpData { posts, mainHeadlinePost in
-                let tabBarController = TabBarViewController(with: posts, mainHeadlinePost: mainHeadlinePost)
-                self.window!.rootViewController = tabBarController
-            }
+          prepareInitialPosts { posts, mainHeadlinePost in
+              let tabBarController = TabBarViewController(with: posts, mainHeadlinePost: mainHeadlinePost)
+              self.window!.rootViewController = tabBarController
+
+          }
         }
+        
+        //Initialize Google Mobile Ads SDKAds
+        //@TODO change ad ID from test ad to our specific ID
+        GADMobileAds.configure(withApplicationID: "ca-app-pub-3940256099942544/2934735716")
+
         return true
     }
 
-    /** 
+    /**
      Receive a universal link redirect and handle it properly. Uses Handoff.
      https://developer.apple.com/library/content/documentation/General/Conceptual/AppSearch/UniversalLinks.html#//apple_ref/doc/uid/TP40016308-CH12-SW2
      */
