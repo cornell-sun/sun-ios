@@ -23,10 +23,11 @@ class SectionViewController: UIViewController {
     var sections: [Sections] = [.opinion(id: 3), .sports(id: 4), .arts(id: 5), .science(id: 6), .dining(id: 7), .multimedia(id: 9)]
 
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         title = "Sections"
         navigationController?.navigationBar.barTintColor = .white
         navigationController?.navigationBar.titleTextAttributes = [
-            NSAttributedStringKey.font: UIFont.systemFont(ofSize: 16, weight: .medium)
+            NSAttributedStringKey.font: UIFont.headerTitle
         ]
     }
 
@@ -80,7 +81,7 @@ extension SectionViewController: UITableViewDataSource, UITableViewDelegate {
             return UITableViewCell()
         }
         cell.textLabel?.text = sectionToString(section: sections[indexPath.row])
-        cell.textLabel?.font = .systemFont(ofSize: 17, weight: .semibold)
+        cell.textLabel?.font = .listText
         cell.accessoryView = UIImageView(image: #imageLiteral(resourceName: "disclosureArrow"))
         return cell
     }

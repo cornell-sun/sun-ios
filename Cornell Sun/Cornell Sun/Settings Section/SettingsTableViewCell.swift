@@ -42,7 +42,7 @@ class SettingsTableViewCell: UITableViewCell {
             }
             secondLabel.text = setting.secondaryLabel
             secondLabel.textAlignment = .right
-            secondLabel.font = UIFont(name: "Times New Roman", size: 22) // may be changed
+            secondLabel.font = .listText // may be changed
         case .toggle:
             let secondSwitch = UISwitch()
             contentView.addSubview(secondSwitch)

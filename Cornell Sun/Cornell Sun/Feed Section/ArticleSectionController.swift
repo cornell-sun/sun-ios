@@ -58,10 +58,10 @@ extension ArticleSectionController: BookmarkPressedDelegate, SharePressedDelegat
         case .categoryCell:
             return CGSize(width: width, height: 40)
         case .titleCell:
-            let height = entry.title.height(withConstrainedWidth: width - 22, font: .articleViewTitle) //CLUTCH Extension thank stackoverflow gods
-            return CGSize(width: width, height: height + 10)
+            let height = entry.title.height(withConstrainedWidth: width - 34, font: .articleTitle) //CLUTCH Extension thank stackoverflow gods
+            return CGSize(width: width, height: height + 20)
         case .authorCell:
-            guard let height = entry.author?.name.height(withConstrainedWidth: width, font: .articleSection) else { return .zero}
+            guard let height = entry.author?.name.height(withConstrainedWidth: width, font: .secondaryHeader) else { return .zero}
             return CGSize(width: width, height: height + 9)
         case .imageCell:
             return CGSize(width: width, height: width / 1.92)

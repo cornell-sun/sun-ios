@@ -35,8 +35,8 @@ class OnboardingPageViewController: UIPageViewController {
 
         pageControl = UIPageControl()
         pageControl.currentPage = 0
-        pageControl.currentPageIndicatorTintColor = .offWhite
-        pageControl.pageIndicatorTintColor = UIColor.offWhite.withAlphaComponent(0.5)
+        pageControl.currentPageIndicatorTintColor = .white
+        pageControl.pageIndicatorTintColor = UIColor.white.withAlphaComponent(0.5)
         pageControl.numberOfPages = pages.count
         view.addSubview(pageControl)
         pageControl.snp.makeConstraints { make in

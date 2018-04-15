@@ -53,7 +53,7 @@ class ArticleHeaderView: UIView {
 
         categoryLabel = UILabel(frame: .zero)
         categoryLabel.textColor = .black
-        categoryLabel.font = .articleViewTheme
+        categoryLabel.font = .secondaryHeader
         addSubview(categoryLabel)
         categoryLabel.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(leadingOffset)
@@ -62,21 +62,21 @@ class ArticleHeaderView: UIView {
         }
 
         titleLabel = UILabel(frame: .zero)
-        titleLabel.textColor = .blackThree
+        titleLabel.textColor = .black90
         titleLabel.font = .articleTitle
         titleLabel.numberOfLines = 6
         titleLabel.lineBreakMode = .byTruncatingTail
         addSubview(titleLabel)
 
         captionLabel = UILabel(frame: .zero)
-        captionLabel.font = .caption
-        captionLabel.textColor = .darkGrey
+        captionLabel.font = .photoCaption
+        captionLabel.textColor = .black90
         captionLabel.numberOfLines = 0
         addSubview(captionLabel)
 
         creditsLabel = UILabel()
-        creditsLabel.font = .credits
-        creditsLabel.textColor = .warmGrey
+        creditsLabel.font = .photoCaptionCredit
+        creditsLabel.textColor = .black40
         addSubview(creditsLabel)
         creditsLabel.snp.makeConstraints { make in
             make.top.equalTo(captionLabel.snp.bottom)
@@ -92,8 +92,8 @@ class ArticleHeaderView: UIView {
         }
 
         authorLabel = UILabel(frame: .zero)
-        authorLabel.textColor = .darkGrey
-        authorLabel.font = .author
+        authorLabel.textColor = .black90
+        authorLabel.font = .photoCaption
         addSubview(authorLabel)
         authorLabel.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(leadingOffset)
@@ -102,14 +102,13 @@ class ArticleHeaderView: UIView {
         }
 
         timeStampLabel = UILabel(frame: .zero)
-        timeStampLabel.textColor = .darkGrey
-        timeStampLabel.font = .author
+        timeStampLabel.textColor = .black90
+        timeStampLabel.font = .photoCaption
         addSubview(timeStampLabel)
         timeStampLabel.snp.makeConstraints { make in
-            make.leading.equalTo(authorLabel.snp.leading)
+            make.leading.equalToSuperview().offset(leadingOffset)
             make.top.equalTo(authorLabel.snp.bottom)
             make.height.equalTo(timeStampHeight)
-            make.bottom.equalToSuperview()
         }
     }
 

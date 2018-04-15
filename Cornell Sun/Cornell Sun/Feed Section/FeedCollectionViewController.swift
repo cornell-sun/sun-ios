@@ -64,7 +64,7 @@ class FeedCollectionViewController: ViewController, UIScrollViewDelegate {
         view.addSubview(collectionView)
 
         adapter.collectionView = collectionView
-        adapter.collectionView?.backgroundColor = .offWhite
+        adapter.collectionView?.backgroundColor = .black5
         adapter.collectionView?.refreshControl = refreshControl
         adapter.dataSource = self
         adapter.scrollViewDelegate = self
@@ -174,7 +174,6 @@ extension FeedCollectionViewController {
 
 extension FeedCollectionViewController: TabBarViewControllerDelegate {
     func articleSectionDidPressOnArticle(_ article: PostObject) {
-//        let articleVC = ArticleViewController(article: article)
         let articleVC = ArticleStackViewController(post: article)
         articleVC.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(articleVC, animated: true)

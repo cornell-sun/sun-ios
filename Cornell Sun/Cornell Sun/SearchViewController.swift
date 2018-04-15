@@ -103,7 +103,7 @@ class SearchViewController: UIViewController, UITableViewDelegate {
         }
 
         adapter.collectionView = collectionView
-        adapter.collectionView?.backgroundColor = .offWhite
+        adapter.collectionView?.backgroundColor = .white
         adapter.dataSource = self
         adapter.scrollViewDelegate = self
 
@@ -179,7 +179,7 @@ extension SearchViewController: UITableViewDataSource {
         headerView.contentView.backgroundColor = .white
         let trendingLabel = UILabel()
         trendingLabel.text = "Trending Topics"
-        trendingLabel.font = .boldSystemFont(ofSize: 18)
+        trendingLabel.font = .headerTitle
         headerView.contentView.addSubview(trendingLabel)
 
         trendingLabel.snp.makeConstraints { make in
@@ -195,7 +195,7 @@ extension SearchViewController: UITableViewDataSource {
         // Set up custom search result cell
         let cell = tableView.dequeueReusableCell(withIdentifier: "SearchResultCell", for: indexPath)
         cell.textLabel?.text = trendingTopics[indexPath.row]
-        cell.textLabel?.textColor = .trendingBlue
+        cell.textLabel?.textColor = .black90
         return cell
     }
 
@@ -263,7 +263,7 @@ extension SearchViewController: UISearchBarDelegate {
 }
 extension SearchViewController: TabBarViewControllerDelegate {
     func articleSectionDidPressOnArticle(_ article: PostObject) {
-        let articleVC = ArticleViewController(article: article)
+        let articleVC = ArticleStackViewController(post: article)
         articleVC.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(articleVC, animated: true)
     }

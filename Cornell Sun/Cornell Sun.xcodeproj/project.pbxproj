@@ -14,7 +14,6 @@
 		0C736C54202F96E000E9D92E /* ImageAttachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C736C53202F96E000E9D92E /* ImageAttachment.swift */; };
 		0C7D9A8E1F217B510041E1B0 /* apple-app-site-association in Resources */ = {isa = PBXBuildFile; fileRef = 0C7D9A8D1F217B510041E1B0 /* apple-app-site-association */; };
 		0CA26A1B205F41A6004759D1 /* ArticleStackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CA26A1A205F41A6004759D1 /* ArticleStackViewController.swift */; };
-		0CAA2BEC1F954E3200D423FD /* ArticleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CAA2BEB1F954E3200D423FD /* ArticleViewController.swift */; };
 		0CB00B261FBBAEE800376A94 /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CB00B251FBBAEE800376A94 /* CommentTableViewCell.swift */; };
 		0CB1EBCE2041ED9100DD8777 /* ShareBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CB1EBCD2041ED9100DD8777 /* ShareBarView.swift */; };
 		0CBC2CEE1F5E3093003FBB38 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CBC2CED1F5E3093003FBB38 /* TabBarViewController.swift */; };
@@ -113,7 +112,6 @@
 		0C736C53202F96E000E9D92E /* ImageAttachment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageAttachment.swift; sourceTree = "<group>"; };
 		0C7D9A8D1F217B510041E1B0 /* apple-app-site-association */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "apple-app-site-association"; path = "Cornell Sun/apple-app-site-association"; sourceTree = "<group>"; };
 		0CA26A1A205F41A6004759D1 /* ArticleStackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleStackViewController.swift; sourceTree = "<group>"; };
-		0CAA2BEB1F954E3200D423FD /* ArticleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleViewController.swift; sourceTree = "<group>"; };
 		0CB00B251FBBAEE800376A94 /* CommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
 		0CB1EBCD2041ED9100DD8777 /* ShareBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareBarView.swift; sourceTree = "<group>"; };
 		0CBC2CED1F5E3093003FBB38 /* TabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
@@ -229,13 +227,20 @@
 		0C15F1851FBDD1A5009724DB /* Article Detail */ = {
 			isa = PBXGroup;
 			children = (
-				0CAA2BEB1F954E3200D423FD /* ArticleViewController.swift */,
 				0CA26A1A205F41A6004759D1 /* ArticleStackViewController.swift */,
 				0C15F1861FBDD433009724DB /* ArticleHeaderView.swift */,
 				0CB00B251FBBAEE800376A94 /* CommentTableViewCell.swift */,
 				0CB1EBCD2041ED9100DD8777 /* ShareBarView.swift */,
 			);
 			path = "Article Detail";
+			sourceTree = "<group>";
+		};
+		0C67D79F208414CD0020DD98 /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				0C736C53202F96E000E9D92E /* ImageAttachment.swift */,
+			);
+			name = "Recovered References";
 			sourceTree = "<group>";
 		};
 		3441C7882066C0AB00F58D5E /* Delegate Extension */ = {
@@ -265,7 +270,7 @@
 				5006AFF91EA9625000F58549 /* Products */,
 				6FF0DFD245B42D7BBFBC46CA /* Pods */,
 				C0B2C074512AC5316E8D48D8 /* Frameworks */,
-				0C7DB4CE2083E9A8002105CE /* Recovered References */,
+				0C67D79F208414CD0020DD98 /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -832,7 +837,6 @@
 				DCFC88C41F86B50200A0D8A9 /* ActionMenuCell.swift in Sources */,
 				DC6561D71FBACE7D00C5062D /* CaptionCell.swift in Sources */,
 				DC818D9B1F74CFBB0064AFFA /* SpinnerCell.swift in Sources */,
-				0CAA2BEC1F954E3200D423FD /* ArticleViewController.swift in Sources */,
 				0CED4FAE1FAB523F0025EB91 /* UIFont+.swift in Sources */,
 				5006B24D1EADA37F00F58549 /* PostObject.swift in Sources */,
 				DC34DEF520321C6D0010DF9A /* SectionCollectionViewController.swift in Sources */,

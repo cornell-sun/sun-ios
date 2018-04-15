@@ -24,7 +24,6 @@ class SectionCollectionViewController: UIViewController, UIScrollViewDelegate {
             }
         }
     }
-
     var loading = false
     let spinToken = "spinner"
 
@@ -44,7 +43,7 @@ class SectionCollectionViewController: UIViewController, UIScrollViewDelegate {
         sectionSelected = section
         title = sectionTitle
         navigationController?.navigationBar.titleTextAttributes = [
-            NSAttributedStringKey.font: UIFont.systemFont(ofSize: 16, weight: .medium)
+            NSAttributedStringKey.font: UIFont.headerTitle
         ]
         var sectionID = 0
         switch section {
@@ -72,12 +71,11 @@ class SectionCollectionViewController: UIViewController, UIScrollViewDelegate {
         navigationController?.navigationBar.topItem?.title = ""
         navigationController?.navigationBar.tintColor = .black
 
-
         emptySpinnerView.addSubview(spinner)
 
         view.addSubview(collectionView)
         adapter.collectionView = collectionView
-        adapter.collectionView?.backgroundColor = .offWhite
+        adapter.collectionView?.backgroundColor = .white
         adapter.collectionView?.refreshControl = refreshControl
         adapter.dataSource = self
         adapter.scrollViewDelegate = self
@@ -115,7 +113,6 @@ extension SectionCollectionViewController: ListAdapterDataSource {
             let heroSC = HeroSectionController()
             heroSC.delegate = self
             return heroSC
-
         }
         let articleSC = ArticleSectionController()
         articleSC.delegate = self
@@ -127,13 +124,12 @@ extension SectionCollectionViewController: ListAdapterDataSource {
             spinner.startAnimating()
         }
         return emptySpinnerView
-
     }
 }
 
 extension SectionCollectionViewController: TabBarViewControllerDelegate {
     func articleSectionDidPressOnArticle(_ article: PostObject) {
-        let articleVC = ArticleViewController(article: article)
+        let articleVC = ArticleStackViewController(post: article)
         articleVC.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(articleVC, animated: true)
     }

@@ -68,7 +68,7 @@ class OnboardingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = .bigRed
+        view.backgroundColor = .brick
         let backgroundGradientView = UIImageView()
         backgroundGradientView.image = #imageLiteral(resourceName: "gradient")
         view.addSubview(backgroundGradientView)

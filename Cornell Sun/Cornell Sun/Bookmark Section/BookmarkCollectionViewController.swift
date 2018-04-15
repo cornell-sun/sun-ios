@@ -28,6 +28,8 @@ class BookmarkCollectionViewController: ViewController, UIScrollViewDelegate {
     }()
 
     override func viewWillAppear(_ animated: Bool) {
+        title = "Bookmarks"
+
         guard !isFirstRun else {
             isFirstRun = false
             return
@@ -37,10 +39,13 @@ class BookmarkCollectionViewController: ViewController, UIScrollViewDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(realmData)
+        title = "Bookmarks"
+        navigationController?.navigationBar.titleTextAttributes = [
+            NSAttributedStringKey.font: UIFont.headerTitle
+        ]
         view.addSubview(collectionView)
         adapter.collectionView = collectionView
-        adapter.collectionView?.backgroundColor = UIColor(white: 241.0 / 255.0, alpha: 1.0)
+        adapter.collectionView?.backgroundColor = .black5
         adapter.dataSource = self
         adapter.scrollViewDelegate = self
 
@@ -92,8 +97,7 @@ extension BookmarkCollectionViewController: ListAdapterDataSource {
 
 extension BookmarkCollectionViewController: TabBarViewControllerDelegate {
     func articleSectionDidPressOnArticle(_ article: PostObject) {
-        let articleVC = ArticleViewController()
-        articleVC.post = article
+        let articleVC = ArticleStackViewController(post: article)
         articleVC.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(articleVC, animated: true)
     }
