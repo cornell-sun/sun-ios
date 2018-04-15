@@ -21,14 +21,14 @@ final class CaptionCell: UICollectionViewCell {
         let label = UILabel()
         label.text = ""
         label.numberOfLines = 3
-        label.font = UIFont(name: "Georgia", size: 13)
-        label.textColor = .darkGrey
+        label.font = .photoCaption
+        label.textColor = .black
         return label
     }()
 
     let divider: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor(white: 127.0 / 255.0, alpha: 1.0)
+        view.backgroundColor = .black40
         return view
     }()
 

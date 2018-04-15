@@ -15,8 +15,9 @@ final class AuthorCell: UICollectionViewCell {
 
     var post: PostObject? {
         didSet {
-            authorLabel.text = post?.author?.name
-            timeStampLabel.text = post?.datePosted.timeAgoSinceNow()
+            if let post = post, let author = post.author {
+                authorLabel.text = "By \(author.name)"
+            }
         }
     }
 
@@ -24,17 +25,8 @@ final class AuthorCell: UICollectionViewCell {
         let label = UILabel()
         label.text = ""
         label.numberOfLines = 1
-        label.font = UIFont(name: "Georgia", size: 13)
-        label.textColor = .darkGrey
-        return label
-    }()
-
-    let timeStampLabel: UILabel = {
-        let label = UILabel()
-        label.text = ""
-        label.numberOfLines = 1
-        label.font = .authorCell
-        label.textColor = .darkGrey
+        label.font = .cellInformationText
+        label.textColor = .black90
         return label
     }()
 
@@ -50,15 +42,9 @@ final class AuthorCell: UICollectionViewCell {
     func setupViews() {
         self.backgroundColor = .white
         addSubview(authorLabel)
-        addSubview(timeStampLabel)
         authorLabel.snp.makeConstraints { (make) in
             make.top.equalToSuperview()
             make.left.equalToSuperview().inset(insetConstant)
-        }
-
-        timeStampLabel.snp.makeConstraints { (make) in
-            make.top.equalToSuperview()
-            make.right.equalToSuperview().inset(insetConstant)
         }
     }
 }

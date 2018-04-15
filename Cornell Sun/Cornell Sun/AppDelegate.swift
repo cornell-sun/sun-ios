@@ -8,6 +8,7 @@
 
 import UIKit
 import Kingfisher
+import GoogleMobileAds
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -28,10 +29,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         ImageCache.default.maxDiskCacheSize = 50 * 1024 * 1024 //50 mb
         ImageCache.default.maxCachePeriodInSecond = 60 * 60 * 24 * 4 //4 days until its removed
 
-        setUpData { posts, mainHeadlinePost in
+        prepareInitialPosts { posts, mainHeadlinePost in
             let tabBarController = TabBarViewController(with: posts, mainHeadlinePost: mainHeadlinePost)
             self.window!.rootViewController = tabBarController
+            
         }
+        
+        //Initialize Google Mobile Ads SDKAds
+        //@TODO change ad ID from test ad to our specific ID
+        GADMobileAds.configure(withApplicationID: "ca-app-pub-3940256099942544/2934735716")
 
         return true
     }

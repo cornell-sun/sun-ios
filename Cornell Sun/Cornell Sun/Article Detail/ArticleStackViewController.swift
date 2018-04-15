@@ -139,7 +139,7 @@ class ArticleStackViewController: UIViewController {
 
             var htmlString = openPRegex.stringByReplacingMatches(in: outerHtml, options: [], range: NSRange(location: 0, length: outerHtml.count), withTemplate: "<span>")
             htmlString = closePRegex.stringByReplacingMatches(in: htmlString, options: [], range: NSRange(location: 0, length: htmlString.count), withTemplate: "</span>")
-            return .text(htmlString.htmlToAttributedString)
+            return .text(htmlString.htmlToAttributedString ?? NSAttributedString(string: ""))
         }
     }
 
@@ -162,8 +162,8 @@ class ArticleStackViewController: UIViewController {
         let view = UIView()
         let label = UILabel()
         label.text = caption
-        label.font = .caption
-        label.textColor = .darkGrey
+        label.font = .photoCaption
+        label.textColor = .black90
         label.numberOfLines = 0
         view.addSubview(label)
         stackView.addArrangedSubview(view)
@@ -195,8 +195,8 @@ class ArticleStackViewController: UIViewController {
         let creditLabel = UILabel()
         creditLabel.numberOfLines = 0
         creditLabel.text = credit
-        creditLabel.textColor = .warmGrey
-        creditLabel.font = .credits
+        creditLabel.textColor = .black40
+        creditLabel.font = .photoCaptionCredit
         view.addSubview(creditLabel)
         stackView.addArrangedSubview(view)
         creditLabel.snp.makeConstraints { make in
@@ -232,7 +232,7 @@ class ArticleStackViewController: UIViewController {
         let textView = UITextView()
         textView.text = text
         textView.textContainer.lineFragmentPadding = 0
-        textView.font = .articleViewTheme
+        textView.font = .blockQuote
         textView.textColor = .black
         textView.textAlignment = .left
         textView.isScrollEnabled = false

@@ -28,7 +28,7 @@ class CommentTableViewCell: UITableViewCell {
         selectionStyle = .none
 
         profileImageView = UIImageView(frame: .zero)
-        profileImageView.backgroundColor = .warmGrey
+        profileImageView.backgroundColor = .black40
         profileImageView.layer.cornerRadius = profileImageSize.width/2
         profileImageView.layer.masksToBounds = true
 
@@ -40,27 +40,26 @@ class CommentTableViewCell: UITableViewCell {
         }
 
         nameLabel = UILabel()
-        nameLabel.font = .likesAndComments
-        nameLabel.textColor = .darkGrey
-        nameLabel.numberOfLines = 0
-        contentView.addSubview(nameLabel)
+        nameLabel.font = .subSecondaryHeader
+        nameLabel.textColor = .black90
+        addSubview(nameLabel)
         nameLabel.snp.makeConstraints { make in
             make.leading.equalTo(profileImageView.snp.trailing).offset(nameLabelLeading)
             make.centerY.equalTo(profileImageView.snp.centerY)
         }
 
         timestampLabel = UILabel()
-        timestampLabel.font = .likesAndComments
-        timestampLabel.textColor = .darkGrey
-        contentView.addSubview(timestampLabel)
+        timestampLabel.font = .subSecondaryHeader
+        timestampLabel.textColor = .black90
+        addSubview(timestampLabel)
         timestampLabel.snp.makeConstraints { make in
             make.trailing.equalToSuperview().inset(timeStampTrailing)
             make.centerY.equalTo(nameLabel.snp.centerY)
         }
 
         commentTextView = UITextView()
-        commentTextView.font = .likesAndComments
-        commentTextView.textColor = .darkGrey
+        commentTextView.font = .subSecondaryHeader
+        commentTextView.textColor = .black90
         commentTextView.isScrollEnabled = false
         commentTextView.isEditable = false
         commentTextView.autoresizesSubviews = true

@@ -21,7 +21,7 @@ final class SearchCell: UICollectionViewCell {
             if let post = post {
             authorLabel.text = post.author?.name
             timeStampLabel.text = post.datePosted.timeAgoSinceNow()
-            contentLabel.text = post.content.htmlToAttributedString.string.replacingOccurrences(of: "\n", with: "")
+            contentLabel.text = post.content.htmlToString.replacingOccurrences(of: "\n", with: "")
             setupImage()
             }
         }
@@ -38,7 +38,7 @@ final class SearchCell: UICollectionViewCell {
         let label = UILabel()
         label.text = ""
         label.numberOfLines = 1
-        label.font = UIFont(name: "Georgia", size: 13)
+        label.font = .photoCaption
         label.textColor = .black
         return label
     }()
@@ -47,7 +47,7 @@ final class SearchCell: UICollectionViewCell {
         let label = UILabel()
         label.text = ""
         label.numberOfLines = 1
-        label.font = UIFont(name: "Georgia", size: 13)
+        label.font = .photoCaption
         label.textColor = .black
         return label
     }()
@@ -56,7 +56,7 @@ final class SearchCell: UICollectionViewCell {
         let label = UILabel()
         label.text = ""
         label.numberOfLines = 0
-        label.font = UIFont(name: "Georgia", size: 13)
+        label.font = .photoCaption
         label.textColor = .black
         return label
     }()

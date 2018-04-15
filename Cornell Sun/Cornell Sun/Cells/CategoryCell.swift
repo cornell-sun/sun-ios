@@ -11,23 +11,33 @@ import SnapKit
 
 final class CategoryCell: UICollectionViewCell {
 
+    var categoryLabelLeading = 17.0
+
     var post: PostObject? {
         didSet {
             categoryLabel.text = post?.primaryCategory
+        }
+    }
+    
+    var adLabel: String? {
+        didSet {
+            if let text = adLabel {
+                categoryLabel.text = text
+            }
         }
     }
 
     let categoryLabel: UILabel = {
         let label = UILabel()
         label.text = ""
-        label.font = .systemFont(ofSize: 14, weight: .medium)
+        label.font = .secondaryHeader
         label.numberOfLines = 2
         return label
     }()
 
     let divider: UIView = {
         let view = UIView()
-        view.backgroundColor = .dividerGray
+        view.backgroundColor = .black40
         return view
     }()
 
@@ -46,7 +56,7 @@ final class CategoryCell: UICollectionViewCell {
         addSubview(divider)
         categoryLabel.snp.makeConstraints { (make) in
             make.centerY.equalToSuperview()
-            make.edges.equalToSuperview().inset(UIEdgeInsets(top: 5, left: 17, bottom: 5, right: 5))
+            make.leading.equalTo(categoryLabelLeading)
         }
         divider.snp.makeConstraints { (make) in
             make.height.equalTo(1)

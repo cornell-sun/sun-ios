@@ -11,6 +11,17 @@ import Kingfisher
 import Realm
 import RealmSwift
 
+let tempLabel = UILabel()
+
+func numberOfLines(text: String, font: UIFont, width: CGFloat) -> Int {
+    tempLabel.text = text
+    tempLabel.font = font
+    let textSize = CGSize(width: width, height: CGFloat(MAXFLOAT))
+    let rHeight: Int = lroundf(Float(tempLabel.sizeThatFits(textSize).height))
+    let charSize: Int = lroundf(Float(tempLabel.font.pointSize))
+    return (rHeight / charSize) - 1
+}
+
 func captionMaxHeight(width: CGFloat) -> CGFloat {
      let tmpStr = "A rink attendant collect fish thrown by the Cornell students in a tradition that spans over decades. (Cameron Pollack/ Sun Photography Editor)"
     return tmpStr.height(withConstrainedWidth: width - 36, font: UIFont(name: "Georgia", size: 13)!)
@@ -55,9 +66,10 @@ extension String {
         return ceil(boundingBox.width)
     }
 
-    var htmlToAttributedString: NSAttributedString {
+    var htmlToAttributedString: NSAttributedString? {
         do {
-            return try NSAttributedString(data: Data(utf8),
+            guard let data = data(using: .utf8) else { return nil }
+            return try NSAttributedString(data: data,
                                           options: [.documentType: NSAttributedString.DocumentType.html,
                                                     .characterEncoding: String.Encoding.utf8.rawValue],
                                           documentAttributes: nil)
@@ -68,7 +80,7 @@ extension String {
     }
 
     var htmlToString: String {
-        return htmlToAttributedString.string
+        return htmlToAttributedString?.string ?? ""
     }
 }
 

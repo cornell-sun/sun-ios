@@ -30,52 +30,14 @@ class PhotoGallerySectionController: ListSectionController {
     }
 }
 
-extension PhotoGallerySectionController: HeartPressedDelegate, BookmarkPressedDelegate, SharePressedDelegate, PhotoChangedDelegate {
+extension PhotoGallerySectionController: BookmarkPressedDelegate, SharePressedDelegate, PhotoChangedDelegate {
 
     func didPressBookmark(_ cell: MenuActionCell) {
-        let didBookmark = cell.bookmarkButton.currentImage == #imageLiteral(resourceName: "bookmark") //we should save the bookmark
-        let correctBookmarkImage = cell.bookmarkButton.currentImage == #imageLiteral(resourceName: "bookmarkPressed") ? #imageLiteral(resourceName: "bookmark") : #imageLiteral(resourceName: "bookmarkPressed")
-        cell.bookmarkButton.setImage(correctBookmarkImage, for: .normal)
-        cell.bookmarkButton.transform = CGAffineTransform(scaleX: 0.6, y: 0.6)
-        taptic(style: .light)
-        UIView.animate(withDuration: 1.0,
-                       delay: 0,
-                       usingSpringWithDamping: CGFloat(0.40),
-                       initialSpringVelocity: CGFloat(6.0),
-                       options: UIViewAnimationOptions.allowUserInteraction,
-                       animations: {
-                        cell.bookmarkButton.transform = CGAffineTransform.identity
-        })
-        if didBookmark {
-            RealmManager.instance.save(object: entry)
-        } else {
-            RealmManager.instance.delete(object: entry)
-        }
-    }
-
-    func didPressHeart(_ cell: MenuActionCell) {
-        let correctHeartImage = cell.heartButton.currentImage == #imageLiteral(resourceName: "heartPressed") ? #imageLiteral(resourceName: "heart") : #imageLiteral(resourceName: "heartPressed")
-        cell.heartButton.setImage(correctHeartImage, for: .normal)
-        cell.heartButton.transform = CGAffineTransform(scaleX: 0.6, y: 0.6)
-        taptic(style: .light)
-        UIView.animate(withDuration: 1.0,
-                       delay: 0,
-                       usingSpringWithDamping: CGFloat(0.40),
-                       initialSpringVelocity: CGFloat(6.0),
-                       options: UIViewAnimationOptions.allowUserInteraction,
-                       animations: {
-                        cell.heartButton.transform = CGAffineTransform.identity
-        })
+        pressedBookmark(cell, entry: entry)
     }
 
     func didPressShare() {
-        taptic(style: .light)
-        if let articleLink = URL(string: entry.link) {
-            let title = entry.title
-            let objectToShare = [title, articleLink] as [Any]
-            let activityVC = UIActivityViewController(activityItems: objectToShare, applicationActivities: nil)
-            getCurrentViewController()?.present(activityVC, animated: true, completion: nil)
-        }
+        pressedShare(entry: entry)
     }
 
     func photoDidChange(_ index: Int) {
@@ -100,16 +62,15 @@ extension PhotoGallerySectionController: HeartPressedDelegate, BookmarkPressedDe
         case .categoryCell:
             return CGSize(width: width, height: 40)
         case .titleCell:
-            let height = entry.title.height(withConstrainedWidth: width, font: UIFont.boldSystemFont(ofSize: 22)) //CLUTCH Extension thank stackoverflow gods
-            return CGSize(width: width, height: height + 5)
+            let height = entry.title.height(withConstrainedWidth: width - 34, font: .headerTitle) //CLUTCH Extension thank stackoverflow gods
+            return CGSize(width: width, height: height + 40)
         case .authorCell:
-            let height = entry.author?.name.height(withConstrainedWidth: width, font: UIFont(name: "Georgia", size: 13)!)
+            let height = entry.author?.name.height(withConstrainedWidth: width, font: .photoCaption)
             return CGSize(width: width, height: height! + 9)
         case .photoGalleryCell:
             return CGSize(width: width, height: width / 1.5)
         case .captionCell:
             let height = captionMaxHeight(width: width)
-
             return CGSize(width: width, height: height + 16)
         case .likeCommentCell:
             let hasComments = !entry.comments.isEmpty
@@ -158,9 +119,9 @@ extension PhotoGallerySectionController: HeartPressedDelegate, BookmarkPressedDe
         case .actionMenuCell:
             // swiftlint:disable:next force_cast
             let cell = collectionContext!.dequeueReusableCell(of: MenuActionCell.self, for: self, at: index) as! MenuActionCell
-            cell.heartDelegate = self
             cell.bookmarkDelegate = self
             cell.shareDelegate = self
+            cell.post = entry
             cell.setupViews(forBookmarks: false)
             cell.setBookmarkImage(didSelectBookmark: entry.didSave)
             return cell

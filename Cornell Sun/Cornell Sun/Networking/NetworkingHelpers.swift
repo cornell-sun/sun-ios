@@ -20,9 +20,9 @@ typealias PostObjectCompletionBlock = (_ posts: [PostObject], _ error: APIErrors
 typealias TrendingCompletionBlock = (_ trending: [String], _ error: APIErrors?) -> Void
 typealias CommentsCompletionBlock = (_ comments: [CommentObject], _ error: APIErrors?) -> Void
 let savedPosts: Results<PostObject> = RealmManager.instance.get()
+let savedPostIds: [Int] = Array(RealmManager.instance.get()).map({$0.id})
 
 func fetchPosts(target: SunAPI, completion: @escaping PostObjectCompletionBlock) {
-    let savedPostIds: [Int] = savedPosts.map({$0.id})
     var postObjects: [PostObject] = []
     API.request(target: target) { response in
         guard let response = response else {
@@ -87,32 +87,59 @@ func getComments(postID: Int, completion: @escaping CommentsCompletionBlock) {
     }
 }
 
-var headlinePost: PostObject?
-func setUpData(callback: @escaping ([PostObject], PostObject?) -> Void) {
-    let savedPostIds: [Int] = savedPosts.map({$0.id})
+func prepareInitialPosts(callback: @escaping ([PostObject], PostObject?) -> Void) {
+    var headlinePost: PostObject?
     var postObjects: [PostObject] = []
+
+    let group = DispatchGroup()
+
+    group.enter()
+    API.request(target: .featured) { (response) in
+        if let response = response {
+            do {
+                let json = try JSONSerialization.jsonObject(with: response.data, options: [])
+                if let postDictionary = json as? [String: Any], let post = PostObject(data: postDictionary) {
+                    post.didSave = savedPostIds.contains(post.id)
+                    headlinePost = post
+                } else {
+                    print("could not parse featured post")
+                }
+            } catch {
+                fatalError()
+            }
+        }
+        group.leave()
+    }
+
+    group.enter()
     API.request(target: .posts(page: 1)) { (response) in
-        guard let response = response else {return callback(postObjects, headlinePost) }
-        do {
-            let jsonResult = try JSONSerialization.jsonObject(with: response.data, options: [])
-            if let postArray = jsonResult as? [[String: Any]] {
-                for postDictionary in postArray {
-                    if let post = PostObject(data: postDictionary) {
-                        if headlinePost == nil {
-                            headlinePost = post
+        if let response = response {
+
+            do {
+                let json = try JSONSerialization.jsonObject(with: response.data, options: [])
+                if let postArray = json as? [[String: Any]] {
+                    for postDictionary in postArray {
+                        if let post = PostObject(data: postDictionary) {
+                            if savedPostIds.contains(post.id) {
+                                post.didSave = true
+                            }
+                            postObjects.append(post)
                         }
-                        if savedPostIds.contains(post.id) {
-                            post.didSave = true
-                        }
-                        postObjects.append(post)
                     }
                 }
+            } catch {
+                fatalError()
             }
-            callback(postObjects, headlinePost)
-        } catch {
-            print("could not parse")
-            callback(postObjects, headlinePost)
-            // can't parse data, show error
         }
+
+        group.leave()
+    }
+
+    group.notify(queue: .main) {
+        //both network requests are done
+        postObjects = postObjects.filter { post in
+            return post.id != headlinePost?.id
+        }
+        callback(postObjects, headlinePost)
     }
 }

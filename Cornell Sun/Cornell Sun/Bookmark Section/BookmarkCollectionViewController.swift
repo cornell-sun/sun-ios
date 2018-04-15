@@ -12,10 +12,9 @@ import Realm
 import RealmSwift
 
 class BookmarkCollectionViewController: ViewController, UIScrollViewDelegate {
+    var isFirstRun = true
     var token: NotificationToken?
-    var realmData: Results<PostObject> {
-        return RealmManager.instance.get()
-    }
+    let realmData: Results<PostObject> = RealmManager.instance.get()
 
     let collectionView: UICollectionView = {
         let view = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
@@ -28,12 +27,25 @@ class BookmarkCollectionViewController: ViewController, UIScrollViewDelegate {
         return ListAdapter(updater: ListAdapterUpdater(), viewController: self, workingRangeSize: 0)
     }()
 
+    override func viewWillAppear(_ animated: Bool) {
+        title = "Bookmarks"
+
+        guard !isFirstRun else {
+            isFirstRun = false
+            return
+        }
+        self.adapter.performUpdates(animated: true, completion: nil)
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        title = "Bookmarks"
+        navigationController?.navigationBar.titleTextAttributes = [
+            NSAttributedStringKey.font: UIFont.headerTitle
+        ]
         view.addSubview(collectionView)
         adapter.collectionView = collectionView
-        adapter.collectionView?.backgroundColor = UIColor(white: 241.0 / 255.0, alpha: 1.0)
+        adapter.collectionView?.backgroundColor = .black5
         adapter.dataSource = self
         adapter.scrollViewDelegate = self
 

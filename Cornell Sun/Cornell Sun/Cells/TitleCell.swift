@@ -11,13 +11,14 @@ import SnapKit
 
 final class TitleCell: UICollectionViewCell {
     var topInset: CGFloat = 5
-    var leftInset: CGFloat = 17
+    var leftRightInset: CGFloat = 17
     var bottomInset: CGFloat = 5
-    var rightInset: CGFloat = 5
 
     var post: PostObject? {
         didSet {
-            titleLabel.text = post?.title
+            if let post = post {
+                titleLabel.text = post.title
+            }
         }
     }
 
@@ -25,7 +26,7 @@ final class TitleCell: UICollectionViewCell {
         let label = UILabel()
         label.text = ""
         label.numberOfLines = 4
-        label.font = .articleViewTitle
+        label.font = .articleTitle
         return label
     }()
 
@@ -43,7 +44,7 @@ final class TitleCell: UICollectionViewCell {
         addSubview(titleLabel)
         titleLabel.snp.makeConstraints { (make) in
             make.centerY.equalToSuperview()
-            make.edges.equalToSuperview().inset(UIEdgeInsets(top: topInset, left: leftInset, bottom: bottomInset, right: rightInset))
+            make.leading.trailing.equalToSuperview().inset(leftRightInset)
         }
     }
 }
