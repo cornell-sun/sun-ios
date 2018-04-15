@@ -78,6 +78,7 @@ class OnboardingPageViewController: UIPageViewController {
         OneSignal.promptForPushNotifications(userResponse: { accepted in
             print("User accepted notifications: \(accepted)")
             let userDefaults = UserDefaults.standard
+            userDefaults.setValue(accepted, forKey: breakingNewsKey)
             userDefaults.setValue(true, forKey: hasOnboardedKey)
             self.loadingIndicator.startAnimating()
             prepareInitialPosts { posts, mainHeadlinePost in
