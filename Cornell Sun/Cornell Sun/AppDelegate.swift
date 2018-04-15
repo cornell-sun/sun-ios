@@ -28,13 +28,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                         handleNotificationAction: nil,
                                         settings: onesignalInitSettings)
 
-        OneSignal.inFocusDisplayType = OSNotificationDisplayType.notification;
+        OneSignal.inFocusDisplayType = OSNotificationDisplayType.notification
 
-        // Recommend moving the below line to prompt for push after informing the user about
-        //   how your app will use them.
+        //MINDY: Move this prompt. It returns a bool. No matter what after they click something push to new view
         OneSignal.promptForPushNotifications(userResponse: { accepted in
             print("User accepted notifications: \(accepted)")
-            OneSignal.sendTag("sports", value: "sports")
         })
 
         window = UIWindow(frame: UIScreen.main.bounds)
