@@ -37,6 +37,8 @@
 		DC0A88401FBA84E700F2BCBB /* AuthorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0A883F1FBA84E700F2BCBB /* AuthorCell.swift */; };
 		DC34DEF3203216690010DF9A /* SectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC34DEF2203216690010DF9A /* SectionViewController.swift */; };
 		DC34DEF520321C6D0010DF9A /* SectionCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC34DEF420321C6D0010DF9A /* SectionCollectionViewController.swift */; };
+		DC3667D4206EB9D2002EB4F9 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC3667D3206EB9D2002EB4F9 /* NotificationService.swift */; };
+		DC3667D8206EB9D2002EB4F9 /* SunNotificationServiceExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = DC3667D1206EB9D2002EB4F9 /* SunNotificationServiceExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		DC4308ED1F2558D500ABB31F /* SunAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4308EC1F2558D500ABB31F /* SunAPI.swift */; };
 		DC4308EF1F2563FF00ABB31F /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4308EE1F2563FF00ABB31F /* API.swift */; };
 		DC446C2E1F5D016500D68688 /* FeedCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC446C2D1F5D016500D68688 /* FeedCollectionViewController.swift */; };
@@ -64,10 +66,18 @@
 		DCFC88C41F86B50200A0D8A9 /* ActionMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFC88C31F86B50200A0D8A9 /* ActionMenuCell.swift */; };
 		DCFC88C61F86C03700A0D8A9 /* CommentObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFC88C51F86C03700A0D8A9 /* CommentObject.swift */; };
 		DCFC88C81F86C7B000A0D8A9 /* LikeCommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFC88C71F86C7B000A0D8A9 /* LikeCommentCell.swift */; };
+		E89F9B870388A78A9CB83842 /* Pods_Cornell_Sun_SunNotificationServiceExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED70911BC31B1BB1FC7EE973 /* Pods_Cornell_Sun_SunNotificationServiceExtension.framework */; };
 		F252229F2922831926DB3A6C /* Pods_Cornell_Sun.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DBAAD519F3C5A2D044960CA /* Pods_Cornell_Sun.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		DC3667D6206EB9D2002EB4F9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5006AFF01EA9625000F58549 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DC3667D0206EB9D2002EB4F9;
+			remoteInfo = SunNotificationServiceExtension;
+		};
 		DCD870F11F256B7B00B98AF8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 5006AFF01EA9625000F58549 /* Project object */;
@@ -76,6 +86,20 @@
 			remoteInfo = "Cornell Sun";
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		DC3667DC206EB9D2002EB4F9 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				DC3667D8206EB9D2002EB4F9 /* SunNotificationServiceExtension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		0C15F1861FBDD433009724DB /* ArticleHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleHeaderView.swift; sourceTree = "<group>"; };
@@ -110,12 +134,18 @@
 		79D08546F469CBFA91B516C4 /* Pods-Cornell Sun.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cornell Sun.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Cornell Sun/Pods-Cornell Sun.debug.xcconfig"; sourceTree = "<group>"; };
 		8D204AC28FA383322F3630A2 /* Pods-Cornell SunTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cornell SunTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Cornell SunTests/Pods-Cornell SunTests.release.xcconfig"; sourceTree = "<group>"; };
 		A733FA4C43777F59F6F0F8B3 /* Pods-Cornell Sun.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cornell Sun.release.xcconfig"; path = "Pods/Target Support Files/Pods-Cornell Sun/Pods-Cornell Sun.release.xcconfig"; sourceTree = "<group>"; };
+		DA69BC56E568CC99632DAB34 /* Pods-Cornell Sun-SunNotificationServiceExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cornell Sun-SunNotificationServiceExtension.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Cornell Sun-SunNotificationServiceExtension/Pods-Cornell Sun-SunNotificationServiceExtension.debug.xcconfig"; sourceTree = "<group>"; };
 		DC0A88391FBA2DEE00F2BCBB /* PhotoGalleryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoGalleryCell.swift; sourceTree = "<group>"; };
 		DC0A883B1FBA531000F2BCBB /* BookmarkCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkCollectionViewController.swift; sourceTree = "<group>"; };
 		DC0A883D1FBA6B8200F2BCBB /* BookmarkSectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkSectionController.swift; sourceTree = "<group>"; };
 		DC0A883F1FBA84E700F2BCBB /* AuthorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorCell.swift; sourceTree = "<group>"; };
 		DC34DEF2203216690010DF9A /* SectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionViewController.swift; sourceTree = "<group>"; };
 		DC34DEF420321C6D0010DF9A /* SectionCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionCollectionViewController.swift; sourceTree = "<group>"; };
+		DC3667D1206EB9D2002EB4F9 /* SunNotificationServiceExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = SunNotificationServiceExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		DC3667D3206EB9D2002EB4F9 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
+		DC3667D5206EB9D2002EB4F9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DC3667DD206EBA54002EB4F9 /* SunNotificationServiceExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SunNotificationServiceExtension.entitlements; sourceTree = "<group>"; };
+		DC3667DE206EBAC6002EB4F9 /* Cornell Sun.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Cornell Sun.entitlements"; sourceTree = "<group>"; };
 		DC4308EC1F2558D500ABB31F /* SunAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunAPI.swift; sourceTree = "<group>"; };
 		DC4308EE1F2563FF00ABB31F /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		DC446C2D1F5D016500D68688 /* FeedCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCollectionViewController.swift; sourceTree = "<group>"; };
@@ -145,6 +175,8 @@
 		DCFC88C31F86B50200A0D8A9 /* ActionMenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionMenuCell.swift; sourceTree = "<group>"; };
 		DCFC88C51F86C03700A0D8A9 /* CommentObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentObject.swift; sourceTree = "<group>"; };
 		DCFC88C71F86C7B000A0D8A9 /* LikeCommentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeCommentCell.swift; sourceTree = "<group>"; };
+		DD303BF8F0052FBBDBBC06E3 /* Pods-Cornell Sun-SunNotificationServiceExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cornell Sun-SunNotificationServiceExtension.release.xcconfig"; path = "Pods/Target Support Files/Pods-Cornell Sun-SunNotificationServiceExtension/Pods-Cornell Sun-SunNotificationServiceExtension.release.xcconfig"; sourceTree = "<group>"; };
+		ED70911BC31B1BB1FC7EE973 /* Pods_Cornell_Sun_SunNotificationServiceExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cornell_Sun_SunNotificationServiceExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -153,6 +185,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				F252229F2922831926DB3A6C /* Pods_Cornell_Sun.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DC3667CE206EB9D2002EB4F9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E89F9B870388A78A9CB83842 /* Pods_Cornell_Sun_SunNotificationServiceExtension.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -200,6 +240,7 @@
 				5006B00D1EA963A900F58549 /* Default-568h@2x.png */,
 				5006AFFA1EA9625000F58549 /* Cornell Sun */,
 				DCD870ED1F256B7B00B98AF8 /* Cornell SunTests */,
+				DC3667D2206EB9D2002EB4F9 /* SunNotificationServiceExtension */,
 				5006AFF91EA9625000F58549 /* Products */,
 				6FF0DFD245B42D7BBFBC46CA /* Pods */,
 				C0B2C074512AC5316E8D48D8 /* Frameworks */,
@@ -211,6 +252,7 @@
 			children = (
 				5006AFF81EA9625000F58549 /* Cornell Sun.app */,
 				DCD870EC1F256B7B00B98AF8 /* Cornell SunTests.xctest */,
+				DC3667D1206EB9D2002EB4F9 /* SunNotificationServiceExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -218,6 +260,7 @@
 		5006AFFA1EA9625000F58549 /* Cornell Sun */ = {
 			isa = PBXGroup;
 			children = (
+				DC3667DE206EBAC6002EB4F9 /* Cornell Sun.entitlements */,
 				3487167C2041F09D008CB9D5 /* Launch Screen.storyboard */,
 				5006AFFB1EA9625000F58549 /* AppDelegate.swift */,
 				34C558282041E42A00E62CE8 /* Ad Section */,
@@ -272,6 +315,8 @@
 				A733FA4C43777F59F6F0F8B3 /* Pods-Cornell Sun.release.xcconfig */,
 				389771843ED115B12D456CDA /* Pods-Cornell SunTests.debug.xcconfig */,
 				8D204AC28FA383322F3630A2 /* Pods-Cornell SunTests.release.xcconfig */,
+				DA69BC56E568CC99632DAB34 /* Pods-Cornell Sun-SunNotificationServiceExtension.debug.xcconfig */,
+				DD303BF8F0052FBBDBBC06E3 /* Pods-Cornell Sun-SunNotificationServiceExtension.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -281,6 +326,7 @@
 			children = (
 				3DBAAD519F3C5A2D044960CA /* Pods_Cornell_Sun.framework */,
 				3C38BCC6B38BFCC0EC16BF2B /* Pods_Cornell_SunTests.framework */,
+				ED70911BC31B1BB1FC7EE973 /* Pods_Cornell_Sun_SunNotificationServiceExtension.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -368,6 +414,16 @@
 			path = "Sections Section";
 			sourceTree = "<group>";
 		};
+		DC3667D2206EB9D2002EB4F9 /* SunNotificationServiceExtension */ = {
+			isa = PBXGroup;
+			children = (
+				DC3667DD206EBA54002EB4F9 /* SunNotificationServiceExtension.entitlements */,
+				DC3667D3206EB9D2002EB4F9 /* NotificationService.swift */,
+				DC3667D5206EB9D2002EB4F9 /* Info.plist */,
+			);
+			path = SunNotificationServiceExtension;
+			sourceTree = "<group>";
+		};
 		DCA02C062026580100CBE97F /* Search Section */ = {
 			isa = PBXGroup;
 			children = (
@@ -448,15 +504,36 @@
 				5D796D343FAE3F7BC75A78B1 /* [CP] Embed Pods Frameworks */,
 				74EBFA210DC6D01883DE7F2A /* [CP] Copy Pods Resources */,
 				40D130291F61EF250063329A /* SwiftLint */,
+				DC3667DC206EB9D2002EB4F9 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				DC3667D7206EB9D2002EB4F9 /* PBXTargetDependency */,
 			);
 			name = "Cornell Sun";
 			productName = "Cornell Sun";
 			productReference = 5006AFF81EA9625000F58549 /* Cornell Sun.app */;
 			productType = "com.apple.product-type.application";
+		};
+		DC3667D0206EB9D2002EB4F9 /* SunNotificationServiceExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DC3667DB206EB9D2002EB4F9 /* Build configuration list for PBXNativeTarget "SunNotificationServiceExtension" */;
+			buildPhases = (
+				9A98D18971B5E40B0126C24C /* [CP] Check Pods Manifest.lock */,
+				DC3667CD206EB9D2002EB4F9 /* Sources */,
+				DC3667CE206EB9D2002EB4F9 /* Frameworks */,
+				DC3667CF206EB9D2002EB4F9 /* Resources */,
+				FBF9831FB6D9CF6AF66B4DBF /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SunNotificationServiceExtension;
+			productName = SunNotificationServiceExtension;
+			productReference = DC3667D1206EB9D2002EB4F9 /* SunNotificationServiceExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 		DCD870EB1F256B7B00B98AF8 /* Cornell SunTests */ = {
 			isa = PBXNativeTarget;
@@ -485,7 +562,7 @@
 		5006AFF01EA9625000F58549 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0900;
+				LastSwiftUpdateCheck = 0920;
 				LastUpgradeCheck = 0900;
 				ORGANIZATIONNAME = cornell.sun;
 				TargetAttributes = {
@@ -494,6 +571,24 @@
 						DevelopmentTeam = D5T999AFZL;
 						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
+					};
+					DC3667D0206EB9D2002EB4F9 = {
+						CreatedOnToolsVersion = 9.2;
+						DevelopmentTeam = D5T999AFZL;
+						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 0;
+							};
+						};
 					};
 					DCD870EB1F256B7B00B98AF8 = {
 						CreatedOnToolsVersion = 9.0;
@@ -517,6 +612,7 @@
 			targets = (
 				5006AFF71EA9625000F58549 /* Cornell Sun */,
 				DCD870EB1F256B7B00B98AF8 /* Cornell SunTests */,
+				DC3667D0206EB9D2002EB4F9 /* SunNotificationServiceExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -531,6 +627,13 @@
 				DC818DA31F75E0CF0064AFFA /* Sonnenstrahl-Ausgezeichnet.ttf in Resources */,
 				3487167D2041F09D008CB9D5 /* Launch Screen.storyboard in Resources */,
 				0C7D9A8E1F217B510041E1B0 /* apple-app-site-association in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DC3667CF206EB9D2002EB4F9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -680,6 +783,24 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Cornell Sun/Pods-Cornell Sun-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		9A98D18971B5E40B0126C24C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Cornell Sun-SunNotificationServiceExtension-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 		D18FABB7FF88C9A16A7E9EF3 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -696,6 +817,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FBF9831FB6D9CF6AF66B4DBF /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Cornell Sun-SunNotificationServiceExtension/Pods-Cornell Sun-SunNotificationServiceExtension-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -757,6 +893,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		DC3667CD206EB9D2002EB4F9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DC3667D4206EB9D2002EB4F9 /* NotificationService.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		DCD870E81F256B7B00B98AF8 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -769,6 +913,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		DC3667D7206EB9D2002EB4F9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DC3667D0206EB9D2002EB4F9 /* SunNotificationServiceExtension */;
+			targetProxy = DC3667D6206EB9D2002EB4F9 /* PBXContainerItemProxy */;
+		};
 		DCD870F21F256B7B00B98AF8 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 5006AFF71EA9625000F58549 /* Cornell Sun */;
@@ -888,7 +1037,9 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 79D08546F469CBFA91B516C4 /* Pods-Cornell Sun.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Cornell Sun/Cornell Sun.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
@@ -908,7 +1059,9 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A733FA4C43777F59F6F0F8B3 /* Pods-Cornell Sun.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Cornell Sun/Cornell Sun.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
@@ -923,6 +1076,52 @@
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Cornell Sun.app/Cornell Sun";
+			};
+			name = Release;
+		};
+		DC3667D9206EB9D2002EB4F9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = DA69BC56E568CC99632DAB34 /* Pods-Cornell Sun-SunNotificationServiceExtension.debug.xcconfig */;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = D5T999AFZL;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = SunNotificationServiceExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.cornellsun.app.SunNotificationServiceExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		DC3667DA206EB9D2002EB4F9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = DD303BF8F0052FBBDBBC06E3 /* Pods-Cornell Sun-SunNotificationServiceExtension.release.xcconfig */;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = D5T999AFZL;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = SunNotificationServiceExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.cornellsun.app.SunNotificationServiceExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -968,6 +1167,15 @@
 			buildConfigurations = (
 				5006B00B1EA9625000F58549 /* Debug */,
 				5006B00C1EA9625000F58549 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DC3667DB206EB9D2002EB4F9 /* Build configuration list for PBXNativeTarget "SunNotificationServiceExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DC3667D9206EB9D2002EB4F9 /* Debug */,
+				DC3667DA206EB9D2002EB4F9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
