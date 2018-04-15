@@ -10,23 +10,23 @@ import UIKit
 
 enum OnboardingViewControllerType {
     case welcome
-    case getStarted
+    case notifications
 
     var titleString: String {
         switch self {
         case .welcome:
             return "Welcome to The Cornell Daily Sun"
-        case .getStarted:
-            return "Let's get started"
+        case .notifications:
+            return "Stay up to date with Breaking News"
         }
     }
 
     var descriptionString: String {
         switch self {
         case .welcome:
-            return "Here's a description"
-        case .getStarted:
-            return "It's lit"
+            return "The oldest independent student newspaper by Cornellians, for Cornellians"
+        case .notifications:
+            return "We’ll only send you the most important stories. You can customize this later on."
         }
     }
 
@@ -34,8 +34,17 @@ enum OnboardingViewControllerType {
         switch self {
         case .welcome:
             return 0
-        case .getStarted:
+        case .notifications:
             return 1
+        }
+    }
+
+    var image: UIImage {
+        switch self {
+        case .welcome:
+            return #imageLiteral(resourceName: "clockTower")
+        case .notifications:
+            return #imageLiteral(resourceName: "notificationsAndChair")
         }
     }
 }
@@ -43,11 +52,13 @@ enum OnboardingViewControllerType {
 class OnboardingViewController: UIViewController {
 
     var onboardingType: OnboardingViewControllerType!
-    var onboardingImageView: UIImageView?
+    var onboardingImageView: UIImageView!
     var onboardingTitleLabel: UILabel!
     var onboardingDescriptionLabel: UILabel!
-    var nextButton: UIButton!
-    var backButton: UIButton!
+
+    let padding: CGFloat = 50
+    let topOffset: CGFloat = 90
+    let descriptionTopOffset: CGFloat = 10
 
     init(type: OnboardingViewControllerType) {
         super.init(nibName: nil, bundle: nil)
@@ -58,45 +69,40 @@ class OnboardingViewController: UIViewController {
         super.viewDidLoad()
 
         view.backgroundColor = .bigRed
+        let backgroundGradientView = UIImageView()
+        backgroundGradientView.image = #imageLiteral(resourceName: "gradient")
+        view.addSubview(backgroundGradientView)
+        backgroundGradientView.snp.makeConstraints { $0.edges.equalToSuperview() }
 
         onboardingTitleLabel = UILabel()
+        onboardingTitleLabel.numberOfLines = 0
         onboardingTitleLabel.textColor = .white
-        onboardingTitleLabel.textAlignment = .center
+        onboardingTitleLabel.textAlignment = .left
+        onboardingTitleLabel.font = .systemFont(ofSize: 27, weight: .bold)
         view.addSubview(onboardingTitleLabel)
         onboardingTitleLabel.snp.makeConstraints { make in
-            make.center.equalToSuperview()
-            make.width.equalToSuperview().inset(16)
+            make.top.equalToSuperview().offset(topOffset)
+            make.leading.trailing.equalToSuperview().inset(padding)
         }
 
         onboardingDescriptionLabel = UILabel()
         onboardingDescriptionLabel.textColor = .white
-        onboardingDescriptionLabel.textAlignment = .center
+        onboardingDescriptionLabel.textAlignment = .left
+        onboardingDescriptionLabel.numberOfLines = 0
+        onboardingDescriptionLabel.font = .systemFont(ofSize: 16, weight: .medium)
         view.addSubview(onboardingDescriptionLabel)
         onboardingDescriptionLabel.snp.makeConstraints { make in
-            make.centerX.width.equalToSuperview()
-            make.top.equalTo(onboardingTitleLabel.snp.bottom).offset(24)
+            make.top.equalTo(onboardingTitleLabel.snp.bottom).offset(descriptionTopOffset)
+            make.leading.trailing.equalToSuperview().inset(padding)
         }
 
-        nextButton = UIButton()
-        nextButton.setTitle("Next", for: .normal)
-        nextButton.addTarget(nil, action: #selector(OnboardingPageViewController.pageNextTapped(_:)), for: .touchUpInside)
-        view.addSubview(nextButton)
-        nextButton.snp.makeConstraints { make in
-            make.leading.equalTo(onboardingDescriptionLabel.snp.centerX).offset(6)
-            make.top.equalTo(onboardingDescriptionLabel.snp.bottom).offset(24)
-            make.width.equalTo(48)
-            make.height.equalTo(24)
-        }
-
-        backButton = UIButton()
-        backButton.setTitle("Back", for: .normal)
-        backButton.addTarget(nil, action: #selector(OnboardingPageViewController.pageBackTapped(_:)), for: .touchUpInside)
-        view.addSubview(backButton)
-        backButton.snp.makeConstraints { make in
-            make.trailing.equalTo(onboardingDescriptionLabel.snp.centerX).inset(6)
-            make.top.equalTo(onboardingDescriptionLabel.snp.bottom).offset(24)
-            make.width.equalTo(48)
-            make.height.equalTo(24)
+        onboardingImageView = UIImageView()
+        onboardingImageView.contentMode = .bottom
+        view.addSubview(onboardingImageView)
+        onboardingImageView.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview()
+            make.bottom.equalToSuperview().inset(padding)
+            make.top.equalToSuperview()
         }
 
         configureOnboarding()
@@ -105,12 +111,7 @@ class OnboardingViewController: UIViewController {
     private func configureOnboarding() {
         onboardingTitleLabel.text = onboardingType.titleString
         onboardingDescriptionLabel.text = onboardingType.descriptionString
-        if onboardingType.indexInPages == 0 {
-            backButton.isHidden = true
-        } else if onboardingType.indexInPages == 1 {
-            nextButton.setTitle("Finish", for: .normal)
-            nextButton.addTarget(nil, action: #selector(OnboardingPageViewController.dismissOnboarding), for: .touchUpInside)
-        }
+        onboardingImageView.image = onboardingType.image
     }
 
     required init?(coder aDecoder: NSCoder) {

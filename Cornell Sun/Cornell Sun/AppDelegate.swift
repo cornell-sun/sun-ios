@@ -29,12 +29,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         ImageCache.default.maxCachePeriodInSecond = 60 * 60 * 24 * 4 //4 days until its removed
 
         let userDefaults = UserDefaults.standard
-        setUpData { posts, mainHeadlinePost in
-            let tabBarController = TabBarViewController(with: posts, mainHeadlinePost: mainHeadlinePost)
-            self.window!.rootViewController = tabBarController
-            if !userDefaults.bool(forKey: hasOnboardedKey) {
-                let onboardingViewController = OnboardingPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
-                self.window?.rootViewController?.present(onboardingViewController, animated: false, completion: nil)
+        if !userDefaults.bool(forKey: hasOnboardedKey) {
+            let onboardingViewController = OnboardingPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
+            self.window?.rootViewController?.present(onboardingViewController, animated: false, completion: nil)
+        } else {
+            setUpData { posts, mainHeadlinePost in
+                let tabBarController = TabBarViewController(with: posts, mainHeadlinePost: mainHeadlinePost)
+                self.window!.rootViewController = tabBarController
             }
         }
         return true
