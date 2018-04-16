@@ -17,7 +17,8 @@ target 'Cornell Sun' do
   pod 'RealmSwift'
   pod 'Google-Mobile-Ads-SDK'
   pod 'SwiftSoup'
-   pod 'OneSignal', '>= 2.6.2', '< 3.0'
+  pod 'SkeletonView'
+  pod 'OneSignal', '>= 2.6.2', '< 3.0'
 
 target 'SunNotificationServiceExtension' do
     pod 'OneSignal', '>= 2.6.2', '< 3.0'
