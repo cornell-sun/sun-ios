@@ -82,7 +82,6 @@ class ArticleStackViewController: UIViewController {
         }
 
         setup()
-        setupComments()
     }
 
     /// Sets up the content in the stack view by parsing each section.
@@ -102,7 +101,7 @@ class ArticleStackViewController: UIViewController {
                 setupBlockquote(text: string)
             }
         }
-
+        setupComments()
     }
 
     func createArticleContentType(content: String) -> [ArticleContentType] {

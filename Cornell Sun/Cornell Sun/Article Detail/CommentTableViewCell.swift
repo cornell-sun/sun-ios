@@ -40,6 +40,7 @@ class CommentTableViewCell: UITableViewCell {
         }
 
         nameLabel = UILabel()
+        nameLabel.numberOfLines = 0
         nameLabel.font = .subSecondaryHeader
         nameLabel.textColor = .black90
         addSubview(nameLabel)

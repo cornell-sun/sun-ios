@@ -26,6 +26,7 @@ PODS:
   - Moya/Core (9.0.0):
     - Alamofire (~> 4.1)
     - Result (~> 3.0)
+  - OneSignal (2.8.2)
   - PINCache (2.3)
   - PINRemoteImage (2.1.4):
     - PINRemoteImage/FLAnimatedImage (= 2.1.4)
@@ -52,6 +53,7 @@ DEPENDENCIES:
   - Kingfisher (~> 4.0)
   - Moya
   - Moya-ModelMapper (= 5.0.0)
+  - OneSignal (< 3.0, >= 2.6.2)
   - PINRemoteImage
   - RealmSwift
   - SnapKit (~> 4.0)
@@ -68,6 +70,7 @@ SPEC REPOS:
     - ModelMapper
     - Moya
     - Moya-ModelMapper
+    - OneSignal
     - PINCache
     - PINRemoteImage
     - Realm
@@ -97,6 +100,7 @@ SPEC CHECKSUMS:
   ModelMapper: a258c5f8e1422e0e826c8265a3e89ae1b329c3a6
   Moya: cf5e6ee93af526532f92614004b8ad2ea60fd845
   Moya-ModelMapper: fc14d8c7d6466f11aea83e785c7f2c4c521fead6
+  OneSignal: ab5c509192ca8390bdd3570a6261e6decf4c79c1
   PINCache: ce36ed282031b92fc7733ffe831f474ff80fddc2
   PINRemoteImage: 4ac4011c5caefd6befd99758e09becede05d3226
   Realm: 63ebf4903b446b0bdf2131244eb1e1549925c724
@@ -105,6 +109,6 @@ SPEC CHECKSUMS:
   SnapKit: a42d492c16e80209130a3379f73596c3454b7694
   SwiftSoup: 277f7ef548826e0ca7603a06b30d4a5df3ee0587
 
-PODFILE CHECKSUM: 2ff961c22308738cdf8a0b74a31cb7e4cbcd0bad
+PODFILE CHECKSUM: 8d878ab3e1ab8e4dcaff73dfc3e80f1f24709cd6
 
 COCOAPODS: 1.5.0

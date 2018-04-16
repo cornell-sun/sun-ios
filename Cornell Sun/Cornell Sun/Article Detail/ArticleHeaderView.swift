@@ -102,11 +102,11 @@ class ArticleHeaderView: UIView {
         }
 
         timeStampLabel = UILabel(frame: .zero)
-        timeStampLabel.textColor = .black
+        timeStampLabel.textColor = .black40
         timeStampLabel.font = .subSecondaryHeader
         addSubview(timeStampLabel)
         timeStampLabel.snp.makeConstraints { make in
-            make.leading.equalTo(authorLabel.snp.leading)
+            make.leading.equalToSuperview().offset(leadingOffset)
             make.top.equalTo(authorLabel.snp.bottom)
             make.height.equalTo(timeStampHeight)
             make.bottom.equalToSuperview()

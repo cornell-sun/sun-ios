@@ -12,9 +12,6 @@ import Realm
 import RealmSwift
 
 class FeedCollectionViewController: ViewController, UIScrollViewDelegate {
-
-    var isFirstRun = true
-
     var loading = false
 
     var currentPage = 1
@@ -24,10 +21,10 @@ class FeedCollectionViewController: ViewController, UIScrollViewDelegate {
     var adDict = [String: Int]()
     var currAdToken = ""
 
-
     var feedData: [PostObject] = []
     var savedPostIds: [Int] = []
     var headlinePost: PostObject!
+    var isFirstRun = true
 
     var refreshControl = UIRefreshControl()
 

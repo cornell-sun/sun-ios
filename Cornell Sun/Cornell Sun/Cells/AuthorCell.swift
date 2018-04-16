@@ -25,7 +25,7 @@ final class AuthorCell: UICollectionViewCell {
         let label = UILabel()
         label.text = ""
         label.numberOfLines = 1
-        label.font = .cellInformationText
+        label.font = .subSecondaryHeader
         label.textColor = .black90
         return label
     }()

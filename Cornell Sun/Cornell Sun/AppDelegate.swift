@@ -9,6 +9,7 @@
 import UIKit
 import Kingfisher
 import GoogleMobileAds
+import OneSignal
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -19,20 +20,36 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+
+        let onesignalInitSettings = [kOSSettingsKeyAutoPrompt: false]
+
+        OneSignal.initWithLaunchOptions(launchOptions,
+                                        appId: "c7e28bf2-698c-4a07-b56c-f2077e43c1b4",
+                                        handleNotificationAction: nil,
+                                        settings: onesignalInitSettings)
+
+        OneSignal.inFocusDisplayType = OSNotificationDisplayType.notification
+
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
         storyboard = UIStoryboard(name: "Launch Screen", bundle: nil)
         let rootVC = storyboard?.instantiateInitialViewController()
-        self.window!.rootViewController = rootVC
+        window?.rootViewController = rootVC
 
         //Image cache settings
         ImageCache.default.maxDiskCacheSize = 50 * 1024 * 1024 //50 mb
         ImageCache.default.maxCachePeriodInSecond = 60 * 60 * 24 * 4 //4 days until its removed
 
-        prepareInitialPosts { posts, mainHeadlinePost in
-            let tabBarController = TabBarViewController(with: posts, mainHeadlinePost: mainHeadlinePost)
-            self.window!.rootViewController = tabBarController
-            
+        let userDefaults = UserDefaults.standard
+        if !userDefaults.bool(forKey: hasOnboardedKey) {
+            let onboardingViewController = OnboardingPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
+            self.window?.rootViewController?.present(onboardingViewController, animated: false, completion: nil)
+        } else {
+          prepareInitialPosts { posts, mainHeadlinePost in
+              let tabBarController = TabBarViewController(with: posts, mainHeadlinePost: mainHeadlinePost)
+              self.window!.rootViewController = tabBarController
+
+          }
         }
         
         //Initialize Google Mobile Ads SDKAds
@@ -42,7 +59,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
 
-    /** 
+    /**
      Receive a universal link redirect and handle it properly. Uses Handoff.
      https://developer.apple.com/library/content/documentation/General/Conceptual/AppSearch/UniversalLinks.html#//apple_ref/doc/uid/TP40016308-CH12-SW2
      */
