@@ -15,15 +15,17 @@ class SettingObject {
     var secondaryLabel: String
     var nextController: UIViewController? //ViewController launched on selecting clickable cell
     var secondaryViewType: SecondaryViewType //the secondary view appearing on the right hand side of the cell
+    var notificationType: NotificationType?
 
-    init( label: String, secondary: String, next: UIViewController?, secType: SecondaryViewType) {
-        settingLabel = label
-        secondaryLabel =  secondary
-        secondaryViewType = secType
-        nextController = nil
+    init( label: String, secondary: String, next: UIViewController?, secType: SecondaryViewType, notifType: NotificationType? = nil) {
+        self.settingLabel = label
+        self.secondaryLabel =  secondary
+        self.secondaryViewType = secType
+        self.nextController = nil
+        self.notificationType = notifType
         if let controller = next {
-            nextController = controller
-            type = .clickable
+            self.nextController = controller
+            self.type = .clickable
         }
     }
 }

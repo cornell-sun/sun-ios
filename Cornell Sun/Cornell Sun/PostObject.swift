@@ -37,6 +37,8 @@ class PostObject: Object, ListDiffable {
     @objc dynamic var link: String = ""
     @objc dynamic var title: String = ""
     @objc dynamic var content: String = ""
+    @objc dynamic var caption: String = ""
+    @objc dynamic var credits: String = ""
     @objc dynamic var excerpt: String = ""
     @objc dynamic var author: AuthorObject?
     @objc dynamic var primaryCategory: String = ""
@@ -67,8 +69,7 @@ class PostObject: Object, ListDiffable {
         let date = wpDateFormatter.date(from: dateString),
         let titleDictionary = postDict["title"] as? [String: Any],
         let title = titleDictionary["rendered"] as? String,
-        let contentDictionary = postDict["content"] as? [String: Any],
-        let content = contentDictionary["rendered"] as? String,
+        let content = postDict["post_content_no_srcset"] as? String,
         let excerptDictionary = postDict["excerpt"] as? [String: Any],
         let excerpt = excerptDictionary["rendered"] as? String,
         let link = postDict["link"] as? String,
@@ -78,6 +79,7 @@ class PostObject: Object, ListDiffable {
         let postTypeString = postDict["post_type_enum"] as? String,
         let postTypeEnum = postTypeEnum(rawValue: postTypeString),
         let featuredMediaDictionary = postDict["featured_media_url_string"] as? [String: Any],
+        let featuredMediaCaption = postDict["featured_media_caption"] as? String,
         let mediumLargeDictionary = featuredMediaDictionary["medium_large"] as? [String: Any],
         let thumbnailDictionary = featuredMediaDictionary["thumbnail"] as? [String: Any],
         let fullDictionary = featuredMediaDictionary["full"] as? [String: Any],
@@ -90,6 +92,7 @@ class PostObject: Object, ListDiffable {
             print("going to return nil")
             return nil
         }
+        let featuredMediaCredit = postDict["featured_media_credit"] as? String ?? ""
 
         var photoGalleryObjects: [PhotoGalleryObject] = []
 
@@ -109,7 +112,7 @@ class PostObject: Object, ListDiffable {
         }
         let postCommentsArray: [String: Any] = [:]
 
-        let authorObject = AuthorObject(id: authorId, name: authorName, link: authorLink, bio: bio, avatarLink: avatarLink)
+        let authorObject = AuthorObject(id: authorId, name: authorName.htmlToString, link: authorLink, bio: bio, avatarLink: avatarLink)
 
         var commentsArray: [CommentObject] = []
 
@@ -142,7 +145,10 @@ class PostObject: Object, ListDiffable {
         self.id = id
         self.datePosted = date
         self.title = title.removingHTMLEntities
-        self.content = content.htmlToString
+        self.content = "<span style=\"font-family: 'Georgia', 'Times', 'serif';font-size: 18\">\(content)</span>"
+        self.caption = featuredMediaCaption
+        self.credits = featuredMediaCredit
+
         self.link = link
         self.excerpt = excerpt
         self.primaryCategory = primaryCategory.removingHTMLEntities
@@ -178,6 +184,29 @@ class PostObject: Object, ListDiffable {
         guard self !== object else { return true }
         guard let object = object as? PostObject else { return false }
         return self.id == object.id
+    }
+
+    func attributedContentString() -> NSAttributedString {
+        let addLineBreaks = content.replacingOccurrences(of: "</p>", with: "</p><br>")
+        if let attributedString = try? NSMutableAttributedString(
+            data: addLineBreaks.data(using: .utf8, allowLossyConversion: true)!,
+            options: [NSAttributedString.DocumentReadingOptionKey.documentType: NSAttributedString.DocumentType.html, NSAttributedString.DocumentReadingOptionKey.characterEncoding: String.Encoding.utf8.rawValue],
+            documentAttributes: nil) {
+            attributedString.enumerateAttribute(NSAttributedStringKey.attachment, in: NSRange(location: 0, length: attributedString.length), options: .init(rawValue: 0), using: { (value, range, _) in
+                if let attachment = value as? NSTextAttachment {
+                    // try making a blank image attachment and then add image to that?
+                    let image = attachment.image(forBounds: attachment.bounds, textContainer: NSTextContainer(), characterIndex: range.location)!
+                    if image.size.width > UIScreen.main.bounds.width - 35 {
+                        let newImage = image.resizeImage(scale: UIScreen.main.bounds.width/(image.size.width - 35))
+                        let newAttachment = ImageAttachment()
+                        newAttachment.image = newImage
+                        attributedString.addAttribute(NSAttributedStringKey.attachment, value: newAttachment, range: range)
+                    }
+                }
+            })
+            return attributedString
+        }
+        return NSAttributedString(string: "")
     }
 
 }

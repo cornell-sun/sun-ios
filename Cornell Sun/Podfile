@@ -18,6 +18,11 @@ target 'Cornell Sun' do
   pod 'Google-Mobile-Ads-SDK'
   pod 'SwiftSoup'
   pod 'SkeletonView'
+  pod 'OneSignal', '>= 2.6.2', '< 3.0'
+
+target 'SunNotificationServiceExtension' do
+    pod 'OneSignal', '>= 2.6.2', '< 3.0'
+end
 
   target 'Cornell SunTests' do
       inherit! :search_paths
@@ -25,5 +30,14 @@ target 'Cornell Sun' do
       pod 'Moya-ModelMapper', '5.0.0'
 
       end
+end
 
+post_install do |installer|
+    installer.pods_project.targets.each do |target|
+        #if target.name == "ImageSlideshow-ImageSlideshow"
+        target.build_configurations.each do |config|
+            config.build_settings['APPLICATION_EXTENSION_API_ONLY'] = 'NO'
+        end
+            #end
+    end
 end

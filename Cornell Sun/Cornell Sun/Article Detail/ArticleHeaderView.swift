@@ -12,26 +12,35 @@ import SnapKit
 class ArticleHeaderView: UIView {
     let leadingOffset: CGFloat = 17.5
     let categoryLabelTopOffset: CGFloat = 18.5
-    let categoryLabelHeight: CGFloat = 18
+    let categoryLabelHeight: CGFloat = 20
     let titleLabelTopOffset: CGFloat = 12.0
     let titleLabelHeight: CGFloat = 100
     let imageViewHeight: CGFloat = 250.0
-    let imageViewTopOffset: CGFloat = 12.0
-    let timeStampTopOffset: CGFloat = 14.5
+    let imageViewTopOffset: CGFloat = 10.5
     let timeStampHeight: CGFloat = 15
     let authorLabelHeight: CGFloat = 15
+    let authorLabelTopOffset: CGFloat = 30
     let captionLabelTopOffset: CGFloat = 4
+    let captionLabelBottomOffset: CGFloat = 9.5
+    let creditsLabelHeight: CGFloat = 15
 
     var categoryLabel: UILabel!
     var titleLabel: UILabel!
     var authorLabel: UILabel!
     var timeStampLabel: UILabel!
     var captionLabel: UILabel!
+    var creditsLabel: UILabel!
     let heroImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.layer.masksToBounds = true
         imageView.contentMode = .scaleAspectFill
         return imageView
+    }()
+
+    private let readableDateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .long
+        return formatter
     }()
 
     convenience init(article: PostObject, frame: CGRect) {
@@ -55,49 +64,53 @@ class ArticleHeaderView: UIView {
         titleLabel = UILabel(frame: .zero)
         titleLabel.textColor = .black90
         titleLabel.font = .articleTitle
-        titleLabel.preferredMaxLayoutWidth = frame.width - 2 * leadingOffset
-        titleLabel.numberOfLines = 4
+        titleLabel.numberOfLines = 6
         titleLabel.lineBreakMode = .byTruncatingTail
         addSubview(titleLabel)
-        titleLabel.snp.makeConstraints { make in
+
+        captionLabel = UILabel(frame: .zero)
+        captionLabel.font = .photoCaption
+        captionLabel.textColor = .black90
+        captionLabel.numberOfLines = 0
+        addSubview(captionLabel)
+
+        creditsLabel = UILabel()
+        creditsLabel.font = .photoCaptionCredit
+        creditsLabel.textColor = .black40
+        addSubview(creditsLabel)
+        creditsLabel.snp.makeConstraints { make in
+            make.top.equalTo(captionLabel.snp.bottom)
             make.leading.trailing.equalToSuperview().inset(leadingOffset)
-            make.top.equalTo(categoryLabel.snp.bottom).offset(titleLabelTopOffset)
-        }
-
-        timeStampLabel = UILabel(frame: .zero)
-        timeStampLabel.textColor = .black90
-        timeStampLabel.font = .photoCaption
-        addSubview(timeStampLabel)
-        timeStampLabel.snp.makeConstraints { make in
-            make.trailing.equalToSuperview().inset(leadingOffset)
-            make.top.equalTo(titleLabel.snp.bottom).offset(timeStampTopOffset)
-            make.height.equalTo(timeStampHeight)
-        }
-
-        authorLabel = UILabel(frame: .zero)
-        authorLabel.textColor = .black90
-        authorLabel.font = .photoCaption
-        addSubview(authorLabel)
-        authorLabel.snp.makeConstraints { make in
-            make.leading.equalToSuperview().offset(leadingOffset)
-            make.bottom.equalTo(timeStampLabel.snp.bottom)
-            make.height.equalTo(authorLabelHeight)
+            make.height.equalTo(creditsLabelHeight)
         }
 
         addSubview(heroImageView)
         heroImageView.snp.makeConstraints { make in
-            make.top.equalTo(timeStampLabel.snp.bottom).offset(imageViewTopOffset)
+            make.top.equalTo(titleLabel.snp.bottom).offset(imageViewTopOffset)
             make.width.leading.centerX.equalToSuperview()
             make.height.equalTo(imageViewHeight)
         }
 
-        captionLabel = UILabel(frame: .zero)
-        addSubview(captionLabel)
-        captionLabel.snp.makeConstraints { make in
-            make.top.equalTo(heroImageView.snp.bottom).offset(captionLabelTopOffset)
-            make.leading.trailing.equalToSuperview().inset(leadingOffset)
+        authorLabel = UILabel(frame: .zero)
+        authorLabel.textColor = .black90
+        authorLabel.font = .secondaryHeader
+        addSubview(authorLabel)
+        authorLabel.snp.makeConstraints { make in
+            make.leading.equalToSuperview().offset(leadingOffset)
+            make.top.equalTo(captionLabel.snp.bottom).offset(authorLabelTopOffset)
+            make.height.equalTo(authorLabelHeight)
         }
 
+        timeStampLabel = UILabel(frame: .zero)
+        timeStampLabel.textColor = .black40
+        timeStampLabel.font = .subSecondaryHeader
+        addSubview(timeStampLabel)
+        timeStampLabel.snp.makeConstraints { make in
+            make.leading.equalToSuperview().offset(leadingOffset)
+            make.top.equalTo(authorLabel.snp.bottom)
+            make.height.equalTo(timeStampHeight)
+            make.bottom.equalToSuperview()
+        }
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -108,9 +121,18 @@ class ArticleHeaderView: UIView {
         setupHeroImage(with: post)
         categoryLabel.text = post.primaryCategory
         titleLabel.text = post.title
-        timeStampLabel.text = post.datePosted.timeAgoSinceNow()
+        titleLabel.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview().inset(leadingOffset)
+            make.top.equalTo(categoryLabel.snp.bottom).offset(titleLabelTopOffset)
+        }
+        timeStampLabel.text = readableDateFormatter.string(from: post.datePosted)
         authorLabel.text = "By \(post.author!.name.removingHTMLEntities.htmlToString)"
-        // add caption text
+        captionLabel.text = post.caption.htmlToString
+        captionLabel.snp.makeConstraints { make in
+            make.top.equalTo(heroImageView.snp.bottom).offset(captionLabelTopOffset)
+            make.leading.trailing.equalToSuperview().inset(leadingOffset)
+        }
+        creditsLabel.text = post.credits
     }
 
     func setupHeroImage(with post: PostObject) {

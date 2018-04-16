@@ -13,9 +13,6 @@ import RealmSwift
 import SkeletonView
 
 class FeedCollectionViewController: ViewController, UIScrollViewDelegate {
-
-    var isFirstRun = true
-
     var loading = false
 
     var currentPage = 1
@@ -25,10 +22,10 @@ class FeedCollectionViewController: ViewController, UIScrollViewDelegate {
     var adDict = [String: Int]()
     var currAdToken = ""
 
-
     var feedData: [PostObject] = []
     var savedPostIds: [Int] = []
     var headlinePost: PostObject!
+    var isFirstRun = true
 
     var refreshControl = UIRefreshControl()
 
@@ -108,17 +105,17 @@ extension FeedCollectionViewController: ListAdapterDataSource {
 
         if loading {
             objects.append(spinToken as ListDiffable)
-        } 
+        }
         return objects
     }
-    
+
     func mergeAds(feed: [ListDiffable]) -> [ListDiffable] {
         var objects = feed
         currAdToken = "adToken\(adCount)"
         adDict[currAdToken] = adCount
         adCount += 1
         for (adtoken, adcount) in adDict {
-            if(adcount <= currentPage) {
+            if adcount <= currentPage && objects.count >= adIndex * adcount {
                 objects.insert(adtoken as ListDiffable, at: adIndex*adcount)
             }
         }
@@ -178,7 +175,7 @@ extension FeedCollectionViewController {
 
 extension FeedCollectionViewController: TabBarViewControllerDelegate {
     func articleSectionDidPressOnArticle(_ article: PostObject) {
-        let articleVC = ArticleViewController(article: article)
+        let articleVC = ArticleStackViewController(post: article)
         articleVC.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(articleVC, animated: true)
     }
