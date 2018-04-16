@@ -9,7 +9,6 @@
 import UIKit
 import IGListKit
 import SafariServices
-import SkeletonView
 
 protocol TabBarViewControllerDelegate: class {
     func articleSectionDidPressOnArticle(_ article: PostObject)

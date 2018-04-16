@@ -120,10 +120,10 @@ extension SectionCollectionViewController: ListAdapterDataSource {
     }
 
     func emptyView(for listAdapter: ListAdapter) -> UIView? {
-        let skeletonView = SkeletonFeedCell(frame: view.frame)
-        skeletonView.isSkeletonable = true
-        skeletonView.showAnimatedSkeleton()
-        return skeletonView
+        if feedData.isEmpty {
+            spinner.startAnimating()
+        }
+        return emptySpinnerView
     }
 }
 

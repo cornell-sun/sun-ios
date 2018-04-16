@@ -10,7 +10,6 @@ import UIKit
 import IGListKit
 import Realm
 import RealmSwift
-import SkeletonView
 
 class FeedCollectionViewController: ViewController, UIScrollViewDelegate {
     var loading = false
@@ -63,7 +62,7 @@ class FeedCollectionViewController: ViewController, UIScrollViewDelegate {
         refreshControl.addTarget(self, action: #selector(refreshData), for: .valueChanged)
 
         view.addSubview(collectionView)
-        
+
         adapter.collectionView = collectionView
         adapter.collectionView?.backgroundColor = .black5
         adapter.collectionView?.refreshControl = refreshControl
