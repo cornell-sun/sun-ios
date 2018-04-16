@@ -70,7 +70,7 @@ class PostObject: Object, ListDiffable {
         let titleDictionary = postDict["title"] as? [String: Any],
         let title = titleDictionary["rendered"] as? String,
         let content = postDict["post_content_no_srcset"] as? String,
-        let excerptDictionary = data["excerpt"] as? [String: Any],
+        let excerptDictionary = postDict["excerpt"] as? [String: Any],
         let excerpt = excerptDictionary["rendered"] as? String,
         let link = postDict["link"] as? String,
         let categoriesArray = postDict["category_strings"] as? [String],
@@ -80,7 +80,6 @@ class PostObject: Object, ListDiffable {
         let postTypeEnum = postTypeEnum(rawValue: postTypeString),
         let featuredMediaDictionary = postDict["featured_media_url_string"] as? [String: Any],
         let featuredMediaCaption = postDict["featured_media_caption"] as? String,
-        let featuredMediaCredit = postDict["featured_media_credit"] as? String,
         let mediumLargeDictionary = featuredMediaDictionary["medium_large"] as? [String: Any],
         let thumbnailDictionary = featuredMediaDictionary["thumbnail"] as? [String: Any],
         let fullDictionary = featuredMediaDictionary["full"] as? [String: Any],
@@ -93,6 +92,7 @@ class PostObject: Object, ListDiffable {
             print("going to return nil")
             return nil
         }
+        let featuredMediaCredit = postDict["featured_media_credit"] as? String ?? ""
 
         var photoGalleryObjects: [PhotoGalleryObject] = []
 

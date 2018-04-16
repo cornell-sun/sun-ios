@@ -114,7 +114,7 @@ extension FeedCollectionViewController: ListAdapterDataSource {
         adDict[currAdToken] = adCount
         adCount += 1
         for (adtoken, adcount) in adDict {
-            if(adcount <= currentPage) {
+            if adcount <= currentPage && objects.count >= adIndex * adcount {
                 objects.insert(adtoken as ListDiffable, at: adIndex*adcount)
             }
         }
