@@ -17,6 +17,7 @@ target 'Cornell Sun' do
   pod 'RealmSwift'
   pod 'Google-Mobile-Ads-SDK'
   pod 'SwiftSoup'
+  pod 'SkeletonView'
 
   target 'Cornell SunTests' do
       inherit! :search_paths

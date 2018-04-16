@@ -5,6 +5,7 @@ disabled_rules: # rule identifiers to exclude from running
   - force_try
   - next_force_cast
   - trailing_whitespace
+  - function_body_length
 
 excluded: # paths to ignore during linting. Takes precedence over `included`.
   - Carthage
