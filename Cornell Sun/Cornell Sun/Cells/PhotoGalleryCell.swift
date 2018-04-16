@@ -23,7 +23,7 @@ final class PhotoGalleryCell: UICollectionViewCell {
         }
     }
 
-    var photoGalleryDelegate: PhotoChangedDelegate?
+    weak var photoGalleryDelegate: PhotoChangedDelegate?
 
     let slideShow: ImageSlideshow = {
         let slideShow = ImageSlideshow()

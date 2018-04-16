@@ -32,7 +32,7 @@ class ShareBarView: UIView {
         backgroundColor = .white
 
         topSeparatorLabel = UILabel()
-        topSeparatorLabel.backgroundColor = .white
+        topSeparatorLabel.backgroundColor = .black20
         addSubview(topSeparatorLabel)
         topSeparatorLabel.snp.makeConstraints { make in
             make.top.leading.trailing.equalToSuperview()

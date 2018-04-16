@@ -75,7 +75,7 @@ extension String {
                                           documentAttributes: nil)
         } catch {
             print("error:", error)
-            return  nil
+            return NSAttributedString()
         }
     }
 

@@ -71,7 +71,7 @@ class CommentTableViewCell: UITableViewCell {
         nameLabel.text = comment.authorName
         timestampLabel.text = comment.date.timeAgoSinceNow()
         commentTextView.text = comment.comment
-        profileImageView.image = comment.profileImage
+        profileImageView.kf.setImage(with: comment.profileImageURL)
         commentTextView.snp.makeConstraints { make in
             make.top.equalTo(profileImageView.snp.bottom).offset(textViewTopOffset)
             make.leading.trailing.equalToSuperview().inset(leadingPadding)

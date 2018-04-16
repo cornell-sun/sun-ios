@@ -19,29 +19,26 @@ class CommentObject: Object {
     }()
 
     @objc dynamic var id: Int = 0
-    @objc dynamic var postId: Int = 0
     @objc dynamic var authorName: String = ""
     @objc dynamic var comment: String = ""
     @objc dynamic var date: Date = Date()
-    var profileImage: UIImage?
-    init(id: Int, postId: Int, authorName: String, comment: String, date: Date, image: UIImage) {
+    var profileImageURL: URL?
+    init(id: Int, authorName: String, comment: String, date: Date, imageURL: URL?) {
         super.init()
         self.id = id
-        self.postId = postId
         self.authorName = authorName
         self.comment = comment
         self.date = date
-        self.profileImage = image
+        self.profileImageURL = imageURL
     }
 
-    init(id: Int, postId: Int, authorName: String, comment: String, date: Date) {
+    init(id: Int, authorName: String, comment: String, date: Date) {
         super.init()
         self.id = id
-        self.postId = postId
         self.authorName = authorName
         self.comment = comment
         self.date = date
-        self.profileImage = nil
+        self.profileImageURL = nil
 
     }
 
@@ -49,21 +46,19 @@ class CommentObject: Object {
         super.init()
         guard
             let id = data["id"] as? Int,
-            let postId = data["post"] as? Int,
-            let authorName = data["author_name"] as? String,
-            let content = data["content"] as? [String: AnyObject],
-            let comment = content["rendered"] as? String,
-            let dateString = data["date"] as? String,
+            let authorMeta = data["from"] as? [String: AnyObject],
+            let authorName = authorMeta["name"] as? String,
+            let comment = data["message"] as? String,
+            let dateMeta = data["created_time"] as? [String: AnyObject],
+            let dateString = dateMeta["date"] as? String,
             let date = wpDateFormatter.date(from: dateString)
             else {
                 return nil
         }
         self.id = id
-        self.postId = postId
         self.authorName = authorName
         self.comment = comment
         self.date = date
-        self.profileImage = #imageLiteral(resourceName: "emptyProfile") // default egg for now
 
     }
 
