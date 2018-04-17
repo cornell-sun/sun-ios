@@ -258,9 +258,9 @@ class ArticleStackViewController: UIViewController {
     }
 
     func setupComments() {
-        setupCommentsTableView()
         getComments(postID: post.id) { comments, error in
             if error == nil {
+                self.setupCommentsTableView()
                 self.comments = comments
                 self.commentsTableView.reloadData()
             }
@@ -268,17 +268,23 @@ class ArticleStackViewController: UIViewController {
     }
 
     func setupCommentsTableView() {
-        let view = UIView()
+//        let view = UIView()
         commentsTableView = UITableView()
         commentsTableView.delegate = self
         commentsTableView.dataSource = self
+        commentsTableView.isScrollEnabled = false
         commentsTableView.rowHeight = UITableViewAutomaticDimension
         commentsTableView.register(CommentTableViewCell.self, forCellReuseIdentifier: commentReuseIdentifier)
         commentsTableView.estimatedRowHeight = 100
-        view.addSubview(commentsTableView)
-        stackView.addArrangedSubview(view)
+        scrollView.addSubview(commentsTableView)
+//        stackView.addArrangedSubview(view)
         commentsTableView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            make.bottom.width.leading.trailinequalToSuperview()
+            make.top.equalTo(stackView.snp.bottom)
+        }
+        stackView.snp.remakeConstraints { make in
+            make.leading.trailing.top.equalToSuperview()
+            make.bottom.equalTo(commentsTableView.snp.top)
         }
     }
 }

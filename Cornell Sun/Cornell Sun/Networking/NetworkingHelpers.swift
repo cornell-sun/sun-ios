@@ -73,9 +73,9 @@ func getComments(postID: Int, completion: @escaping CommentsCompletionBlock) {
             let jsonResult = try JSONSerialization.jsonObject(with: response.data, options: [])
             if let rawCommentsArray = jsonResult as? [[String: AnyObject]] {
                 var commentsArray = [CommentObject]()
-                rawCommentsArray.forEach {
-                    if let comment = CommentObject(data: $0) {
-                        commentsArray.append(comment)
+                for comment in rawCommentsArray {
+                    if let newComment = CommentObject(data: comment) {
+                        commentsArray.append(newComment)
                     }
                 }
                 completion(commentsArray, nil)
