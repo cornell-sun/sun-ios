@@ -96,9 +96,7 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let setting = settings[indexPath.section][indexPath.row]
-        print("Herererea")
         if let next = setting.nextController {
-            print("aaaadbdd")
                 navigationController?.pushViewController(next, animated: true)
         }
          else {
@@ -158,6 +156,7 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
         //Initializing Account settings
         settings.append([])
         let notificationViewController = NotificationViewController()
+        notificationViewController.prevViewController = self
         settings[0].append(SettingObject(label: "Notification", next: notificationViewController, setType: .none))
         settings[0].append(SettingObject(label: "Login", next: nil, setType: .none))
         

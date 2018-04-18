@@ -9,18 +9,18 @@
 import UIKit
 import SnapKit
 
-class NotificationTableViewCell: UITableViewCell {
+class NotificationsTableViewCell: UITableViewCell {
     var label: UILabel!
     let heightLabel = 20
     let heightSec = 31
     let offsetLeft = 16
     let offsetRight = -13.5
     let offsetBottom = -7
-
+    
     override func awakeFromNib() {
         super.awakeFromNib()
     }
-
+    
     func setupCell(labelText: String) {
         label = UILabel()
         contentView.addSubview(label)
@@ -40,3 +40,4 @@ class NotificationTableViewCell: UITableViewCell {
         }
     }
 }
+

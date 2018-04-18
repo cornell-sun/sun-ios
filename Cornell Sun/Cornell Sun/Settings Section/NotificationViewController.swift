@@ -10,9 +10,22 @@ import UIKit
 
 class NotificationViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
+    var prevViewController: UIViewController!
+    var titleCache: String!
+    
     var tableView: UITableView!
     var notifications: [String] = []
 
+    override func viewWillAppear(_ animated: Bool) {
+        titleCache = prevViewController.title
+        prevViewController.title = "Settings"
+        descriptionTextView.isScrollEnabled = false
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        prevViewController.title = titleCache
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         super.viewDidLoad()
@@ -24,7 +37,7 @@ class NotificationViewController: UIViewController, UITableViewDataSource, UITab
         
         // Set up table view for settings
         tableView = UITableView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height))
-        tableView.register(NotificationTableViewCell.self, forCellReuseIdentifier: "NotificationCell")
+        tableView.register(NotificationsTableViewCell.self, forCellReuseIdentifier: "NotificationCell")
         tableView.tableFooterView = UIView()
         tableView.delegate = self
         tableView.dataSource = self
@@ -38,7 +51,7 @@ class NotificationViewController: UIViewController, UITableViewDataSource, UITab
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCell(withIdentifier: "NotificationCell", for: indexPath) as? NotificationTableViewCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "NotificationCell", for: indexPath) as? NotificationsTableViewCell {
             cell.setupCell(labelText: notifications[indexPath.row])
             cell.selectionStyle = .none
             return cell

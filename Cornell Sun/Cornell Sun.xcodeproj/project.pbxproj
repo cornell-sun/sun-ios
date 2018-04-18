@@ -20,12 +20,12 @@
 		348716782041EAC8008CB9D5 /* AdImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348716772041EAC8008CB9D5 /* AdImageCell.swift */; };
 		3487167D2041F09D008CB9D5 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3487167C2041F09D008CB9D5 /* Launch Screen.storyboard */; };
 		34C5582A2041E49E00E62CE8 /* AdSectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34C558292041E49E00E62CE8 /* AdSectionController.swift */; };
+		4029BB0A2087B02300E8BAEB /* NotificationsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4029BB092087B02300E8BAEB /* NotificationsTableViewCell.swift */; };
 		4036564D207446B100E7583A /* DisplayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4036564C207446B000E7583A /* DisplayViewController.swift */; };
 		4047EA05207590450030067E /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4047EA04207590450030067E /* NotificationViewController.swift */; };
 		405F83D81FBE1E2B00360AEB /* SettingObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405F83D71FBE1E2B00360AEB /* SettingObject.swift */; };
 		405F83DA1FBE1E3100360AEB /* SettingEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405F83D91FBE1E3000360AEB /* SettingEnum.swift */; };
 		405F83DC1FBE1E7C00360AEB /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405F83DB1FBE1E7C00360AEB /* SettingsViewController.swift */; };
-		405F83DE1FBE1E8200360AEB /* NotificationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405F83DD1FBE1E8200360AEB /* NotificationTableViewCell.swift */; };
 		40B1D4922073107E00C1306E /* ContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B1D4912073107E00C1306E /* ContactViewController.swift */; };
 		40B1D4942073164800C1306E /* UIColor+1ptImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B1D4932073164800C1306E /* UIColor+1ptImage.swift */; };
 		40B1D4962074306600C1306E /* SubscribeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B1D4952074306600C1306E /* SubscribeViewController.swift */; };
@@ -98,12 +98,12 @@
 		389771843ED115B12D456CDA /* Pods-Cornell SunTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cornell SunTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Cornell SunTests/Pods-Cornell SunTests.debug.xcconfig"; sourceTree = "<group>"; };
 		3C38BCC6B38BFCC0EC16BF2B /* Pods_Cornell_SunTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cornell_SunTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DBAAD519F3C5A2D044960CA /* Pods_Cornell_Sun.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cornell_Sun.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4029BB092087B02300E8BAEB /* NotificationsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsTableViewCell.swift; sourceTree = "<group>"; };
 		4036564C207446B000E7583A /* DisplayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayViewController.swift; sourceTree = "<group>"; };
 		4047EA04207590450030067E /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
 		405F83D71FBE1E2B00360AEB /* SettingObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingObject.swift; sourceTree = "<group>"; };
 		405F83D91FBE1E3000360AEB /* SettingEnum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingEnum.swift; sourceTree = "<group>"; };
 		405F83DB1FBE1E7C00360AEB /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
-		405F83DD1FBE1E8200360AEB /* NotificationTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationTableViewCell.swift; sourceTree = "<group>"; };
 		40B1D4912073107E00C1306E /* ContactViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactViewController.swift; sourceTree = "<group>"; };
 		40B1D4932073164800C1306E /* UIColor+1ptImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+1ptImage.swift"; sourceTree = "<group>"; };
 		40B1D4952074306600C1306E /* SubscribeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscribeViewController.swift; sourceTree = "<group>"; };
@@ -306,7 +306,6 @@
 		DC34DEEA2032137C0010DF9A /* Settings Section */ = {
 			isa = PBXGroup;
 			children = (
-				405F83DD1FBE1E8200360AEB /* NotificationTableViewCell.swift */,
 				405F83DB1FBE1E7C00360AEB /* SettingsViewController.swift */,
 				40B1D4912073107E00C1306E /* ContactViewController.swift */,
 				40B1D4952074306600C1306E /* SubscribeViewController.swift */,
@@ -428,6 +427,7 @@
 				DC79719E1F7B30540055A7B2 /* CategoryCell.swift */,
 				DC4FED222027F05A004F435E /* SearchCell.swift */,
 				348716772041EAC8008CB9D5 /* AdImageCell.swift */,
+				4029BB092087B02300E8BAEB /* NotificationsTableViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -728,7 +728,6 @@
 				DC0A883C1FBA531000F2BCBB /* BookmarkCollectionViewController.swift in Sources */,
 				4036564D207446B100E7583A /* DisplayViewController.swift in Sources */,
 				3441C78A2066C0CD00F58D5E /* Delegate+.swift in Sources */,
-				405F83DE1FBE1E8200360AEB /* NotificationTableViewCell.swift in Sources */,
 				348716782041EAC8008CB9D5 /* AdImageCell.swift in Sources */,
 				40B1D4962074306600C1306E /* SubscribeViewController.swift in Sources */,
 				40B1D4942073164800C1306E /* UIColor+1ptImage.swift in Sources */,
@@ -757,6 +756,7 @@
 				DC695D8B1FBB897600C6C62F /* RealmManager.swift in Sources */,
 				DC556AC520602E6900475B7D /* Constants.swift in Sources */,
 				61652CD21F6EF3A500EEFC29 /* SearchViewController.swift in Sources */,
+				4029BB0A2087B02300E8BAEB /* NotificationsTableViewCell.swift in Sources */,
 				DC4308ED1F2558D500ABB31F /* SunAPI.swift in Sources */,
 				0CED4FAD1FAB523F0025EB91 /* UIColor+.swift in Sources */,
 				34C5582A2041E49E00E62CE8 /* AdSectionController.swift in Sources */,
