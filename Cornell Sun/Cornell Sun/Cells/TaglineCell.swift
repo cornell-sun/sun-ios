@@ -23,7 +23,7 @@ final class TaglineCell: UICollectionViewCell {
         let label = UILabel()
         label.text = ""
         label.numberOfLines = 3
-        label.font = .articleSection
+        label.font = .photoCaption
         return label
     }()
 

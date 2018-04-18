@@ -75,7 +75,7 @@ extension String {
                                           documentAttributes: nil)
         } catch {
             print("error:", error)
-            return  nil
+            return NSAttributedString()
         }
     }
 
@@ -127,4 +127,17 @@ class ArticleImageView: UIImageView {
                 })
         }.resume()
     }
+}
+
+extension UIImage {
+
+    func resizeImage(scale: CGFloat) -> UIImage {
+        let newSize = CGSize(width: size.width * scale, height: size.height * scale)
+        UIGraphicsBeginImageContextWithOptions(newSize, false, 0.0)
+        draw(in: CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height))
+        guard let newImage = UIGraphicsGetImageFromCurrentImageContext() else { return UIImage() }
+        UIGraphicsEndImageContext()
+        return newImage
+    }
+
 }

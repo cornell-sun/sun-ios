@@ -28,19 +28,21 @@ class CommentTableViewCell: UITableViewCell {
         selectionStyle = .none
 
         profileImageView = UIImageView(frame: .zero)
-        profileImageView.backgroundColor = .warmGrey
+        profileImageView.backgroundColor = .black40
         profileImageView.layer.cornerRadius = profileImageSize.width/2
         profileImageView.layer.masksToBounds = true
+
         contentView.addSubview(profileImageView)
         profileImageView.snp.makeConstraints { make in
-            make.size.equalTo(profileImageSize).priority(999)
+            make.height.width.equalTo(profileImageSize.height)
             make.top.equalToSuperview().offset(topPadding)
             make.leading.equalToSuperview().offset(leadingPadding)
         }
 
         nameLabel = UILabel()
-        nameLabel.font = .likesAndComments
-        nameLabel.textColor = .darkGrey
+        nameLabel.numberOfLines = 0
+        nameLabel.font = .subSecondaryHeader
+        nameLabel.textColor = .black90
         addSubview(nameLabel)
         nameLabel.snp.makeConstraints { make in
             make.leading.equalTo(profileImageView.snp.trailing).offset(nameLabelLeading)
@@ -48,8 +50,8 @@ class CommentTableViewCell: UITableViewCell {
         }
 
         timestampLabel = UILabel()
-        timestampLabel.font = .likesAndComments
-        timestampLabel.textColor = .darkGrey
+        timestampLabel.font = .subSecondaryHeader
+        timestampLabel.textColor = .black90
         addSubview(timestampLabel)
         timestampLabel.snp.makeConstraints { make in
             make.trailing.equalToSuperview().inset(timeStampTrailing)
@@ -57,24 +59,25 @@ class CommentTableViewCell: UITableViewCell {
         }
 
         commentTextView = UITextView()
-        commentTextView.font = .likesAndComments
-        commentTextView.textColor = .darkGrey
+        commentTextView.font = .subSecondaryHeader
+        commentTextView.textColor = .black90
         commentTextView.isScrollEnabled = false
+        commentTextView.isEditable = false
         commentTextView.autoresizesSubviews = true
-        addSubview(commentTextView)
-        commentTextView.snp.makeConstraints { make in
-            make.top.equalTo(profileImageView.snp.bottom).offset(textViewTopOffset)
-            make.leading.trailing.equalToSuperview().inset(leadingPadding)
-            make.bottom.equalToSuperview().inset(textViewBottomInset)
-        }
+        contentView.addSubview(commentTextView)
     }
 
     func setup(for comment: CommentObject) {
         nameLabel.text = comment.authorName
         timestampLabel.text = comment.date.timeAgoSinceNow()
         commentTextView.text = comment.comment
-        commentTextView.sizeToFit()
-        profileImageView.image = comment.profileImage
+        profileImageView.kf.setImage(with: comment.profileImageURL)
+        commentTextView.snp.makeConstraints { make in
+            make.top.equalTo(profileImageView.snp.bottom).offset(textViewTopOffset)
+            make.leading.trailing.equalToSuperview().inset(leadingPadding)
+            make.bottom.equalToSuperview().inset(textViewBottomInset)
+        }
+        setNeedsUpdateConstraints()
     }
 
     required init?(coder aDecoder: NSCoder) {

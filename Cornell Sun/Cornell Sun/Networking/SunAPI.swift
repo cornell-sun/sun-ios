@@ -62,8 +62,8 @@ extension SunAPI: TargetType {
             return "\(defaultPath)/media/" + mediaId
         case .category(let categoryId):
             return "\(defaultPath)/categories/\(categoryId)"
-        case .comments:
-            return "\(defaultPath)/comments"
+        case .comments(let postID):
+            return "\(backendPath)/comments/\(postID)"
         case .trending:
             return "\(backendPath)/trending"
         case .featured:

@@ -62,16 +62,15 @@ extension PhotoGallerySectionController: BookmarkPressedDelegate, SharePressedDe
         case .categoryCell:
             return CGSize(width: width, height: 40)
         case .titleCell:
-            let height = entry.title.height(withConstrainedWidth: width, font: UIFont.boldSystemFont(ofSize: 22)) //CLUTCH Extension thank stackoverflow gods
-            return CGSize(width: width, height: height + 10)
+            let height = entry.title.height(withConstrainedWidth: width - 34, font: .headerTitle) //CLUTCH Extension thank stackoverflow gods
+            return CGSize(width: width, height: height + 40)
         case .authorCell:
-            let height = entry.author?.name.height(withConstrainedWidth: width, font: UIFont(name: "Georgia", size: 13)!)
+            let height = entry.author?.name.height(withConstrainedWidth: width, font: .photoCaption)
             return CGSize(width: width, height: height! + 9)
         case .photoGalleryCell:
             return CGSize(width: width, height: width / 1.5)
         case .captionCell:
             let height = captionMaxHeight(width: width)
-
             return CGSize(width: width, height: height + 16)
         case .likeCommentCell:
             let hasComments = !entry.comments.isEmpty

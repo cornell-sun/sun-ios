@@ -10,6 +10,18 @@ import UIKit
 import SnapKit
 import SafariServices
 
+enum NotificationType: String {
+    case breakingNews = "breaking-news"
+    case opinion = "opinion"
+    case sports = "sports"
+    case artsAndEntertainment = "arts-and-entertainment"
+    case science = "science"
+    case dining = "dining"
+    case multimedia = "multimedia"
+    case localNews = "local-news"
+    case sunspots = "sunspots"
+}
+
 class SettingsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     var tableView: UITableView!
     var sections: [String] = []
