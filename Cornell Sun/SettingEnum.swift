@@ -12,6 +12,3 @@ enum SettingType {
     case none, contactus, feedback, history, appteam, masthead, rate, privacy
 }
 
-enum DisplaySettingType {
-    case contactus, feedback, history, appteam, masthead, rate, none, privacy
-}

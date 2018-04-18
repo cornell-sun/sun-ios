@@ -13,7 +13,7 @@ class ContactViewController: UIViewController, UITextFieldDelegate, MFMailCompos
     
     var prevViewController: UIViewController!
     var titleCache: String!
-    var type: DisplaySettingType!
+    var type: SettingType!
     
     var headerLabel: UILabel!
     var descriptionTextView: UITextView!
