@@ -52,6 +52,18 @@ func cacheImage(imageLink: String) {
 }
 
 extension String {
+
+    func requiredHeight(width: CGFloat, font: UIFont) -> CGFloat {
+        let label = UILabel(frame: CGRect(x: 0.0, y: 0.0, width: width, height: CGFloat.greatestFiniteMagnitude))
+        label.numberOfLines = 0
+        label.lineBreakMode = .byWordWrapping
+        label.font = font
+        label.text = self
+        label.sizeToFit()
+        return label.frame.height
+    }
+
+
     func height(withConstrainedWidth width: CGFloat, font: UIFont) -> CGFloat {
         let constraintRect = CGSize(width: width, height: .greatestFiniteMagnitude)
         let boundingBox = self.boundingRect(with: constraintRect, options: .usesLineFragmentOrigin, attributes: [NSAttributedStringKey.font: font], context: nil)

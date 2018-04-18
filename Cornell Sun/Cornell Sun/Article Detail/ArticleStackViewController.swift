@@ -260,8 +260,8 @@ class ArticleStackViewController: UIViewController {
     func setupComments() {
         getComments(postID: post.id) { comments, error in
             if error == nil {
-                self.setupCommentsTableView()
                 self.comments = comments
+                self.setupCommentsTableView()
                 self.commentsTableView.reloadData()
             }
         }
@@ -278,14 +278,27 @@ class ArticleStackViewController: UIViewController {
         commentsTableView.estimatedRowHeight = 100
         scrollView.addSubview(commentsTableView)
 //        stackView.addArrangedSubview(view)
-        commentsTableView.snp.makeConstraints { make in
-            make.bottom.width.leading.trailinequalToSuperview()
-            make.top.equalTo(stackView.snp.bottom)
+
+        let totalHeight = self.comments.map { comment -> CGFloat in
+
+            let textHeight = comment.comment.requiredHeight(width: view.bounds.width-37, font: .subSecondaryHeader)
+            return textHeight + 100
         }
+
+        stackView.snp.removeConstraints()
+
         stackView.snp.remakeConstraints { make in
             make.leading.trailing.top.equalToSuperview()
             make.bottom.equalTo(commentsTableView.snp.top)
         }
+
+        commentsTableView.snp.makeConstraints { make in
+            make.width.leading.trailing.equalToSuperview()
+            make.height.equalTo(totalHeight.reduce(0, +))
+            make.top.equalTo(stackView.snp.bottom)
+            make.bottom.equalToSuperview().inset(20)
+        }
+
     }
 }
 

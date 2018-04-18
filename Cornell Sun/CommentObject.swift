@@ -14,6 +14,7 @@ import Realm
 class CommentObject: Object {
     private let wpDateFormatter: DateFormatter = {
         let formatter = DateFormatter()
+        formatter.timeZone = TimeZone(abbreviation: "GMT+00")
         formatter.dateFormat = "yyyy-MM-dd HH:mm:ss.SSSSSS"    // 2018-03-07 05:30:35.000000
         return formatter
     }()
