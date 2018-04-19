@@ -19,7 +19,6 @@ class NotificationViewController: UIViewController, UITableViewDataSource, UITab
     override func viewWillAppear(_ animated: Bool) {
         titleCache = prevViewController.title
         prevViewController.title = "Settings"
-        descriptionTextView.isScrollEnabled = false
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -42,7 +41,6 @@ class NotificationViewController: UIViewController, UITableViewDataSource, UITab
         tableView.delegate = self
         tableView.dataSource = self
         view.addSubview(tableView)
-        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
@@ -63,15 +61,4 @@ class NotificationViewController: UIViewController, UITableViewDataSource, UITab
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return notifications.count
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
