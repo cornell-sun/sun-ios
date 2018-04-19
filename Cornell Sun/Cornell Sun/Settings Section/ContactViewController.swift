@@ -9,25 +9,25 @@
 import UIKit
 import MessageUI
 
-class ContactViewController: UIViewController, UITextFieldDelegate, MFMailComposeViewControllerDelegate {
+class ContactViewController: UIViewController, UITextFieldDelegate, MFMailComposeViewControllerDelegate, UITextViewDelegate {
     
     var prevViewController: UIViewController!
     var titleCache: String!
     var type: SettingType!
     
     var headerLabel: UILabel!
-    var descriptionTextView: UITextView!
+    var descriptionTextView: UILabel!
     var actionButton: UIButton!
     var subjectField: UITextField!
     var emailField: UITextField!
-    var messageField: UITextField!
+    var messageField: UITextView!
     
     let contactEmail = "news@cornellsun.com"
     let feedbackEmail = "feedback@cornellsun.com"
     
     let headerHeight: CGFloat = 43
-    let headerOffset: CGFloat = 86.5
-    let descriptionHeight: CGFloat = 58
+    let headerOffset: CGFloat = 22.5
+    let descriptionHeight: CGFloat = 65
     let descriptionOffset: CGFloat = 17.5
     let descriptionOffsetBottom: CGFloat = 20
     let labelHeight: CGFloat = 17
@@ -39,7 +39,7 @@ class ContactViewController: UIViewController, UITextFieldDelegate, MFMailCompos
     let screenWidth: CGFloat = 375
     let buttonWidth: CGFloat = 118.5
     let buttonHeight: CGFloat = 45.5
-    let buttonOffset: CGFloat = 56.5
+    let buttonOffset: CGFloat = 40
     
     override func viewWillAppear(_ animated: Bool) {
         titleCache = prevViewController.title
@@ -63,23 +63,30 @@ class ContactViewController: UIViewController, UITextFieldDelegate, MFMailCompos
         headerLabel.textColor = .black
         headerLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 36.0)
         view.addSubview(headerLabel)
+        var topArea = view.layoutMarginsGuide.snp.top
+        var bottomArea = view.layoutMarginsGuide.snp.bottom
+        if #available(iOS 11, *) {
+            topArea = view.safeAreaLayoutGuide.snp.top
+            bottomArea = view.safeAreaLayoutGuide.snp.bottom
+        }
         headerLabel.snp.makeConstraints { make in
             make.width.equalTo(textWidth*widthScale)
             make.height.equalTo(headerHeight)
             make.centerX.equalTo(view.center.x)
-            make.top.equalTo(view.snp.top).offset(headerOffset)
+            make.top.equalTo(topArea).offset(headerOffset)
         }
         
-        descriptionTextView = UITextView()
+        descriptionTextView = UILabel()
         descriptionTextView.text = getText()
+        descriptionTextView.numberOfLines = 0
         descriptionTextView.textColor = .black
         descriptionTextView.font = UIFont(name:"HelveticaNeue", size: 16.0)
-        descriptionTextView.isEditable = false
-        descriptionTextView.isScrollEnabled = false
+        //descriptionTextView.isEditable = false
+        //descriptionTextView.isScrollEnabled = false
         view.addSubview(descriptionTextView)
         descriptionTextView.snp.makeConstraints { make in
             make.width.equalTo(textWidth*widthScale)
-            make.height.equalTo(descriptionHeight)
+            make.height.equalTo(getText().height(withConstrainedWidth: textWidth*widthScale, font: descriptionTextView.font))
             make.centerX.equalTo(view.center.x)
             make.top.equalTo(headerLabel.snp.bottom).offset(descriptionOffset)
         }
@@ -183,23 +190,12 @@ class ContactViewController: UIViewController, UITextFieldDelegate, MFMailCompos
             make.centerX.equalTo(view.center.x)
             make.top.equalTo(emailField.snp.bottom).offset(labelOffsetTop)
         }
-        messageField = UITextField()
-        messageField.borderStyle = UITextBorderStyle.none
+        messageField = UITextView()
+        //messageField.borderStyle = UITextBorderStyle.none
+        messageField.addDoneButton()
         messageField.delegate = self
         messageField.font = UIFont(name:"HelveticaNeue", size: 18.0)
         view.addSubview(messageField)
-        messageField.snp.makeConstraints { make in
-            make.width.equalTo(textWidth*widthScale)
-            make.height.equalTo(messageHeight)
-            make.centerX.equalTo(view.center.x)
-            make.top.equalTo(messageLabel.snp.bottom).offset(labelOffsetBottom)
-        }
-        let messageBorder = CALayer()
-        messageBorder.borderColor = UIColor(red: 217/256, green: 217/256, blue: 217/256, alpha: 1).cgColor
-        messageBorder.frame = CGRect(x: 0, y: messageHeight - width, width:  textWidth*widthScale+2.0, height: messageHeight+2)
-        messageBorder.borderWidth = width
-        messageField.layer.addSublayer(messageBorder)
-        messageField.layer.masksToBounds = true
         
         actionButton = UIButton()
         actionButton.backgroundColor = UIColor.white
@@ -215,9 +211,24 @@ class ContactViewController: UIViewController, UITextFieldDelegate, MFMailCompos
         actionButton.snp.makeConstraints { make in
             make.width.equalTo(buttonWidth)
             make.height.equalTo(buttonHeight)
-            make.bottom.equalTo(view.snp.bottom).offset(-buttonOffset)
+            make.bottom.equalTo(bottomArea).offset(-buttonOffset)
             make.centerX.equalTo(view.center.x)
         }
+
+        messageField.snp.makeConstraints { make in
+            make.width.equalTo(textWidth*widthScale)
+            //make.height.equalTo(messageHeight)
+            make.centerX.equalTo(view.center.x)
+            make.top.equalTo(messageLabel.snp.bottom).offset(labelOffsetBottom)
+            make.bottom.equalTo(actionButton.snp.top).offset(-8)
+        }
+
+//        let messageBorder = CALayer()
+//        messageBorder.borderColor = UIColor(red: 217/256, green: 217/256, blue: 217/256, alpha: 1).cgColor
+//        messageBorder.frame = CGRect(x: 0, y: actionButton.bounds.minY - 6, width:  textWidth*widthScale, height: 2)
+//        messageBorder.borderWidth = width
+//        messageField.layer.addSublayer(messageBorder)
+//        messageField.layer.masksToBounds = true
     }
 
     override func didReceiveMemoryWarning() {
@@ -267,8 +278,7 @@ class ContactViewController: UIViewController, UITextFieldDelegate, MFMailCompos
             mailer.setSubject(subjectField.text!)
             mailer.setMessageBody(messageField.text!, isHTML: false)
             self.present(mailer, animated: true, completion: nil)
-        }
-        else {
+        } else {
             let alert = UIAlertController(title: "Error", message: "Cannot send email right now", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
             self.present(alert, animated: true)

@@ -59,6 +59,10 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
     func numberOfSections(in tableView: UITableView) -> Int {
         return sections.count
     }
+
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 44.0
+    }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         var headerCell: UITableViewCell
@@ -70,10 +74,13 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
         headerCell.contentView.backgroundColor = UIColor.grayMid
         let sectionLabel = UILabel()
         headerCell.contentView.addSubview(sectionLabel)
+        sectionLabel.font = UIFont.systemFont(ofSize: 14, weight: UIFont.Weight.regular)
+        sectionLabel.textColor = UIColor(white: 74/255, alpha: 1.0)
         sectionLabel.snp.makeConstraints { make in
             make.height.equalTo(20)
             make.left.equalTo(headerCell.contentView.snp.left).offset(16)
-            make.top.equalTo(headerCell.contentView.snp.top).offset(5)
+            //make.top.equalTo(headerCell.contentView.snp.top).offset(5)
+            make.bottom.equalToSuperview().offset(-6)
         }
         sectionLabel.text = sections[section]
         return headerCell.contentView

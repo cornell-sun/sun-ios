@@ -22,7 +22,7 @@ class SubscribeViewController: UIViewController,UITextFieldDelegate, UIPickerVie
     var pickerView: UIPickerView!
     
     let headerHeight: CGFloat = 43
-    let headerOffset: CGFloat = 86.5
+    let headerOffset: CGFloat = 22.5
     let descriptionHeight: CGFloat = 58
     let descriptionOffset: CGFloat = 17.5
     let descriptionOffsetBottom: CGFloat = 20
@@ -36,7 +36,7 @@ class SubscribeViewController: UIViewController,UITextFieldDelegate, UIPickerVie
     let screenWidth: CGFloat = 375
     let buttonWidth: CGFloat = 118.5
     let buttonHeight: CGFloat = 45.5
-    let buttonOffset: CGFloat = 56.5
+    let buttonOffset: CGFloat = 40.0
     
     override func viewWillAppear(_ animated: Bool) {
         titleCache = prevViewController.title
@@ -61,11 +61,18 @@ class SubscribeViewController: UIViewController,UITextFieldDelegate, UIPickerVie
         headerLabel.textColor = .black
         headerLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 36.0)
         view.addSubview(headerLabel)
+        var topArea = view.layoutMarginsGuide.snp.top
+        var bottomArea = view.layoutMarginsGuide.snp.bottom
+        if #available(iOS 11, *) {
+            topArea = view.safeAreaLayoutGuide.snp.top
+            bottomArea = view.safeAreaLayoutGuide.snp.bottom
+        }
+
         headerLabel.snp.makeConstraints { make in
             make.width.equalTo(textWidth*widthScale)
             make.height.equalTo(headerHeight)
             make.centerX.equalTo(view.center.x)
-            make.top.equalTo(view.snp.top).offset(headerOffset)
+            make.top.equalTo(topArea).offset(headerOffset)
         }
         
         descriptionTextView = UITextView()
@@ -178,7 +185,7 @@ class SubscribeViewController: UIViewController,UITextFieldDelegate, UIPickerVie
         actionButton.snp.makeConstraints { make in
             make.width.equalTo(buttonWidth)
             make.height.equalTo(buttonHeight)
-            make.bottom.equalTo(view.snp.bottom).offset(-buttonOffset)
+            make.bottom.equalTo(bottomArea).offset(-buttonOffset)
             make.centerX.equalTo(view.center.x)
         }
     }
