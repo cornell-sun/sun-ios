@@ -10,10 +10,7 @@ import Foundation
 import UIKit
 
 enum SettingType {
-    case clickable, unclickable
-}
-enum SecondaryViewType {
-    case none, label, toggle //Can add more if needed
+    case none, contactus, feedback, history, appteam, masthead, rate, privacy
 }
 
 enum ArticleContentType {
