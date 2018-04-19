@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import SnapKit
+import SafariServices
 
 enum NotificationType: String {
     case breakingNews = "breaking-news"
@@ -22,19 +24,29 @@ enum NotificationType: String {
 
 class SettingsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     var tableView: UITableView!
-    var settings: [SettingObject] = []
+    var sections: [String] = []
+    var settings: [[SettingObject]] = []
+    
+    let appID = "App ID"
+    
+    override func viewWillAppear(_ animated: Bool) {
+        setNavigationInformation()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Settings"
-        view.backgroundColor = .white
-        //Calling hardcoded test. To be deleted
+        view.backgroundColor = UIColor.grayMid
+        //Calling hardcoded populator
         if settings.count == 0 {
             testInit()
         }
+    
         // Set up table view for settings
         tableView = UITableView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height))
-        tableView.register(SettingsTableViewCell.self, forCellReuseIdentifier: "SettingCell")
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "SettingCell")
         tableView.tableFooterView = UIView()
+        tableView.tableFooterView?.backgroundColor = UIColor.grayMid
+        tableView.backgroundColor = UIColor.grayMid
         tableView.delegate = self
         tableView.dataSource = self
         view.addSubview(tableView)
@@ -44,45 +56,149 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    func setNavigationInformation() {
+        navigationItem.title = "The Cornell Daily Sun"
+        let navBar = navigationController?.navigationBar
+        navBar?.barTintColor = .white
+        navBar?.tintColor = .black
+        navBar?.titleTextAttributes = [
+            NSAttributedStringKey.font: UIFont(name: "Sonnenstrahl-Ausgezeichnet", size: .mainHeaderSize)!
+        ]
+    }
+    
+    //Table View functions
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return sections.count
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        var headerCell: UITableViewCell
+        if let dequeueCell = tableView.dequeueReusableCell(withIdentifier: "HeaderCell") {
+            headerCell = dequeueCell
+        } else {
+            headerCell = UITableViewCell()
+        }
+        headerCell.contentView.backgroundColor = UIColor.grayMid
+        let sectionLabel = UILabel()
+        headerCell.contentView.addSubview(sectionLabel)
+        sectionLabel.snp.makeConstraints { make in
+            make.height.equalTo(20)
+            make.left.equalTo(headerCell.contentView.snp.left).offset(16)
+            make.top.equalTo(headerCell.contentView.snp.top).offset(5)
+        }
+        sectionLabel.text = sections[section]
+        return headerCell.contentView
+    }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCell(withIdentifier: "SettingCell", for: indexPath) as? SettingsTableViewCell {
-            let setting = settings[indexPath.row]
-            cell.setupCell(setting: setting)
-            cell.selectionStyle = .none
-            return cell
-        }
-        return UITableViewCell()
+        let cell = tableView.dequeueReusableCell(withIdentifier: "SettingCell", for: indexPath)
+        let setting = settings[indexPath.section][indexPath.row]
+        cell.textLabel?.text = setting.settingLabel
+        cell.selectionStyle = .none
+        cell.accessoryType = .disclosureIndicator
+        return cell
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return settings.count
+        return settings[section].count
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let setting = settings[indexPath.row]
-        if setting.type == .clickable {
-            if let next = setting.nextController {
+        let setting = settings[indexPath.section][indexPath.row]
+        if let next = setting.nextController {
                 navigationController?.pushViewController(next, animated: true)
+        }
+         else {
+            switch(setting.type) {
+                case .rate:
+                    let urlStr = "itms-apps://itunes.apple.com/app/viewContentsUserReviews?id=\(appID)"
+                    if let url = URL(string: urlStr), UIApplication.shared.canOpenURL(url) {
+                        if #available(iOS 10.0, *) {
+                            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                        } else {
+                            UIApplication.shared.openURL(url)
+                        }
+                    } else {
+                        let alert = UIAlertController(title: "Error", message: "The app is not available for rating yet", preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+                        self.present(alert, animated: true)
+                }
+                case .privacy:
+                    if let url = URL(string: "http://cornellsun.com/2008/06/01/cornellsun-com-privacy-policy/") {
+                        if #available(iOS 11.0, *) {
+                            let config = SFSafariViewController.Configuration()
+                            config.entersReaderIfAvailable = true
+                            let vc = SFSafariViewController(url: url, configuration: config)
+                            present(vc, animated: true)
+                        } else {
+                            // Fallback on earlier versions
+                            let safariVC = SFSafariViewController(url: url)
+                            self.present(safariVC, animated: true, completion: nil)
+                        }
+                }
+                case .masthead:
+                    if let url = URL(string: "http://cornellsun.com/2007/03/01/full-masthead-of-the-cornell-daily-sun/") {
+                        if #available(iOS 11.0, *) {
+                            let config = SFSafariViewController.Configuration()
+                            config.entersReaderIfAvailable = true
+                            let vc = SFSafariViewController(url: url, configuration: config)
+                            present(vc, animated: true)
+                        } else {
+                            // Fallback on earlier versions
+                            let safariVC = SFSafariViewController(url: url)
+                            self.present(safariVC, animated: true, completion: nil)
+                        }
+                }
+                default:
+                    print("default")
+                    break
             }
         }
     }
+    
 
-    //*Test* populator for settings array. To be deleted
+    //Populator for settings array
     func testInit() {
-        settings.append(SettingObject(label: "Subscribe", secondary: "", next: nil, secType: .none))
-        let notifViewController = SettingsViewController()
-        let notifSettings: [(String, NotificationType)] = [("Breaking News", .breakingNews), ("Local News", .localNews),("Opinion", .opinion), ("Sports", .sports), ("Sunspots", .sunspots), ("Multimedia", .multimedia), ("Arts and Entertainment", .artsAndEntertainment), ("Science", .science), ("Dining", .dining)]
-        for i in notifSettings {
-            notifViewController.settings.append(SettingObject(label: i.0, secondary: "", next: nil, secType: .toggle, notifType: i.1))
-        }
-        settings.append(SettingObject(label: "Notification", secondary: "", next: notifViewController, secType: .none))
-        settings.append(SettingObject(label: "Font Size", secondary: "Normal", next: nil, secType: .label))
-        settings.append(SettingObject(label: "Support", secondary: "", next: nil, secType: .none))
-        settings.append(SettingObject(label: "Feedback", secondary: "", next: nil, secType: .none))
-        settings.append(SettingObject(label: "Rate", secondary: "", next: nil, secType: .none))
-        settings.append(SettingObject(label: "About", secondary: "", next: nil, secType: .none))
-        settings.append(SettingObject(label: "Privacy Policy", secondary: "", next: nil, secType: .none))
-        settings.append(SettingObject(label: "Use Agreement", secondary: "", next: nil, secType: .none))
+        //Initializing sections
+        sections = ["ACCOUNT", "SUPPORT", "ABOUT"]
+        
+        //Initializing Account settings
+        settings.append([])
+        let notificationViewController = NotificationViewController()
+        notificationViewController.prevViewController = self
+        settings[0].append(SettingObject(label: "Notification", next: notificationViewController, setType: .none))
+        settings[0].append(SettingObject(label: "Login", next: nil, setType: .none))
+        
+        let subscribeViewController = SubscribeViewController()
+        subscribeViewController.prevViewController = self
+        settings[0].append(SettingObject(label: "Subscribe", next: subscribeViewController,setType: .none))
+        
+        //Initializing Support settings
+        settings.append([])
+        let feedBackViewController = ContactViewController()
+        feedBackViewController.prevViewController = self
+        feedBackViewController.type = .feedback
+        settings[1].append(SettingObject(label: "Send App Feedback", next: feedBackViewController, setType: .feedback))
+        settings[1].append(SettingObject(label: "Rate on App Store", next: nil, setType: .rate))
+        
+        //Initializing About settings
+        settings.append([])
+        let contactViewController = ContactViewController()
+        contactViewController.prevViewController = self
+        contactViewController.type = .contactus
+        settings[2].append(SettingObject(label: "Contact the Sun", next: contactViewController, setType: .contactus))
+        
+        let dispViewController = DisplayViewController()
+        dispViewController.prevViewController = self
+        dispViewController.type = .history
+        settings[2].append(SettingObject(label: "History", next: dispViewController, setType: .history))
+        settings[2].append(SettingObject(label: "The Masthead", next: nil, setType: .masthead))
+        
+        let teamViewController = DisplayViewController()
+        teamViewController.prevViewController = self
+        teamViewController.type = .appteam
+        settings[2].append(SettingObject(label: "The App Team", next: teamViewController, setType: .appteam))
+        settings[2].append(SettingObject(label: "Privacy Policy", next: nil, setType: .privacy))
     }
 }

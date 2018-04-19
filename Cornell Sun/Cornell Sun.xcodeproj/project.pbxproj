@@ -24,10 +24,15 @@
 		348716782041EAC8008CB9D5 /* AdImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348716772041EAC8008CB9D5 /* AdImageCell.swift */; };
 		3487167D2041F09D008CB9D5 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3487167C2041F09D008CB9D5 /* Launch Screen.storyboard */; };
 		34C5582A2041E49E00E62CE8 /* AdSectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34C558292041E49E00E62CE8 /* AdSectionController.swift */; };
+		4029BB0A2087B02300E8BAEB /* NotificationsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4029BB092087B02300E8BAEB /* NotificationsTableViewCell.swift */; };
+		4036564D207446B100E7583A /* DisplayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4036564C207446B000E7583A /* DisplayViewController.swift */; };
+		4047EA05207590450030067E /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4047EA04207590450030067E /* NotificationViewController.swift */; };
 		405F83D81FBE1E2B00360AEB /* SettingObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405F83D71FBE1E2B00360AEB /* SettingObject.swift */; };
 		405F83DA1FBE1E3100360AEB /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405F83D91FBE1E3000360AEB /* Enums.swift */; };
 		405F83DC1FBE1E7C00360AEB /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405F83DB1FBE1E7C00360AEB /* SettingsViewController.swift */; };
-		405F83DE1FBE1E8200360AEB /* SettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405F83DD1FBE1E8200360AEB /* SettingsTableViewCell.swift */; };
+		40B1D4922073107E00C1306E /* ContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B1D4912073107E00C1306E /* ContactViewController.swift */; };
+		40B1D4942073164800C1306E /* UIColor+1ptImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B1D4932073164800C1306E /* UIColor+1ptImage.swift */; };
+		40B1D4962074306600C1306E /* SubscribeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B1D4952074306600C1306E /* SubscribeViewController.swift */; };
 		5006AFFC1EA9625000F58549 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5006AFFB1EA9625000F58549 /* AppDelegate.swift */; };
 		5006AFFE1EA9625000F58549 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5006AFFD1EA9625000F58549 /* ViewController.swift */; };
 		5006B0031EA9625000F58549 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5006B0021EA9625000F58549 /* Assets.xcassets */; };
@@ -125,10 +130,15 @@
 		389771843ED115B12D456CDA /* Pods-Cornell SunTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cornell SunTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Cornell SunTests/Pods-Cornell SunTests.debug.xcconfig"; sourceTree = "<group>"; };
 		3C38BCC6B38BFCC0EC16BF2B /* Pods_Cornell_SunTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cornell_SunTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DBAAD519F3C5A2D044960CA /* Pods_Cornell_Sun.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cornell_Sun.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4029BB092087B02300E8BAEB /* NotificationsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsTableViewCell.swift; sourceTree = "<group>"; };
+		4036564C207446B000E7583A /* DisplayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayViewController.swift; sourceTree = "<group>"; };
+		4047EA04207590450030067E /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
 		405F83D71FBE1E2B00360AEB /* SettingObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingObject.swift; sourceTree = "<group>"; };
 		405F83D91FBE1E3000360AEB /* Enums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 		405F83DB1FBE1E7C00360AEB /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
-		405F83DD1FBE1E8200360AEB /* SettingsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewCell.swift; sourceTree = "<group>"; };
+		40B1D4912073107E00C1306E /* ContactViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactViewController.swift; sourceTree = "<group>"; };
+		40B1D4932073164800C1306E /* UIColor+1ptImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+1ptImage.swift"; sourceTree = "<group>"; };
+		40B1D4952074306600C1306E /* SubscribeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscribeViewController.swift; sourceTree = "<group>"; };
 		5006AFF81EA9625000F58549 /* Cornell Sun.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Cornell Sun.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5006AFFB1EA9625000F58549 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5006AFFD1EA9625000F58549 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -361,8 +371,11 @@
 		DC34DEEA2032137C0010DF9A /* Settings Section */ = {
 			isa = PBXGroup;
 			children = (
-				405F83DD1FBE1E8200360AEB /* SettingsTableViewCell.swift */,
 				405F83DB1FBE1E7C00360AEB /* SettingsViewController.swift */,
+				40B1D4912073107E00C1306E /* ContactViewController.swift */,
+				40B1D4952074306600C1306E /* SubscribeViewController.swift */,
+				4036564C207446B000E7583A /* DisplayViewController.swift */,
+				4047EA04207590450030067E /* NotificationViewController.swift */,
 			);
 			path = "Settings Section";
 			sourceTree = "<group>";
@@ -399,6 +412,7 @@
 			isa = PBXGroup;
 			children = (
 				0CED4FAB1FAB523E0025EB91 /* UIColor+.swift */,
+				40B1D4932073164800C1306E /* UIColor+1ptImage.swift */,
 			);
 			path = "Color Extension";
 			sourceTree = "<group>";
@@ -488,6 +502,7 @@
 				DC79719E1F7B30540055A7B2 /* CategoryCell.swift */,
 				DC4FED222027F05A004F435E /* SearchCell.swift */,
 				348716772041EAC8008CB9D5 /* AdImageCell.swift */,
+				4029BB092087B02300E8BAEB /* NotificationsTableViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -587,7 +602,7 @@
 				TargetAttributes = {
 					5006AFF71EA9625000F58549 = {
 						CreatedOnToolsVersion = 8.3.1;
-						DevelopmentTeam = D5T999AFZL;
+						DevelopmentTeam = 6C5MLKPA5N;
 						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
@@ -866,9 +881,12 @@
 				DC0A883E1FBA6B8200F2BCBB /* BookmarkSectionController.swift in Sources */,
 				DC6561D31FBAC45900C5062D /* PhotoGalleryObject.swift in Sources */,
 				DC0A883C1FBA531000F2BCBB /* BookmarkCollectionViewController.swift in Sources */,
+				4036564D207446B100E7583A /* DisplayViewController.swift in Sources */,
 				3441C78A2066C0CD00F58D5E /* Delegate+.swift in Sources */,
-				405F83DE1FBE1E8200360AEB /* SettingsTableViewCell.swift in Sources */,
 				348716782041EAC8008CB9D5 /* AdImageCell.swift in Sources */,
+				40B1D4962074306600C1306E /* SubscribeViewController.swift in Sources */,
+				40B1D4942073164800C1306E /* UIColor+1ptImage.swift in Sources */,
+				40B1D4922073107E00C1306E /* ContactViewController.swift in Sources */,
 				DCA02C0A2027B18400CBE97F /* SearchSectionController.swift in Sources */,
 				5006AFFC1EA9625000F58549 /* AppDelegate.swift in Sources */,
 				405F83DA1FBE1E3100360AEB /* Enums.swift in Sources */,
@@ -893,6 +911,7 @@
 				DC695D8B1FBB897600C6C62F /* RealmManager.swift in Sources */,
 				DC556AC520602E6900475B7D /* Constants.swift in Sources */,
 				61652CD21F6EF3A500EEFC29 /* SearchViewController.swift in Sources */,
+				4029BB0A2087B02300E8BAEB /* NotificationsTableViewCell.swift in Sources */,
 				DC4308ED1F2558D500ABB31F /* SunAPI.swift in Sources */,
 				0CED4FAD1FAB523F0025EB91 /* UIColor+.swift in Sources */,
 				34C5582A2041E49E00E62CE8 /* AdSectionController.swift in Sources */,
@@ -910,6 +929,7 @@
 				DC818D9F1F7596970064AFFA /* TitleCell.swift in Sources */,
 				0C0D2FE9206048BA00BC77E9 /* OnboardingViewController.swift in Sources */,
 				DC4308EF1F2563FF00ABB31F /* API.swift in Sources */,
+				4047EA05207590450030067E /* NotificationViewController.swift in Sources */,
 				61652CD41F6EF44900EEFC29 /* SearchTableViewCell.swift in Sources */,
 				DCB717141FB9FE1700BE4D26 /* HeroSectionController.swift in Sources */,
 				DCECA9901FBDFB7300BAB2EA /* BookmarkCell.swift in Sources */,
@@ -1066,10 +1086,10 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = D5T999AFZL;
+				DEVELOPMENT_TEAM = 6C5MLKPA5N;
 				INFOPLIST_FILE = "Cornell Sun/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.cornellsun.app;
+				PRODUCT_BUNDLE_IDENTIFIER = com.cornellsun.c;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1088,10 +1108,10 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = D5T999AFZL;
+				DEVELOPMENT_TEAM = 6C5MLKPA5N;
 				INFOPLIST_FILE = "Cornell Sun/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.cornellsun.app;
+				PRODUCT_BUNDLE_IDENTIFIER = com.cornellsun.c;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
