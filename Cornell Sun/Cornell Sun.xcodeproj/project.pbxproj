@@ -66,6 +66,7 @@
 		DC818DA31F75E0CF0064AFFA /* Sonnenstrahl-Ausgezeichnet.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DC818DA21F75E08B0064AFFA /* Sonnenstrahl-Ausgezeichnet.ttf */; };
 		DCA02C0A2027B18400CBE97F /* SearchSectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA02C092027B18300CBE97F /* SearchSectionController.swift */; };
 		DCA02C0C2027E0F500CBE97F /* NetworkingHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA02C0B2027E0F500CBE97F /* NetworkingHelpers.swift */; };
+		DCB1BB4D20893B0D002C11E2 /* SkeletonFeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB1BB4C20893B0D002C11E2 /* SkeletonFeedCell.swift */; };
 		DCB717121FB94BCA00BE4D26 /* KeplerStd-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = DCB717111FB94BCA00BE4D26 /* KeplerStd-Bold.otf */; };
 		DCB717141FB9FE1700BE4D26 /* HeroSectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB717131FB9FE1700BE4D26 /* HeroSectionController.swift */; };
 		DCB717161FBA016400BE4D26 /* TaglineCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB717151FBA016400BE4D26 /* TaglineCell.swift */; };
@@ -182,6 +183,7 @@
 		DC818DA21F75E08B0064AFFA /* Sonnenstrahl-Ausgezeichnet.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Sonnenstrahl-Ausgezeichnet.ttf"; sourceTree = "<group>"; };
 		DCA02C092027B18300CBE97F /* SearchSectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchSectionController.swift; sourceTree = "<group>"; };
 		DCA02C0B2027E0F500CBE97F /* NetworkingHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingHelpers.swift; sourceTree = "<group>"; };
+		DCB1BB4C20893B0D002C11E2 /* SkeletonFeedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkeletonFeedCell.swift; sourceTree = "<group>"; };
 		DCB717111FB94BCA00BE4D26 /* KeplerStd-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "KeplerStd-Bold.otf"; sourceTree = "<group>"; };
 		DCB717131FB9FE1700BE4D26 /* HeroSectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroSectionController.swift; sourceTree = "<group>"; };
 		DCB717151FBA016400BE4D26 /* TaglineCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaglineCell.swift; sourceTree = "<group>"; };
@@ -512,6 +514,7 @@
 				DC4FED222027F05A004F435E /* SearchCell.swift */,
 				348716772041EAC8008CB9D5 /* AdImageCell.swift */,
 				4029BB092087B02300E8BAEB /* NotificationsTableViewCell.swift */,
+				DCB1BB4C20893B0D002C11E2 /* SkeletonFeedCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -770,6 +773,7 @@
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
+				"${BUILT_PRODUCTS_DIR}/SkeletonView/SkeletonView.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftSoup/SwiftSoup.framework",
 			);
@@ -790,6 +794,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SkeletonView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftSoup.framework",
 			);
@@ -908,6 +913,7 @@
 				0CED4FAE1FAB523F0025EB91 /* UIFont+.swift in Sources */,
 				5006B24D1EADA37F00F58549 /* PostObject.swift in Sources */,
 				DC34DEF520321C6D0010DF9A /* SectionCollectionViewController.swift in Sources */,
+				DCB1BB4D20893B0D002C11E2 /* SkeletonFeedCell.swift in Sources */,
 				DCB717161FBA016400BE4D26 /* TaglineCell.swift in Sources */,
 				DC0A88401FBA84E700F2BCBB /* AuthorCell.swift in Sources */,
 				0C15F1871FBDD433009724DB /* ArticleHeaderView.swift in Sources */,
