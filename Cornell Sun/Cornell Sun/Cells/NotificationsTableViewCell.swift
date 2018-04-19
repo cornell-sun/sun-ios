@@ -36,7 +36,7 @@ class NotificationsTableViewCell: UITableViewCell {
         label.text = labelText
         let secondSwitch = UISwitch()
         secondSwitch.onTintColor = UIColor.brick
-        if let notifType = settingObj.notificationType {
+        if let notifType = notificationType {
             secondSwitch.setOn(userDefaults.bool(forKey: notifType.rawValue), animated: false)
         }
         secondSwitch.addTarget(self, action: #selector(toggleSwitched), for: .valueChanged)
