@@ -272,6 +272,7 @@
 				5006AFF91EA9625000F58549 /* Products */,
 				6FF0DFD245B42D7BBFBC46CA /* Pods */,
 				C0B2C074512AC5316E8D48D8 /* Frameworks */,
+				DCB1BB452088D28D002C11E2 /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -467,6 +468,14 @@
 			path = "Search Section";
 			sourceTree = "<group>";
 		};
+		DCB1BB452088D28D002C11E2 /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				0C736C53202F96E000E9D92E /* ImageAttachment.swift */,
+			);
+			name = "Recovered References";
+			sourceTree = "<group>";
+		};
 		DCD870ED1F256B7B00B98AF8 /* Cornell SunTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -602,7 +611,7 @@
 				TargetAttributes = {
 					5006AFF71EA9625000F58549 = {
 						CreatedOnToolsVersion = 8.3.1;
-						DevelopmentTeam = 6C5MLKPA5N;
+						DevelopmentTeam = 3C8UBDMMME;
 						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
@@ -1086,10 +1095,10 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 6C5MLKPA5N;
+				DEVELOPMENT_TEAM = 3C8UBDMMME;
 				INFOPLIST_FILE = "Cornell Sun/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.cornellsun.c;
+				PRODUCT_BUNDLE_IDENTIFIER = com.cornellsun.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1108,10 +1117,10 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 6C5MLKPA5N;
+				DEVELOPMENT_TEAM = 3C8UBDMMME;
 				INFOPLIST_FILE = "Cornell Sun/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.cornellsun.c;
+				PRODUCT_BUNDLE_IDENTIFIER = com.cornellsun.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
