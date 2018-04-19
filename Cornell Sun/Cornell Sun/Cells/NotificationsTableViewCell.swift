@@ -8,6 +8,7 @@
 
 import UIKit
 import SnapKit
+import OneSignal
 
 class NotificationsTableViewCell: UITableViewCell {
     var label: UILabel!
@@ -16,6 +17,9 @@ class NotificationsTableViewCell: UITableViewCell {
     let offsetLeft = 16
     let offsetRight = -13.5
     let offsetBottom = -7
+    
+    let userDefaults = UserDefaults.standard
+    var notificationType: NotificationType?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -32,11 +36,25 @@ class NotificationsTableViewCell: UITableViewCell {
         label.text = labelText
         let secondSwitch = UISwitch()
         secondSwitch.onTintColor = UIColor.brick
+        if let notifType = notificationType {
+            secondSwitch.setOn(userDefaults.bool(forKey: notifType.rawValue), animated: false)
+        }
+        secondSwitch.addTarget(self, action: #selector(toggleSwitched), for: .valueChanged)
         contentView.addSubview(secondSwitch)
         secondSwitch.snp.makeConstraints { make in
             make.height.equalTo(heightSec)
             make.bottom.equalTo(contentView.snp.bottom).offset(offsetBottom)
             make.right.equalTo(contentView.snp.right).offset(offsetRight)
+        }
+    }
+    
+    @objc func toggleSwitched(sender: UISwitch) {
+        guard let notifType = notificationType else { return }
+        userDefaults.set(sender.isOn, forKey: notifType.rawValue)
+        if sender.isOn {
+            OneSignal.sendTag(notifType.rawValue, value: notifType.rawValue)
+        } else {
+            OneSignal.deleteTag(notifType.rawValue)
         }
     }
 }

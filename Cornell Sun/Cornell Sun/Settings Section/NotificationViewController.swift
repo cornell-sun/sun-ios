@@ -8,13 +8,25 @@
 
 import UIKit
 
+enum NotificationType: String {
+    case breakingNews = "breaking-news"
+    case opinion = "opinion"
+    case sports = "sports"
+    case artsAndEntertainment = "arts-and-entertainment"
+    case science = "science"
+    case dining = "dining"
+    case multimedia = "multimedia"
+    case localNews = "local-news"
+    case sunspots = "sunspots"
+}
+
 class NotificationViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     var prevViewController: UIViewController!
     var titleCache: String!
     
     var tableView: UITableView!
-    var notifications: [String] = []
+    var notifications: [(String, NotificationType)] = []
 
     override func viewWillAppear(_ animated: Bool) {
         titleCache = prevViewController.title
@@ -31,7 +43,7 @@ class NotificationViewController: UIViewController, UITableViewDataSource, UITab
         view.backgroundColor = .white
         //Calling hardcoded populator
         if notifications.count == 0 {
-            notifications = ["Breaking News", "Local News", "Opinion", "Sports", "Sunspots", "Multimedia", "Arts and Entertainment", "Science", "Dining"]
+            notifications = [("Breaking News", .breakingNews), ("Local News", .localNews),("Opinion", .opinion), ("Sports", .sports), ("Sunspots", .sunspots), ("Multimedia", .multimedia), ("Arts and Entertainment", .artsAndEntertainment), ("Science", .science), ("Dining", .dining)]
         }
         
         // Set up table view for settings
@@ -50,7 +62,8 @@ class NotificationViewController: UIViewController, UITableViewDataSource, UITab
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "NotificationCell", for: indexPath) as? NotificationsTableViewCell {
-            cell.setupCell(labelText: notifications[indexPath.row])
+            cell.notificationType = notifications[indexPath.row].1
+            cell.setupCell(labelText: notifications[indexPath.row].0)
             cell.selectionStyle = .none
             return cell
         } else {
