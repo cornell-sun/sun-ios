@@ -40,19 +40,10 @@ class DisplayViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         let navBar = navigationController?.navigationBar
-        //        if #available(iOS 11.0, *) {
-        //            navBar?.prefersLargeTitles = true
-        //            navigationItem.largeTitleDisplayMode = .never
-        //        } else {
-        //            // Fallback on earlier versions
-        //        }
-        //navBar?.barTintColor = .white
-        //navBar?.tintColor = .black
         navBar?.setBackgroundImage(UIColor.clear.as1ptImage(), for: .default)
         navBar?.shadowImage = UIColor.lightGray.as1ptImage()
         self.title = ""
         let widthScale = view.frame.width/screenWidth //Scaling width
-        //let heightScale = view.frame.height/screenWidth //Scaling height
         headerLabel = UILabel()
         headerLabel.text = getHeader()
         headerLabel.textColor = .black
@@ -68,8 +59,7 @@ class DisplayViewController: UIViewController {
         descriptionTextView = UITextView()
         descriptionTextView.text = getText()
         descriptionTextView.textColor = .black
-        descriptionTextView.font = UIFont(name:"HelveticaNeue", size: 16.0)
-        //descriptionTextView.font?.withSize(16.0)
+        descriptionTextView.font = UIFont(name: "HelveticaNeue", size: 16.0)
         descriptionTextView.isEditable = false
         view.addSubview(descriptionTextView)
         descriptionTextView.snp.makeConstraints { make in
@@ -106,16 +96,4 @@ class DisplayViewController: UIViewController {
             return ""
         }
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

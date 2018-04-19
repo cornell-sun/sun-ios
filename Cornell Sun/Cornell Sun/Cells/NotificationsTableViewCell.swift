@@ -27,11 +27,11 @@ class NotificationsTableViewCell: UITableViewCell {
         label.snp.makeConstraints { make in
             make.height.equalTo(heightLabel)
             make.left.equalTo(contentView.snp.left).offset(offsetLeft)
-            make.centerY.equalTo(contentView.center.y)
+            make.centerY.equalTo(contentView)
         }
         label.text = labelText
         let secondSwitch = UISwitch()
-        secondSwitch.onTintColor = .bigRed
+        secondSwitch.onTintColor = UIColor.brick
         contentView.addSubview(secondSwitch)
         secondSwitch.snp.makeConstraints { make in
             make.height.equalTo(heightSec)

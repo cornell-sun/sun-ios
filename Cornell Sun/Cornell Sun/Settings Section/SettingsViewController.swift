@@ -29,15 +29,13 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
     
     let appID = "App ID"
     
-    let defBackgroundColor = UIColor(red: 248/256, green: 248/256, blue: 248/256, alpha: 1)
-    
     override func viewWillAppear(_ animated: Bool) {
         setNavigationInformation()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = defBackgroundColor
+        view.backgroundColor = UIColor.grayMid
         //Calling hardcoded populator
         if settings.count == 0 {
             testInit()
@@ -47,8 +45,8 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
         tableView = UITableView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height))
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "SettingCell")
         tableView.tableFooterView = UIView()
-        tableView.tableFooterView?.backgroundColor = defBackgroundColor
-        tableView.backgroundColor = defBackgroundColor
+        tableView.tableFooterView?.backgroundColor = UIColor.grayMid
+        tableView.backgroundColor = UIColor.grayMid
         tableView.delegate = self
         tableView.dataSource = self
         view.addSubview(tableView)
@@ -81,7 +79,7 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
         } else {
             headerCell = UITableViewCell()
         }
-        headerCell.contentView.backgroundColor = defBackgroundColor
+        headerCell.contentView.backgroundColor = UIColor.grayMid
         let sectionLabel = UILabel()
         headerCell.contentView.addSubview(sectionLabel)
         sectionLabel.snp.makeConstraints { make in

@@ -42,7 +42,6 @@ class SubscribeViewController: UIViewController,UITextFieldDelegate, UIPickerVie
         titleCache = prevViewController.title
         prevViewController.title = "Settings"
         pickerView.selectRow(1, inComponent:0, animated:true)
-        //descriptionTextView.isScrollEnabled = true
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -53,19 +52,10 @@ class SubscribeViewController: UIViewController,UITextFieldDelegate, UIPickerVie
         super.viewDidLoad()
         view.backgroundColor = .white
         let navBar = navigationController?.navigationBar
-        //        if #available(iOS 11.0, *) {
-        //            navBar?.prefersLargeTitles = true
-        //            navigationItem.largeTitleDisplayMode = .never
-        //        } else {
-        //            // Fallback on earlier versions
-        //        }
-        //navBar?.barTintColor = .white
-        //navBar?.tintColor = .black
         navBar?.setBackgroundImage(UIColor.clear.as1ptImage(), for: .default)
         navBar?.shadowImage = UIColor.lightGray.as1ptImage()
         self.title = ""
         let widthScale = view.frame.width/screenWidth //Scaling width
-        //let heightScale = view.frame.height/screenWidth //Scaling height
         headerLabel = UILabel()
         headerLabel.text = "Daily Newsletters"
         headerLabel.textColor = .black

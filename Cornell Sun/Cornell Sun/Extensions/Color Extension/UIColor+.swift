@@ -12,6 +12,10 @@ extension UIColor {
     @nonobjc class var brick: UIColor {
         return UIColor(red: 179.0 / 255.0, green: 27.0 / 255.0, blue: 27.0 / 255.0, alpha: 1.0)
     }
+    
+    @nonobjc class var grayMid: UIColor {
+        return UIColor(red: 248/255, green: 248/255, blue: 248/255, alpha: 1)
+    }
 
     @nonobjc class var black5: UIColor {
         return UIColor(white: 0.0, alpha: 0.05)

@@ -54,19 +54,10 @@ class ContactViewController: UIViewController, UITextFieldDelegate, MFMailCompos
         super.viewDidLoad()
         view.backgroundColor = .white
         let navBar = navigationController?.navigationBar
-//        if #available(iOS 11.0, *) {
-//            navBar?.prefersLargeTitles = true
-//            navigationItem.largeTitleDisplayMode = .never
-//        } else {
-//            // Fallback on earlier versions
-//        }
-        //navBar?.barTintColor = .white
-        //navBar?.tintColor = .black
         navBar?.setBackgroundImage(UIColor.clear.as1ptImage(), for: .default)
         navBar?.shadowImage = UIColor.lightGray.as1ptImage()
         self.title = ""
         let widthScale = view.frame.width/screenWidth //Scaling width
-        //let heightScale = view.frame.height/screenWidth //Scaling height
         headerLabel = UILabel()
         headerLabel.text = getHeader()
         headerLabel.textColor = .black
@@ -83,7 +74,6 @@ class ContactViewController: UIViewController, UITextFieldDelegate, MFMailCompos
         descriptionTextView.text = getText()
         descriptionTextView.textColor = .black
         descriptionTextView.font = UIFont(name:"HelveticaNeue", size: 16.0)
-        //descriptionTextView.font?.withSize(16.0)
         descriptionTextView.isEditable = false
         descriptionTextView.isScrollEnabled = false
         view.addSubview(descriptionTextView)
@@ -127,7 +117,7 @@ class ContactViewController: UIViewController, UITextFieldDelegate, MFMailCompos
         let nameLabel = UILabel()
         nameLabel.text = "Name"
         nameLabel.font = UIFont(name:"HelveticaNeue", size: 14.0)
-        nameLabel.textColor = UIColor(red: 155/256, green: 155/256, blue: 155/256, alpha: 1)
+        nameLabel.textColor = UIColor(red: 155/255, green: 155/255, blue: 155/255, alpha: 1)
         view.addSubview(nameLabel)
         nameLabel.snp.makeConstraints { make in
             make.width.equalTo(textWidth*widthScale)
@@ -212,9 +202,9 @@ class ContactViewController: UIViewController, UITextFieldDelegate, MFMailCompos
         messageField.layer.masksToBounds = true
         
         actionButton = UIButton()
-        actionButton.backgroundColor = UIColor.white// (red: 238/255, green: 68/255, blue: 68/255, alpha: 1)
+        actionButton.backgroundColor = UIColor.white
         actionButton.layer.cornerRadius = 20
-        let bigRed = UIColor(red: 179/255, green: 27/255, blue: 27/255, alpha: 1)
+        let bigRed = UIColor.brick
         actionButton.layer.borderWidth = 2.5
         actionButton.layer.borderColor = bigRed.cgColor
         actionButton.setTitle("Send", for: .normal)
@@ -284,17 +274,4 @@ class ContactViewController: UIViewController, UITextFieldDelegate, MFMailCompos
             self.present(alert, animated: true)
         }
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-   
-
 }
