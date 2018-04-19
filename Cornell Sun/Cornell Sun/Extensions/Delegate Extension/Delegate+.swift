@@ -19,8 +19,8 @@ func pressedShare(entry: PostObject) {
 }
 
 func pressedBookmark(_ cell: MenuActionCell, entry: PostObject) {
-    let didBookmark = cell.bookmarkButton.currentImage == #imageLiteral(resourceName: "bookmark") //we should save the bookmark
-    let correctBookmarkImage = cell.bookmarkButton.currentImage == #imageLiteral(resourceName: "bookmarkPressed") ? #imageLiteral(resourceName: "bookmark") : #imageLiteral(resourceName: "bookmarkPressed")
+    let didBookmark = !entry.didSave
+    let correctBookmarkImage = didBookmark ? #imageLiteral(resourceName: "bookmarkPressed") : #imageLiteral(resourceName: "bookmark")
     cell.bookmarkButton.setImage(correctBookmarkImage, for: .normal)
     cell.bookmarkButton.transform = CGAffineTransform(scaleX: 0.6, y: 0.6)
     taptic(style: .light)

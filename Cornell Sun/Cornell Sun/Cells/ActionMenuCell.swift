@@ -86,7 +86,7 @@ final class MenuActionCell: UICollectionViewCell {
     }
 
     override func prepareForReuse() {
-        bookmarkButton.setImage(#imageLiteral(resourceName: "bookmark"), for: .normal)
+        //bookmarkButton.setImage(#imageLiteral(resourceName: "bookmark"), for: .normal)
     }
 
     func setBookmarkImage(didSelectBookmark: Bool) {
@@ -96,6 +96,10 @@ final class MenuActionCell: UICollectionViewCell {
 
     func setupViews(forBookmarks: Bool) {
         self.backgroundColor = .white
+
+        if forBookmarks {
+            bookmarkButton.setImage(#imageLiteral(resourceName: "bookmarkPressed"), for: .normal)
+        }
 
         timeStampLabel.snp.makeConstraints { (make) in
             make.leading.equalTo(offset)
