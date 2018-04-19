@@ -62,8 +62,8 @@ class NotificationViewController: UIViewController, UITableViewDataSource, UITab
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "NotificationCell", for: indexPath) as? NotificationsTableViewCell {
-            cell.setupCell(labelText: notifications[indexPath.row].0)
             cell.notificationType = notifications[indexPath.row].1
+            cell.setupCell(labelText: notifications[indexPath.row].0)
             cell.selectionStyle = .none
             return cell
         } else {
