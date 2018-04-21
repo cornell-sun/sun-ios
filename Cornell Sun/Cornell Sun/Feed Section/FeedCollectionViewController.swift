@@ -14,6 +14,8 @@ import RealmSwift
 class FeedCollectionViewController: ViewController, UIScrollViewDelegate {
     var loading = false
 
+    fileprivate var token: NotificationToken?
+
     var currentPage = 1
     let spinToken = "spinner"
     var adIndex = 7
@@ -21,6 +23,9 @@ class FeedCollectionViewController: ViewController, UIScrollViewDelegate {
     var adDict = [String: Int]()
     var currAdToken = ""
 
+    fileprivate var bookmarkPosts: Results<PostObject> {
+        return RealmManager.instance.get()
+    }
     var feedData: [PostObject] = []
     var savedPostIds: [Int] = []
     var headlinePost: PostObject!
@@ -49,15 +54,25 @@ class FeedCollectionViewController: ViewController, UIScrollViewDelegate {
 
         setNavigationInformation()
 
-        feedData = feedData.map {
-            RealmManager.instance.update(object: $0, to: savedPostIds.contains($0.id))
-            return $0
-        }
-        self.adapter.performUpdates(animated: true, completion: nil)
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        token = bookmarkPosts.observe {[weak self] (changes: RealmCollectionChange) in
+            guard let strongSelf = self else { return }
+            switch changes {
+            case .initial:
+                strongSelf.updateBookmarksInFeed()
+                strongSelf.adapter.performUpdates(animated: true, completion: nil)
+            case .update:
+                strongSelf.updateBookmarksInFeed()
+                strongSelf.adapter.performUpdates(animated: true, completion: nil)
+                //bookmarkPosts has the most up to date bookmarks, change feedData
+            default:
+                break
+            }
+        }
 
         refreshControl.addTarget(self, action: #selector(refreshData), for: .valueChanged)
 
@@ -80,6 +95,19 @@ class FeedCollectionViewController: ViewController, UIScrollViewDelegate {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+
+    fileprivate func isPostIdInBookmarks(post: PostObject, currListOfBookmarks: [PostObject]) -> PostObject? {
+        guard let index = currListOfBookmarks.index(where: {$0.id == post.id}) else { return nil }
+        return currListOfBookmarks[index]
+    }
+
+    fileprivate func updateBookmarksInFeed() {
+        let currListOfBookmarks = Array(bookmarkPosts)
+        feedData = feedData.map { post in
+            guard let updatedBookmarkPost = isPostIdInBookmarks(post: post, currListOfBookmarks: currListOfBookmarks) else { return post }
+            return updatedBookmarkPost
+        }
     }
 
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
@@ -153,6 +181,7 @@ extension FeedCollectionViewController {
                 self.loading = false
                 self.feedData.append(contentsOf: posts)
                 self.refreshControl.endRefreshing()
+                self.updateBookmarksInFeed()
                 self.adapter.performUpdates(animated: true, completion: nil)
             }
         }
