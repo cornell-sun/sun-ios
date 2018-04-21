@@ -75,7 +75,7 @@ class SectionCollectionViewController: UIViewController, UIScrollViewDelegate {
 
         view.addSubview(collectionView)
         adapter.collectionView = collectionView
-        adapter.collectionView?.backgroundColor = .white
+        adapter.collectionView?.backgroundColor = .collectionBackground
         adapter.collectionView?.refreshControl = refreshControl
         adapter.dataSource = self
         adapter.scrollViewDelegate = self
