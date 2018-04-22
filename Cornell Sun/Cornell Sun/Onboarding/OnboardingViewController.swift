@@ -96,12 +96,17 @@ class OnboardingViewController: UIViewController {
             make.leading.trailing.equalToSuperview().inset(padding)
         }
 
+        var bottomArea = view.layoutMarginsGuide.snp.bottom
+        if #available(iOS 11, *) {
+            bottomArea = view.safeAreaLayoutGuide.snp.bottom
+        }
+
         onboardingImageView = UIImageView()
         onboardingImageView.contentMode = .bottom
         view.addSubview(onboardingImageView)
         onboardingImageView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
-            make.bottom.equalToSuperview().inset(padding)
+            make.bottom.equalTo(bottomArea).inset(padding)
             make.top.equalToSuperview()
         }
 

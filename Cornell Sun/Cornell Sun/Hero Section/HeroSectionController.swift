@@ -100,6 +100,7 @@ extension HeroSectionController: BookmarkPressedDelegate, SharePressedDelegate {
             cell.shareDelegate = self
             cell.post = entry
             cell.setupViews(forBookmarks: false)
+            cell.setBookmarkImage(didSelectBookmark: entry.didSave)
             return cell
         }
     }

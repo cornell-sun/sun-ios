@@ -33,11 +33,24 @@ final class RealmManager {
         }
     }
 
-    func update(object: PostObject, to: Bool) {
+    func update(object: PostObject, to: Bool) -> PostObject {
         let realm = getRealm()
         try! realm.write {
-            object.didSave = to
+            //object.didSave = to
+
+            if to {
+                object.didSave = true
+                object.bookmarkDate = Date()
+                object.softDelete = false
+                object.bookmarkedThisSession = true
+            } else {
+                object.softDelete = true
+                object.didSave = false
+                object.bookmarkDate = nil
+                object.bookmarkedThisSession = false
+            }
         }
+        return object
     }
 
     func delete(object: Object) {

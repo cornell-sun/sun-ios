@@ -181,9 +181,9 @@ class PostObject: Object, ListDiffable {
     }
 
     func isEqual(toDiffableObject object: ListDiffable?) -> Bool {
-        guard self !== object else { return true }
+        //guard self !== object else { return true }
         guard let object = object as? PostObject else { return false }
-        return self.id == object.id
+        return self.id == object.id && self.didSave == object.didSave
     }
 
     func attributedContentString() -> NSAttributedString {
