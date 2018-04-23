@@ -11,6 +11,7 @@
 		0C0D2FE72060462500BC77E9 /* OnboardingPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C0D2FE62060462500BC77E9 /* OnboardingPageViewController.swift */; };
 		0C0D2FE9206048BA00BC77E9 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C0D2FE8206048BA00BC77E9 /* OnboardingViewController.swift */; };
 		0C15F1871FBDD433009724DB /* ArticleHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C15F1861FBDD433009724DB /* ArticleHeaderView.swift */; };
+		0C59AD44208D505700CF3A31 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C59AD43208D505700CF3A31 /* Button.swift */; };
 		0C736C54202F96E000E9D92E /* ImageAttachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C736C53202F96E000E9D92E /* ImageAttachment.swift */; };
 		0C7D9A8E1F217B510041E1B0 /* apple-app-site-association in Resources */ = {isa = PBXBuildFile; fileRef = 0C7D9A8D1F217B510041E1B0 /* apple-app-site-association */; };
 		0CA26A1B205F41A6004759D1 /* ArticleStackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CA26A1A205F41A6004759D1 /* ArticleStackViewController.swift */; };
@@ -115,6 +116,7 @@
 		0C0D2FE62060462500BC77E9 /* OnboardingPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPageViewController.swift; sourceTree = "<group>"; };
 		0C0D2FE8206048BA00BC77E9 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		0C15F1861FBDD433009724DB /* ArticleHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleHeaderView.swift; sourceTree = "<group>"; };
+		0C59AD43208D505700CF3A31 /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
 		0C736C53202F96E000E9D92E /* ImageAttachment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageAttachment.swift; sourceTree = "<group>"; };
 		0C7D9A8D1F217B510041E1B0 /* apple-app-site-association */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "apple-app-site-association"; path = "Cornell Sun/apple-app-site-association"; sourceTree = "<group>"; };
 		0CA26A1A205F41A6004759D1 /* ArticleStackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleStackViewController.swift; sourceTree = "<group>"; };
@@ -429,6 +431,7 @@
 				DC34DEF0203214580010DF9A /* Date Extension */,
 				DC446C351F5D0DFF00D68688 /* Extensions.swift */,
 				DC556AC420602E6900475B7D /* Constants.swift */,
+				0C59AD43208D505700CF3A31 /* Button.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -550,7 +553,6 @@
 				5D796D343FAE3F7BC75A78B1 /* [CP] Embed Pods Frameworks */,
 				40D130291F61EF250063329A /* SwiftLint */,
 				DC3667DC206EB9D2002EB4F9 /* Embed App Extensions */,
-				C4E932C21EB4E24573D5B9FC /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -570,7 +572,6 @@
 				DC3667CD206EB9D2002EB4F9 /* Sources */,
 				DC3667CE206EB9D2002EB4F9 /* Frameworks */,
 				DC3667CF206EB9D2002EB4F9 /* Resources */,
-				C08FFCEF0F696E3B4D6C1095 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -590,7 +591,6 @@
 				DCD870E91F256B7B00B98AF8 /* Frameworks */,
 				DCD870EA1F256B7B00B98AF8 /* Resources */,
 				257BDE34A42EF8D90E4C73AE /* [CP] Embed Pods Frameworks */,
-				C43AF39992652565C2A1C8FE /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -821,51 +821,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		C08FFCEF0F696E3B4D6C1095 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Cornell Sun-SunNotificationServiceExtension/Pods-Cornell Sun-SunNotificationServiceExtension-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		C43AF39992652565C2A1C8FE /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Cornell SunTests/Pods-Cornell SunTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		C4E932C21EB4E24573D5B9FC /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Cornell Sun/Pods-Cornell Sun-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		D18FABB7FF88C9A16A7E9EF3 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -946,6 +901,7 @@
 				DC818D9F1F7596970064AFFA /* TitleCell.swift in Sources */,
 				0C0D2FE9206048BA00BC77E9 /* OnboardingViewController.swift in Sources */,
 				DC4308EF1F2563FF00ABB31F /* API.swift in Sources */,
+				0C59AD44208D505700CF3A31 /* Button.swift in Sources */,
 				4047EA05207590450030067E /* NotificationViewController.swift in Sources */,
 				61652CD41F6EF44900EEFC29 /* SearchTableViewCell.swift in Sources */,
 				DCB717141FB9FE1700BE4D26 /* HeroSectionController.swift in Sources */,

@@ -12,7 +12,7 @@ import OneSignal
 class OnboardingPageViewController: UIPageViewController {
 
     var pageControl: UIPageControl!
-    var nextButton: UIButton!
+    var nextButton: Button!
     var loadingIndicator: UIActivityIndicatorView!
     var pages = [UIViewController]()
 
@@ -50,7 +50,7 @@ class OnboardingPageViewController: UIPageViewController {
             make.bottom.equalTo(bottomArea).inset(pageControlBottomInset)
         }
 
-        nextButton = UIButton()
+        nextButton = Button()
         nextButton.setImage(#imageLiteral(resourceName: "arrowThinCopy"), for: .normal)
         nextButton.addTarget(nil, action: #selector(pageNextTapped(_:)), for: .touchUpInside)
         view.addSubview(nextButton)
