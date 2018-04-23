@@ -33,8 +33,8 @@ func pressedBookmark(_ cell: MenuActionCell, entry: PostObject) {
                     cell.bookmarkButton.transform = CGAffineTransform.identity
     })
     if didBookmark {
-        RealmManager.instance.save(object: entry)
+        PostOffice.instance.store(object: entry)
     } else {
-        RealmManager.instance.delete(object: entry)
+        PostOffice.instance.remove(object: entry)
     }
 }

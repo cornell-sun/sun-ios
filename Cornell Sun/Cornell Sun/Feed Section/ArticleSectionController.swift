@@ -20,8 +20,7 @@ enum cellType: Int {
     case titleCell = 1
     case authorCell = 2
     case imageCell = 3
-    case likeCommentCell = 4
-    case actionMenuCell = 5
+    case actionMenuCell = 4
 }
 
 class ArticleSectionController: ListSectionController {
@@ -45,7 +44,7 @@ extension ArticleSectionController: BookmarkPressedDelegate, SharePressedDelegat
     }
 
     override func numberOfItems() -> Int {
-        return 6
+        return 5
     }
 
     override func sizeForItem(at index: Int) -> CGSize {
@@ -61,13 +60,10 @@ extension ArticleSectionController: BookmarkPressedDelegate, SharePressedDelegat
             let height = entry.title.height(withConstrainedWidth: width - 34, font: .articleTitle) //CLUTCH Extension thank stackoverflow gods
             return CGSize(width: width, height: height + 20)
         case .authorCell:
-            guard let height = entry.author?.name.height(withConstrainedWidth: width, font: .secondaryHeader) else { return .zero}
+            let height = entry.author.name.height(withConstrainedWidth: width, font: .secondaryHeader)
             return CGSize(width: width, height: height + 9)
         case .imageCell:
             return CGSize(width: width, height: width / 1.92)
-        case .likeCommentCell:
-            let hasComments = !entry.comments.isEmpty
-            return hasComments ? CGSize(width: width, height: 25) : .zero
         case .actionMenuCell:
             return CGSize(width: width, height: 35)
         }
@@ -96,11 +92,6 @@ extension ArticleSectionController: BookmarkPressedDelegate, SharePressedDelegat
         case .imageCell:
             // swiftlint:disable:next force_cast
             let cell = collectionContext!.dequeueReusableCell(of: ImageCell.self, for: self, at: index) as! ImageCell
-            cell.post = entry
-            return cell
-        case .likeCommentCell:
-            // swiftlint:disable:next force_cast
-            let cell = collectionContext!.dequeueReusableCell(of: LikeCommentCell.self, for: self, at: index) as! LikeCommentCell
             cell.post = entry
             return cell
         case .actionMenuCell:

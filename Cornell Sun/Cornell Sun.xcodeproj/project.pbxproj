@@ -58,7 +58,7 @@
 		DC6561D31FBAC45900C5062D /* PhotoGalleryObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6561D21FBAC45900C5062D /* PhotoGalleryObject.swift */; };
 		DC6561D51FBACA8800C5062D /* PhotoGallerySectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6561D41FBACA8800C5062D /* PhotoGallerySectionController.swift */; };
 		DC6561D71FBACE7D00C5062D /* CaptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6561D61FBACE7D00C5062D /* CaptionCell.swift */; };
-		DC695D8B1FBB897600C6C62F /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC695D8A1FBB897600C6C62F /* RealmManager.swift */; };
+		DC695D8B1FBB897600C6C62F /* PostOffice.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC695D8A1FBB897600C6C62F /* PostOffice.swift */; };
 		DC79719F1F7B30540055A7B2 /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC79719E1F7B30540055A7B2 /* CategoryCell.swift */; };
 		DC818D9B1F74CFBB0064AFFA /* SpinnerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC818D9A1F74CFBB0064AFFA /* SpinnerCell.swift */; };
 		DC818D9D1F7553380064AFFA /* ImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC818D9C1F7553380064AFFA /* ImageCell.swift */; };
@@ -174,7 +174,7 @@
 		DC6561D21FBAC45900C5062D /* PhotoGalleryObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoGalleryObject.swift; sourceTree = "<group>"; };
 		DC6561D41FBACA8800C5062D /* PhotoGallerySectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoGallerySectionController.swift; sourceTree = "<group>"; };
 		DC6561D61FBACE7D00C5062D /* CaptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptionCell.swift; sourceTree = "<group>"; };
-		DC695D8A1FBB897600C6C62F /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
+		DC695D8A1FBB897600C6C62F /* PostOffice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostOffice.swift; sourceTree = "<group>"; };
 		DC79719E1F7B30540055A7B2 /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
 		DC818D9A1F74CFBB0064AFFA /* SpinnerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinnerCell.swift; sourceTree = "<group>"; };
 		DC818D9C1F7553380064AFFA /* ImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCell.swift; sourceTree = "<group>"; };
@@ -305,7 +305,7 @@
 				DCECA9921FBE2DAF00BAB2EA /* Cells */,
 				DC34DEED203213D90010DF9A /* Networking */,
 				DC34DEEF203214280010DF9A /* Extensions */,
-				507744F01EB5326D0079D80D /* Realm */,
+				507744F01EB5326D0079D80D /* PostOffice */,
 				5006B24E1EADA38400F58549 /* Models */,
 				DC34DEEC203213C20010DF9A /* TabBar Controller */,
 				5006AFFD1EA9625000F58549 /* ViewController.swift */,
@@ -329,12 +329,12 @@
 			path = ..;
 			sourceTree = "<group>";
 		};
-		507744F01EB5326D0079D80D /* Realm */ = {
+		507744F01EB5326D0079D80D /* PostOffice */ = {
 			isa = PBXGroup;
 			children = (
-				DC695D8A1FBB897600C6C62F /* RealmManager.swift */,
+				DC695D8A1FBB897600C6C62F /* PostOffice.swift */,
 			);
-			name = Realm;
+			name = PostOffice;
 			path = ..;
 			sourceTree = "<group>";
 		};
@@ -767,8 +767,6 @@
 				"${BUILT_PRODUCTS_DIR}/Moya-ModelMapper/Moya_ModelMapper.framework",
 				"${BUILT_PRODUCTS_DIR}/PINCache/PINCache.framework",
 				"${BUILT_PRODUCTS_DIR}/PINRemoteImage/PINRemoteImage.framework",
-				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
-				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftSoup/SwiftSoup.framework",
@@ -787,8 +785,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya_ModelMapper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PINCache.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PINRemoteImage.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftSoup.framework",
@@ -919,7 +915,7 @@
 				DC446C2E1F5D016500D68688 /* FeedCollectionViewController.swift in Sources */,
 				0CBC2CEE1F5E3093003FBB38 /* TabBarViewController.swift in Sources */,
 				50A898121EAEC93B0099CFA9 /* AuthorObject.swift in Sources */,
-				DC695D8B1FBB897600C6C62F /* RealmManager.swift in Sources */,
+				DC695D8B1FBB897600C6C62F /* PostOffice.swift in Sources */,
 				DC556AC520602E6900475B7D /* Constants.swift in Sources */,
 				61652CD21F6EF3A500EEFC29 /* SearchViewController.swift in Sources */,
 				4029BB0A2087B02300E8BAEB /* NotificationsTableViewCell.swift in Sources */,

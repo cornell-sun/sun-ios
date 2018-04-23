@@ -19,7 +19,7 @@ final class BookmarkCell: UICollectionViewCell {
     var post: PostObject? {
         didSet {
             titleLabel.text = post?.title
-            authorLabel.text = post?.author?.name
+            authorLabel.text = post?.author.name
             setupImage()
         }
     }

@@ -300,13 +300,7 @@ extension ArticleStackViewController: UITableViewDelegate, UITableViewDataSource
 extension ArticleStackViewController: ShareBarViewDelegate {
 
     func shareBarDidPressShare(_ view: ShareBarView) {
-        taptic(style: .light)
-        if let articleLink = URL(string: post.link) {
-            let title = post.title
-            let objectToShare = [title, articleLink] as [Any]
-            let activityVC = UIActivityViewController(activityItems: objectToShare, applicationActivities: nil)
-            present(activityVC, animated: true, completion: nil)
-        }
+        pressedShare(entry: post)
     }
 
     func shareBarDidPressBookmark(_ view: ShareBarView) {
@@ -324,9 +318,9 @@ extension ArticleStackViewController: ShareBarViewDelegate {
                         view.bookmarkButton.transform = CGAffineTransform.identity
         })
         if didBookmark {
-            RealmManager.instance.save(object: post)
+            PostOffice.instance.store(object: post)
         } else {
-            RealmManager.instance.delete(object: post)
+            PostOffice.instance.remove(object: post)
         }
     }
 }

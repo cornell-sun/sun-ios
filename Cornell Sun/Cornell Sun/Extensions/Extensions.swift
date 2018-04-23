@@ -8,8 +8,6 @@
 
 import UIKit
 import Kingfisher
-import Realm
-import RealmSwift
 
 let tempLabel = UILabel()
 

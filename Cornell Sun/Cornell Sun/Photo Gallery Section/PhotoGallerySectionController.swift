@@ -17,8 +17,7 @@ enum photoGalleryCellType: Int {
     case authorCell = 2
     case photoGalleryCell = 3
     case captionCell = 4
-    case likeCommentCell = 5
-    case actionMenuCell = 6
+    case actionMenuCell = 5
 }
 
 class PhotoGallerySectionController: ListSectionController {
@@ -49,7 +48,7 @@ extension PhotoGallerySectionController: BookmarkPressedDelegate, SharePressedDe
     }
 
     override func numberOfItems() -> Int {
-        return 7
+        return 6
     }
 
     override func sizeForItem(at index: Int) -> CGSize {
@@ -65,16 +64,13 @@ extension PhotoGallerySectionController: BookmarkPressedDelegate, SharePressedDe
             let height = entry.title.height(withConstrainedWidth: width - 34, font: .headerTitle) //CLUTCH Extension thank stackoverflow gods
             return CGSize(width: width, height: height + 40)
         case .authorCell:
-            let height = entry.author?.name.height(withConstrainedWidth: width, font: .photoCaption)
-            return CGSize(width: width, height: height! + 9)
+            let height = entry.author.name.height(withConstrainedWidth: width, font: .photoCaption)
+            return CGSize(width: width, height: height + 9)
         case .photoGalleryCell:
             return CGSize(width: width, height: width / 1.5)
         case .captionCell:
             let height = captionMaxHeight(width: width)
             return CGSize(width: width, height: height + 16)
-        case .likeCommentCell:
-            let hasComments = !entry.comments.isEmpty
-            return hasComments ? CGSize(width: width, height: 25) : .zero
         case .actionMenuCell:
             return CGSize(width: width, height: 35)
         }
@@ -109,11 +105,6 @@ extension PhotoGallerySectionController: BookmarkPressedDelegate, SharePressedDe
         case .captionCell:
             // swiftlint:disable:next force_cast
             let cell = collectionContext!.dequeueReusableCell(of: CaptionCell.self, for: self, at: index) as! CaptionCell
-            cell.post = entry
-            return cell
-        case .likeCommentCell:
-            // swiftlint:disable:next force_cast
-            let cell = collectionContext!.dequeueReusableCell(of: LikeCommentCell.self, for: self, at: index) as! LikeCommentCell
             cell.post = entry
             return cell
         case .actionMenuCell:

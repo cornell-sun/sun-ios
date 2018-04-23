@@ -19,7 +19,7 @@ final class SearchCell: UICollectionViewCell {
     var post: PostObject? {
         didSet {
             if let post = post {
-            authorLabel.text = post.author?.name
+            authorLabel.text = post.author.name
             timeStampLabel.text = post.datePosted.timeAgoSinceNow()
             contentLabel.text = post.content.htmlToString.replacingOccurrences(of: "\n", with: "")
             setupImage()

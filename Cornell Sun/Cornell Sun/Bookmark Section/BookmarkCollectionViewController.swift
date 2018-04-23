@@ -8,13 +8,11 @@
 
 import UIKit
 import IGListKit
-import Realm
-import RealmSwift
 
 class BookmarkCollectionViewController: ViewController, UIScrollViewDelegate {
+    fileprivate var observer: NSKeyValueObservation?
     var isFirstRun = true
-    var token: NotificationToken?
-    let realmData: Results<PostObject> = RealmManager.instance.get()
+    var bookmarkPosts = PostOffice.instance.get() ?? []
 
     let collectionView: UICollectionView = {
         let view = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
@@ -49,14 +47,15 @@ class BookmarkCollectionViewController: ViewController, UIScrollViewDelegate {
         adapter.dataSource = self
         adapter.scrollViewDelegate = self
 
-        token = realmData.observe { [weak self] changes in
-            switch changes {
-            case .update:
-                self?.adapter.performUpdates(animated: true, completion: nil)
-            default:
-                break
-            }
-        }
+        observer = UserDefaults.standard.observe(\.packages, options: [.initial, .new], changeHandler: { (userDefaults, change) in
+            guard let newValue = change.newValue, let updatedBookmarks = newValue else { return }
+            self.bookmarkPosts = updatedBookmarks
+            self.adapter.performUpdates(animated: true, completion: nil)
+        })
+    }
+
+    deinit {
+        observer?.invalidate()
     }
 
     override func viewDidLayoutSubviews() {
@@ -72,9 +71,9 @@ class BookmarkCollectionViewController: ViewController, UIScrollViewDelegate {
 
 extension BookmarkCollectionViewController: ListAdapterDataSource {
     func objects(for listAdapter: ListAdapter) -> [ListDiffable] {
-        let bookmarkedPosts = realmData.map {$0}
+        let bookmarkedPosts = bookmarkPosts
         return bookmarkedPosts.sorted { (post1, post2) -> Bool in
-            guard let post1Date = post1.bookmarkDate, let post2Date = post2.bookmarkDate else {return false}
+            guard let post1Date = post1.storeDate, let post2Date = post2.storeDate else {return false}
             return post1Date.compare(post2Date) == .orderedDescending
         }
     }

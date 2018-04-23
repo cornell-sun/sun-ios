@@ -7,8 +7,6 @@
 //
 
 import Foundation
-import Realm
-import RealmSwift
 
 enum APIErrors: Error {
     case networkingError
@@ -19,8 +17,11 @@ enum APIErrors: Error {
 typealias PostObjectCompletionBlock = (_ posts: [PostObject], _ error: APIErrors?) -> Void
 typealias TrendingCompletionBlock = (_ trending: [String], _ error: APIErrors?) -> Void
 typealias CommentsCompletionBlock = (_ comments: [CommentObject], _ error: APIErrors?) -> Void
-let savedPosts: Results<PostObject> = RealmManager.instance.get()
-let savedPostIds: [Int] = Array(RealmManager.instance.get()).map({$0.id})
+
+let savedPostIds: [Int] = {
+    guard let posts = PostOffice.instance.get() else { return [] }
+    return posts.map({$0.id})
+}()
 
 func fetchPosts(target: SunAPI, completion: @escaping PostObjectCompletionBlock) {
     var postObjects: [PostObject] = []

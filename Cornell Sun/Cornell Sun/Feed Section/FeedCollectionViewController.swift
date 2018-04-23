@@ -8,13 +8,12 @@
 
 import UIKit
 import IGListKit
-import Realm
-import RealmSwift
 
 class FeedCollectionViewController: ViewController, UIScrollViewDelegate {
     var loading = false
 
-    fileprivate var token: NotificationToken?
+    fileprivate var observer: NSKeyValueObservation?
+    //fileprivate var token: NotificationToken?
 
     var currentPage = 1
     let spinToken = "spinner"
@@ -23,11 +22,14 @@ class FeedCollectionViewController: ViewController, UIScrollViewDelegate {
     var adDict = [String: Int]()
     var currAdToken = ""
 
-    fileprivate var bookmarkPosts: Results<PostObject> {
-        return RealmManager.instance.get()
-    }
+    var bookmarkPosts: [PostObject] = {
+        return PostOffice.instance.get() ?? []
+    }()
+//    fileprivate var bookmarkPosts: Results<PostObject> {
+//        return RealmManager.instance.get()
+//    }
     var feedData: [PostObject] = []
-    var savedPostIds: [Int] = []
+    //var savedPostIds: [Int] =
     var headlinePost: PostObject!
     var isFirstRun = true
 
@@ -59,20 +61,12 @@ class FeedCollectionViewController: ViewController, UIScrollViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        token = bookmarkPosts.observe {[weak self] (changes: RealmCollectionChange) in
-            guard let strongSelf = self else { return }
-            switch changes {
-            case .initial:
-                strongSelf.updateBookmarksInFeed()
-                strongSelf.adapter.performUpdates(animated: true, completion: nil)
-            case .update:
-                strongSelf.updateBookmarksInFeed()
-                strongSelf.adapter.performUpdates(animated: true, completion: nil)
-                //bookmarkPosts has the most up to date bookmarks, change feedData
-            default:
-                break
-            }
-        }
+        observer = UserDefaults.standard.observe(\.packages, options: [.initial, .new], changeHandler: { (userDefaults, change) in
+            guard let newValue = change.newValue, let updatedBookmarks = newValue else { return }
+            self.bookmarkPosts = updatedBookmarks
+            self.updateBookmarksInFeed()
+            self.adapter.performUpdates(animated: true, completion: nil)
+            })
 
         refreshControl.addTarget(self, action: #selector(refreshData), for: .valueChanged)
 
@@ -84,12 +78,16 @@ class FeedCollectionViewController: ViewController, UIScrollViewDelegate {
         adapter.dataSource = self
         adapter.scrollViewDelegate = self
 
-        savedPostIds = Array(RealmManager.instance.get()).map({$0.id})
+        //savedPostIds = Array(RealmManager.instance.get()).map({$0.id})
     }
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         collectionView.frame = view.bounds
+    }
+
+    deinit {
+        observer?.invalidate()
     }
 
     override func didReceiveMemoryWarning() {
@@ -103,7 +101,7 @@ class FeedCollectionViewController: ViewController, UIScrollViewDelegate {
     }
 
     fileprivate func updateBookmarksInFeed() {
-        let currListOfBookmarks = Array(bookmarkPosts)
+        let currListOfBookmarks = bookmarkPosts
         feedData = feedData.map { post in
             guard let updatedBookmarkPost = isPostIdInBookmarks(post: post, currListOfBookmarks: currListOfBookmarks) else { return post }
             return updatedBookmarkPost
