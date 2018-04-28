@@ -72,6 +72,7 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
         }
         let sectionLabel = UILabel()
         headerCell.contentView.addSubview(sectionLabel)
+        headerCell.contentView.backgroundColor = .black5
         sectionLabel.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         sectionLabel.textColor = UIColor(white: 74/255, alpha: 1.0)
         sectionLabel.snp.makeConstraints { make in

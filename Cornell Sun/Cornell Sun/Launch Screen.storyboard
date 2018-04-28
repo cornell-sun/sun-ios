@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
-    <device id="retina4_7" orientation="portrait">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+    <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -14,15 +13,19 @@
         <scene sceneID="EHf-IW-A2E">
             <objects>
                 <viewController id="01J-lp-oVM" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="I9G-fB-NOg"/>
+                        <viewControllerLayoutGuide type="bottom" id="VJk-f8-1Ip"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gradient" translatesAutoresizingMaskIntoConstraints="NO" id="2mq-kd-vqS">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="gradient" translatesAutoresizingMaskIntoConstraints="NO" id="2mq-kd-vqS">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sunLogoWhiteCopy" translatesAutoresizingMaskIntoConstraints="NO" id="dee-3g-Swq">
-                                <rect key="frame" x="154.5" y="296.5" width="65" height="74.5"/>
+                                <rect key="frame" x="155" y="369" width="65" height="75"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="65" id="iZe-7f-U0L"/>
                                     <constraint firstAttribute="height" constant="74.700000000000003" id="tep-dO-VVw"/>
@@ -31,14 +34,11 @@
                         </subviews>
                         <color key="backgroundColor" red="0.62745098039215685" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="2mq-kd-vqS" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="2c1-ea-vV6"/>
                             <constraint firstItem="dee-3g-Swq" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="3OY-c0-Os3"/>
-                            <constraint firstItem="Bcu-3y-fUS" firstAttribute="bottom" secondItem="2mq-kd-vqS" secondAttribute="bottom" id="7Qw-F5-YQ5"/>
+                            <constraint firstItem="2mq-kd-vqS" firstAttribute="bottom" secondItem="Ze5-6b-2t3" secondAttribute="bottom" id="CNt-DI-JLv"/>
                             <constraint firstItem="dee-3g-Swq" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="LId-o3-EGj"/>
-                            <constraint firstItem="2mq-kd-vqS" firstAttribute="leading" secondItem="Bcu-3y-fUS" secondAttribute="leading" id="Voj-Kw-HkB"/>
-                            <constraint firstItem="2mq-kd-vqS" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="ZnE-c0-gux"/>
-                            <constraint firstItem="Bcu-3y-fUS" firstAttribute="trailing" secondItem="2mq-kd-vqS" secondAttribute="trailing" id="kRw-NA-tVz"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="Bcu-3y-fUS"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
