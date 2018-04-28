@@ -41,7 +41,7 @@ class ShareBarView: UIView {
 
         bookmarkButton = Button()
         bookmarkButton.imageView?.contentMode = .scaleAspectFit
-        bookmarkButton.setImage(#imageLiteral(resourceName: "bookmark"), for: .normal)
+        bookmarkButton.setImage(#imageLiteral(resourceName: "bookmarkIcon"), for: .normal)
         bookmarkButton.addTarget(self, action: #selector(bookmark), for: .touchUpInside)
         addSubview(bookmarkButton)
         bookmarkButton.snp.makeConstraints { make in

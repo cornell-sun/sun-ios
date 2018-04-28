@@ -15,11 +15,13 @@ final class BookmarkCell: UICollectionViewCell {
     let offsetConstant: CGFloat = 12
     let imageViewWidthHeight: CGFloat = 100
     let titleBottomInset: CGFloat = 8.5
+    let authorHeight: CGFloat = 13
 
     var post: PostObject? {
         didSet {
             if let post = post, let author = post.author {
                 titleLabel.text = post.title
+                titleLabel.setLineSpacing(to: 4.5)
                 authorLabel.text = "By " + author.name
                 setupImage()
             }
@@ -74,7 +76,7 @@ final class BookmarkCell: UICollectionViewCell {
         authorLabel.snp.makeConstraints { (make) in
             make.left.equalTo(imageView.snp.right).offset(offsetConstant)
             make.bottom.equalTo(imageView.snp.bottom)
-            make.height.equalTo(13)
+            make.height.equalTo(authorHeight)
         }
 
         titleLabel.snp.makeConstraints { (make) in

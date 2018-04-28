@@ -51,15 +51,12 @@ class SubscribeViewController: UIViewController,UITextFieldDelegate, UIPickerVie
         super.viewDidLoad()
         super.viewDidLoad()
         view.backgroundColor = .white
-        let navBar = navigationController?.navigationBar
-        navBar?.setBackgroundImage(UIColor.clear.as1ptImage(), for: .default)
-        navBar?.shadowImage = UIColor.lightGray.as1ptImage()
         self.title = ""
         let widthScale = view.frame.width/screenWidth //Scaling width
         headerLabel = UILabel()
         headerLabel.text = "Daily Newsletters"
         headerLabel.textColor = .black
-        headerLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 36.0)
+        headerLabel.font = .systemFont(ofSize: 36, weight: .bold)
         view.addSubview(headerLabel)
         var topArea = view.layoutMarginsGuide.snp.top
         var bottomArea = view.layoutMarginsGuide.snp.bottom
@@ -78,8 +75,7 @@ class SubscribeViewController: UIViewController,UITextFieldDelegate, UIPickerVie
         descriptionTextView = UITextView()
         descriptionTextView.text = "Get Daily Sun headlines delivered to your inbox every day. \n You'll never miss a moment."
         descriptionTextView.textColor = .black
-        descriptionTextView.font = UIFont(name:"HelveticaNeue", size: 16.0)
-        //descriptionTextView.font?.withSize(16.0)
+        descriptionTextView.font = .systemFont(ofSize: 16)
         descriptionTextView.isEditable = false
         descriptionTextView.isScrollEnabled = false
         view.addSubview(descriptionTextView)
@@ -92,7 +88,7 @@ class SubscribeViewController: UIViewController,UITextFieldDelegate, UIPickerVie
         
         let nameLabel = UILabel()
         nameLabel.text = "Name"
-        nameLabel.font = UIFont(name:"HelveticaNeue", size: 14.0)
+        nameLabel.font = .systemFont(ofSize: 14)
         nameLabel.textColor = UIColor(red: 155/256, green: 155/256, blue: 155/256, alpha: 1)
         view.addSubview(nameLabel)
         nameLabel.snp.makeConstraints { make in

@@ -19,10 +19,11 @@ class ArticleHeaderView: UIView {
     let imageViewTopOffset: CGFloat = 10.5
     let timeStampHeight: CGFloat = 15
     let authorLabelHeight: CGFloat = 15
-    let authorLabelTopOffset: CGFloat = 30
+    let authorLabelTopOffset: CGFloat = 46
     let captionLabelTopOffset: CGFloat = 4
     let captionLabelBottomOffset: CGFloat = 9.5
     let creditsLabelHeight: CGFloat = 15
+    let creditsLabelInset: CGFloat = 10.5
 
     var categoryLabel: UILabel!
     var titleLabel: UILabel!
@@ -109,7 +110,7 @@ class ArticleHeaderView: UIView {
             make.leading.equalToSuperview().offset(leadingOffset)
             make.top.equalTo(authorLabel.snp.bottom)
             make.height.equalTo(timeStampHeight)
-            make.bottom.equalToSuperview()
+            make.bottom.equalToSuperview().inset(creditsLabelInset)
         }
     }
 
@@ -121,6 +122,7 @@ class ArticleHeaderView: UIView {
         setupHeroImage(with: post)
         categoryLabel.text = post.primaryCategory
         titleLabel.text = post.title
+        titleLabel.setLineSpacing(to: 4.5)
         titleLabel.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(leadingOffset)
             make.top.equalTo(categoryLabel.snp.bottom).offset(titleLabelTopOffset)
@@ -128,6 +130,7 @@ class ArticleHeaderView: UIView {
         timeStampLabel.text = readableDateFormatter.string(from: post.datePosted)
         authorLabel.text = "By \(post.author!.name.removingHTMLEntities.htmlToString)"
         captionLabel.text = post.caption.htmlToString
+        captionLabel.setLineSpacing(to: 2)
         captionLabel.snp.makeConstraints { make in
             make.top.equalTo(heroImageView.snp.bottom).offset(captionLabelTopOffset)
             make.leading.trailing.equalToSuperview().inset(leadingOffset)

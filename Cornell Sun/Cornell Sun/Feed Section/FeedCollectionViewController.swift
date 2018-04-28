@@ -34,7 +34,8 @@ class FeedCollectionViewController: ViewController, UIScrollViewDelegate {
     var refreshControl = UIRefreshControl()
 
     let collectionView: UICollectionView = {
-        let view = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+        let flowLayout = UICollectionViewFlowLayout()
+        let view = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
         view.alwaysBounceVertical = true
         view.backgroundColor = .white
         return view

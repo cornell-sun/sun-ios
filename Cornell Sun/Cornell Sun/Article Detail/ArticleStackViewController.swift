@@ -44,7 +44,7 @@ class ArticleStackViewController: UIViewController {
         super.viewDidLoad()
 
         view.backgroundColor = .white
-        navigationController?.navigationBar.topItem?.title = ""
+        navigationController?.navigationBar.topItem?.title = "Main Feed"
         navigationController?.navigationBar.tintColor = .black
         if #available(iOS 11.0, *) {
             navigationController?.navigationBar.prefersLargeTitles = false
@@ -82,6 +82,10 @@ class ArticleStackViewController: UIViewController {
         }
 
         setup()
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        navigationController?.navigationBar.topItem?.title = "The Cornell Daily Sun"
     }
 
     /// Sets up the content in the stack view by parsing each section.

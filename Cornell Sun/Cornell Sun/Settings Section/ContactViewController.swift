@@ -53,9 +53,6 @@ class ContactViewController: UIViewController, UITextFieldDelegate, MFMailCompos
         super.viewDidLoad()
         super.viewDidLoad()
         view.backgroundColor = .white
-        let navBar = navigationController?.navigationBar
-        navBar?.setBackgroundImage(UIColor.clear.as1ptImage(), for: .default)
-        navBar?.shadowImage = UIColor.lightGray.as1ptImage()
         self.title = ""
         let widthScale = view.frame.width/screenWidth //Scaling width
         headerLabel = UILabel()

@@ -29,24 +29,25 @@ final class MenuActionCell: UICollectionViewCell {
     weak var shareDelegate: SharePressedDelegate?
 
     let heartWidth = 23.0
-    let shareWidth = 20.0
+    let shareWidth = 23.0
     let bookmarkWidth = 15.0
-    let imageHeight = 21.0
+    let imageHeight = 32
     let offset = 18
-    let bookmarkOffset = -24.0
+    let bookmarkOffset = -30.0
 
     lazy var timeStampLabel: UILabel = {
         let label = UILabel()
         label.text = ""
         label.numberOfLines = 1
         label.font = .cellInformationText
+        label.textColor = .black90
         self.contentView.addSubview(label)
         return label
     }()
 
     lazy var bookmarkButton: UIButton = {
         let button = UIButton(type: .custom)
-        button.imageView?.contentMode = .scaleAspectFit
+        button.imageView?.contentMode = .scaleToFill
         button.setImage(#imageLiteral(resourceName: "bookmark"), for: .normal)
         button.addTarget(self, action: #selector(MenuActionCell.bookmarkPressed(_:)), for: .touchUpInside)
         self.contentView.addSubview(button)
@@ -55,7 +56,7 @@ final class MenuActionCell: UICollectionViewCell {
 
     let commentImageView: UIImageView = {
         let image = UIImageView()
-        image.contentMode = .scaleAspectFit
+        image.contentMode = .scaleToFill
         image.image = #imageLiteral(resourceName: "comment")
         return image
     }()
@@ -90,7 +91,7 @@ final class MenuActionCell: UICollectionViewCell {
     }
 
     func setBookmarkImage(didSelectBookmark: Bool) {
-        let image = didSelectBookmark ? #imageLiteral(resourceName: "bookmarkPressed") : #imageLiteral(resourceName: "bookmark")
+        let image = didSelectBookmark ? #imageLiteral(resourceName: "bookmarkPressed") : #imageLiteral(resourceName: "bookmarkIcon")
         bookmarkButton.setImage(image, for: .normal)
     }
 

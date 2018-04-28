@@ -39,15 +39,12 @@ class DisplayViewController: UIViewController {
         super.viewDidLoad()
         super.viewDidLoad()
         view.backgroundColor = .white
-        let navBar = navigationController?.navigationBar
-        navBar?.setBackgroundImage(UIColor.clear.as1ptImage(), for: .default)
-        navBar?.shadowImage = UIColor.lightGray.as1ptImage()
         self.title = ""
         let widthScale = view.frame.width/screenWidth //Scaling width
         headerLabel = UILabel()
         headerLabel.text = getHeader()
         headerLabel.textColor = .black
-        headerLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 36.0)
+        headerLabel.font = .systemFont(ofSize: 36, weight: .bold)
         view.addSubview(headerLabel)
         headerLabel.snp.makeConstraints { make in
             make.width.equalTo(textWidth*widthScale)
@@ -59,8 +56,9 @@ class DisplayViewController: UIViewController {
         descriptionTextView = UITextView()
         descriptionTextView.text = getText()
         descriptionTextView.textColor = .black
-        descriptionTextView.font = UIFont(name: "HelveticaNeue", size: 16.0)
+        descriptionTextView.font = .systemFont(ofSize: 16)
         descriptionTextView.isEditable = false
+        descriptionTextView.textContainer.lineFragmentPadding = 0
         view.addSubview(descriptionTextView)
         descriptionTextView.snp.makeConstraints { make in
             make.width.equalTo(textWidth*widthScale)
@@ -78,7 +76,7 @@ class DisplayViewController: UIViewController {
     func getText() -> String {
         switch type {
         case .appteam:
-            return "Austin Astorga '19 \nChris Sciavolino '19 \nMindy Lou '19 \nAditya Dwivedi '20 \nTheo Carrel '20 \nMike Fang '21 \nBrendan Elliot '19 \nAlexis Vinzons '19"
+            return "Austin Astorga '19 \nChris Sciavolino '19 \nMindy Lou '19 \nAditya Dwivedi '20 \nTheo Carrel '20 \nMike Fang '21 \nBrendan Elliott '19 \nAlexis Vinzons '19"
         case .history:
             return "The Cornell Sun was founded in 1880 by William Ballard Hoyt to challenge Cornell's original and leading publication, the weekly Cornell Era (founded 1868).\n The Sun boasted in its opening paragraph: \"We have no indulgence to ask, no favors to beg. \" The paper incorporated and changed to daily frequency, earning its longstanding boast \"Ithaca's Only Morning Newspaper.\" In 1912 it added a second, \"first collegiate member of the Associated Press.\""
         default:

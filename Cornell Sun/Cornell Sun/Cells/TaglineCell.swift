@@ -14,7 +14,8 @@ final class TaglineCell: UICollectionViewCell {
     var post: PostObject? {
         didSet {
             if let post = post {
-            taglineLabel.text = post.excerpt.removingHTMLEntities.replacingOccurrences(of: "<[^>]+>", with: "", options: .regularExpression, range: nil)
+                taglineLabel.text = post.excerpt.removingHTMLEntities.replacingOccurrences(of: "<[^>]+>", with: "", options: .regularExpression, range: nil)
+                taglineLabel.setLineSpacing(to: 5)
             }
         }
     }
@@ -40,8 +41,8 @@ final class TaglineCell: UICollectionViewCell {
         self.backgroundColor = .white
         addSubview(taglineLabel)
         taglineLabel.snp.makeConstraints { (make) in
-            make.centerY.equalToSuperview()
-            make.edges.equalToSuperview().inset(UIEdgeInsets(top: 5, left: 17, bottom: 5, right: 5))
+//            make.centerY.equalToSuperview()
+            make.edges.equalToSuperview().inset(UIEdgeInsets(top: 0, left: 17, bottom: 5, right: 5))
         }
     }
 }

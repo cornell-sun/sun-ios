@@ -53,18 +53,18 @@ extension HeroSectionController: BookmarkPressedDelegate, SharePressedDelegate {
         case .imageCell:
             return CGSize(width: width, height: width / 1.5)
         case .titleCell:
-            let height = entry.title.height(withConstrainedWidth: width - 34, font: .headerTitle) //CLUTCH Extension thank stackoverflow gods
-            return CGSize(width: width, height: height + 40)
+            let height = entry.title.height(withConstrainedWidth: width - 34, font: .articleTitle, lineSpacing: 4.5) //CLUTCH Extension thank stackoverflow gods
+            return CGSize(width: width, height: height + 20)
         case .authorCell:
-            guard let height = entry.author?.name.height(withConstrainedWidth: width, font: .photoCaption) else { return .zero }
-            return CGSize(width: width, height: height)
+            guard let height = entry.author?.name.height(withConstrainedWidth: width, font: .cellInformationText) else { return .zero }
+            return CGSize(width: width, height: height + 9)
         case .taglineCell:
             let lineHeight: CGFloat = UIFont.photoCaption.lineHeight * 4.0
             let height = entry.excerpt.removingHTMLEntities.height(withConstrainedWidth: width, font: .photoCaption)
             let correctHeight = lineHeight <= height ? lineHeight : height
             return CGSize(width: width, height: correctHeight)
         case .actionMenuCell:
-            return CGSize(width: width, height: 35)
+            return CGSize(width: width, height: 40)
         }
     }
 
