@@ -183,7 +183,7 @@
 		DC6561D21FBAC45900C5062D /* PhotoGalleryObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoGalleryObject.swift; sourceTree = "<group>"; };
 		DC6561D41FBACA8800C5062D /* PhotoGallerySectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoGallerySectionController.swift; sourceTree = "<group>"; };
 		DC6561D61FBACE7D00C5062D /* CaptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptionCell.swift; sourceTree = "<group>"; };
-		DC695D8A1FBB897600C6C62F /* PostOffice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostOffice.swift; sourceTree = "<group>"; };
+		DC695D8A1FBB897600C6C62F /* PostOffice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PostOffice.swift; path = "Cornell Sun/Post Office/PostOffice.swift"; sourceTree = "<group>"; };
 		DC79719E1F7B30540055A7B2 /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
 		DC818D9A1F74CFBB0064AFFA /* SpinnerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinnerCell.swift; sourceTree = "<group>"; };
 		DC818D9C1F7553380064AFFA /* ImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCell.swift; sourceTree = "<group>"; };
