@@ -125,8 +125,8 @@ class ArticleHeaderView: UIView {
             make.leading.trailing.equalToSuperview().inset(leadingOffset)
             make.top.equalTo(categoryLabel.snp.bottom).offset(titleLabelTopOffset)
         }
-        timeStampLabel.text = readableDateFormatter.string(from: post.datePosted)
-        authorLabel.text = "By \(post.author.name.removingHTMLEntities.htmlToString)"
+        timeStampLabel.text = readableDateFormatter.string(from: post.date)
+        authorLabel.text = "By \(post.author[0].name.removingHTMLEntities.htmlToString)"
         if let caption = post.featuredMediaCaption {
             captionLabel.text = caption.htmlToString
         }
@@ -134,14 +134,14 @@ class ArticleHeaderView: UIView {
             make.top.equalTo(heroImageView.snp.bottom).offset(captionLabelTopOffset)
             make.leading.trailing.equalToSuperview().inset(leadingOffset)
         }
-        if let credits = post.featureMediaCredit {
+        if let credits = post.featuredMediaCredit {
             creditsLabel.text = credits
         }
 
     }
 
     func setupHeroImage(with post: PostObject) {
-        if let mediumLink = post.mediumLargeImageLink, let heroImageUrl = URL(string: mediumLink) {
+        if let heroImageUrl = post.featuredMediaImages.mediumLarge?.url {
             heroImageView.kf.indicatorType = .activity
             heroImageView.kf.setImage(with: heroImageUrl)
         }

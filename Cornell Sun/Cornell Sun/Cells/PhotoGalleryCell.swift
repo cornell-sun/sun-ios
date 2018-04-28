@@ -15,30 +15,21 @@ import ImageSlideshow
 protocol PhotoChangedDelegate: class {
     func photoDidChange(_ index: Int)
 }
+
 final class PhotoGalleryCell: UICollectionViewCell {
 
     var post: PostObject? {
         didSet {
-            setUpImages()
+            setupViews()
         }
     }
 
     weak var photoGalleryDelegate: PhotoChangedDelegate?
 
-    let slideShow: ImageSlideshow = {
-        let slideShow = ImageSlideshow()
-        slideShow.contentScaleMode = .scaleAspectFill
-        slideShow.circular = false
-        slideShow.pageControl.backgroundColor = .clear
-        slideShow.pageControlPosition = .custom(padding: -15.0)
-        slideShow.activityIndicator = DefaultActivityIndicator(style: .white, color: nil)
-        return slideShow
-
-    }()
+    var slideShow: PhotoGallery!
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setupViews()
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -49,9 +40,12 @@ final class PhotoGalleryCell: UICollectionViewCell {
         super.layoutSubviews()
     }
 
+    override func prepareForReuse() {
+
+    }
+
     func setupViews() {
-        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapPhotos))
-        slideShow.addGestureRecognizer(gestureRecognizer)
+        slideShow = PhotoGallery(attachments: post!.postAttachments, height: self.bounds.height, width: self.bounds.width)
 
         addSubview(slideShow)
         slideShow.snp.makeConstraints { (make) in
@@ -59,27 +53,25 @@ final class PhotoGalleryCell: UICollectionViewCell {
             make.height.equalToSuperview()
         }
 
-        slideShow.currentPageChanged = { page in
+        slideShow.updateCaption = { page in
             self.photoGalleryDelegate?.photoDidChange(page)
         }
-
     }
 
-    @objc func didTapPhotos() {
-        let fullscreenVC = slideShow.presentFullScreenController(from: getCurrentViewController()!)
-        fullscreenVC.slideshow.activityIndicator = DefaultActivityIndicator(style: .white, color: nil)
-        fullscreenVC.captions = post?.photoGalleryObjects.map({$0.caption})
-        fullscreenVC.captionLabel.text = post?.photoGalleryObjects[slideShow.currentPage].caption
-
-    }
+//    @objc func didTapPhotos() {
+//        let fullscreenVC = slideShow.presentFullScreenController(from: getCurrentViewController()!)
+//        fullscreenVC.slideshow.activityIndicator = DefaultActivityIndicator(style: .white, color: nil)
+//        fullscreenVC.captions = post?.postAttachments.compactMap {$0.caption}
+//        fullscreenVC.captionLabel.text = post?.postAttachments[slideShow.currentPage].caption ?? ""
+//    }
     func setUpImages() {
         var kingfisherSource: [KingfisherSource] = []
-        guard let photoGalleryObjects = post?.photoGalleryObjects else { return }
-        for photoGalleryObject in photoGalleryObjects {
-            let source = KingfisherSource(urlString: photoGalleryObject.fullImageLink)
-            kingfisherSource.append(source!)
+        guard let postAttachments = post?.postAttachments else { return }
+        for attachment in postAttachments {
+            let source = KingfisherSource(url: attachment.url)
+            kingfisherSource.append(source)
         }
-        slideShow.setImageInputs(kingfisherSource)
+        //slideShow.setImageInputs(kingfisherSource)
     }
 
 }

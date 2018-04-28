@@ -21,7 +21,7 @@ final class MenuActionCell: UICollectionViewCell {
 
     var post: PostObject? {
         didSet {
-            timeStampLabel.text = post?.datePosted.timeAgoSinceNow()
+            timeStampLabel.text = post?.date.timeAgoSinceNow()
         }
     }
 

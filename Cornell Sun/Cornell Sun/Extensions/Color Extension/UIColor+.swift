@@ -37,4 +37,8 @@ extension UIColor {
         return UIColor(white: 0.0, alpha: 0.9)
     }
 
+    @nonobjc class var lightGray2: UIColor {
+        return UIColor(white: 240.0/255.0, alpha: 1.0)
+    }
+
 }

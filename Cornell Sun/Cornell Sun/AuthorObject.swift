@@ -8,20 +8,18 @@
 
 import Foundation
 
-
 class AuthorObject: Codable {
-    var id: Int
     var name: String
-    var link: String?
-    var bio: String?
-    var avatarLink: String?
 
-    init(id: Int, name: String, link: String?, bio: String?, avatarLink: String?) {
-        self.id = id
+    init(name: String) {
         self.name = name
-        self.link = link
-        self.bio = bio
-        self.avatarLink = avatarLink
     }
+}
 
+extension Array where Element: AuthorObject {
+    var byline: String {
+        let names = self.map { $0.name }
+        guard let last = names.last else { return "" }
+        return names.count <= 2 ? names.joined(separator: " and ") : names.dropLast().joined(separator: ", ") + ", and " + last
+    }
 }

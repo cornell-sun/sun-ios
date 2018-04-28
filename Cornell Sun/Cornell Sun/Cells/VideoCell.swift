@@ -1,9 +1,9 @@
 //
-//  ImageCell.swift
+//  VideoCell.swift
 //  Cornell Sun
 //
-//  Created by Austin Astorga on 9/22/17.
-//  Copyright © 2017 cornell.sun. All rights reserved.
+//  Created by Austin Astorga on 4/26/18.
+//  Copyright © 2018 cornell.sun. All rights reserved.
 //
 
 import UIKit
@@ -11,19 +11,19 @@ import IGListKit
 import SnapKit
 import Kingfisher
 
-final class ImageCell: UICollectionViewCell {
+final class VideoCell: UICollectionViewCell {
 
     var post: PostObject? {
         didSet {
-            setupHeroImage()
+            setupVideo()
         }
     }
 
-    let heroImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.layer.masksToBounds = true
-        imageView.contentMode = .scaleAspectFill
-        return imageView
+    let videoWebView: UIWebView = {
+        let webView = UIWebView()
+        webView.allowsInlineMediaPlayback = true
+        webView.backgroundColor = .orange
+        return webView
     }()
 
     fileprivate let activityView: UIActivityIndicatorView = {
@@ -48,18 +48,18 @@ final class ImageCell: UICollectionViewCell {
     }
 
     func setupViews() {
-        addSubview(heroImageView)
-        heroImageView.snp.makeConstraints { (make) in
+        addSubview(videoWebView)
+        videoWebView.snp.makeConstraints { (make) in
             make.width.equalToSuperview()
             make.height.equalToSuperview()
         }
     }
 
-    func setupHeroImage() {
-        if let heroImageUrl = post?.featuredMediaImages.mediumLarge?.url {
-            //activityView.stopAnimating()
-            heroImageView.kf.indicatorType = .activity
-            heroImageView.kf.setImage(with: heroImageUrl)
+    func setupVideo() {
+        if let videoUrl = post?.postAttachments[0].url {
+            let request = URLRequest(url: videoUrl)
+            videoWebView.loadRequest(request)
+            //videoWebView.loadHTMLString("<body style=\"margin: 0; padding: 0;\"><iframe width=\"\(videoWebView.frame.width)\" height=\"\(videoWebView.frame.height)\" src=\"\(videoUrl)?&playsinline=1\" frameborder=\"0\" allowfullscreen></iframe></body>", baseURL: nil)
         }
     }
 }

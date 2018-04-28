@@ -12,7 +12,7 @@ import IGListKit
 class BookmarkCollectionViewController: ViewController, UIScrollViewDelegate {
     fileprivate var observer: NSKeyValueObservation?
     var isFirstRun = true
-    var bookmarkPosts = PostOffice.instance.get() ?? []
+    var bookmarkPosts: [PostObject] = []
 
     let collectionView: UICollectionView = {
         let view = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
@@ -47,11 +47,15 @@ class BookmarkCollectionViewController: ViewController, UIScrollViewDelegate {
         adapter.dataSource = self
         adapter.scrollViewDelegate = self
 
-        observer = UserDefaults.standard.observe(\.packages, options: [.initial, .new], changeHandler: { (userDefaults, change) in
-            guard let newValue = change.newValue, let updatedBookmarks = newValue else { return }
-            self.bookmarkPosts = updatedBookmarks
-            self.adapter.performUpdates(animated: true, completion: nil)
-        })
+        observer = PostOffice.instance.observe(\.packages, options: [.initial, .new]) { (child, change) in
+            if let newValue = change.newValue {
+                self.bookmarkPosts = newValue
+                self.adapter.performUpdates(animated: true, completion: nil)
+                print("newValue for bookmarks \(newValue.count)")
+            } else {
+                print("initial vlaue for bookmarks \(child.packages.count)")
+            }
+        }
     }
 
     deinit {

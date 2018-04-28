@@ -25,11 +25,8 @@ class FeedCollectionViewController: ViewController, UIScrollViewDelegate {
     var bookmarkPosts: [PostObject] = {
         return PostOffice.instance.get() ?? []
     }()
-//    fileprivate var bookmarkPosts: Results<PostObject> {
-//        return RealmManager.instance.get()
-//    }
+
     var feedData: [PostObject] = []
-    //var savedPostIds: [Int] =
     var headlinePost: PostObject!
     var isFirstRun = true
 
@@ -61,12 +58,15 @@ class FeedCollectionViewController: ViewController, UIScrollViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        observer = UserDefaults.standard.observe(\.packages, options: [.initial, .new], changeHandler: { (userDefaults, change) in
-            guard let newValue = change.newValue, let updatedBookmarks = newValue else { return }
-            self.bookmarkPosts = updatedBookmarks
+        observer = PostOffice.instance.observe(\.packages, options: [.initial, .new]) { (postOffice, change) in
+            if let newValue = change.newValue {
+                self.bookmarkPosts = newValue
+            } else {
+                self.bookmarkPosts = postOffice.packages
+            }
             self.updateBookmarksInFeed()
             self.adapter.performUpdates(animated: true, completion: nil)
-            })
+        }
 
         refreshControl.addTarget(self, action: #selector(refreshData), for: .valueChanged)
 
@@ -77,8 +77,6 @@ class FeedCollectionViewController: ViewController, UIScrollViewDelegate {
         adapter.collectionView?.refreshControl = refreshControl
         adapter.dataSource = self
         adapter.scrollViewDelegate = self
-
-        //savedPostIds = Array(RealmManager.instance.get()).map({$0.id})
     }
 
     override func viewDidLayoutSubviews() {

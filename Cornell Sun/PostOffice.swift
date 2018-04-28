@@ -8,19 +8,20 @@
 
 import Foundation
 
-extension UserDefaults {
-    @objc dynamic var packages: [PostObject]? {
-        return PostOffice.instance.get()
-    }
-}
-
 //Called PostOffice because it handles PostObjects
-final class PostOffice {
+final class PostOffice: NSObject {
 
     static let instance = PostOffice()
+    @objc dynamic var packages: [PostObject]
     private let decoder = JSONDecoder()
     private let encoder = JSONEncoder()
     private let packagesKey = "packages" //key for saving post objects
+
+    override init() {
+        self.packages = []
+        super.init()
+        self.packages = get() ?? []
+    }
 
     func get() -> [PostObject]? {
         guard let packageData = UserDefaults.standard.data(forKey: packagesKey) else { return nil }
@@ -31,7 +32,6 @@ final class PostOffice {
     /// attempts to store the object
     /// - Returns: true if store is successful else false
     func store(object: PostObject) -> Bool {
-        guard var packages = get() else { return false }
         object.storeDate = Date()
         object.didSave = true
         packages.append(object)
@@ -42,11 +42,10 @@ final class PostOffice {
     /// attempts to remove the object
     /// - Returns: true if remove is successful else false
     func remove(object: PostObject) -> Bool {
-        guard let packages = get() else { return false }
         object.storeDate = nil
         object.didSave = false
-        let newPackages = packages.filter { $0.id != object.id }
-        let success = shipToStorage(packages: newPackages)
+        packages = packages.filter { $0.id != object.id }
+        let success = shipToStorage(packages: packages)
         return success
     }
 

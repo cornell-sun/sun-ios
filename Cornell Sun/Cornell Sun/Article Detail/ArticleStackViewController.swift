@@ -145,7 +145,10 @@ class ArticleStackViewController: UIViewController {
     func parseImg(element: Element) -> ArticleContentType? {
         guard let src = try? element.select("img[src]") else { return nil }
         guard let srcUrl = try? src.attr("src").description else { return nil }
-        cacheImage(imageLink: srcUrl) //cache the image
+        if let imageURL = URL(string: srcUrl) {
+            cacheImage(imageURL: imageURL) //cache the image
+        }
+
         return .image(srcUrl)
     }
 

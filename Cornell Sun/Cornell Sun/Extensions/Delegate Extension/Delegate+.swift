@@ -10,12 +10,10 @@ import UIKit
 
 func pressedShare(entry: PostObject) {
     taptic(style: .light)
-    if let articleLink = URL(string: entry.link) {
-        let title = entry.title
-        let objectToShare = [title, articleLink] as [Any]
-        let activityVC = UIActivityViewController(activityItems: objectToShare, applicationActivities: nil)
-        getCurrentViewController()?.present(activityVC, animated: true, completion: nil)
-    }
+    let title = entry.title
+    let objectToShare = [title, entry.link] as [Any]
+    let activityVC = UIActivityViewController(activityItems: objectToShare, applicationActivities: nil)
+    getCurrentViewController()?.present(activityVC, animated: true, completion: nil)
 }
 
 func pressedBookmark(_ cell: MenuActionCell, entry: PostObject) {

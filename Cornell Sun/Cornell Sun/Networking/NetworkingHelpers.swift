@@ -23,6 +23,18 @@ let savedPostIds: [Int] = {
     return posts.map({$0.id})
 }()
 
+let dateFormatter: DateFormatter = {
+    let formatter = DateFormatter()
+    formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+    return formatter
+}()
+
+let decoder: JSONDecoder = {
+    let coder = JSONDecoder()
+    coder.dateDecodingStrategy = .formatted(dateFormatter)
+    return coder
+}()
+
 func fetchPosts(target: SunAPI, completion: @escaping PostObjectCompletionBlock) {
     var postObjects: [PostObject] = []
     API.request(target: target) { response in
@@ -31,20 +43,10 @@ func fetchPosts(target: SunAPI, completion: @escaping PostObjectCompletionBlock)
             return
         }
         do {
-            let jsonResult = try JSONSerialization.jsonObject(with: response.data, options: [])
-            if let postArray = jsonResult as? [[String: Any]] {
-                for postDictionary in postArray {
-                    if let post = PostObject(data: postDictionary) {
-                        if savedPostIds.contains(post.id) {
-                            post.didSave = true
-                        }
-                        postObjects.append(post)
-                    }
-                }
-            } else {
-                completion(postObjects, .noResultsError)
-            }
-        } catch {
+            postObjects = try decoder.decode([PostObject].self, from: response.data)
+            completion(postObjects, .noResultsError)
+        } catch let error {
+            print(error)
             completion(postObjects, .parsingError)
             return
         }
@@ -54,16 +56,11 @@ func fetchPosts(target: SunAPI, completion: @escaping PostObjectCompletionBlock)
 
 func getTrending(completion: @escaping TrendingCompletionBlock) {
     API.request(target: .trending) { response in
-        guard let response = response else { return }
-        do {
-            let jsonResult = try JSONSerialization.jsonObject(with: response.data, options: [])
-            if let trending = jsonResult as? [String] {
-                completion(trending, nil)
-            }
-        } catch {
-            print("could not parse")
-            completion([String](), .parsingError)
-        }
+        guard
+            let response = response,
+            let trending = try? decoder.decode([String].self, from: response.data)
+        else { completion([String](), .parsingError); return }
+        completion(trending, nil)
     }
 }
 
@@ -98,14 +95,11 @@ func prepareInitialPosts(callback: @escaping ([PostObject], PostObject?) -> Void
     API.request(target: .featured) { (response) in
         if let response = response {
             do {
-                let json = try JSONSerialization.jsonObject(with: response.data, options: [])
-                if let postDictionary = json as? [String: Any], let post = PostObject(data: postDictionary) {
-                    post.didSave = savedPostIds.contains(post.id)
-                    headlinePost = post
-                } else {
-                    print("could not parse featured post")
-                }
-            } catch {
+                let featuredPost = try decoder.decode(PostObject.self, from: response.data)
+                featuredPost.didSave = savedPostIds.contains(featuredPost.id)
+                headlinePost = featuredPost
+            } catch let error {
+                print(error)
                 fatalError()
             }
         }
@@ -117,18 +111,9 @@ func prepareInitialPosts(callback: @escaping ([PostObject], PostObject?) -> Void
         if let response = response {
 
             do {
-                let json = try JSONSerialization.jsonObject(with: response.data, options: [])
-                if let postArray = json as? [[String: Any]] {
-                    for postDictionary in postArray {
-                        if let post = PostObject(data: postDictionary) {
-                            if savedPostIds.contains(post.id) {
-                                post.didSave = true
-                            }
-                            postObjects.append(post)
-                        }
-                    }
-                }
-            } catch {
+                postObjects = try decoder.decode([PostObject].self, from: response.data)
+            } catch let error {
+                print(error)
                 fatalError()
             }
         }

@@ -1,3 +1,4 @@
+
 //
 //  PhotoGallerySectionController.swift
 //  Cornell Sun
@@ -64,7 +65,7 @@ extension PhotoGallerySectionController: BookmarkPressedDelegate, SharePressedDe
             let height = entry.title.height(withConstrainedWidth: width - 34, font: .headerTitle) //CLUTCH Extension thank stackoverflow gods
             return CGSize(width: width, height: height + 40)
         case .authorCell:
-            let height = entry.author.name.height(withConstrainedWidth: width, font: .photoCaption)
+            let height = entry.author[0].name.height(withConstrainedWidth: width, font: .photoCaption)
             return CGSize(width: width, height: height + 9)
         case .photoGalleryCell:
             return CGSize(width: width, height: width / 1.5)
@@ -123,3 +124,4 @@ extension PhotoGallerySectionController: BookmarkPressedDelegate, SharePressedDe
         entry = object as? PostObject
     }
 }
+

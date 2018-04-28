@@ -55,6 +55,8 @@ class SectionCollectionViewController: UIViewController, UIScrollViewDelegate {
             if error == nil {
             self.feedData = posts
             self.adapter.reloadData(completion: nil)
+            } else {
+                print(error)
             }
         }
     }
@@ -109,6 +111,8 @@ extension SectionCollectionViewController: ListAdapterDataSource {
             return spinnerSectionController()
         } else if let obj = object as? PostObject, obj.postType == .photoGallery {
             return PhotoGallerySectionController()
+        } else if let obj = object as? PostObject, obj.postType == .video {
+            return VideoSectionController()
         } else if let obj = object as? PostObject, obj.isEqual(toDiffableObject: feedData[0]) {
             let heroSC = HeroSectionController()
             heroSC.delegate = self

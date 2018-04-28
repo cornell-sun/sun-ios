@@ -31,7 +31,6 @@ class CommentObject: Codable {
         self.profileImageURL = imageURL
     }
 
-
     init?(data: [String: AnyObject]) {
         guard
             let id = data["id"] as? Int,

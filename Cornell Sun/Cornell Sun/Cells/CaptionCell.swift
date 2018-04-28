@@ -13,7 +13,9 @@ final class CaptionCell: UICollectionViewCell {
 
     var post: PostObject? {
         didSet {
-            captionLabel.text = post?.photoGalleryObjects.first?.caption
+            if let caption = post?.postAttachments.first?.caption {
+                captionLabel.text = caption
+            }
         }
     }
 
@@ -42,7 +44,12 @@ final class CaptionCell: UICollectionViewCell {
     }
 
     func updateCaption(index: Int) {
-        captionLabel.text = post?.photoGalleryObjects[index].caption
+        captionLabel.text = post?.postAttachments[index].caption ?? ""
+        captionLabel.snp.remakeConstraints { make in
+            make.top.equalToSuperview().inset(10)
+            make.left.equalToSuperview().inset(18)
+            make.right.equalToSuperview().inset(18)
+        }
     }
 
     func setupViews() {

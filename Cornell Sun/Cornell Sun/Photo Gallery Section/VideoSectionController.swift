@@ -1,31 +1,24 @@
 //
-//  ArticleSectionController.swift
+//  VideoSectionController.swift
 //  Cornell Sun
 //
-//  Created by Austin Astorga on 9/3/17.
-//  Copyright © 2017 cornell.sun. All rights reserved.
+//  Created by Austin Astorga on 4/26/18.
+//  Copyright © 2018 cornell.sun. All rights reserved.
 //
 
 import UIKit
 import IGListKit
-import SafariServices
 
-protocol TabBarViewControllerDelegate: class {
-    func articleSectionDidPressOnArticle(_ article: PostObject)
-}
-
-// swiftlint:disable:next type_name
-enum cellType: Int {
+fileprivate enum VideoCellType: Int {
     case categoryCell = 0
     case titleCell = 1
-    case authorCell = 2
-    case imageCell = 3
-    case actionMenuCell = 4
+    case videoCell = 2
+    case actionMenuCell = 3
+
 }
 
-class ArticleSectionController: ListSectionController {
+class VideoSectionController: ListSectionController {
     var entry: PostObject!
-    weak var delegate: TabBarViewControllerDelegate?
 
     override init() {
         super.init()
@@ -33,7 +26,7 @@ class ArticleSectionController: ListSectionController {
     }
 }
 
-extension ArticleSectionController: BookmarkPressedDelegate, SharePressedDelegate {
+extension VideoSectionController: BookmarkPressedDelegate, SharePressedDelegate {
 
     func didPressBookmark(_ cell: MenuActionCell) {
         pressedBookmark(cell, entry: entry)
@@ -44,35 +37,34 @@ extension ArticleSectionController: BookmarkPressedDelegate, SharePressedDelegat
     }
 
     override func numberOfItems() -> Int {
-        return 5
+        return 4
     }
 
     override func sizeForItem(at index: Int) -> CGSize {
         guard let context = collectionContext, entry != nil else {return .zero}
         let width = context.containerSize.width
-        guard let sizeForItemIndex = cellType(rawValue: index) else {
+        guard let sizeForItemIndex = VideoCellType(rawValue: index) else {
             return .zero
         }
+
         switch sizeForItemIndex {
         case .categoryCell:
             return CGSize(width: width, height: 40)
         case .titleCell:
-            let height = entry.title.height(withConstrainedWidth: width - 34, font: .articleTitle) //CLUTCH Extension thank stackoverflow gods
-            return CGSize(width: width, height: height + 20)
-        case .authorCell:
-            let height = entry.author[0].name.height(withConstrainedWidth: width, font: .secondaryHeader)
-            return CGSize(width: width, height: height + 9)
-        case .imageCell:
-            return CGSize(width: width, height: width / 1.92)
+            let height = entry.title.height(withConstrainedWidth: width - 34, font: .headerTitle) //CLUTCH Extension thank stackoverflow gods
+            return CGSize(width: width, height: height + 40)
+        case .videoCell:
+            return CGSize(width: width, height: width / 1.5)
         case .actionMenuCell:
             return CGSize(width: width, height: 35)
         }
     }
 
     override func cellForItem(at index: Int) -> UICollectionViewCell {
-        guard let cellForItemIndex = cellType(rawValue: index) else {
+        guard let cellForItemIndex = VideoCellType(rawValue: index) else {
             return UICollectionViewCell()
         }
+
         switch cellForItemIndex {
         case .categoryCell:
             // swiftlint:disable:next force_cast
@@ -84,14 +76,9 @@ extension ArticleSectionController: BookmarkPressedDelegate, SharePressedDelegat
             let cell = collectionContext!.dequeueReusableCell(of: TitleCell.self, for: self, at: index) as! TitleCell
             cell.post = entry
             return cell
-        case .authorCell:
+        case .videoCell:
             // swiftlint:disable:next force_cast
-            let cell = collectionContext!.dequeueReusableCell(of: AuthorCell.self, for: self, at: index) as! AuthorCell
-            cell.post = entry
-            return cell
-        case .imageCell:
-            // swiftlint:disable:next force_cast
-            let cell = collectionContext!.dequeueReusableCell(of: ImageCell.self, for: self, at: index) as! ImageCell
+            let cell = collectionContext!.dequeueReusableCell(of: VideoCell.self, for: self, at: index) as! VideoCell
             cell.post = entry
             return cell
         case .actionMenuCell:
@@ -108,24 +95,5 @@ extension ArticleSectionController: BookmarkPressedDelegate, SharePressedDelegat
 
     override func didUpdate(to object: Any) {
         entry = object as? PostObject
-    }
-
-    func getCurrentViewController() -> UIViewController? {
-
-        if let rootController = UIApplication.shared.keyWindow?.rootViewController {
-            var currentController: UIViewController! = rootController
-            while currentController.presentedViewController != nil {
-                currentController = currentController.presentedViewController
-            }
-            return currentController
-        }
-        return nil
-
-    }
-
-    override func didSelectItem(at index: Int) {
-        if cellType(rawValue: index) != .actionMenuCell {
-            delegate?.articleSectionDidPressOnArticle(entry)
-        }
     }
 }

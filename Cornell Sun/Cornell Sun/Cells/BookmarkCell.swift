@@ -19,7 +19,7 @@ final class BookmarkCell: UICollectionViewCell {
     var post: PostObject? {
         didSet {
             titleLabel.text = post?.title
-            authorLabel.text = post?.author.name
+            authorLabel.text = post?.author[0].name
             setupImage()
         }
     }
@@ -98,7 +98,7 @@ final class BookmarkCell: UICollectionViewCell {
     }
 
     func setupImage() {
-        if let imagelink = post?.thumbnailImageLink, let imageUrl = URL(string: imagelink) {
+        if let imageUrl = post?.featuredMediaImages.thumbnail?.url {
             imageView.kf.indicatorType = .activity
             imageView.kf.setImage(with: imageUrl)
         }

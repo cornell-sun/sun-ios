@@ -8,35 +8,20 @@
 
 import UIKit
 
-class PhotoGalleryObject: Codable {
-    var id: Int
-    var caption: String
-    var authorName: String
-    var fullImageLink: String
 
-    init(id: Int, caption: String, authorName: String, fullImageLink: String) {
-        self.id = id
-        self.caption = caption
-        self.authorName = authorName
-        self.fullImageLink = fullImageLink
+class PostAttachmentObject: Codable {
+    var id: Int?
+    var name: String?
+    var caption: String?
+    var authorName: String?
+    var mediaType: String?
+    var url: URL!
+
+    enum CodingKeys: String, CodingKey {
+        case id, name, caption, url
+        case authorName = "author_name"
+        case mediaType = "media_type"
     }
 
-//    init? (data: [String: Any]) {
-//        super.init()
-//        guard
-//        let id = data["id"] as? Int,
-//        let caption = data["caption"] as? String,
-//        let authorName = data["author_name"] as? String,
-//        let fullImageLink = data["full"] as? String
-//        else { return nil }
-//
-//        self.id = id
-//        self.caption = caption
-//        self.authorName = authorName
-//        self.fullImageLink = fullImageLink
-//
-//        DispatchQueue.main.async {
-//            cacheImage(imageLink: fullImageLink)
-//        }
-//    }
+
 }

@@ -44,10 +44,13 @@
 		DC0A883C1FBA531000F2BCBB /* BookmarkCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0A883B1FBA531000F2BCBB /* BookmarkCollectionViewController.swift */; };
 		DC0A883E1FBA6B8200F2BCBB /* BookmarkSectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0A883D1FBA6B8200F2BCBB /* BookmarkSectionController.swift */; };
 		DC0A88401FBA84E700F2BCBB /* AuthorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0A883F1FBA84E700F2BCBB /* AuthorCell.swift */; };
+		DC0E7C4E208FFCBA00B1295F /* PostObjectHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0E7C4D208FFCBA00B1295F /* PostObjectHelpers.swift */; };
 		DC34DEF3203216690010DF9A /* SectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC34DEF2203216690010DF9A /* SectionViewController.swift */; };
 		DC34DEF520321C6D0010DF9A /* SectionCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC34DEF420321C6D0010DF9A /* SectionCollectionViewController.swift */; };
 		DC3667D4206EB9D2002EB4F9 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC3667D3206EB9D2002EB4F9 /* NotificationService.swift */; };
 		DC3667D8206EB9D2002EB4F9 /* SunNotificationServiceExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = DC3667D1206EB9D2002EB4F9 /* SunNotificationServiceExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		DC3CCB3320924288000A9A5B /* VideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC3CCB3220924288000A9A5B /* VideoCell.swift */; };
+		DC3CCB35209243BC000A9A5B /* VideoSectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC3CCB34209243BC000A9A5B /* VideoSectionController.swift */; };
 		DC4308ED1F2558D500ABB31F /* SunAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4308EC1F2558D500ABB31F /* SunAPI.swift */; };
 		DC4308EF1F2563FF00ABB31F /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4308EE1F2563FF00ABB31F /* API.swift */; };
 		DC446C2E1F5D016500D68688 /* FeedCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC446C2D1F5D016500D68688 /* FeedCollectionViewController.swift */; };
@@ -69,6 +72,9 @@
 		DCB717121FB94BCA00BE4D26 /* KeplerStd-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = DCB717111FB94BCA00BE4D26 /* KeplerStd-Bold.otf */; };
 		DCB717141FB9FE1700BE4D26 /* HeroSectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB717131FB9FE1700BE4D26 /* HeroSectionController.swift */; };
 		DCB717161FBA016400BE4D26 /* TaglineCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB717151FBA016400BE4D26 /* TaglineCell.swift */; };
+		DCC03FE22092A9BF0027D102 /* PhotoGallery.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC03FE12092A9BF0027D102 /* PhotoGallery.swift */; };
+		DCC03FE42094CF4A0027D102 /* ZoomTransitioningDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC03FE32094CF4A0027D102 /* ZoomTransitioningDelegate.swift */; };
+		DCC03FE62094D6410027D102 /* PhotoGalleryDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC03FE52094D6410027D102 /* PhotoGalleryDetailViewController.swift */; };
 		DCD870EF1F256B7B00B98AF8 /* Cornell_SunTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD870EE1F256B7B00B98AF8 /* Cornell_SunTests.swift */; };
 		DCD870F91F256E2C00B98AF8 /* APITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD870F81F256E2C00B98AF8 /* APITests.swift */; };
 		DCECA9901FBDFB7300BAB2EA /* BookmarkCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCECA98F1FBDFB7300BAB2EA /* BookmarkCell.swift */; };
@@ -157,6 +163,7 @@
 		DC0A883B1FBA531000F2BCBB /* BookmarkCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkCollectionViewController.swift; sourceTree = "<group>"; };
 		DC0A883D1FBA6B8200F2BCBB /* BookmarkSectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkSectionController.swift; sourceTree = "<group>"; };
 		DC0A883F1FBA84E700F2BCBB /* AuthorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorCell.swift; sourceTree = "<group>"; };
+		DC0E7C4D208FFCBA00B1295F /* PostObjectHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostObjectHelpers.swift; sourceTree = "<group>"; };
 		DC34DEF2203216690010DF9A /* SectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionViewController.swift; sourceTree = "<group>"; };
 		DC34DEF420321C6D0010DF9A /* SectionCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionCollectionViewController.swift; sourceTree = "<group>"; };
 		DC3667D1206EB9D2002EB4F9 /* SunNotificationServiceExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = SunNotificationServiceExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -164,6 +171,8 @@
 		DC3667D5206EB9D2002EB4F9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DC3667DD206EBA54002EB4F9 /* SunNotificationServiceExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SunNotificationServiceExtension.entitlements; sourceTree = "<group>"; };
 		DC3667DE206EBAC6002EB4F9 /* Cornell Sun.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Cornell Sun.entitlements"; sourceTree = "<group>"; };
+		DC3CCB3220924288000A9A5B /* VideoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCell.swift; sourceTree = "<group>"; };
+		DC3CCB34209243BC000A9A5B /* VideoSectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoSectionController.swift; sourceTree = "<group>"; };
 		DC4308EC1F2558D500ABB31F /* SunAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunAPI.swift; sourceTree = "<group>"; };
 		DC4308EE1F2563FF00ABB31F /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		DC446C2D1F5D016500D68688 /* FeedCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCollectionViewController.swift; sourceTree = "<group>"; };
@@ -185,6 +194,9 @@
 		DCB717111FB94BCA00BE4D26 /* KeplerStd-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "KeplerStd-Bold.otf"; sourceTree = "<group>"; };
 		DCB717131FB9FE1700BE4D26 /* HeroSectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroSectionController.swift; sourceTree = "<group>"; };
 		DCB717151FBA016400BE4D26 /* TaglineCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaglineCell.swift; sourceTree = "<group>"; };
+		DCC03FE12092A9BF0027D102 /* PhotoGallery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoGallery.swift; sourceTree = "<group>"; };
+		DCC03FE32094CF4A0027D102 /* ZoomTransitioningDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomTransitioningDelegate.swift; sourceTree = "<group>"; };
+		DCC03FE52094D6410027D102 /* PhotoGalleryDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoGalleryDetailViewController.swift; sourceTree = "<group>"; };
 		DCD870EC1F256B7B00B98AF8 /* Cornell SunTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Cornell SunTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCD870EE1F256B7B00B98AF8 /* Cornell_SunTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cornell_SunTests.swift; sourceTree = "<group>"; };
 		DCD870F01F256B7B00B98AF8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -292,6 +304,7 @@
 				DC3667DE206EBAC6002EB4F9 /* Cornell Sun.entitlements */,
 				3487167C2041F09D008CB9D5 /* Launch Screen.storyboard */,
 				5006AFFB1EA9625000F58549 /* AppDelegate.swift */,
+				DCC03FE02092A9940027D102 /* PhotoGallery */,
 				0C0D2FE52060461000BC77E9 /* Onboarding */,
 				34C558282041E42A00E62CE8 /* Ad Section */,
 				DCECA9911FBE2D8700BAB2EA /* Feed Section */,
@@ -318,6 +331,7 @@
 		5006B24E1EADA38400F58549 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				DC0E7C4D208FFCBA00B1295F /* PostObjectHelpers.swift */,
 				405F83D91FBE1E3000360AEB /* Enums.swift */,
 				405F83D71FBE1E2B00360AEB /* SettingObject.swift */,
 				50A898111EAEC93B0099CFA9 /* AuthorObject.swift */,
@@ -365,6 +379,7 @@
 			isa = PBXGroup;
 			children = (
 				DC6561D41FBACA8800C5062D /* PhotoGallerySectionController.swift */,
+				DC3CCB34209243BC000A9A5B /* VideoSectionController.swift */,
 			);
 			path = "Photo Gallery Section";
 			sourceTree = "<group>";
@@ -427,6 +442,7 @@
 				DC34DEF0203214580010DF9A /* Date Extension */,
 				DC446C351F5D0DFF00D68688 /* Extensions.swift */,
 				DC556AC420602E6900475B7D /* Constants.swift */,
+				DCC03FE32094CF4A0027D102 /* ZoomTransitioningDelegate.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -476,6 +492,15 @@
 			name = "Recovered References";
 			sourceTree = "<group>";
 		};
+		DCC03FE02092A9940027D102 /* PhotoGallery */ = {
+			isa = PBXGroup;
+			children = (
+				DCC03FE12092A9BF0027D102 /* PhotoGallery.swift */,
+				DCC03FE52094D6410027D102 /* PhotoGalleryDetailViewController.swift */,
+			);
+			path = PhotoGallery;
+			sourceTree = "<group>";
+		};
 		DCD870ED1F256B7B00B98AF8 /* Cornell SunTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -512,6 +537,7 @@
 				DC4FED222027F05A004F435E /* SearchCell.swift */,
 				348716772041EAC8008CB9D5 /* AdImageCell.swift */,
 				4029BB092087B02300E8BAEB /* NotificationsTableViewCell.swift */,
+				DC3CCB3220924288000A9A5B /* VideoCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -770,6 +796,7 @@
 				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftSoup/SwiftSoup.framework",
+				"${BUILT_PRODUCTS_DIR}/UICircularProgressRing/UICircularProgressRing.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -788,6 +815,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftSoup.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/UICircularProgressRing.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -887,6 +915,8 @@
 				5006AFFE1EA9625000F58549 /* ViewController.swift in Sources */,
 				DC0A883E1FBA6B8200F2BCBB /* BookmarkSectionController.swift in Sources */,
 				DC6561D31FBAC45900C5062D /* PhotoGalleryObject.swift in Sources */,
+				DC3CCB35209243BC000A9A5B /* VideoSectionController.swift in Sources */,
+				DC3CCB3320924288000A9A5B /* VideoCell.swift in Sources */,
 				DC0A883C1FBA531000F2BCBB /* BookmarkCollectionViewController.swift in Sources */,
 				4036564D207446B100E7583A /* DisplayViewController.swift in Sources */,
 				3441C78A2066C0CD00F58D5E /* Delegate+.swift in Sources */,
@@ -894,6 +924,7 @@
 				40B1D4962074306600C1306E /* SubscribeViewController.swift in Sources */,
 				40B1D4942073164800C1306E /* UIColor+1ptImage.swift in Sources */,
 				40B1D4922073107E00C1306E /* ContactViewController.swift in Sources */,
+				DC0E7C4E208FFCBA00B1295F /* PostObjectHelpers.swift in Sources */,
 				DCA02C0A2027B18400CBE97F /* SearchSectionController.swift in Sources */,
 				5006AFFC1EA9625000F58549 /* AppDelegate.swift in Sources */,
 				405F83DA1FBE1E3100360AEB /* Enums.swift in Sources */,
@@ -902,6 +933,7 @@
 				DC6561D71FBACE7D00C5062D /* CaptionCell.swift in Sources */,
 				DC818D9B1F74CFBB0064AFFA /* SpinnerCell.swift in Sources */,
 				0CED4FAE1FAB523F0025EB91 /* UIFont+.swift in Sources */,
+				DCC03FE42094CF4A0027D102 /* ZoomTransitioningDelegate.swift in Sources */,
 				5006B24D1EADA37F00F58549 /* PostObject.swift in Sources */,
 				DC34DEF520321C6D0010DF9A /* SectionCollectionViewController.swift in Sources */,
 				DCB717161FBA016400BE4D26 /* TaglineCell.swift in Sources */,
@@ -920,8 +952,10 @@
 				61652CD21F6EF3A500EEFC29 /* SearchViewController.swift in Sources */,
 				4029BB0A2087B02300E8BAEB /* NotificationsTableViewCell.swift in Sources */,
 				DC4308ED1F2558D500ABB31F /* SunAPI.swift in Sources */,
+				DCC03FE22092A9BF0027D102 /* PhotoGallery.swift in Sources */,
 				0CED4FAD1FAB523F0025EB91 /* UIColor+.swift in Sources */,
 				34C5582A2041E49E00E62CE8 /* AdSectionController.swift in Sources */,
+				DCC03FE62094D6410027D102 /* PhotoGalleryDetailViewController.swift in Sources */,
 				DC446C361F5D0DFF00D68688 /* Extensions.swift in Sources */,
 				DC6561D51FBACA8800C5062D /* PhotoGallerySectionController.swift in Sources */,
 				DC4FED232027F05A004F435E /* SearchCell.swift in Sources */,

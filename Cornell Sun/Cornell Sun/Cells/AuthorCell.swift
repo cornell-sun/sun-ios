@@ -16,7 +16,7 @@ final class AuthorCell: UICollectionViewCell {
     var post: PostObject? {
         didSet {
             if let post = post {
-                authorLabel.text = "By \(post.author.name)"
+                authorLabel.text = "By \(post.author.byline)"
             }
         }
     }
