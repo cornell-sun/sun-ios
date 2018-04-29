@@ -1,4 +1,3 @@
-
 //
 //  PhotoGallerySectionController.swift
 //  Cornell Sun
@@ -124,4 +123,3 @@ extension PhotoGallerySectionController: BookmarkPressedDelegate, SharePressedDe
         entry = object as? PostObject
     }
 }
-

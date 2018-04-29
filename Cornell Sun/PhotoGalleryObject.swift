@@ -8,7 +8,6 @@
 
 import UIKit
 
-
 class PostAttachmentObject: Codable {
     var id: Int?
     var name: String?
@@ -22,6 +21,5 @@ class PostAttachmentObject: Codable {
         case authorName = "author_name"
         case mediaType = "media_type"
     }
-
 
 }

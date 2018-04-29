@@ -103,8 +103,7 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
         let setting = settings[indexPath.section][indexPath.row]
         if let next = setting.nextController {
                 navigationController?.pushViewController(next, animated: true)
-        }
-         else {
+        } else {
             switch(setting.type) {
                 case .rate:
                     let urlStr = "itms-apps://itunes.apple.com/app/viewContentsUserReviews?id=\(appID)"
@@ -151,7 +150,6 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
             }
         }
     }
-    
 
     //Populator for settings array
     func testInit() {
@@ -167,7 +165,7 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
         
         let subscribeViewController = SubscribeViewController()
         subscribeViewController.prevViewController = self
-        settings[0].append(SettingObject(label: "Subscribe", next: subscribeViewController,setType: .none))
+        settings[0].append(SettingObject(label: "Subscribe", next: subscribeViewController, setType: .none))
         
         //Initializing Support settings
         settings.append([])

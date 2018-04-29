@@ -21,7 +21,6 @@ let artsAndEntertainmentKey = "arts-and-entertainment"
 let scienceKey = "science"
 let diningKey = "dining"
 
-
 extension CGFloat {
 
     //main cornell sun header font size
