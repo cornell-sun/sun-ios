@@ -7,10 +7,11 @@
 //
 
 import UIKit
+import IGListKit
 
 class TabBarViewController: UITabBarController {
 
-    var posts: [PostObject]!
+    var posts: [ListDiffable]!
     var headlinePost: PostObject?
 
     override func viewDidLoad() {
@@ -25,7 +26,7 @@ class TabBarViewController: UITabBarController {
         setupTabs()
     }
 
-    init(with postObjects: [PostObject], mainHeadlinePost: PostObject?) {
+    init(with postObjects: [ListDiffable], mainHeadlinePost: PostObject?) {
         posts = postObjects
         headlinePost = mainHeadlinePost
         super.init(nibName: nil, bundle: nil)

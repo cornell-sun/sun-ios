@@ -17,6 +17,9 @@ PODS:
   - IQKeyboardManagerSwift (5.0.0)
   - Kingfisher (4.7.0)
   - ModelMapper (8.0.0)
+  - Motion (1.4.0):
+    - Motion/Core (= 1.4.0)
+  - Motion/Core (1.4.0)
   - Moya (9.0.0):
     - Moya/Core (= 9.0.0)
   - Moya-ModelMapper (5.0.0):
@@ -27,7 +30,7 @@ PODS:
   - Moya/Core (9.0.0):
     - Alamofire (~> 4.1)
     - Result (~> 3.0)
-  - OneSignal (2.8.2)
+  - OneSignal (2.8.3)
   - PINCache (2.3)
   - PINRemoteImage (2.1.4):
     - PINRemoteImage/FLAnimatedImage (= 2.1.4)
@@ -49,6 +52,7 @@ DEPENDENCIES:
   - ImageSlideshow/Kingfisher (from `https://github.com/AAAstorga/ImageSlideshow.git`, commit `bec5f17bd71d32d289378e1ba787a55cfa80bcce`)
   - IQKeyboardManagerSwift (= 5.0.0)
   - Kingfisher (~> 4.7.0)
+  - Motion
   - Moya
   - Moya-ModelMapper (= 5.0.0)
   - OneSignal (< 3.0, >= 2.6.2)
@@ -77,9 +81,10 @@ SPEC CHECKSUMS:
   IQKeyboardManagerSwift: 3f340202ebe1a7076279b9b9b3c817243ddb3aab
   Kingfisher: da6b005aa96d37698e3e4f1ccfe96a5b9bbf27d6
   ModelMapper: a258c5f8e1422e0e826c8265a3e89ae1b329c3a6
+  Motion: 6d812ce71efcaac170d7f98bd6bcea847426f59e
   Moya: cf5e6ee93af526532f92614004b8ad2ea60fd845
   Moya-ModelMapper: fc14d8c7d6466f11aea83e785c7f2c4c521fead6
-  OneSignal: ab5c509192ca8390bdd3570a6261e6decf4c79c1
+  OneSignal: 09de92b4efc11ceb96c372c103e35ebe6773bf78
   PINCache: ce36ed282031b92fc7733ffe831f474ff80fddc2
   PINRemoteImage: 4ac4011c5caefd6befd99758e09becede05d3226
   Result: d2d07204ce72856f1fd9130bbe42c35a7b0fea10
@@ -87,6 +92,6 @@ SPEC CHECKSUMS:
   SwiftSoup: 277f7ef548826e0ca7603a06b30d4a5df3ee0587
   UICircularProgressRing: f41663e98c0f40b4794461a4209a67569ea2cc28
 
-PODFILE CHECKSUM: 7586b2486dd800115b34959a51e6d0f3029f0408
+PODFILE CHECKSUM: 11ddeeeb40ff1a784f87c3b759b9340d1b9b00c2
 
 COCOAPODS: 1.3.1

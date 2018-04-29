@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import IGListKit
 
 enum APIErrors: Error {
     case networkingError
@@ -85,9 +86,9 @@ func getComments(postID: Int, completion: @escaping CommentsCompletionBlock) {
     }
 }
 
-func prepareInitialPosts(callback: @escaping ([PostObject], PostObject?) -> Void) {
+func prepareInitialPosts(callback: @escaping ([ListDiffable], PostObject?) -> Void) {
     var headlinePost: PostObject?
-    var postObjects: [PostObject] = []
+    var postObjects: [ListDiffable] = []
 
     let group = DispatchGroup()
 
@@ -112,6 +113,7 @@ func prepareInitialPosts(callback: @escaping ([PostObject], PostObject?) -> Void
 
             do {
                 postObjects = try decoder.decode([PostObject].self, from: response.data)
+                postObjects.insert("adToken" as ListDiffable, at: 7)
             } catch let error {
                 print(error)
                 fatalError()
@@ -124,6 +126,7 @@ func prepareInitialPosts(callback: @escaping ([PostObject], PostObject?) -> Void
     group.notify(queue: .main) {
         //both network requests are done
         postObjects = postObjects.filter { post in
+            guard let post = post as? PostObject else { return true }
             return post.id != headlinePost?.id
         }
         callback(postObjects, headlinePost)

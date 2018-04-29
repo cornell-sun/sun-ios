@@ -53,6 +53,7 @@
 		DC3CCB35209243BC000A9A5B /* VideoSectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC3CCB34209243BC000A9A5B /* VideoSectionController.swift */; };
 		DC4308ED1F2558D500ABB31F /* SunAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4308EC1F2558D500ABB31F /* SunAPI.swift */; };
 		DC4308EF1F2563FF00ABB31F /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4308EE1F2563FF00ABB31F /* API.swift */; };
+		DC4324B920965D92004CAF23 /* ImageCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4324B820965D92004CAF23 /* ImageCollectionCell.swift */; };
 		DC446C2E1F5D016500D68688 /* FeedCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC446C2D1F5D016500D68688 /* FeedCollectionViewController.swift */; };
 		DC446C321F5D05FF00D68688 /* ArticleSectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC446C311F5D05FF00D68688 /* ArticleSectionController.swift */; };
 		DC446C361F5D0DFF00D68688 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC446C351F5D0DFF00D68688 /* Extensions.swift */; };
@@ -73,7 +74,6 @@
 		DCB717141FB9FE1700BE4D26 /* HeroSectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB717131FB9FE1700BE4D26 /* HeroSectionController.swift */; };
 		DCB717161FBA016400BE4D26 /* TaglineCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB717151FBA016400BE4D26 /* TaglineCell.swift */; };
 		DCC03FE22092A9BF0027D102 /* PhotoGallery.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC03FE12092A9BF0027D102 /* PhotoGallery.swift */; };
-		DCC03FE42094CF4A0027D102 /* ZoomTransitioningDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC03FE32094CF4A0027D102 /* ZoomTransitioningDelegate.swift */; };
 		DCC03FE62094D6410027D102 /* PhotoGalleryDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC03FE52094D6410027D102 /* PhotoGalleryDetailViewController.swift */; };
 		DCD870EF1F256B7B00B98AF8 /* Cornell_SunTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD870EE1F256B7B00B98AF8 /* Cornell_SunTests.swift */; };
 		DCD870F91F256E2C00B98AF8 /* APITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD870F81F256E2C00B98AF8 /* APITests.swift */; };
@@ -175,6 +175,7 @@
 		DC3CCB34209243BC000A9A5B /* VideoSectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoSectionController.swift; sourceTree = "<group>"; };
 		DC4308EC1F2558D500ABB31F /* SunAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunAPI.swift; sourceTree = "<group>"; };
 		DC4308EE1F2563FF00ABB31F /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		DC4324B820965D92004CAF23 /* ImageCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionCell.swift; sourceTree = "<group>"; };
 		DC446C2D1F5D016500D68688 /* FeedCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCollectionViewController.swift; sourceTree = "<group>"; };
 		DC446C311F5D05FF00D68688 /* ArticleSectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleSectionController.swift; sourceTree = "<group>"; };
 		DC446C351F5D0DFF00D68688 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
@@ -195,7 +196,6 @@
 		DCB717131FB9FE1700BE4D26 /* HeroSectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroSectionController.swift; sourceTree = "<group>"; };
 		DCB717151FBA016400BE4D26 /* TaglineCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaglineCell.swift; sourceTree = "<group>"; };
 		DCC03FE12092A9BF0027D102 /* PhotoGallery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoGallery.swift; sourceTree = "<group>"; };
-		DCC03FE32094CF4A0027D102 /* ZoomTransitioningDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomTransitioningDelegate.swift; sourceTree = "<group>"; };
 		DCC03FE52094D6410027D102 /* PhotoGalleryDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoGalleryDetailViewController.swift; sourceTree = "<group>"; };
 		DCD870EC1F256B7B00B98AF8 /* Cornell SunTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Cornell SunTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCD870EE1F256B7B00B98AF8 /* Cornell_SunTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cornell_SunTests.swift; sourceTree = "<group>"; };
@@ -442,7 +442,6 @@
 				DC34DEF0203214580010DF9A /* Date Extension */,
 				DC446C351F5D0DFF00D68688 /* Extensions.swift */,
 				DC556AC420602E6900475B7D /* Constants.swift */,
-				DCC03FE32094CF4A0027D102 /* ZoomTransitioningDelegate.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -497,6 +496,7 @@
 			children = (
 				DCC03FE12092A9BF0027D102 /* PhotoGallery.swift */,
 				DCC03FE52094D6410027D102 /* PhotoGalleryDetailViewController.swift */,
+				DC4324B820965D92004CAF23 /* ImageCollectionCell.swift */,
 			);
 			path = PhotoGallery;
 			sourceTree = "<group>";
@@ -789,6 +789,7 @@
 				"${BUILT_PRODUCTS_DIR}/ImageSlideshow/ImageSlideshow.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/ModelMapper/Mapper.framework",
+				"${BUILT_PRODUCTS_DIR}/Motion/Motion.framework",
 				"${BUILT_PRODUCTS_DIR}/Moya/Moya.framework",
 				"${BUILT_PRODUCTS_DIR}/Moya-ModelMapper/Moya_ModelMapper.framework",
 				"${BUILT_PRODUCTS_DIR}/PINCache/PINCache.framework",
@@ -808,6 +809,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ImageSlideshow.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Mapper.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Motion.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya_ModelMapper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PINCache.framework",
@@ -933,7 +935,6 @@
 				DC6561D71FBACE7D00C5062D /* CaptionCell.swift in Sources */,
 				DC818D9B1F74CFBB0064AFFA /* SpinnerCell.swift in Sources */,
 				0CED4FAE1FAB523F0025EB91 /* UIFont+.swift in Sources */,
-				DCC03FE42094CF4A0027D102 /* ZoomTransitioningDelegate.swift in Sources */,
 				5006B24D1EADA37F00F58549 /* PostObject.swift in Sources */,
 				DC34DEF520321C6D0010DF9A /* SectionCollectionViewController.swift in Sources */,
 				DCB717161FBA016400BE4D26 /* TaglineCell.swift in Sources */,
@@ -946,6 +947,7 @@
 				DC0A883A1FBA2DEE00F2BCBB /* PhotoGalleryCell.swift in Sources */,
 				DC446C2E1F5D016500D68688 /* FeedCollectionViewController.swift in Sources */,
 				0CBC2CEE1F5E3093003FBB38 /* TabBarViewController.swift in Sources */,
+				DC4324B920965D92004CAF23 /* ImageCollectionCell.swift in Sources */,
 				50A898121EAEC93B0099CFA9 /* AuthorObject.swift in Sources */,
 				DC695D8B1FBB897600C6C62F /* PostOffice.swift in Sources */,
 				DC556AC520602E6900475B7D /* Constants.swift in Sources */,

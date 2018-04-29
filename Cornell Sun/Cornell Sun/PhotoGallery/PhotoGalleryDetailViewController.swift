@@ -9,24 +9,51 @@
 import UIKit
 import SnapKit
 
+struct PhotoGalleryDetailConstants {
+    static let closeButtonInsets = 16
+}
+
 class PhotoGalleryDetailViewController: UIViewController {
     var photoGallery: PhotoGallery!
-    var height: CGFloat!
-    var width: CGFloat!
     var attachments: [PostAttachmentObject]!
     var selectedIndex: IndexPath!
+    var updateMainGallery: ((Int) -> Void)?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        photoGallery = PhotoGallery(attachments: attachments, height: height, width: width)
-        photoGallery.scrollTo(indexPath: selectedIndex)
+        let closeButton = UIButton()
+        closeButton.addTarget(self, action: #selector(dismissVC), for: .touchUpInside)
+        closeButton.setBackgroundImage(#imageLiteral(resourceName: "close"), for: .normal)
+        closeButton.tintColor = .white
+
+        isMotionEnabled = true
+        photoGallery = PhotoGallery(attachments: attachments, height: view.bounds.width / 1.5, width: view.bounds.width, pinchToZoom: true, viewHeight: view.bounds.height)
+        photoGallery.displayPageControl = false
+        
         view.addSubview(photoGallery)
+        view.addSubview(closeButton)
+
+        photoGallery.updateScrollPosition = { item in
+            self.updateMainGallery?(item)
+        }
 
         photoGallery.snp.makeConstraints { make in
-            make.center.equalToSuperview()
+            make.edges.equalToSuperview()
         }
+
+        closeButton.snp.makeConstraints { make in
+            if #available(iOS 11.0, *) {
+                make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(PhotoGalleryDetailConstants.closeButtonInsets)
+            } else {
+                make.top.equalToSuperview().offset(PhotoGalleryDetailConstants.closeButtonInsets)
+            }
+            make.leading.equalToSuperview().offset(PhotoGalleryDetailConstants.closeButtonInsets)
+        }
+        view.layoutIfNeeded()
+        photoGallery.scrollTo(indexPath: selectedIndex)
     }
 
+    @objc func dismissVC() {
+        dismiss(animated: true, completion: nil)
+    }
 }
-

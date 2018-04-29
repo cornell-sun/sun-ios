@@ -10,32 +10,42 @@ import UIKit
 import SnapKit
 import UICircularProgressRing
 import Kingfisher
+import Motion
 
 class PhotoGallery: UIView {
 
     private var didSetupConstraints = false
     private var didSetupImages = false
-    private var collectionView: UICollectionView!
+    var collectionView: UICollectionView!
     private var pageControl: UIPageControl!
     private var attachments: [PostAttachmentObject]!
-    fileprivate var selectedIndex: IndexPath!
-    fileprivate var height: CGFloat!
-    fileprivate var width: CGFloat!
+    private var pinchToZoom: Bool!
+    private var height: CGFloat!
+
+    var selectedIndex: IndexPath?
+    var displayPageControl = true {
+        didSet {
+            pageControl.isHidden = !displayPageControl
+        }
+    }
 
     var updateCaption: ((Int) -> Void)?
+    var pushToDetail: (([PostAttachmentObject], IndexPath) -> Void)?
+    var updateScrollPosition: ((Int) -> Void)?
 
-    init(attachments: [PostAttachmentObject], height: CGFloat, width: CGFloat) {
+    init(attachments: [PostAttachmentObject], height: CGFloat, width: CGFloat, pinchToZoom: Bool = false, viewHeight: CGFloat = 0.0) {
         super.init(frame: .zero)
 
         self.attachments = attachments
+        self.pinchToZoom = pinchToZoom
         self.height = height
-        self.width = width
 
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         layout.minimumInteritemSpacing = 0
         layout.minimumLineSpacing = 0
-        layout.itemSize = CGSize(width: width, height: height)
+        let itemHeight = viewHeight == 0.0 ? height : viewHeight
+        layout.itemSize = CGSize(width: width, height: itemHeight)
 
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.isPagingEnabled = true
@@ -45,13 +55,20 @@ class PhotoGallery: UIView {
         collectionView.delegate = self
         collectionView.register(ImageCollectionCell.self, forCellWithReuseIdentifier: "image-cell")
 
+        if pinchToZoom {
+            collectionView.backgroundColor = .black
+        }
+
         pageControl = UIPageControl()
         pageControl.currentPage = 0
         pageControl.numberOfPages = attachments.count
+        pageControl.addTarget(self, action: #selector(updatePageDisplay), for: .valueChanged)
 
         addSubview(collectionView)
         addSubview(pageControl)
+
         self.setNeedsUpdateConstraints()
+        collectionView.layoutIfNeeded()
 
     }
 
@@ -77,56 +94,19 @@ class PhotoGallery: UIView {
         }
         super.updateConstraints()
     }
+
+    @objc func updatePageDisplay() {
+        let index = IndexPath(item: pageControl.currentPage, section: 0)
+        scrollTo(indexPath: index, animated: true)
+        updateCaption?(pageControl.currentPage)
+    }
 }
 
-class ImageCollectionCell: UICollectionViewCell {
-    var imageView: UIImageView!
-    var loadingIndicator: UICircularProgressRingView!
+extension PhotoGallery: UICollectionViewDataSource, UICollectionViewDelegate, UIGestureRecognizerDelegate {
 
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-
-        imageView = UIImageView()
-        imageView.backgroundColor = .clear
-        loadingIndicator = UICircularProgressRingView()
-        loadingIndicator.ringStyle = .ontop
-        loadingIndicator.innerRingWidth = 2
-        loadingIndicator.outerRingWidth = 2
-        loadingIndicator.innerRingColor = .brick
-
-        contentView.addSubview(loadingIndicator)
-        contentView.addSubview(imageView)
-
-        loadingIndicator.shouldShowValueText = false
-
-        imageView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
-        }
-
-        loadingIndicator.snp.makeConstraints { make in
-            make.center.equalToSuperview()
-            make.height.width.equalTo(40)
-        }
-    }
-
-    func updatePercentage(percentage: CGFloat) {
-        loadingIndicator.setProgress(to: percentage, duration: 0.1)
-    }
-
-    override func prepareForReuse() {
-        loadingIndicator.setProgress(to: 0.0, duration: 0)
-    }
-
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
-}
-
-extension PhotoGallery: UICollectionViewDataSource, UICollectionViewDelegate {
-
-    func scrollTo(indexPath: IndexPath) {
-        collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: false)
+    func scrollTo(indexPath: IndexPath, animated: Bool = false) {
+        collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: animated)
+        pageControl.currentPage = indexPath.item
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -137,37 +117,33 @@ extension PhotoGallery: UICollectionViewDataSource, UICollectionViewDelegate {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "image-cell", for: indexPath) as? ImageCollectionCell else { return UICollectionViewCell() }
 
         cell.imageView.kf.setImage(with: attachments[indexPath.item].url, progressBlock: { receivedSize, totalSize in
-        let percentage = (CGFloat(receivedSize) / CGFloat(totalSize)) * 100.0
-        cell.updatePercentage(percentage: percentage)
-    })
-    return cell
-}
+            let percentage = (CGFloat(receivedSize) / CGFloat(totalSize)) * 100.0
+            cell.updatePercentage(percentage: percentage)
+        })
+        cell.imageView.motionIdentifier = "photo_\(attachments[indexPath.item].id!)"
+        if pinchToZoom {
+            cell.addPinchGesture()
+            cell.captionLabel.text = attachments[indexPath.item].caption!
+            cell.addCaptionConstraints()
+        }
 
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("push to detail")
+        return cell
     }
 
-func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-    pageControl.currentPage = scrollView.currentPage
-    updateCaption?(pageControl.currentPage)
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        pushToDetail?(attachments, indexPath)
+    }
 
-}
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        pageControl.currentPage = scrollView.currentPage
+        updateCaption?(pageControl.currentPage)
+        updateScrollPosition?(pageControl.currentPage)
+
+    }
 }
 
 extension UIScrollView {
     var currentPage: Int {
         return Int((self.contentOffset.x + (0.5*self.frame.size.width))/self.frame.width)
-    }
-}
-
-extension PhotoGallery: ZoomingViewController {
-    func zoomingImageView(for transition: ZoomTransitioningDelegate) -> UIImageView? {
-        guard let indexPath = selectedIndex else { return nil }
-        guard let cell = collectionView.cellForItem(at: indexPath) as? ImageCollectionCell else { return nil}
-        return cell.imageView
-    }
-
-    func zoomingBackgroundView(for transition: ZoomTransitioningDelegate) -> UIView? {
-        return nil
     }
 }

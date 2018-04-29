@@ -26,7 +26,7 @@ class FeedCollectionViewController: ViewController, UIScrollViewDelegate {
         return PostOffice.instance.get() ?? []
     }()
 
-    var feedData: [PostObject] = []
+    var feedData: [ListDiffable] = []
     var headlinePost: PostObject!
     var isFirstRun = true
 
@@ -100,7 +100,8 @@ class FeedCollectionViewController: ViewController, UIScrollViewDelegate {
 
     fileprivate func updateBookmarksInFeed() {
         let currListOfBookmarks = bookmarkPosts
-        feedData = feedData.map { post in
+        feedData = feedData.map { postObj in
+            guard let post = postObj as? PostObject else { return postObj }
             guard let updatedBookmarkPost = isPostIdInBookmarks(post: post, currListOfBookmarks: currListOfBookmarks) else { return post }
             return updatedBookmarkPost
         }
@@ -120,7 +121,6 @@ class FeedCollectionViewController: ViewController, UIScrollViewDelegate {
 extension FeedCollectionViewController: ListAdapterDataSource {
     func objects(for listAdapter: ListAdapter) -> [ListDiffable] {
         var objects = feedData as [ListDiffable]
-        objects = mergeAds(feed: objects)
 
         if let mainPost = headlinePost {
             objects = [mainPost] + objects
@@ -128,19 +128,6 @@ extension FeedCollectionViewController: ListAdapterDataSource {
 
         if loading {
             objects.append(spinToken as ListDiffable)
-        }
-        return objects
-    }
-
-    func mergeAds(feed: [ListDiffable]) -> [ListDiffable] {
-        var objects = feed
-        currAdToken = "adToken\(adCount)"
-        adDict[currAdToken] = adCount
-        adCount += 1
-        for (adtoken, adcount) in adDict {
-            if adcount <= currentPage && objects.count >= adIndex * adcount {
-                objects.insert(adtoken as ListDiffable, at: adIndex*adcount)
-            }
         }
         return objects
     }
@@ -154,7 +141,7 @@ extension FeedCollectionViewController: ListAdapterDataSource {
             return heroSC
         } else if let obj = object as? PostObject, obj.postType == .photoGallery {
             return PhotoGallerySectionController()
-        } else if let obj = object as? String, adDict[obj] != nil {
+        } else if let obj = object as? String, obj.contains("adToken") {
             return AdSectionController()
         }
         let articleSC = ArticleSectionController()
@@ -174,8 +161,11 @@ extension FeedCollectionViewController {
 
         fetchPosts(target: .posts(page: page)) { posts, error in
             if error == nil {
+                var postsWithAd: [ListDiffable] = posts
+                postsWithAd.insert("adToken\(self.adCount)" as ListDiffable, at: 7)
+                self.adCount += 1
                 self.loading = false
-                self.feedData.append(contentsOf: posts)
+                self.feedData.append(contentsOf: postsWithAd)
                 self.refreshControl.endRefreshing()
                 self.updateBookmarksInFeed()
                 self.adapter.performUpdates(animated: true, completion: nil)

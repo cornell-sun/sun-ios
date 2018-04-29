@@ -15,7 +15,7 @@ class SectionCollectionViewController: UIViewController, UIScrollViewDelegate {
     var emptySpinnerView = UIView()
     let spinner = UIActivityIndicatorView(activityIndicatorStyle: .gray)
     var refreshControl = UIRefreshControl()
-    var feedData: [PostObject] = [] {
+    var feedData: [ListDiffable] = [] {
         didSet {
             if feedData.isEmpty {
                 spinner.startAnimating()
@@ -26,10 +26,7 @@ class SectionCollectionViewController: UIViewController, UIScrollViewDelegate {
     }
     var loading = false
     var currentPage = 1
-    var adIndex = 7
     var adCount = 1
-    var adDict = [String: Int]()
-    var currAdToken = ""
     var sectionID = 0
     let spinToken = "spinner"
 
@@ -57,14 +54,7 @@ class SectionCollectionViewController: UIViewController, UIScrollViewDelegate {
             sectionID = id
         }
 
-        fetchPosts(target: .section(section: sectionID, page: 1)) { posts, error in
-            if error == nil {
-            self.feedData = posts
-            self.adapter.reloadData(completion: nil)
-            } else {
-                print(error)
-            }
-        }
+        getPosts(page: currentPage, sectionID: sectionID)
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -118,22 +108,8 @@ class SectionCollectionViewController: UIViewController, UIScrollViewDelegate {
 extension SectionCollectionViewController: ListAdapterDataSource {
     func objects(for listAdapter: ListAdapter) -> [ListDiffable] {
         var objects = feedData as [ListDiffable]
-        objects = mergeAds(feed: objects)
         if loading {
             objects.append(spinToken as ListDiffable)
-        }
-        return objects
-    }
-    
-    func mergeAds(feed: [ListDiffable]) -> [ListDiffable] {
-        var objects = feed
-        currAdToken = "adToken\(adCount)"
-        adDict[currAdToken] = adCount
-        adCount += 1
-        for (adtoken, adcount) in adDict {
-            if adcount <= currentPage && objects.count >= adIndex * adcount {
-                objects.insert(adtoken as ListDiffable, at: adIndex*adcount)
-            }
         }
         return objects
     }
@@ -149,7 +125,7 @@ extension SectionCollectionViewController: ListAdapterDataSource {
             let heroSC = HeroSectionController()
             heroSC.delegate = self
             return heroSC
-        } else if let obj = object as? String, adDict[obj] != nil {
+        } else if let obj = object as? String, obj.contains("adToken") {
             return AdSectionController()
         }
         let articleSC = ArticleSectionController()
@@ -172,7 +148,10 @@ extension SectionCollectionViewController {
         fetchPosts(target: .section(section: sectionID, page: page)) { posts, error in
             if error == nil {
                 self.loading = false
-                self.feedData.append(contentsOf: posts)
+                var postsWithAds: [ListDiffable] = posts
+                postsWithAds.insert("adToken\(self.adCount)" as ListDiffable, at: posts.count - 2)
+                self.adCount += 1
+                self.feedData.append(contentsOf: postsWithAds)
                 self.refreshControl.endRefreshing()
                 self.adapter.performUpdates(animated: true, completion: nil)
             }

@@ -11,6 +11,7 @@ import IGListKit
 import SnapKit
 import Kingfisher
 import ImageSlideshow
+import Motion
 
 protocol PhotoChangedDelegate: class {
     func photoDidChange(_ index: Int)
@@ -25,8 +26,7 @@ final class PhotoGalleryCell: UICollectionViewCell {
     }
 
     weak var photoGalleryDelegate: PhotoChangedDelegate?
-
-    var slideShow: PhotoGallery!
+    var photoGallery: PhotoGallery!
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -36,42 +36,31 @@ final class PhotoGalleryCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
-    override func layoutSubviews() {
-        super.layoutSubviews()
-    }
-
-    override func prepareForReuse() {
-
-    }
-
     func setupViews() {
-        slideShow = PhotoGallery(attachments: post!.postAttachments, height: self.bounds.height, width: self.bounds.width)
+        photoGallery = PhotoGallery(attachments: post!.postAttachments, height: self.bounds.height, width: self.bounds.width)
 
-        addSubview(slideShow)
-        slideShow.snp.makeConstraints { (make) in
+        addSubview(photoGallery)
+        photoGallery.snp.makeConstraints { (make) in
             make.width.equalToSuperview()
             make.height.equalToSuperview()
         }
 
-        slideShow.updateCaption = { page in
+        photoGallery.updateCaption = { page in
             self.photoGalleryDelegate?.photoDidChange(page)
         }
-    }
 
-//    @objc func didTapPhotos() {
-//        let fullscreenVC = slideShow.presentFullScreenController(from: getCurrentViewController()!)
-//        fullscreenVC.slideshow.activityIndicator = DefaultActivityIndicator(style: .white, color: nil)
-//        fullscreenVC.captions = post?.postAttachments.compactMap {$0.caption}
-//        fullscreenVC.captionLabel.text = post?.postAttachments[slideShow.currentPage].caption ?? ""
-//    }
-    func setUpImages() {
-        var kingfisherSource: [KingfisherSource] = []
-        guard let postAttachments = post?.postAttachments else { return }
-        for attachment in postAttachments {
-            let source = KingfisherSource(url: attachment.url)
-            kingfisherSource.append(source)
+        photoGallery.pushToDetail = { attachments, index in
+            let detailPhotoVC = PhotoGalleryDetailViewController()
+            detailPhotoVC.attachments = attachments
+            detailPhotoVC.selectedIndex = index
+            getCurrentViewController()?.motionTransitionType = .autoReverse(presenting: .zoom)
+            getCurrentViewController()?.present(detailPhotoVC, animated: true, completion: nil)
+
+            detailPhotoVC.updateMainGallery = { item in
+                let index = IndexPath(item: item, section: 0)
+                self.photoGallery.scrollTo(indexPath: index)
+                self.photoGalleryDelegate?.photoDidChange(item)
+            }
         }
-        //slideShow.setImageInputs(kingfisherSource)
     }
-
 }

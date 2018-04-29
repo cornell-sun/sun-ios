@@ -26,12 +26,6 @@ final class VideoCell: UICollectionViewCell {
         return webView
     }()
 
-    fileprivate let activityView: UIActivityIndicatorView = {
-        let view = UIActivityIndicatorView(activityIndicatorStyle: .gray)
-        //view.startAnimating()
-        return view
-    }()
-
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()
@@ -39,12 +33,6 @@ final class VideoCell: UICollectionViewCell {
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        let bounds = contentView.bounds
-        activityView.center = CGPoint(x: bounds.width/2.0, y: bounds.height/2.0)
     }
 
     func setupViews() {
@@ -59,7 +47,7 @@ final class VideoCell: UICollectionViewCell {
         if let videoUrl = post?.postAttachments[0].url {
             let request = URLRequest(url: videoUrl)
             videoWebView.loadRequest(request)
-            //videoWebView.loadHTMLString("<body style=\"margin: 0; padding: 0;\"><iframe width=\"\(videoWebView.frame.width)\" height=\"\(videoWebView.frame.height)\" src=\"\(videoUrl)?&playsinline=1\" frameborder=\"0\" allowfullscreen></iframe></body>", baseURL: nil)
+
         }
     }
 }
