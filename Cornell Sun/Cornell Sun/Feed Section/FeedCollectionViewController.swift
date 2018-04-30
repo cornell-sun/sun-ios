@@ -34,7 +34,8 @@ class FeedCollectionViewController: ViewController, UIScrollViewDelegate {
     var refreshControl = UIRefreshControl()
 
     let collectionView: UICollectionView = {
-        let view = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+        let flowLayout = UICollectionViewFlowLayout()
+        let view = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
         view.alwaysBounceVertical = true
         view.backgroundColor = .white
         return view
@@ -53,7 +54,13 @@ class FeedCollectionViewController: ViewController, UIScrollViewDelegate {
         }
 
         setNavigationInformation()
+        savedPostIds = Array(RealmManager.instance.get()).map({$0.id})
 
+        feedData = feedData.map {
+            print($0.title, ":", $0.id, ":", savedPostIds.contains($0.id))
+            return RealmManager.instance.update(object: $0, to: savedPostIds.contains($0.id))
+        }
+        self.adapter.performUpdates(animated: true, completion: nil)
     }
 
     override func viewDidLoad() {

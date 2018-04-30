@@ -66,16 +66,38 @@ extension UITextView {
 }
 
 extension String {
-    func height(withConstrainedWidth width: CGFloat, font: UIFont) -> CGFloat {
-        let constraintRect = CGSize(width: width, height: .greatestFiniteMagnitude)
-        let boundingBox = self.boundingRect(with: constraintRect, options: .usesLineFragmentOrigin, attributes: [NSAttributedStringKey.font: font], context: nil)
 
+    func requiredHeight(width: CGFloat, font: UIFont) -> CGFloat {
+        let label = UILabel(frame: CGRect(x: 0.0, y: 0.0, width: width, height: CGFloat.greatestFiniteMagnitude))
+        label.numberOfLines = 0
+        label.lineBreakMode = .byWordWrapping
+        label.font = font
+        label.text = self
+        label.sizeToFit()
+        return label.frame.height
+    }
+
+    func height(withConstrainedWidth width: CGFloat, font: UIFont, lineSpacing: CGFloat = 0.0) -> CGFloat {
+        let constraintRect = CGSize(width: width, height: .greatestFiniteMagnitude)
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = lineSpacing
+        let boundingBox = self.boundingRect(with: constraintRect,
+                                            options: .usesLineFragmentOrigin,
+                                            attributes: [NSAttributedStringKey.font: font,
+                                                         NSAttributedStringKey.paragraphStyle: paragraphStyle],
+                                            context: nil)
         return ceil(boundingBox.height)
     }
 
-    func width(withConstraintedHeight height: CGFloat, font: UIFont) -> CGFloat {
+    func width(withConstraintedHeight height: CGFloat, font: UIFont, lineSpacing: CGFloat = 0.0) -> CGFloat {
         let constraintRect = CGSize(width: .greatestFiniteMagnitude, height: height)
-        let boundingBox = self.boundingRect(with: constraintRect, options: .usesLineFragmentOrigin, attributes: [NSAttributedStringKey.font: font], context: nil)
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = lineSpacing
+        let boundingBox = self.boundingRect(with: constraintRect,
+                                            options: .usesLineFragmentOrigin,
+                                            attributes: [NSAttributedStringKey.font: font,
+                                                         NSAttributedStringKey.paragraphStyle: paragraphStyle],
+                                            context: nil)
 
         return ceil(boundingBox.width)
     }
@@ -152,6 +174,27 @@ extension UIImage {
         guard let newImage = UIGraphicsGetImageFromCurrentImageContext() else { return UIImage() }
         UIGraphicsEndImageContext()
         return newImage
+    }
+
+}
+
+extension UILabel {
+
+    /// Set line spacing between lines on a UILabel
+    func setLineSpacing(to value: CGFloat) {
+        guard let labelText = text else { return }
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = value
+        paragraphStyle.lineBreakMode = .byTruncatingTail
+
+        var attributedString: NSMutableAttributedString
+        if let attrText = attributedText {
+            attributedString = NSMutableAttributedString(attributedString: attrText)
+        } else {
+            attributedString = NSMutableAttributedString(string: labelText)
+        }
+        attributedString.addAttribute(.paragraphStyle, value: paragraphStyle, range: NSRange(location: 0, length: attributedString.length))
+        attributedText = attributedString
     }
 
 }

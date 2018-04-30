@@ -88,6 +88,7 @@ class SearchViewController: UIViewController, UITableViewDelegate {
         view.addSubview(tableView)
 
         collectionView.isHidden = true
+        collectionView.backgroundColor = .collectionBackground
         view.addSubview(collectionView)
 
         spinner.snp.makeConstraints { make in

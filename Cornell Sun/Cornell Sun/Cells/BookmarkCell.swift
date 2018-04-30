@@ -15,12 +15,16 @@ final class BookmarkCell: UICollectionViewCell {
     let offsetConstant: CGFloat = 12
     let imageViewWidthHeight: CGFloat = 100
     let titleBottomInset: CGFloat = 8.5
+    let authorHeight: CGFloat = 13
 
     var post: PostObject? {
         didSet {
-            titleLabel.text = post?.title
-            authorLabel.text = post?.author?.name
-            setupImage()
+            if let post = post, let author = post.author {
+                titleLabel.text = post.title
+                titleLabel.setLineSpacing(to: 4.5)
+                authorLabel.text = "By " + author.name
+                setupImage()
+            }
         }
     }
 
@@ -49,12 +53,6 @@ final class BookmarkCell: UICollectionViewCell {
         return label
     }()
 
-    let divider: UIView = {
-        let view = UIView()
-        view.backgroundColor = .black40
-        return view
-    }()
-
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()
@@ -69,7 +67,6 @@ final class BookmarkCell: UICollectionViewCell {
         addSubview(imageView)
         addSubview(titleLabel)
         addSubview(authorLabel)
-        addSubview(divider)
         imageView.snp.makeConstraints { (make) in
             make.centerY.equalToSuperview()
             make.left.equalToSuperview().inset(insetConstant)
@@ -79,7 +76,7 @@ final class BookmarkCell: UICollectionViewCell {
         authorLabel.snp.makeConstraints { (make) in
             make.left.equalTo(imageView.snp.right).offset(offsetConstant)
             make.bottom.equalTo(imageView.snp.bottom)
-            make.height.equalTo(13)
+            make.height.equalTo(authorHeight)
         }
 
         titleLabel.snp.makeConstraints { (make) in
@@ -89,12 +86,6 @@ final class BookmarkCell: UICollectionViewCell {
             make.bottom.lessThanOrEqualTo(authorLabel.snp.top).offset(-titleBottomInset)
         }
 
-        divider.snp.makeConstraints { (make) in
-            make.height.equalTo(1)
-            make.left.equalToSuperview().inset(insetConstant)
-            make.right.equalToSuperview().inset(insetConstant)
-            make.bottom.equalToSuperview().inset(1)
-        }
     }
 
     func setupImage() {

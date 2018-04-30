@@ -15,8 +15,8 @@ protocol ShareBarViewDelegate: class {
 
 class ShareBarView: UIView {
     var topSeparatorLabel: UILabel!
-    var bookmarkButton: UIButton!
-    var shareButton: UIButton!
+    var bookmarkButton: Button!
+    var shareButton: Button!
     weak var delegate: ShareBarViewDelegate?
 
     let topSeparatorHeight: CGFloat = 1
@@ -39,9 +39,9 @@ class ShareBarView: UIView {
             make.height.equalTo(topSeparatorHeight)
         }
 
-        bookmarkButton = UIButton()
+        bookmarkButton = Button()
         bookmarkButton.imageView?.contentMode = .scaleAspectFit
-        bookmarkButton.setImage(#imageLiteral(resourceName: "bookmark"), for: .normal)
+        bookmarkButton.setImage(#imageLiteral(resourceName: "bookmarkIcon"), for: .normal)
         bookmarkButton.addTarget(self, action: #selector(bookmark), for: .touchUpInside)
         addSubview(bookmarkButton)
         bookmarkButton.snp.makeConstraints { make in
@@ -51,7 +51,7 @@ class ShareBarView: UIView {
             make.centerY.equalToSuperview()
         }
 
-        shareButton = UIButton()
+        shareButton = Button()
         shareButton.imageView?.contentMode = .scaleAspectFit
         shareButton.setImage(#imageLiteral(resourceName: "share"), for: .normal)
         shareButton.addTarget(self, action: #selector(share), for: .touchUpInside)

@@ -12,6 +12,7 @@ class TabBarViewController: UITabBarController {
 
     var posts: [PostObject]!
     var headlinePost: PostObject?
+    var previousViewController: UIViewController?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,7 +21,7 @@ class TabBarViewController: UITabBarController {
         tabBar.backgroundColor = .white
         tabBar.backgroundImage = UIImage()
         tabBar.tintColor = .brick
-        tabBar.unselectedItemTintColor = .black
+        tabBar.unselectedItemTintColor = .black70
         delegate = self
         setupTabs()
     }
@@ -45,6 +46,7 @@ class TabBarViewController: UITabBarController {
             feedVC.headlinePost = mainHeadlinePost
         }
         let tabOneNavigationController = UINavigationController(rootViewController: feedVC)
+        tabOneNavigationController.navigationBar.isTranslucent = false
         let tabOneTabBarItem = UITabBarItem(title: "News", image: #imageLiteral(resourceName: "feedIcon").withRenderingMode(.alwaysOriginal), selectedImage: #imageLiteral(resourceName: "feedIconRed").withRenderingMode(.alwaysOriginal))
         tabOneNavigationController.tabBarItem = tabOneTabBarItem
 
@@ -77,6 +79,9 @@ class TabBarViewController: UITabBarController {
 }
 
 extension TabBarViewController: UITabBarControllerDelegate {
-    override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
+
+    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+        // do scroll to top
+
     }
 }

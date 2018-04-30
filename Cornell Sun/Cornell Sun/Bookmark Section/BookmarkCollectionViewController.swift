@@ -29,6 +29,10 @@ class BookmarkCollectionViewController: ViewController, UIScrollViewDelegate {
 
     override func viewWillAppear(_ animated: Bool) {
         title = "Bookmarks"
+        navigationController?.navigationBar.barTintColor = .white
+        navigationController?.navigationBar.titleTextAttributes = [
+            NSAttributedStringKey.font: UIFont.headerTitle
+        ]
 
         guard !isFirstRun else {
             isFirstRun = false
@@ -40,9 +44,7 @@ class BookmarkCollectionViewController: ViewController, UIScrollViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Bookmarks"
-        navigationController?.navigationBar.titleTextAttributes = [
-            NSAttributedStringKey.font: UIFont.headerTitle
-        ]
+
         view.addSubview(collectionView)
         adapter.collectionView = collectionView
         adapter.collectionView?.backgroundColor = .black5

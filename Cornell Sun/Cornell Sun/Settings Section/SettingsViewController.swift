@@ -16,43 +16,42 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
     var settings: [[SettingObject]] = []
     
     let appID = "App ID"
+    let headerReuseIdentifier = "HeaderCell"
+    let settingReuseIdentifier = "SettingCell"
     
     override func viewWillAppear(_ animated: Bool) {
-        setNavigationInformation()
+        title = "Settings"
+        navigationController?.navigationBar.barTintColor = .white
+        navigationController?.navigationBar.titleTextAttributes = [
+            NSAttributedStringKey.font: UIFont.headerTitle,
+            NSAttributedStringKey.strokeColor: UIColor.black90
+        ]
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor.grayMid
+        view.backgroundColor = .white
         //Calling hardcoded populator
         if settings.count == 0 {
             testInit()
         }
     
         // Set up table view for settings
-        tableView = UITableView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height))
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "SettingCell")
+        tableView = UITableView()
+        tableView.backgroundColor = .black5
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: settingReuseIdentifier)
         tableView.tableFooterView = UIView()
-        tableView.tableFooterView?.backgroundColor = UIColor.grayMid
-        tableView.backgroundColor = UIColor.grayMid
         tableView.delegate = self
         tableView.dataSource = self
         view.addSubview(tableView)
+        tableView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-    
-    func setNavigationInformation() {
-        navigationItem.title = "The Cornell Daily Sun"
-        let navBar = navigationController?.navigationBar
-        navBar?.barTintColor = .white
-        navBar?.tintColor = .black
-        navBar?.titleTextAttributes = [
-            NSAttributedStringKey.font: UIFont(name: "Sonnenstrahl-Ausgezeichnet", size: .mainHeaderSize)!
-        ]
     }
     
     //Table View functions
@@ -71,15 +70,14 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
         } else {
             headerCell = UITableViewCell()
         }
-        headerCell.contentView.backgroundColor = UIColor.grayMid
         let sectionLabel = UILabel()
         headerCell.contentView.addSubview(sectionLabel)
-        sectionLabel.font = UIFont.systemFont(ofSize: 14, weight: UIFont.Weight.regular)
+        headerCell.contentView.backgroundColor = .black5
+        sectionLabel.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         sectionLabel.textColor = UIColor(white: 74/255, alpha: 1.0)
         sectionLabel.snp.makeConstraints { make in
             make.height.equalTo(20)
             make.left.equalTo(headerCell.contentView.snp.left).offset(16)
-            //make.top.equalTo(headerCell.contentView.snp.top).offset(5)
             make.bottom.equalToSuperview().offset(-6)
         }
         sectionLabel.text = sections[section]
@@ -103,9 +101,8 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
         let setting = settings[indexPath.section][indexPath.row]
         if let next = setting.nextController {
                 navigationController?.pushViewController(next, animated: true)
-        }
-         else {
-            switch(setting.type) {
+        } else {
+            switch setting.type {
                 case .rate:
                     let urlStr = "itms-apps://itunes.apple.com/app/viewContentsUserReviews?id=\(appID)"
                     if let url = URL(string: urlStr), UIApplication.shared.canOpenURL(url) {
@@ -133,17 +130,9 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
                         }
                 }
                 case .masthead:
-                    if let url = URL(string: "http://cornellsun.com/2007/03/01/full-masthead-of-the-cornell-daily-sun/") {
-                        if #available(iOS 11.0, *) {
-                            let config = SFSafariViewController.Configuration()
-                            config.entersReaderIfAvailable = true
-                            let vc = SFSafariViewController(url: url, configuration: config)
-                            present(vc, animated: true)
-                        } else {
-                            // Fallback on earlier versions
-                            let safariVC = SFSafariViewController(url: url)
-                            self.present(safariVC, animated: true, completion: nil)
-                        }
+                    if let url = URL(string: "http://i1.wp.com/cornellsun.com/wp-content/uploads/2015/10/Screen-Shot-2018-03-07-at-10.10.55-AM.png?w=394") {
+                        let mastheadViewController = MastheadViewController(url: url)
+                        navigationController?.pushViewController(mastheadViewController, animated: true)
                 }
                 default:
                     print("default")
@@ -151,7 +140,6 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
             }
         }
     }
-    
 
     //Populator for settings array
     func testInit() {
@@ -162,12 +150,12 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
         settings.append([])
         let notificationViewController = NotificationViewController()
         notificationViewController.prevViewController = self
-        settings[0].append(SettingObject(label: "Notification", next: notificationViewController, setType: .none))
+        settings[0].append(SettingObject(label: "Notifications", next: notificationViewController, setType: .none))
         settings[0].append(SettingObject(label: "Login", next: nil, setType: .none))
         
         let subscribeViewController = SubscribeViewController()
         subscribeViewController.prevViewController = self
-        settings[0].append(SettingObject(label: "Subscribe", next: subscribeViewController,setType: .none))
+        settings[0].append(SettingObject(label: "Subscribe", next: subscribeViewController, setType: .none))
         
         //Initializing Support settings
         settings.append([])

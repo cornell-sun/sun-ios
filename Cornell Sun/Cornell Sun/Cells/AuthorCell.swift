@@ -12,6 +12,9 @@ import SnapKit
 final class AuthorCell: UICollectionViewCell {
 
     let insetConstant: CGFloat = 17
+    let topOffset: CGFloat = 2
+    let bottomInset: CGFloat = 10
+    let height: CGFloat = 13
 
     var post: PostObject? {
         didSet {
@@ -25,7 +28,7 @@ final class AuthorCell: UICollectionViewCell {
         let label = UILabel()
         label.text = ""
         label.numberOfLines = 1
-        label.font = .subSecondaryHeader
+        label.font = .cellInformationText
         label.textColor = .black90
         return label
     }()
@@ -43,8 +46,8 @@ final class AuthorCell: UICollectionViewCell {
         self.backgroundColor = .white
         addSubview(authorLabel)
         authorLabel.snp.makeConstraints { (make) in
-            make.top.equalToSuperview()
-            make.left.equalToSuperview().inset(insetConstant)
+            make.top.equalToSuperview().offset(topOffset)
+            make.leading.equalToSuperview().inset(insetConstant)
         }
     }
 }

@@ -16,22 +16,18 @@ class ViewController: UIViewController {
         view.backgroundColor = .white
         navigationItem.title = "The Cornell Daily Sun"
         self.navigationController?.navigationBar.titleTextAttributes = [
-            NSAttributedStringKey.font: UIFont(name: "Sonnenstrahl-Ausgezeichnet", size: 22)!
+            NSAttributedStringKey.font: UIFont(name: "Sonnenstrahl-Ausgezeichnet", size: 30)!
         ]
-
-        /* navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Search",
-                                                            style: .plain,
-                                                            target: self,
-                                                            action: #selector(showSearchViewController))
-         */
     }
 
     override func viewWillAppear(_ animated: Bool) {
         navigationItem.title = "The Cornell Daily Sun"
     }
 
-    @objc func showSearchViewController() {
-        navigationController?.pushViewController(SearchViewController(fetchTrending: true), animated: true)
+    override func viewWillDisappear(_ animated: Bool) {
+        self.navigationController?.navigationBar.titleTextAttributes = [
+            NSAttributedStringKey.font: UIFont.systemFont(ofSize: 16)
+        ]
     }
 
     override func didReceiveMemoryWarning() {

@@ -63,11 +63,11 @@ extension BookmarkSectionController: BookmarkPressedDelegate, SharePressedDelega
         }
         switch sizeForItemIndex {
         case .categoryCell:
-            return CGSize(width: width, height: 40)
+            return CGSize(width: width, height: 45)
         case .imageAndTitleCell:
             return CGSize(width: width, height: 124)
         case .actionMenuCell:
-            return CGSize(width: width, height: 35)
+            return CGSize(width: width, height: 40)
         }
     }
 
@@ -93,7 +93,6 @@ extension BookmarkSectionController: BookmarkPressedDelegate, SharePressedDelega
             cell.shareDelegate = self
             cell.post = entry
             cell.setupViews(forBookmarks: true)
-            cell.setBookmarkImage(didSelectBookmark: entry.didSave)
             return cell
         }
     }

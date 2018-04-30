@@ -12,7 +12,7 @@ import OneSignal
 class OnboardingPageViewController: UIPageViewController {
 
     var pageControl: UIPageControl!
-    var nextButton: UIButton!
+    var nextButton: Button!
     var loadingIndicator: UIActivityIndicatorView!
     var pages = [UIViewController]()
 
@@ -39,20 +39,25 @@ class OnboardingPageViewController: UIPageViewController {
         pageControl.pageIndicatorTintColor = UIColor.white.withAlphaComponent(0.5)
         pageControl.numberOfPages = pages.count
         view.addSubview(pageControl)
+
+        var bottomArea = view.layoutMarginsGuide.snp.bottom
+        if #available(iOS 11, *) {
+            bottomArea = view.safeAreaLayoutGuide.snp.bottom
+        }
         pageControl.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.size.equalTo(pageControlSize)
-            make.bottom.equalToSuperview().inset(pageControlBottomInset)
+            make.bottom.equalTo(bottomArea).inset(pageControlBottomInset)
         }
 
-        nextButton = UIButton()
+        nextButton = Button()
         nextButton.setImage(#imageLiteral(resourceName: "arrowThinCopy"), for: .normal)
         nextButton.addTarget(nil, action: #selector(pageNextTapped(_:)), for: .touchUpInside)
         view.addSubview(nextButton)
         nextButton.snp.makeConstraints { make in
             make.trailing.equalToSuperview().inset(nextButtonInset)
             make.size.equalTo(nextButtonSize)
-            make.bottom.equalToSuperview().inset(nextButtonBottomInset)
+            make.bottom.equalTo(bottomArea).inset(nextButtonBottomInset)
         }
 
         loadingIndicator = UIActivityIndicatorView()

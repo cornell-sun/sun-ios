@@ -46,7 +46,7 @@ extension UIFont {
     }
 
     class var photoCaption: UIFont {
-        return UIFont(name: "Georgia", size: 14.0)!
+        return UIFont(name: "Georgia", size: 13.0)!
     }
 
     class var photoCaptionCredit: UIFont {

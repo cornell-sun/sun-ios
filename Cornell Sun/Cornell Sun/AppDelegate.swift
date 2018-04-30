@@ -23,6 +23,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         IQKeyboardManager.sharedManager().enable = true
 
+        // Set all navigation bar attributes
+        UINavigationBar.appearance().backgroundColor = .white
+        UINavigationBar.appearance().tintColor = .black70
+
         let onesignalInitSettings = [kOSSettingsKeyAutoPrompt: false]
 
         OneSignal.initWithLaunchOptions(launchOptions,

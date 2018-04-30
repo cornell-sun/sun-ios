@@ -75,7 +75,7 @@ class SectionCollectionViewController: UIViewController, UIScrollViewDelegate {
 
         view.addSubview(collectionView)
         adapter.collectionView = collectionView
-        adapter.collectionView?.backgroundColor = .white
+        adapter.collectionView?.backgroundColor = .collectionBackground
         adapter.collectionView?.refreshControl = refreshControl
         adapter.dataSource = self
         adapter.scrollViewDelegate = self
@@ -87,6 +87,13 @@ class SectionCollectionViewController: UIViewController, UIScrollViewDelegate {
         spinner.snp.makeConstraints { make in
             make.center.equalToSuperview()
         }
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.navigationBar.barTintColor = .white
+        navigationController?.navigationBar.titleTextAttributes = [
+            NSAttributedStringKey.font: UIFont.headerTitle
+        ]
     }
 
     override func didReceiveMemoryWarning() {
@@ -120,10 +127,10 @@ extension SectionCollectionViewController: ListAdapterDataSource {
     }
 
     func emptyView(for listAdapter: ListAdapter) -> UIView? {
-        if feedData.isEmpty {
-            spinner.startAnimating()
-        }
-        return emptySpinnerView
+        let skeletonView = SkeletonFeedCell(frame: view.frame)
+        skeletonView.isSkeletonable = true
+        skeletonView.showAnimatedSkeleton()
+        return skeletonView
     }
 }
 

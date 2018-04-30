@@ -44,7 +44,7 @@ class ArticleStackViewController: UIViewController {
         super.viewDidLoad()
 
         view.backgroundColor = .white
-        navigationController?.navigationBar.topItem?.title = ""
+        navigationController?.navigationBar.topItem?.title = "Main Feed"
         navigationController?.navigationBar.tintColor = .black
         if #available(iOS 11.0, *) {
             navigationController?.navigationBar.prefersLargeTitles = false
@@ -82,6 +82,10 @@ class ArticleStackViewController: UIViewController {
         }
 
         setup()
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        navigationController?.navigationBar.topItem?.title = "The Cornell Daily Sun"
     }
 
     /// Sets up the content in the stack view by parsing each section.
@@ -143,9 +147,13 @@ class ArticleStackViewController: UIViewController {
     }
 
     func parseImg(element: Element) -> ArticleContentType? {
-        guard let src = try? element.select("img[src]") else { return nil }
-        guard let srcUrl = try? src.attr("src").description else { return nil }
-        cacheImage(imageLink: srcUrl) //cache the image
+        if let src = try? element.select("img[src]"), let srcUrl = try? src.attr("src").description, srcUrl != "" {
+            cacheImage(imageLink: srcUrl) //cache the image
+            return .image(srcUrl)
+        }
+        // slideshow parsing for now
+        guard let srcUrl = try? element.attr("data-lazy").description else { return nil }
+        cacheImage(imageLink: srcUrl)
         return .image(srcUrl)
     }
 
@@ -258,28 +266,44 @@ class ArticleStackViewController: UIViewController {
     }
 
     func setupComments() {
-        setupCommentsTableView()
         getComments(postID: post.id) { comments, error in
             if error == nil {
                 self.comments = comments
+                self.setupCommentsTableView()
                 self.commentsTableView.reloadData()
             }
         }
     }
 
     func setupCommentsTableView() {
-        let view = UIView()
         commentsTableView = UITableView()
         commentsTableView.delegate = self
         commentsTableView.dataSource = self
+        commentsTableView.isScrollEnabled = false
         commentsTableView.rowHeight = UITableViewAutomaticDimension
         commentsTableView.register(CommentTableViewCell.self, forCellReuseIdentifier: commentReuseIdentifier)
         commentsTableView.estimatedRowHeight = 100
-        view.addSubview(commentsTableView)
-        stackView.addArrangedSubview(view)
-        commentsTableView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+        scrollView.addSubview(commentsTableView)
+
+        let totalHeight = self.comments.map { comment -> CGFloat in
+            let textHeight = comment.comment.requiredHeight(width: view.bounds.width-37, font: .subSecondaryHeader)
+            return textHeight + 100
         }
+
+        stackView.snp.removeConstraints()
+
+        stackView.snp.remakeConstraints { make in
+            make.leading.trailing.top.equalToSuperview()
+            make.bottom.equalTo(commentsTableView.snp.top)
+        }
+
+        commentsTableView.snp.makeConstraints { make in
+            make.width.leading.trailing.equalToSuperview()
+            make.height.equalTo(totalHeight.reduce(0, +))
+            make.top.equalTo(stackView.snp.bottom)
+            make.bottom.equalToSuperview().inset(20)
+        }
+
     }
 }
 

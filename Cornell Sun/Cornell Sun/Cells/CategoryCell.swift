@@ -31,6 +31,7 @@ final class CategoryCell: UICollectionViewCell {
         let label = UILabel()
         label.text = ""
         label.font = .secondaryHeader
+        label.textColor = .black90
         label.numberOfLines = 2
         return label
     }()
