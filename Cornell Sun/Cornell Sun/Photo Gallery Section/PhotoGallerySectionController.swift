@@ -59,20 +59,20 @@ extension PhotoGallerySectionController: BookmarkPressedDelegate, SharePressedDe
         }
         switch sizeForItemIndex {
         case .categoryCell:
-            return CGSize(width: width, height: 40)
+            return CGSize(width: width, height: 45)
         case .titleCell:
-            let height = entry.title.height(withConstrainedWidth: width - 34, font: .headerTitle) //CLUTCH Extension thank stackoverflow gods
-            return CGSize(width: width, height: height + 40)
+            let height = entry.title.height(withConstrainedWidth: width - 34, font: .articleTitle, lineSpacing: 4.5) //CLUTCH Extension thank stackoverflow gods
+            return CGSize(width: width, height: height + 20)
         case .authorCell:
             let height = entry.author[0].name.height(withConstrainedWidth: width, font: .photoCaption)
-            return CGSize(width: width, height: height + 9)
+            return CGSize(width: width, height: height + 13)
         case .photoGalleryCell:
             return CGSize(width: width, height: width / 1.5)
         case .captionCell:
             let height = captionMaxHeight(width: width)
             return CGSize(width: width, height: height + 16)
         case .actionMenuCell:
-            return CGSize(width: width, height: 35)
+            return CGSize(width: width, height: 50)
         }
     }
 

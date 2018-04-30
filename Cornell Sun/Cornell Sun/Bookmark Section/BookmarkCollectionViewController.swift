@@ -87,7 +87,7 @@ extension BookmarkCollectionViewController: ListAdapterDataSource {
             return PhotoGallerySectionController()
         }
 
-        let bookmarkSC = BookmarkSectionController()
+        let bookmarkSC = BookmarkSearchSectionController(forBookmarks: true)
         bookmarkSC.delegate = self
         return bookmarkSC
     }

@@ -49,14 +49,14 @@ extension VideoSectionController: BookmarkPressedDelegate, SharePressedDelegate 
 
         switch sizeForItemIndex {
         case .categoryCell:
-            return CGSize(width: width, height: 40)
+            return CGSize(width: width, height: 45)
         case .titleCell:
-            let height = entry.title.height(withConstrainedWidth: width - 34, font: .headerTitle) //CLUTCH Extension thank stackoverflow gods
-            return CGSize(width: width, height: height + 40)
+            let height = entry.title.height(withConstrainedWidth: width - 34, font: .articleTitle, lineSpacing: 4.5) //CLUTCH Extension thank stackoverflow gods
+            return CGSize(width: width, height: height + 20)
         case .videoCell:
             return CGSize(width: width, height: width / 1.5)
         case .actionMenuCell:
-            return CGSize(width: width, height: 35)
+            return CGSize(width: width, height: 50)
         }
     }
 

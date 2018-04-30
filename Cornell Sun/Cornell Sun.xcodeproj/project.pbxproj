@@ -44,7 +44,7 @@
 		61652CD41F6EF44900EEFC29 /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61652CD31F6EF44900EEFC29 /* SearchTableViewCell.swift */; };
 		DC0A883A1FBA2DEE00F2BCBB /* PhotoGalleryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0A88391FBA2DEE00F2BCBB /* PhotoGalleryCell.swift */; };
 		DC0A883C1FBA531000F2BCBB /* BookmarkCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0A883B1FBA531000F2BCBB /* BookmarkCollectionViewController.swift */; };
-		DC0A883E1FBA6B8200F2BCBB /* BookmarkSectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0A883D1FBA6B8200F2BCBB /* BookmarkSectionController.swift */; };
+		DC0A883E1FBA6B8200F2BCBB /* BookmarkSearchSectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0A883D1FBA6B8200F2BCBB /* BookmarkSearchSectionController.swift */; };
 		DC0A88401FBA84E700F2BCBB /* AuthorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0A883F1FBA84E700F2BCBB /* AuthorCell.swift */; };
 		DC0E7C4E208FFCBA00B1295F /* PostObjectHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0E7C4D208FFCBA00B1295F /* PostObjectHelpers.swift */; };
 		DC34DEF3203216690010DF9A /* SectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC34DEF2203216690010DF9A /* SectionViewController.swift */; };
@@ -165,7 +165,7 @@
 		DA69BC56E568CC99632DAB34 /* Pods-Cornell Sun-SunNotificationServiceExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cornell Sun-SunNotificationServiceExtension.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Cornell Sun-SunNotificationServiceExtension/Pods-Cornell Sun-SunNotificationServiceExtension.debug.xcconfig"; sourceTree = "<group>"; };
 		DC0A88391FBA2DEE00F2BCBB /* PhotoGalleryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoGalleryCell.swift; sourceTree = "<group>"; };
 		DC0A883B1FBA531000F2BCBB /* BookmarkCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkCollectionViewController.swift; sourceTree = "<group>"; };
-		DC0A883D1FBA6B8200F2BCBB /* BookmarkSectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkSectionController.swift; sourceTree = "<group>"; };
+		DC0A883D1FBA6B8200F2BCBB /* BookmarkSearchSectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkSearchSectionController.swift; sourceTree = "<group>"; };
 		DC0A883F1FBA84E700F2BCBB /* AuthorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorCell.swift; sourceTree = "<group>"; };
 		DC0E7C4D208FFCBA00B1295F /* PostObjectHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostObjectHelpers.swift; sourceTree = "<group>"; };
 		DC34DEF2203216690010DF9A /* SectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionViewController.swift; sourceTree = "<group>"; };
@@ -560,7 +560,7 @@
 			isa = PBXGroup;
 			children = (
 				DC0A883B1FBA531000F2BCBB /* BookmarkCollectionViewController.swift */,
-				DC0A883D1FBA6B8200F2BCBB /* BookmarkSectionController.swift */,
+				DC0A883D1FBA6B8200F2BCBB /* BookmarkSearchSectionController.swift */,
 			);
 			path = "Bookmark Section";
 			sourceTree = "<group>";
@@ -579,7 +579,6 @@
 				5D796D343FAE3F7BC75A78B1 /* [CP] Embed Pods Frameworks */,
 				40D130291F61EF250063329A /* SwiftLint */,
 				DC3667DC206EB9D2002EB4F9 /* Embed App Extensions */,
-				F7F7835D55907867EA6B8388 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -599,7 +598,6 @@
 				DC3667CD206EB9D2002EB4F9 /* Sources */,
 				DC3667CE206EB9D2002EB4F9 /* Frameworks */,
 				DC3667CF206EB9D2002EB4F9 /* Resources */,
-				16DBF59F947FE44D1149C6FA /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -619,7 +617,6 @@
 				DCD870E91F256B7B00B98AF8 /* Frameworks */,
 				DCD870EA1F256B7B00B98AF8 /* Resources */,
 				257BDE34A42EF8D90E4C73AE /* [CP] Embed Pods Frameworks */,
-				D999605B716B973CB4C648C2 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -722,21 +719,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		16DBF59F947FE44D1149C6FA /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Cornell Sun-SunNotificationServiceExtension/Pods-Cornell Sun-SunNotificationServiceExtension-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		257BDE34A42EF8D90E4C73AE /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -883,36 +865,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		D999605B716B973CB4C648C2 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Cornell SunTests/Pods-Cornell SunTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		F7F7835D55907867EA6B8388 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Cornell Sun/Pods-Cornell Sun-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -923,7 +875,7 @@
 				0CEA0F7A1F99454600607CC7 /* Date+.swift in Sources */,
 				DC446C321F5D05FF00D68688 /* ArticleSectionController.swift in Sources */,
 				5006AFFE1EA9625000F58549 /* ViewController.swift in Sources */,
-				DC0A883E1FBA6B8200F2BCBB /* BookmarkSectionController.swift in Sources */,
+				DC0A883E1FBA6B8200F2BCBB /* BookmarkSearchSectionController.swift in Sources */,
 				DC6561D31FBAC45900C5062D /* PhotoGalleryObject.swift in Sources */,
 				DC3CCB35209243BC000A9A5B /* VideoSectionController.swift in Sources */,
 				DC3CCB3320924288000A9A5B /* VideoCell.swift in Sources */,

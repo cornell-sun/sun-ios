@@ -347,6 +347,7 @@ extension ArticleStackViewController: ShareBarViewDelegate {
         } else {
             PostOffice.instance.remove(object: post)
         }
+        
     }
 }
 

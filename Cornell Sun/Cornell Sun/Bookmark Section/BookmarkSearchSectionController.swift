@@ -17,17 +17,19 @@ enum bookmarkCellType: Int {
     case actionMenuCell = 2
 }
 
-class BookmarkSectionController: ListSectionController {
+class BookmarkSearchSectionController: ListSectionController {
     var entry: PostObject!
+    var forBookmarks: Bool!
     weak var delegate: TabBarViewControllerDelegate?
 
-    override init() {
+    init(forBookmarks: Bool = false) {
         super.init()
         inset = UIEdgeInsets(top: 0, left: 0, bottom: 15, right: 0)
+        self.forBookmarks = forBookmarks
     }
 }
 
-extension BookmarkSectionController: BookmarkPressedDelegate, SharePressedDelegate {
+extension BookmarkSearchSectionController: BookmarkPressedDelegate, SharePressedDelegate {
 
     func taptic() {
         let generator = UIImpactFeedbackGenerator(style: .light)
@@ -92,7 +94,7 @@ extension BookmarkSectionController: BookmarkPressedDelegate, SharePressedDelega
             cell.bookmarkDelegate = self
             cell.shareDelegate = self
             cell.post = entry
-            cell.setupViews(forBookmarks: true)
+            cell.setupViews(forBookmarks: forBookmarks)
             return cell
         }
     }
