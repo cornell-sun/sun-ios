@@ -21,7 +21,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="gradient" translatesAutoresizingMaskIntoConstraints="NO" id="2mq-kd-vqS">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gradient" translatesAutoresizingMaskIntoConstraints="NO" id="2mq-kd-vqS">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sunLogoWhiteCopy" translatesAutoresizingMaskIntoConstraints="NO" id="dee-3g-Swq">
@@ -36,8 +36,11 @@
                         <constraints>
                             <constraint firstItem="2mq-kd-vqS" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="2c1-ea-vV6"/>
                             <constraint firstItem="dee-3g-Swq" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="3OY-c0-Os3"/>
+                            <constraint firstItem="2mq-kd-vqS" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="5AQ-zb-Jko"/>
                             <constraint firstItem="2mq-kd-vqS" firstAttribute="bottom" secondItem="Ze5-6b-2t3" secondAttribute="bottom" id="CNt-DI-JLv"/>
                             <constraint firstItem="dee-3g-Swq" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="LId-o3-EGj"/>
+                            <constraint firstAttribute="trailing" secondItem="2mq-kd-vqS" secondAttribute="trailing" id="Rz3-gm-fLr"/>
+                            <constraint firstItem="2mq-kd-vqS" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="zIw-gZ-vx9"/>
                         </constraints>
                     </view>
                 </viewController>

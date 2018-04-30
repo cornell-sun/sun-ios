@@ -86,10 +86,6 @@ final class MenuActionCell: UICollectionViewCell {
         shareDelegate?.didPressShare()
     }
 
-    override func prepareForReuse() {
-        //bookmarkButton.setImage(#imageLiteral(resourceName: "bookmark"), for: .normal)
-    }
-
     func setBookmarkImage(didSelectBookmark: Bool) {
         let image = didSelectBookmark ? #imageLiteral(resourceName: "bookmarkPressed") : #imageLiteral(resourceName: "bookmarkIcon")
         bookmarkButton.setImage(image, for: .normal)

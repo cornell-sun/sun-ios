@@ -44,7 +44,6 @@ class PostObject: Object, ListDiffable {
     @objc dynamic var primaryCategory: String = ""
     var categories = List<String>()
     var tags = List<String>()
-    var comments = List<CommentObject>()
     var photoGalleryObjects = List<PhotoGalleryObject>()
     @objc dynamic var mediumLargeImageLink: String = ""
     @objc dynamic var thumbnailImageLink: String = ""
@@ -114,11 +113,6 @@ class PostObject: Object, ListDiffable {
 
         let authorObject = AuthorObject(id: authorId, name: authorName.htmlToString, link: authorLink, bio: bio, avatarLink: avatarLink)
 
-        var commentsArray: [CommentObject] = []
-
-        for comment in postCommentsArray {
-        }
-
         if postTypeEnum == .photoGallery, let postAttachmentsArray = postDict["post_attachments_meta"] as? [Any] {
             //process photogallery stuff
             for postAttachment in postAttachmentsArray {
@@ -135,9 +129,6 @@ class PostObject: Object, ListDiffable {
 
         let tagsList = List<String>()
         tagsList.append(objectsIn: tagsArray)
-
-        let commentsList = List<CommentObject>()
-        commentsList.append(objectsIn: commentsArray)
 
         let photoGalleryList = List<PhotoGalleryObject>()
         photoGalleryList.append(objectsIn: photoGalleryObjects)
@@ -159,7 +150,6 @@ class PostObject: Object, ListDiffable {
         self.fullImageLink = fullImageLink
         self.author = authorObject
         self.postType = postTypeEnum
-        self.comments = commentsList
         self.photoGalleryObjects = photoGalleryList
         cacheImage(imageLink: mediumLargeImageLink)
     }

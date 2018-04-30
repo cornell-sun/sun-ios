@@ -150,7 +150,7 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
         settings.append([])
         let notificationViewController = NotificationViewController()
         notificationViewController.prevViewController = self
-        settings[0].append(SettingObject(label: "Notification", next: notificationViewController, setType: .none))
+        settings[0].append(SettingObject(label: "Notifications", next: notificationViewController, setType: .none))
         settings[0].append(SettingObject(label: "Login", next: nil, setType: .none))
         
         let subscribeViewController = SubscribeViewController()

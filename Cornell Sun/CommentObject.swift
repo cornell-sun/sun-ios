@@ -11,7 +11,7 @@ import UIKit
 import RealmSwift
 import Realm
 
-class CommentObject: Object {
+class CommentObject: NSObject {
     private let wpDateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.timeZone = TimeZone(abbreviation: "GMT+00")
@@ -19,10 +19,10 @@ class CommentObject: Object {
         return formatter
     }()
 
-    @objc dynamic var id: String = ""
-    @objc dynamic var authorName: String = ""
-    @objc dynamic var comment: String = ""
-    @objc dynamic var date: Date = Date()
+    var id: String = ""
+    var authorName: String = ""
+    var comment: String = ""
+    var date: Date = Date()
     var profileImageURL: URL?
     init(id: String, authorName: String, comment: String, date: Date, imageURL: URL?) {
         super.init()
@@ -65,17 +65,4 @@ class CommentObject: Object {
             self.profileImageURL = URL(string: profileURL)
         }
     }
-
-    required init(realm: RLMRealm, schema: RLMObjectSchema) {
-        super.init(realm: realm, schema: schema)
-    }
-
-    required init(value: Any, schema: RLMSchema) {
-        super.init(value: value, schema: schema)
-    }
-
-    required init() {
-        super.init()
-    }
-
 }

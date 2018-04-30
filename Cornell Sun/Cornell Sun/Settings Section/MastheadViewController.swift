@@ -25,6 +25,7 @@ class MastheadViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .white
 
         scrollView = UIScrollView()
         view.addSubview(scrollView)
@@ -33,9 +34,11 @@ class MastheadViewController: UIViewController {
         }
 
         imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFit
         scrollView.addSubview(imageView)
         imageView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            make.top.bottom.centerX.equalToSuperview()
+            make.width.lessThanOrEqualToSuperview()
         }
 
         imageView.kf.setImage(with: imageURL)

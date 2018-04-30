@@ -20,7 +20,6 @@ enum cellType: Int {
     case titleCell = 1
     case authorCell = 2
     case imageCell = 3
-    case likeCommentCell = 4
     case actionMenuCell = 5
 }
 
@@ -65,9 +64,6 @@ extension ArticleSectionController: BookmarkPressedDelegate, SharePressedDelegat
             return CGSize(width: width, height: height + 13)
         case .imageCell:
             return CGSize(width: width, height: width / 1.92)
-        case .likeCommentCell:
-            let hasComments = !entry.comments.isEmpty
-            return hasComments ? CGSize(width: width, height: 25) : .zero
         case .actionMenuCell:
             return CGSize(width: width, height: 50)
         }
@@ -96,11 +92,6 @@ extension ArticleSectionController: BookmarkPressedDelegate, SharePressedDelegat
         case .imageCell:
             // swiftlint:disable:next force_cast
             let cell = collectionContext!.dequeueReusableCell(of: ImageCell.self, for: self, at: index) as! ImageCell
-            cell.post = entry
-            return cell
-        case .likeCommentCell:
-            // swiftlint:disable:next force_cast
-            let cell = collectionContext!.dequeueReusableCell(of: LikeCommentCell.self, for: self, at: index) as! LikeCommentCell
             cell.post = entry
             return cell
         case .actionMenuCell:

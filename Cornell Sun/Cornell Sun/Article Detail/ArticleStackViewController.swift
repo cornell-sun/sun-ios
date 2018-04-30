@@ -276,7 +276,6 @@ class ArticleStackViewController: UIViewController {
     }
 
     func setupCommentsTableView() {
-//        let view = UIView()
         commentsTableView = UITableView()
         commentsTableView.delegate = self
         commentsTableView.dataSource = self
@@ -285,10 +284,8 @@ class ArticleStackViewController: UIViewController {
         commentsTableView.register(CommentTableViewCell.self, forCellReuseIdentifier: commentReuseIdentifier)
         commentsTableView.estimatedRowHeight = 100
         scrollView.addSubview(commentsTableView)
-//        stackView.addArrangedSubview(view)
 
         let totalHeight = self.comments.map { comment -> CGFloat in
-
             let textHeight = comment.comment.requiredHeight(width: view.bounds.width-37, font: .subSecondaryHeader)
             return textHeight + 100
         }

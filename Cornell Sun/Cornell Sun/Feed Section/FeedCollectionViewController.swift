@@ -59,8 +59,6 @@ class FeedCollectionViewController: ViewController, UIScrollViewDelegate {
         feedData = feedData.map {
             print($0.title, ":", $0.id, ":", savedPostIds.contains($0.id))
             return RealmManager.instance.update(object: $0, to: savedPostIds.contains($0.id))
-            //print($0.title, ":", $0.id, ":", $0.didSave)
-            //return $0
         }
         self.adapter.performUpdates(animated: true, completion: nil)
     }

@@ -93,8 +93,6 @@ extension BookmarkSectionController: BookmarkPressedDelegate, SharePressedDelega
             cell.shareDelegate = self
             cell.post = entry
             cell.setupViews(forBookmarks: true)
-            //print(entry.title, ": ", entry.didSave)
-            //cell.setBookmarkImage(didSelectBookmark: entry.didSave)
             return cell
         }
     }
