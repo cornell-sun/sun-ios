@@ -74,6 +74,7 @@ class ArticleStackViewController: UIViewController {
         }
 
         shareBarView = ShareBarView()
+        shareBarView.setBookmarkImage(didSelectBookmark: PostOffice.instance.isPostIdInBookmarks(post: post))
         shareBarView.delegate = self
         view.addSubview(shareBarView)
         shareBarView.snp.makeConstraints { make in
