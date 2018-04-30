@@ -13,7 +13,6 @@ class FeedCollectionViewController: ViewController, UIScrollViewDelegate {
     var loading = false
 
     fileprivate var observer: NSKeyValueObservation?
-    //fileprivate var token: NotificationToken?
 
     var currentPage = 1
     let spinToken = "spinner"
