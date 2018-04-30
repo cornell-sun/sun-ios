@@ -2,9 +2,6 @@
   "images" : [
     {
       "idiom" : "universal",
-<<<<<<< HEAD
-      "filename" : "sendIcon2.pdf"
-=======
       "filename" : "sendIcon2.png",
       "scale" : "1x"
     },
@@ -17,7 +14,6 @@
       "idiom" : "universal",
       "filename" : "sendIcon2@3x.png",
       "scale" : "3x"
->>>>>>> theo/bugfixes
     }
   ],
   "info" : {
