@@ -53,7 +53,10 @@ DEPENDENCIES:
   - ImageSlideshow/Kingfisher (from `https://github.com/AAAstorga/ImageSlideshow.git`, commit `bec5f17bd71d32d289378e1ba787a55cfa80bcce`)
   - IQKeyboardManagerSwift (= 5.0.0)
   - Kingfisher (~> 4.7.0)
+<<<<<<< HEAD
   - Motion
+=======
+>>>>>>> theo/bugfixes
   - Moya
   - Moya-ModelMapper (= 5.0.0)
   - OneSignal (< 3.0, >= 2.6.2)
@@ -95,6 +98,10 @@ SPEC CHECKSUMS:
   SwiftSoup: 277f7ef548826e0ca7603a06b30d4a5df3ee0587
   UICircularProgressRing: f41663e98c0f40b4794461a4209a67569ea2cc28
 
+<<<<<<< HEAD
 PODFILE CHECKSUM: 093fce9bc515363f8b3738afa23c01764e40c8bc
+=======
+PODFILE CHECKSUM: 17ead6fdaa53a440de68fba954145231f17e7f79
+>>>>>>> theo/bugfixes
 
 COCOAPODS: 1.3.1
