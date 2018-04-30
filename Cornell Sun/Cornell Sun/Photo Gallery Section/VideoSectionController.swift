@@ -1,26 +1,23 @@
 //
-//  PhotoGallerySectionController.swift
+//  VideoSectionController.swift
 //  Cornell Sun
 //
-//  Created by Austin Astorga on 11/14/17.
-//  Copyright © 2017 cornell.sun. All rights reserved.
+//  Created by Austin Astorga on 4/26/18.
+//  Copyright © 2018 cornell.sun. All rights reserved.
 //
 
 import UIKit
 import IGListKit
-import ImageSlideshow
 
-// swiftlint:disable:next type_name
-enum photoGalleryCellType: Int {
+fileprivate enum VideoCellType: Int {
     case categoryCell = 0
     case titleCell = 1
-    case authorCell = 2
-    case photoGalleryCell = 3
-    case captionCell = 4
-    case actionMenuCell = 5
+    case videoCell = 2
+    case actionMenuCell = 3
+
 }
 
-class PhotoGallerySectionController: ListSectionController {
+class VideoSectionController: ListSectionController {
     var entry: PostObject!
 
     override init() {
@@ -29,7 +26,7 @@ class PhotoGallerySectionController: ListSectionController {
     }
 }
 
-extension PhotoGallerySectionController: BookmarkPressedDelegate, SharePressedDelegate, PhotoChangedDelegate {
+extension VideoSectionController: BookmarkPressedDelegate, SharePressedDelegate {
 
     func didPressBookmark(_ cell: MenuActionCell) {
         pressedBookmark(cell, entry: entry)
@@ -39,47 +36,35 @@ extension PhotoGallerySectionController: BookmarkPressedDelegate, SharePressedDe
         pressedShare(entry: entry)
     }
 
-    func photoDidChange(_ index: Int) {
-        let captionCell: photoGalleryCellType = .captionCell
-        let captionIndex = captionCell.rawValue
-        if let cell = collectionContext?.cellForItem(at: captionIndex, sectionController: self) as? CaptionCell {
-            cell.updateCaption(index: index)
-        }
-    }
-
     override func numberOfItems() -> Int {
-        return 6
+        return 4
     }
 
     override func sizeForItem(at index: Int) -> CGSize {
         guard let context = collectionContext, entry != nil else {return .zero}
         let width = context.containerSize.width
-        guard let sizeForItemIndex = photoGalleryCellType(rawValue: index) else {
+        guard let sizeForItemIndex = VideoCellType(rawValue: index) else {
             return .zero
         }
+
         switch sizeForItemIndex {
         case .categoryCell:
             return CGSize(width: width, height: 40)
         case .titleCell:
             let height = entry.title.height(withConstrainedWidth: width - 34, font: .headerTitle) //CLUTCH Extension thank stackoverflow gods
             return CGSize(width: width, height: height + 40)
-        case .authorCell:
-            let height = entry.author[0].name.height(withConstrainedWidth: width, font: .photoCaption)
-            return CGSize(width: width, height: height + 9)
-        case .photoGalleryCell:
+        case .videoCell:
             return CGSize(width: width, height: width / 1.5)
-        case .captionCell:
-            let height = captionMaxHeight(width: width)
-            return CGSize(width: width, height: height + 16)
         case .actionMenuCell:
             return CGSize(width: width, height: 35)
         }
     }
 
     override func cellForItem(at index: Int) -> UICollectionViewCell {
-        guard let cellForItemIndex = photoGalleryCellType(rawValue: index) else {
+        guard let cellForItemIndex = VideoCellType(rawValue: index) else {
             return UICollectionViewCell()
         }
+
         switch cellForItemIndex {
         case .categoryCell:
             // swiftlint:disable:next force_cast
@@ -91,20 +76,9 @@ extension PhotoGallerySectionController: BookmarkPressedDelegate, SharePressedDe
             let cell = collectionContext!.dequeueReusableCell(of: TitleCell.self, for: self, at: index) as! TitleCell
             cell.post = entry
             return cell
-        case .authorCell:
+        case .videoCell:
             // swiftlint:disable:next force_cast
-            let cell = collectionContext!.dequeueReusableCell(of: AuthorCell.self, for: self, at: index) as! AuthorCell
-            cell.post = entry
-            return cell
-        case .photoGalleryCell:
-            // swiftlint:disable:next force_cast
-            let cell = collectionContext!.dequeueReusableCell(of: PhotoGalleryCell.self, for: self, at: index) as! PhotoGalleryCell
-            cell.photoGalleryDelegate = self
-            cell.post = entry
-            return cell
-        case .captionCell:
-            // swiftlint:disable:next force_cast
-            let cell = collectionContext!.dequeueReusableCell(of: CaptionCell.self, for: self, at: index) as! CaptionCell
+            let cell = collectionContext!.dequeueReusableCell(of: VideoCell.self, for: self, at: index) as! VideoCell
             cell.post = entry
             return cell
         case .actionMenuCell:

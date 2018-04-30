@@ -15,7 +15,7 @@ class SectionCollectionViewController: UIViewController, UIScrollViewDelegate {
     var emptySpinnerView = UIView()
     let spinner = UIActivityIndicatorView(activityIndicatorStyle: .gray)
     var refreshControl = UIRefreshControl()
-    var feedData: [PostObject] = [] {
+    var feedData: [ListDiffable] = [] {
         didSet {
             if feedData.isEmpty {
                 spinner.startAnimating()
@@ -25,6 +25,9 @@ class SectionCollectionViewController: UIViewController, UIScrollViewDelegate {
         }
     }
     var loading = false
+    var currentPage = 1
+    var adCount = 1
+    var sectionID = 0
     let spinToken = "spinner"
 
     let collectionView: UICollectionView = {
@@ -45,18 +48,13 @@ class SectionCollectionViewController: UIViewController, UIScrollViewDelegate {
         navigationController?.navigationBar.titleTextAttributes = [
             NSAttributedStringKey.font: UIFont.headerTitle
         ]
-        var sectionID = 0
+        
         switch section {
         case .opinion(let id), .arts(let id), .dining(let id), .multimedia(let id), .science(let id), .sports(let id):
             sectionID = id
         }
 
-        fetchPosts(target: .section(section: sectionID, page: 1)) { posts, error in
-            if error == nil {
-            self.feedData = posts
-            self.adapter.reloadData(completion: nil)
-            }
-        }
+        getPosts(page: currentPage, sectionID: sectionID)
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -73,6 +71,8 @@ class SectionCollectionViewController: UIViewController, UIScrollViewDelegate {
 
         emptySpinnerView.addSubview(spinner)
 
+        refreshControl.addTarget(self, action: #selector(refreshData), for: .valueChanged)
+        
         view.addSubview(collectionView)
         adapter.collectionView = collectionView
         adapter.collectionView?.backgroundColor = .collectionBackground
@@ -100,6 +100,16 @@ class SectionCollectionViewController: UIViewController, UIScrollViewDelegate {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        let distance = scrollView.contentSize.height - (targetContentOffset.pointee.y + scrollView.bounds.height)
+        if !loading && distance < 300 {
+            loading = true
+            adapter.performUpdates(animated: true, completion: nil)
+            currentPage += 1
+            getPosts(page: currentPage, sectionID: sectionID)
+        }
+    }
 }
 
 extension SectionCollectionViewController: ListAdapterDataSource {
@@ -116,10 +126,14 @@ extension SectionCollectionViewController: ListAdapterDataSource {
             return spinnerSectionController()
         } else if let obj = object as? PostObject, obj.postType == .photoGallery {
             return PhotoGallerySectionController()
+        } else if let obj = object as? PostObject, obj.postType == .video {
+            return VideoSectionController()
         } else if let obj = object as? PostObject, obj.isEqual(toDiffableObject: feedData[0]) {
             let heroSC = HeroSectionController()
             heroSC.delegate = self
             return heroSC
+        } else if let obj = object as? String, obj.contains("adToken") {
+            return AdSectionController()
         }
         let articleSC = ArticleSectionController()
         articleSC.delegate = self
@@ -131,6 +145,30 @@ extension SectionCollectionViewController: ListAdapterDataSource {
         skeletonView.isSkeletonable = true
         skeletonView.showAnimatedSkeleton()
         return skeletonView
+    }
+}
+
+extension SectionCollectionViewController {
+    
+    func getPosts(page: Int, sectionID: Int) {
+        
+        fetchPosts(target: .section(section: sectionID, page: page)) { posts, error in
+            if error == nil {
+                self.loading = false
+                var postsWithAds: [ListDiffable] = posts
+                postsWithAds.insert("adToken\(self.adCount)" as ListDiffable, at: posts.count - 2)
+                self.adCount += 1
+                self.feedData.append(contentsOf: postsWithAds)
+                self.refreshControl.endRefreshing()
+                self.adapter.performUpdates(animated: true, completion: nil)
+            }
+        }
+    }
+    
+    @objc func refreshData() {
+        currentPage = 1
+        feedData = []
+        getPosts(page: currentPage, sectionID: sectionID)
     }
 }
 

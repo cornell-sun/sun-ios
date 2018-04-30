@@ -8,8 +8,6 @@
 
 import UIKit
 import Kingfisher
-import Realm
-import RealmSwift
 
 let tempLabel = UILabel()
 
@@ -45,10 +43,8 @@ func taptic(style: UIImpactFeedbackStyle) {
     generator.impactOccurred()
 }
 
-func cacheImage(imageLink: String) {
-    if let urlImage = URL(string: imageLink) {
-        KingfisherManager.shared.retrieveImage(with: urlImage, options: nil, progressBlock: nil, completionHandler: nil)
-    }
+func cacheImage(imageURL: URL) {
+    KingfisherManager.shared.retrieveImage(with: imageURL, options: nil, progressBlock: nil, completionHandler: nil)
 }
 
 extension UITextView {

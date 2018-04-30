@@ -84,7 +84,6 @@ class SkeletonFeedCell: UIView {
             make.top.equalTo(contentLabel.snp.bottom).offset(lineSpace)
         }
 
-
         let timeStampLabel = UILabel()
         timeStampLabel.isSkeletonable = true
         addSubview(timeStampLabel)
@@ -159,4 +158,3 @@ class SkeletonFeedCell: UIView {
     }
 
 }
-

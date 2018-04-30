@@ -20,7 +20,8 @@ enum cellType: Int {
     case titleCell = 1
     case authorCell = 2
     case imageCell = 3
-    case actionMenuCell = 5
+    case actionMenuCell = 4
+
 }
 
 class ArticleSectionController: ListSectionController {
@@ -44,7 +45,7 @@ extension ArticleSectionController: BookmarkPressedDelegate, SharePressedDelegat
     }
 
     override func numberOfItems() -> Int {
-        return 6
+        return 5
     }
 
     override func sizeForItem(at index: Int) -> CGSize {
@@ -60,8 +61,9 @@ extension ArticleSectionController: BookmarkPressedDelegate, SharePressedDelegat
             let height = entry.title.height(withConstrainedWidth: width - 34, font: .articleTitle, lineSpacing: 4.5) //CLUTCH Extension thank stackoverflow gods
             return CGSize(width: width, height: height + 20)
         case .authorCell:
-            guard let height = entry.author?.name.height(withConstrainedWidth: width, font: .cellInformationText) else { return .zero}
+            let height = entry.author.byline.height(withConstrainedWidth: width, font: .cellInformationText)
             return CGSize(width: width, height: height + 13)
+
         case .imageCell:
             return CGSize(width: width, height: width / 1.92)
         case .actionMenuCell:

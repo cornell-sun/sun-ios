@@ -9,7 +9,7 @@
 import UIKit
 import SafariServices
 
-class SubscribeViewController: UIViewController,UITextFieldDelegate, UIPickerViewDataSource, UIPickerViewDelegate {
+class SubscribeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDataSource, UIPickerViewDelegate {
     
     var prevViewController: UIViewController!
     var titleCache: String!
@@ -191,7 +191,6 @@ class SubscribeViewController: UIViewController,UITextFieldDelegate, UIPickerVie
         // Dispose of any resources that can be recreated.
     }
     
-    
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
@@ -218,7 +217,6 @@ class SubscribeViewController: UIViewController,UITextFieldDelegate, UIPickerVie
         return false
     }
     
-    
     @objc func buttonAction() {
         if let url = URL(string: "https://cornellsun.us11.list-manage.com/subscribe/post") {
             if #available(iOS 11.0, *) {
@@ -233,8 +231,6 @@ class SubscribeViewController: UIViewController,UITextFieldDelegate, UIPickerVie
             }
         }
     }
-    
-    
 
     /*
     // MARK: - Navigation

@@ -43,7 +43,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.rootViewController = rootVC
 
         //Image cache settings
-        ImageCache.default.maxDiskCacheSize = 50 * 1024 * 1024 //50 mb
+        ImageCache.default.maxDiskCacheSize = 100 * 1024 * 1024 //100 mb
         ImageCache.default.maxCachePeriodInSecond = 60 * 60 * 24 * 4 //4 days until its removed
 
         let userDefaults = UserDefaults.standard
@@ -101,7 +101,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-        RealmManager.instance.clearOldBookmarks()
     }
 
 }

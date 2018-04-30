@@ -44,7 +44,7 @@ class NotificationViewController: UIViewController, UITableViewDataSource, UITab
     
         //Calling hardcoded populator
         if notifications.count == 0 {
-            notifications = [("Breaking News", .breakingNews), ("Local News", .localNews),("Opinion", .opinion), ("Sports", .sports), ("Sunspots", .sunspots), ("Multimedia", .multimedia), ("Arts and Entertainment", .artsAndEntertainment), ("Science", .science), ("Dining", .dining)]
+            notifications = [("Breaking News", .breakingNews), ("Local News", .localNews), ("Opinion", .opinion), ("Sports", .sports), ("Sunspots", .sunspots), ("Multimedia", .multimedia), ("Arts and Entertainment", .artsAndEntertainment), ("Science", .science), ("Dining", .dining)]
         }
         
         // Set up table view for settings

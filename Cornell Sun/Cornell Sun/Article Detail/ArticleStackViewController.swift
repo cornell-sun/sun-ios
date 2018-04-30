@@ -147,14 +147,15 @@ class ArticleStackViewController: UIViewController {
     }
 
     func parseImg(element: Element) -> ArticleContentType? {
-        if let src = try? element.select("img[src]"), let srcUrl = try? src.attr("src").description, srcUrl != "" {
-            cacheImage(imageLink: srcUrl) //cache the image
-            return .image(srcUrl)
+        if let src = try? element.select("img[src]"), let srcString = try? src.attr("src").description, srcString != "", let srcUrl = URL(string: srcString) {
+            cacheImage(imageURL: srcUrl) //cache the image
+            return .image(srcString)
         }
         // slideshow parsing for now
-        guard let srcUrl = try? element.attr("data-lazy").description else { return nil }
-        cacheImage(imageLink: srcUrl)
-        return .image(srcUrl)
+        guard let srcString = try? element.attr("data-lazy").description, let srcUrl = URL(string: srcString) else { return nil }
+        cacheImage(imageURL: srcUrl)
+
+        return .image(srcString)
     }
 
     func parseAside(element: Element) -> ArticleContentType? {
@@ -324,13 +325,7 @@ extension ArticleStackViewController: UITableViewDelegate, UITableViewDataSource
 extension ArticleStackViewController: ShareBarViewDelegate {
 
     func shareBarDidPressShare(_ view: ShareBarView) {
-        taptic(style: .light)
-        if let articleLink = URL(string: post.link) {
-            let title = post.title
-            let objectToShare = [title, articleLink] as [Any]
-            let activityVC = UIActivityViewController(activityItems: objectToShare, applicationActivities: nil)
-            present(activityVC, animated: true, completion: nil)
-        }
+        pressedShare(entry: post)
     }
 
     func shareBarDidPressBookmark(_ view: ShareBarView) {
@@ -348,9 +343,9 @@ extension ArticleStackViewController: ShareBarViewDelegate {
                         view.bookmarkButton.transform = CGAffineTransform.identity
         })
         if didBookmark {
-            RealmManager.instance.save(object: post)
+            PostOffice.instance.store(object: post)
         } else {
-            RealmManager.instance.delete(object: post)
+            PostOffice.instance.remove(object: post)
         }
     }
 }

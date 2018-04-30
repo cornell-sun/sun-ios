@@ -21,7 +21,6 @@ class SettingsTableViewCell: UITableViewCell {
 
     var settingObj: SettingObject!
 
-
     override func awakeFromNib() {
         super.awakeFromNib()
     }

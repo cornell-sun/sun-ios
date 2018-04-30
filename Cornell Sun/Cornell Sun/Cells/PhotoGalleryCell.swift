@@ -11,75 +11,56 @@ import IGListKit
 import SnapKit
 import Kingfisher
 import ImageSlideshow
+import Motion
 
 protocol PhotoChangedDelegate: class {
     func photoDidChange(_ index: Int)
 }
+
 final class PhotoGalleryCell: UICollectionViewCell {
 
     var post: PostObject? {
         didSet {
-            setUpImages()
+            setupViews()
         }
     }
 
     weak var photoGalleryDelegate: PhotoChangedDelegate?
-
-    let slideShow: ImageSlideshow = {
-        let slideShow = ImageSlideshow()
-        slideShow.contentScaleMode = .scaleAspectFill
-        slideShow.circular = false
-        slideShow.pageControl.backgroundColor = .clear
-        slideShow.pageControlPosition = .custom(padding: -15.0)
-        slideShow.activityIndicator = DefaultActivityIndicator(style: .white, color: nil)
-        return slideShow
-
-    }()
+    var photoGallery: PhotoGallery!
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setupViews()
     }
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    override func layoutSubviews() {
-        super.layoutSubviews()
-    }
-
     func setupViews() {
-        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapPhotos))
-        slideShow.addGestureRecognizer(gestureRecognizer)
+        photoGallery = PhotoGallery(attachments: post!.postAttachments, height: self.bounds.height, width: self.bounds.width)
 
-        addSubview(slideShow)
-        slideShow.snp.makeConstraints { (make) in
+        addSubview(photoGallery)
+        photoGallery.snp.makeConstraints { make in
             make.width.equalToSuperview()
             make.height.equalToSuperview()
         }
 
-        slideShow.currentPageChanged = { page in
+        photoGallery.updateCaption = { page in
             self.photoGalleryDelegate?.photoDidChange(page)
         }
 
-    }
+        photoGallery.pushToDetail = { attachments, index in
+            let detailPhotoVC = PhotoGalleryDetailViewController()
+            detailPhotoVC.attachments = attachments
+            detailPhotoVC.selectedIndex = index
+            getCurrentViewController()?.motionTransitionType = .autoReverse(presenting: .zoom)
+            getCurrentViewController()?.present(detailPhotoVC, animated: true, completion: nil)
 
-    @objc func didTapPhotos() {
-        let fullscreenVC = slideShow.presentFullScreenController(from: getCurrentViewController()!)
-        fullscreenVC.slideshow.activityIndicator = DefaultActivityIndicator(style: .white, color: nil)
-        fullscreenVC.captions = post?.photoGalleryObjects.map({$0.caption})
-        fullscreenVC.captionLabel.text = post?.photoGalleryObjects[slideShow.currentPage].caption
-
-    }
-    func setUpImages() {
-        var kingfisherSource: [KingfisherSource] = []
-        guard let photoGalleryObjects = post?.photoGalleryObjects else { return }
-        for photoGalleryObject in photoGalleryObjects {
-            let source = KingfisherSource(urlString: photoGalleryObject.fullImageLink)
-            kingfisherSource.append(source!)
+            detailPhotoVC.updateMainGallery = { item in
+                let index = IndexPath(item: item, section: 0)
+                self.photoGallery.scrollTo(indexPath: index)
+                self.photoGalleryDelegate?.photoDidChange(item)
+            }
         }
-        slideShow.setImageInputs(kingfisherSource)
     }
-
 }

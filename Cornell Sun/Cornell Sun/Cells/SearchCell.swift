@@ -19,8 +19,8 @@ final class SearchCell: UICollectionViewCell {
     var post: PostObject? {
         didSet {
             if let post = post {
-            authorLabel.text = post.author?.name
-            timeStampLabel.text = post.datePosted.timeAgoSinceNow()
+            authorLabel.text = post.author[0].name
+            timeStampLabel.text = post.date.timeAgoSinceNow()
             contentLabel.text = post.content.htmlToString.replacingOccurrences(of: "\n", with: "")
             setupImage()
             }
@@ -102,7 +102,7 @@ final class SearchCell: UICollectionViewCell {
     }
 
     func setupImage() {
-        if let imagelink = post?.thumbnailImageLink, let imageUrl = URL(string: imagelink) {
+        if let imageUrl = post?.featuredMediaImages.thumbnail?.url {
             imageView.kf.indicatorType = .activity
             imageView.kf.setImage(with: imageUrl)
         }

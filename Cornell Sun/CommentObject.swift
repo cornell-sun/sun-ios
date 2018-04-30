@@ -8,8 +8,6 @@
 
 import Foundation
 import UIKit
-import RealmSwift
-import Realm
 
 class CommentObject: NSObject {
     private let wpDateFormatter: DateFormatter = {
@@ -44,7 +42,6 @@ class CommentObject: NSObject {
     }
 
     init?(data: [String: AnyObject]) {
-        super.init()
         guard
             let id = data["id"] as? String,
             let comment = data["message"] as? String,

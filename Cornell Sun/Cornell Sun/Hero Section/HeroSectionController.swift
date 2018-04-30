@@ -56,7 +56,7 @@ extension HeroSectionController: BookmarkPressedDelegate, SharePressedDelegate {
             let height = entry.title.height(withConstrainedWidth: width - 34, font: .articleTitle, lineSpacing: 4.5) //CLUTCH Extension thank stackoverflow gods
             return CGSize(width: width, height: height + 20)
         case .authorCell:
-            guard let height = entry.author?.name.height(withConstrainedWidth: width, font: .cellInformationText) else { return .zero }
+            let height = entry.author[0].name.height(withConstrainedWidth: width, font: .cellInformationText)
             return CGSize(width: width, height: height + 9)
         case .taglineCell:
             let lineHeight: CGFloat = UIFont.photoCaption.lineHeight * 4.0

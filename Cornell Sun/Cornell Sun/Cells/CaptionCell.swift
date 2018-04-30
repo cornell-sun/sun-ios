@@ -9,11 +9,22 @@
 import UIKit
 import SnapKit
 
+struct CaptionCellConstants {
+    static let captionVerticalInset = 10
+    static let captionHorizontalInset = 18
+
+    static let dividerHeight = 1
+    static let dividerHorizontalInset = 18
+    static let dividerBottom = 1
+}
+
 final class CaptionCell: UICollectionViewCell {
 
     var post: PostObject? {
         didSet {
-            captionLabel.text = post?.photoGalleryObjects.first?.caption
+            if let caption = post?.postAttachments.first?.caption {
+                captionLabel.text = caption
+            }
         }
     }
 
@@ -42,7 +53,11 @@ final class CaptionCell: UICollectionViewCell {
     }
 
     func updateCaption(index: Int) {
-        captionLabel.text = post?.photoGalleryObjects[index].caption
+        captionLabel.text = post?.postAttachments[index].caption ?? ""
+        captionLabel.snp.remakeConstraints { make in
+            make.top.equalToSuperview().inset(CaptionCellConstants.captionVerticalInset)
+            make.leading.trailing.equalToSuperview().inset(CaptionCellConstants.captionHorizontalInset)
+        }
     }
 
     func setupViews() {
@@ -50,16 +65,14 @@ final class CaptionCell: UICollectionViewCell {
         addSubview(captionLabel)
         addSubview(divider)
         captionLabel.snp.makeConstraints { (make) in
-            make.top.equalToSuperview().inset(10)
-            make.left.equalToSuperview().inset(18)
-            make.right.equalToSuperview().inset(18)
+            make.top.equalToSuperview().inset(CaptionCellConstants.captionVerticalInset)
+            make.leading.trailing.equalToSuperview().inset(CaptionCellConstants.captionHorizontalInset)
         }
 
         divider.snp.makeConstraints { (make) in
-            make.height.equalTo(1)
-            make.left.equalToSuperview().inset(18)
-            make.right.equalToSuperview().inset(18)
-            make.bottom.equalToSuperview().inset(1)
+            make.height.equalTo(CaptionCellConstants.dividerHeight)
+            make.leading.trailing.equalToSuperview().inset(CaptionCellConstants.dividerHorizontalInset)
+            make.bottom.equalToSuperview().inset(CaptionCellConstants.dividerBottom)
         }
     }
 }

@@ -7,8 +7,7 @@
 //
 
 import Foundation
-import Realm
-import RealmSwift
+import IGListKit
 
 enum APIErrors: Error {
     case networkingError
@@ -19,8 +18,23 @@ enum APIErrors: Error {
 typealias PostObjectCompletionBlock = (_ posts: [PostObject], _ error: APIErrors?) -> Void
 typealias TrendingCompletionBlock = (_ trending: [String], _ error: APIErrors?) -> Void
 typealias CommentsCompletionBlock = (_ comments: [CommentObject], _ error: APIErrors?) -> Void
-let savedPosts: Results<PostObject> = RealmManager.instance.get()
-let savedPostIds: [Int] = Array(RealmManager.instance.get()).map({$0.id})
+
+let savedPostIds: [Int] = {
+    guard let posts = PostOffice.instance.get() else { return [] }
+    return posts.map { $0.id } 
+}()
+
+let dateFormatter: DateFormatter = {
+    let formatter = DateFormatter()
+    formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+    return formatter
+}()
+
+let decoder: JSONDecoder = {
+    let coder = JSONDecoder()
+    coder.dateDecodingStrategy = .formatted(dateFormatter)
+    return coder
+}()
 
 func fetchPosts(target: SunAPI, completion: @escaping PostObjectCompletionBlock) {
     var postObjects: [PostObject] = []
@@ -30,20 +44,10 @@ func fetchPosts(target: SunAPI, completion: @escaping PostObjectCompletionBlock)
             return
         }
         do {
-            let jsonResult = try JSONSerialization.jsonObject(with: response.data, options: [])
-            if let postArray = jsonResult as? [[String: Any]] {
-                for postDictionary in postArray {
-                    if let post = PostObject(data: postDictionary) {
-                        if savedPostIds.contains(post.id) {
-                            post.didSave = true
-                        }
-                        postObjects.append(post)
-                    }
-                }
-            } else {
-                completion(postObjects, .noResultsError)
-            }
-        } catch {
+            postObjects = try decoder.decode([PostObject].self, from: response.data)
+            completion(postObjects, .noResultsError)
+        } catch let error {
+            print(error)
             completion(postObjects, .parsingError)
             return
         }
@@ -53,16 +57,11 @@ func fetchPosts(target: SunAPI, completion: @escaping PostObjectCompletionBlock)
 
 func getTrending(completion: @escaping TrendingCompletionBlock) {
     API.request(target: .trending) { response in
-        guard let response = response else { return }
-        do {
-            let jsonResult = try JSONSerialization.jsonObject(with: response.data, options: [])
-            if let trending = jsonResult as? [String] {
-                completion(trending, nil)
-            }
-        } catch {
-            print("could not parse")
-            completion([String](), .parsingError)
-        }
+        guard
+            let response = response,
+            let trending = try? decoder.decode([String].self, from: response.data)
+        else { completion([String](), .parsingError); return }
+        completion(trending, nil)
     }
 }
 
@@ -87,9 +86,9 @@ func getComments(postID: Int, completion: @escaping CommentsCompletionBlock) {
     }
 }
 
-func prepareInitialPosts(callback: @escaping ([PostObject], PostObject?) -> Void) {
+func prepareInitialPosts(callback: @escaping ([ListDiffable], PostObject?) -> Void) {
     var headlinePost: PostObject?
-    var postObjects: [PostObject] = []
+    var postObjects: [ListDiffable] = []
 
     let group = DispatchGroup()
 
@@ -97,14 +96,11 @@ func prepareInitialPosts(callback: @escaping ([PostObject], PostObject?) -> Void
     API.request(target: .featured) { (response) in
         if let response = response {
             do {
-                let json = try JSONSerialization.jsonObject(with: response.data, options: [])
-                if let postDictionary = json as? [String: Any], let post = PostObject(data: postDictionary) {
-                    post.didSave = savedPostIds.contains(post.id)
-                    headlinePost = post
-                } else {
-                    print("could not parse featured post")
-                }
-            } catch {
+                let featuredPost = try decoder.decode(PostObject.self, from: response.data)
+                featuredPost.didSave = savedPostIds.contains(featuredPost.id)
+                headlinePost = featuredPost
+            } catch let error {
+                print(error)
                 fatalError()
             }
         }
@@ -116,18 +112,10 @@ func prepareInitialPosts(callback: @escaping ([PostObject], PostObject?) -> Void
         if let response = response {
 
             do {
-                let json = try JSONSerialization.jsonObject(with: response.data, options: [])
-                if let postArray = json as? [[String: Any]] {
-                    for postDictionary in postArray {
-                        if let post = PostObject(data: postDictionary) {
-                            if savedPostIds.contains(post.id) {
-                                post.didSave = true
-                            }
-                            postObjects.append(post)
-                        }
-                    }
-                }
-            } catch {
+                postObjects = try decoder.decode([PostObject].self, from: response.data)
+                postObjects.insert("adToken" as ListDiffable, at: 7)
+            } catch let error {
+                print(error)
                 fatalError()
             }
         }
@@ -138,6 +126,7 @@ func prepareInitialPosts(callback: @escaping ([PostObject], PostObject?) -> Void
     group.notify(queue: .main) {
         //both network requests are done
         postObjects = postObjects.filter { post in
+            guard let post = post as? PostObject else { return true }
             return post.id != headlinePost?.id
         }
         callback(postObjects, headlinePost)

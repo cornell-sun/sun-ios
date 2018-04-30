@@ -7,52 +7,19 @@
 //
 
 import UIKit
-import RealmSwift
-import Realm
 
-class PhotoGalleryObject: Object {
-    @objc dynamic var id: Int = 0
-    @objc dynamic var caption: String = ""
-    @objc dynamic var authorName: String = ""
-    @objc dynamic var fullImageLink: String = ""
+class PostAttachmentObject: Codable {
+    var id: Int?
+    var name: String?
+    var caption: String?
+    var authorName: String?
+    var mediaType: String?
+    var url: URL!
 
-    init(id: Int, caption: String, authorName: String, fullImageLink: String) {
-        super.init()
-        self.id = id
-        self.caption = caption
-        self.authorName = authorName
-        self.fullImageLink = fullImageLink
-    }
-
-    init? (data: [String: Any]) {
-        super.init()
-        guard
-        let id = data["id"] as? Int,
-        let caption = data["caption"] as? String,
-        let authorName = data["author_name"] as? String,
-        let fullImageLink = data["full"] as? String
-        else { return nil }
-
-        self.id = id
-        self.caption = caption
-        self.authorName = authorName
-        self.fullImageLink = fullImageLink
-
-        DispatchQueue.main.async {
-            cacheImage(imageLink: fullImageLink)
-        }
-    }
-
-    required init() {
-        super.init()
-    }
-
-    required init(realm: RLMRealm, schema: RLMObjectSchema) {
-        super.init(realm: realm, schema: schema)
-    }
-
-    required init(value: Any, schema: RLMSchema) {
-        super.init(value: value, schema: schema)
+    enum CodingKeys: String, CodingKey {
+        case id, name, caption, url
+        case authorName = "author_name"
+        case mediaType = "media_type"
     }
 
 }

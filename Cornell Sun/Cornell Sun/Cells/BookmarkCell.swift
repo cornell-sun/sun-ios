@@ -19,12 +19,10 @@ final class BookmarkCell: UICollectionViewCell {
 
     var post: PostObject? {
         didSet {
-            if let post = post, let author = post.author {
-                titleLabel.text = post.title
-                titleLabel.setLineSpacing(to: 4.5)
-                authorLabel.text = "By " + author.name
-                setupImage()
-            }
+            titleLabel.text = post?.title
+            titleLabel.setLineSpacing(to: 4.5)
+            authorLabel.text = post?.author.byline
+            setupImage()
         }
     }
 
@@ -89,7 +87,7 @@ final class BookmarkCell: UICollectionViewCell {
     }
 
     func setupImage() {
-        if let imagelink = post?.thumbnailImageLink, let imageUrl = URL(string: imagelink) {
+        if let imageUrl = post?.featuredMediaImages.thumbnail?.url {
             imageView.kf.indicatorType = .activity
             imageView.kf.setImage(with: imageUrl)
         }

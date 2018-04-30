@@ -50,8 +50,8 @@ extension SunAPI: TargetType {
             return nil
         }
     }
-
-    var baseURL: URL { return URL(string: "http://cornellsun.com/wp-json")! }
+    //var baseURL: URL { return URL(string: "http://cornellsun.staging.wpengine.com/wp-json")! } //dev url
+    var baseURL: URL { return URL(string: "http://cornellsun.com/wp-json")! } //production url
     var path: String {
         switch self {
         case .posts, .search, .post, .section:

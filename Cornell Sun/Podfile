@@ -14,12 +14,13 @@ target 'Cornell Sun' do
   pod 'Kingfisher', '~> 4.7.0'
   pod 'ImageSlideshow', :git=> 'https://github.com/AAAstorga/ImageSlideshow.git', :commit => 'bec5f17bd71d32d289378e1ba787a55cfa80bcce'
   pod 'ImageSlideshow/Kingfisher', :git=> 'https://github.com/AAAstorga/ImageSlideshow.git', :commit => 'bec5f17bd71d32d289378e1ba787a55cfa80bcce'
-  pod 'RealmSwift'
   pod 'Google-Mobile-Ads-SDK'
   pod 'SwiftSoup'
   pod 'OneSignal', '>= 2.6.2', '< 3.0'
   pod 'IQKeyboardManagerSwift', '5.0.0'
   pod 'SkeletonView'
+  pod 'UICircularProgressRing'
+  pod 'Motion'
 
 target 'SunNotificationServiceExtension' do
     pod 'OneSignal', '>= 2.6.2', '< 3.0'
