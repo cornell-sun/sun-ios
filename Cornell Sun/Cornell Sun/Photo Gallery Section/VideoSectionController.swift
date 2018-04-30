@@ -51,8 +51,8 @@ extension VideoSectionController: BookmarkPressedDelegate, SharePressedDelegate 
         case .categoryCell:
             return CGSize(width: width, height: 40)
         case .titleCell:
-            let height = entry.title.height(withConstrainedWidth: width - 34, font: .headerTitle) //CLUTCH Extension thank stackoverflow gods
-            return CGSize(width: width, height: height + 40)
+            let height = entry.title.height(withConstrainedWidth: width - 34, font: .articleTitle, lineSpacing: 4.5) //CLUTCH Extension thank stackoverflow gods
+            return CGSize(width: width, height: height + 30)
         case .videoCell:
             return CGSize(width: width, height: width / 1.5)
         case .actionMenuCell:

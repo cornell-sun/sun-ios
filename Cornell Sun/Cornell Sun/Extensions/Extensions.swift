@@ -62,7 +62,6 @@ extension UITextView {
 }
 
 extension String {
-
     func requiredHeight(width: CGFloat, font: UIFont) -> CGFloat {
         let label = UILabel(frame: CGRect(x: 0.0, y: 0.0, width: width, height: CGFloat.greatestFiniteMagnitude))
         label.numberOfLines = 0
