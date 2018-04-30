@@ -12,6 +12,10 @@ import UICircularProgressRing
 import Kingfisher
 import Motion
 
+struct PhotoGalleryConstants {
+    static let pageControlBottomInset = 4
+}
+
 class PhotoGallery: UIView {
 
     private var didSetupConstraints = false
@@ -86,7 +90,7 @@ class PhotoGallery: UIView {
 
             pageControl.snp.makeConstraints { make in
                 make.height.equalTo(pageControl.intrinsicContentSize.height)
-                make.bottom.equalToSuperview().inset(4)
+                make.bottom.equalToSuperview().inset(PhotoGalleryConstants.pageControlBottomInset)
                 make.leading.trailing.equalToSuperview()
             }
 

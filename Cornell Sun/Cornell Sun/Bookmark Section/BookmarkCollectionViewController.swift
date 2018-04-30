@@ -51,9 +51,6 @@ class BookmarkCollectionViewController: ViewController, UIScrollViewDelegate {
             if let newValue = change.newValue {
                 self.bookmarkPosts = newValue
                 self.adapter.performUpdates(animated: true, completion: nil)
-                print("newValue for bookmarks \(newValue.count)")
-            } else {
-                print("initial vlaue for bookmarks \(child.packages.count)")
             }
         }
     }

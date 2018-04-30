@@ -21,7 +21,7 @@ typealias CommentsCompletionBlock = (_ comments: [CommentObject], _ error: APIEr
 
 let savedPostIds: [Int] = {
     guard let posts = PostOffice.instance.get() else { return [] }
-    return posts.map({$0.id})
+    return posts.map { $0.id } 
 }()
 
 let dateFormatter: DateFormatter = {

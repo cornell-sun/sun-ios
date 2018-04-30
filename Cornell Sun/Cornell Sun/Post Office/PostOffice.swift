@@ -25,8 +25,8 @@ final class PostOffice: NSObject {
 
     func get() -> [PostObject]? {
         guard let packageData = UserDefaults.standard.data(forKey: packagesKey) else { return nil }
-            let packages = try? decoder.decode([PostObject].self, from: packageData)
-            return packages
+        let packages = try? decoder.decode([PostObject].self, from: packageData)
+        return packages
     }
 
     /// attempts to store the object
@@ -55,5 +55,5 @@ final class PostOffice: NSObject {
         guard let encodedPackages = try? encoder.encode(packages) else { return false }
         UserDefaults.standard.set(encodedPackages, forKey: packagesKey)
         return true
-        }
     }
+}

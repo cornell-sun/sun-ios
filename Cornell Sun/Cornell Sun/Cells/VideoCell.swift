@@ -22,7 +22,6 @@ final class VideoCell: UICollectionViewCell {
     let videoWebView: UIWebView = {
         let webView = UIWebView()
         webView.allowsInlineMediaPlayback = true
-        webView.backgroundColor = .orange
         return webView
     }()
 
@@ -37,9 +36,8 @@ final class VideoCell: UICollectionViewCell {
 
     func setupViews() {
         addSubview(videoWebView)
-        videoWebView.snp.makeConstraints { (make) in
-            make.width.equalToSuperview()
-            make.height.equalToSuperview()
+        videoWebView.snp.makeConstraints { make in
+            make.width.height.equalToSuperview()
         }
     }
 

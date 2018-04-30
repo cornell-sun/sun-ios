@@ -40,7 +40,7 @@ final class PhotoGalleryCell: UICollectionViewCell {
         photoGallery = PhotoGallery(attachments: post!.postAttachments, height: self.bounds.height, width: self.bounds.width)
 
         addSubview(photoGallery)
-        photoGallery.snp.makeConstraints { (make) in
+        photoGallery.snp.makeConstraints { make in
             make.width.equalToSuperview()
             make.height.equalToSuperview()
         }
