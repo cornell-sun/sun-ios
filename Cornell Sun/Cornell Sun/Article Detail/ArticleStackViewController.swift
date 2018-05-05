@@ -130,7 +130,7 @@ class ArticleStackViewController: UIViewController {
     }
 
     func parsePTag(element: Element) -> ArticleContentType? {
-        guard let text = try? element.text() else { return nil }
+        guard let text = try? element.text(), text != "" else { return nil }
         if element.hasClass("wp-media-credit") {
             return .imageCredit(text)
         } else if element.hasClass("wp-caption-text") {
@@ -143,7 +143,9 @@ class ArticleStackViewController: UIViewController {
 
             var htmlString = openPRegex.stringByReplacingMatches(in: outerHtml, options: [], range: NSRange(location: 0, length: outerHtml.count), withTemplate: "<span>")
             htmlString = closePRegex.stringByReplacingMatches(in: htmlString, options: [], range: NSRange(location: 0, length: htmlString.count), withTemplate: "</span>")
-            return .text(htmlString.htmlToAttributedString ?? NSAttributedString(string: ""))
+
+            let str = "<span style=\"font-family: 'serif'; font-size: 18\">\(htmlString)"
+            return .text(str.htmlToAttributedString ?? NSAttributedString(string: ""))
         }
     }
 
@@ -220,7 +222,7 @@ class ArticleStackViewController: UIViewController {
         let textView = UITextView()
         textView.attributedText = text
         textView.textContainer.lineFragmentPadding = 0
-        textView.font = .articleBody
+//        textView.font = .articleBody
         textView.textColor = .black
         textView.delegate = self
         textView.isScrollEnabled = false
