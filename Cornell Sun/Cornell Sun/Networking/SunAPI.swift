@@ -54,7 +54,7 @@ extension SunAPI: TargetType {
     var baseURL: URL { return URL(string: "http://cornellsun.com/wp-json")! } //production url
     var path: String {
         switch self {
-        case .posts, .search, .post, .section:
+        case .posts, .search, .section:
             return "\(defaultPath)/posts"
         case .author(let authorId):
             return "\(defaultPath)/users/\(authorId)"
@@ -68,6 +68,8 @@ extension SunAPI: TargetType {
             return "\(backendPath)/trending"
         case .featured:
             return "\(backendPath)/featured"
+        case .post(let postID):
+            return "\(defaultPath)/posts/\(postID)"
         }
     }
 

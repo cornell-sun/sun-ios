@@ -24,7 +24,7 @@ class PostObject: NSObject, Codable, ListDiffable {
     var content: String!
     var excerpt: String!
     var link: URL!
-    var author: [AuthorObject]!
+    var author: [AuthorObject]?
     var featuredMediaImages: FeaturedMediaImages!
     var featuredMediaCaption: String?
     var featuredMediaCredit: String?
@@ -33,6 +33,7 @@ class PostObject: NSObject, Codable, ListDiffable {
     var tags: [String]!
     var postAttachments: [PostAttachmentObject]!
     var postType: PostType!
+    var suggestedStories: [SuggestedStoryObject]!
 
     required init(from decoder: Decoder) throws {
 
@@ -51,7 +52,7 @@ class PostObject: NSObject, Codable, ListDiffable {
         self.excerpt = try nested.decode(String.self, forKey: .excerpt)
         self.link = try nested.decode(URL.self, forKey: .link)
         self.content = try nested.decode(String.self, forKey: .content)
-        self.author = try nested.decode([AuthorObject].self, forKey: .author)
+        self.author = try? nested.decode([AuthorObject].self, forKey: .author)
         self.featuredMediaImages = try nested.decode(FeaturedMediaImages.self, forKey: .featuredMediaImages)
         self.featuredMediaCaption = try nested.decode(String?.self, forKey: .featuredMediaCaption)
         self.featuredMediaCredit = try nested.decode(String?.self, forKey: .featuredMediaCredit)
@@ -62,6 +63,7 @@ class PostObject: NSObject, Codable, ListDiffable {
         self.postAttachments = try nested.decode([PostAttachmentObject].self, forKey: .postAttachments)
         self.didSave = (try? nested.decode(Bool.self, forKey: .didSave)) ?? false
         self.storeDate = try? nested.decode(Date.self, forKey: .storeDate)
+        self.suggestedStories = try nested.decode([SuggestedStoryObject].self, forKey: .suggested)
 
         //cache image
         if let mediumImageURL = self.featuredMediaImages.mediumLarge?.url {
@@ -89,6 +91,7 @@ extension PostObject {
         case tags = "tag_strings"
         case postType = "post_type_enum"
         case postAttachments = "post_attachments_meta"
+        case suggested = "suggested_article_ids"
     }
 
     func encode(to encoder: Encoder) throws {
@@ -110,6 +113,7 @@ extension PostObject {
         try container.encode(postAttachments, forKey: .postAttachments)
         try container.encode(didSave, forKey: .didSave)
         try container.encode(storeDate, forKey: .storeDate)
+        try container.encode(suggestedStories, forKey: .suggested)
     }
 
     func diffIdentifier() -> NSObjectProtocol {

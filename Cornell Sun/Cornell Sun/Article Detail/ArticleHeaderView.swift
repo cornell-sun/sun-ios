@@ -129,7 +129,9 @@ class ArticleHeaderView: UIView {
         }
 
         timeStampLabel.text = readableDateFormatter.string(from: post.date)
-        authorLabel.text = "By \(post.author.byline)"
+        if let authors = post.author {
+            authorLabel.text = "By \(authors.byline)"
+        }
         if let caption = post.featuredMediaCaption {
             captionLabel.text = caption.htmlToString
         }
@@ -149,6 +151,14 @@ class ArticleHeaderView: UIView {
         if let heroImageUrl = post.featuredMediaImages.mediumLarge?.url {
             heroImageView.kf.indicatorType = .activity
             heroImageView.kf.setImage(with: heroImageUrl)
+        } else {
+            heroImageView.snp.updateConstraints { make in
+                make.height.equalTo(0)
+            }
+            captionLabel.snp.remakeConstraints { make in
+                make.top.equalTo(heroImageView.snp.bottom).offset(captionLabelTopOffset)
+                make.height.equalTo(0)
+            }
         }
     }
 
