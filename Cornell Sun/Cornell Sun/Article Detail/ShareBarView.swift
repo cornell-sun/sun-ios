@@ -22,7 +22,7 @@ class ShareBarView: UIView {
     let topSeparatorHeight: CGFloat = 1
     let bookmarkTrailingPadding: CGFloat = 18
     let bookmarkWidth: CGFloat = 15
-    let bookmarkHeight: CGFloat = 20
+    let bookmarkHeight: CGFloat = 32
     let shareTrailingPadding: CGFloat = 25
     let shareWidth: CGFloat = 19
     let shareHeight: CGFloat = 21

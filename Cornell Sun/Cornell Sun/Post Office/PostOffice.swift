@@ -56,4 +56,11 @@ final class PostOffice: NSObject {
         UserDefaults.standard.set(encodedPackages, forKey: packagesKey)
         return true
     }
+
+    /// check whether post is in the office
+    /// - Returns: true if post is bookmarked, false if not
+    func isPostIdInBookmarks(post: PostObject) -> Bool {
+        return packages.filter { $0.id == post.id }.count == 1
+    }
+
 }

@@ -15,6 +15,7 @@
 		0C6E76C62094FF0D00F8710C /* MastheadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C6E76C52094FF0D00F8710C /* MastheadViewController.swift */; };
 		0C736C54202F96E000E9D92E /* ImageAttachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C736C53202F96E000E9D92E /* ImageAttachment.swift */; };
 		0C7D9A8E1F217B510041E1B0 /* apple-app-site-association in Resources */ = {isa = PBXBuildFile; fileRef = 0C7D9A8D1F217B510041E1B0 /* apple-app-site-association */; };
+		0C8FF80820A13B6B003544BF /* SettingObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8FF80720A13B6B003544BF /* SettingObject.swift */; };
 		0CA26A1B205F41A6004759D1 /* ArticleStackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CA26A1A205F41A6004759D1 /* ArticleStackViewController.swift */; };
 		0CB00B261FBBAEE800376A94 /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CB00B251FBBAEE800376A94 /* CommentTableViewCell.swift */; };
 		0CB1EBCE2041ED9100DD8777 /* ShareBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CB1EBCD2041ED9100DD8777 /* ShareBarView.swift */; };
@@ -29,7 +30,6 @@
 		4029BB0A2087B02300E8BAEB /* NotificationsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4029BB092087B02300E8BAEB /* NotificationsTableViewCell.swift */; };
 		4036564D207446B100E7583A /* DisplayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4036564C207446B000E7583A /* DisplayViewController.swift */; };
 		4047EA05207590450030067E /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4047EA04207590450030067E /* NotificationViewController.swift */; };
-		405F83D81FBE1E2B00360AEB /* SettingObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405F83D71FBE1E2B00360AEB /* SettingObject.swift */; };
 		405F83DA1FBE1E3100360AEB /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405F83D91FBE1E3000360AEB /* Enums.swift */; };
 		405F83DC1FBE1E7C00360AEB /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405F83DB1FBE1E7C00360AEB /* SettingsViewController.swift */; };
 		40B1D4922073107E00C1306E /* ContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B1D4912073107E00C1306E /* ContactViewController.swift */; };
@@ -44,7 +44,7 @@
 		61652CD41F6EF44900EEFC29 /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61652CD31F6EF44900EEFC29 /* SearchTableViewCell.swift */; };
 		DC0A883A1FBA2DEE00F2BCBB /* PhotoGalleryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0A88391FBA2DEE00F2BCBB /* PhotoGalleryCell.swift */; };
 		DC0A883C1FBA531000F2BCBB /* BookmarkCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0A883B1FBA531000F2BCBB /* BookmarkCollectionViewController.swift */; };
-		DC0A883E1FBA6B8200F2BCBB /* BookmarkSectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0A883D1FBA6B8200F2BCBB /* BookmarkSectionController.swift */; };
+		DC0A883E1FBA6B8200F2BCBB /* BookmarkSearchSectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0A883D1FBA6B8200F2BCBB /* BookmarkSearchSectionController.swift */; };
 		DC0A88401FBA84E700F2BCBB /* AuthorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0A883F1FBA84E700F2BCBB /* AuthorCell.swift */; };
 		DC0E7C4E208FFCBA00B1295F /* PostObjectHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0E7C4D208FFCBA00B1295F /* PostObjectHelpers.swift */; };
 		DC34DEF3203216690010DF9A /* SectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC34DEF2203216690010DF9A /* SectionViewController.swift */; };
@@ -122,10 +122,12 @@
 		0C0D2FE62060462500BC77E9 /* OnboardingPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPageViewController.swift; sourceTree = "<group>"; };
 		0C0D2FE8206048BA00BC77E9 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		0C15F1861FBDD433009724DB /* ArticleHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleHeaderView.swift; sourceTree = "<group>"; };
+		0C30CF802097AC4500015EF6 /* KeplerStd-Italic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "KeplerStd-Italic.otf"; sourceTree = "<group>"; };
 		0C59AD43208D505700CF3A31 /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
 		0C6E76C52094FF0D00F8710C /* MastheadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MastheadViewController.swift; sourceTree = "<group>"; };
 		0C736C53202F96E000E9D92E /* ImageAttachment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageAttachment.swift; sourceTree = "<group>"; };
 		0C7D9A8D1F217B510041E1B0 /* apple-app-site-association */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "apple-app-site-association"; path = "Cornell Sun/apple-app-site-association"; sourceTree = "<group>"; };
+		0C8FF80720A13B6B003544BF /* SettingObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingObject.swift; sourceTree = "<group>"; };
 		0CA26A1A205F41A6004759D1 /* ArticleStackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleStackViewController.swift; sourceTree = "<group>"; };
 		0CB00B251FBBAEE800376A94 /* CommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
 		0CB1EBCD2041ED9100DD8777 /* ShareBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareBarView.swift; sourceTree = "<group>"; };
@@ -143,7 +145,6 @@
 		4029BB092087B02300E8BAEB /* NotificationsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsTableViewCell.swift; sourceTree = "<group>"; };
 		4036564C207446B000E7583A /* DisplayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayViewController.swift; sourceTree = "<group>"; };
 		4047EA04207590450030067E /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
-		405F83D71FBE1E2B00360AEB /* SettingObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingObject.swift; sourceTree = "<group>"; };
 		405F83D91FBE1E3000360AEB /* Enums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 		405F83DB1FBE1E7C00360AEB /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		40B1D4912073107E00C1306E /* ContactViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactViewController.swift; sourceTree = "<group>"; };
@@ -165,7 +166,7 @@
 		DA69BC56E568CC99632DAB34 /* Pods-Cornell Sun-SunNotificationServiceExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cornell Sun-SunNotificationServiceExtension.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Cornell Sun-SunNotificationServiceExtension/Pods-Cornell Sun-SunNotificationServiceExtension.debug.xcconfig"; sourceTree = "<group>"; };
 		DC0A88391FBA2DEE00F2BCBB /* PhotoGalleryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoGalleryCell.swift; sourceTree = "<group>"; };
 		DC0A883B1FBA531000F2BCBB /* BookmarkCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkCollectionViewController.swift; sourceTree = "<group>"; };
-		DC0A883D1FBA6B8200F2BCBB /* BookmarkSectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkSectionController.swift; sourceTree = "<group>"; };
+		DC0A883D1FBA6B8200F2BCBB /* BookmarkSearchSectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkSearchSectionController.swift; sourceTree = "<group>"; };
 		DC0A883F1FBA84E700F2BCBB /* AuthorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorCell.swift; sourceTree = "<group>"; };
 		DC0E7C4D208FFCBA00B1295F /* PostObjectHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostObjectHelpers.swift; sourceTree = "<group>"; };
 		DC34DEF2203216690010DF9A /* SectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionViewController.swift; sourceTree = "<group>"; };
@@ -337,7 +338,7 @@
 			children = (
 				DC0E7C4D208FFCBA00B1295F /* PostObjectHelpers.swift */,
 				405F83D91FBE1E3000360AEB /* Enums.swift */,
-				405F83D71FBE1E2B00360AEB /* SettingObject.swift */,
+				0C8FF80720A13B6B003544BF /* SettingObject.swift */,
 				50A898111EAEC93B0099CFA9 /* AuthorObject.swift */,
 				5006B24C1EADA37E00F58549 /* PostObject.swift */,
 				DCFC88C51F86C03700A0D8A9 /* CommentObject.swift */,
@@ -406,6 +407,7 @@
 			children = (
 				0CED4FAC1FAB523F0025EB91 /* UIFont+.swift */,
 				DCB717111FB94BCA00BE4D26 /* KeplerStd-Bold.otf */,
+				0C30CF802097AC4500015EF6 /* KeplerStd-Italic.otf */,
 				DC818DA21F75E08B0064AFFA /* Sonnenstrahl-Ausgezeichnet.ttf */,
 			);
 			path = "Font Extension";
@@ -560,7 +562,7 @@
 			isa = PBXGroup;
 			children = (
 				DC0A883B1FBA531000F2BCBB /* BookmarkCollectionViewController.swift */,
-				DC0A883D1FBA6B8200F2BCBB /* BookmarkSectionController.swift */,
+				DC0A883D1FBA6B8200F2BCBB /* BookmarkSearchSectionController.swift */,
 			);
 			path = "Bookmark Section";
 			sourceTree = "<group>";
@@ -579,7 +581,6 @@
 				5D796D343FAE3F7BC75A78B1 /* [CP] Embed Pods Frameworks */,
 				40D130291F61EF250063329A /* SwiftLint */,
 				DC3667DC206EB9D2002EB4F9 /* Embed App Extensions */,
-				F7F7835D55907867EA6B8388 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -599,7 +600,6 @@
 				DC3667CD206EB9D2002EB4F9 /* Sources */,
 				DC3667CE206EB9D2002EB4F9 /* Frameworks */,
 				DC3667CF206EB9D2002EB4F9 /* Resources */,
-				16DBF59F947FE44D1149C6FA /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -619,7 +619,6 @@
 				DCD870E91F256B7B00B98AF8 /* Frameworks */,
 				DCD870EA1F256B7B00B98AF8 /* Resources */,
 				257BDE34A42EF8D90E4C73AE /* [CP] Embed Pods Frameworks */,
-				D999605B716B973CB4C648C2 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -722,21 +721,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		16DBF59F947FE44D1149C6FA /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Cornell Sun-SunNotificationServiceExtension/Pods-Cornell Sun-SunNotificationServiceExtension-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		257BDE34A42EF8D90E4C73AE /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -883,36 +867,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		D999605B716B973CB4C648C2 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Cornell SunTests/Pods-Cornell SunTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		F7F7835D55907867EA6B8388 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Cornell Sun/Pods-Cornell Sun-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -923,7 +877,7 @@
 				0CEA0F7A1F99454600607CC7 /* Date+.swift in Sources */,
 				DC446C321F5D05FF00D68688 /* ArticleSectionController.swift in Sources */,
 				5006AFFE1EA9625000F58549 /* ViewController.swift in Sources */,
-				DC0A883E1FBA6B8200F2BCBB /* BookmarkSectionController.swift in Sources */,
+				DC0A883E1FBA6B8200F2BCBB /* BookmarkSearchSectionController.swift in Sources */,
 				DC6561D31FBAC45900C5062D /* PhotoGalleryObject.swift in Sources */,
 				DC3CCB35209243BC000A9A5B /* VideoSectionController.swift in Sources */,
 				DC3CCB3320924288000A9A5B /* VideoCell.swift in Sources */,
@@ -949,9 +903,9 @@
 				DCB717161FBA016400BE4D26 /* TaglineCell.swift in Sources */,
 				DC0A88401FBA84E700F2BCBB /* AuthorCell.swift in Sources */,
 				0C15F1871FBDD433009724DB /* ArticleHeaderView.swift in Sources */,
-				405F83D81FBE1E2B00360AEB /* SettingObject.swift in Sources */,
 				DC79719F1F7B30540055A7B2 /* CategoryCell.swift in Sources */,
 				DC34DEF3203216690010DF9A /* SectionViewController.swift in Sources */,
+				0C8FF80820A13B6B003544BF /* SettingObject.swift in Sources */,
 				DC0A883A1FBA2DEE00F2BCBB /* PhotoGalleryCell.swift in Sources */,
 				DC446C2E1F5D016500D68688 /* FeedCollectionViewController.swift in Sources */,
 				0CBC2CEE1F5E3093003FBB38 /* TabBarViewController.swift in Sources */,

@@ -85,9 +85,12 @@ extension BookmarkCollectionViewController: ListAdapterDataSource {
 
         if let obj = object as? PostObject, obj.postType == .photoGallery {
             return PhotoGallerySectionController()
+        } else if let obj = object as? PostObject, obj.postType == .photoGallery {
+            return PhotoGallerySectionController()
+        } else if let obj = object as? PostObject, obj.postType == .video {
+            return VideoSectionController()
         }
-
-        let bookmarkSC = BookmarkSectionController()
+        let bookmarkSC = BookmarkSearchSectionController(forBookmarks: true)
         bookmarkSC.delegate = self
         return bookmarkSC
     }

@@ -11,10 +11,13 @@ import IGListKit
 
 class SectionCollectionViewController: UIViewController, UIScrollViewDelegate {
 
+    fileprivate var observer: NSKeyValueObservation?
+
     var sectionSelected: Sections!
     var emptySpinnerView = UIView()
     let spinner = UIActivityIndicatorView(activityIndicatorStyle: .gray)
     var refreshControl = UIRefreshControl()
+    var bookmarkPosts: [PostObject] = []
     var feedData: [ListDiffable] = [] {
         didSet {
             if feedData.isEmpty {
@@ -61,6 +64,10 @@ class SectionCollectionViewController: UIViewController, UIScrollViewDelegate {
         fatalError("init(coder:) has not been implemented")
     }
 
+    deinit {
+        observer = nil
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -70,6 +77,16 @@ class SectionCollectionViewController: UIViewController, UIScrollViewDelegate {
         navigationController?.navigationBar.tintColor = .black
 
         emptySpinnerView.addSubview(spinner)
+
+        observer = PostOffice.instance.observe(\.packages, options: [.initial, .new]) { (postOffice, change) in
+            if let newValue = change.newValue {
+                self.bookmarkPosts = newValue
+            } else {
+                self.bookmarkPosts = postOffice.packages
+            }
+            self.updateBookmarksInFeed()
+            self.adapter.performUpdates(animated: true, completion: nil)
+        }
 
         refreshControl.addTarget(self, action: #selector(refreshData), for: .valueChanged)
         
@@ -99,6 +116,20 @@ class SectionCollectionViewController: UIViewController, UIScrollViewDelegate {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+
+    fileprivate func isPostIdInBookmarks(post: PostObject, currListOfBookmarks: [PostObject]) -> PostObject? {
+        guard let index = currListOfBookmarks.index(where: {$0.id == post.id}) else { return nil }
+        return currListOfBookmarks[index]
+    }
+
+    fileprivate func updateBookmarksInFeed() {
+        let currListOfBookmarks = bookmarkPosts
+        feedData = feedData.map { postObj in
+            guard let post = postObj as? PostObject else { return postObj }
+            guard let updatedBookmarkPost = isPostIdInBookmarks(post: post, currListOfBookmarks: currListOfBookmarks) else { return post }
+            return updatedBookmarkPost
+        }
     }
     
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
