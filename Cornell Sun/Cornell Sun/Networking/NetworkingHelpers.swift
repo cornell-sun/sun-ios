@@ -86,6 +86,33 @@ func getComments(postID: Int, completion: @escaping CommentsCompletionBlock) {
     }
 }
 
+func getPostsFromIDs(_ ids: [Int], completion: @escaping ([Int: PostObject], APIErrors?) -> Void) {
+    let group = DispatchGroup()
+    var postsDict = [Int: PostObject]()
+
+    ids.forEach { id in
+        group.enter()
+        API.request(target: .post(postId: id)) { response in
+            guard let response = response else {
+                print("error")
+                fatalError()
+            }
+            do {
+                let post = try decoder.decode(PostObject.self, from: response.data)
+                postsDict[id] = post
+            } catch let error {
+                print(error)
+                fatalError()
+            }
+            group.leave()
+        }
+    }
+
+    group.notify(queue: .main) {
+        completion(postsDict, nil)
+    }
+}
+
 func prepareInitialPosts(callback: @escaping ([ListDiffable], PostObject?) -> Void) {
     var headlinePost: PostObject?
     var postObjects: [ListDiffable] = []

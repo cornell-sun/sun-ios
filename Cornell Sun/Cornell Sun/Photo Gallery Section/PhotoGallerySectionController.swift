@@ -64,7 +64,7 @@ extension PhotoGallerySectionController: BookmarkPressedDelegate, SharePressedDe
             let height = entry.title.height(withConstrainedWidth: width - 34, font: .articleTitle, lineSpacing: 4.5) //CLUTCH Extension thank stackoverflow gods
             return CGSize(width: width, height: height + 20)
         case .authorCell:
-            let height = entry.author[0].name.height(withConstrainedWidth: width, font: .photoCaption)
+            let height = entry.author?.byline.height(withConstrainedWidth: width, font: .photoCaption) ?? 0
             return CGSize(width: width, height: height + 13)
         case .photoGalleryCell:
             return CGSize(width: width, height: width / 1.5)

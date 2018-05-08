@@ -24,9 +24,11 @@ class ArticleStackViewController: UIViewController {
     let captionBottomInset: CGFloat = 24
 
     let commentReuseIdentifier = "CommentReuseIdentifier"
+    let suggestedReuseIdentifier = "SuggestedReuseIdentifier"
 
     var post: PostObject!
     var comments: [CommentObject]! = []
+    var suggestedStories: [Int: PostObject] = [:] // map post id to post object
     var views: [UIView] = []
 
     var scrollView: UIScrollView!
@@ -34,6 +36,7 @@ class ArticleStackViewController: UIViewController {
     var headerView: ArticleHeaderView!
     var shareBarView: ShareBarView!
     var commentsTableView: UITableView!
+    var suggestedTableView: UITableView!
 
     convenience init(post: PostObject) {
         self.init()
@@ -89,6 +92,10 @@ class ArticleStackViewController: UIViewController {
         navigationController?.navigationBar.topItem?.title = "The Cornell Daily Sun"
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.navigationBar.topItem?.title = ""
+    }
+
     /// Sets up the content in the stack view by parsing each section.
     func setup() {
         let sections = createArticleContentType(content: post.content)
@@ -107,7 +114,10 @@ class ArticleStackViewController: UIViewController {
             }
         }
         setupComments()
+        setupSuggestedStories()
     }
+
+    // MARK: - Parsing HTML Tags
 
     func createArticleContentType(content: String) -> [ArticleContentType] {
         var sections: [ArticleContentType] = []
@@ -166,6 +176,8 @@ class ArticleStackViewController: UIViewController {
         }
         return nil
     }
+
+    // MARK: - Setting up subviews
 
     func setupCaptionLabel(caption: String) {
         let view = UIView()
@@ -267,6 +279,8 @@ class ArticleStackViewController: UIViewController {
         }
     }
 
+    // MARK: - Comments
+
     func setupComments() {
         getComments(postID: post.id) { comments, error in
             if error == nil {
@@ -287,41 +301,123 @@ class ArticleStackViewController: UIViewController {
         commentsTableView.estimatedRowHeight = 100
         scrollView.addSubview(commentsTableView)
 
-        let totalHeight = self.comments.map { comment -> CGFloat in
-            let textHeight = comment.comment.requiredHeight(width: view.bounds.width-37, font: .subSecondaryHeader)
-            return textHeight + 100
-        }
-
-        stackView.snp.removeConstraints()
-
-        stackView.snp.remakeConstraints { make in
-            make.leading.trailing.top.equalToSuperview()
-            make.bottom.equalTo(commentsTableView.snp.top)
-        }
-
-        commentsTableView.snp.makeConstraints { make in
-            make.width.leading.trailing.equalToSuperview()
-            make.height.equalTo(totalHeight.reduce(0, +))
-            make.top.equalTo(stackView.snp.bottom)
-            make.bottom.equalToSuperview().inset(20)
-        }
+//        let totalHeight = self.comments.map { comment -> CGFloat in
+//            let textHeight = comment.comment.requiredHeight(width: view.bounds.width-37, font: .subSecondaryHeader)
+//            return textHeight + 100
+//        }
+//        stackView.snp.removeConstraints()
+//
+//        stackView.snp.remakeConstraints { make in
+//            make.leading.trailing.top.equalToSuperview()
+//            make.bottom.equalTo(commentsTableView.snp.top)
+//        }
+//
+//        commentsTableView.snp.makeConstraints { make in
+//            make.width.leading.trailing.equalToSuperview()
+//            make.height.equalTo(totalHeight.reduce(0, +))
+//            make.top.equalTo(stackView.snp.bottom)
+//            make.bottom.equalToSuperview().inset(20)
+//        }
 
     }
+
+    // MARK: - Suggested Stories
+    func setupSuggestedStories() {
+        let headerHeight: CGFloat = 37
+        let footerHeight: CGFloat = 16
+        let headerView = UIView()
+        let headerLabel = UILabel()
+        headerLabel.font = .headerTitle
+        headerLabel.textColor = .black90
+        headerLabel.text = "Suggested Stories"
+        headerView.addSubview(headerLabel)
+
+        suggestedTableView = UITableView()
+        suggestedTableView.tableHeaderView = headerView
+        suggestedTableView.separatorStyle = .none
+        suggestedTableView.delegate = self
+        suggestedTableView.dataSource = self
+        suggestedTableView.isScrollEnabled = false
+        suggestedTableView.allowsSelection = false
+        suggestedTableView.rowHeight = 118
+        suggestedTableView.tableFooterView = UIView()
+        suggestedTableView.register(SuggestedStoryTableViewCell.self, forCellReuseIdentifier: suggestedReuseIdentifier)
+        scrollView.addSubview(suggestedTableView)
+        suggestedTableView.reloadData()
+
+        stackView.snp.remakeConstraints { make in
+            make.leading.trailing.width.top.equalToSuperview()
+            make.bottom.equalTo(suggestedTableView.snp.top)
+        }
+
+        suggestedTableView.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview()
+            make.height.equalTo(CGFloat(post.suggestedStories.count * 118) + headerHeight + footerHeight)
+            make.top.equalTo(stackView.snp.bottom)
+            make.bottom.equalToSuperview()
+        }
+
+        headerView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+            make.height.equalTo(headerHeight)
+        }
+
+        headerLabel.snp.makeConstraints { make in
+            make.leading.equalTo(leadingOffset)
+            make.height.equalTo(headerHeight)
+        }
+
+        headerView.layoutIfNeeded()
+        suggestedTableView.tableHeaderView = headerView
+        getSuggestedStoriesByIds()
+    }
+
+    func getSuggestedStoriesByIds() {
+        getPostsFromIDs(post.suggestedStories.map { $0.postID }) { posts, error in
+            if error == nil {
+                self.suggestedStories = posts
+                self.suggestedTableView.allowsSelection = true
+            }
+        }
+    }
 }
+
+// MARK: - TableView
 
 extension ArticleStackViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return comments.count
+        if tableView == commentsTableView {
+            return comments.count
+        } else {
+            return post.suggestedStories.count
+        }
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: commentReuseIdentifier, for: indexPath) as? CommentTableViewCell else { return CommentTableViewCell() }
-        cell.setup(for: comments[indexPath.row])
-        return cell
+        if tableView == commentsTableView {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: commentReuseIdentifier, for: indexPath) as? CommentTableViewCell else { return CommentTableViewCell() }
+            cell.setup(for: comments[indexPath.row])
+            return cell
+        } else {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: suggestedReuseIdentifier, for: indexPath) as? SuggestedStoryTableViewCell else { return SuggestedStoryTableViewCell() }
+            cell.setup(for: post.suggestedStories[indexPath.row])
+            return cell
+        }
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if tableView == suggestedTableView {
+            if let suggestedID = post.suggestedStories[indexPath.row].postID, let suggestedStory = suggestedStories[suggestedID] {
+                let articleViewController = ArticleStackViewController(post: suggestedStory)
+                navigationController?.pushViewController(articleViewController, animated: true)
+            }
+        }
     }
 
 }
+
+// MARK: - Share bar
 
 extension ArticleStackViewController: ShareBarViewDelegate {
 
@@ -350,6 +446,8 @@ extension ArticleStackViewController: ShareBarViewDelegate {
         }
     }
 }
+
+// MARK: - TextView
 
 extension ArticleStackViewController: UITextViewDelegate {
 

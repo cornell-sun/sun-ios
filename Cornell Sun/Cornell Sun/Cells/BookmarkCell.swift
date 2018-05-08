@@ -21,7 +21,7 @@ final class BookmarkCell: UICollectionViewCell {
         didSet {
             titleLabel.text = post?.title
             titleLabel.setLineSpacing(to: 4.5)
-            authorLabel.text = post?.author.byline
+            authorLabel.text = post?.author?.byline ?? ""
             setupImage()
         }
     }
@@ -87,7 +87,7 @@ final class BookmarkCell: UICollectionViewCell {
     }
 
     func setupImage() {
-        if let imageUrl = post?.featuredMediaImages.thumbnail?.url {
+        if let imageUrl = post?.featuredMediaImages?.thumbnail?.url {
             imageView.kf.indicatorType = .activity
             imageView.kf.setImage(with: imageUrl)
         }
