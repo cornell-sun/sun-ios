@@ -64,7 +64,11 @@ extension ArticleSectionController: BookmarkPressedDelegate, SharePressedDelegat
             let height = entry.author?.byline.height(withConstrainedWidth: width, font: .cellInformationText) ?? 0
             return CGSize(width: width, height: height + 13)
         case .imageCell:
-            return CGSize(width: width, height: width / 1.92)
+            if entry.featuredMediaImages.mediumLarge?.url == nil {
+                return .zero
+            } else {
+                return CGSize(width: width, height: width / 1.92)
+            }
         case .actionMenuCell:
             return CGSize(width: width, height: 50)
         }
