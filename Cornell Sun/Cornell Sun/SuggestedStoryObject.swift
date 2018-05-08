@@ -16,7 +16,7 @@ class SuggestedStoryObject: Codable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
 
         postID = try container.decode(Int.self, forKey: .postID)
-        title = try container.decode(String.self, forKey: .title)
+        title = try container.decode(String.self, forKey: .title).htmlToString
         authors = try? container.decode([AuthorObject].self, forKey: .authorName)
 
         featuredMediaImages = try? container.decode(FeaturedMediaImages.self, forKey: .featuredMediaImages)
