@@ -9,7 +9,7 @@
 import UIKit
 import IGListKit
 
-fileprivate enum VideoCellType: Int {
+private enum VideoCellType: Int {
     case categoryCell = 0
     case titleCell = 1
     case videoCell = 2

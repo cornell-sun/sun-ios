@@ -15,6 +15,7 @@
 		0C6E76C62094FF0D00F8710C /* MastheadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C6E76C52094FF0D00F8710C /* MastheadViewController.swift */; };
 		0C736C54202F96E000E9D92E /* ImageAttachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C736C53202F96E000E9D92E /* ImageAttachment.swift */; };
 		0C7D9A8E1F217B510041E1B0 /* apple-app-site-association in Resources */ = {isa = PBXBuildFile; fileRef = 0C7D9A8D1F217B510041E1B0 /* apple-app-site-association */; };
+		0C8FF80820A13B6B003544BF /* SettingObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8FF80720A13B6B003544BF /* SettingObject.swift */; };
 		0CA26A1B205F41A6004759D1 /* ArticleStackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CA26A1A205F41A6004759D1 /* ArticleStackViewController.swift */; };
 		0CB00B261FBBAEE800376A94 /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CB00B251FBBAEE800376A94 /* CommentTableViewCell.swift */; };
 		0CB1EBCE2041ED9100DD8777 /* ShareBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CB1EBCD2041ED9100DD8777 /* ShareBarView.swift */; };
@@ -29,7 +30,6 @@
 		4029BB0A2087B02300E8BAEB /* NotificationsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4029BB092087B02300E8BAEB /* NotificationsTableViewCell.swift */; };
 		4036564D207446B100E7583A /* DisplayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4036564C207446B000E7583A /* DisplayViewController.swift */; };
 		4047EA05207590450030067E /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4047EA04207590450030067E /* NotificationViewController.swift */; };
-		405F83D81FBE1E2B00360AEB /* SettingObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405F83D71FBE1E2B00360AEB /* SettingObject.swift */; };
 		405F83DA1FBE1E3100360AEB /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405F83D91FBE1E3000360AEB /* Enums.swift */; };
 		405F83DC1FBE1E7C00360AEB /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405F83DB1FBE1E7C00360AEB /* SettingsViewController.swift */; };
 		40B1D4922073107E00C1306E /* ContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B1D4912073107E00C1306E /* ContactViewController.swift */; };
@@ -127,6 +127,7 @@
 		0C6E76C52094FF0D00F8710C /* MastheadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MastheadViewController.swift; sourceTree = "<group>"; };
 		0C736C53202F96E000E9D92E /* ImageAttachment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageAttachment.swift; sourceTree = "<group>"; };
 		0C7D9A8D1F217B510041E1B0 /* apple-app-site-association */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "apple-app-site-association"; path = "Cornell Sun/apple-app-site-association"; sourceTree = "<group>"; };
+		0C8FF80720A13B6B003544BF /* SettingObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingObject.swift; sourceTree = "<group>"; };
 		0CA26A1A205F41A6004759D1 /* ArticleStackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleStackViewController.swift; sourceTree = "<group>"; };
 		0CB00B251FBBAEE800376A94 /* CommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
 		0CB1EBCD2041ED9100DD8777 /* ShareBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareBarView.swift; sourceTree = "<group>"; };
@@ -144,7 +145,6 @@
 		4029BB092087B02300E8BAEB /* NotificationsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsTableViewCell.swift; sourceTree = "<group>"; };
 		4036564C207446B000E7583A /* DisplayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayViewController.swift; sourceTree = "<group>"; };
 		4047EA04207590450030067E /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
-		405F83D71FBE1E2B00360AEB /* SettingObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingObject.swift; sourceTree = "<group>"; };
 		405F83D91FBE1E3000360AEB /* Enums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 		405F83DB1FBE1E7C00360AEB /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		40B1D4912073107E00C1306E /* ContactViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactViewController.swift; sourceTree = "<group>"; };
@@ -338,7 +338,7 @@
 			children = (
 				DC0E7C4D208FFCBA00B1295F /* PostObjectHelpers.swift */,
 				405F83D91FBE1E3000360AEB /* Enums.swift */,
-				405F83D71FBE1E2B00360AEB /* SettingObject.swift */,
+				0C8FF80720A13B6B003544BF /* SettingObject.swift */,
 				50A898111EAEC93B0099CFA9 /* AuthorObject.swift */,
 				5006B24C1EADA37E00F58549 /* PostObject.swift */,
 				DCFC88C51F86C03700A0D8A9 /* CommentObject.swift */,
@@ -903,9 +903,9 @@
 				DCB717161FBA016400BE4D26 /* TaglineCell.swift in Sources */,
 				DC0A88401FBA84E700F2BCBB /* AuthorCell.swift in Sources */,
 				0C15F1871FBDD433009724DB /* ArticleHeaderView.swift in Sources */,
-				405F83D81FBE1E2B00360AEB /* SettingObject.swift in Sources */,
 				DC79719F1F7B30540055A7B2 /* CategoryCell.swift in Sources */,
 				DC34DEF3203216690010DF9A /* SectionViewController.swift in Sources */,
+				0C8FF80820A13B6B003544BF /* SettingObject.swift in Sources */,
 				DC0A883A1FBA2DEE00F2BCBB /* PhotoGalleryCell.swift in Sources */,
 				DC446C2E1F5D016500D68688 /* FeedCollectionViewController.swift in Sources */,
 				0CBC2CEE1F5E3093003FBB38 /* TabBarViewController.swift in Sources */,
