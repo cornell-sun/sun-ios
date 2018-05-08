@@ -130,7 +130,7 @@ class ArticleStackViewController: UIViewController {
     }
 
     func parsePTag(element: Element) -> ArticleContentType? {
-        guard let text = try? element.text(), text != "" else { return nil }
+        guard let text = try? element.text(), !text.isEmpty else { return nil }
         if element.hasClass("wp-media-credit") {
             return .imageCredit(text)
         } else if element.hasClass("wp-caption-text") {
@@ -348,7 +348,6 @@ extension ArticleStackViewController: ShareBarViewDelegate {
         } else {
             PostOffice.instance.remove(object: post)
         }
-        
     }
 }
 
