@@ -590,6 +590,7 @@
 				5D796D343FAE3F7BC75A78B1 /* [CP] Embed Pods Frameworks */,
 				40D130291F61EF250063329A /* SwiftLint */,
 				DC3667DC206EB9D2002EB4F9 /* Embed App Extensions */,
+				4914E41DC788C1FB2DDEFA4B /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -609,6 +610,7 @@
 				DC3667CD206EB9D2002EB4F9 /* Sources */,
 				DC3667CE206EB9D2002EB4F9 /* Frameworks */,
 				DC3667CF206EB9D2002EB4F9 /* Resources */,
+				02C2853D3A7DA190D2B3986F /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -628,6 +630,7 @@
 				DCD870E91F256B7B00B98AF8 /* Frameworks */,
 				DCD870EA1F256B7B00B98AF8 /* Resources */,
 				257BDE34A42EF8D90E4C73AE /* [CP] Embed Pods Frameworks */,
+				7495D1BD41CB47AE50BB980E /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -730,6 +733,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		02C2853D3A7DA190D2B3986F /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Cornell Sun-SunNotificationServiceExtension/Pods-Cornell Sun-SunNotificationServiceExtension-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		257BDE34A42EF8D90E4C73AE /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -788,6 +806,21 @@
 			shellPath = /bin/sh;
 			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\nelse\n    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
 		};
+		4914E41DC788C1FB2DDEFA4B /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Cornell Sun/Pods-Cornell Sun-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		5D796D343FAE3F7BC75A78B1 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -838,6 +871,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Cornell Sun/Pods-Cornell Sun-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7495D1BD41CB47AE50BB980E /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Cornell SunTests/Pods-Cornell SunTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		9A98D18971B5E40B0126C24C /* [CP] Check Pods Manifest.lock */ = {
