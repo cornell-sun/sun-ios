@@ -65,8 +65,8 @@ extension ArticleSectionController: BookmarkPressedDelegate, SharePressedDelegat
             return CGSize(width: width, height: height + 13)
 
         case .imageCell:
-            if(entry.featuredMediaImages.mediumLarge?.url == nil) {
-                return CGSize(width: 0, height: 0)
+            if entry.featuredMediaImages.mediumLarge?.url == nil {
+                return .zero
             } else {
                 return CGSize(width: width, height: width / 1.92)
             }

@@ -68,19 +68,18 @@ final class SearchCellNoImage: UICollectionViewCell {
         addSubview(timeStampLabel)
         addSubview(contentLabel)
         
-        authorLabel.snp.makeConstraints { (make) in
+        authorLabel.snp.makeConstraints { make in
             make.leading.equalToSuperview().inset(insetConstant)
             make.top.equalToSuperview().inset(offsetConstant)
         }
         
-        timeStampLabel.snp.makeConstraints { (make) in
+        timeStampLabel.snp.makeConstraints { make in
             make.trailing.equalToSuperview().offset(-insetConstant)
             make.top.equalToSuperview().inset(offsetConstant)
         }
         
         contentLabel.snp.makeConstraints { make in
-            make.leading.equalToSuperview().inset(insetConstant)
-            make.trailing.equalToSuperview().inset(insetConstant)
+            make.leading.trailing.equalToSuperview().inset(insetConstant)
             make.top.equalTo(authorLabel.snp.bottom).offset(offsetConstant)
         }
     }

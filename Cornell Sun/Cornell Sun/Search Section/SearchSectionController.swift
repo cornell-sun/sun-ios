@@ -66,7 +66,7 @@ class SearchSectionController: ListSectionController {
             return cell
         case .previewCell:
             // swiftlint:disable:next force_cast
-            if(entry.featuredMediaImages.thumbnail?.url != nil) {
+            if entry.featuredMediaImages.thumbnail?.url != nil {
                 let cell = collectionContext!.dequeueReusableCell(of: SearchCell.self, for: self, at: index) as! SearchCell
                 cell.post = entry
                 return cell
