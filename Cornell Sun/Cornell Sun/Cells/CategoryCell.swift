@@ -15,7 +15,7 @@ final class CategoryCell: UICollectionViewCell {
 
     var post: PostObject? {
         didSet {
-            categoryLabel.text = post?.primaryCategory.removingHTMLEntities
+            categoryLabel.text = post?.primaryCategory.htmlToString
         }
     }
     

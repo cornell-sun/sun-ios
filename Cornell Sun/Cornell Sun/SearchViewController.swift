@@ -71,12 +71,14 @@ class SearchViewController: UIViewController, UITableViewDelegate {
         } else {
             navigationItem.titleView = searchController.searchBar
         }
-        self.definesPresentationContext = true
+        navigationController?.navigationBar.backgroundColor = .white
+        navigationController?.navigationBar.isTranslucent = false
+        definesPresentationContext = true
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = .black5
 
         emptyLoadingView.addSubview(spinner)
 
@@ -104,7 +106,7 @@ class SearchViewController: UIViewController, UITableViewDelegate {
         }
 
         adapter.collectionView = collectionView
-        adapter.collectionView?.backgroundColor = .white
+        adapter.collectionView?.backgroundColor = .black5
         adapter.dataSource = self
         adapter.scrollViewDelegate = self
 
@@ -140,8 +142,12 @@ extension SearchViewController: UIScrollViewDelegate, ListAdapterDataSource {
     func listAdapter(_ listAdapter: ListAdapter, sectionControllerFor object: Any) -> ListSectionController {
         if let obj = object as? String, obj == spinToken {
             return spinnerSectionController()
+        } else if let obj = object as? PostObject, obj.postType == .photoGallery {
+            return PhotoGallerySectionController()
+        } else if let obj = object as? PostObject, obj.postType == .video {
+            return VideoSectionController()
         }
-        let searchSectionController = SearchSectionController()
+        let searchSectionController = BookmarkSearchSectionController()
         searchSectionController.delegate = self
         return searchSectionController
     }

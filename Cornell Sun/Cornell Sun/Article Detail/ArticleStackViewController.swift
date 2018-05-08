@@ -77,6 +77,7 @@ class ArticleStackViewController: UIViewController {
         }
 
         shareBarView = ShareBarView()
+        shareBarView.setBookmarkImage(didSelectBookmark: PostOffice.instance.isPostIdInBookmarks(post: post))
         shareBarView.delegate = self
         view.addSubview(shareBarView)
         shareBarView.snp.makeConstraints { make in
@@ -139,7 +140,7 @@ class ArticleStackViewController: UIViewController {
     }
 
     func parsePTag(element: Element) -> ArticleContentType? {
-        guard let text = try? element.text() else { return nil }
+        guard let text = try? element.text(), !text.isEmpty else { return nil }
         if element.hasClass("wp-media-credit") {
             return .imageCredit(text)
         } else if element.hasClass("wp-caption-text") {

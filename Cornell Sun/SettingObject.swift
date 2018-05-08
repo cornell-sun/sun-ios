@@ -13,13 +13,13 @@ class SettingObject {
     var type: SettingType
     var settingLabel: String
     var nextController: UIViewController? //ViewController launched on selecting clickable cell
-    
-    init( label: String, next: UIViewController?, setType: SettingType) {
+
+    init(label: String, next: UIViewController?, setType: SettingType) {
         settingLabel = label
         nextController = next
         type = setType
     }
-    
+
     func isClickable() -> Bool {
         return !(nextController == nil)
     }
