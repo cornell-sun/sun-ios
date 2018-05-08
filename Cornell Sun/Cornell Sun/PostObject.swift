@@ -25,7 +25,7 @@ class PostObject: NSObject, Codable, ListDiffable {
     var excerpt: String!
     var link: URL!
     var author: [AuthorObject]?
-    var featuredMediaImages: FeaturedMediaImages!
+    var featuredMediaImages: FeaturedMediaImages?
     var featuredMediaCaption: String?
     var featuredMediaCredit: String?
     var categories: [String]!
@@ -53,7 +53,7 @@ class PostObject: NSObject, Codable, ListDiffable {
         self.link = try nested.decode(URL.self, forKey: .link)
         self.content = try nested.decode(String.self, forKey: .content)
         self.author = try? nested.decode([AuthorObject].self, forKey: .author)
-        self.featuredMediaImages = try nested.decode(FeaturedMediaImages.self, forKey: .featuredMediaImages)
+        self.featuredMediaImages = try? nested.decode(FeaturedMediaImages.self, forKey: .featuredMediaImages)
         self.featuredMediaCaption = try nested.decode(String?.self, forKey: .featuredMediaCaption)
         self.featuredMediaCredit = try nested.decode(String?.self, forKey: .featuredMediaCredit)
         self.categories = try nested.decode([String].self, forKey: .categories)
@@ -66,7 +66,7 @@ class PostObject: NSObject, Codable, ListDiffable {
         self.suggestedStories = try nested.decode([SuggestedStoryObject].self, forKey: .suggested)
 
         //cache image
-        if let mediumImageURL = self.featuredMediaImages.mediumLarge?.url {
+        if let mediumImageURL = self.featuredMediaImages?.mediumLarge?.url {
             cacheImage(imageURL: mediumImageURL)
         }
         super.init()

@@ -87,7 +87,7 @@ final class BookmarkCell: UICollectionViewCell {
     }
 
     func setupImage() {
-        if let imageUrl = post?.featuredMediaImages.thumbnail?.url {
+        if let imageUrl = post?.featuredMediaImages?.thumbnail?.url {
             imageView.kf.indicatorType = .activity
             imageView.kf.setImage(with: imageUrl)
         }

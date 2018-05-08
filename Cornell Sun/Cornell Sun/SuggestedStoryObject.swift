@@ -10,7 +10,7 @@ class SuggestedStoryObject: Codable {
     var postID: Int!
     var title: String!
     var authors: [AuthorObject]?
-    var featuredMediaImages: FeaturedMediaImages!
+    var featuredMediaImages: FeaturedMediaImages?
 
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
@@ -19,9 +19,9 @@ class SuggestedStoryObject: Codable {
         title = try container.decode(String.self, forKey: .title)
         authors = try? container.decode([AuthorObject].self, forKey: .authorName)
 
-        featuredMediaImages = try container.decode(FeaturedMediaImages.self, forKey: .featuredMediaImages)
+        featuredMediaImages = try? container.decode(FeaturedMediaImages.self, forKey: .featuredMediaImages)
 
-        if let mediumImageURL = featuredMediaImages.mediumLarge?.url {
+        if let mediumImageURL = featuredMediaImages?.mediumLarge?.url {
             cacheImage(imageURL: mediumImageURL)
         }
 

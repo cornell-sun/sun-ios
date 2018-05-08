@@ -323,6 +323,7 @@ class ArticleStackViewController: UIViewController {
     // MARK: - Suggested Stories
     func setupSuggestedStories() {
         let headerHeight: CGFloat = 37
+        let footerHeight: CGFloat = 16
         let headerView = UIView()
         let headerLabel = UILabel()
         headerLabel.font = .headerTitle
@@ -338,6 +339,7 @@ class ArticleStackViewController: UIViewController {
         suggestedTableView.isScrollEnabled = false
         suggestedTableView.allowsSelection = false
         suggestedTableView.rowHeight = 118
+        suggestedTableView.tableFooterView = UIView()
         suggestedTableView.register(SuggestedStoryTableViewCell.self, forCellReuseIdentifier: suggestedReuseIdentifier)
         scrollView.addSubview(suggestedTableView)
         suggestedTableView.reloadData()
@@ -349,7 +351,7 @@ class ArticleStackViewController: UIViewController {
 
         suggestedTableView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
-            make.height.equalTo(CGFloat(post.suggestedStories.count * 118) + headerHeight)
+            make.height.equalTo(CGFloat(post.suggestedStories.count * 118) + headerHeight + footerHeight)
             make.top.equalTo(stackView.snp.bottom)
             make.bottom.equalToSuperview()
         }

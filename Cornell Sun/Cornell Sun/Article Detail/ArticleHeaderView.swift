@@ -119,8 +119,7 @@ class ArticleHeaderView: UIView {
     }
 
     func setupWithPost(_ post: PostObject) {
-        setupHeroImage(with: post)
-        categoryLabel.text = post.primaryCategory
+        categoryLabel.text = post.primaryCategory.htmlToString
         titleLabel.text = post.title
         titleLabel.setLineSpacing(to: 4.5)
         titleLabel.snp.makeConstraints { make in
@@ -144,20 +143,33 @@ class ArticleHeaderView: UIView {
         if let credits = post.featuredMediaCredit {
             creditsLabel.text = credits
         }
-
+        setupHeroImage(with: post)
     }
 
     func setupHeroImage(with post: PostObject) {
-        if let heroImageUrl = post.featuredMediaImages.mediumLarge?.url {
+        if let heroImageUrl = post.featuredMediaImages?.mediumLarge?.url {
             heroImageView.kf.indicatorType = .activity
             heroImageView.kf.setImage(with: heroImageUrl)
         } else {
             heroImageView.snp.updateConstraints { make in
                 make.height.equalTo(0)
             }
+            captionLabel.text = ""
+            creditsLabel.text = ""
             captionLabel.snp.remakeConstraints { make in
                 make.top.equalTo(heroImageView.snp.bottom).offset(captionLabelTopOffset)
                 make.height.equalTo(0)
+                make.leading.trailing.equalToSuperview()
+            }
+            creditsLabel.snp.remakeConstraints { make in
+                make.height.equalTo(0)
+                make.top.equalTo(captionLabel.snp.bottom)
+                make.leading.trailing.equalToSuperview()
+            }
+            authorLabel.snp.remakeConstraints { make in
+                make.top.equalTo(titleLabel.snp.bottom).offset(titleLabelTopOffset)
+                make.leading.equalToSuperview().offset(leadingOffset)
+                make.height.equalTo(authorLabelHeight)
             }
         }
     }
