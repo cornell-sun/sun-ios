@@ -14,6 +14,7 @@ class BookmarkCollectionViewController: ViewController, UIScrollViewDelegate {
     var isFirstRun = true
     var bookmarkPosts: [PostObject] = []
 
+    let emptyBookmarkView = EmptyView(image: #imageLiteral(resourceName: "empty-bookmark-sun"), title: "No Bookmarks", description: "Running late? Tap the bookmark icon to save articles for later")
     let collectionView: UICollectionView = {
         let view = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
         view.alwaysBounceVertical = true
@@ -96,7 +97,7 @@ extension BookmarkCollectionViewController: ListAdapterDataSource {
     }
 
     func emptyView(for listAdapter: ListAdapter) -> UIView? {
-        return nil
+        return emptyBookmarkView
     }
 }
 

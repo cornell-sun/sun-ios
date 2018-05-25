@@ -75,6 +75,7 @@
 		DC818DA31F75E0CF0064AFFA /* Sonnenstrahl-Ausgezeichnet.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DC818DA21F75E08B0064AFFA /* Sonnenstrahl-Ausgezeichnet.ttf */; };
 		DCA02C0A2027B18400CBE97F /* SearchSectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA02C092027B18300CBE97F /* SearchSectionController.swift */; };
 		DCA02C0C2027E0F500CBE97F /* NetworkingHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA02C0B2027E0F500CBE97F /* NetworkingHelpers.swift */; };
+		DCA75BA020B7B34C003A1D5C /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA75B9F20B7B34C003A1D5C /* EmptyView.swift */; };
 		DCB1BB4D20893B0D002C11E2 /* SkeletonFeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB1BB4C20893B0D002C11E2 /* SkeletonFeedCell.swift */; };
 		DCB717121FB94BCA00BE4D26 /* KeplerStd-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = DCB717111FB94BCA00BE4D26 /* KeplerStd-Bold.otf */; };
 		DCB717141FB9FE1700BE4D26 /* HeroSectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB717131FB9FE1700BE4D26 /* HeroSectionController.swift */; };
@@ -203,6 +204,7 @@
 		DC818DA21F75E08B0064AFFA /* Sonnenstrahl-Ausgezeichnet.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Sonnenstrahl-Ausgezeichnet.ttf"; sourceTree = "<group>"; };
 		DCA02C092027B18300CBE97F /* SearchSectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchSectionController.swift; sourceTree = "<group>"; };
 		DCA02C0B2027E0F500CBE97F /* NetworkingHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingHelpers.swift; sourceTree = "<group>"; };
+		DCA75B9F20B7B34C003A1D5C /* EmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyView.swift; sourceTree = "<group>"; };
 		DCB1BB4C20893B0D002C11E2 /* SkeletonFeedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkeletonFeedCell.swift; sourceTree = "<group>"; };
 		DCB717111FB94BCA00BE4D26 /* KeplerStd-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "KeplerStd-Bold.otf"; sourceTree = "<group>"; };
 		DCB717131FB9FE1700BE4D26 /* HeroSectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroSectionController.swift; sourceTree = "<group>"; };
@@ -329,6 +331,7 @@
 				0C15F1851FBDD1A5009724DB /* Article Detail */,
 				DCECA9921FBE2DAF00BAB2EA /* Cells */,
 				DC34DEED203213D90010DF9A /* Networking */,
+				DCA75BA120B848BB003A1D5C /* Empty State */,
 				DC34DEEF203214280010DF9A /* Extensions */,
 				507744F01EB5326D0079D80D /* PostOffice */,
 				5006B24E1EADA38400F58549 /* Models */,
@@ -497,6 +500,14 @@
 				61652CD31F6EF44900EEFC29 /* SearchTableViewCell.swift */,
 			);
 			path = "Search Section";
+			sourceTree = "<group>";
+		};
+		DCA75BA120B848BB003A1D5C /* Empty State */ = {
+			isa = PBXGroup;
+			children = (
+				DCA75B9F20B7B34C003A1D5C /* EmptyView.swift */,
+			);
+			path = "Empty State";
 			sourceTree = "<group>";
 		};
 		DCB1BB452088D28D002C11E2 /* Recovered References */ = {
@@ -961,6 +972,7 @@
 				DCB717161FBA016400BE4D26 /* TaglineCell.swift in Sources */,
 				0C49290520A14C4B004AF877 /* SettingObject.swift in Sources */,
 				DC0A88401FBA84E700F2BCBB /* AuthorCell.swift in Sources */,
+				DCA75BA020B7B34C003A1D5C /* EmptyView.swift in Sources */,
 				0C15F1871FBDD433009724DB /* ArticleHeaderView.swift in Sources */,
 				DC79719F1F7B30540055A7B2 /* CategoryCell.swift in Sources */,
 				DC34DEF3203216690010DF9A /* SectionViewController.swift in Sources */,

@@ -12,8 +12,7 @@ import IGListKit
 class SearchViewController: UIViewController, UITableViewDelegate {
 
     var tableView: UITableView!
-    let emptyLoadingView = UIView()
-    let spinner = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+    let emptySearchView = EmptyView(image: #imageLiteral(resourceName: "empty-search-sun"), title: "No Results", description: "Check your spelling?")
     let searchController = UISearchController(searchResultsController: nil)
     let dimView = UIView()
     var currentQuery = ""
@@ -37,15 +36,7 @@ class SearchViewController: UIViewController, UITableViewDelegate {
         return ListAdapter(updater: ListAdapterUpdater(), viewController: self, workingRangeSize: 0)
     }()
 
-    var searchData: [PostObject] = [] {
-        didSet {
-            if searchData.isEmpty {
-                spinner.startAnimating()
-            } else {
-                spinner.stopAnimating()
-            }
-        }
-    }
+    var searchData: [PostObject] = []
 
     init(fetchTrending: Bool) {
         super.init(nibName: nil, bundle: nil)
@@ -80,8 +71,6 @@ class SearchViewController: UIViewController, UITableViewDelegate {
         super.viewDidLoad()
         view.backgroundColor = .black5
 
-        emptyLoadingView.addSubview(spinner)
-
         tableView = UITableView()
         tableView.register(SearchTableViewCell.self, forCellReuseIdentifier: "SearchResultCell")
         tableView.tableFooterView = UIView()
@@ -92,10 +81,6 @@ class SearchViewController: UIViewController, UITableViewDelegate {
         collectionView.isHidden = true
         collectionView.backgroundColor = .collectionBackground
         view.addSubview(collectionView)
-
-        spinner.snp.makeConstraints { make in
-            make.center.equalToSuperview()
-        }
 
         tableView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
@@ -153,8 +138,8 @@ extension SearchViewController: UIScrollViewDelegate, ListAdapterDataSource {
     }
 
     func emptyView(for listAdapter: ListAdapter) -> UIView? {
-        //eventually show uh-oh no searches found
-        return emptyLoadingView
+        //show uh-oh no searches found
+        return emptySearchView
     }
 
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
