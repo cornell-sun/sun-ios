@@ -151,7 +151,6 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
         let notificationViewController = NotificationViewController()
         notificationViewController.prevViewController = self
         settings[0].append(SettingObject(label: "Notifications", next: notificationViewController, setType: .none))
-        settings[0].append(SettingObject(label: "Login", next: nil, setType: .none))
         
         let subscribeViewController = SubscribeViewController()
         subscribeViewController.prevViewController = self
@@ -178,9 +177,9 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
         settings[2].append(SettingObject(label: "History", next: dispViewController, setType: .history))
         settings[2].append(SettingObject(label: "The Masthead", next: nil, setType: .masthead))
         
-        let teamViewController = DisplayViewController()
+        let teamViewController = TeamViewController()
         teamViewController.prevViewController = self
-        teamViewController.type = .appteam
+        //teamViewController.type = .appteam
         settings[2].append(SettingObject(label: "The App Team", next: teamViewController, setType: .appteam))
         settings[2].append(SettingObject(label: "Privacy Policy", next: nil, setType: .privacy))
     }

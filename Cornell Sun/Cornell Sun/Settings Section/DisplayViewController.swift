@@ -28,7 +28,7 @@ class DisplayViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         titleCache = prevViewController.title
         prevViewController.title = "Settings"
-        descriptionTextView.isScrollEnabled = false
+        descriptionTextView.isScrollEnabled = true
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -44,7 +44,8 @@ class DisplayViewController: UIViewController {
         headerLabel = UILabel()
         headerLabel.text = getHeader()
         headerLabel.textColor = .black
-        headerLabel.font = .systemFont(ofSize: 36, weight: .bold)
+        headerLabel.font = UIFont(name: "Sonnenstrahl-Ausgezeichnet", size: 36)
+        headerLabel.textAlignment = .center
         view.addSubview(headerLabel)
         headerLabel.snp.makeConstraints { make in
             make.width.equalTo(textWidth*widthScale)
@@ -56,13 +57,13 @@ class DisplayViewController: UIViewController {
         descriptionTextView = UITextView()
         descriptionTextView.text = getText()
         descriptionTextView.textColor = .black
-        descriptionTextView.font = .systemFont(ofSize: 16)
+        descriptionTextView.font = UIFont(name: "Georgia", size: 20)
         descriptionTextView.isEditable = false
         descriptionTextView.textContainer.lineFragmentPadding = 0
         view.addSubview(descriptionTextView)
         descriptionTextView.snp.makeConstraints { make in
             make.width.equalTo(textWidth*widthScale)
-            make.height.equalTo(descriptionHeight)
+            make.height.equalToSuperview()
             make.centerX.equalTo(view.center.x)
             make.top.equalTo(headerLabel.snp.bottom).offset(descriptionOffset)
         }
@@ -78,7 +79,7 @@ class DisplayViewController: UIViewController {
         case .appteam:
             return "Austin Astorga '19 \nChris Sciavolino '19 \nMindy Lou '19 \nAditya Dwivedi '20 \nTheo Carrel '20 \nMike Fang '21 \nBrendan Elliott '19 \nAlexis Vinzons '19"
         case .history:
-            return "The Cornell Sun was founded in 1880 by William Ballard Hoyt to challenge Cornell's original and leading publication, the weekly Cornell Era (founded 1868).\n The Sun boasted in its opening paragraph: \"We have no indulgence to ask, no favors to beg. \" The paper incorporated and changed to daily frequency, earning its longstanding boast \"Ithaca's Only Morning Newspaper.\" In 1912 it added a second, \"first collegiate member of the Associated Press.\""
+            return "The Cornell Daily Sun is an independent, daily student-run newspaper serving the Cornell University and Ithaca, NY, communities.\n\nFounded in 1880, The Sun is the oldest continuously independent college daily in the United States.\n\nThe Sun publishes a print edition on Monday, Tuesday and Thursday during the academic year and is free on newsstands and online. The Sun is staffed entirely by Cornell students, aside from a few full-time production and business positions, and operates out of an office building in downtown Ithaca."
         default:
             return ""
         }
@@ -89,7 +90,7 @@ class DisplayViewController: UIViewController {
         case .appteam:
             return "App Team"
         case .history:
-            return "History"
+            return "The Cornell Daily Sun"
         default:
             return ""
         }
