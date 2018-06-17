@@ -10,6 +10,10 @@ import UIKit
 
 class EmptyView: UIView {
 
+    //Constants
+    let emptyImageHeight: CGFloat = 77.5
+    let emptyImageWidth: CGFloat = 160.0
+
     var emptyImage: UIImageView = {
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFit
@@ -56,8 +60,8 @@ class EmptyView: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
         emptyImage.snp.makeConstraints { make in
-            make.height.equalTo(77.5)
-            make.width.equalTo(160.0)
+            make.height.equalTo(emptyImageHeight)
+            make.width.equalTo(emptyImageWidth)
             make.centerX.equalToSuperview()
             make.top.equalTo(bounds.height * 0.34) //from zeplin. Image starts 34% down from the top
         }
@@ -72,7 +76,6 @@ class EmptyView: UIView {
         emptyDescription.snp.makeConstraints { make in
             make.top.equalTo(emptyTitle.snp.bottom).offset(7.5)
             make.width.equalTo(emptyImage)
-            make.height.equalTo(emptyDescription.intrinsicContentSize.height)
             make.centerX.equalToSuperview()
         }
     }
