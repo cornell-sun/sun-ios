@@ -106,7 +106,7 @@ extension String {
                                           documentAttributes: nil)
         } catch {
             print("error:", error)
-            return NSAttributedString()
+            return NSAttributedString(string: "")
         }
     }
 
