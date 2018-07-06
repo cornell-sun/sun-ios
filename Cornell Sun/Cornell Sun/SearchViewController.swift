@@ -17,6 +17,7 @@ class SearchViewController: UIViewController, UITableViewDelegate {
     let dimView = UIView()
     var currentQuery = ""
     let spinToken = "spinner"
+    var empty = false
     var currentPage = 1
     var endOfResults = false
     var loading = false
@@ -138,8 +139,14 @@ extension SearchViewController: UIScrollViewDelegate, ListAdapterDataSource {
     }
 
     func emptyView(for listAdapter: ListAdapter) -> UIView? {
-        //show uh-oh no searches found
-        return emptySearchView
+        if empty {
+            return emptySearchView
+        } else {
+            let skeletonView = SkeletonFeedCell(frame: view.frame)
+            skeletonView.isSkeletonable = true
+            skeletonView.showAnimatedSkeleton()
+            return skeletonView
+        }
     }
 
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
@@ -225,6 +232,7 @@ extension SearchViewController: UISearchBarDelegate {
     }
 
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        empty = false
         searchBar.endEditing(true)
         collectionView.snp.remakeConstraints { make in
             make.edges.equalToSuperview()
@@ -246,6 +254,9 @@ extension SearchViewController: UISearchBarDelegate {
             if error == nil {
                 self.searchData = posts
                 self.adapter.performUpdates(animated: true)
+                if posts.count == 0 {
+                    self.empty = true
+                }
                 if posts.count < 10 {
                     self.endOfResults = true
                 }
