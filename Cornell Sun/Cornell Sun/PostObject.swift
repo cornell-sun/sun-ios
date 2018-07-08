@@ -46,9 +46,16 @@ class PostObject: NSObject, Codable, ListDiffable {
             nested = try decoder.container(keyedBy: PostInfoCodingKeys.self)
         }
 
+        let title = try nested.decode(String.self, forKey: .title)
+
         self.id = try nested.decode(Int.self, forKey: .id)
         self.date = try nested.decode(Date.self, forKey: .date)
-        self.title = try nested.decode(String.self, forKey: .title)
+        if let titleParsed = title.htmlToAttributedString {
+            self.title = titleParsed.string
+        } else {
+            self.title = title
+        }
+
         self.excerpt = try nested.decode(String.self, forKey: .excerpt)
         self.link = try nested.decode(URL.self, forKey: .link)
         self.content = try nested.decode(String.self, forKey: .content)

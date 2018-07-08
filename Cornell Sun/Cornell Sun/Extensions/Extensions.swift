@@ -97,10 +97,10 @@ extension String {
         return ceil(boundingBox.width)
     }
 
-        /// Converts HTML string to a `NSAttributedString`
-        var htmlToAttributedString: NSAttributedString? {
-            return try? NSAttributedString(data: Data(utf8), options: [.documentType: NSAttributedString.DocumentType.html, .characterEncoding: String.Encoding.utf8.rawValue], documentAttributes: nil)
-        }
+    /// Converts HTML string to a `NSAttributedString`
+    var htmlToAttributedString: NSAttributedString? {
+        return try? NSAttributedString(data: Data(utf8), options: [.documentType: NSAttributedString.DocumentType.html, .characterEncoding: String.Encoding.utf8.rawValue], documentAttributes: nil)
+    }
 
     var htmlToString: String {
         return htmlToAttributedString?.string ?? ""
