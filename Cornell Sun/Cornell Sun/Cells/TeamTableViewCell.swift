@@ -24,7 +24,7 @@ class TeamTableViewCell: UITableViewCell {
         super.awakeFromNib()
     }
     
-    func setupCell(name: String, title: String, origin: String, liner: String) {
+    func setupCell(name: String, title: String, origin: String, liner: String, emoji: String) {
         
         let emojiLabel = UILabel()
         contentView.addSubview(emojiLabel)
@@ -34,7 +34,7 @@ class TeamTableViewCell: UITableViewCell {
             make.top.equalToSuperview().offset(offsetTop)
         }
         emojiLabel.font = UIFont.boldSystemFont(ofSize: 16)
-        emojiLabel.text = "👻"
+        emojiLabel.text = emoji
         
         let nameLabel = UILabel()
         contentView.addSubview(nameLabel)

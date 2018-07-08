@@ -13,12 +13,14 @@ class TeamMember {
     var title: String
     var origin: String
     var oneLiner: String
+    var emoji: String
     
-    init(nam: String, titl: String, home: String, liner: String) {
+    init(nam: String, titl: String, home: String, liner: String, emoji: String) {
         name = nam
         title = titl
         origin = home
         oneLiner = liner
+        self.emoji = emoji
     }
 }
 
@@ -43,17 +45,18 @@ class TeamViewController: UIViewController, UITableViewDataSource, UITableViewDe
         super.viewDidLoad()
         super.viewDidLoad()
         view.backgroundColor = .white
+        title = "App Team"
         
         //Calling hardcoded populator
         if members.count == 0 {
-            members = [TeamMember(nam: "Austin Astorga '19", titl: "Developer", home: "Hometown, State", liner: "One Liner!"),
-                TeamMember(nam: "Mindy Lou '19", titl: "Developer", home: "Hometown, State", liner: "One Liner!"),
-                TeamMember(nam: "Chris Sciavolino '19", titl: "Developer", home: "Hometown, State", liner: "One Liner!"),
-                TeamMember(nam: "Brendan Elliot '19", titl: "Designer", home: "Hometown, State", liner: "One Liner!"),
-                TeamMember(nam: "Alexis Vinzons '19", titl: "Designer", home: "Hometown, State", liner: "One Liner!"),
-                TeamMember(nam: "Aditya Dwivedi '20", titl: "Developer", home: "Hometown, State", liner: "One Liner!"),
-                TeamMember(nam: "Theo Carrel '20", titl: "Developer", home: "Hometown, State", liner: "One Liner!"),
-                TeamMember(nam: "Mike Fang '21", titl: "Developer", home: "Hometown, State", liner: "One Liner!")]
+            members = [TeamMember(nam: "Austin Astorga '19", titl: "Developer", home: "Carlsbad, California", liner: "God's Plan", emoji: "🙏🏽"),
+                       TeamMember(nam: "Mindy Lou '19", titl: "Developer", home: "Wayland, MA", liner: "A hot dog is not a sandwich", emoji: "🎉"),
+                TeamMember(nam: "Chris Sciavolino '19", titl: "Developer", home: "Naples, Flordia", liner: "What's the worst that can happen?", emoji: "👀"),
+                TeamMember(nam: "Brendan Elliot '19", titl: "Designer", home: "Grand Rapids, Michigan", liner: "Gt busy living or get busy dying", emoji: "👨🏻‍💻"),
+                TeamMember(nam: "Alexis Vinzons '19", titl: "Designer", home: "Mamaroneck, NY", liner: "The solution is in the framing of the problem", emoji: "💃"),
+                TeamMember(nam: "Aditya Dwivedi '20", titl: "Developer", home: "Lucknow, India", liner: "Waffles > Pancakes", emoji: "🐪"),
+                TeamMember(nam: "Theo Carrel '20", titl: "Developer", home: "New York, NY", liner: "Is you not impressed?", emoji: "🔥"),
+                TeamMember(nam: "Mike Fang '21", titl: "Developer", home: "San Jose, California", liner: "Do not fear mistakes. There are none", emoji: "🐺")]
         }
         
         // Set up table view for settings
@@ -73,7 +76,7 @@ class TeamViewController: UIViewController, UITableViewDataSource, UITableViewDe
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "TeamCell", for: indexPath) as? TeamTableViewCell {
             let member = members[indexPath.row]
-            cell.setupCell(name: member.name, title: member.title, origin: member.origin, liner: member.oneLiner)
+            cell.setupCell(name: member.name, title: member.title, origin: member.origin, liner: member.oneLiner, emoji: member.emoji)
             cell.selectionStyle = .none
             return cell
         } else {

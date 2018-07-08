@@ -30,6 +30,8 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+
         view.backgroundColor = .white
         //Calling hardcoded populator
         if settings.count == 0 {

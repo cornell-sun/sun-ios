@@ -42,12 +42,13 @@ class NotificationViewController: UIViewController, UITableViewDataSource, UITab
         super.viewDidLoad()
         super.viewDidLoad()
         view.backgroundColor = .white
+        title = "Notifications"
     
         //Calling hardcoded populator
         if notifications.count == 0 {
             notifications = [("Breaking News", .breakingNews), ("Local News", .localNews), ("Opinion", .opinion), ("Sports", .sports), ("Sunspots", .sunspots), ("Multimedia", .multimedia), ("Arts and Entertainment", .artsAndEntertainment), ("Science", .science), ("Dining", .dining)]
             
-            notificationsDisplay = [("Major stories as they happen", #imageLiteral(resourceName: "feedIcon")), ("[idk yet]", #imageLiteral(resourceName: "feedIcon")), ("Two to four alerts daily", #imageLiteral(resourceName: "feedIcon")), ("Four to five alerts daily", #imageLiteral(resourceName: "feedIcon")), ("One to three alerts on the weekdays", #imageLiteral(resourceName: "feedIcon")), ("[idk yet]", #imageLiteral(resourceName: "feedIcon")), ("One to two alerts daily", #imageLiteral(resourceName: "feedIcon")), ("One to two alerts daily", #imageLiteral(resourceName: "feedIcon")), ("Two to three alerts daily", #imageLiteral(resourceName: "feedIcon"))]
+            notificationsDisplay = [("Major stories as they happen", #imageLiteral(resourceName: "breakingNews")), ("One to two alerts daily", #imageLiteral(resourceName: "localNews")), ("Two to four alerts daily", #imageLiteral(resourceName: "opinion")), ("Four to five alerts daily", #imageLiteral(resourceName: "sports")), ("One to three alerts on the weekdays", #imageLiteral(resourceName: "sunspots")), ("One to two alerts daily", #imageLiteral(resourceName: "multimedia")), ("One to two alerts daily", #imageLiteral(resourceName: "arts")), ("One to two alerts daily", #imageLiteral(resourceName: "science")), ("Two to three alerts daily", #imageLiteral(resourceName: "dining"))]
         }
         
         // Set up table view for settings
@@ -73,6 +74,10 @@ class NotificationViewController: UIViewController, UITableViewDataSource, UITab
         } else {
             return UITableViewCell()
         }
+    }
+
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 60.0
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

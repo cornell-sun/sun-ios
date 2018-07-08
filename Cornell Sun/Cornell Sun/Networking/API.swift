@@ -25,8 +25,11 @@ API.request(target: .recentPosts, success: { (response) in
 })
 */
 
+
 struct API {
     static let provider = MoyaProvider<SunAPI>()
+
+    static let mailchimpProvider = MoyaProvider<MailchimpAPI>()
 
     static func request(target: SunAPI, callback: @escaping (Response?) -> Void) {
         requestHelper(target: target, success: callback, error: { (error) in
