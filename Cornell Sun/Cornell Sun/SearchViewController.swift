@@ -58,7 +58,6 @@ class SearchViewController: UIViewController, UITableViewDelegate {
         title = "Search"
         if #available(iOS 11, *) {
             navigationItem.searchController = searchController
-            navigationController?.navigationBar.prefersLargeTitles = true
             navigationItem.hidesSearchBarWhenScrolling = false
         } else {
             navigationItem.titleView = searchController.searchBar
