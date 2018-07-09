@@ -30,6 +30,8 @@
 		348716782041EAC8008CB9D5 /* AdImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348716772041EAC8008CB9D5 /* AdImageCell.swift */; };
 		3487167D2041F09D008CB9D5 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3487167C2041F09D008CB9D5 /* Launch Screen.storyboard */; };
 		34C5582A2041E49E00E62CE8 /* AdSectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34C558292041E49E00E62CE8 /* AdSectionController.swift */; };
+		4029318520C58036000E1F4A /* TeamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4029318420C58036000E1F4A /* TeamViewController.swift */; };
+		4029318720C580D1000E1F4A /* TeamTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4029318620C580D1000E1F4A /* TeamTableViewCell.swift */; };
 		4029BB0A2087B02300E8BAEB /* NotificationsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4029BB092087B02300E8BAEB /* NotificationsTableViewCell.swift */; };
 		4036564D207446B100E7583A /* DisplayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4036564C207446B000E7583A /* DisplayViewController.swift */; };
 		4047EA05207590450030067E /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4047EA04207590450030067E /* NotificationViewController.swift */; };
@@ -84,6 +86,7 @@
 		DCC03FE62094D6410027D102 /* PhotoGalleryDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC03FE52094D6410027D102 /* PhotoGalleryDetailViewController.swift */; };
 		DCD870EF1F256B7B00B98AF8 /* Cornell_SunTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD870EE1F256B7B00B98AF8 /* Cornell_SunTests.swift */; };
 		DCD870F91F256E2C00B98AF8 /* APITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD870F81F256E2C00B98AF8 /* APITests.swift */; };
+		DCE6A5A220F04BB500F608E6 /* MailchimpAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE6A5A120F04BB500F608E6 /* MailchimpAPI.swift */; };
 		DCECA9901FBDFB7300BAB2EA /* BookmarkCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCECA98F1FBDFB7300BAB2EA /* BookmarkCell.swift */; };
 		DCFC88C41F86B50200A0D8A9 /* ActionMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFC88C31F86B50200A0D8A9 /* ActionMenuCell.swift */; };
 		DCFC88C61F86C03700A0D8A9 /* CommentObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFC88C51F86C03700A0D8A9 /* CommentObject.swift */; };
@@ -149,6 +152,8 @@
 		389771843ED115B12D456CDA /* Pods-Cornell SunTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cornell SunTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Cornell SunTests/Pods-Cornell SunTests.debug.xcconfig"; sourceTree = "<group>"; };
 		3C38BCC6B38BFCC0EC16BF2B /* Pods_Cornell_SunTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cornell_SunTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DBAAD519F3C5A2D044960CA /* Pods_Cornell_Sun.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cornell_Sun.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4029318420C58036000E1F4A /* TeamViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamViewController.swift; sourceTree = "<group>"; };
+		4029318620C580D1000E1F4A /* TeamTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamTableViewCell.swift; sourceTree = "<group>"; };
 		4029BB092087B02300E8BAEB /* NotificationsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsTableViewCell.swift; sourceTree = "<group>"; };
 		4036564C207446B000E7583A /* DisplayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayViewController.swift; sourceTree = "<group>"; };
 		4047EA04207590450030067E /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
@@ -215,6 +220,7 @@
 		DCD870EE1F256B7B00B98AF8 /* Cornell_SunTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cornell_SunTests.swift; sourceTree = "<group>"; };
 		DCD870F01F256B7B00B98AF8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DCD870F81F256E2C00B98AF8 /* APITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APITests.swift; sourceTree = "<group>"; };
+		DCE6A5A120F04BB500F608E6 /* MailchimpAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailchimpAPI.swift; sourceTree = "<group>"; };
 		DCECA98F1FBDFB7300BAB2EA /* BookmarkCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkCell.swift; sourceTree = "<group>"; };
 		DCFC88C31F86B50200A0D8A9 /* ActionMenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionMenuCell.swift; sourceTree = "<group>"; };
 		DCFC88C51F86C03700A0D8A9 /* CommentObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentObject.swift; sourceTree = "<group>"; };
@@ -409,6 +415,7 @@
 				4036564C207446B000E7583A /* DisplayViewController.swift */,
 				4047EA04207590450030067E /* NotificationViewController.swift */,
 				0C6E76C52094FF0D00F8710C /* MastheadViewController.swift */,
+				4029318420C58036000E1F4A /* TeamViewController.swift */,
 			);
 			path = "Settings Section";
 			sourceTree = "<group>";
@@ -438,6 +445,7 @@
 				DC4308EC1F2558D500ABB31F /* SunAPI.swift */,
 				DC4308EE1F2563FF00ABB31F /* API.swift */,
 				DCA02C0B2027E0F500CBE97F /* NetworkingHelpers.swift */,
+				DCE6A5A120F04BB500F608E6 /* MailchimpAPI.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -566,6 +574,7 @@
 				4029BB092087B02300E8BAEB /* NotificationsTableViewCell.swift */,
 				DCB1BB4C20893B0D002C11E2 /* SkeletonFeedCell.swift */,
 				DC3CCB3220924288000A9A5B /* VideoCell.swift */,
+				4029318620C580D1000E1F4A /* TeamTableViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -601,6 +610,7 @@
 				5D796D343FAE3F7BC75A78B1 /* [CP] Embed Pods Frameworks */,
 				40D130291F61EF250063329A /* SwiftLint */,
 				DC3667DC206EB9D2002EB4F9 /* Embed App Extensions */,
+				9AE232EDBBD0CC5D6FE04A5D /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -620,6 +630,8 @@
 				DC3667CD206EB9D2002EB4F9 /* Sources */,
 				DC3667CE206EB9D2002EB4F9 /* Frameworks */,
 				DC3667CF206EB9D2002EB4F9 /* Resources */,
+				419E4E9FA96E2B229DEFA042 /* [CP] Copy Pods Resources */,
+
 			);
 			buildRules = (
 			);
@@ -639,6 +651,7 @@
 				DCD870E91F256B7B00B98AF8 /* Frameworks */,
 				DCD870EA1F256B7B00B98AF8 /* Resources */,
 				257BDE34A42EF8D90E4C73AE /* [CP] Embed Pods Frameworks */,
+				AD6C198B172D04E7850CE8A7 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -799,6 +812,22 @@
 			shellPath = /bin/sh;
 			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\nelse\n    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
 		};
+		419E4E9FA96E2B229DEFA042 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Cornell Sun-SunNotificationServiceExtension/Pods-Cornell Sun-SunNotificationServiceExtension-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+
 		5D796D343FAE3F7BC75A78B1 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -869,6 +898,36 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		9AE232EDBBD0CC5D6FE04A5D /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Cornell Sun/Pods-Cornell Sun-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		AD6C198B172D04E7850CE8A7 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Cornell SunTests/Pods-Cornell SunTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		D18FABB7FF88C9A16A7E9EF3 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -921,6 +980,7 @@
 				5006B24D1EADA37F00F58549 /* PostObject.swift in Sources */,
 				DC34DEF520321C6D0010DF9A /* SectionCollectionViewController.swift in Sources */,
 				DCB1BB4D20893B0D002C11E2 /* SkeletonFeedCell.swift in Sources */,
+				4029318720C580D1000E1F4A /* TeamTableViewCell.swift in Sources */,
 				DCB717161FBA016400BE4D26 /* TaglineCell.swift in Sources */,
 				0C49290520A14C4B004AF877 /* SettingObject.swift in Sources */,
 				DC0A88401FBA84E700F2BCBB /* AuthorCell.swift in Sources */,
@@ -929,6 +989,7 @@
 				DC79719F1F7B30540055A7B2 /* CategoryCell.swift in Sources */,
 				DC34DEF3203216690010DF9A /* SectionViewController.swift in Sources */,
 				DC0A883A1FBA2DEE00F2BCBB /* PhotoGalleryCell.swift in Sources */,
+				DCE6A5A220F04BB500F608E6 /* MailchimpAPI.swift in Sources */,
 				DC446C2E1F5D016500D68688 /* FeedCollectionViewController.swift in Sources */,
 				0CBC2CEE1F5E3093003FBB38 /* TabBarViewController.swift in Sources */,
 				DC4324B920965D92004CAF23 /* ImageCollectionCell.swift in Sources */,
@@ -964,6 +1025,7 @@
 				61652CD41F6EF44900EEFC29 /* SearchTableViewCell.swift in Sources */,
 				DCB717141FB9FE1700BE4D26 /* HeroSectionController.swift in Sources */,
 				DCECA9901FBDFB7300BAB2EA /* BookmarkCell.swift in Sources */,
+				4029318520C58036000E1F4A /* TeamViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

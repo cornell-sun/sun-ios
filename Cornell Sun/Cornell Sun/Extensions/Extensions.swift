@@ -97,17 +97,9 @@ extension String {
         return ceil(boundingBox.width)
     }
 
+    /// Converts HTML string to a `NSAttributedString`
     var htmlToAttributedString: NSAttributedString? {
-        do {
-            guard let data = data(using: .utf8) else { return nil }
-            return try NSAttributedString(data: data,
-                                          options: [.documentType: NSAttributedString.DocumentType.html,
-                                                    .characterEncoding: String.Encoding.utf8.rawValue],
-                                          documentAttributes: nil)
-        } catch {
-            print("error:", error)
-            return NSAttributedString(string: "")
-        }
+        return try? NSAttributedString(data: Data(utf8), options: [.documentType: NSAttributedString.DocumentType.html, .characterEncoding: String.Encoding.utf8.rawValue], documentAttributes: nil)
     }
 
     var htmlToString: String {

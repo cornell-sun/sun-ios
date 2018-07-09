@@ -27,6 +27,7 @@ class NotificationViewController: UIViewController, UITableViewDataSource, UITab
     
     var tableView: UITableView!
     var notifications: [(String, NotificationType)] = []
+    var notificationsDisplay: [(String, UIImage)] = []
 
     override func viewWillAppear(_ animated: Bool) {
         titleCache = prevViewController.title
@@ -41,10 +42,13 @@ class NotificationViewController: UIViewController, UITableViewDataSource, UITab
         super.viewDidLoad()
         super.viewDidLoad()
         view.backgroundColor = .white
+        title = "Notifications"
     
         //Calling hardcoded populator
         if notifications.count == 0 {
             notifications = [("Breaking News", .breakingNews), ("Local News", .localNews), ("Opinion", .opinion), ("Sports", .sports), ("Sunspots", .sunspots), ("Multimedia", .multimedia), ("Arts and Entertainment", .artsAndEntertainment), ("Science", .science), ("Dining", .dining)]
+            
+            notificationsDisplay = [("Major stories as they happen", #imageLiteral(resourceName: "breakingNews")), ("One to two alerts daily", #imageLiteral(resourceName: "localNews")), ("Two to four alerts daily", #imageLiteral(resourceName: "opinion")), ("Four to five alerts daily", #imageLiteral(resourceName: "sports")), ("One to three alerts on the weekdays", #imageLiteral(resourceName: "sunspots")), ("One to two alerts daily", #imageLiteral(resourceName: "multimedia")), ("One to two alerts daily", #imageLiteral(resourceName: "arts")), ("One to two alerts daily", #imageLiteral(resourceName: "science")), ("Two to three alerts daily", #imageLiteral(resourceName: "dining"))]
         }
         
         // Set up table view for settings
@@ -64,12 +68,16 @@ class NotificationViewController: UIViewController, UITableViewDataSource, UITab
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "NotificationCell", for: indexPath) as? NotificationsTableViewCell {
             cell.notificationType = notifications[indexPath.row].1
-            cell.setupCell(labelText: notifications[indexPath.row].0)
+            cell.setupCell(labelText: notifications[indexPath.row].0, descriptionText: notificationsDisplay[indexPath.row].0, icon: notificationsDisplay[indexPath.row].1)
             cell.selectionStyle = .none
             return cell
         } else {
             return UITableViewCell()
         }
+    }
+
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 60.0
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

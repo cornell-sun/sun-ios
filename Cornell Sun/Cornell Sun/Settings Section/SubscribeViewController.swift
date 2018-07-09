@@ -19,6 +19,7 @@ class SubscribeViewController: UIViewController, UITextFieldDelegate, UIPickerVi
     var descriptionTextView: UITextView!
     var actionButton: UIButton!
     var emailField: UITextField!
+    var nameField: UITextField!
     var pickerView: UIPickerView!
     
     let headerHeight: CGFloat = 43
@@ -97,7 +98,7 @@ class SubscribeViewController: UIViewController, UITextFieldDelegate, UIPickerVi
             make.centerX.equalTo(view.center.x)
             make.top.equalTo(descriptionTextView.snp.bottom).offset(labelOffsetTop)
         }
-        let nameField = UITextField()
+        nameField = UITextField()
         nameField.borderStyle = UITextBorderStyle.none
         //nameField.delegate = self
         nameField.font = UIFont(name:"HelveticaNeue", size: 18.0)
@@ -218,18 +219,18 @@ class SubscribeViewController: UIViewController, UITextFieldDelegate, UIPickerVi
     }
     
     @objc func buttonAction() {
-        if let url = URL(string: "https://cornellsun.us11.list-manage.com/subscribe/post") {
-            if #available(iOS 11.0, *) {
-                let config = SFSafariViewController.Configuration()
-                config.entersReaderIfAvailable = true
-                let vc = SFSafariViewController(url: url, configuration: config)
-                present(vc, animated: true)
-            } else {
-                // Fallback on earlier versions
-                let safariVC = SFSafariViewController(url: url)
-                self.present(safariVC, animated: true, completion: nil)
-            }
+        guard
+        let email = emailField.text,
+            let name = nameField.text else { return }
+        let names = name.trimmingCharacters(in: .whitespacesAndNewlines).split(separator: " ")
+        let firstname = names.first ?? ""
+        let lastname = names.last ?? ""
+        API.mailchimpProvider.request(.subscribe(firstname: String(firstname), lastname: String(lastname), email: email)) { _ in
+            let alert = UIAlertController(title: "Thank You For Subscribing!", message: "Please check your email to confirm your subscription", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
         }
+
     }
 
     /*

@@ -272,11 +272,11 @@ class ContactViewController: UIViewController, UITextFieldDelegate, MFMailCompos
                 default:
                     break
             }
-            mailer.setSubject(subjectField.text!)
-            mailer.setMessageBody(messageField.text!, isHTML: false)
+            mailer.setSubject(subjectField.text ?? "")
+            mailer.setMessageBody(messageField.text ?? "", isHTML: false)
             self.present(mailer, animated: true, completion: nil)
         } else {
-            let alert = UIAlertController(title: "Error", message: "Cannot send email right now", preferredStyle: .alert)
+            let alert = UIAlertController(title: "Error", message: "Please have the default mail client installed.", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
             self.present(alert, animated: true)
         }
