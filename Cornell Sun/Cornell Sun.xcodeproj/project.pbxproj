@@ -631,7 +631,6 @@
 				DC3667CE206EB9D2002EB4F9 /* Frameworks */,
 				DC3667CF206EB9D2002EB4F9 /* Resources */,
 				419E4E9FA96E2B229DEFA042 /* [CP] Copy Pods Resources */,
-
 			);
 			buildRules = (
 			);
@@ -827,7 +826,6 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Cornell Sun-SunNotificationServiceExtension/Pods-Cornell Sun-SunNotificationServiceExtension-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-
 		5D796D343FAE3F7BC75A78B1 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;

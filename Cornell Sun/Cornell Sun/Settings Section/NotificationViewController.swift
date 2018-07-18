@@ -17,7 +17,7 @@ enum NotificationType: String {
     case dining = "dining"
     case multimedia = "multimedia"
     case localNews = "local-news"
-    case sunspots = "sunspots"
+    //case sunspots = "sunspots"
 }
 
 class NotificationViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
@@ -46,9 +46,9 @@ class NotificationViewController: UIViewController, UITableViewDataSource, UITab
     
         //Calling hardcoded populator
         if notifications.count == 0 {
-            notifications = [("Breaking News", .breakingNews), ("Local News", .localNews), ("Opinion", .opinion), ("Sports", .sports), ("Sunspots", .sunspots), ("Multimedia", .multimedia), ("Arts and Entertainment", .artsAndEntertainment), ("Science", .science), ("Dining", .dining)]
+            notifications = [("Breaking News", .breakingNews), ("Local News", .localNews), ("Opinion", .opinion), ("Sports", .sports), ("Multimedia", .multimedia), ("Arts and Entertainment", .artsAndEntertainment), ("Science", .science), ("Dining", .dining)]
             
-            notificationsDisplay = [("Major stories as they happen", #imageLiteral(resourceName: "breakingNews")), ("One to two alerts daily", #imageLiteral(resourceName: "localNews")), ("Two to four alerts daily", #imageLiteral(resourceName: "opinion")), ("Four to five alerts daily", #imageLiteral(resourceName: "sports")), ("One to three alerts on the weekdays", #imageLiteral(resourceName: "sunspots")), ("One to two alerts daily", #imageLiteral(resourceName: "multimedia")), ("One to two alerts daily", #imageLiteral(resourceName: "arts")), ("One to two alerts daily", #imageLiteral(resourceName: "science")), ("Two to three alerts daily", #imageLiteral(resourceName: "dining"))]
+            notificationsDisplay = [("Major stories as they happen", #imageLiteral(resourceName: "breakingNews")), ("One to two alerts daily", #imageLiteral(resourceName: "localNews")), ("Two to four alerts daily", #imageLiteral(resourceName: "opinion")), ("Four to five alerts daily", #imageLiteral(resourceName: "sports")), ("One to two alerts daily", #imageLiteral(resourceName: "multimedia")), ("One to two alerts daily", #imageLiteral(resourceName: "arts")), ("One to two alerts daily", #imageLiteral(resourceName: "science")), ("Two to three alerts daily", #imageLiteral(resourceName: "dining"))]
         }
         
         // Set up table view for settings

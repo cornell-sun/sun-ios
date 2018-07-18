@@ -40,6 +40,9 @@ enum SunAPI {
 
     //featured post
     case featured
+
+    //url to id
+    case urlToID(url: URL)
 }
 
 extension SunAPI: TargetType {
@@ -50,7 +53,7 @@ extension SunAPI: TargetType {
             return nil
         }
     }
-    //var baseURL: URL { return URL(string: "http://cornellsun.staging.wpengine.com/wp-json")! } //dev url
+    //    var baseURL: URL { return URL(string: "http://cornellsun.staging.wpengine.com/wp-json")! } //dev url
     var baseURL: URL { return URL(string: "http://cornellsun.com/wp-json")! } //production url
     var path: String {
         switch self {
@@ -70,6 +73,8 @@ extension SunAPI: TargetType {
             return "\(backendPath)/featured"
         case .post(let postID):
             return "\(defaultPath)/posts/\(postID)"
+        case .urlToID:
+            return "\(backendPath)/urltoid/"
         }
     }
 
@@ -97,6 +102,8 @@ extension SunAPI: TargetType {
             return .requestParameters(parameters: ["search": query, "page": page], encoding: URLEncoding.default)
         case .section(let section, let page):
             return .requestParameters(parameters: ["categories": section, "page": page], encoding: URLEncoding.default)
+        case .urlToID(url: let url):
+            return .requestParameters(parameters: ["url": url], encoding: URLEncoding.default)
         default:
             return .requestPlain
         }

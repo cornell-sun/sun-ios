@@ -15,7 +15,7 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
     var sections: [String] = []
     var settings: [[SettingObject]] = []
     
-    let appID = "App ID"
+    let appID = "1375063933"
     let headerReuseIdentifier = "HeaderCell"
     let settingReuseIdentifier = "SettingCell"
     

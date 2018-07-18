@@ -45,13 +45,13 @@ class FeedCollectionViewController: ViewController, UIScrollViewDelegate {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        setNavigationInformation()
 
         guard !isFirstRun else {
             isFirstRun = false
             return
         }
 
-        setNavigationInformation()
         self.adapter.performUpdates(animated: true, completion: nil)
     }
 

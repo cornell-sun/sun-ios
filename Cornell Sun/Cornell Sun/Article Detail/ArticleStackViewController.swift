@@ -111,6 +111,8 @@ class ArticleStackViewController: UIViewController {
                 setupArticleText(text: attrString)
             case .blockquote(let string):
                 setupBlockquote(text: string)
+            case .heading(let string):
+                setupHeading(text: string)
             }
         }
         setupComments()
@@ -134,6 +136,9 @@ class ArticleStackViewController: UIViewController {
             } else if element.tag().toString() == "aside" {
                 guard let blockquote = parseAside(element: element) else { continue }
                 sections.append(blockquote)
+            } else if element.tag().toString() == "h2" {
+                guard let heading = parseHeading(element: element) else { continue }
+                sections.append(heading)
             }
         }
         return sections
@@ -151,9 +156,15 @@ class ArticleStackViewController: UIViewController {
                 let closePRegex = try? NSRegularExpression(pattern: "</p[^>]*>"),
                 let outerHtml = try? element.outerHtml() else { return nil }
 
-            var htmlString = openPRegex.stringByReplacingMatches(in: outerHtml, options: [], range: NSRange(location: 0, length: outerHtml.count), withTemplate: "<span>")
+            var htmlString = openPRegex.stringByReplacingMatches(in: outerHtml, options: [], range: NSRange(location: 0, length: outerHtml.count), withTemplate: "<span style=\"font-family: '\(UIFont.articleBody.fontName)'; font-size: 18\">")
             htmlString = closePRegex.stringByReplacingMatches(in: htmlString, options: [], range: NSRange(location: 0, length: htmlString.count), withTemplate: "</span>")
-            return .text(htmlString.htmlToAttributedString ?? NSAttributedString(string: ""))
+
+            let paragraphStyle = NSMutableParagraphStyle()
+            paragraphStyle.lineSpacing = 10
+            let attributedString = NSMutableAttributedString(attributedString: htmlString.htmlToAttributedString ?? NSAttributedString(string: ""))
+            attributedString.addAttribute(.paragraphStyle, value: paragraphStyle, range: NSRange(location: 0, length: attributedString.length))
+
+            return .text(attributedString)
         }
     }
 
@@ -175,6 +186,11 @@ class ArticleStackViewController: UIViewController {
             return .blockquote(text.htmlToString)
         }
         return nil
+    }
+
+    func parseHeading(element: Element) -> ArticleContentType? {
+        guard let text = try? element.text() else { return nil }
+        return .heading(text)
     }
 
     // MARK: - Setting up subviews
@@ -232,7 +248,6 @@ class ArticleStackViewController: UIViewController {
         let textView = UITextView()
         textView.attributedText = text
         textView.textContainer.lineFragmentPadding = 0
-        textView.font = .articleBody
         textView.textColor = .black
         textView.delegate = self
         textView.isScrollEnabled = false
@@ -243,7 +258,7 @@ class ArticleStackViewController: UIViewController {
         view.addSubview(textView)
         stackView.addArrangedSubview(view)
         textView.snp.makeConstraints { make in
-            make.top.bottom.equalToSuperview()
+            make.top.bottom.equalToSuperview().inset(leadingOffset)
             make.leading.trailing.equalToSuperview().inset(leadingOffset)
         }
     }
@@ -254,7 +269,7 @@ class ArticleStackViewController: UIViewController {
         textView.text = text
         textView.textContainer.lineFragmentPadding = 0
         textView.font = .blockQuote
-        textView.textColor = .black
+        textView.textColor = .black90
         textView.textAlignment = .left
         textView.isScrollEnabled = false
         textView.isEditable = false
@@ -276,6 +291,22 @@ class ArticleStackViewController: UIViewController {
             make.leading.equalTo(leftLine.snp.trailing).offset(leadingOffset)
             make.trailing.equalToSuperview().inset(leadingOffset)
             make.bottom.equalToSuperview().offset(-leadingOffset)
+        }
+    }
+
+    func setupHeading(text: String) {
+        let view = UIView()
+        let label = UILabel()
+        label.text = text
+        label.font = .blockQuote
+        label.textColor = .black90
+        label.textAlignment = .center
+        view.addSubview(label)
+        stackView.addArrangedSubview(view)
+        label.snp.makeConstraints { make in
+            make.top.equalToSuperview().inset(captionTopOffset)
+            make.bottom.equalToSuperview()
+            make.leading.trailing.equalToSuperview().inset(leadingOffset)
         }
     }
 
@@ -301,30 +332,29 @@ class ArticleStackViewController: UIViewController {
         commentsTableView.estimatedRowHeight = 100
         scrollView.addSubview(commentsTableView)
 
-//        let totalHeight = self.comments.map { comment -> CGFloat in
-//            let textHeight = comment.comment.requiredHeight(width: view.bounds.width-37, font: .subSecondaryHeader)
-//            return textHeight + 100
-//        }
-//        stackView.snp.removeConstraints()
-//
-//        stackView.snp.remakeConstraints { make in
-//            make.leading.trailing.top.equalToSuperview()
-//            make.bottom.equalTo(commentsTableView.snp.top)
-//        }
-//
-//        commentsTableView.snp.makeConstraints { make in
-//            make.width.leading.trailing.equalToSuperview()
-//            make.height.equalTo(totalHeight.reduce(0, +))
-//            make.top.equalTo(stackView.snp.bottom)
-//            make.bottom.equalToSuperview().inset(20)
-//        }
+        //        let totalHeight = self.comments.map { comment -> CGFloat in
+        //            let textHeight = comment.comment.requiredHeight(width: view.bounds.width-37, font: .subSecondaryHeader)
+        //            return textHeight + 100
+        //        }
+        //        stackView.snp.removeConstraints()
+        //
+        //        stackView.snp.remakeConstraints { make in
+        //            make.leading.trailing.top.equalToSuperview()
+        //            make.bottom.equalTo(commentsTableView.snp.top)
+        //        }
+        //
+        //        commentsTableView.snp.makeConstraints { make in
+        //            make.width.leading.trailing.equalToSuperview()
+        //            make.height.equalTo(totalHeight.reduce(0, +))
+        //            make.top.equalTo(stackView.snp.bottom)
+        //            make.bottom.equalToSuperview().inset(20)
+        //        }
 
     }
 
     // MARK: - Suggested Stories
     func setupSuggestedStories() {
-        let headerHeight: CGFloat = 37
-        let footerHeight: CGFloat = 16
+        let headerHeight: CGFloat = 30
         let headerView = UIView()
         let headerLabel = UILabel()
         headerLabel.font = .headerTitle
@@ -352,7 +382,7 @@ class ArticleStackViewController: UIViewController {
 
         suggestedTableView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
-            make.height.equalTo(CGFloat(post.suggestedStories.count * 118) + headerHeight + footerHeight)
+            make.height.equalTo(CGFloat(post.suggestedStories.count * 118) + headerHeight)
             make.top.equalTo(stackView.snp.bottom)
             make.bottom.equalToSuperview()
         }

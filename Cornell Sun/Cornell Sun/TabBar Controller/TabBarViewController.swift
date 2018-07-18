@@ -48,7 +48,7 @@ class TabBarViewController: UITabBarController {
         }
         let tabOneNavigationController = UINavigationController(rootViewController: feedVC)
         tabOneNavigationController.navigationBar.isTranslucent = false
-        let tabOneTabBarItem = UITabBarItem(title: "News", image: #imageLiteral(resourceName: "feedIcon").withRenderingMode(.alwaysOriginal), selectedImage: #imageLiteral(resourceName: "feedIconRed").withRenderingMode(.alwaysOriginal))
+        let tabOneTabBarItem = UITabBarItem(title: "Feed", image: #imageLiteral(resourceName: "feedIcon").withRenderingMode(.alwaysOriginal), selectedImage: #imageLiteral(resourceName: "feedIconRed").withRenderingMode(.alwaysOriginal))
         tabOneNavigationController.tabBarItem = tabOneTabBarItem
 
         let tabTwoNavigationController = UINavigationController(rootViewController: SectionViewController())

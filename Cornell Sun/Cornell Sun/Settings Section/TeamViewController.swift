@@ -50,10 +50,10 @@ class TeamViewController: UIViewController, UITableViewDataSource, UITableViewDe
         //Calling hardcoded populator
         if members.count == 0 {
             members = [TeamMember(nam: "Austin Astorga '19", titl: "Developer", home: "Carlsbad, California", liner: "God's Plan", emoji: "🙏🏽"),
-                       TeamMember(nam: "Mindy Lou '19", titl: "Developer", home: "Wayland, MA", liner: "A hot dog is not a sandwich", emoji: "🎉"),
-                TeamMember(nam: "Chris Sciavolino '19", titl: "Developer", home: "Naples, Flordia", liner: "What's the worst that can happen?", emoji: "👀"),
-                TeamMember(nam: "Brendan Elliot '19", titl: "Designer", home: "Grand Rapids, Michigan", liner: "Gt busy living or get busy dying", emoji: "👨🏻‍💻"),
-                TeamMember(nam: "Alexis Vinzons '19", titl: "Designer", home: "Mamaroneck, NY", liner: "The solution is in the framing of the problem", emoji: "💃"),
+                       TeamMember(nam: "Mindy Lou '19", titl: "Developer", home: "Wayland, Massachusetts", liner: "A hot dog is not a sandwich", emoji: "🎉"),
+                TeamMember(nam: "Chris Sciavolino '19", titl: "Developer", home: "Naples, Florida", liner: "What's the worst that can happen?", emoji: "👀"),
+                TeamMember(nam: "Brendan Elliott '19", titl: "Designer", home: "Grand Rapids, Michigan", liner: "Gt busy living or get busy dying", emoji: "👨🏻‍💻"),
+                TeamMember(nam: "Alexis Vinzons '19", titl: "Designer", home: "Mamaroneck, New York", liner: "The solution is in the framing of the problem", emoji: "💃"),
                 TeamMember(nam: "Aditya Dwivedi '20", titl: "Developer", home: "Lucknow, India", liner: "Waffles > Pancakes", emoji: "🐪"),
                 TeamMember(nam: "Theo Carrel '20", titl: "Developer", home: "New York, NY", liner: "Is you not impressed?", emoji: "🔥"),
                 TeamMember(nam: "Mike Fang '21", titl: "Developer", home: "San Jose, California", liner: "Do not fear mistakes. There are none", emoji: "🐺")]

@@ -21,7 +21,7 @@ typealias CommentsCompletionBlock = (_ comments: [CommentObject], _ error: APIEr
 
 let savedPostIds: [Int] = {
     guard let posts = PostOffice.instance.get() else { return [] }
-    return posts.map { $0.id } 
+    return posts.map { $0.id }
 }()
 
 let dateFormatter: DateFormatter = {
@@ -60,7 +60,7 @@ func getTrending(completion: @escaping TrendingCompletionBlock) {
         guard
             let response = response,
             let trending = try? decoder.decode([String].self, from: response.data)
-        else { completion([String](), .parsingError); return }
+            else { completion([String](), .parsingError); return }
         completion(trending, nil)
     }
 }
@@ -110,6 +110,32 @@ func getPostsFromIDs(_ ids: [Int], completion: @escaping ([Int: PostObject], API
 
     group.notify(queue: .main) {
         completion(postsDict, nil)
+    }
+}
+
+func getPostFromID(_ id: Int, completion: @escaping (PostObject) -> Void) {
+    API.request(target: .post(postId: id)) { response in
+        guard let response = response else {
+            print("Error fetching post by id: \(id)")
+            fatalError()
+        }
+        do {
+            let post = try decoder.decode(PostObject.self, from: response.data)
+            completion(post)
+        } catch let error {
+            print("Error: \(error)")
+            fatalError()
+        }
+    }
+}
+
+func getIDFromURL(_ url: URL, completion: @escaping (Int?) -> Void) {
+    API.request(target: .urlToID(url: url)) { response in
+        guard let tryID = try? response?.mapString(), let idString = tryID, let id = Int(idString), id != 0 else {
+            completion(nil)
+            return
+        }
+        completion(id)
     }
 }
 

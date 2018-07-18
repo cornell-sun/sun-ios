@@ -281,4 +281,10 @@ class ContactViewController: UIViewController, UITextFieldDelegate, MFMailCompos
             self.present(alert, animated: true)
         }
     }
+
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true, completion: nil)
+    }
+
+
 }
