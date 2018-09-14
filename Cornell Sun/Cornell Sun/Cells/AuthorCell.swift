@@ -19,7 +19,7 @@ final class AuthorCell: UICollectionViewCell {
     var post: PostObject? {
         didSet {
             if let post = post, let authors = post.author {
-                authorLabel.text = "By \(authors.byline)"
+                authorLabel.text = "By \(authors.byline)".uppercased()
             }
         }
     }
@@ -28,8 +28,8 @@ final class AuthorCell: UICollectionViewCell {
         let label = UILabel()
         label.text = ""
         label.numberOfLines = 1
-        label.font = .cellInformationText
-        label.textColor = .black90
+        label.font = .subSecondaryHeader
+        label.textColor = .black60
         return label
     }()
 

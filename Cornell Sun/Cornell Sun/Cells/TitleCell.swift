@@ -18,7 +18,7 @@ final class TitleCell: UICollectionViewCell {
         didSet {
             if let post = post {
                 titleLabel.text = post.title
-                titleLabel.setLineSpacing(to: 4.5)
+                titleLabel.setLineSpacing(to: 5)
             }
         }
     }

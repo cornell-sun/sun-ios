@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 
 class ArticleHeaderView: UIView {
-    let leadingOffset: CGFloat = 17.5
+    let leadingOffset: CGFloat = 16
     let categoryLabelTopOffset: CGFloat = 18.5
     let categoryLabelHeight: CGFloat = 20
     let titleLabelTopOffset: CGFloat = 12.0
@@ -53,7 +53,7 @@ class ArticleHeaderView: UIView {
         super.init(frame: frame)
 
         categoryLabel = UILabel(frame: .zero)
-        categoryLabel.textColor = .black
+        categoryLabel.textColor = .black60
         categoryLabel.font = .secondaryHeader
         addSubview(categoryLabel)
         categoryLabel.snp.makeConstraints { make in
@@ -110,7 +110,7 @@ class ArticleHeaderView: UIView {
             make.leading.equalToSuperview().offset(leadingOffset)
             make.top.equalTo(authorLabel.snp.bottom)
             make.height.equalTo(timeStampHeight)
-            make.bottom.equalToSuperview().inset(creditsLabelInset)
+            make.bottom.equalToSuperview()
         }
     }
 
@@ -119,9 +119,9 @@ class ArticleHeaderView: UIView {
     }
 
     func setupWithPost(_ post: PostObject) {
-        categoryLabel.text = post.primaryCategory.htmlToString
+        categoryLabel.text = post.primaryCategory.htmlToString.uppercased()
         titleLabel.text = post.title
-        titleLabel.setLineSpacing(to: 4.5)
+        titleLabel.setLineSpacing(to: 5)
         titleLabel.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(leadingOffset)
             make.top.equalTo(categoryLabel.snp.bottom).offset(titleLabelTopOffset)
