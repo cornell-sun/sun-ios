@@ -14,6 +14,9 @@ class TabBarViewController: UITabBarController {
     var posts: [ListDiffable]!
     var headlinePost: PostObject?
     var previousViewController: UIViewController?
+    
+    let normal = [NSAttributedStringKey.font : UIFont(name: "SanFranciscoText-Medium", size: 11) as Any] as [NSAttributedStringKey : Any]
+    let selected = [NSAttributedStringKey.font : UIFont(name: "SanFranciscoText-Semibold", size: 11) as Any] as [NSAttributedStringKey : Any]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,6 +26,8 @@ class TabBarViewController: UITabBarController {
         tabBar.backgroundImage = UIImage()
         tabBar.tintColor = .brick
         tabBar.unselectedItemTintColor = .black70
+        tabBarItem.setTitleTextAttributes(normal, for: .normal)
+        tabBarItem.setTitleTextAttributes(selected, for: .selected)
         delegate = self
         setupTabs()
     }
