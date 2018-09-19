@@ -35,9 +35,11 @@ final class VideoCell: UICollectionViewCell {
     }
 
     func setupViews() {
+        backgroundColor = .white
         addSubview(videoWebView)
         videoWebView.snp.makeConstraints { make in
-            make.width.height.equalToSuperview()
+            make.height.equalToSuperview()
+            make.leading.trailing.equalToSuperview().inset(16)
         }
     }
 

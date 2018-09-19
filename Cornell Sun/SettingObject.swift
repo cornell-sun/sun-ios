@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 class SettingObject {
-    var type: SettingType
+    var type: SettingType!
     var settingLabel: String
     var nextController: UIViewController? //ViewController launched on selecting clickable cell
 

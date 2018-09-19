@@ -104,7 +104,7 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
         if let next = setting.nextController {
                 navigationController?.pushViewController(next, animated: true)
         } else {
-            switch setting.type {
+            switch setting.type! {
                 case .rate:
                     let urlStr = "itms-apps://itunes.apple.com/app/viewContentsUserReviews?id=\(appID)"
                     if let url = URL(string: urlStr), UIApplication.shared.canOpenURL(url) {

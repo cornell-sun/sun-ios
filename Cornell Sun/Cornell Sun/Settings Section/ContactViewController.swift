@@ -239,7 +239,7 @@ class ContactViewController: UIViewController, UITextFieldDelegate, MFMailCompos
     }
     
     func getText() -> String {
-        switch type {
+        switch type! {
         case .contactus:
             return "Send us a message for advertising inquiries, news tips, corrections, or anything else."
         case .feedback:
@@ -250,7 +250,7 @@ class ContactViewController: UIViewController, UITextFieldDelegate, MFMailCompos
     }
     
     func getHeader() -> String {
-        switch type {
+        switch type! {
         case .contactus:
             return "Contact us"
         case .feedback:
@@ -264,7 +264,7 @@ class ContactViewController: UIViewController, UITextFieldDelegate, MFMailCompos
         if MFMailComposeViewController.canSendMail() {
             let mailer = MFMailComposeViewController()
             mailer.mailComposeDelegate = self
-            switch type {
+            switch type! {
                 case .contactus:
                         mailer.setToRecipients([contactEmail])
                 case .feedback:

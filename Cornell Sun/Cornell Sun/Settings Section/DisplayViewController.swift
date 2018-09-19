@@ -75,7 +75,7 @@ class DisplayViewController: UIViewController {
     }
     
     func getText() -> String {
-        switch type {
+        switch type! {
         case .appteam:
             return "Austin Astorga '19 \nChris Sciavolino '19 \nMindy Lou '19 \nAditya Dwivedi '20 \nTheo Carrel '20 \nMike Fang '21 \nBrendan Elliott '19 \nAlexis Vinzons '19"
         case .history:
@@ -86,7 +86,7 @@ class DisplayViewController: UIViewController {
     }
     
     func getHeader() -> String {
-        switch type {
+        switch type! {
         case .appteam:
             return "App Team"
         case .history:
