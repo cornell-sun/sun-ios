@@ -610,7 +610,6 @@
 				5D796D343FAE3F7BC75A78B1 /* [CP] Embed Pods Frameworks */,
 				40D130291F61EF250063329A /* SwiftLint */,
 				DC3667DC206EB9D2002EB4F9 /* Embed App Extensions */,
-				9AE232EDBBD0CC5D6FE04A5D /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -630,7 +629,6 @@
 				DC3667CD206EB9D2002EB4F9 /* Sources */,
 				DC3667CE206EB9D2002EB4F9 /* Frameworks */,
 				DC3667CF206EB9D2002EB4F9 /* Resources */,
-				419E4E9FA96E2B229DEFA042 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -650,7 +648,6 @@
 				DCD870E91F256B7B00B98AF8 /* Frameworks */,
 				DCD870EA1F256B7B00B98AF8 /* Resources */,
 				257BDE34A42EF8D90E4C73AE /* [CP] Embed Pods Frameworks */,
-				AD6C198B172D04E7850CE8A7 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -811,21 +808,6 @@
 			shellPath = /bin/sh;
 			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\nelse\n    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
 		};
-		419E4E9FA96E2B229DEFA042 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Cornell Sun-SunNotificationServiceExtension/Pods-Cornell Sun-SunNotificationServiceExtension-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		5D796D343FAE3F7BC75A78B1 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -894,36 +876,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		9AE232EDBBD0CC5D6FE04A5D /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Cornell Sun/Pods-Cornell Sun-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		AD6C198B172D04E7850CE8A7 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Cornell SunTests/Pods-Cornell SunTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		D18FABB7FF88C9A16A7E9EF3 /* [CP] Check Pods Manifest.lock */ = {

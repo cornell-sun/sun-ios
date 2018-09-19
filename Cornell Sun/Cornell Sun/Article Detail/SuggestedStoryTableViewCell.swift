@@ -78,7 +78,7 @@ class SuggestedStoryTableViewCell: UITableViewCell {
         headlineLabel.text = suggestedStory.title
         headlineLabel.setLineSpacing(to: 4.5)
         if let byline = suggestedStory.authors?.byline {
-            bylineLabel.text = "By \(byline)"
+            bylineLabel.text = "By \(byline)".uppercased()
         }
     }
 

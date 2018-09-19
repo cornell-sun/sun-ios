@@ -15,7 +15,7 @@ final class TaglineCell: UICollectionViewCell {
         didSet {
             if let post = post {
                 taglineLabel.text = post.excerpt.removingHTMLEntities.replacingOccurrences(of: "<[^>]+>", with: "", options: .regularExpression, range: nil)
-                taglineLabel.setLineSpacing(to: 5)
+                taglineLabel.setLineSpacing(to: 6.5)
             }
         }
     }

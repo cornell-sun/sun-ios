@@ -12,10 +12,8 @@ import SafariServices
 
 class ArticleStackViewController: UIViewController {
 
-    let leadingOffset: CGFloat = 17.5
-    let articleBodyOffset: CGFloat = 25
-    let articleBodyInset: CGFloat = 36
-    let articleSeparatorOffset: CGFloat = 15
+    let leadingOffset: CGFloat = 16
+    let articleSeparatorOffset: CGFloat = 11.5
     let separatorHeight: CGFloat = 1.5
     let articleTextViewOffset: CGFloat = 7
     let shareBarHeight: CGFloat = 50
@@ -258,7 +256,7 @@ class ArticleStackViewController: UIViewController {
         view.addSubview(textView)
         stackView.addArrangedSubview(view)
         textView.snp.makeConstraints { make in
-            make.top.bottom.equalToSuperview().inset(leadingOffset)
+            make.top.bottom.equalToSuperview().inset(articleSeparatorOffset)
             make.leading.trailing.equalToSuperview().inset(leadingOffset)
         }
     }

@@ -30,17 +30,17 @@ final class MenuActionCell: UICollectionViewCell {
 
     let heartWidth = 23.0
     let shareWidth = 23.0
-    let bookmarkWidth = 15.0
+    let bookmarkWidth = 15
     let imageHeight = 32
-    let offset = 18
-    let bookmarkOffset = -30.0
+    let inset = 16
+    let shareTrailingPadding = 28
 
     lazy var timeStampLabel: UILabel = {
         let label = UILabel()
         label.text = ""
         label.numberOfLines = 1
-        label.font = .cellInformationText
-        label.textColor = .black90
+        label.font = .subSecondaryHeader
+        label.textColor = .black60
         self.contentView.addSubview(label)
         return label
     }()
@@ -87,7 +87,7 @@ final class MenuActionCell: UICollectionViewCell {
     }
 
     func setBookmarkImage(didSelectBookmark: Bool) {
-        let image = didSelectBookmark ? #imageLiteral(resourceName: "bookmarkPressed") : #imageLiteral(resourceName: "bookmarkIcon")
+        let image = didSelectBookmark ? #imageLiteral(resourceName: "bookmarkPressed") : #imageLiteral(resourceName: "bookmark")
         bookmarkButton.setImage(image, for: .normal)
     }
 
@@ -98,23 +98,23 @@ final class MenuActionCell: UICollectionViewCell {
             bookmarkButton.setImage(#imageLiteral(resourceName: "bookmarkPressed"), for: .normal)
         }
 
-        timeStampLabel.snp.makeConstraints { (make) in
-            make.leading.equalTo(offset)
+        timeStampLabel.snp.makeConstraints { make in
+            make.leading.equalTo(inset)
             make.centerY.equalToSuperview()
         }
 
-        bookmarkButton.snp.makeConstraints { (make) in
+        bookmarkButton.snp.makeConstraints { make in
             make.width.equalTo(bookmarkWidth)
             make.height.equalTo(imageHeight)
             make.centerY.equalToSuperview()
-            make.right.equalToSuperview().inset(offset)
+            make.trailing.equalToSuperview().offset(-inset)
         }
 
-        shareImageView.snp.makeConstraints { (make) in
+        shareImageView.snp.makeConstraints { make in
             make.width.equalTo(shareWidth)
             make.height.equalTo(imageHeight)
             make.centerY.equalToSuperview()
-            make.right.equalTo(bookmarkButton.snp.left).offset(bookmarkOffset)
+            make.trailing.equalTo(bookmarkButton.snp.leading).offset(-shareTrailingPadding)
         }
     }
 }
