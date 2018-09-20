@@ -15,7 +15,7 @@ final class CategoryCell: UICollectionViewCell {
 
     var post: PostObject? {
         didSet {
-            categoryLabel.text = post?.primaryCategory.htmlToString
+            categoryLabel.text = post?.primaryCategory.htmlToString.uppercased()
         }
     }
     
@@ -31,7 +31,7 @@ final class CategoryCell: UICollectionViewCell {
         let label = UILabel()
         label.text = ""
         label.font = .secondaryHeader
-        label.textColor = .black90
+        label.textColor = .black60
         label.numberOfLines = 2
         return label
     }()
