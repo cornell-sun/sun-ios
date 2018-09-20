@@ -13,7 +13,7 @@ class ContactViewController: UIViewController, UITextFieldDelegate, MFMailCompos
     
     var prevViewController: UIViewController!
     var titleCache: String!
-    var type: SettingType!
+    var settingType: SettingType!
     
     var headerLabel: UILabel!
     var descriptionTextView: UILabel!
@@ -219,13 +219,6 @@ class ContactViewController: UIViewController, UITextFieldDelegate, MFMailCompos
             make.top.equalTo(messageLabel.snp.bottom).offset(labelOffsetBottom)
             make.bottom.equalTo(actionButton.snp.top).offset(-8)
         }
-
-//        let messageBorder = CALayer()
-//        messageBorder.borderColor = UIColor(red: 217/256, green: 217/256, blue: 217/256, alpha: 1).cgColor
-//        messageBorder.frame = CGRect(x: 0, y: actionButton.bounds.minY - 6, width:  textWidth*widthScale, height: 2)
-//        messageBorder.borderWidth = width
-//        messageField.layer.addSublayer(messageBorder)
-//        messageField.layer.masksToBounds = true
     }
 
     override func didReceiveMemoryWarning() {
@@ -239,7 +232,8 @@ class ContactViewController: UIViewController, UITextFieldDelegate, MFMailCompos
     }
     
     func getText() -> String {
-        switch type! {
+        guard let type = settingType else { return "" }
+        switch type {
         case .contactus:
             return "Send us a message for advertising inquiries, news tips, corrections, or anything else."
         case .feedback:
@@ -250,7 +244,8 @@ class ContactViewController: UIViewController, UITextFieldDelegate, MFMailCompos
     }
     
     func getHeader() -> String {
-        switch type! {
+        guard let type = settingType else { return "" }
+        switch type {
         case .contactus:
             return "Contact us"
         case .feedback:
@@ -264,7 +259,7 @@ class ContactViewController: UIViewController, UITextFieldDelegate, MFMailCompos
         if MFMailComposeViewController.canSendMail() {
             let mailer = MFMailComposeViewController()
             mailer.mailComposeDelegate = self
-            switch type! {
+            switch settingType! {
                 case .contactus:
                         mailer.setToRecipients([contactEmail])
                 case .feedback:
@@ -285,6 +280,5 @@ class ContactViewController: UIViewController, UITextFieldDelegate, MFMailCompos
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         controller.dismiss(animated: true, completion: nil)
     }
-
 
 }

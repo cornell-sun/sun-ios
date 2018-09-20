@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 enum SettingType {
-    case none, contactus, feedback, history, appteam, masthead, rate, privacy
+    case nonSetting, contactus, feedback, history, appteam, masthead, rate, privacy
 }
 
 enum ArticleContentType {

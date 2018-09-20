@@ -152,17 +152,17 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
         settings.append([])
         let notificationViewController = NotificationViewController()
         notificationViewController.prevViewController = self
-        settings[0].append(SettingObject(label: "Notifications", next: notificationViewController, setType: .none))
+        settings[0].append(SettingObject(label: "Notifications", next: notificationViewController, setType: .nonSetting))
         
         let subscribeViewController = SubscribeViewController()
         subscribeViewController.prevViewController = self
-        settings[0].append(SettingObject(label: "Subscribe", next: subscribeViewController, setType: .none))
+        settings[0].append(SettingObject(label: "Subscribe", next: subscribeViewController, setType: .nonSetting))
         
         //Initializing Support settings
         settings.append([])
         let feedBackViewController = ContactViewController()
         feedBackViewController.prevViewController = self
-        feedBackViewController.type = .feedback
+        feedBackViewController.settingType = .feedback
         settings[1].append(SettingObject(label: "Send App Feedback", next: feedBackViewController, setType: .feedback))
         settings[1].append(SettingObject(label: "Rate on App Store", next: nil, setType: .rate))
         
@@ -170,7 +170,7 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
         settings.append([])
         let contactViewController = ContactViewController()
         contactViewController.prevViewController = self
-        contactViewController.type = .contactus
+        contactViewController.settingType = .contactus
         settings[2].append(SettingObject(label: "Contact the Sun", next: contactViewController, setType: .contactus))
         
         let dispViewController = DisplayViewController()
