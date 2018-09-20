@@ -17,8 +17,8 @@ class NotificationsTableViewCell: UITableViewCell {
     let heightLabel: CGFloat = 20
     let heightSec: CGFloat = 31
     let offsetTop: CGFloat = 11.5
-    let offsetLeft = 16
-    let offsetRight = -13.5
+    let offsetLeft = 18
+    let offsetRight = -18
     let offsetBottom = -7
     
     let userDefaults = UserDefaults.standard
@@ -38,29 +38,29 @@ class NotificationsTableViewCell: UITableViewCell {
             make.centerY.equalToSuperview()
         }
         
-        
         label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 16, weight: .medium)
+        label.textAlignment = .left
+        label.textColor = .black90
+        label.text = labelText
         contentView.addSubview(label)
         label.snp.makeConstraints { make in
-            make.height.equalTo(heightLabel)
+            make.height.equalTo(label.intrinsicContentSize.height)
             make.left.equalTo(iconImageView.snp.right).offset(offsetLeft)
             make.top.equalTo(contentView).offset(offsetTop)
         }
-        label.font = UIFont.systemFont(ofSize: 18)
-        label.text = labelText
         
         descriptionLabel = UILabel()
+        descriptionLabel.text = descriptionText
+        descriptionLabel.font = UIFont.systemFont(ofSize: 14)
+        descriptionLabel.textColor = .black40
         contentView.addSubview(descriptionLabel)
         descriptionLabel.snp.makeConstraints { make in
             make.top.equalTo(label.snp.bottom)
-            make.height.equalTo(heightLabel*0.95)
+            make.height.equalTo(descriptionLabel.intrinsicContentSize.height)
             make.left.equalTo(label.snp.left)
-            make.bottomMargin.equalTo(-5)
+            make.bottom.equalToSuperview().inset(12)
         }
-        descriptionLabel.text = descriptionText
-        descriptionLabel.font = UIFont.systemFont(ofSize: 16)
-        descriptionLabel.textColor = UIColor(white: 70/255, alpha: 1.0)
-        
         
         let secondSwitch = UISwitch()
         secondSwitch.onTintColor = UIColor.brick

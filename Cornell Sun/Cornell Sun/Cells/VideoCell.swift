@@ -18,6 +18,8 @@ final class VideoCell: UICollectionViewCell {
             setupVideo()
         }
     }
+    
+    private let videoInsets: CGFloat = 16.0
 
     let videoWebView: UIWebView = {
         let webView = UIWebView()
@@ -39,7 +41,7 @@ final class VideoCell: UICollectionViewCell {
         addSubview(videoWebView)
         videoWebView.snp.makeConstraints { make in
             make.height.equalToSuperview()
-            make.leading.trailing.equalToSuperview().inset(16)
+            make.leading.trailing.equalToSuperview().inset(videoInsets)
         }
     }
 

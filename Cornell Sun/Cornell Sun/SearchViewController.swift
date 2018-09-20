@@ -22,7 +22,7 @@ class SearchViewController: UIViewController, UITableViewDelegate {
     var endOfResults = false
     var loading = false
     var trendingTopics: [String] = []
-    let TRENDINGLABEL_LEADING: CGFloat = 12
+    let TRENDINGLABEL_LEADING: CGFloat = 18.0
     let TRENDINGLABEL_TOP_BOTTOM_TRAILING: CGFloat = 8
     let DISTANCE: CGFloat = 300.0
 
@@ -193,7 +193,7 @@ extension SearchViewController: UITableViewDataSource {
         // Set up custom search result cell
         let cell = tableView.dequeueReusableCell(withIdentifier: "SearchResultCell", for: indexPath)
         cell.textLabel?.text = trendingTopics[indexPath.row]
-        cell.textLabel?.textColor = .black90
+        cell.textLabel?.font = .secondaryHeader
         return cell
     }
 
