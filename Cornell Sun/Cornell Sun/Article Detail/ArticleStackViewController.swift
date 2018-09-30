@@ -28,6 +28,7 @@ class ArticleStackViewController: UIViewController {
     var comments: [CommentObject]! = []
     var suggestedStories: [Int: PostObject] = [:] // map post id to post object
     var views: [UIView] = []
+    var isLoadingDeeplink = false
 
     var scrollView: UIScrollView!
     var stackView: UIStackView!
@@ -480,8 +481,23 @@ extension ArticleStackViewController: ShareBarViewDelegate {
 extension ArticleStackViewController: UITextViewDelegate {
 
     func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
-        let safariViewController = SFSafariViewController(url: URL)
-        present(safariViewController, animated: true, completion: nil) // TODO: detect if it's a Sun article and display that article instead
+
+        if !isLoadingDeeplink {
+            isLoadingDeeplink.toggle()
+            getIDFromURL(URL) { id in
+                guard let id = id else {
+                    let safariViewController = SFSafariViewController(url: URL)
+                    self.present(safariViewController, animated: true, completion: nil)
+                    return
+                }
+
+                getPostFromID(id, completion: { post in
+                    let articleViewController = ArticleStackViewController(post: post)
+                    self.navigationController?.pushViewController(articleViewController, animated: true)
+                    self.isLoadingDeeplink.toggle()
+                })
+            }
+        }
         return false
     }
 
