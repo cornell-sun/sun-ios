@@ -48,7 +48,7 @@ class SuggestedStoryTableViewCell: UITableViewCell {
 
         bylineLabel = UILabel()
         bylineLabel.font = .cellInformationText
-        bylineLabel.textColor = .black90
+        bylineLabel.textColor = .black60
         contentView.addSubview(bylineLabel)
 
         bylineLabel.snp.makeConstraints { make in

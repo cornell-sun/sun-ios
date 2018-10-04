@@ -354,6 +354,7 @@ class ArticleStackViewController: UIViewController {
     // MARK: - Suggested Stories
     func setupSuggestedStories() {
         let headerHeight: CGFloat = 30
+        let suggestedStoryPadding: CGFloat = 18
         let headerView = UIView()
         let headerLabel = UILabel()
         headerLabel.font = .headerTitle
@@ -383,7 +384,7 @@ class ArticleStackViewController: UIViewController {
             make.leading.trailing.equalToSuperview()
             make.height.equalTo(CGFloat(post.suggestedStories.count * 118) + headerHeight)
             make.top.equalTo(stackView.snp.bottom)
-            make.bottom.equalToSuperview()
+            make.bottom.equalToSuperview().inset(suggestedStoryPadding)
         }
 
         headerView.snp.makeConstraints { make in
