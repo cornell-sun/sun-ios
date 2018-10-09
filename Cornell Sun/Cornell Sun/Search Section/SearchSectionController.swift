@@ -58,26 +58,26 @@ class SearchSectionController: ListSectionController {
             // swiftlint:disable:next force_cast
             let cell = collectionContext!.dequeueReusableCell(of: CategoryCell.self, for: self, at: index) as! CategoryCell
             cell.post = entry
-            cell.layoutMargins = UIEdgeInsets.zero
+            cell.layoutMargins = .zero
             return cell
         case .titleCell:
             // swiftlint:disable:next force_cast
             let cell = collectionContext!.dequeueReusableCell(of: TitleCell.self, for: self, at: index) as! TitleCell
             cell.post = entry
-            cell.layoutMargins = UIEdgeInsets.zero
+            cell.layoutMargins = .zero
             return cell
         case .previewCell:
             if entry.featuredMediaImages?.thumbnail?.url != nil {
                 // swiftlint:disable:next force_cast
                 let cell = collectionContext!.dequeueReusableCell(of: SearchCell.self, for: self, at: index) as! SearchCell
                 cell.post = entry
-                cell.layoutMargins = UIEdgeInsets.zero
+                cell.layoutMargins = .zero
                 return cell
             } else {
                 // swiftlint:disable:next force_cast
                 let cell = collectionContext!.dequeueReusableCell(of: SearchCellNoImage.self, for: self, at: index) as! SearchCellNoImage
                 cell.post = entry
-                cell.layoutMargins = UIEdgeInsets.zero
+                cell.layoutMargins = .zero
                 return cell
             }
         }
