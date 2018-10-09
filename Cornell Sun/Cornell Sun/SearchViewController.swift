@@ -111,7 +111,7 @@ class SearchViewController: UIViewController, UITableViewDelegate {
         searchController.dimsBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search For Articles"
         searchController.searchBar.setPositionAdjustment(UIOffset(horizontal: 10, vertical: 0), for: .search)
-        if let textField = searchController.searchBar.subviews.first?.subviews.compactMap{$0 as? UITextField }).first {
+        if let textField = searchController.searchBar.subviews.first?.subviews.compactMap({$0 as? UITextField }).first {
             textField.subviews.first?.isHidden = true
             textField.layer.backgroundColor = UIColor(red: 0/255.0, green: 0/255.0, blue: 0/255.0, alpha: 0.05).cgColor
             textField.layer.cornerRadius = 15.5
