@@ -51,7 +51,11 @@ class DisplayViewController: UIViewController {
             make.width.equalTo(textWidth*widthScale)
             make.height.equalTo(headerHeight)
             make.centerX.equalTo(view.center.x)
-            make.top.equalTo(view.snp.top).offset(headerOffset)
+            if #available(iOS 11.0, *) {
+                make.top.equalTo(view.safeAreaInsets.top).offset(headerOffset)
+            } else {
+                make.top.equalToSuperview().offset(headerOffset)
+            }
         }
         
         descriptionTextView = UITextView()

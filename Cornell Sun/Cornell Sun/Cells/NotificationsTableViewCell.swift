@@ -19,7 +19,7 @@ class NotificationsTableViewCell: UITableViewCell {
     let offsetTop: CGFloat = 11.5
     let offsetLeft = 18
     let offsetRight = -18
-    let offsetBottom = -7
+    let offsetBottom = -4
     
     let userDefaults = UserDefaults.standard
     var notificationType: NotificationType?
@@ -27,41 +27,34 @@ class NotificationsTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
     }
-    
-    func setupCell(labelText: String, descriptionText: String, icon: UIImage) {
-        
+
+    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+
         iconImageView = UIImageView()
-        iconImageView.image = icon
         contentView.addSubview(iconImageView)
         iconImageView.snp.makeConstraints { make in
             make.left.equalTo(contentView.snp.left).offset(offsetLeft)
             make.centerY.equalToSuperview()
         }
-        
+
         label = UILabel()
         label.font = UIFont.systemFont(ofSize: 16, weight: .medium)
         label.textAlignment = .left
         label.textColor = .black90
-        label.text = labelText
         contentView.addSubview(label)
         label.snp.makeConstraints { make in
             make.height.equalTo(label.intrinsicContentSize.height)
-            make.left.equalTo(iconImageView.snp.right).offset(offsetLeft)
+            make.leading.equalTo(iconImageView.snp.trailing).offset(offsetLeft)
             make.top.equalTo(contentView).offset(offsetTop)
         }
-        
+
         descriptionLabel = UILabel()
-        descriptionLabel.text = descriptionText
         descriptionLabel.font = UIFont.systemFont(ofSize: 14)
         descriptionLabel.textColor = .black40
+        descriptionLabel.numberOfLines = 3
         contentView.addSubview(descriptionLabel)
-        descriptionLabel.snp.makeConstraints { make in
-            make.top.equalTo(label.snp.bottom)
-            make.height.equalTo(descriptionLabel.intrinsicContentSize.height)
-            make.left.equalTo(label.snp.left)
-            make.bottom.equalToSuperview().inset(12)
-        }
-        
+
         let secondSwitch = UISwitch()
         secondSwitch.onTintColor = UIColor.brick
         if let notifType = notificationType {
@@ -70,11 +63,34 @@ class NotificationsTableViewCell: UITableViewCell {
         secondSwitch.addTarget(self, action: #selector(toggleSwitched), for: .valueChanged)
         contentView.addSubview(secondSwitch)
         secondSwitch.snp.makeConstraints { make in
-            make.height.equalTo(heightSec)
-            //make.top.equalToSuperview().offset(offsetTop)
+            make.height.equalTo(secondSwitch.intrinsicContentSize.height)
+            make.width.equalTo(secondSwitch.intrinsicContentSize.width)
             make.centerY.equalToSuperview()
-            make.right.equalTo(contentView.snp.right).offset(offsetRight)
+            make.trailing.equalToSuperview().offset(offsetRight)
         }
+
+        descriptionLabel.snp.makeConstraints { make in
+            make.top.equalTo(label.snp.bottom)
+            make.bottom.lessThanOrEqualToSuperview().offset(offsetBottom)
+            make.leading.equalTo(label)
+            make.trailing.lessThanOrEqualTo(secondSwitch.snp.leading).inset(-4)
+        }
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    func setupCell(labelText: String, descriptionText: String, icon: UIImage) {
+        iconImageView.image = icon
+        label.text = labelText
+        descriptionLabel.text = descriptionText
+
+        label.snp.updateConstraints { make in
+            make.height.equalTo(label.intrinsicContentSize.height)
+        }
+
+
     }
     
     @objc func toggleSwitched(sender: UISwitch) {

@@ -19,14 +19,21 @@ class TeamTableViewCell: UITableViewCell {
     
     let userDefaults = UserDefaults.standard
     var notificationType: NotificationType?
+
+    var emojiLabel: UILabel!
+    var nameLabel: UILabel!
+    var titleLabel: UILabel!
+    var originLabel: UILabel!
+    var linerLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
     }
-    
-    func setupCell(name: String, title: String, origin: String, liner: String, emoji: String) {
-        
-        let emojiLabel = UILabel()
+
+    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+
+        emojiLabel = UILabel()
         contentView.addSubview(emojiLabel)
         emojiLabel.snp.makeConstraints { make in
             make.height.equalTo(heightLabel)
@@ -34,9 +41,8 @@ class TeamTableViewCell: UITableViewCell {
             make.top.equalToSuperview().offset(offsetTop)
         }
         emojiLabel.font = UIFont.boldSystemFont(ofSize: 16)
-        emojiLabel.text = emoji
-        
-        let nameLabel = UILabel()
+
+        nameLabel = UILabel()
         contentView.addSubview(nameLabel)
         nameLabel.snp.makeConstraints { make in
             make.height.equalTo(heightLabel)
@@ -44,9 +50,8 @@ class TeamTableViewCell: UITableViewCell {
             make.top.equalTo(emojiLabel)
         }
         nameLabel.font = UIFont.boldSystemFont(ofSize: 16)
-        nameLabel.text = name
-        
-        let titleLabel = UILabel()
+
+        titleLabel = UILabel()
         contentView.addSubview(titleLabel)
         titleLabel.snp.makeConstraints { make in
             make.height.equalTo(heightLabel)
@@ -54,9 +59,8 @@ class TeamTableViewCell: UITableViewCell {
             make.top.equalTo(nameLabel.snp.bottom).offset(offsetBottom)
         }
         titleLabel.font = UIFont.systemFont(ofSize: 13)
-        titleLabel.text = title
-        
-        let originLabel = UILabel()
+
+        originLabel = UILabel()
         contentView.addSubview(originLabel)
         originLabel.snp.makeConstraints { make in
             make.height.equalTo(heightLabel)
@@ -64,9 +68,8 @@ class TeamTableViewCell: UITableViewCell {
             make.top.equalTo(titleLabel.snp.bottom).offset(offsetBottom)
         }
         originLabel.font = UIFont.systemFont(ofSize: 13)
-        originLabel.text = origin
-        
-        let linerLabel = UILabel()
+
+        linerLabel = UILabel()
         contentView.addSubview(linerLabel)
         linerLabel.snp.makeConstraints { make in
             make.height.equalTo(heightLabel)
@@ -75,6 +78,19 @@ class TeamTableViewCell: UITableViewCell {
             make.bottomMargin.equalTo(-5)
         }
         linerLabel.font = UIFont.italicSystemFont(ofSize: 13)
+
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    func setupCell(name: String, title: String, origin: String, liner: String, emoji: String) {
+
+        emojiLabel.text = emoji
+        nameLabel.text = name
+        titleLabel.text = title
+        originLabel.text = origin
         linerLabel.text = liner
         
     }
