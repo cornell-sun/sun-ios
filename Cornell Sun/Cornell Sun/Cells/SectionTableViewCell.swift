@@ -10,6 +10,12 @@ import UIKit
 
 class SectionTableViewCell: UITableViewCell {
 
+
+    let sectionImageSize: CGFloat = 16.0
+    let sectionImageLeading: CGFloat = 19.0
+    let detailImageTrailing: CGFloat = 17.5
+    let titleLabelPadding: CGFloat = 7.0
+
     let titleLabel: UILabel = {
         let label = UILabel()
         label.text = ""
@@ -45,19 +51,19 @@ class SectionTableViewCell: UITableViewCell {
         
         sectionImageView.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
-            make.height.width.equalTo(16)
-            make.leading.equalTo(19)
+            make.height.width.equalTo(sectionImageSize)
+            make.leading.equalTo(sectionImageLeading)
         }
         
         detailImageView.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
-            make.trailing.equalToSuperview().inset(17.5)
+            make.trailing.equalToSuperview().inset(detailImageTrailing)
             make.width.height.equalTo(detailImageView.intrinsicContentSize)
         }
         
         titleLabel.snp.makeConstraints { make in
-            make.leading.equalTo(sectionImageView.snp.trailing).offset(7)
-            make.trailing.lessThanOrEqualTo(detailImageView.snp.leading).inset(7)
+            make.leading.equalTo(sectionImageView.snp.trailing).offset(titleLabelPadding)
+            make.trailing.lessThanOrEqualTo(detailImageView.snp.leading).inset(titleLabelPadding)
             make.centerY.equalTo(sectionImageView)
         }
     }

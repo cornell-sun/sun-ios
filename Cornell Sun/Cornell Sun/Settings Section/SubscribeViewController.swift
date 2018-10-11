@@ -23,12 +23,17 @@ class SubscribeViewController: UIViewController, UITextFieldDelegate, UIPickerVi
     var lastNameField: UITextField!
     var iAmAField: UITextField!
     var pickerView: UIPickerView!
+    var emailBorder: UIView!
+    var firstNameBorder: UIView!
+    var lastNameBorder: UIView!
+    var iAmABorder: UIView!
     
     var pickerIndexSelected = 0
-    
+
+    let descriptionPadding: CGFloat = 30.0
+    let descriptionHeight: CGFloat = 117.0
     let headerHeight: CGFloat = 43
     let headerOffset: CGFloat = 22.5
-    let descriptionHeight: CGFloat = 58
     let descriptionOffset: CGFloat = 17.5
     let descriptionOffsetBottom: CGFloat = 20
     let labelHeight: CGFloat = 17
@@ -42,40 +47,100 @@ class SubscribeViewController: UIViewController, UITextFieldDelegate, UIPickerVi
     let buttonWidth: CGFloat = 118.5
     let buttonHeight: CGFloat = 45.5
     let buttonOffset: CGFloat = 40.0
+
+
+    var didLayout = false
     
     override func viewWillAppear(_ animated: Bool) {
         titleCache = prevViewController.title
         prevViewController.title = "Settings"
-        //pickerView.selectRow(1, inComponent: 0, animated: true)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         prevViewController.title = titleCache
     }
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+
+        if !didLayout {
+            let widthScale = view.frame.width/screenWidth //Scaling width
+            var topArea = view.layoutMarginsGuide.snp.top
+            var bottomArea = view.layoutMarginsGuide.snp.bottom
+            if #available(iOS 11, *) {
+                topArea = view.safeAreaLayoutGuide.snp.top
+                bottomArea = view.safeAreaLayoutGuide.snp.bottom
+            }
+
+            headerLabel.snp.makeConstraints { make in
+                make.width.equalTo(textWidth*widthScale)
+                make.height.equalTo(headerHeight)
+                make.centerX.equalTo(view.center.x)
+                make.top.equalTo(topArea).offset(headerOffset)
+            }
+
+            let fixedWidth = view.bounds.width - 2*descriptionPadding
+            let newSize = descriptionTextView.sizeThatFits(CGSize(width: fixedWidth, height: CGFloat.greatestFiniteMagnitude))
+
+            descriptionTextView.snp.makeConstraints { make in
+                make.leading.equalTo(descriptionPadding)
+                make.trailing.equalToSuperview().inset(descriptionPadding)
+                make.height.equalTo(newSize.height)
+                make.top.equalTo(headerLabel.snp.bottom)
+            }
+
+            emailField.snp.makeConstraints { make in
+                make.width.equalTo(descriptionTextView.snp.width)
+                make.height.equalTo(textHeight)
+                make.centerX.equalToSuperview()
+                make.top.equalTo(descriptionTextView.snp.bottom).offset(30)
+            }
+
+            firstNameField.snp.makeConstraints { make in
+                make.width.equalTo(descriptionTextView.snp.width)
+                make.height.equalTo(textHeight)
+                make.centerX.equalToSuperview()
+                make.top.equalTo(emailBorder.snp.bottom).offset(headerHeight)
+            }
+
+            lastNameField.snp.makeConstraints { make in
+                make.width.equalTo(descriptionTextView.snp.width)
+                make.height.equalTo(textHeight)
+                make.centerX.equalToSuperview()
+                make.top.equalTo(firstNameBorder.snp.bottom).offset(headerHeight)
+            }
+
+            iAmAField.snp.makeConstraints { make in
+                make.width.equalTo(descriptionTextView.snp.width)
+                make.height.equalTo(textHeight)
+                make.centerX.equalToSuperview()
+                make.top.equalTo(lastNameBorder.snp.bottom).offset(headerHeight)
+            }
+            actionButton.snp.makeConstraints { make in
+                make.width.equalTo(buttonWidth)
+                make.height.equalTo(buttonHeight)
+                make.bottom.equalTo(bottomArea).offset(-buttonOffset)
+                make.centerX.equalTo(view.center.x)
+            }
+
+
+
+
+            didLayout = true
+        }
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         super.viewDidLoad()
         view.backgroundColor = .white
         self.title = ""
-        let widthScale = view.frame.width/screenWidth //Scaling width
         headerLabel = UILabel()
         headerLabel.text = "Daily Newsletters"
         headerLabel.textColor = .black
         headerLabel.font = .systemFont(ofSize: 36, weight: .bold)
+        headerLabel.adjustsFontSizeToFitWidth = true
         view.addSubview(headerLabel)
-        var topArea = view.layoutMarginsGuide.snp.top
-        var bottomArea = view.layoutMarginsGuide.snp.bottom
-        if #available(iOS 11, *) {
-            topArea = view.safeAreaLayoutGuide.snp.top
-            bottomArea = view.safeAreaLayoutGuide.snp.bottom
-        }
-
-        headerLabel.snp.makeConstraints { make in
-            make.width.equalTo(textWidth*widthScale)
-            make.height.equalTo(headerHeight)
-            make.centerX.equalTo(view.center.x)
-            make.top.equalTo(topArea).offset(headerOffset)
-        }
         
         descriptionTextView = UITextView()
         let descriptionText = "Get Daily Sun headlines delivered to your inbox every day. You'll never miss a moment."
@@ -85,12 +150,6 @@ class SubscribeViewController: UIViewController, UITextFieldDelegate, UIPickerVi
         descriptionTextView.isEditable = false
         descriptionTextView.isScrollEnabled = false
         view.addSubview(descriptionTextView)
-        descriptionTextView.snp.makeConstraints { make in
-            make.leading.equalTo(30)
-            make.trailing.equalToSuperview().inset(30)
-            make.height.equalTo(117)
-            make.top.equalTo(headerLabel.snp.bottom)
-        }
         
         emailField = UITextField()
         emailField.placeholder = "Email"
@@ -99,15 +158,9 @@ class SubscribeViewController: UIViewController, UITextFieldDelegate, UIPickerVi
         emailField.autocapitalizationType = .none
         emailField.delegate = self
         view.addSubview(emailField)
-        
-        emailField.snp.makeConstraints { make in
-            make.width.equalTo(descriptionTextView.snp.width)
-            make.height.equalTo(21.5)
-            make.centerX.equalToSuperview()
-            make.top.equalTo(descriptionTextView.snp.bottom).offset(40)
-        }
-        let emailBorder = UIView()
-        emailBorder.backgroundColor = UIColor(red: 217/256, green: 217/256, blue: 217/256, alpha: 1)
+
+        emailBorder = UIView()
+        emailBorder.backgroundColor = .subscribeTextField
         view.addSubview(emailBorder)
         emailBorder.snp.makeConstraints { make in
             make.leading.trailing.equalTo(emailField)
@@ -120,15 +173,9 @@ class SubscribeViewController: UIViewController, UITextFieldDelegate, UIPickerVi
         firstNameField.borderStyle = .none
         firstNameField.delegate = self
         view.addSubview(firstNameField)
-        
-        firstNameField.snp.makeConstraints { make in
-            make.width.equalTo(descriptionTextView.snp.width)
-            make.height.equalTo(21.5)
-            make.centerX.equalToSuperview()
-            make.top.equalTo(emailBorder.snp.bottom).offset(43)
-        }
-        let firstNameBorder = UIView()
-        firstNameBorder.backgroundColor = UIColor(red: 217/256, green: 217/256, blue: 217/256, alpha: 1)
+
+        firstNameBorder = UIView()
+        firstNameBorder.backgroundColor = .subscribeTextField
         view.addSubview(firstNameBorder)
         firstNameBorder.snp.makeConstraints { make in
             make.leading.trailing.equalTo(firstNameField)
@@ -141,15 +188,9 @@ class SubscribeViewController: UIViewController, UITextFieldDelegate, UIPickerVi
         lastNameField.borderStyle = .none
         lastNameField.delegate = self
         view.addSubview(lastNameField)
-        
-        lastNameField.snp.makeConstraints { make in
-            make.width.equalTo(descriptionTextView.snp.width)
-            make.height.equalTo(21.5)
-            make.centerX.equalToSuperview()
-            make.top.equalTo(firstNameBorder.snp.bottom).offset(43)
-        }
-        let lastNameBorder = UIView()
-        lastNameBorder.backgroundColor = UIColor(red: 217/256, green: 217/256, blue: 217/256, alpha: 1)
+
+        lastNameBorder = UIView()
+        lastNameBorder.backgroundColor = .subscribeTextField
         view.addSubview(lastNameBorder)
         lastNameBorder.snp.makeConstraints { make in
             make.leading.trailing.equalTo(lastNameField)
@@ -167,15 +208,9 @@ class SubscribeViewController: UIViewController, UITextFieldDelegate, UIPickerVi
         iAmAField.inputView = pickerView
         iAmAField.delegate = self
         view.addSubview(iAmAField)
-        
-        iAmAField.snp.makeConstraints { make in
-            make.width.equalTo(descriptionTextView.snp.width)
-            make.height.equalTo(21.5)
-            make.centerX.equalToSuperview()
-            make.top.equalTo(lastNameBorder.snp.bottom).offset(43)
-        }
-        let iAmABorder = UIView()
-        iAmABorder.backgroundColor = UIColor(red: 217/256, green: 217/256, blue: 217/256, alpha: 1)
+
+        iAmABorder = UIView()
+        iAmABorder.backgroundColor = .subscribeTextField
         view.addSubview(iAmABorder)
         iAmABorder.snp.makeConstraints { make in
             make.leading.trailing.equalTo(iAmAField)
@@ -194,12 +229,7 @@ class SubscribeViewController: UIViewController, UITextFieldDelegate, UIPickerVi
         actionButton.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
         actionButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
         view.addSubview(actionButton)
-        actionButton.snp.makeConstraints { make in
-            make.width.equalTo(buttonWidth)
-            make.height.equalTo(buttonHeight)
-            make.bottom.equalTo(bottomArea).offset(-buttonOffset)
-            make.centerX.equalTo(view.center.x)
-        }
+
     }
     
     override func didReceiveMemoryWarning() {
