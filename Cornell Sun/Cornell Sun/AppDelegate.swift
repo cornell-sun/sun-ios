@@ -27,11 +27,35 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().backgroundColor = .white
         UINavigationBar.appearance().tintColor = .black70
 
-        let onesignalInitSettings = [kOSSettingsKeyAutoPrompt: false]
+        // Set up OneSignal
+        let onesignalInitSettings = [kOSSettingsKeyAutoPrompt: false, kOSSettingsKeyInAppLaunchURL: true]
+        let handleNotificationReceivedBlock: OSHandleNotificationReceivedBlock = { notification in
+            guard let notification = notification else { return }
+            let payloadBody = notification.payload.additionalData
+            print("Payload received: \(payloadBody)")
+        }
+
+        let handleNotificationActionBlock: OSHandleNotificationActionBlock = { result in
+            guard let result = result, let payloadBody = result.notification.payload.additionalData as? [String: String] else { return }
+            print("Payload action: \(payloadBody)")
+            if let postValue = payloadBody["id"], let postID = Int(postValue) {
+                prepareInitialPosts(callback: { posts, mainHeadlinePost in
+                    let tabBarController = TabBarViewController(with: posts, mainHeadlinePost: mainHeadlinePost)
+                    self.window?.rootViewController = tabBarController
+                    getPostFromID(postID, completion: { post in
+                        let articleViewController = ArticleStackViewController(post: post)
+                        if let navigationController = tabBarController.selectedViewController as? UINavigationController {
+                            navigationController.pushViewController(articleViewController, animated: true)
+                        }
+                    })
+                })
+            }
+        }
 
         OneSignal.initWithLaunchOptions(launchOptions,
                                         appId: "c7e28bf2-698c-4a07-b56c-f2077e43c1b4",
-                                        handleNotificationAction: nil,
+                                        handleNotificationReceived: handleNotificationReceivedBlock,
+                                        handleNotificationAction: handleNotificationActionBlock,
                                         settings: onesignalInitSettings)
 
         OneSignal.inFocusDisplayType = OSNotificationDisplayType.notification
