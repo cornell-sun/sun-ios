@@ -51,6 +51,12 @@ class PhotoGalleryDetailViewController: UIViewController {
         }
         view.layoutIfNeeded()
         photoGallery.scrollTo(indexPath: selectedIndex)
+        
+        //MARK: - Add Swipe down Gesture Recognizer
+        let slideDownGesture = UISwipeGestureRecognizer(target: self, action: #selector(dismissVC))
+        slideDownGesture.direction = .down
+        view.addGestureRecognizer(slideDownGesture)
+        
     }
 
     @objc func dismissVC() {

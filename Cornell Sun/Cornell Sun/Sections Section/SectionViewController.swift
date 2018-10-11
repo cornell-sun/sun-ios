@@ -8,7 +8,13 @@
 
 import UIKit
 
+struct SectionMeta {
+    let title: String
+    let imageName: String
+}
+
 enum Sections {
+    case news(id: Int)
     case opinion(id: Int)
     case sports(id: Int)
     case arts(id: Int)
@@ -20,7 +26,7 @@ enum Sections {
 
 class SectionViewController: UIViewController {
     var tableView: UITableView!
-    var sections: [Sections] = [.opinion(id: 3), .sports(id: 4), .arts(id: 5), .science(id: 6), .dining(id: 7), .multimedia(id: 9)]
+    var sections: [Sections] = [.news(id: 2), .opinion(id: 3), .sports(id: 4), .arts(id: 5), .science(id: 6), .dining(id: 7), .multimedia(id: 9)]
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -34,7 +40,7 @@ class SectionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView = UITableView()
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "sectionCell")
+        tableView.register(SectionTableViewCell.self, forCellReuseIdentifier: "sectionCell")
         tableView.tableFooterView = UIView()
         tableView.delegate = self
         tableView.dataSource = self
@@ -50,23 +56,36 @@ class SectionViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    func sectionToString(section: Sections) -> String {
+    func sectionToMeta(section: Sections) -> SectionMeta {
+        var title: String = ""
+        var imageName: String = ""
         switch section {
+        case .news:
+            title = "News"
+            imageName = "breakingNews"
         case .opinion:
-            return "Opinion"
+            title = "Opinion"
+            imageName = "opinion"
         case .sports:
-            return "Sports"
+            title = "Sports"
+            imageName = "sports"
         case .arts:
-            return "Arts & Entertainment"
+            title = "Arts & Entertainment"
+            imageName = "arts"
         case .science:
-            return "Science"
+            title = "Science"
+            imageName = "science"
         case .dining:
-            return "Dining"
+            title = "Dining"
+            imageName = "dining"
         case .multimedia:
-            return "Multimedia"
+            title = "Multimedia"
+            imageName = "multimedia"
         //case .sunspots:
             //return "Sunspots"
         }
+        
+        return SectionMeta(title: title, imageName: imageName)
     }
 }
 
@@ -77,19 +96,20 @@ extension SectionViewController: UITableViewDataSource, UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "sectionCell") else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "sectionCell") as? SectionTableViewCell else {
             return UITableViewCell()
         }
-        cell.textLabel?.text = sectionToString(section: sections[indexPath.row])
-        cell.textLabel?.font = .listText
-        cell.accessoryView = UIImageView(image: #imageLiteral(resourceName: "disclosureArrow"))
+        let sectionMeta = sectionToMeta(section: sections[indexPath.row])
+        cell.titleLabel.text = sectionMeta.title
+        cell.sectionImageView.image = UIImage(named: sectionMeta.imageName)
         return cell
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let section = sections[indexPath.row]
-        let sectionVC = SectionCollectionViewController(with: section, sectionTitle: sectionToString(section: section))
+        let sectionMeta = sectionToMeta(section: section)
+        let sectionVC = SectionCollectionViewController(with: section, sectionTitle: sectionMeta.title)
         navigationController?.pushViewController(sectionVC, animated: true)
     }
 }
