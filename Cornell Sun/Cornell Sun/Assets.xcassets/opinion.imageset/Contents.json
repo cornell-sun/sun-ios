@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "copy8.png",
+      "filename" : "opinionIcon.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "copy8@2x.png",
+      "filename" : "opinionIcon@2x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "copy8@3x.png",
+      "filename" : "opinionIcon@3x.png",
       "scale" : "3x"
     }
   ],

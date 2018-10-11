@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "masks.png",
+      "filename" : "artsAndEntIcon.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "masks@2x.png",
+      "filename" : "artsAndEntIcon@2x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "masks@3x.png",
+      "filename" : "artsAndEntIcon@3x.png",
       "scale" : "3x"
     }
   ],

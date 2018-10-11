@@ -62,7 +62,7 @@ class SectionViewController: UIViewController {
         switch section {
         case .news:
             title = "News"
-            imageName = "breakingNews"
+            imageName = "news-section"
         case .opinion:
             title = "Opinion"
             imageName = "opinion"
