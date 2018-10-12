@@ -54,7 +54,7 @@ enum OnboardingViewControllerType {
         case .welcome:
             return UIImage(named: "clockTower")!
         case .notifications:
-            return UIImage(named: "notificationsAndChair")!
+            return UIImage(named: "notificationsAndChairSmall")!
         }
     }
 }
