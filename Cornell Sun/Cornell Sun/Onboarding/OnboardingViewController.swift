@@ -39,13 +39,22 @@ enum OnboardingViewControllerType {
         }
     }
 
-    // also include second image
     var image: UIImage {
         switch self {
         case .welcome:
             return #imageLiteral(resourceName: "clockTower")
         case .notifications:
-            return #imageLiteral(resourceName: "notificationsAndChair")
+            return UIImage(named: "notificationsAndChairLarge")!
+        }
+    }
+
+    // For 5/SE screen size
+    var smallImage: UIImage {
+        switch self {
+        case .welcome:
+            return UIImage(named: "clockTower")!
+        case .notifications:
+            return UIImage(named: "notificationsAndChair")!
         }
     }
 }
@@ -128,7 +137,7 @@ class OnboardingViewController: UIViewController {
         onboardingTitleLabel.text = onboardingType.titleString
         onboardingDescriptionLabel.text = onboardingType.descriptionString
         if UIScreen.main.bounds.width <= 350 {
-            // Set SE Photo
+            onboardingImageView.image = onboardingType.smallImage
         } else {
             onboardingImageView.image = onboardingType.image
         }

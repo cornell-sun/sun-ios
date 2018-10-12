@@ -19,7 +19,7 @@ class ArticleStackViewController: UIViewController {
     let shareBarHeight: CGFloat = 50
     let imageViewHeight: CGFloat = 250
     let captionTopOffset: CGFloat = 4
-    let captionBottomInset: CGFloat = 24
+    let bottomInset: CGFloat = 24
 
     let commentReuseIdentifier = "CommentReuseIdentifier"
     let suggestedReuseIdentifier = "SuggestedReuseIdentifier"
@@ -125,10 +125,19 @@ class ArticleStackViewController: UIViewController {
         guard let doc: Document = try? SwiftSoup.parse(content) else { return sections }
         guard let elements = try? doc.getAllElements() else { return sections }
 
-        for element in elements {
+        for i in 0..<elements.size() {
+            let element = elements.array()[i]
             if element.tag().toString() == "p" {
                 guard let pItem = parsePTag(element: element) else { continue }
-                sections.append(pItem)
+                if let lastItem = sections.last,
+                    case ArticleContentType.imageCredit(_) = lastItem,
+                    case ArticleContentType.caption(_) = pItem {
+                    let lastIndex = sections.count - 1
+                    sections.append(pItem)
+                    sections.swapAt(lastIndex, sections.count - 1)
+                } else {
+                    sections.append(pItem)
+                }
             } else if element.tag().toString() == "img" {
                 guard let imgItem = parseImg(element: element) else { continue }
                 sections.append(imgItem)
@@ -204,9 +213,9 @@ class ArticleStackViewController: UIViewController {
         view.addSubview(label)
         stackView.addArrangedSubview(view)
         label.snp.makeConstraints { make in
-            make.top.equalToSuperview()
+            make.top.equalToSuperview().offset(captionTopOffset)
             make.leading.trailing.equalToSuperview().inset(leadingOffset)
-            make.bottom.equalToSuperview().inset(captionBottomInset)
+            make.bottom.equalToSuperview()
         }
     }
 
@@ -220,7 +229,7 @@ class ArticleStackViewController: UIViewController {
         stackView.addArrangedSubview(view)
         imageView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
-            make.top.equalToSuperview().offset(captionBottomInset)
+            make.top.equalToSuperview().offset(bottomInset)
             make.bottom.equalToSuperview()
             make.height.equalTo(imageViewHeight)
         }
@@ -236,8 +245,8 @@ class ArticleStackViewController: UIViewController {
         view.addSubview(creditLabel)
         stackView.addArrangedSubview(view)
         creditLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().inset(captionTopOffset)
-            make.bottom.equalToSuperview()
+            make.top.equalToSuperview().offset(captionTopOffset)
+            make.bottom.equalToSuperview().inset(bottomInset)
             make.leading.trailing.equalToSuperview().inset(leadingOffset)
         }
     }
