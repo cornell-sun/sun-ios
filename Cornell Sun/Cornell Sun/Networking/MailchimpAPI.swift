@@ -16,7 +16,7 @@ enum MailchimpAPI {
 
 extension MailchimpAPI: TargetType {
 
-    var headers: [String : String]? {
+    var headers: [String: String]? {
         switch self {
         default:
             return ["Authorization": "apikey f1b0b2d8ae43f58174a5b924315f9e53-us11"]
@@ -50,5 +50,3 @@ extension MailchimpAPI: TargetType {
         }
     }
 }
-
-

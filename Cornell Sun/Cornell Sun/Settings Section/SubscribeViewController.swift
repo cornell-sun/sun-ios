@@ -42,7 +42,7 @@ class SubscribeViewController: UIViewController, UITextFieldDelegate, UIPickerVi
     override func viewWillAppear(_ animated: Bool) {
         titleCache = prevViewController.title
         prevViewController.title = "Settings"
-        pickerView.selectRow(1, inComponent:0, animated:true)
+        pickerView.selectRow(1, inComponent: 0, animated: true)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -101,7 +101,7 @@ class SubscribeViewController: UIViewController, UITextFieldDelegate, UIPickerVi
         nameField = UITextField()
         nameField.borderStyle = UITextBorderStyle.none
         //nameField.delegate = self
-        nameField.font = UIFont(name:"HelveticaNeue", size: 18.0)
+        nameField.font = UIFont(name: "HelveticaNeue", size: 18.0)
         view.addSubview(nameField)
         nameField.snp.makeConstraints { make in
             make.width.equalTo(textWidth*widthScale)
@@ -112,14 +112,14 @@ class SubscribeViewController: UIViewController, UITextFieldDelegate, UIPickerVi
         let nameBorder = CALayer()
         let width = CGFloat(1.0)
         nameBorder.borderColor = UIColor(red: 217/256, green: 217/256, blue: 217/256, alpha: 1).cgColor
-        nameBorder.frame = CGRect(x: 0, y: textHeight - width, width:  textWidth*widthScale+2.0, height: textHeight+2)
+        nameBorder.frame = CGRect(x: 0, y: textHeight - width, width: textWidth*widthScale+2.0, height: textHeight+2)
         nameBorder.borderWidth = width
         nameField.layer.addSublayer(nameBorder)
         nameField.layer.masksToBounds = true
         
         let emailLabel = UILabel()
         emailLabel.text = "Email"
-        emailLabel.font = UIFont(name:"HelveticaNeue", size: 14.0)
+        emailLabel.font = UIFont(name: "HelveticaNeue", size: 14.0)
         emailLabel.textColor = UIColor(red: 155/256, green: 155/256, blue: 155/256, alpha: 1)
         view.addSubview(emailLabel)
         emailLabel.snp.makeConstraints { make in
@@ -131,7 +131,7 @@ class SubscribeViewController: UIViewController, UITextFieldDelegate, UIPickerVi
         emailField = UITextField()
         emailField.borderStyle = UITextBorderStyle.none
         //emailField.delegate = self
-        emailField.font = UIFont(name:"HelveticaNeue", size: 18.0)
+        emailField.font = UIFont(name: "HelveticaNeue", size: 18.0)
         view.addSubview(emailField)
         emailField.snp.makeConstraints { make in
             make.width.equalTo(textWidth*widthScale)
@@ -141,14 +141,14 @@ class SubscribeViewController: UIViewController, UITextFieldDelegate, UIPickerVi
         }
         let emailBorder = CALayer()
         emailBorder.borderColor = UIColor(red: 217/256, green: 217/256, blue: 217/256, alpha: 1).cgColor
-        emailBorder.frame = CGRect(x: 0, y: textHeight - width, width:  textWidth*widthScale+2.0, height: textHeight+2)
+        emailBorder.frame = CGRect(x: 0, y: textHeight - width, width: textWidth*widthScale+2.0, height: textHeight+2)
         emailBorder.borderWidth = width
         emailField.layer.addSublayer(emailBorder)
         emailField.layer.masksToBounds = true
         
         let pickerLabel = UILabel()
         pickerLabel.text = "I am a"
-        pickerLabel.font = UIFont(name:"HelveticaNeue", size: 14.0)
+        pickerLabel.font = UIFont(name: "HelveticaNeue", size: 14.0)
         pickerLabel.textColor = UIColor(red: 155/256, green: 155/256, blue: 155/256, alpha: 1)
         view.addSubview(pickerLabel)
         pickerLabel.snp.makeConstraints { make in

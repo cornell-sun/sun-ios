@@ -32,22 +32,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let handleNotificationReceivedBlock: OSHandleNotificationReceivedBlock = { notification in
             guard let notification = notification else { return }
             let payloadBody = notification.payload.additionalData
-            print("Payload received: \(payloadBody)")
+            print("Payload received: \(payloadBody ?? ["": ""])")
         }
 
         let handleNotificationActionBlock: OSHandleNotificationActionBlock = { result in
             guard let result = result, let payloadBody = result.notification.payload.additionalData as? [String: String] else { return }
             print("Payload action: \(payloadBody)")
             if let postValue = payloadBody["id"], let postID = Int(postValue) {
-                prepareInitialPosts(callback: { posts, mainHeadlinePost in
+                getDeeplinkedPostWithId(postID, completion: { (posts, mainHeadlinePost, deeplinkedPost) in
+                    guard let deeplinkedPost = deeplinkedPost else { return }
                     let tabBarController = TabBarViewController(with: posts, mainHeadlinePost: mainHeadlinePost)
                     self.window?.rootViewController = tabBarController
-                    getPostFromID(postID, completion: { post in
-                        let articleViewController = ArticleStackViewController(post: post)
-                        if let navigationController = tabBarController.selectedViewController as? UINavigationController {
-                            navigationController.pushViewController(articleViewController, animated: true)
-                        }
-                    })
+                    let articleViewController = ArticleStackViewController(post: deeplinkedPost)
+                    if let navigationController = tabBarController.selectedViewController as? UINavigationController {
+                        navigationController.pushViewController(articleViewController, animated: true)
+                    }
                 })
             }
         }
@@ -103,7 +102,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     /**
      Handles opening the url separately (eg. opening cornellsun.com in Safari)
      */
-    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey: Any] = [:]) -> Bool {
         return false
     }
 
