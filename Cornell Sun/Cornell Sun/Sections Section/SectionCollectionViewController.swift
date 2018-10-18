@@ -53,7 +53,7 @@ class SectionCollectionViewController: UIViewController, UIScrollViewDelegate {
         ]
         
         switch section {
-        case .opinion(let id), .arts(let id), .dining(let id), .multimedia(let id), .science(let id), .sports(let id):
+        case .news(let id), .opinion(let id), .arts(let id), .dining(let id), .multimedia(let id), .science(let id), .sports(let id):
             sectionID = id
         }
 

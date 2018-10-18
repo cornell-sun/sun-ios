@@ -76,6 +76,8 @@ class SearchViewController: UIViewController, UITableViewDelegate {
         tableView.tableFooterView = UIView()
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.layoutMargins = .zero
+        tableView.separatorInset = .zero
         view.addSubview(tableView)
 
         collectionView.isHidden = true
@@ -107,6 +109,16 @@ class SearchViewController: UIViewController, UITableViewDelegate {
         searchController.searchBar.delegate = self
         searchController.definesPresentationContext = true
         searchController.dimsBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search For Articles"
+        searchController.searchBar.setPositionAdjustment(UIOffset(horizontal: 10, vertical: 0), for: .search)
+        if let textField = searchController.searchBar.subviews.first?.subviews.compactMap({$0 as? UITextField }).first {
+            textField.subviews.first?.isHidden = true
+            textField.layer.backgroundColor = UIColor(red: 0/255.0, green: 0/255.0, blue: 0/255.0, alpha: 0.05).cgColor
+            textField.layer.cornerRadius = 15.5
+            textField.layer.masksToBounds = true
+            textField.font = UIFont(name: "SanFranciscoDisplay-Medium", size: 14)
+        }
+        
     }
 
     override func didReceiveMemoryWarning() {

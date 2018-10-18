@@ -1,8 +1,8 @@
 {
   "images" : [
     {
-      "idiom" : "universal",
-      "filename" : "notificationsAndChair.pdf"
+      "filename" : "notificationsAndChair.pdf",
+      "idiom" : "universal"
     }
   ],
   "info" : {

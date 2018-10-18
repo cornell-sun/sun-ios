@@ -17,6 +17,10 @@ extension UIColor {
         return UIColor(red: 248/255, green: 248/255, blue: 248/255, alpha: 1)
     }
 
+    @nonobjc class var subscribeTextField: UIColor {
+        return UIColor(red: 217/256, green: 217/256, blue: 217/256, alpha: 1)
+    }
+
     @nonobjc class var black5: UIColor {
         return UIColor(red: 0.97, green: 0.97, blue: 0.97, alpha: 1.0)
     }

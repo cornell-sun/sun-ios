@@ -47,6 +47,7 @@
 		50A898121EAEC93B0099CFA9 /* AuthorObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50A898111EAEC93B0099CFA9 /* AuthorObject.swift */; };
 		61652CD21F6EF3A500EEFC29 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61652CD11F6EF3A500EEFC29 /* SearchViewController.swift */; };
 		61652CD41F6EF44900EEFC29 /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61652CD31F6EF44900EEFC29 /* SearchTableViewCell.swift */; };
+		D91565CB2166A04900BCA466 /* SectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D91565CA2166A04900BCA466 /* SectionTableViewCell.swift */; };
 		DC0A883A1FBA2DEE00F2BCBB /* PhotoGalleryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0A88391FBA2DEE00F2BCBB /* PhotoGalleryCell.swift */; };
 		DC0A883C1FBA531000F2BCBB /* BookmarkCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0A883B1FBA531000F2BCBB /* BookmarkCollectionViewController.swift */; };
 		DC0A883E1FBA6B8200F2BCBB /* BookmarkSearchSectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0A883D1FBA6B8200F2BCBB /* BookmarkSearchSectionController.swift */; };
@@ -175,6 +176,7 @@
 		79D08546F469CBFA91B516C4 /* Pods-Cornell Sun.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cornell Sun.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Cornell Sun/Pods-Cornell Sun.debug.xcconfig"; sourceTree = "<group>"; };
 		8D204AC28FA383322F3630A2 /* Pods-Cornell SunTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cornell SunTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Cornell SunTests/Pods-Cornell SunTests.release.xcconfig"; sourceTree = "<group>"; };
 		A733FA4C43777F59F6F0F8B3 /* Pods-Cornell Sun.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cornell Sun.release.xcconfig"; path = "Pods/Target Support Files/Pods-Cornell Sun/Pods-Cornell Sun.release.xcconfig"; sourceTree = "<group>"; };
+		D91565CA2166A04900BCA466 /* SectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionTableViewCell.swift; sourceTree = "<group>"; };
 		DA69BC56E568CC99632DAB34 /* Pods-Cornell Sun-SunNotificationServiceExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cornell Sun-SunNotificationServiceExtension.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Cornell Sun-SunNotificationServiceExtension/Pods-Cornell Sun-SunNotificationServiceExtension.debug.xcconfig"; sourceTree = "<group>"; };
 		DC0A88391FBA2DEE00F2BCBB /* PhotoGalleryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoGalleryCell.swift; sourceTree = "<group>"; };
 		DC0A883B1FBA531000F2BCBB /* BookmarkCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkCollectionViewController.swift; sourceTree = "<group>"; };
@@ -575,6 +577,7 @@
 				DCB1BB4C20893B0D002C11E2 /* SkeletonFeedCell.swift */,
 				DC3CCB3220924288000A9A5B /* VideoCell.swift */,
 				4029318620C580D1000E1F4A /* TeamTableViewCell.swift */,
+				D91565CA2166A04900BCA466 /* SectionTableViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -695,7 +698,7 @@
 					};
 					DCD870EB1F256B7B00B98AF8 = {
 						CreatedOnToolsVersion = 9.0;
-						DevelopmentTeam = 3C8UBDMMME;
+						DevelopmentTeam = D5T999AFZL;
 						TestTargetID = 5006AFF71EA9625000F58549;
 					};
 				};
@@ -970,6 +973,7 @@
 				DC818D9F1F7596970064AFFA /* TitleCell.swift in Sources */,
 				0C0D2FE9206048BA00BC77E9 /* OnboardingViewController.swift in Sources */,
 				DC4308EF1F2563FF00ABB31F /* API.swift in Sources */,
+				D91565CB2166A04900BCA466 /* SectionTableViewCell.swift in Sources */,
 				0C59AD44208D505700CF3A31 /* Button.swift in Sources */,
 				4047EA05207590450030067E /* NotificationViewController.swift in Sources */,
 				61652CD41F6EF44900EEFC29 /* SearchTableViewCell.swift in Sources */,
@@ -1224,6 +1228,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				COPY_PHASE_STRIP = NO;
+				DEVELOPMENT_TEAM = D5T999AFZL;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				PRODUCT_NAME = "Cornell SunTests";
@@ -1238,6 +1243,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = D5T999AFZL;
 				PRODUCT_NAME = "Cornell SunTests";
 				SWIFT_VERSION = 4.0;
 			};
