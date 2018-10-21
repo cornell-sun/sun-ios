@@ -27,6 +27,7 @@
 		0CED4FAE1FAB523F0025EB91 /* UIFont+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CED4FAC1FAB523F0025EB91 /* UIFont+.swift */; };
 		3441C78A2066C0CD00F58D5E /* Delegate+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3441C7892066C0CD00F58D5E /* Delegate+.swift */; };
 		344B71B820A0FFB800DF8081 /* SearchCellNoImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 344B71B720A0FFB800DF8081 /* SearchCellNoImage.swift */; };
+		34590494217D23DB009EAEFA /* Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 34590493217D23DB009EAEFA /* Keys.plist */; };
 		348716782041EAC8008CB9D5 /* AdImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348716772041EAC8008CB9D5 /* AdImageCell.swift */; };
 		3487167D2041F09D008CB9D5 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3487167C2041F09D008CB9D5 /* Launch Screen.storyboard */; };
 		34C5582A2041E49E00E62CE8 /* AdSectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34C558292041E49E00E62CE8 /* AdSectionController.swift */; };
@@ -147,6 +148,7 @@
 		0CED4FAC1FAB523F0025EB91 /* UIFont+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+.swift"; sourceTree = "<group>"; };
 		3441C7892066C0CD00F58D5E /* Delegate+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Delegate+.swift"; sourceTree = "<group>"; };
 		344B71B720A0FFB800DF8081 /* SearchCellNoImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCellNoImage.swift; sourceTree = "<group>"; };
+		34590493217D23DB009EAEFA /* Keys.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Keys.plist; sourceTree = "<group>"; };
 		348716772041EAC8008CB9D5 /* AdImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdImageCell.swift; sourceTree = "<group>"; };
 		3487167C2041F09D008CB9D5 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		34C558292041E49E00E62CE8 /* AdSectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdSectionController.swift; sourceTree = "<group>"; };
@@ -347,6 +349,7 @@
 				5006AFFD1EA9625000F58549 /* ViewController.swift */,
 				5006B0021EA9625000F58549 /* Assets.xcassets */,
 				5006B0071EA9625000F58549 /* Info.plist */,
+				34590493217D23DB009EAEFA /* Keys.plist */,
 			);
 			path = "Cornell Sun";
 			sourceTree = "<group>";
@@ -613,6 +616,7 @@
 				5D796D343FAE3F7BC75A78B1 /* [CP] Embed Pods Frameworks */,
 				40D130291F61EF250063329A /* SwiftLint */,
 				DC3667DC206EB9D2002EB4F9 /* Embed App Extensions */,
+				34E6B50F2178DC0100836916 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -728,6 +732,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				34590494217D23DB009EAEFA /* Keys.plist in Resources */,
 				DCB717121FB94BCA00BE4D26 /* KeplerStd-Bold.otf in Resources */,
 				5006B0031EA9625000F58549 /* Assets.xcassets in Resources */,
 				DC818DA31F75E0CF0064AFFA /* Sonnenstrahl-Ausgezeichnet.ttf in Resources */,
@@ -796,6 +801,23 @@
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
+		};
+		34E6B50F2178DC0100836916 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"${PODS_ROOT}/Fabric/run\" c685260cfb468a6290c418467c6349565a9489ff 1301fd4041026f5761c63bef95a572e75c6bc25e4a9433e01c9a0a17a388d051\n";
 		};
 		40D130291F61EF250063329A /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;

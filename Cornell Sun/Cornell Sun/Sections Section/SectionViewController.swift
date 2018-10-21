@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Crashlytics
 
 struct SectionMeta {
     let title: String
@@ -111,5 +112,6 @@ extension SectionViewController: UITableViewDataSource, UITableViewDelegate {
         let sectionMeta = sectionToMeta(section: section)
         let sectionVC = SectionCollectionViewController(with: section, sectionTitle: sectionMeta.title)
         navigationController?.pushViewController(sectionVC, animated: true)
+        Answers.logCustomEvent(withName: "Section Selected", customAttributes: ["Section": section])
     }
 }

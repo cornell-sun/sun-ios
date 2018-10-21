@@ -11,6 +11,9 @@ import Kingfisher
 import GoogleMobileAds
 import OneSignal
 import IQKeyboardManagerSwift
+import Fabric
+import Crashlytics
+
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -64,7 +67,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //fake id ca-app-pub-3940256099942544/2934735716
         GADMobileAds.configure(withApplicationID: "ca-app-pub-4474706420182946~3782719574")
 
+        //Set up Crashlytics
+        Crashlytics.start(withAPIKey: fabricAPIKey())
+        Fabric.sharedSDK().debug = true
+    
+
         return true
+    }
+    
+    func fabricAPIKey() -> String {
+        
+        var format = PropertyListSerialization.PropertyListFormat.xml
+        var key:[String:AnyObject] = [:]
+        let keyPath:String? = Bundle.main.path(forResource: "Keys", ofType: "plist")!
+        let keyXML = FileManager.default.contents(atPath: keyPath!)
+        
+        do {
+            key = try PropertyListSerialization.propertyList(from: keyXML!, options: .mutableContainersAndLeaves, format: &format) as! [String:AnyObject]
+        }
+        catch {
+            print("Error reading plist: \(error), format: \(format)")
+        }
+        
+        return key["APIKey"] as! String
+        
     }
 
     /**

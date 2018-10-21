@@ -8,6 +8,7 @@
 
 import UIKit
 import IGListKit
+import Crashlytics
 
 class SearchViewController: UIViewController, UITableViewDelegate {
 
@@ -119,6 +120,9 @@ class SearchViewController: UIViewController, UITableViewDelegate {
             textField.font = UIFont(name: "SanFranciscoDisplay-Medium", size: 14)
         }
         
+        //Set up search analytics
+        Answers.logSearch(withQuery: "Search", customAttributes: nil)
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -218,6 +222,7 @@ extension SearchViewController: UITableViewDataSource {
         let topic = trendingTopics[indexPath.row]
         searchController.searchBar.text = topic
         searchBarSearchButtonClicked(searchController.searchBar)
+        Answers.logCustomEvent(withName: "Trending Selected", customAttributes: ["Topic": topic])
     }
 }
 

@@ -1,5 +1,8 @@
 PODS:
   - Alamofire (4.7.2)
+  - Crashlytics (3.10.1):
+    - Fabric (~> 1.7.5)
+  - Fabric (1.7.6)
   - FLAnimatedImage (1.0.12)
   - Google-Mobile-Ads-SDK (7.30.0)
   - HTMLString (4.0.1)
@@ -46,6 +49,8 @@ PODS:
   - UICircularProgressRing (2.0.0)
 
 DEPENDENCIES:
+  - Crashlytics
+  - Fabric
   - Google-Mobile-Ads-SDK
   - HTMLString (~> 4.0)
   - IGListKit (~> 3.1.1)
@@ -66,6 +71,8 @@ DEPENDENCIES:
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Alamofire
+    - Crashlytics
+    - Fabric
     - FLAnimatedImage
     - Google-Mobile-Ads-SDK
     - HTMLString
@@ -97,6 +104,8 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   Alamofire: e4fa87002c137ba2d8d634d2c51fabcda0d5c223
+  Crashlytics: aee1a064cbbf99b32efa3f056a5f458d846bc8ff
+  Fabric: f8d42c893bb187326a7968b62abe55c36a987a46
   FLAnimatedImage: 4a0b56255d9b05f18b6dd7ee06871be5d3b89e31
   Google-Mobile-Ads-SDK: 7404f68120ae8682afeb5af001fbf4aad731c78e
   HTMLString: 8d9a8a8aaf63dd52c5b8cd9a38e14da52f753210
@@ -117,6 +126,6 @@ SPEC CHECKSUMS:
   SwiftSoup: 277f7ef548826e0ca7603a06b30d4a5df3ee0587
   UICircularProgressRing: f41663e98c0f40b4794461a4209a67569ea2cc28
 
-PODFILE CHECKSUM: 093fce9bc515363f8b3738afa23c01764e40c8bc
+PODFILE CHECKSUM: 6595474d17144640cf9fc4d02a522feeb0915a4f
 
 COCOAPODS: 1.5.3
