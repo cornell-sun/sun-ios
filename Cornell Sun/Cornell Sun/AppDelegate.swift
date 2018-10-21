@@ -27,11 +27,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().backgroundColor = .white
         UINavigationBar.appearance().tintColor = .black70
 
-        let onesignalInitSettings = [kOSSettingsKeyAutoPrompt: false]
+        // Set up OneSignal
+        let onesignalInitSettings = [kOSSettingsKeyAutoPrompt: false, kOSSettingsKeyInAppLaunchURL: true]
+        let handleNotificationReceivedBlock: OSHandleNotificationReceivedBlock = { _ in }
+
+        let handleNotificationActionBlock: OSHandleNotificationActionBlock = { result in
+            guard let result = result, let payloadBody = result.notification.payload.additionalData as? [String: String] else { return }
+            if let postValue = payloadBody["id"], let postID = Int(postValue) {
+                getDeeplinkedPostWithId(postID, completion: { (posts, mainHeadlinePost, deeplinkedPost) in
+                    guard let deeplinkedPost = deeplinkedPost else { return }
+                    let tabBarController = TabBarViewController(with: posts, mainHeadlinePost: mainHeadlinePost)
+                    self.window?.rootViewController = tabBarController
+                    let articleViewController = ArticleStackViewController(post: deeplinkedPost)
+                    if let navigationController = tabBarController.selectedViewController as? UINavigationController {
+                        navigationController.pushViewController(articleViewController, animated: true)
+                    }
+                })
+            }
+        }
 
         OneSignal.initWithLaunchOptions(launchOptions,
                                         appId: "c7e28bf2-698c-4a07-b56c-f2077e43c1b4",
-                                        handleNotificationAction: nil,
+                                        handleNotificationReceived: handleNotificationReceivedBlock,
+                                        handleNotificationAction: handleNotificationActionBlock,
                                         settings: onesignalInitSettings)
 
         OneSignal.inFocusDisplayType = OSNotificationDisplayType.notification
@@ -79,7 +97,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     /**
      Handles opening the url separately (eg. opening cornellsun.com in Safari)
      */
-    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey: Any] = [:]) -> Bool {
         return false
     }
 

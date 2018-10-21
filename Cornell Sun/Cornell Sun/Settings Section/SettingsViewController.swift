@@ -107,40 +107,39 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
                 navigationController?.pushViewController(next, animated: true)
         } else {
             switch setting.type! {
-                case .rate:
-                    let urlStr = "itms-apps://itunes.apple.com/app/viewContentsUserReviews?id=\(appID)"
-                    if let url = URL(string: urlStr), UIApplication.shared.canOpenURL(url) {
-                        if #available(iOS 10.0, *) {
-                            UIApplication.shared.open(url, options: [:], completionHandler: nil)
-                        } else {
-                            UIApplication.shared.openURL(url)
-                        }
+            case .rate:
+                let urlStr = "itms-apps://itunes.apple.com/app/viewContentsUserReviews?id=\(appID)"
+                if let url = URL(string: urlStr), UIApplication.shared.canOpenURL(url) {
+                    if #available(iOS 10.0, *) {
+                        UIApplication.shared.open(url, options: [:], completionHandler: nil)
                     } else {
-                        let alert = UIAlertController(title: "Error", message: "The app is not available for rating yet", preferredStyle: .alert)
-                        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-                        self.present(alert, animated: true)
-                }
-                case .privacy:
-                    if let url = URL(string: "http://cornellsun.com/2008/06/01/cornellsun-com-privacy-policy/") {
-                        if #available(iOS 11.0, *) {
-                            let config = SFSafariViewController.Configuration()
-                            config.entersReaderIfAvailable = true
-                            let vc = SFSafariViewController(url: url, configuration: config)
-                            present(vc, animated: true)
-                        } else {
-                            // Fallback on earlier versions
-                            let safariVC = SFSafariViewController(url: url)
-                            self.present(safariVC, animated: true, completion: nil)
-                        }
-                }
-                case .masthead:
-                    if let url = URL(string: "http://i1.wp.com/cornellsun.com/wp-content/uploads/2015/10/Screen-Shot-2018-03-07-at-10.10.55-AM.png?w=394") {
-                        let mastheadViewController = MastheadViewController(url: url)
-                        navigationController?.pushViewController(mastheadViewController, animated: true)
-                }
-                default:
-                    print("default")
-                    break
+                        UIApplication.shared.openURL(url)
+                    }
+                } else {
+                    let alert = UIAlertController(title: "Error", message: "The app is not available for rating yet", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+                    self.present(alert, animated: true)
+            }
+            case .privacy:
+                if let url = URL(string: "http://cornellsun.com/2008/06/01/cornellsun-com-privacy-policy/") {
+                    if #available(iOS 11.0, *) {
+                        let config = SFSafariViewController.Configuration()
+                        config.entersReaderIfAvailable = true
+                        let vc = SFSafariViewController(url: url, configuration: config)
+                        present(vc, animated: true)
+                    } else {
+                        // Fallback on earlier versions
+                        let safariVC = SFSafariViewController(url: url)
+                        self.present(safariVC, animated: true, completion: nil)
+                    }
+            }
+            case .masthead:
+                if let url = URL(string: "http://i1.wp.com/cornellsun.com/wp-content/uploads/2015/10/Screen-Shot-2018-03-07-at-10.10.55-AM.png?w=394") {
+                    let mastheadViewController = MastheadViewController(url: url)
+                    navigationController?.pushViewController(mastheadViewController, animated: true)
+            }
+            default:
+                print("default")
             }
         }
     }

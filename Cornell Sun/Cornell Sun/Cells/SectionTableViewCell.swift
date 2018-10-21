@@ -10,7 +10,6 @@ import UIKit
 
 class SectionTableViewCell: UITableViewCell {
 
-
     let sectionImageSize: CGFloat = 16.0
     let sectionImageLeading: CGFloat = 19.0
     let detailImageTrailing: CGFloat = 17.5

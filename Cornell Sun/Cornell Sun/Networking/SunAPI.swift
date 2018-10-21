@@ -47,7 +47,7 @@ enum SunAPI {
 
 extension SunAPI: TargetType {
 
-    var headers: [String : String]? {
+    var headers: [String: String]? {
         switch self {
         default:
             return nil

@@ -15,8 +15,8 @@ class TabBarViewController: UITabBarController {
     var headlinePost: PostObject?
     var previousViewController: UIViewController?
     
-    let normal = [NSAttributedStringKey.font : UIFont(name: "SanFranciscoText-Medium", size: 11) as Any] as [NSAttributedStringKey : Any]
-    let selected = [NSAttributedStringKey.font : UIFont(name: "SanFranciscoText-Semibold", size: 11) as Any] as [NSAttributedStringKey : Any]
+    let normal = [NSAttributedStringKey.font: UIFont(name: "SanFranciscoText-Medium", size: 11) as Any] as [NSAttributedStringKey: Any]
+    let selected = [NSAttributedStringKey.font: UIFont(name: "SanFranciscoText-Semibold", size: 11) as Any] as [NSAttributedStringKey: Any]
 
     override func viewDidLoad() {
         super.viewDidLoad()

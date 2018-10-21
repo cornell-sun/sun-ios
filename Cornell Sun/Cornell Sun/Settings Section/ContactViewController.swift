@@ -49,6 +49,7 @@ class ContactViewController: UIViewController, UITextFieldDelegate, MFMailCompos
     override func viewWillDisappear(_ animated: Bool) {
         prevViewController.title = titleCache
     }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         super.viewDidLoad()
@@ -58,7 +59,7 @@ class ContactViewController: UIViewController, UITextFieldDelegate, MFMailCompos
         headerLabel = UILabel()
         headerLabel.text = getHeader()
         headerLabel.textColor = .black
-        headerLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 36.0)
+        headerLabel.font = UIFont(name: "HelveticaNeue-Bold", size: 36.0)
         view.addSubview(headerLabel)
         var topArea = view.layoutMarginsGuide.snp.top
         var bottomArea = view.layoutMarginsGuide.snp.bottom
@@ -77,9 +78,7 @@ class ContactViewController: UIViewController, UITextFieldDelegate, MFMailCompos
         descriptionTextView.text = getText()
         descriptionTextView.numberOfLines = 0
         descriptionTextView.textColor = .black
-        descriptionTextView.font = UIFont(name:"HelveticaNeue", size: 16.0)
-        //descriptionTextView.isEditable = false
-        //descriptionTextView.isScrollEnabled = false
+        descriptionTextView.font = UIFont(name: "HelveticaNeue", size: 16.0)
         view.addSubview(descriptionTextView)
         descriptionTextView.snp.makeConstraints { make in
             make.width.equalTo(textWidth*widthScale)
@@ -90,7 +89,7 @@ class ContactViewController: UIViewController, UITextFieldDelegate, MFMailCompos
         
         let subjectLabel = UILabel()
         subjectLabel.text = "Subject"
-        subjectLabel.font = UIFont(name:"HelveticaNeue", size: 14.0)
+        subjectLabel.font = UIFont(name: "HelveticaNeue", size: 14.0)
         subjectLabel.textColor = UIColor(red: 155/256, green: 155/256, blue: 155/256, alpha: 1)
         view.addSubview(subjectLabel)
         subjectLabel.snp.makeConstraints { make in
@@ -102,7 +101,7 @@ class ContactViewController: UIViewController, UITextFieldDelegate, MFMailCompos
         subjectField = UITextField()
         subjectField.borderStyle = UITextBorderStyle.none
         subjectField.delegate = self
-        subjectField.font = UIFont(name:"HelveticaNeue", size: 18.0)
+        subjectField.font = UIFont(name: "HelveticaNeue", size: 18.0)
         view.addSubview(subjectField)
         subjectField.snp.makeConstraints { make in
             make.width.equalTo(textWidth*widthScale)
@@ -113,14 +112,14 @@ class ContactViewController: UIViewController, UITextFieldDelegate, MFMailCompos
         let subjectBorder = CALayer()
         let width = CGFloat(1.0)
         subjectBorder.borderColor = UIColor(red: 217/256, green: 217/256, blue: 217/256, alpha: 1).cgColor
-        subjectBorder.frame = CGRect(x: 0, y: textHeight - width, width:  textWidth*widthScale+2.0, height: textHeight+2)
+        subjectBorder.frame = CGRect(x: 0, y: textHeight - width, width: textWidth*widthScale+2.0, height: textHeight+2)
         subjectBorder.borderWidth = width
         subjectField.layer.addSublayer(subjectBorder)
         subjectField.layer.masksToBounds = true
         
         let nameLabel = UILabel()
         nameLabel.text = "Name"
-        nameLabel.font = UIFont(name:"HelveticaNeue", size: 14.0)
+        nameLabel.font = UIFont(name: "HelveticaNeue", size: 14.0)
         nameLabel.textColor = UIColor(red: 155/255, green: 155/255, blue: 155/255, alpha: 1)
         view.addSubview(nameLabel)
         nameLabel.snp.makeConstraints { make in
@@ -132,7 +131,7 @@ class ContactViewController: UIViewController, UITextFieldDelegate, MFMailCompos
         let nameField = UITextField()
         nameField.borderStyle = UITextBorderStyle.none
         nameField.delegate = self
-        nameField.font = UIFont(name:"HelveticaNeue", size: 18.0)
+        nameField.font = UIFont(name: "HelveticaNeue", size: 18.0)
         view.addSubview(nameField)
         nameField.snp.makeConstraints { make in
             make.width.equalTo(textWidth*widthScale)
@@ -142,14 +141,14 @@ class ContactViewController: UIViewController, UITextFieldDelegate, MFMailCompos
         }
         let nameBorder = CALayer()
         nameBorder.borderColor = UIColor(red: 217/256, green: 217/256, blue: 217/256, alpha: 1).cgColor
-        nameBorder.frame = CGRect(x: 0, y: textHeight - width, width:  textWidth*widthScale+2.0, height: textHeight+2)
+        nameBorder.frame = CGRect(x: 0, y: textHeight - width, width: textWidth*widthScale+2.0, height: textHeight+2)
         nameBorder.borderWidth = width
         nameField.layer.addSublayer(nameBorder)
         nameField.layer.masksToBounds = true
         
         let emailLabel = UILabel()
         emailLabel.text = "Email"
-        emailLabel.font = UIFont(name:"HelveticaNeue", size: 14.0)
+        emailLabel.font = UIFont(name: "HelveticaNeue", size: 14.0)
         emailLabel.textColor = UIColor(red: 155/256, green: 155/256, blue: 155/256, alpha: 1)
         view.addSubview(emailLabel)
         emailLabel.snp.makeConstraints { make in
@@ -161,7 +160,7 @@ class ContactViewController: UIViewController, UITextFieldDelegate, MFMailCompos
         emailField = UITextField()
         emailField.borderStyle = UITextBorderStyle.none
         emailField.delegate = self
-        emailField.font = UIFont(name:"HelveticaNeue", size: 18.0)
+        emailField.font = UIFont(name: "HelveticaNeue", size: 18.0)
         view.addSubview(emailField)
         emailField.snp.makeConstraints { make in
             make.width.equalTo(textWidth*widthScale)
@@ -171,14 +170,14 @@ class ContactViewController: UIViewController, UITextFieldDelegate, MFMailCompos
         }
         let emailBorder = CALayer()
         emailBorder.borderColor = UIColor(red: 217/256, green: 217/256, blue: 217/256, alpha: 1).cgColor
-        emailBorder.frame = CGRect(x: 0, y: textHeight - width, width:  textWidth*widthScale+2.0, height: textHeight+2)
+        emailBorder.frame = CGRect(x: 0, y: textHeight - width, width: textWidth*widthScale+2.0, height: textHeight+2)
         emailBorder.borderWidth = width
         emailField.layer.addSublayer(emailBorder)
         emailField.layer.masksToBounds = true
         
         let messageLabel = UILabel()
         messageLabel.text = "Message"
-        messageLabel.font = UIFont(name:"HelveticaNeue", size: 14.0)
+        messageLabel.font = UIFont(name: "HelveticaNeue", size: 14.0)
         messageLabel.textColor = UIColor(red: 155/256, green: 155/256, blue: 155/256, alpha: 1)
         view.addSubview(messageLabel)
         messageLabel.snp.makeConstraints { make in
@@ -188,10 +187,9 @@ class ContactViewController: UIViewController, UITextFieldDelegate, MFMailCompos
             make.top.equalTo(emailField.snp.bottom).offset(labelOffsetTop)
         }
         messageField = UITextView()
-        //messageField.borderStyle = UITextBorderStyle.none
         messageField.addDoneButton()
         messageField.delegate = self
-        messageField.font = UIFont(name:"HelveticaNeue", size: 18.0)
+        messageField.font = UIFont(name: "HelveticaNeue", size: 18.0)
         view.addSubview(messageField)
         
         actionButton = UIButton()
@@ -214,7 +212,6 @@ class ContactViewController: UIViewController, UITextFieldDelegate, MFMailCompos
 
         messageField.snp.makeConstraints { make in
             make.width.equalTo(textWidth*widthScale)
-            //make.height.equalTo(messageHeight)
             make.centerX.equalTo(view.center.x)
             make.top.equalTo(messageLabel.snp.bottom).offset(labelOffsetBottom)
             make.bottom.equalTo(actionButton.snp.top).offset(-8)
@@ -260,12 +257,12 @@ class ContactViewController: UIViewController, UITextFieldDelegate, MFMailCompos
             let mailer = MFMailComposeViewController()
             mailer.mailComposeDelegate = self
             switch settingType! {
-                case .contactus:
-                        mailer.setToRecipients([contactEmail])
-                case .feedback:
-                        mailer.setToRecipients([feedbackEmail])
-                default:
-                    break
+            case .contactus:
+                    mailer.setToRecipients([contactEmail])
+            case .feedback:
+                    mailer.setToRecipients([feedbackEmail])
+            default:
+                break
             }
             mailer.setSubject(subjectField.text ?? "")
             mailer.setMessageBody(messageField.text ?? "", isHTML: false)

@@ -5,16 +5,15 @@
 //  Created by Aditya Dwivedi on 3/23/18.
 //  Copyright © 2018 cornell.sun. All rights reserved.
 //
-
 import UIKit
 import SafariServices
 
 class SubscribeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDataSource, UIPickerViewDelegate {
-    
+
     var prevViewController: UIViewController!
     var titleCache: String!
     var pickerList: [String] = ["Cornell Student", "Cornell Alumnus", "Parent", "Cornell staff", "Other"]
-    
+
     var headerLabel: UILabel!
     var descriptionTextView: UITextView!
     var actionButton: UIButton!
@@ -27,7 +26,7 @@ class SubscribeViewController: UIViewController, UITextFieldDelegate, UIPickerVi
     var firstNameBorder: UIView!
     var lastNameBorder: UIView!
     var iAmABorder: UIView!
-    
+
     var pickerIndexSelected = 0
 
     let descriptionPadding: CGFloat = 30.0
@@ -48,14 +47,13 @@ class SubscribeViewController: UIViewController, UITextFieldDelegate, UIPickerVi
     let buttonHeight: CGFloat = 45.5
     let buttonOffset: CGFloat = 40.0
 
-
     var didLayout = false
-    
+
     override func viewWillAppear(_ animated: Bool) {
         titleCache = prevViewController.title
         prevViewController.title = "Settings"
     }
-    
+
     override func viewWillDisappear(_ animated: Bool) {
         prevViewController.title = titleCache
     }
@@ -123,9 +121,6 @@ class SubscribeViewController: UIViewController, UITextFieldDelegate, UIPickerVi
                 make.centerX.equalTo(view.center.x)
             }
 
-
-
-
             didLayout = true
         }
     }
@@ -141,7 +136,7 @@ class SubscribeViewController: UIViewController, UITextFieldDelegate, UIPickerVi
         headerLabel.font = .systemFont(ofSize: 36, weight: .bold)
         headerLabel.adjustsFontSizeToFitWidth = true
         view.addSubview(headerLabel)
-        
+
         descriptionTextView = UITextView()
         let descriptionText = "Get Daily Sun headlines delivered to your inbox every day. You'll never miss a moment."
         descriptionTextView.text = descriptionText
@@ -150,7 +145,7 @@ class SubscribeViewController: UIViewController, UITextFieldDelegate, UIPickerVi
         descriptionTextView.isEditable = false
         descriptionTextView.isScrollEnabled = false
         view.addSubview(descriptionTextView)
-        
+
         emailField = UITextField()
         emailField.placeholder = "Email"
         emailField.borderStyle = .none
@@ -167,7 +162,7 @@ class SubscribeViewController: UIViewController, UITextFieldDelegate, UIPickerVi
             make.height.equalTo(1)
             make.top.equalTo(emailField.snp.bottom).offset(3)
         }
-        
+
         firstNameField = UITextField()
         firstNameField.placeholder = "First Name"
         firstNameField.borderStyle = .none
@@ -182,7 +177,7 @@ class SubscribeViewController: UIViewController, UITextFieldDelegate, UIPickerVi
             make.height.equalTo(1)
             make.top.equalTo(firstNameField.snp.bottom).offset(3)
         }
-        
+
         lastNameField = UITextField()
         lastNameField.placeholder = "Last Name"
         lastNameField.borderStyle = .none
@@ -197,11 +192,11 @@ class SubscribeViewController: UIViewController, UITextFieldDelegate, UIPickerVi
             make.height.equalTo(1)
             make.top.equalTo(lastNameField.snp.bottom).offset(3)
         }
-        
+
         pickerView = UIPickerView()
         pickerView.dataSource = self
         pickerView.delegate = self
-        
+
         iAmAField = UITextField()
         iAmAField.placeholder = "I am a:"
         iAmAField.borderStyle = .none
@@ -217,7 +212,7 @@ class SubscribeViewController: UIViewController, UITextFieldDelegate, UIPickerVi
             make.height.equalTo(1)
             make.top.equalTo(iAmAField.snp.bottom).offset(3)
         }
-        
+
         actionButton = UIButton()
         actionButton.backgroundColor = UIColor.white// (red: 238/255, green: 68/255, blue: 68/255, alpha: 1)
         actionButton.layer.cornerRadius = buttonHeight / 2.0
@@ -231,26 +226,26 @@ class SubscribeViewController: UIViewController, UITextFieldDelegate, UIPickerVi
         view.addSubview(actionButton)
 
     }
-    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         let itemSelected = pickerList[row]
         iAmAField.text = itemSelected
         pickerIndexSelected = row
     }
-    
+
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
-    
+
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return pickerList.count
     }
-    
+
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
         if let pickerLabel = view as? UILabel {
             pickerLabel.text = pickerList[row]
@@ -263,25 +258,25 @@ class SubscribeViewController: UIViewController, UITextFieldDelegate, UIPickerVi
             return pickerLabel
         }
     }
-    
+
     func textFieldDidBeginEditing(_ textField: UITextField) {
         if textField == iAmAField {
             pickerView(pickerView, didSelectRow: pickerIndexSelected, inComponent: 0)
         }
     }
-    
+
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.view.endEditing(true)
         return false
     }
-    
+
     @objc func buttonAction() {
         guard
-        let email = emailField.text,
+            let email = emailField.text,
             let firstName = firstNameField.text,
             let lastName = lastNameField.text,
             !email.isEmpty, !firstName.isEmpty, !lastName.isEmpty else { return }
-        
+
         API.mailchimpProvider.request(.subscribe(firstname: firstName, lastname: lastName, email: email)) { _ in
             let alert = UIAlertController(title: "Thank You For Subscribing!", message: "Please check your email to confirm your subscription", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
@@ -290,7 +285,7 @@ class SubscribeViewController: UIViewController, UITextFieldDelegate, UIPickerVi
             self.firstNameField.text = ""
             self.lastNameField.text = ""
             self.iAmAField.text = ""
-            
+
         }
 
     }

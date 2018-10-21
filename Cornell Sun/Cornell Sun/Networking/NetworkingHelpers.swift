@@ -185,3 +185,27 @@ func prepareInitialPosts(callback: @escaping ([ListDiffable], PostObject?) -> Vo
         callback(postObjects, headlinePost)
     }
 }
+
+func getDeeplinkedPostWithId(_ id: Int, completion: @escaping ([ListDiffable], PostObject?, PostObject?) -> Void) {
+    let group = DispatchGroup()
+    var posts: [ListDiffable] = []
+    var heroPost: PostObject?
+    var deeplinkPost: PostObject?
+
+    group.enter()
+    prepareInitialPosts { (postObjects, headlinePost) in
+        posts = postObjects
+        heroPost = headlinePost
+        group.leave()
+    }
+
+    group.enter()
+    getPostFromID(id) { post in
+        deeplinkPost = post
+        group.leave()
+    }
+
+    group.notify(queue: .main) {
+        completion(posts, heroPost, deeplinkPost)
+    }
+}

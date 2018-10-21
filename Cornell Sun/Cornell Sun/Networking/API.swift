@@ -25,7 +25,6 @@ API.request(target: .recentPosts, success: { (response) in
 })
 */
 
-
 struct API {
     static let provider = MoyaProvider<SunAPI>()
 
@@ -50,7 +49,7 @@ struct API {
                     successCallback(response)
                 } else {
                     // 2:
-                    let error = NSError(domain:"com.cornellsun.networkLayer", code:0, userInfo:[NSLocalizedDescriptionKey: "Parsing Error"])
+                    let error = NSError(domain: "com.cornellsun.networkLayer", code: 0, userInfo: [NSLocalizedDescriptionKey: "Parsing Error"])
                     errorCallback(error)
                 }
             case .failure(let error):
