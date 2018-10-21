@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "thought2Copy.png",
+      "filename" : "sunsportsIcon.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "thought2Copy@2x.png",
+      "filename" : "sunsportsIcon@2x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "thought2Copy@3x.png",
+      "filename" : "sunsportsIcon@3x.png",
       "scale" : "3x"
     }
   ],

@@ -58,7 +58,9 @@ extension ArticleSectionController: BookmarkPressedDelegate, SharePressedDelegat
         case .categoryCell:
             return CGSize(width: width, height: 45)
         case .titleCell:
-            let height = entry.title.height(withConstrainedWidth: width - 34, font: .articleTitle, lineSpacing: 4.5) //CLUTCH Extension thank stackoverflow gods
+            //106.0 is the height needed for 4 lines of text
+            var height = entry.title.height(withConstrainedWidth: width - 34, font: .articleTitle, lineSpacing: 4.5) //CLUTCH Extension thank stackoverflow gods
+            height = height <= 106.0 ? height : 106.0
             return CGSize(width: width, height: height + 20)
         case .authorCell:
             let height = entry.author?.byline.height(withConstrainedWidth: width, font: .cellInformationText) ?? 0

@@ -48,16 +48,20 @@ class NotificationViewController: UIViewController, UITableViewDataSource, UITab
         if notifications.count == 0 {
             notifications = [("Breaking News", .breakingNews), ("Local News", .localNews), ("Opinion", .opinion), ("Sports", .sports), ("Multimedia", .multimedia), ("Arts and Entertainment", .artsAndEntertainment), ("Science", .science), ("Dining", .dining)]
             
-            notificationsDisplay = [("Major stories as they happen", #imageLiteral(resourceName: "breakingNews")), ("One to two alerts daily", #imageLiteral(resourceName: "localNews")), ("Two to four alerts daily", #imageLiteral(resourceName: "opinion")), ("Four to five alerts daily", #imageLiteral(resourceName: "sports")), ("One to two alerts daily", #imageLiteral(resourceName: "multimedia")), ("One to two alerts daily", #imageLiteral(resourceName: "arts")), ("One to two alerts daily", #imageLiteral(resourceName: "science")), ("Two to three alerts daily", #imageLiteral(resourceName: "dining"))]
+            notificationsDisplay = [("News you need to know as it happens", #imageLiteral(resourceName: "breakingNews")), ("Cornell and the surrounding Ithaca community", #imageLiteral(resourceName: "localNews")), ("Thoughts from your peers, professors, and alumni", #imageLiteral(resourceName: "opinion")), ("Scores, recaps, features and more about the Red", #imageLiteral(resourceName: "sports")), ("Photos, videos, and interviews about the Cornell community", #imageLiteral(resourceName: "multimedia")), ("Music, movies, fashion, and performance", #imageLiteral(resourceName: "arts")), ("What you need to know about research, Cornell Tech", #imageLiteral(resourceName: "science")), ("All the food news on campus and in the Ithaca area", #imageLiteral(resourceName: "dining"))]
         }
         
         // Set up table view for settings
-        tableView = UITableView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height))
+        tableView = UITableView(frame: .zero)
         tableView.register(NotificationsTableViewCell.self, forCellReuseIdentifier: "NotificationCell")
         tableView.tableFooterView = UIView()
         tableView.delegate = self
         tableView.dataSource = self
         view.addSubview(tableView)
+
+        tableView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -77,7 +81,7 @@ class NotificationViewController: UIViewController, UITableViewDataSource, UITab
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 60.0
+        return 80.0
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
