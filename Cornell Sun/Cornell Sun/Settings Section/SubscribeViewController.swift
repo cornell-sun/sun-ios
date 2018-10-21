@@ -47,7 +47,6 @@ class SubscribeViewController: UIViewController, UITextFieldDelegate, UIPickerVi
     let buttonHeight: CGFloat = 45.5
     let buttonOffset: CGFloat = 40.0
 
-
     var didLayout = false
 
     override func viewWillAppear(_ animated: Bool) {
@@ -121,9 +120,6 @@ class SubscribeViewController: UIViewController, UITextFieldDelegate, UIPickerVi
                 make.bottom.equalTo(bottomArea).offset(-buttonOffset)
                 make.centerX.equalTo(view.center.x)
             }
-
-
-
 
             didLayout = true
         }
