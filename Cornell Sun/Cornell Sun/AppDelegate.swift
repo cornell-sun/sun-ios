@@ -29,15 +29,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         // Set up OneSignal
         let onesignalInitSettings = [kOSSettingsKeyAutoPrompt: false, kOSSettingsKeyInAppLaunchURL: true]
-        let handleNotificationReceivedBlock: OSHandleNotificationReceivedBlock = { notification in
-            guard let notification = notification else { return }
-            let payloadBody = notification.payload.additionalData
-            print("Payload received: \(payloadBody ?? ["": ""])")
-        }
+        let handleNotificationReceivedBlock: OSHandleNotificationReceivedBlock = { _ in }
 
         let handleNotificationActionBlock: OSHandleNotificationActionBlock = { result in
             guard let result = result, let payloadBody = result.notification.payload.additionalData as? [String: String] else { return }
-            print("Payload action: \(payloadBody)")
             if let postValue = payloadBody["id"], let postID = Int(postValue) {
                 getDeeplinkedPostWithId(postID, completion: { (posts, mainHeadlinePost, deeplinkedPost) in
                     guard let deeplinkedPost = deeplinkedPost else { return }

@@ -49,6 +49,7 @@ class ContactViewController: UIViewController, UITextFieldDelegate, MFMailCompos
     override func viewWillDisappear(_ animated: Bool) {
         prevViewController.title = titleCache
     }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         super.viewDidLoad()
@@ -78,8 +79,6 @@ class ContactViewController: UIViewController, UITextFieldDelegate, MFMailCompos
         descriptionTextView.numberOfLines = 0
         descriptionTextView.textColor = .black
         descriptionTextView.font = UIFont(name: "HelveticaNeue", size: 16.0)
-        //descriptionTextView.isEditable = false
-        //descriptionTextView.isScrollEnabled = false
         view.addSubview(descriptionTextView)
         descriptionTextView.snp.makeConstraints { make in
             make.width.equalTo(textWidth*widthScale)
@@ -188,7 +187,6 @@ class ContactViewController: UIViewController, UITextFieldDelegate, MFMailCompos
             make.top.equalTo(emailField.snp.bottom).offset(labelOffsetTop)
         }
         messageField = UITextView()
-        //messageField.borderStyle = UITextBorderStyle.none
         messageField.addDoneButton()
         messageField.delegate = self
         messageField.font = UIFont(name: "HelveticaNeue", size: 18.0)
@@ -214,7 +212,6 @@ class ContactViewController: UIViewController, UITextFieldDelegate, MFMailCompos
 
         messageField.snp.makeConstraints { make in
             make.width.equalTo(textWidth*widthScale)
-            //make.height.equalTo(messageHeight)
             make.centerX.equalTo(view.center.x)
             make.top.equalTo(messageLabel.snp.bottom).offset(labelOffsetBottom)
             make.bottom.equalTo(actionButton.snp.top).offset(-8)
