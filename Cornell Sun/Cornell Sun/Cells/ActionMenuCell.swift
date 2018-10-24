@@ -8,6 +8,7 @@
 
 import UIKit
 import SnapKit
+import Crashlytics
 
 protocol BookmarkPressedDelegate: class {
     func didPressBookmark(_ cell: MenuActionCell)
@@ -80,10 +81,12 @@ final class MenuActionCell: UICollectionViewCell {
 
     @objc func bookmarkPressed(_ button: UIButton) {
         bookmarkDelegate?.didPressBookmark(self)
+        Answers.logCustomEvent(withName: "Bookmark Pressed", customAttributes: nil)
     }
 
     @objc func sharePressed(_ button: UIButton) {
         shareDelegate?.didPressShare()
+        Answers.logCustomEvent(withName: "Shared Pressed", customAttributes: nil)
     }
 
     func setBookmarkImage(didSelectBookmark: Bool) {

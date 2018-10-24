@@ -21,6 +21,8 @@ target 'Cornell Sun' do
   pod 'SkeletonView'
   pod 'UICircularProgressRing'
   pod 'Motion'
+  pod 'Fabric'
+  pod 'Crashlytics'
 
 target 'SunNotificationServiceExtension' do
     pod 'OneSignal', '>= 2.6.2', '< 3.0'
