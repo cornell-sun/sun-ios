@@ -14,7 +14,6 @@ import IQKeyboardManagerSwift
 import Fabric
 import Crashlytics
 
-
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -69,8 +68,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         //Set up Crashlytics
         Crashlytics.start(withAPIKey: fabricAPIKey())
-        Fabric.sharedSDK().debug = true
-    
 
         return true
     }

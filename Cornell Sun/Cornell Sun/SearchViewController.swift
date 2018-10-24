@@ -120,9 +120,6 @@ class SearchViewController: UIViewController, UITableViewDelegate {
             textField.font = UIFont(name: "SanFranciscoDisplay-Medium", size: 14)
         }
         
-        //Set up search analytics
-        Answers.logSearch(withQuery: "Search", customAttributes: nil)
-        
     }
 
     override func didReceiveMemoryWarning() {
@@ -278,6 +275,9 @@ extension SearchViewController: UISearchBarDelegate {
                 }
             }
         }
+        
+        //Set up search analytics
+        Answers.logSearch(withQuery: "Search", customAttributes: ["Searched For" : query])
     }
 }
 extension SearchViewController: TabBarViewControllerDelegate {
