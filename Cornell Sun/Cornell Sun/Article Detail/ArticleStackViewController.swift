@@ -494,15 +494,18 @@ extension ArticleStackViewController: UITextViewDelegate {
 
         if !isLoadingDeeplink {
             isLoadingDeeplink.toggle()
+            UIApplication.shared.isNetworkActivityIndicatorVisible = true
             getIDFromURL(URL) { id in
                 guard let id = id else {
                     let safariViewController = SFSafariViewController(url: URL)
                     self.present(safariViewController, animated: true, completion: nil)
+                    UIApplication.shared.isNetworkActivityIndicatorVisible = false
                     return
                 }
 
                 getPostFromID(id, completion: { post in
                     let articleViewController = ArticleStackViewController(post: post)
+                    UIApplication.shared.isNetworkActivityIndicatorVisible = false
                     self.navigationController?.pushViewController(articleViewController, animated: true)
                     self.isLoadingDeeplink.toggle()
                 })

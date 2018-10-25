@@ -95,11 +95,11 @@ class ArticleHeaderView: UIView {
         authorLabel = UILabel(frame: .zero)
         authorLabel.textColor = .black90
         authorLabel.font = .secondaryHeader
+        authorLabel.numberOfLines = 0
         addSubview(authorLabel)
         authorLabel.snp.makeConstraints { make in
-            make.leading.equalToSuperview().offset(leadingOffset)
+            make.leading.trailing.equalToSuperview().inset(leadingOffset)
             make.top.equalTo(captionLabel.snp.bottom).offset(authorLabelTopOffset)
-            make.height.equalTo(authorLabelHeight)
         }
 
         timeStampLabel = UILabel(frame: .zero)
@@ -167,9 +167,8 @@ class ArticleHeaderView: UIView {
                 make.leading.trailing.equalToSuperview()
             }
             authorLabel.snp.remakeConstraints { make in
+                make.leading.trailing.equalToSuperview().inset(leadingOffset)
                 make.top.equalTo(titleLabel.snp.bottom).offset(titleLabelTopOffset)
-                make.leading.equalToSuperview().offset(leadingOffset)
-                make.height.equalTo(authorLabelHeight)
             }
         }
     }

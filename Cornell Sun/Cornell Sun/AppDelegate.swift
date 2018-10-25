@@ -98,12 +98,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let keyXML = FileManager.default.contents(atPath: keyPath!)
         
         do {
+            //swiftlint:disable:next force_cast
             key = try PropertyListSerialization.propertyList(from: keyXML!, options: .mutableContainersAndLeaves, format: &format) as! [String:AnyObject]
-        }
-        catch {
+        } catch {
             print("Error reading plist: \(error), format: \(format)")
         }
-        
+
+        //swiftlint:disable:next force_cast
         return key["APIKey"] as! String
         
     }
