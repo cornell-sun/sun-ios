@@ -16,7 +16,7 @@ class ArticleStackViewController: UIViewController {
     let articleSeparatorOffset: CGFloat = 11.5
     let separatorHeight: CGFloat = 1.5
     let articleTextViewOffset: CGFloat = 7
-    let shareBarHeight: CGFloat = 50
+    let shareBarHeight: CGFloat = 60
     let imageViewHeight: CGFloat = 250
     let captionTopOffset: CGFloat = 4
     let bottomInset: CGFloat = 24

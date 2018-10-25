@@ -20,7 +20,7 @@ class ShareBarView: UIView {
     weak var delegate: ShareBarViewDelegate?
 
     let topSeparatorHeight: CGFloat = 1
-    let bookmarkTrailingPadding: CGFloat = 18
+    let bookmarkTrailingPadding: CGFloat = 28
     let bookmarkWidth: CGFloat = 15
     let bookmarkHeight: CGFloat = 32
     let shareTrailingPadding: CGFloat = 28
