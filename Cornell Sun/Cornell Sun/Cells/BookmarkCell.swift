@@ -72,7 +72,8 @@ final class BookmarkCell: UICollectionViewCell {
         }
 
         authorLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(imageView.snp.right).offset(offsetConstant)
+            make.leading.equalTo(imageView.snp.trailing).offset(offsetConstant)
+            make.trailing.equalToSuperview().inset(offsetConstant)
             make.bottom.equalTo(imageView.snp.bottom)
             make.height.equalTo(authorHeight)
         }

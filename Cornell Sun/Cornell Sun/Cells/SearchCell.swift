@@ -84,7 +84,7 @@ final class SearchCell: UICollectionViewCell {
         }
 
         authorLabel.snp.makeConstraints { (make) in
-            make.leading.equalToSuperview().inset(insetConstant)
+            make.leading.trailing.equalToSuperview().inset(insetConstant)
             make.top.equalTo(imageView.snp.top)
         }
 

@@ -47,7 +47,7 @@ final class AuthorCell: UICollectionViewCell {
         addSubview(authorLabel)
         authorLabel.snp.makeConstraints { (make) in
             make.top.equalToSuperview().offset(topOffset)
-            make.leading.equalToSuperview().inset(insetConstant)
+            make.leading.trailing.equalToSuperview().inset(insetConstant)
         }
     }
 }
