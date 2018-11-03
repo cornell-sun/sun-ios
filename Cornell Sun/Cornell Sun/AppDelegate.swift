@@ -93,13 +93,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func fabricAPIKey() -> String {
         
         var format = PropertyListSerialization.PropertyListFormat.xml
-        var key:[String:AnyObject] = [:]
-        let keyPath:String? = Bundle.main.path(forResource: "Keys", ofType: "plist")!
+        var key: [String: AnyObject] = [:]
+        let keyPath: String? = Bundle.main.path(forResource: "Keys", ofType: "plist")!
         let keyXML = FileManager.default.contents(atPath: keyPath!)
         
         do {
             //swiftlint:disable:next force_cast
-            key = try PropertyListSerialization.propertyList(from: keyXML!, options: .mutableContainersAndLeaves, format: &format) as! [String:AnyObject]
+            key = try PropertyListSerialization.propertyList(from: keyXML!, options: .mutableContainersAndLeaves, format: &format) as! [String: AnyObject]
         } catch {
             print("Error reading plist: \(error), format: \(format)")
         }
