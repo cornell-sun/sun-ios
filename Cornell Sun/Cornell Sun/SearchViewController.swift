@@ -277,7 +277,7 @@ extension SearchViewController: UISearchBarDelegate {
         }
         
         //Set up search analytics
-        Answers.logSearch(withQuery: "Search", customAttributes: ["Searched For" : query])
+        Answers.logSearch(withQuery: "Search", customAttributes: ["Searched For": query])
     }
 }
 extension SearchViewController: TabBarViewControllerDelegate {

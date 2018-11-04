@@ -14,16 +14,16 @@ class NotificationsTableViewCell: UITableViewCell {
     var label: UILabel!
     var descriptionLabel: UILabel!
     var iconImageView: UIImageView!
+    var subscribeSwitch: UISwitch!
     let heightLabel: CGFloat = 20
     let heightSec: CGFloat = 31
     let offsetTop: CGFloat = 11.5
     let offsetLeft = 18
     let offsetRight = -18
     let offsetBottom = -4
-    
-    let userDefaults = UserDefaults.standard
-    var notificationType: NotificationType?
-    
+
+    weak var delegate: NotificationsTableViewCellDelegate?
+
     override func awakeFromNib() {
         super.awakeFromNib()
     }
@@ -55,16 +55,13 @@ class NotificationsTableViewCell: UITableViewCell {
         descriptionLabel.numberOfLines = 3
         contentView.addSubview(descriptionLabel)
 
-        let secondSwitch = UISwitch()
-        secondSwitch.onTintColor = UIColor.brick
-        if let notifType = notificationType {
-            secondSwitch.setOn(userDefaults.bool(forKey: notifType.rawValue), animated: false)
-        }
-        secondSwitch.addTarget(self, action: #selector(toggleSwitched), for: .valueChanged)
-        contentView.addSubview(secondSwitch)
-        secondSwitch.snp.makeConstraints { make in
-            make.height.equalTo(secondSwitch.intrinsicContentSize.height)
-            make.width.equalTo(secondSwitch.intrinsicContentSize.width)
+        subscribeSwitch = UISwitch()
+        subscribeSwitch.onTintColor = .brick
+        subscribeSwitch.addTarget(self, action: #selector(toggleSwitched), for: .valueChanged)
+        contentView.addSubview(subscribeSwitch)
+        subscribeSwitch.snp.makeConstraints { make in
+            make.height.equalTo(subscribeSwitch.intrinsicContentSize.height)
+            make.width.equalTo(subscribeSwitch.intrinsicContentSize.width)
             make.centerY.equalToSuperview()
             make.trailing.equalToSuperview().offset(offsetRight)
         }
@@ -73,7 +70,7 @@ class NotificationsTableViewCell: UITableViewCell {
             make.top.equalTo(label.snp.bottom)
             make.bottom.lessThanOrEqualToSuperview().offset(offsetBottom)
             make.leading.equalTo(label)
-            make.trailing.lessThanOrEqualTo(secondSwitch.snp.leading).inset(-4)
+            make.trailing.lessThanOrEqualTo(subscribeSwitch.snp.leading).inset(-4)
         }
     }
 
@@ -81,25 +78,17 @@ class NotificationsTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func setupCell(labelText: String, descriptionText: String, icon: UIImage) {
+    func setupCell(labelText: String, descriptionText: String, icon: UIImage, isSubscribed: Bool) {
         iconImageView.image = icon
         label.text = labelText
         descriptionLabel.text = descriptionText
-
+        subscribeSwitch.setOn(isSubscribed, animated: false)
         label.snp.updateConstraints { make in
             make.height.equalTo(label.intrinsicContentSize.height)
         }
-
-
     }
     
     @objc func toggleSwitched(sender: UISwitch) {
-        guard let notifType = notificationType else { return }
-        userDefaults.set(sender.isOn, forKey: notifType.rawValue)
-        if sender.isOn {
-            OneSignal.sendTag(notifType.rawValue, value: notifType.rawValue)
-        } else {
-            OneSignal.deleteTag(notifType.rawValue)
-        }
+        delegate?.switchToggled(for: self, isSubscribed: subscribeSwitch.isOn)
     }
 }

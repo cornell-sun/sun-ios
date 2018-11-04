@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import OneSignal
 
 enum NotificationType: String {
     case breakingNews = "breaking-news"
@@ -20,6 +21,10 @@ enum NotificationType: String {
     //case sunspots = "sunspots"
 }
 
+protocol NotificationsTableViewCellDelegate: class {
+    func switchToggled(for cell: NotificationsTableViewCell, isSubscribed: Bool)
+}
+
 class NotificationViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     var prevViewController: UIViewController!
@@ -28,6 +33,8 @@ class NotificationViewController: UIViewController, UITableViewDataSource, UITab
     var tableView: UITableView!
     var notifications: [(String, NotificationType)] = []
     var notificationsDisplay: [(String, UIImage)] = []
+
+    let userDefaults = UserDefaults.standard
 
     override func viewWillAppear(_ animated: Bool) {
         titleCache = prevViewController.title
@@ -71,8 +78,9 @@ class NotificationViewController: UIViewController, UITableViewDataSource, UITab
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "NotificationCell", for: indexPath) as? NotificationsTableViewCell {
-            cell.notificationType = notifications[indexPath.row].1
-            cell.setupCell(labelText: notifications[indexPath.row].0, descriptionText: notificationsDisplay[indexPath.row].0, icon: notificationsDisplay[indexPath.row].1)
+            cell.delegate = self
+            let isSubscribed = userDefaults.bool(forKey: notifications[indexPath.row].1.rawValue)
+            cell.setupCell(labelText: notifications[indexPath.row].0, descriptionText: notificationsDisplay[indexPath.row].0, icon: notificationsDisplay[indexPath.row].1, isSubscribed: isSubscribed)
             cell.selectionStyle = .none
             return cell
         } else {
@@ -86,5 +94,19 @@ class NotificationViewController: UIViewController, UITableViewDataSource, UITab
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return notifications.count
+    }
+}
+
+// MARK: - NotificationTableViewCellDelegate
+extension NotificationViewController: NotificationsTableViewCellDelegate {
+    func switchToggled(for cell: NotificationsTableViewCell, isSubscribed: Bool) {
+        guard let indexPath = tableView.indexPath(for: cell) else { return }
+        let notificationType = notifications[indexPath.row].1
+        userDefaults.set(isSubscribed, forKey: notificationType.rawValue)
+        if isSubscribed {
+            OneSignal.sendTag(notificationType.rawValue, value: notificationType.rawValue)
+        } else {
+            OneSignal.deleteTag(notificationType.rawValue)
+        }
     }
 }
