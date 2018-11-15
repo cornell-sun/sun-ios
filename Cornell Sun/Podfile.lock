@@ -17,7 +17,7 @@ PODS:
   - ImageSlideshow/Kingfisher (1.4.1):
     - ImageSlideshow/Core
     - Kingfisher (> 3.0)
-  - IQKeyboardManagerSwift (5.0.0)
+  - IQKeyboardManagerSwift (6.2.0)
   - Kingfisher (4.7.0)
   - ModelMapper (9.0.0)
   - Motion (1.4.3):
@@ -56,7 +56,7 @@ DEPENDENCIES:
   - IGListKit (~> 3.1.1)
   - ImageSlideshow (from `https://github.com/AAAstorga/ImageSlideshow.git`, commit `bec5f17bd71d32d289378e1ba787a55cfa80bcce`)
   - ImageSlideshow/Kingfisher (from `https://github.com/AAAstorga/ImageSlideshow.git`, commit `bec5f17bd71d32d289378e1ba787a55cfa80bcce`)
-  - IQKeyboardManagerSwift (= 5.0.0)
+  - IQKeyboardManagerSwift
   - Kingfisher (~> 4.7.0)
   - Motion
   - Moya
@@ -111,7 +111,7 @@ SPEC CHECKSUMS:
   HTMLString: d346ba551d1b7e687190c948ec0c2ddaf4057544
   IGListKit: cb97f405ae43e59fe1da74271e19427ec20d3c07
   ImageSlideshow: 1a742794b9e6fd388a3d2bd36cb063c6e564d6aa
-  IQKeyboardManagerSwift: 3f340202ebe1a7076279b9b9b3c817243ddb3aab
+  IQKeyboardManagerSwift: b07ccf9d8cafe993dcd6cb794eb4ba34611a0c4e
   Kingfisher: da6b005aa96d37698e3e4f1ccfe96a5b9bbf27d6
   ModelMapper: d73910ce35d8dca0042bcea4cddc24050014e09a
   Motion: 153ba49692997888556c7a95207278a8b1f8be95
@@ -126,6 +126,6 @@ SPEC CHECKSUMS:
   SwiftSoup: 92f5b348c131aed8af04f4326db1579ab19fa08c
   UICircularProgressRing: 5a32c01f54474571b1e66e8fa050c0f83d6d981b
 
-PODFILE CHECKSUM: 6595474d17144640cf9fc4d02a522feeb0915a4f
+PODFILE CHECKSUM: ad4fc88fea1fc843e9eb3e3f0308802bcc10c0c2
 
 COCOAPODS: 1.5.3
