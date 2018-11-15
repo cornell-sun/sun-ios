@@ -86,18 +86,15 @@ class ArticleStackViewController: UIViewController {
         setup()
     }
 
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        //title = "The Cornell Daily Sun"
-        self.navigationController?.navigationBar.titleTextAttributes = [
-            NSAttributedString.Key.font: UIFont(name: "Sonnenstrahl-Ausgezeichnet", size: .mainHeaderSize)!
-        ]
-
-    }
-
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        tabBarController?.tabBar.isHidden = true
         navigationController?.navigationBar.topItem?.title = ""
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        tabBarController?.tabBar.isHidden = false
     }
 
     /// Sets up the content in the stack view by parsing each section.

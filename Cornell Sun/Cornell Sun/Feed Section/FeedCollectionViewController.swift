@@ -9,7 +9,7 @@
 import UIKit
 import IGListKit
 
-class FeedCollectionViewController: ViewController, UIScrollViewDelegate {
+class FeedCollectionViewController: UIViewController, UIScrollViewDelegate {
     var loading = false
 
     fileprivate var observer: NSKeyValueObservation?
@@ -56,6 +56,8 @@ class FeedCollectionViewController: ViewController, UIScrollViewDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        view.backgroundColor = .white
 
         observer = PostOffice.instance.observe(\.packages, options: [.initial, .new]) { (postOffice, change) in
             if let newValue = change.newValue {
@@ -180,14 +182,16 @@ extension FeedCollectionViewController {
 
     func setNavigationInformation() {
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-        //title = "The Cornell Daily Sun"
+        navigationController?.navigationBar.titleTextAttributes = [
+            NSAttributedString.Key.font: UIFont(name: "Sonnenstrahl-Ausgezeichnet", size: 30)!]
+        navigationItem.title = "The Cornell Daily Sun"
     }
 }
 
 extension FeedCollectionViewController: TabBarViewControllerDelegate {
     func articleSectionDidPressOnArticle(_ article: PostObject) {
         let articleVC = ArticleStackViewController(post: article)
-        articleVC.hidesBottomBarWhenPushed = true
+        
         navigationController?.pushViewController(articleVC, animated: true)
     }
 }

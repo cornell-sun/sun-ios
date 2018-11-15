@@ -14,7 +14,7 @@ class TabBarViewController: UITabBarController {
     var posts: [ListDiffable]!
     var headlinePost: PostObject?
     var previousViewController: UIViewController?
-    
+
     let normal = [NSAttributedString.Key.font: UIFont(name: "SanFranciscoText-Medium", size: 11) as Any] as [NSAttributedString.Key: Any]
     let selected = [NSAttributedString.Key.font: UIFont(name: "SanFranciscoText-Semibold", size: 11) as Any] as [NSAttributedString.Key: Any]
 
@@ -23,6 +23,7 @@ class TabBarViewController: UITabBarController {
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         // Do any additional setup after loading the view.
         view.backgroundColor = .white
+
         tabBar.backgroundColor = .white
         tabBar.backgroundImage = UIImage()
         tabBar.tintColor = .brick
@@ -74,8 +75,9 @@ class TabBarViewController: UITabBarController {
         let tabFiveTabBarItem = UITabBarItem(title: "Settings", image: #imageLiteral(resourceName: "personSettingsIcon").withRenderingMode(.alwaysOriginal), selectedImage: #imageLiteral(resourceName: "personSettingsIconRed").withRenderingMode(.alwaysOriginal))
         tabFiveNavigationController.tabBarItem = tabFiveTabBarItem
 
-        viewControllers = [tabOneNavigationController, tabTwoNavigationController, tabThreeNavigationController, tabFourNavigationController, tabFiveNavigationController]
+        self.viewControllers = [tabOneNavigationController, tabTwoNavigationController, tabThreeNavigationController, tabFourNavigationController, tabFiveNavigationController]
         selectedIndex = 0
+
     }
 
     override func didReceiveMemoryWarning() {
