@@ -27,7 +27,7 @@ final class ImageCell: UICollectionViewCell {
     }()
 
     fileprivate let activityView: UIActivityIndicatorView = {
-        let view = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+        let view = UIActivityIndicatorView(style: .gray)
         //view.startAnimating()
         return view
     }()

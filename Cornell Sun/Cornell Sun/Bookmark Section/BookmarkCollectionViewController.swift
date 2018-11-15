@@ -30,7 +30,7 @@ class BookmarkCollectionViewController: ViewController, UIScrollViewDelegate {
         title = "Bookmarks"
         navigationController?.navigationBar.barTintColor = .white
         navigationController?.navigationBar.titleTextAttributes = [
-            NSAttributedStringKey.font: UIFont.headerTitle
+            NSAttributedString.Key.font: UIFont.headerTitle
         ]
 
         guard !isFirstRun else {
@@ -104,7 +104,6 @@ extension BookmarkCollectionViewController: ListAdapterDataSource {
 extension BookmarkCollectionViewController: TabBarViewControllerDelegate {
     func articleSectionDidPressOnArticle(_ article: PostObject) {
         let articleVC = ArticleStackViewController(post: article)
-        articleVC.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(articleVC, animated: true)
     }
 }

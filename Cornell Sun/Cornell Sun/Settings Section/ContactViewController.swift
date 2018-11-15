@@ -99,7 +99,7 @@ class ContactViewController: UIViewController, UITextFieldDelegate, MFMailCompos
             make.top.equalTo(descriptionTextView.snp.bottom).offset(labelOffsetTop)
         }
         subjectField = UITextField()
-        subjectField.borderStyle = UITextBorderStyle.none
+        subjectField.borderStyle = UITextField.BorderStyle.none
         subjectField.delegate = self
         subjectField.font = UIFont(name: "HelveticaNeue", size: 18.0)
         view.addSubview(subjectField)
@@ -129,7 +129,7 @@ class ContactViewController: UIViewController, UITextFieldDelegate, MFMailCompos
             make.top.equalTo(subjectField.snp.bottom).offset(labelOffsetTop)
         }
         let nameField = UITextField()
-        nameField.borderStyle = UITextBorderStyle.none
+        nameField.borderStyle = UITextField.BorderStyle.none
         nameField.delegate = self
         nameField.font = UIFont(name: "HelveticaNeue", size: 18.0)
         view.addSubview(nameField)
@@ -158,7 +158,7 @@ class ContactViewController: UIViewController, UITextFieldDelegate, MFMailCompos
             make.top.equalTo(nameField.snp.bottom).offset(labelOffsetTop)
         }
         emailField = UITextField()
-        emailField.borderStyle = UITextBorderStyle.none
+        emailField.borderStyle = UITextField.BorderStyle.none
         emailField.delegate = self
         emailField.font = UIFont(name: "HelveticaNeue", size: 18.0)
         view.addSubview(emailField)

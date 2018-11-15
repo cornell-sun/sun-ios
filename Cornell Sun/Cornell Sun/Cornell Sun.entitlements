@@ -4,5 +4,17 @@
 <dict>
 	<key>aps-environment</key>
 	<string>development</string>
+	<key>com.apple.developer.associated-domains</key>
+	<array>
+		<string>applinks:cornellsun.com</string>
+		<string>applinks:*.cornellsun.com</string>
+		<string>applinks:www.cornellsun.com</string>
+		<string>applinks:https://www.cornellsun.com</string>
+		<string>applinks:http://www.cornellsun.com</string>
+		<string>applinks:https://cornellsun.com</string>
+		<string>applinks:http://cornellsun.com</string>
+		<string>applinks:cornellsun.app.link</string>
+		<string>applinks:cornellsun-alternate.app.link</string>
+	</array>
 </dict>
 </plist>

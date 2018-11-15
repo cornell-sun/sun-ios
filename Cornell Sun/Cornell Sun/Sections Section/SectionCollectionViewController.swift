@@ -15,7 +15,7 @@ class SectionCollectionViewController: UIViewController, UIScrollViewDelegate {
 
     var sectionSelected: Sections!
     var emptySpinnerView = UIView()
-    let spinner = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+    let spinner = UIActivityIndicatorView(style: .gray)
     var refreshControl = UIRefreshControl()
     var bookmarkPosts: [PostObject] = []
     var feedData: [ListDiffable] = [] {
@@ -49,7 +49,7 @@ class SectionCollectionViewController: UIViewController, UIScrollViewDelegate {
         sectionSelected = section
         title = sectionTitle
         navigationController?.navigationBar.titleTextAttributes = [
-            NSAttributedStringKey.font: UIFont.headerTitle
+            NSAttributedString.Key.font: UIFont.headerTitle
         ]
         
         switch section {
@@ -109,7 +109,7 @@ class SectionCollectionViewController: UIViewController, UIScrollViewDelegate {
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.navigationBar.barTintColor = .white
         navigationController?.navigationBar.titleTextAttributes = [
-            NSAttributedStringKey.font: UIFont.headerTitle
+            NSAttributedString.Key.font: UIFont.headerTitle
         ]
     }
 
@@ -206,7 +206,6 @@ extension SectionCollectionViewController {
 extension SectionCollectionViewController: TabBarViewControllerDelegate {
     func articleSectionDidPressOnArticle(_ article: PostObject) {
         let articleVC = ArticleStackViewController(post: article)
-        articleVC.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(articleVC, animated: true)
     }
 }

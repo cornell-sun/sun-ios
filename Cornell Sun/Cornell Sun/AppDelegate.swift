@@ -21,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var storyboard: UIStoryboard?
     let redirectScheme = "cornellsun"
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         IQKeyboardManager.sharedManager().enable = true
 
@@ -114,14 +114,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
      https://developer.apple.com/library/content/documentation/General/Conceptual/AppSearch/UniversalLinks.html#//apple_ref/doc/uid/TP40016308-CH12-SW2
      */
     func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
-
-        return false
+        guard let url = userActivity.webpageURL else { return false }
+        API.request(target: .urlToID(url: url)) { response in
+            guard let tryID = try? response?.mapString(), let idString = tryID, let id = Int(idString), id != 0 else { return
+            }
+            getDeeplinkedPostWithId(id, completion: { (posts, mainHeadlinePost, deeplinkedPost) in
+                guard let deeplinkedPost = deeplinkedPost else { return }
+                let tabBarController = TabBarViewController(with: posts, mainHeadlinePost: mainHeadlinePost)
+                self.window?.rootViewController = tabBarController
+                let articleViewController = ArticleStackViewController(post: deeplinkedPost)
+                if let navigationController = tabBarController.selectedViewController as? UINavigationController {
+                    navigationController.pushViewController(articleViewController, animated: true)
+                }
+            })
+        }
+        return true
     }
 
     /**
      Handles opening the url separately (eg. opening cornellsun.com in Safari)
      */
-    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey: Any] = [:]) -> Bool {
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
         return false
     }
 

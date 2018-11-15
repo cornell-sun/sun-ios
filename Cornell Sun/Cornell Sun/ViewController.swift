@@ -16,18 +16,19 @@ class ViewController: UIViewController {
         view.backgroundColor = .white
         navigationItem.title = "The Cornell Daily Sun"
         self.navigationController?.navigationBar.titleTextAttributes = [
-            NSAttributedStringKey.font: UIFont(name: "Sonnenstrahl-Ausgezeichnet", size: 30)!
+            NSAttributedString.Key.font: UIFont(name: "Sonnenstrahl-Ausgezeichnet", size: 30)!
         ]
     }
 
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         navigationItem.title = "The Cornell Daily Sun"
+        self.navigationController?.navigationBar.titleTextAttributes = [
+            NSAttributedString.Key.font: UIFont(name: "Sonnenstrahl-Ausgezeichnet", size: 30)!
+        ]
     }
 
     override func viewWillDisappear(_ animated: Bool) {
-        self.navigationController?.navigationBar.titleTextAttributes = [
-            NSAttributedStringKey.font: UIFont.systemFont(ofSize: 16)
-        ]
     }
 
     override func didReceiveMemoryWarning() {

@@ -1,14 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<!--
-   Keys.plist
-   Cornell Sun
-
-   Created by Theodore Carrel on 10/21/18.
-   Copyright (c) 2018 cornell.sun. All rights reserved.
--->
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
     <dict>
-    
+        <key>APIKey</key>
+        <string>c685260cfb468a6290c418467c6349565a9489ff</string>
     </dict>
 </plist>

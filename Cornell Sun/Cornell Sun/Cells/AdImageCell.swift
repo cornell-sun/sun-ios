@@ -15,7 +15,7 @@ final class AdImageCell: UICollectionViewCell, GADBannerViewDelegate {
     lazy var adImageView: GADBannerView = {
         let imageView = GADBannerView(adSize: kGADAdSizeMediumRectangle)
         imageView.rootViewController = getCurrentViewController()
-        imageView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+        imageView.adUnitID = "ca-app-pub-4474706420182946/7147249512"
         imageView.delegate = self
         return imageView
     }()
@@ -28,13 +28,18 @@ final class AdImageCell: UICollectionViewCell, GADBannerViewDelegate {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
+    func loadAd() {
+        let request = GADRequest()
+        request.testDevices = [kGADSimulatorID]
+        adImageView.load(request)
+    }
     
     func setupViews() {
         addSubview(adImageView)
         adImageView.snp.makeConstraints { (make) in
             make.width.height.equalToSuperview()
         }
-        adImageView.load(GADRequest())
     }
     
     func getCurrentViewController() -> UIViewController? {
@@ -55,7 +60,8 @@ final class AdImageCell: UICollectionViewCell, GADBannerViewDelegate {
     }
     
     func adView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: GADRequestError) {
-        print("Failed to received")
+        print(error)
+        print("Failed to receive ad")
     }
     
     /// Tells the delegate that a full-screen view will be presented in response

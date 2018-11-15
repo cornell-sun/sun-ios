@@ -37,7 +37,7 @@ func getCurrentViewController() -> UIViewController? {
     return nil
 }
 
-func taptic(style: UIImpactFeedbackStyle) {
+func taptic(style: UIImpactFeedbackGenerator.FeedbackStyle) {
     let generator = UIImpactFeedbackGenerator(style: style)
     generator.prepare()
     generator.impactOccurred()
@@ -78,8 +78,8 @@ extension String {
         paragraphStyle.lineSpacing = lineSpacing
         let boundingBox = self.boundingRect(with: constraintRect,
                                             options: .usesLineFragmentOrigin,
-                                            attributes: [NSAttributedStringKey.font: font,
-                                                         NSAttributedStringKey.paragraphStyle: paragraphStyle],
+                                            attributes: [NSAttributedString.Key.font: font,
+                                                         NSAttributedString.Key.paragraphStyle: paragraphStyle],
                                             context: nil)
         return ceil(boundingBox.height)
     }
@@ -90,8 +90,8 @@ extension String {
         paragraphStyle.lineSpacing = lineSpacing
         let boundingBox = self.boundingRect(with: constraintRect,
                                             options: .usesLineFragmentOrigin,
-                                            attributes: [NSAttributedStringKey.font: font,
-                                                         NSAttributedStringKey.paragraphStyle: paragraphStyle],
+                                            attributes: [NSAttributedString.Key.font: font,
+                                                         NSAttributedString.Key.paragraphStyle: paragraphStyle],
                                             context: nil)
 
         return ceil(boundingBox.width)
@@ -116,7 +116,7 @@ extension UIView {
             viewsDictionary[key] = view
         }
 
-        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: format, options: NSLayoutFormatOptions(), metrics: nil, views: viewsDictionary))
+        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: format, options: NSLayoutConstraint.FormatOptions(), metrics: nil, views: viewsDictionary))
     }
 }
 
