@@ -46,7 +46,6 @@ class FeedCollectionViewController: ViewController, UIScrollViewDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setNavigationInformation()
-
         guard !isFirstRun else {
             isFirstRun = false
             return
@@ -180,10 +179,8 @@ extension FeedCollectionViewController {
     }
 
     func setNavigationInformation() {
-        navigationItem.title = "The Cornell Daily Sun"
-        self.navigationController?.navigationBar.titleTextAttributes = [
-            NSAttributedStringKey.font: UIFont(name: "Sonnenstrahl-Ausgezeichnet", size: .mainHeaderSize)!
-        ]
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        //title = "The Cornell Daily Sun"
     }
 }
 

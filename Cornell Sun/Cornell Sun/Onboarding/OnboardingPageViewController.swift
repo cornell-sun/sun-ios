@@ -61,7 +61,7 @@ class OnboardingPageViewController: UIPageViewController {
         }
 
         loadingIndicator = UIActivityIndicatorView()
-        loadingIndicator.activityIndicatorViewStyle = .whiteLarge
+        loadingIndicator.style = .whiteLarge
         view.addSubview(loadingIndicator)
         loadingIndicator.snp.makeConstraints { make in
             make.center.equalToSuperview()

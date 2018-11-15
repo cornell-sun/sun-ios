@@ -26,7 +26,7 @@ func pressedBookmark(_ cell: MenuActionCell, entry: PostObject) {
                    delay: 0,
                    usingSpringWithDamping: CGFloat(0.4),
                    initialSpringVelocity: CGFloat(6.0),
-                   options: UIViewAnimationOptions.allowUserInteraction,
+                   options: UIView.AnimationOptions.allowUserInteraction,
                    animations: {
                     cell.bookmarkButton.transform = CGAffineTransform.identity
     })

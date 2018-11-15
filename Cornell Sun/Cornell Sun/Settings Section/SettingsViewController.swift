@@ -23,8 +23,8 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
         title = "Settings"
         navigationController?.navigationBar.barTintColor = .white
         navigationController?.navigationBar.titleTextAttributes = [
-            NSAttributedStringKey.font: UIFont.headerTitle,
-            NSAttributedStringKey.strokeColor: UIColor.black90
+            NSAttributedString.Key.font: UIFont.headerTitle,
+            NSAttributedString.Key.strokeColor: UIColor.black90
         ]
     }
     

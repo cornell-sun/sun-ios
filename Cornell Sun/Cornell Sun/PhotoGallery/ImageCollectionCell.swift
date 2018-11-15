@@ -24,7 +24,7 @@ struct ImageCollectionCellConstants {
 
 class ImageCollectionCell: UICollectionViewCell {
     var imageView: UIImageView!
-    var loadingIndicator: UICircularProgressRingView!
+    var loadingIndicator: UICircularProgressRing!
     var captionLabel: UILabel!
 
     override init(frame: CGRect) {
@@ -34,7 +34,7 @@ class ImageCollectionCell: UICollectionViewCell {
         imageView.backgroundColor = .clear
         imageView.isUserInteractionEnabled = true
 
-        loadingIndicator = UICircularProgressRingView()
+        loadingIndicator = UICircularProgressRing()
         loadingIndicator.ringStyle = .ontop
         loadingIndicator.innerRingWidth = 2
         loadingIndicator.outerRingWidth = 2
@@ -113,11 +113,11 @@ class ImageCollectionCell: UICollectionViewCell {
     }
 
     func updatePercentage(percentage: CGFloat) {
-        loadingIndicator.setProgress(to: percentage, duration: ImageCollectionCellConstants.loadingIndicatorDuration)
+        loadingIndicator.startProgress(to: percentage, duration: ImageCollectionCellConstants.loadingIndicatorDuration)
     }
 
     override func prepareForReuse() {
-        loadingIndicator.setProgress(to: 0.0, duration: 0)
+        loadingIndicator.resetProgress()
     }
 
     required init?(coder aDecoder: NSCoder) {

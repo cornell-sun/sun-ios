@@ -30,7 +30,7 @@ class BookmarkCollectionViewController: ViewController, UIScrollViewDelegate {
         title = "Bookmarks"
         navigationController?.navigationBar.barTintColor = .white
         navigationController?.navigationBar.titleTextAttributes = [
-            NSAttributedStringKey.font: UIFont.headerTitle
+            NSAttributedString.Key.font: UIFont.headerTitle
         ]
 
         guard !isFirstRun else {

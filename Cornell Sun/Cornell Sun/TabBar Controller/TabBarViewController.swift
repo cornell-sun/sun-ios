@@ -15,11 +15,12 @@ class TabBarViewController: UITabBarController {
     var headlinePost: PostObject?
     var previousViewController: UIViewController?
     
-    let normal = [NSAttributedStringKey.font: UIFont(name: "SanFranciscoText-Medium", size: 11) as Any] as [NSAttributedStringKey: Any]
-    let selected = [NSAttributedStringKey.font: UIFont(name: "SanFranciscoText-Semibold", size: 11) as Any] as [NSAttributedStringKey: Any]
+    let normal = [NSAttributedString.Key.font: UIFont(name: "SanFranciscoText-Medium", size: 11) as Any] as [NSAttributedString.Key: Any]
+    let selected = [NSAttributedString.Key.font: UIFont(name: "SanFranciscoText-Semibold", size: 11) as Any] as [NSAttributedString.Key: Any]
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         // Do any additional setup after loading the view.
         view.backgroundColor = .white
         tabBar.backgroundColor = .white

@@ -46,7 +46,6 @@ class ArticleStackViewController: UIViewController {
         super.viewDidLoad()
 
         view.backgroundColor = .white
-        navigationController?.navigationBar.topItem?.title = "Main Feed"
         navigationController?.navigationBar.tintColor = .black
         if #available(iOS 11.0, *) {
             navigationController?.navigationBar.prefersLargeTitles = false
@@ -87,11 +86,17 @@ class ArticleStackViewController: UIViewController {
         setup()
     }
 
-    override func viewWillDisappear(_ animated: Bool) {
-        navigationController?.navigationBar.topItem?.title = "The Cornell Daily Sun"
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        //title = "The Cornell Daily Sun"
+        self.navigationController?.navigationBar.titleTextAttributes = [
+            NSAttributedString.Key.font: UIFont(name: "Sonnenstrahl-Ausgezeichnet", size: .mainHeaderSize)!
+        ]
+
     }
 
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         navigationController?.navigationBar.topItem?.title = ""
     }
 
@@ -335,7 +340,7 @@ class ArticleStackViewController: UIViewController {
         commentsTableView.delegate = self
         commentsTableView.dataSource = self
         commentsTableView.isScrollEnabled = false
-        commentsTableView.rowHeight = UITableViewAutomaticDimension
+        commentsTableView.rowHeight = UITableView.automaticDimension
         commentsTableView.register(CommentTableViewCell.self, forCellReuseIdentifier: commentReuseIdentifier)
         commentsTableView.estimatedRowHeight = 100
         scrollView.addSubview(commentsTableView)
@@ -435,11 +440,11 @@ extension ArticleStackViewController: UITableViewDelegate, UITableViewDataSource
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if tableView == commentsTableView {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: commentReuseIdentifier, for: indexPath) as? CommentTableViewCell else { return CommentTableViewCell() }
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: commentReuseIdentifier, for: indexPath) as? CommentTableViewCell else { return UITableViewCell() }
             cell.setup(for: comments[indexPath.row])
             return cell
         } else {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: suggestedReuseIdentifier, for: indexPath) as? SuggestedStoryTableViewCell else { return SuggestedStoryTableViewCell() }
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: suggestedReuseIdentifier, for: indexPath) as? SuggestedStoryTableViewCell else { return UITableViewCell() }
             cell.setup(for: post.suggestedStories[indexPath.row])
             return cell
         }
@@ -474,7 +479,7 @@ extension ArticleStackViewController: ShareBarViewDelegate {
                        delay: 0,
                        usingSpringWithDamping: CGFloat(0.4),
                        initialSpringVelocity: CGFloat(6.0),
-                       options: UIViewAnimationOptions.allowUserInteraction,
+                       options: UIView.AnimationOptions.allowUserInteraction,
                        animations: {
                         view.bookmarkButton.transform = CGAffineTransform.identity
         })

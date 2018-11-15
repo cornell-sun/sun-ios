@@ -54,6 +54,7 @@ extension AdSectionController {
         case .adImageCell:
             // swiftlint:disable:next force_cast
             let cell = collectionContext!.dequeueReusableCell(of: AdImageCell.self, for: self, at: index) as! AdImageCell
+            cell.loadAd()
             return cell
         }
     }
