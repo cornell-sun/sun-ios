@@ -50,12 +50,16 @@ class SubscribeViewController: UIViewController, UITextFieldDelegate, UIPickerVi
     var didLayout = false
 
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         titleCache = prevViewController.title
         prevViewController.title = "Settings"
+        tabBarController?.tabBar.isHidden = true
     }
 
     override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
         prevViewController.title = titleCache
+        tabBarController?.tabBar.isHidden = false
     }
 
     override func viewDidLayoutSubviews() {

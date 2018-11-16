@@ -31,14 +31,14 @@ final class AdImageCell: UICollectionViewCell, GADBannerViewDelegate {
 
     func loadAd() {
         let request = GADRequest()
-        request.testDevices = [kGADSimulatorID]
+        //request.testDevices = [kGADSimulatorID, "0950237e30cd97ec9d147df57b7f01de"]
         adImageView.load(request)
     }
     
     func setupViews() {
         addSubview(adImageView)
         adImageView.snp.makeConstraints { (make) in
-            make.width.height.equalToSuperview()
+            make.edges.equalToSuperview()
         }
     }
     

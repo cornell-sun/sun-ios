@@ -19,8 +19,6 @@
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
-			<key>CFBundleTypeRole</key>
-			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>cornellsun</string>
@@ -28,7 +26,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>10</string>
+	<string>14</string>
 	<key>Fabric</key>
 	<dict>
 		<key>Kits</key>
@@ -74,21 +72,12 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<true/>
-    <key>branch_key</key>
-    <dict>
-        <key>live</key>
-        <string>key_live_hoTid2ky87W5S4aL40Gt4ljewAiMwzTN</string>
-        <key>test</key>
-        <string>key_test_ofMnh9jq38XZTWaRW21fKgigyCdPEDV9</string>
-    </dict>
-    <key>CFBundleURLTypes</key>
-    <array>
-        <dict>
-            <key>CFBundleURLSchemes</key>
-            <array>
-                <string>cornellsun</string>
-            </array>
-        </dict>
-    </array>
+	<key>branch_key</key>
+	<dict>
+		<key>live</key>
+		<string>key_live_hoTid2ky87W5S4aL40Gt4ljewAiMwzTN</string>
+		<key>test</key>
+		<string>key_test_ofMnh9jq38XZTWaRW21fKgigyCdPEDV9</string>
+	</dict>
 </dict>
 </plist>

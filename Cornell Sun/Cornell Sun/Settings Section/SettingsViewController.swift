@@ -103,7 +103,6 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let setting = settings[indexPath.section][indexPath.row]
         if let next = setting.nextController {
-                next.hidesBottomBarWhenPushed = true
                 navigationController?.pushViewController(next, animated: true)
         } else {
             switch setting.type! {

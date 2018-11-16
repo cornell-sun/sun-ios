@@ -26,13 +26,17 @@ class DisplayViewController: UIViewController {
     let textWidth: CGFloat = 315
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         titleCache = prevViewController.title
         prevViewController.title = "Settings"
+        tabBarController?.tabBar.isHidden = true
         descriptionTextView.isScrollEnabled = true
     }
-    
+
     override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
         prevViewController.title = titleCache
+        tabBarController?.tabBar.isHidden = false
     }
 
     override func viewDidLoad() {

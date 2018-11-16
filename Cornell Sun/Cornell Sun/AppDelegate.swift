@@ -113,7 +113,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
      Receive a universal link redirect and handle it properly. Uses Handoff.
      https://developer.apple.com/library/content/documentation/General/Conceptual/AppSearch/UniversalLinks.html#//apple_ref/doc/uid/TP40016308-CH12-SW2
      */
-    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
+
+    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
         guard let url = userActivity.webpageURL else { return false }
         API.request(target: .urlToID(url: url)) { response in
             guard let tryID = try? response?.mapString(), let idString = tryID, let id = Int(idString), id != 0 else { return
@@ -130,6 +131,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         return true
     }
+
+
 
     /**
      Handles opening the url separately (eg. opening cornellsun.com in Safari)

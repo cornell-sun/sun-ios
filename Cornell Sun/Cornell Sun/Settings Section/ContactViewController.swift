@@ -42,16 +42,19 @@ class ContactViewController: UIViewController, UITextFieldDelegate, MFMailCompos
     let buttonOffset: CGFloat = 40
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         titleCache = prevViewController.title
         prevViewController.title = "Settings"
+        tabBarController?.tabBar.isHidden = true
     }
     
     override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
         prevViewController.title = titleCache
+        tabBarController?.tabBar.isHidden = false
     }
 
     override func viewDidLoad() {
-        super.viewDidLoad()
         super.viewDidLoad()
         view.backgroundColor = .white
         self.title = ""

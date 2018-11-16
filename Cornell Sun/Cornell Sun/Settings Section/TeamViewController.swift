@@ -33,12 +33,16 @@ class TeamViewController: UIViewController, UITableViewDataSource, UITableViewDe
     var members: [TeamMember] = []
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         titleCache = prevViewController.title
         prevViewController.title = "Settings"
+        tabBarController?.tabBar.isHidden = true
     }
-    
+
     override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
         prevViewController.title = titleCache
+        tabBarController?.tabBar.isHidden = false
     }
     
     override func viewDidLoad() {
@@ -52,7 +56,7 @@ class TeamViewController: UIViewController, UITableViewDataSource, UITableViewDe
             members = [TeamMember(nam: "Austin Astorga '19", titl: "Developer", home: "Carlsbad, California", liner: "God's Plan", emoji: "🙏🏽"),
                        TeamMember(nam: "Mindy Lou '19", titl: "Developer", home: "Wayland, Massachusetts", liner: "A hot dog is not a sandwich", emoji: "🎉"),
                 TeamMember(nam: "Chris Sciavolino '19", titl: "Developer", home: "Naples, Florida", liner: "What's the worst that can happen?", emoji: "👀"),
-                TeamMember(nam: "Brendan Elliott '19", titl: "Designer", home: "Grand Rapids, Michigan", liner: "Everyone please vote", emoji: "👨🏻‍💻"),
+                TeamMember(nam: "Brendan Elliott '19", titl: "Designer", home: "Grand Rapids, Michigan", liner: "Ketchup should never be used before noon", emoji: "👨🏻‍💻"),
                 TeamMember(nam: "Alexis Vinzons '19", titl: "Designer", home: "Mamaroneck, New York", liner: "The solution is in the framing of the problem", emoji: "💃"),
                 TeamMember(nam: "Aditya Dwivedi '20", titl: "Developer", home: "Lucknow, India", liner: "Waffles > Pancakes", emoji: "🐪"),
                 TeamMember(nam: "Theo Carrel '20", titl: "Developer", home: "New York, NY", liner: "Is you not impressed?", emoji: "🔥"),
