@@ -95,14 +95,14 @@ func getPostsFromIDs(_ ids: [Int], completion: @escaping ([Int: PostObject], API
         API.request(target: .post(postId: id)) { response in
             guard let response = response else {
                 print("error")
-                fatalError()
+                return
             }
             do {
                 let post = try decoder.decode(PostObject.self, from: response.data)
                 postsDict[id] = post
             } catch let error {
                 print(error)
-                fatalError()
+                return
             }
             group.leave()
         }
@@ -154,7 +154,7 @@ func prepareInitialPosts(callback: @escaping ([ListDiffable], PostObject?) -> Vo
                 headlinePost = featuredPost
             } catch let error {
                 print(error)
-                fatalError()
+                return
             }
         }
         group.leave()
@@ -169,7 +169,7 @@ func prepareInitialPosts(callback: @escaping ([ListDiffable], PostObject?) -> Vo
                 postObjects.insert("adToken" as ListDiffable, at: 7)
             } catch let error {
                 print(error)
-                fatalError()
+                return
             }
         }
 

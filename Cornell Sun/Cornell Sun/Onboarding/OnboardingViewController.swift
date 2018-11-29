@@ -24,7 +24,7 @@ enum OnboardingViewControllerType {
     var descriptionString: String {
         switch self {
         case .welcome:
-            return "The oldest independent student newspaper by Cornellians, for Cornellians"
+            return "The oldest continuously independent college daily by Cornellians, for Cornellians"
         case .notifications:
             return "We’ll only send you the most important stories. You can customize this later on."
         }

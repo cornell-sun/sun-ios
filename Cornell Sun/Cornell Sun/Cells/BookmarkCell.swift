@@ -21,7 +21,7 @@ final class BookmarkCell: UICollectionViewCell {
         didSet {
             titleLabel.text = post?.title
             titleLabel.setLineSpacing(to: 4.5)
-            authorLabel.text = post?.author?.byline ?? ""
+            authorLabel.text = post?.author?.byline.uppercased() ?? ""
             setupImage()
         }
     }
@@ -47,7 +47,7 @@ final class BookmarkCell: UICollectionViewCell {
         label.text = ""
         label.numberOfLines = 1
         label.font = .cellInformationText
-        label.textColor = .black
+        label.textColor = .black60
         return label
     }()
 
