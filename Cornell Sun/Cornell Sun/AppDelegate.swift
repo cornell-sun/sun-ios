@@ -55,6 +55,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                         settings: onesignalInitSettings)
 
         OneSignal.inFocusDisplayType = OSNotificationDisplayType.notification
+        
+        syncNotifications()
 
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
@@ -108,6 +110,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return key["APIKey"] as! String
         
     }
+    
+    func syncNotifications() {
+        
+        let allNotificationTypes: [NotificationType] = [
+            .breakingNews, .artsAndEntertainment, .dining, .localNews, .multimedia, .opinion, .science, .sports
+        ]
+        
+        for notificationType in allNotificationTypes {
+            let isSubscribed = UserDefaults.standard.bool(forKey: notificationType.rawValue)
+            if isSubscribed {
+                OneSignal.sendTag(notificationType.rawValue, value: notificationType.rawValue)
+            } else {
+                OneSignal.deleteTag(notificationType.rawValue)
+            }
+        }
+    }
+    
+    
 
     /**
      Receive a universal link redirect and handle it properly. Uses Handoff.
