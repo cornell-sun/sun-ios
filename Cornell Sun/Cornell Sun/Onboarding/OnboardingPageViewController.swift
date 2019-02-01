@@ -85,6 +85,9 @@ class OnboardingPageViewController: UIPageViewController {
             let userDefaults = UserDefaults.standard
             userDefaults.setValue(accepted, forKey: breakingNewsKey)
             userDefaults.setValue(true, forKey: hasOnboardedKey)
+            if accepted {
+                OneSignal.sendTag(NotificationType.breakingNews.rawValue, value: NotificationType.breakingNews.rawValue)
+            }
             self.loadingIndicator.startAnimating()
             prepareInitialPosts { posts, mainHeadlinePost in
                 let tabBarController = TabBarViewController(with: posts, mainHeadlinePost: mainHeadlinePost)
