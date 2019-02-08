@@ -90,7 +90,7 @@ class SearchViewController: UIViewController, UITableViewDelegate {
         }
 
         collectionView.snp.makeConstraints { make in
-            make.leading.trailing.top.bottom.equalToSuperview()
+            make.edges.equalToSuperview()
         }
 
         adapter.collectionView = collectionView
@@ -103,7 +103,7 @@ class SearchViewController: UIViewController, UITableViewDelegate {
         view.addSubview(dimView)
 
         dimView.snp.makeConstraints { make in
-            make.edges.equalTo(tableView.snp.edges)
+            make.edges.equalTo(tableView)
         }
 
         // Set up the searchController delegate and the presentation view
@@ -245,6 +245,7 @@ extension SearchViewController: UISearchBarDelegate {
     }
 
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        navigationController?.setNavigationBarHidden(false, animated: true)
         empty = false
         searchBar.endEditing(true)
         collectionView.snp.remakeConstraints { make in
