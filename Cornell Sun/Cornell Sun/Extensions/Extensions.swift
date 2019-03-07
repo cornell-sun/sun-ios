@@ -97,6 +97,11 @@ extension String {
         return ceil(boundingBox.width)
     }
 
+    func getWordCount() -> Int {
+        let stringComponents = components(separatedBy: .whitespacesAndNewlines)
+        return stringComponents.filter { !$0.isEmpty }.count
+    }
+
     /// Converts HTML string to a `NSAttributedString`
     var htmlToAttributedString: NSAttributedString? {
         return try? NSAttributedString(data: Data(utf8), options: [.documentType: NSAttributedString.DocumentType.html, .characterEncoding: String.Encoding.utf8.rawValue], documentAttributes: nil)

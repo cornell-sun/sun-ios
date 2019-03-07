@@ -20,6 +20,7 @@ enum ArticleContentType {
     case caption(String)
     case blockquote(String)
     case heading(String)
+    case ad
 }
 
 enum PostType: String, Codable {
