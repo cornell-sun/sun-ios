@@ -126,8 +126,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
     }
-    
-    
 
     /**
      Receive a universal link redirect and handle it properly. Uses Handoff.
@@ -151,8 +149,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         return true
     }
-
-
 
     /**
      Handles opening the url separately (eg. opening cornellsun.com in Safari)

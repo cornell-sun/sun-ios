@@ -9,6 +9,7 @@
 import UIKit
 import SwiftSoup
 import SafariServices
+import GoogleMobileAds
 
 class ArticleStackViewController: UIViewController {
 
@@ -20,6 +21,7 @@ class ArticleStackViewController: UIViewController {
     let imageViewHeight: CGFloat = 250
     let captionTopOffset: CGFloat = 4
     let bottomInset: CGFloat = 24
+    let wordCountLimit = 200
 
     let commentReuseIdentifier = "CommentReuseIdentifier"
     let suggestedReuseIdentifier = "SuggestedReuseIdentifier"
@@ -114,6 +116,8 @@ class ArticleStackViewController: UIViewController {
                 setupBlockquote(text: string)
             case .heading(let string):
                 setupHeading(text: string)
+            case .ad:
+                setupAdView()
             }
         }
         setupComments()
@@ -127,10 +131,13 @@ class ArticleStackViewController: UIViewController {
         guard let doc: Document = try? SwiftSoup.parse(content) else { return sections }
         guard let elements = try? doc.getAllElements() else { return sections }
 
+        var wordCount = 0
+
         for i in 0..<elements.size() {
             let element = elements.array()[i]
             if element.tag().toString() == "p" {
-                guard let pItem = parsePTag(element: element) else { continue }
+                guard let (pItem, count) = parsePTag(element: element) else { continue }
+                // Swap image credit and caption
                 if let lastItem = sections.last,
                     case ArticleContentType.imageCredit(_) = lastItem,
                     case ArticleContentType.caption(_) = pItem {
@@ -139,6 +146,12 @@ class ArticleStackViewController: UIViewController {
                     sections.swapAt(lastIndex, sections.count - 1)
                 } else {
                     sections.append(pItem)
+                }
+                wordCount += count
+                // Insert ad every ~100 words
+                if wordCount >= wordCountLimit {
+                    sections.append(.ad)
+                    wordCount = 0
                 }
             } else if element.tag().toString() == "img" {
                 guard let imgItem = parseImg(element: element) else { continue }
@@ -154,12 +167,12 @@ class ArticleStackViewController: UIViewController {
         return sections
     }
 
-    func parsePTag(element: Element) -> ArticleContentType? {
+    func parsePTag(element: Element) -> (ArticleContentType, Int)? {
         guard let text = try? element.text(), !text.isEmpty else { return nil }
         if element.hasClass("wp-media-credit") {
-            return .imageCredit(text)
+            return (.imageCredit(text), 0)
         } else if element.hasClass("wp-caption-text") {
-            return .caption(text)
+            return (.caption(text), 0)
         } else {
             // replace <p> </p> with <span> </span> because of weird iOS html to string bugs
             guard let openPRegex = try? NSRegularExpression(pattern: "<p[^>]*>"),
@@ -174,7 +187,7 @@ class ArticleStackViewController: UIViewController {
             let attributedString = NSMutableAttributedString(attributedString: htmlString.htmlToAttributedString ?? NSAttributedString(string: ""))
             attributedString.addAttribute(.paragraphStyle, value: paragraphStyle, range: NSRange(location: 0, length: attributedString.length))
 
-            return .text(attributedString)
+            return (.text(attributedString), attributedString.string.getWordCount())
         }
     }
 
@@ -420,6 +433,22 @@ class ArticleStackViewController: UIViewController {
                 self.suggestedTableView.allowsSelection = true
             }
         }
+    }
+
+    // MARK: - Ads
+    func setupAdView() {
+        let imageView = GADBannerView(adSize: kGADAdSizeMediumRectangle)
+        imageView.rootViewController = self
+        imageView.adUnitID = "ca-app-pub-4474706420182946/7147249512"
+        let view = UIView()
+        view.addSubview(imageView)
+        stackView.addArrangedSubview(view)
+        imageView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        let request = GADRequest()
+        //request.testDevices = [kGADSimulatorID, "0950237e30cd97ec9d147df57b7f01de"]
+        imageView.load(request)
     }
 }
 
