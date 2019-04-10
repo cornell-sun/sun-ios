@@ -9,6 +9,10 @@
 import UIKit
 import SnapKit
 
+protocol ArticleHeaderDelegate: class {
+    func articleHeaderDidPressOnAuthor()
+}
+
 class ArticleHeaderView: UIView {
     let leadingOffset: CGFloat = 16
     let categoryLabelTopOffset: CGFloat = 18.5
@@ -27,7 +31,7 @@ class ArticleHeaderView: UIView {
 
     var categoryLabel: UILabel!
     var titleLabel: UILabel!
-    var authorLabel: UILabel!
+    var authorButton: UIButton!
     var timeStampLabel: UILabel!
     var captionLabel: UILabel!
     var creditsLabel: UILabel!
@@ -44,8 +48,11 @@ class ArticleHeaderView: UIView {
         return formatter
     }()
 
-    convenience init(article: PostObject, frame: CGRect) {
+    weak var delegate: ArticleHeaderDelegate?
+
+    convenience init(article: PostObject, frame: CGRect, delegate: ArticleHeaderDelegate?) {
         self.init(frame: frame)
+        self.delegate = delegate
         setupWithPost(article)
     }
 
@@ -92,12 +99,17 @@ class ArticleHeaderView: UIView {
             make.height.equalTo(imageViewHeight)
         }
 
-        authorLabel = UILabel(frame: .zero)
-        authorLabel.textColor = .black90
-        authorLabel.font = .secondaryHeader
-        authorLabel.numberOfLines = 0
-        addSubview(authorLabel)
-        authorLabel.snp.makeConstraints { make in
+        authorButton = UIButton()
+        authorButton.setTitleColor(.black90, for: .normal)
+        authorButton.titleLabel?.font = .secondaryHeader
+        authorButton.titleLabel?.numberOfLines = 0
+        if #available(iOS 11.0, *) {
+            authorButton.contentHorizontalAlignment = .leading
+            authorButton.contentVerticalAlignment = .top
+        }
+        authorButton.addTarget(self, action: #selector(authorButtonPressed), for: .touchUpInside)
+        addSubview(authorButton)
+        authorButton.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(leadingOffset)
             make.top.equalTo(captionLabel.snp.bottom).offset(authorLabelTopOffset)
         }
@@ -108,7 +120,7 @@ class ArticleHeaderView: UIView {
         addSubview(timeStampLabel)
         timeStampLabel.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(leadingOffset)
-            make.top.equalTo(authorLabel.snp.bottom)
+            make.top.equalTo(authorButton.snp.bottom)
             make.height.equalTo(timeStampHeight)
             make.bottom.equalToSuperview()
         }
@@ -129,7 +141,7 @@ class ArticleHeaderView: UIView {
 
         timeStampLabel.text = readableDateFormatter.string(from: post.date)
         if let authors = post.author {
-            authorLabel.text = "By \(authors.byline)"
+            authorButton.setTitle("By \(authors.byline)", for: .normal)
         }
         if let caption = post.featuredMediaCaption {
             captionLabel.text = caption.htmlToString
@@ -166,11 +178,15 @@ class ArticleHeaderView: UIView {
                 make.top.equalTo(captionLabel.snp.bottom)
                 make.leading.trailing.equalToSuperview()
             }
-            authorLabel.snp.remakeConstraints { make in
+            authorButton.snp.remakeConstraints { make in
                 make.leading.trailing.equalToSuperview().inset(leadingOffset)
                 make.top.equalTo(titleLabel.snp.bottom).offset(titleLabelTopOffset)
             }
         }
+    }
+
+    @objc func authorButtonPressed() {
+        delegate?.articleHeaderDidPressOnAuthor()
     }
 
 }

@@ -11,10 +11,13 @@
 		0C0D2FE72060462500BC77E9 /* OnboardingPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C0D2FE62060462500BC77E9 /* OnboardingPageViewController.swift */; };
 		0C0D2FE9206048BA00BC77E9 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C0D2FE8206048BA00BC77E9 /* OnboardingViewController.swift */; };
 		0C15F1871FBDD433009724DB /* ArticleHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C15F1861FBDD433009724DB /* ArticleHeaderView.swift */; };
+		0C263B60225E4B8300CDDC8D /* AuthorDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C263B5F225E4B8300CDDC8D /* AuthorDetailViewController.swift */; };
+		0C263B63225E4E8900CDDC8D /* AuthorDetailSectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C263B62225E4E8900CDDC8D /* AuthorDetailSectionController.swift */; };
 		0C49290520A14C4B004AF877 /* SettingObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C49290420A14C4B004AF877 /* SettingObject.swift */; };
 		0C59AD44208D505700CF3A31 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C59AD43208D505700CF3A31 /* Button.swift */; };
 		0C6E76C62094FF0D00F8710C /* MastheadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C6E76C52094FF0D00F8710C /* MastheadViewController.swift */; };
 		0C736C54202F96E000E9D92E /* ImageAttachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C736C53202F96E000E9D92E /* ImageAttachment.swift */; };
+		0C7BB7502257EA1C00B41627 /* AuthorDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7BB74F2257EA1C00B41627 /* AuthorDetailCell.swift */; };
 		0CA26A1B205F41A6004759D1 /* ArticleStackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CA26A1A205F41A6004759D1 /* ArticleStackViewController.swift */; };
 		0CB00B261FBBAEE800376A94 /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CB00B251FBBAEE800376A94 /* CommentTableViewCell.swift */; };
 		0CB1EBCE2041ED9100DD8777 /* ShareBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CB1EBCD2041ED9100DD8777 /* ShareBarView.swift */; };
@@ -130,11 +133,14 @@
 		0C0D2FE62060462500BC77E9 /* OnboardingPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPageViewController.swift; sourceTree = "<group>"; };
 		0C0D2FE8206048BA00BC77E9 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		0C15F1861FBDD433009724DB /* ArticleHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleHeaderView.swift; sourceTree = "<group>"; };
+		0C263B5F225E4B8300CDDC8D /* AuthorDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AuthorDetailViewController.swift; path = "Cornell Sun/Author Detail/AuthorDetailViewController.swift"; sourceTree = SOURCE_ROOT; };
+		0C263B62225E4E8900CDDC8D /* AuthorDetailSectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AuthorDetailSectionController.swift; path = "Cornell Sun/Author Detail/AuthorDetailSectionController.swift"; sourceTree = SOURCE_ROOT; };
 		0C30CF802097AC4500015EF6 /* KeplerStd-Italic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "KeplerStd-Italic.otf"; sourceTree = "<group>"; };
 		0C49290420A14C4B004AF877 /* SettingObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingObject.swift; sourceTree = "<group>"; };
 		0C59AD43208D505700CF3A31 /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
 		0C6E76C52094FF0D00F8710C /* MastheadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MastheadViewController.swift; sourceTree = "<group>"; };
 		0C736C53202F96E000E9D92E /* ImageAttachment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageAttachment.swift; sourceTree = "<group>"; };
+		0C7BB74F2257EA1C00B41627 /* AuthorDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorDetailCell.swift; sourceTree = "<group>"; };
 		0CA26A1A205F41A6004759D1 /* ArticleStackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleStackViewController.swift; sourceTree = "<group>"; };
 		0CB00B251FBBAEE800376A94 /* CommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
 		0CB1EBCD2041ED9100DD8777 /* ShareBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareBarView.swift; sourceTree = "<group>"; };
@@ -279,6 +285,16 @@
 			path = "Article Detail";
 			sourceTree = "<group>";
 		};
+		0C263B61225E4B8D00CDDC8D /* Author Detail */ = {
+			isa = PBXGroup;
+			children = (
+				0C263B5F225E4B8300CDDC8D /* AuthorDetailViewController.swift */,
+				0C263B62225E4E8900CDDC8D /* AuthorDetailSectionController.swift */,
+			);
+			name = "Author Detail";
+			path = "Article Detail";
+			sourceTree = "<group>";
+		};
 		3441C7882066C0AB00F58D5E /* Delegate Extension */ = {
 			isa = PBXGroup;
 			children = (
@@ -336,6 +352,7 @@
 				DC34DEEA2032137C0010DF9A /* Settings Section */,
 				DC34DEE92032136A0010DF9A /* Photo Gallery Section */,
 				0C15F1851FBDD1A5009724DB /* Article Detail */,
+				0C263B61225E4B8D00CDDC8D /* Author Detail */,
 				DCECA9921FBE2DAF00BAB2EA /* Cells */,
 				DC34DEED203213D90010DF9A /* Networking */,
 				DCA75BA120B848BB003A1D5C /* Empty State */,
@@ -561,6 +578,7 @@
 			isa = PBXGroup;
 			children = (
 				DC0A883F1FBA84E700F2BCBB /* AuthorCell.swift */,
+				0C7BB74F2257EA1C00B41627 /* AuthorDetailCell.swift */,
 				DC818D9A1F74CFBB0064AFFA /* SpinnerCell.swift */,
 				DC818D9C1F7553380064AFFA /* ImageCell.swift */,
 				DC0A88391FBA2DEE00F2BCBB /* PhotoGalleryCell.swift */,
@@ -944,6 +962,7 @@
 				344B71B820A0FFB800DF8081 /* SearchCellNoImage.swift in Sources */,
 				40B1D4922073107E00C1306E /* ContactViewController.swift in Sources */,
 				DC0E7C4E208FFCBA00B1295F /* PostObjectHelpers.swift in Sources */,
+				0C263B60225E4B8300CDDC8D /* AuthorDetailViewController.swift in Sources */,
 				DCA02C0A2027B18400CBE97F /* SearchSectionController.swift in Sources */,
 				5006AFFC1EA9625000F58549 /* AppDelegate.swift in Sources */,
 				405F83DA1FBE1E3100360AEB /* Enums.swift in Sources */,
@@ -983,6 +1002,7 @@
 				DC6561D51FBACA8800C5062D /* PhotoGallerySectionController.swift in Sources */,
 				DC4FED232027F05A004F435E /* SearchCell.swift in Sources */,
 				0CCD0BD0209D3D060042E17C /* SuggestedStoryTableViewCell.swift in Sources */,
+				0C7BB7502257EA1C00B41627 /* AuthorDetailCell.swift in Sources */,
 				0C6E76C62094FF0D00F8710C /* MastheadViewController.swift in Sources */,
 				405F83DC1FBE1E7C00360AEB /* SettingsViewController.swift in Sources */,
 				0C736C54202F96E000E9D92E /* ImageAttachment.swift in Sources */,
@@ -990,6 +1010,7 @@
 				DCFC88C61F86C03700A0D8A9 /* CommentObject.swift in Sources */,
 				0C0D2FE72060462500BC77E9 /* OnboardingPageViewController.swift in Sources */,
 				0CA26A1B205F41A6004759D1 /* ArticleStackViewController.swift in Sources */,
+				0C263B63225E4E8900CDDC8D /* AuthorDetailSectionController.swift in Sources */,
 				DCA02C0C2027E0F500CBE97F /* NetworkingHelpers.swift in Sources */,
 				0CB00B261FBBAEE800376A94 /* CommentTableViewCell.swift in Sources */,
 				DC818D9F1F7596970064AFFA /* TitleCell.swift in Sources */,

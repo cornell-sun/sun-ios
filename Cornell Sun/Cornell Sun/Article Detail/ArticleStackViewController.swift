@@ -70,7 +70,7 @@ class ArticleStackViewController: UIViewController {
             make.edges.width.equalToSuperview()
         }
 
-        headerView = ArticleHeaderView(article: post, frame: .zero)
+        headerView = ArticleHeaderView(article: post, frame: .zero, delegate: self)
         stackView.addArrangedSubview(headerView)
         headerView.snp.makeConstraints { make in
             make.top.width.equalToSuperview()
@@ -453,7 +453,6 @@ class ArticleStackViewController: UIViewController {
 }
 
 // MARK: - TableView
-
 extension ArticleStackViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -488,7 +487,6 @@ extension ArticleStackViewController: UITableViewDelegate, UITableViewDataSource
 }
 
 // MARK: - Share bar
-
 extension ArticleStackViewController: ShareBarViewDelegate {
 
     func shareBarDidPressShare(_ view: ShareBarView) {
@@ -543,6 +541,17 @@ extension ArticleStackViewController: UITextViewDelegate {
             }
         }
         return false
+    }
+
+}
+
+// MARK: - Article Header Delegate
+extension ArticleStackViewController: ArticleHeaderDelegate {
+
+    func articleHeaderDidPressOnAuthor() {
+        guard let author = post.author?.first else { return }
+        let authorDetailViewController = AuthorDetailViewController(author: author)
+        navigationController?.pushViewController(authorDetailViewController, animated: true)
     }
 
 }
