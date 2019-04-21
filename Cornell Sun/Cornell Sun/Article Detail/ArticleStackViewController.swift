@@ -132,11 +132,13 @@ class ArticleStackViewController: UIViewController {
         guard let elements = try? doc.getAllElements() else { return sections }
 
         var wordCount = 0
+        var swapImageAndText = false
 
         for i in 0..<elements.size() {
             let element = elements.array()[i]
             if element.tag().toString() == "p" {
-                guard let (pItem, count) = parsePTag(element: element) else { continue }
+                guard let (pItem, count, containsNestedImages) = parsePTag(element: element) else { continue }
+                swapImageAndText = containsNestedImages
                 // Swap image credit and caption
                 if let lastItem = sections.last,
                     case ArticleContentType.imageCredit(_) = lastItem,
@@ -156,6 +158,9 @@ class ArticleStackViewController: UIViewController {
             } else if element.tag().toString() == "img" {
                 guard let imgItem = parseImg(element: element) else { continue }
                 sections.append(imgItem)
+                if swapImageAndText {
+                    sections.swapAt(sections.count - 1, sections.count - 2)
+                }
             } else if element.tag().toString() == "aside" {
                 guard let blockquote = parseAside(element: element) else { continue }
                 sections.append(blockquote)
@@ -167,14 +172,18 @@ class ArticleStackViewController: UIViewController {
         return sections
     }
 
-    func parsePTag(element: Element) -> (ArticleContentType, Int)? {
+    /// Returns format (articleContentType, textLength, containsNestedImages)
+    func parsePTag(element: Element) -> (ArticleContentType, Int, Bool)? {
         guard let text = try? element.text(), !text.isEmpty else { return nil }
         if element.hasClass("wp-media-credit") {
-            return (.imageCredit(text), 0)
+            return (.imageCredit(text), 0, false)
         } else if element.hasClass("wp-caption-text") {
-            return (.caption(text), 0)
+            return (.caption(text), 0, false)
         } else {
             // replace <p> </p> with <span> </span> because of weird iOS html to string bugs
+            let children = element.children().filter { $0.tag().toString() == "img" }
+            let containsNestedImages = children.count > 0
+            children.forEach { try? element.removeChild($0) }
             guard let openPRegex = try? NSRegularExpression(pattern: "<p[^>]*>"),
                 let closePRegex = try? NSRegularExpression(pattern: "</p[^>]*>"),
                 let outerHtml = try? element.outerHtml() else { return nil }
@@ -187,7 +196,7 @@ class ArticleStackViewController: UIViewController {
             let attributedString = NSMutableAttributedString(attributedString: htmlString.htmlToAttributedString ?? NSAttributedString(string: ""))
             attributedString.addAttribute(.paragraphStyle, value: paragraphStyle, range: NSRange(location: 0, length: attributedString.length))
 
-            return (.text(attributedString), attributedString.string.getWordCount())
+            return (.text(attributedString), attributedString.string.getWordCount(), containsNestedImages)
         }
     }
 
