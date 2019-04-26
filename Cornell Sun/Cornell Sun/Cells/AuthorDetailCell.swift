@@ -24,6 +24,8 @@ class AuthorDetailCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
 
+        contentView.backgroundColor = .white
+
         imageView = UIImageView()
         imageView.clipsToBounds = true
         imageView.layer.cornerRadius = imageViewWidth / 2
@@ -33,14 +35,14 @@ class AuthorDetailCell: UICollectionViewCell {
         nameLabel = UILabel()
         nameLabel.textColor = .black90
         nameLabel.font = .systemFont(ofSize: 26, weight: .bold)
-        nameLabel.numberOfLines = 0
+        nameLabel.numberOfLines = 2
         nameLabel.setLineSpacing(to: 6)
         contentView.addSubview(nameLabel)
 
         linkStackView = UIStackView()
-        linkStackView.alignment = .fill
-        linkStackView.axis = .vertical
-        linkStackView.distribution = .fill
+        linkStackView.alignment = .center
+        linkStackView.axis = .horizontal
+        linkStackView.distribution = .equalSpacing
         linkStackView.spacing = 0
         contentView.addSubview(linkStackView)
 
@@ -62,6 +64,7 @@ class AuthorDetailCell: UICollectionViewCell {
         let imageViewLeadingPadding: CGFloat = 16
         let nameLabelLeadingPadding: CGFloat = 12
         let linkStackViewTopPadding: CGFloat = 5
+        let linkStackViewWidth: CGFloat = 212
         let linkStackViewHeight: CGFloat = 56
         let bioTextViewTopPadding: CGFloat = 17
         let bioTextViewBottomPadding: CGFloat = 32
@@ -75,13 +78,14 @@ class AuthorDetailCell: UICollectionViewCell {
         nameLabel.snp.makeConstraints { make in
             make.leading.equalTo(imageView.snp.trailing).offset(nameLabelLeadingPadding)
             make.trailing.equalToSuperview().inset(imageViewLeadingPadding)
-            make.top.equalTo(imageView)
+            make.centerY.equalTo(imageView)
         }
 
         linkStackView.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview()
+            make.width.equalTo(linkStackViewWidth)
             make.top.equalTo(imageView.snp.bottom).offset(linkStackViewTopPadding)
             make.height.equalTo(linkStackViewHeight)
+            make.centerX.equalToSuperview()
         }
 
         underlineView.snp.makeConstraints { make in
@@ -101,6 +105,25 @@ class AuthorDetailCell: UICollectionViewCell {
         imageView.kf.setImage(with: authorDetail.imageURL)
         nameLabel.text = authorDetail.name
         bioTextView.text = authorDetail.bio
+
+        if let twitterURL = authorDetail.twitterLink {
+            linkStackView.addArrangedSubview(createLinkImageView(with: #imageLiteral(resourceName: "twitter")))
+        }
+
+        if let linkedinURL = authorDetail.linkedInLink {
+            linkStackView.addArrangedSubview(createLinkImageView(with: #imageLiteral(resourceName: "linkedIn")))
+        }
+
+        if let emailURL = authorDetail.email {
+            linkStackView.addArrangedSubview(createLinkImageView(with: #imageLiteral(resourceName: "mail")))
+        }
+    }
+
+    private func createLinkImageView(with image: UIImage) -> UIImageView {
+        let imageView = UIImageView(frame: .init(x: 0.0, y: 0.0, width: 25.5, height: 18.0))
+        imageView.image = image
+        imageView.contentMode = .scaleAspectFit
+        return imageView
     }
 
     required init?(coder aDecoder: NSCoder) {

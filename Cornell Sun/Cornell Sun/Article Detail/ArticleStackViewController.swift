@@ -550,7 +550,7 @@ extension ArticleStackViewController: ArticleHeaderDelegate {
 
     func articleHeaderDidPressOnAuthor() {
         guard let author = post.author?.first else { return }
-        let authorDetailViewController = AuthorDetailViewController(author: author)
+        let authorDetailViewController = AuthorDetailViewController(author: author, authorID: post.authorID)
         navigationController?.pushViewController(authorDetailViewController, animated: true)
     }
 
