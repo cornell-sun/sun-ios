@@ -14,6 +14,10 @@ class TabBarViewController: UITabBarController {
     var posts: [ListDiffable]!
     var headlinePost: PostObject?
     var previousViewController: UIViewController?
+    var currentViewController: ViewController? {
+        let navigationController = viewControllers?.first as? UINavigationController
+        return navigationController?.viewControllers.first as? ViewController
+    }
 
     let normal = [NSAttributedString.Key.font: UIFont(name: "SanFranciscoText-Medium", size: 11) as Any] as [NSAttributedString.Key: Any]
     let selected = [NSAttributedString.Key.font: UIFont(name: "SanFranciscoText-Semibold", size: 11) as Any] as [NSAttributedString.Key: Any]

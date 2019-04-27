@@ -19,6 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     var storyboard: UIStoryboard?
+    var isLoadingFromDeeplink: Bool = false
     let redirectScheme = "cornellsun"
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
@@ -73,11 +74,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let onboardingViewController = OnboardingPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
             self.window?.rootViewController?.present(onboardingViewController, animated: false, completion: nil)
         } else {
-          prepareInitialPosts { posts, mainHeadlinePost in
-              let tabBarController = TabBarViewController(with: posts, mainHeadlinePost: mainHeadlinePost)
-              self.window!.rootViewController = tabBarController
-
-          }
+            prepareInitialPosts { posts, mainHeadlinePost in
+                let tabBarController = TabBarViewController(with: posts, mainHeadlinePost: mainHeadlinePost)
+                self.window!.rootViewController = tabBarController
+                if let currentViewController = tabBarController.currentViewController, self.isLoadingFromDeeplink {
+                    currentViewController.startAnimating()
+                }
+            }
         }
         
         //Initialize Google Mobile Ads SDKAds
@@ -133,10 +136,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
      */
 
     func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
+        isLoadingFromDeeplink = true
         guard let url = userActivity.webpageURL else { return false }
+
+        // If app is already open
+        if let tabBarViewController = self.window?.rootViewController as? TabBarViewController, let currentViewController = tabBarViewController.currentViewController {
+            currentViewController.startAnimating()
+        }
+
         API.request(target: .urlToID(url: url)) { response in
-            guard let tryID = try? response?.mapString(), let idString = tryID, let id = Int(idString), id != 0 else { return
-            }
+            guard let tryID = try? response?.mapString(), let idString = tryID, let id = Int(idString), id != 0 else { return }
             getDeeplinkedPostWithId(id, completion: { (posts, mainHeadlinePost, deeplinkedPost) in
                 guard let deeplinkedPost = deeplinkedPost else { return }
                 let tabBarController = TabBarViewController(with: posts, mainHeadlinePost: mainHeadlinePost)

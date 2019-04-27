@@ -9,7 +9,7 @@
 import UIKit
 import IGListKit
 
-class FeedCollectionViewController: UIViewController, UIScrollViewDelegate {
+class FeedCollectionViewController: ViewController, UIScrollViewDelegate {
     var loading = false
 
     fileprivate var observer: NSKeyValueObservation?

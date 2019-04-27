@@ -10,6 +10,12 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    private var activityIndicatorBackgroundView: UIView!
+    var activityIndicatorView: UIActivityIndicatorView?
+
+    private let activityIndicatorCornerRadius: CGFloat = 8
+    private let activityIndicatorHeight: CGFloat = 50
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -18,6 +24,10 @@ class ViewController: UIViewController {
         self.navigationController?.navigationBar.titleTextAttributes = [
             NSAttributedString.Key.font: UIFont(name: "Sonnenstrahl-Ausgezeichnet", size: 30)!
         ]
+
+        activityIndicatorBackgroundView = UIView()
+        activityIndicatorBackgroundView.backgroundColor = UIColor.black.withAlphaComponent(0.5)
+        activityIndicatorBackgroundView.layer.cornerRadius = activityIndicatorCornerRadius
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -28,12 +38,24 @@ class ViewController: UIViewController {
         ]
     }
 
-    override func viewWillDisappear(_ animated: Bool) {
+    func startAnimating() {
+        view.addSubview(activityIndicatorBackgroundView)
+        activityIndicatorBackgroundView.snp.makeConstraints { make in
+            make.width.height.equalTo(activityIndicatorHeight)
+            make.center.equalToSuperview()
+        }
+
+        activityIndicatorView = UIActivityIndicatorView(style: .whiteLarge)
+        view.addSubview(activityIndicatorView!)
+        activityIndicatorView?.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+        }
+        activityIndicatorView?.startAnimating()
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    func stopAnimating() {
+        activityIndicatorView?.stopAnimating()
+        activityIndicatorView?.removeFromSuperview()
     }
 
 }
