@@ -17,21 +17,57 @@ class TabBarViewController: UITabBarController {
 
     let normal = [NSAttributedString.Key.font: UIFont(name: "SanFranciscoText-Medium", size: 11) as Any] as [NSAttributedString.Key: Any]
     let selected = [NSAttributedString.Key.font: UIFont(name: "SanFranciscoText-Semibold", size: 11) as Any] as [NSAttributedString.Key: Any]
+    
+    var darkModeEnabled = UserDefaults.standard.bool(forKey: "darkModeEnabled")
 
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         // Do any additional setup after loading the view.
-        view.backgroundColor = .white
+        
 
-        tabBar.backgroundColor = .white
-        tabBar.backgroundImage = UIImage()
-        tabBar.tintColor = .brick
-        tabBar.unselectedItemTintColor = .black70
+        
+//        tabBar.backgroundImage = UIImage()
         tabBarItem.setTitleTextAttributes(normal, for: .normal)
         tabBarItem.setTitleTextAttributes(selected, for: .selected)
         delegate = self
         setupTabs()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(updateColors), name: .darkModeToggle, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(hideVC(notification:)), name: .darkModeToggle, object: nil)
+        
+        updateColors()
+    }
+    
+    @objc func updateColors() {
+        
+        if(darkModeEnabled) {
+            view.backgroundColor = .darkTint
+            tabBar.backgroundColor = .darkTint
+            tabBar.barTintColor = .darkTint
+            tabBar.isTranslucent = false
+            tabBar.tintColor = .white
+            tabBar.unselectedItemTintColor = .unselectedDark
+        } else {
+            view.backgroundColor = .white
+            tabBar.backgroundColor = .white
+            tabBar.tintColor = .brick
+            tabBar.unselectedItemTintColor = .black70
+        }
+        
+    }
+    
+    @objc func hideVC(notification: NSNotification) {
+        if(!darkModeEnabled) {
+            if let hidden = notification.userInfo?["hidden"] as? Bool {
+                if(hidden) {
+                    view.backgroundColor = .darkCell
+                } else {
+                    view.backgroundColor = .darkCell
+                }
+            }
+        }
+        
     }
 
     init(with postObjects: [ListDiffable], mainHeadlinePost: PostObject?) {
@@ -47,6 +83,14 @@ class TabBarViewController: UITabBarController {
     func setupTabs() {
         // replace each tab with a specified ViewController,
         // these are just placeholders
+        
+        var imageChoice: String
+        
+        if(darkModeEnabled) {
+            imageChoice = "Dark"
+        } else {
+            imageChoice = "Light"
+        }
 
         let feedVC = FeedCollectionViewController()
         feedVC.feedData = posts
@@ -55,25 +99,26 @@ class TabBarViewController: UITabBarController {
         }
         let tabOneNavigationController = UINavigationController(rootViewController: feedVC)
         tabOneNavigationController.navigationBar.isTranslucent = false
-        let tabOneTabBarItem = UITabBarItem(title: "Feed", image: #imageLiteral(resourceName: "feedIcon").withRenderingMode(.alwaysOriginal), selectedImage: #imageLiteral(resourceName: "feedIconRed").withRenderingMode(.alwaysOriginal))
+        let tabOneTabBarItem = UITabBarItem(title: "Feed", image: UIImage(named: "newsIcon" + imageChoice)!.withRenderingMode(.alwaysOriginal), selectedImage: UIImage(named: "newsIconSelectedLight")!.withRenderingMode(.alwaysOriginal))
         tabOneNavigationController.tabBarItem = tabOneTabBarItem
 
         let tabTwoNavigationController = UINavigationController(rootViewController: SectionViewController())
-        let tabTwoTabBarItem = UITabBarItem(title: "Sections", image: #imageLiteral(resourceName: "sectionIcon").withRenderingMode(.alwaysOriginal), selectedImage: #imageLiteral(resourceName: "sectionIconRed").withRenderingMode(.alwaysOriginal))
+        let tabTwoTabBarItem = UITabBarItem(title: "Sections", image: UIImage(named: "sectionIconLight")!.withRenderingMode(.alwaysOriginal), selectedImage: UIImage(named: "sectionIconSelected" + imageChoice)!.withRenderingMode(.alwaysOriginal))
         tabTwoNavigationController.tabBarItem = tabTwoTabBarItem
 
         let tabThreeNavigationController = UINavigationController(rootViewController: BookmarkCollectionViewController())
-        let tabThreeTabBarItem = UITabBarItem(title: "Bookmarks", image: #imageLiteral(resourceName: "bookmarkIcon").withRenderingMode(.alwaysOriginal), selectedImage: #imageLiteral(resourceName: "bookmarkIconRed").withRenderingMode(.alwaysOriginal))
+        let tabThreeTabBarItem = UITabBarItem(title: "Bookmarks", image: UIImage(named: "bookmarkIcon" + imageChoice)!.withRenderingMode(.alwaysOriginal), selectedImage: UIImage(named: "bookmarkIconSelectedLight")!.withRenderingMode(.alwaysOriginal))
         tabThreeNavigationController.tabBarItem = tabThreeTabBarItem
 
         let searchVC = SearchViewController(fetchTrending: true)
         let tabFourNavigationController = UINavigationController(rootViewController: searchVC)
-        let tabFourTabBarItem = UITabBarItem(title: "Search", image: #imageLiteral(resourceName: "searchIcon").withRenderingMode(.alwaysOriginal), selectedImage: #imageLiteral(resourceName: "searchIconRed").withRenderingMode(.alwaysOriginal))
+        let tabFourTabBarItem = UITabBarItem(title: "Search", image: UIImage(named: "searchIcon" + imageChoice)!.withRenderingMode(.alwaysOriginal), selectedImage: UIImage(named: "searchIconSelectedLight")!.withRenderingMode(.alwaysOriginal))
         tabFourNavigationController.tabBarItem = tabFourTabBarItem
 
         let tabFiveNavigationController = UINavigationController(rootViewController: SettingsViewController())
-        let tabFiveTabBarItem = UITabBarItem(title: "Settings", image: #imageLiteral(resourceName: "personSettingsIcon").withRenderingMode(.alwaysOriginal), selectedImage: #imageLiteral(resourceName: "personSettingsIconRed").withRenderingMode(.alwaysOriginal))
+        let tabFiveTabBarItem = UITabBarItem(title: "Settings", image: UIImage(named: "settingsIcon" + imageChoice)!.withRenderingMode(.alwaysOriginal), selectedImage: UIImage(named: "settingsIconSelectedLight")!.withRenderingMode(.alwaysOriginal))
         tabFiveNavigationController.tabBarItem = tabFiveTabBarItem
+
 
         self.viewControllers = [tabOneNavigationController, tabTwoNavigationController, tabThreeNavigationController, tabFourNavigationController, tabFiveNavigationController]
         selectedIndex = 0

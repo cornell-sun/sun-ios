@@ -26,11 +26,13 @@ class SearchViewController: UIViewController, UITableViewDelegate {
     let TRENDINGLABEL_LEADING: CGFloat = 18.0
     let TRENDINGLABEL_TOP_BOTTOM_TRAILING: CGFloat = 8
     let DISTANCE: CGFloat = 300.0
+    
+    //    var darkModeEnabled = UserDefaults.standard.bool(forKey: "darkModeEnabled")
+    var darkModeEnabled = true
 
     let collectionView: UICollectionView = {
         let view = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
         view.alwaysBounceVertical = true
-        view.backgroundColor = .white
         return view
     }()
 
@@ -120,11 +122,41 @@ class SearchViewController: UIViewController, UITableViewDelegate {
             textField.font = UIFont(name: "SanFranciscoDisplay-Medium", size: 14)
         }
         
+        NotificationCenter.default.addObserver(self, selector: #selector(updateColors), name: .darkModeToggle, object: nil)
+        
+        updateColors()
+        
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    @objc func updateColors() {
+        
+        if(darkModeEnabled) {
+            navigationController?.navigationBar.barTintColor = .darkTint
+            navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.darkText]
+            navigationController?.navigationBar.barStyle = .blackTranslucent
+            searchController.searchBar.backgroundColor = .darkTint
+            searchController.searchBar.barStyle = .blackTranslucent
+            tableView.backgroundColor = .darkCell
+            collectionView.backgroundColor = .darkCell
+            searchController.searchBar.tintColor = .darkText
+            
+        } else {
+            navigationController?.navigationBar.barTintColor = .white
+            navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.lightText]
+            navigationController?.navigationBar.barStyle = .default
+            searchController.searchBar.backgroundColor = .white
+            searchController.searchBar.barStyle = .default
+            tableView.backgroundColor = .white
+            collectionView.backgroundColor = .white
+            searchController.searchBar.tintColor = .blue
+
+        }
+    
     }
 }
 
@@ -187,16 +219,24 @@ extension SearchViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = UITableViewHeaderFooterView()
-        headerView.contentView.backgroundColor = .white
+        
         let trendingLabel = UILabel()
         trendingLabel.text = "Trending Topics"
         trendingLabel.font = .headerTitle
         headerView.contentView.addSubview(trendingLabel)
-
+        
         trendingLabel.snp.makeConstraints { make in
             make.leading.equalToSuperview().inset(TRENDINGLABEL_LEADING)
             make.top.bottom.equalToSuperview().inset(TRENDINGLABEL_TOP_BOTTOM_TRAILING)
             make.trailing.lessThanOrEqualToSuperview().inset(TRENDINGLABEL_TOP_BOTTOM_TRAILING)
+        }
+        
+        if(darkModeEnabled) {
+            headerView.contentView.backgroundColor = .darkCell
+            trendingLabel.textColor = .darkText
+        } else {
+            headerView.contentView.backgroundColor = .white
+            trendingLabel.textColor = .white
         }
 
         return headerView
@@ -207,6 +247,15 @@ extension SearchViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SearchResultCell", for: indexPath)
         cell.textLabel?.text = trendingTopics[indexPath.row]
         cell.textLabel?.font = .secondaryHeader
+        
+        if(darkModeEnabled) {
+            cell.backgroundColor = .darkCell
+            cell.textLabel?.textColor = .darkText
+        } else {
+            cell.backgroundColor = .white
+            cell.textLabel?.textColor = .black
+        }
+        
         return cell
     }
 

@@ -19,12 +19,13 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
     let headerReuseIdentifier = "HeaderCell"
     let settingReuseIdentifier = "SettingCell"
     
+    var darkModeEnabled = UserDefaults.standard.bool(forKey: "darkModeEnabled")
+
     override func viewWillAppear(_ animated: Bool) {
         title = "Settings"
-        navigationController?.navigationBar.barTintColor = .white
+        navigationController?.navigationBar.isTranslucent = false
         navigationController?.navigationBar.titleTextAttributes = [
-            NSAttributedString.Key.font: UIFont.headerTitle,
-            NSAttributedString.Key.strokeColor: UIColor.black90
+            NSAttributedString.Key.font: UIFont.headerTitle
         ]
     }
     
@@ -49,11 +50,32 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
         tableView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(updateColors), name: .darkModeToggle, object: nil)
+        
+        updateColors()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    @objc func updateColors() {
+        
+        if(darkModeEnabled) {
+            navigationController?.navigationBar.barTintColor = .darkTint
+            navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.darkText]
+            navigationController?.navigationBar.barStyle = .blackTranslucent
+            tableView.backgroundColor = .darkCell
+        } else {
+            navigationController?.navigationBar.barTintColor = .white
+            navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.lightText]
+            navigationController?.navigationBar.barStyle = .default
+            tableView.backgroundColor = .white
+        }
+        
+        tableView.reloadData()
     }
     
     //Table View functions
@@ -74,15 +96,23 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
         }
         let sectionLabel = UILabel()
         headerCell.contentView.addSubview(sectionLabel)
-        headerCell.contentView.backgroundColor = .black5
+        
         sectionLabel.font = UIFont.systemFont(ofSize: 14, weight: .regular)
-        sectionLabel.textColor = UIColor(white: 74/255, alpha: 1.0)
         sectionLabel.snp.makeConstraints { make in
             make.height.equalTo(20)
             make.left.equalTo(headerCell.contentView.snp.left).offset(16)
             make.bottom.equalToSuperview().offset(-6)
         }
         sectionLabel.text = sections[section]
+        
+        if(darkModeEnabled) {
+            headerCell.contentView.backgroundColor = .darkTableHeader
+            sectionLabel.textColor = UIColor(red: 191/255, green: 191/255, blue: 191/255, alpha: 1.0)
+        } else {
+            headerCell.contentView.backgroundColor = .black5
+            sectionLabel.textColor = UIColor(white: 74/255, alpha: 1.0)
+        }
+        
         return headerCell.contentView
     }
 
@@ -93,6 +123,15 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
         cell.textLabel?.font = .secondaryHeader
         cell.selectionStyle = .none
         cell.accessoryType = .disclosureIndicator
+        
+        if(darkModeEnabled) {
+            cell.backgroundColor = .darkCell
+            cell.textLabel?.textColor = .darkText
+        } else {
+            cell.backgroundColor = .white
+            cell.textLabel?.textColor = .black
+        }
+        
         return cell
     }
 
