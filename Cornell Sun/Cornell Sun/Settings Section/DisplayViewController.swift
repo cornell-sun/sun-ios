@@ -27,8 +27,8 @@ class DisplayViewController: UIViewController {
     
     var tabHidden: [String : Bool] = ["hidden" : true]
     
-//    var darkModeEnabled = UserDefaults.standard.bool(forKey: "darkModeEnabled")
-    var darkModeEnabled = true
+    let darkModeEnabled = UserDefaults.standard.bool(forKey: "darkModeEnabled")
+   
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)

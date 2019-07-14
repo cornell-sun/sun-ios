@@ -83,6 +83,18 @@ extension UIColor {
         return UIColor(white: 1.0, alpha: 0.05)
     }
     
+    @nonobjc class var white90: UIColor {
+        return UIColor(white: 1.0, alpha: 0.9)
+    }
+    
+    @nonobjc class var white40: UIColor {
+        return UIColor(white: 1.0, alpha: 0.4)
+    }
+    
+    @nonobjc class var white60: UIColor {
+        return UIColor(white: 1.0, alpha: 0.6)
+    }
+    
     @nonobjc class var darkTableHeader: UIColor {
         return UIColor(red: 42/255, green: 42/255, blue: 55/255, alpha: 1.0)
     }

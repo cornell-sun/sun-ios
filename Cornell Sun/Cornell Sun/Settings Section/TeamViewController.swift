@@ -32,6 +32,8 @@ class TeamViewController: UIViewController, UITableViewDataSource, UITableViewDe
     var tableView: UITableView!
     var members: [TeamMember] = []
     
+    let darkModeEnabled = UserDefaults.standard.bool(forKey: "darkModeEnabled")
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         titleCache = prevViewController.title
@@ -48,7 +50,7 @@ class TeamViewController: UIViewController, UITableViewDataSource, UITableViewDe
     override func viewDidLoad() {
         super.viewDidLoad()
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = darkModeEnabled ? .darkCell : .white
         title = "App Team"
         
         //Calling hardcoded populator
@@ -59,7 +61,7 @@ class TeamViewController: UIViewController, UITableViewDataSource, UITableViewDe
                 TeamMember(nam: "Brendan Elliott '19", titl: "Designer", home: "Grand Rapids, Michigan", liner: "Ketchup should never be used before noon", emoji: "👨🏻‍💻"),
                 TeamMember(nam: "Alexis Vinzons '19", titl: "Designer", home: "Mamaroneck, New York", liner: "The solution is in the framing of the problem", emoji: "💃"),
                 TeamMember(nam: "Aditya Dwivedi '20", titl: "Developer", home: "Lucknow, India", liner: "Waffles > Pancakes", emoji: "🐪"),
-                TeamMember(nam: "Theo Carrel '20", titl: "Developer", home: "New York, NY", liner: "Is you not impressed?", emoji: "🔥"),
+                TeamMember(nam: "Theo Carrel '20", titl: "Developer", home: "New York, NY", liner: "It really do be like that sometimes", emoji: "🔥"),
                 TeamMember(nam: "Mike Fang '21", titl: "Developer", home: "San Jose, California", liner: "Do not fear mistakes. There are none", emoji: "🐺")]
         }
         
@@ -67,6 +69,7 @@ class TeamViewController: UIViewController, UITableViewDataSource, UITableViewDe
         tableView = UITableView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height))
         tableView.register(TeamTableViewCell.self, forCellReuseIdentifier: "TeamCell")
         tableView.tableFooterView = UIView()
+        tableView.backgroundColor = darkModeEnabled ? .darkCell : .white
         tableView.delegate = self
         tableView.dataSource = self
         view.addSubview(tableView)

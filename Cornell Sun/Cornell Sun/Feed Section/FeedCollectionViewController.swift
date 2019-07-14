@@ -20,6 +20,8 @@ class FeedCollectionViewController: UIViewController, UIScrollViewDelegate {
     var adCount = 1
     var adDict = [String: Int]()
     var currAdToken = ""
+    
+    let darkModeEnabled = UserDefaults.standard.bool(forKey: "darkModeEnabled")
 
     var bookmarkPosts: [PostObject] = {
         return PostOffice.instance.get() ?? []
@@ -70,11 +72,11 @@ class FeedCollectionViewController: UIViewController, UIScrollViewDelegate {
         }
 
         refreshControl.addTarget(self, action: #selector(refreshData), for: .valueChanged)
-
+        
         view.addSubview(collectionView)
 
         adapter.collectionView = collectionView
-        adapter.collectionView?.backgroundColor = .black5
+        adapter.collectionView?.backgroundColor = darkModeEnabled ? .black : .black5
         adapter.collectionView?.refreshControl = refreshControl
         adapter.dataSource = self
         adapter.scrollViewDelegate = self
@@ -182,8 +184,10 @@ extension FeedCollectionViewController {
 
     func setNavigationInformation() {
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        navigationController?.navigationBar.barTintColor = darkModeEnabled ? .darkCell : .white
+        navigationController?.navigationBar.barStyle = UIBarStyle.blackOpaque
         navigationController?.navigationBar.titleTextAttributes = [
-            NSAttributedString.Key.font: UIFont(name: "Sonnenstrahl-Ausgezeichnet", size: 30)!]
+            NSAttributedString.Key.font: UIFont(name: "Sonnenstrahl-Ausgezeichnet", size: 30)!, NSAttributedString.Key.foregroundColor: (darkModeEnabled ? UIColor.white : UIColor.black)]
         navigationItem.title = "The Cornell Daily Sun"
     }
 }

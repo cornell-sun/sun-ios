@@ -15,6 +15,8 @@ final class SearchCell: UICollectionViewCell {
     let offsetConstant: CGFloat = 12
     let imageViewWidthHeight: CGFloat = 90
     let timeLabelOffset: CGFloat = -8
+    
+    let darkModeEnabled = UserDefaults.standard.bool(forKey: "darkModeEnabled")
 
     var post: PostObject? {
         didSet {
@@ -39,7 +41,6 @@ final class SearchCell: UICollectionViewCell {
         label.text = ""
         label.numberOfLines = 1
         label.font = .photoCaption
-        label.textColor = .black
         return label
     }()
 
@@ -48,7 +49,6 @@ final class SearchCell: UICollectionViewCell {
         label.text = ""
         label.numberOfLines = 1
         label.font = .photoCaption
-        label.textColor = .black
         return label
     }()
 
@@ -57,7 +57,6 @@ final class SearchCell: UICollectionViewCell {
         label.text = ""
         label.numberOfLines = 0
         label.font = .photoCaption
-        label.textColor = .black
         return label
     }()
 
@@ -71,7 +70,10 @@ final class SearchCell: UICollectionViewCell {
     }
 
     func setupViews() {
-        self.backgroundColor = .white
+        self.backgroundColor = darkModeEnabled ? .darkCell : .white
+        authorLabel.textColor = darkModeEnabled ? .white90 : .black
+        timeStampLabel.textColor = darkModeEnabled ? .white60 : .black
+        contentLabel.textColor = darkModeEnabled ? .white90 : .black
         addSubview(imageView)
         addSubview(authorLabel)
         addSubview(timeStampLabel)

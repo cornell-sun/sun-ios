@@ -12,6 +12,8 @@ import SnapKit
 final class CategoryCell: UICollectionViewCell {
 
     var categoryLabelLeading = 17.0
+    
+    let darkModeEnabled = UserDefaults.standard.bool(forKey: "darkModeEnabled")
 
     var post: PostObject? {
         didSet {
@@ -31,14 +33,12 @@ final class CategoryCell: UICollectionViewCell {
         let label = UILabel()
         label.text = ""
         label.font = .secondaryHeader
-        label.textColor = .black60
         label.numberOfLines = 2
         return label
     }()
 
     let divider: UIView = {
         let view = UIView()
-        view.backgroundColor = .black40
         return view
     }()
 
@@ -52,7 +52,9 @@ final class CategoryCell: UICollectionViewCell {
     }
 
     func setupViews() {
-        self.backgroundColor = .white
+        self.backgroundColor = darkModeEnabled ? .darkCell : .white
+        categoryLabel.textColor = darkModeEnabled ? .white90 : .black60
+        divider.backgroundColor = darkModeEnabled ? .white40 : .black40
         addSubview(categoryLabel)
         addSubview(divider)
         categoryLabel.snp.makeConstraints { (make) in

@@ -32,6 +32,8 @@ class SectionCollectionViewController: UIViewController, UIScrollViewDelegate {
     var adCount = 1
     var sectionID = 0
     let spinToken = "spinner"
+    
+    let darkModeEnabled = UserDefaults.standard.bool(forKey: "darkModeEnabled")
 
     let collectionView: UICollectionView = {
         let view = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
@@ -92,7 +94,7 @@ class SectionCollectionViewController: UIViewController, UIScrollViewDelegate {
         
         view.addSubview(collectionView)
         adapter.collectionView = collectionView
-        adapter.collectionView?.backgroundColor = .collectionBackground
+        adapter.collectionView?.backgroundColor = darkModeEnabled ? .black : .collectionBackground
         adapter.collectionView?.refreshControl = refreshControl
         adapter.dataSource = self
         adapter.scrollViewDelegate = self
@@ -107,9 +109,9 @@ class SectionCollectionViewController: UIViewController, UIScrollViewDelegate {
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        navigationController?.navigationBar.barTintColor = .white
+        navigationController?.navigationBar.barTintColor = darkModeEnabled ? .darkCell : .white
         navigationController?.navigationBar.titleTextAttributes = [
-            NSAttributedString.Key.font: UIFont.headerTitle
+            NSAttributedString.Key.font: UIFont.headerTitle, NSAttributedString.Key.foregroundColor: darkModeEnabled ? UIColor.white : UIColor.black
         ]
     }
 

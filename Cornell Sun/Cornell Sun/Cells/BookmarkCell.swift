@@ -16,6 +16,8 @@ final class BookmarkCell: UICollectionViewCell {
     let imageViewWidthHeight: CGFloat = 100
     let titleBottomInset: CGFloat = 8.5
     let authorHeight: CGFloat = 13
+    
+    let darkModeEnabled = UserDefaults.standard.bool(forKey: "darkModeEnabled")
 
     var post: PostObject? {
         didSet {
@@ -47,7 +49,6 @@ final class BookmarkCell: UICollectionViewCell {
         label.text = ""
         label.numberOfLines = 1
         label.font = .cellInformationText
-        label.textColor = .black60
         return label
     }()
 
@@ -61,7 +62,9 @@ final class BookmarkCell: UICollectionViewCell {
     }
 
     func setupViews() {
-        self.backgroundColor = .white
+        self.backgroundColor = darkModeEnabled ? .darkCell : .white
+        titleLabel.textColor = darkModeEnabled ? .white90 : .black
+        authorLabel.textColor = darkModeEnabled ? .white60 : .black60
         addSubview(imageView)
         addSubview(titleLabel)
         addSubview(authorLabel)

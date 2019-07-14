@@ -26,12 +26,16 @@ class TeamTableViewCell: UITableViewCell {
     var originLabel: UILabel!
     var linerLabel: UILabel!
     
+    let darkModeEnabled = UserDefaults.standard.bool(forKey: "darkModeEnabled")
+    
     override func awakeFromNib() {
         super.awakeFromNib()
     }
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
+        contentView.backgroundColor = .darkCell
 
         emojiLabel = UILabel()
         contentView.addSubview(emojiLabel)
@@ -43,6 +47,7 @@ class TeamTableViewCell: UITableViewCell {
         emojiLabel.font = UIFont.boldSystemFont(ofSize: 16)
 
         nameLabel = UILabel()
+        nameLabel.textColor = darkModeEnabled ? .white : .black
         contentView.addSubview(nameLabel)
         nameLabel.snp.makeConstraints { make in
             make.height.equalTo(heightLabel)
@@ -52,6 +57,7 @@ class TeamTableViewCell: UITableViewCell {
         nameLabel.font = UIFont.boldSystemFont(ofSize: 16)
 
         titleLabel = UILabel()
+        titleLabel.textColor = darkModeEnabled ? .white90 : .black
         contentView.addSubview(titleLabel)
         titleLabel.snp.makeConstraints { make in
             make.height.equalTo(heightLabel)
@@ -61,6 +67,7 @@ class TeamTableViewCell: UITableViewCell {
         titleLabel.font = UIFont.systemFont(ofSize: 13)
 
         originLabel = UILabel()
+        originLabel.textColor = darkModeEnabled ? .white90 : .black
         contentView.addSubview(originLabel)
         originLabel.snp.makeConstraints { make in
             make.height.equalTo(heightLabel)
@@ -70,6 +77,7 @@ class TeamTableViewCell: UITableViewCell {
         originLabel.font = UIFont.systemFont(ofSize: 13)
 
         linerLabel = UILabel()
+        linerLabel.textColor = darkModeEnabled ? .white90 : .black
         contentView.addSubview(linerLabel)
         linerLabel.snp.makeConstraints { make in
             make.height.equalTo(heightLabel)

@@ -26,6 +26,8 @@ class ShareBarView: UIView {
     let shareTrailingPadding: CGFloat = 28
     let shareWidth: CGFloat = 23
     let shareHeight: CGFloat = 32
+    
+    let darkModeEnabled = UserDefaults.standard.bool(forKey: "darkModeEnabled")
 
     init() {
         super.init(frame: .zero)
@@ -41,7 +43,8 @@ class ShareBarView: UIView {
 
         bookmarkButton = Button()
         bookmarkButton.imageView?.contentMode = .scaleAspectFit
-        bookmarkButton.setImage(#imageLiteral(resourceName: "bookmarkIcon"), for: .normal)
+        let bookMarkImage = darkModeEnabled ? "bookmarkIconDark" : "bookmarkIconLight"
+        bookmarkButton.setImage(UIImage(named: bookMarkImage), for: .normal)
         bookmarkButton.addTarget(self, action: #selector(bookmark), for: .touchUpInside)
         addSubview(bookmarkButton)
         bookmarkButton.snp.makeConstraints { make in
@@ -53,7 +56,8 @@ class ShareBarView: UIView {
 
         shareButton = Button()
         shareButton.imageView?.contentMode = .scaleAspectFit
-        shareButton.setImage(#imageLiteral(resourceName: "share"), for: .normal)
+        let shareButtonImage = darkModeEnabled ? "shareIconDark" : "shareIconLight"
+        shareButton.setImage(UIImage(named: shareButtonImage), for: .normal)
         shareButton.addTarget(self, action: #selector(share), for: .touchUpInside)
         addSubview(shareButton)
         shareButton.snp.makeConstraints { make in
@@ -74,7 +78,13 @@ class ShareBarView: UIView {
     }
 
     func setBookmarkImage(didSelectBookmark: Bool) {
-        let image = didSelectBookmark ? #imageLiteral(resourceName: "bookmarkPressed") : #imageLiteral(resourceName: "bookmark")
+        let image: UIImage!
+        
+        if darkModeEnabled {
+            image = didSelectBookmark ? UIImage(named: "bookmarkIconSelectedDark") : UIImage(named: "bookmarkIconDark")
+        } else {
+            image = didSelectBookmark ? UIImage(named: "bookmarkIconSelectedLight") : UIImage(named: "bookmarkIconLight")
+        }
         bookmarkButton.setImage(image, for: .normal)
     }
 

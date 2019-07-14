@@ -27,8 +27,8 @@ class SearchViewController: UIViewController, UITableViewDelegate {
     let TRENDINGLABEL_TOP_BOTTOM_TRAILING: CGFloat = 8
     let DISTANCE: CGFloat = 300.0
     
-    //    var darkModeEnabled = UserDefaults.standard.bool(forKey: "darkModeEnabled")
-    var darkModeEnabled = true
+    let darkModeEnabled = UserDefaults.standard.bool(forKey: "darkModeEnabled")
+    
 
     let collectionView: UICollectionView = {
         let view = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())

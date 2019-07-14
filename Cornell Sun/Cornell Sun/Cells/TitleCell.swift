@@ -13,6 +13,8 @@ final class TitleCell: UICollectionViewCell {
     var topOffset: CGFloat = 15
     var leftRightInset: CGFloat = 17
     var bottomInset: CGFloat = 5
+    
+    let darkModeEnabled = UserDefaults.standard.bool(forKey: "darkModeEnabled")
 
     var post: PostObject? {
         didSet {
@@ -27,7 +29,6 @@ final class TitleCell: UICollectionViewCell {
         let label = UILabel()
         label.text = ""
         label.numberOfLines = 4
-        label.textColor = .black90
         label.font = .articleTitle
         return label
     }()
@@ -42,7 +43,8 @@ final class TitleCell: UICollectionViewCell {
     }
 
     func setupViews() {
-        self.backgroundColor = .white
+        self.backgroundColor = darkModeEnabled ? .darkCell : .white
+        titleLabel.textColor = darkModeEnabled ? .white90 : .black90
         addSubview(titleLabel)
         titleLabel.snp.makeConstraints { (make) in
             make.leading.trailing.equalToSuperview().inset(leftRightInset)

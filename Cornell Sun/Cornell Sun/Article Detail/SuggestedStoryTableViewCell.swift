@@ -17,11 +17,13 @@ class SuggestedStoryTableViewCell: UITableViewCell {
     var storyImageView: UIImageView!
     var headlineLabel: UILabel!
     var bylineLabel: UILabel!
+    
+    let darkModeEnabled = UserDefaults.standard.bool(forKey: "darkModeEnabled")
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
-        backgroundColor = .white
+        backgroundColor = darkModeEnabled ? .darkCell : .white
         selectionStyle = .none
 
         storyImageView = UIImageView()
@@ -37,7 +39,7 @@ class SuggestedStoryTableViewCell: UITableViewCell {
         headlineLabel = UILabel()
         headlineLabel.numberOfLines = 3
         headlineLabel.font = .articleTitle
-        headlineLabel.textColor = .black90
+        headlineLabel.textColor = darkModeEnabled ? .white90 : .black90
         contentView.addSubview(headlineLabel)
 
         headlineLabel.snp.makeConstraints { make in
@@ -48,7 +50,7 @@ class SuggestedStoryTableViewCell: UITableViewCell {
 
         bylineLabel = UILabel()
         bylineLabel.font = .cellInformationText
-        bylineLabel.textColor = .black60
+        bylineLabel.textColor = darkModeEnabled ? .white60 : .black60
         contentView.addSubview(bylineLabel)
 
         bylineLabel.snp.makeConstraints { make in

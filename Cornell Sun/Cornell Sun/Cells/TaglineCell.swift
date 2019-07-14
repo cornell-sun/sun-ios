@@ -10,6 +10,8 @@ import UIKit
 import SnapKit
 
 final class TaglineCell: UICollectionViewCell {
+    
+    let darkModeEnabled = UserDefaults.standard.bool(forKey: "darkModeEnabled")
 
     var post: PostObject? {
         didSet {
@@ -38,7 +40,8 @@ final class TaglineCell: UICollectionViewCell {
     }
 
     func setupViews() {
-        self.backgroundColor = .white
+        self.backgroundColor = darkModeEnabled ? .darkCell : .white
+        taglineLabel.textColor = darkModeEnabled ? .white90 : .black60
         addSubview(taglineLabel)
         taglineLabel.snp.makeConstraints { (make) in
 //            make.centerY.equalToSuperview()
