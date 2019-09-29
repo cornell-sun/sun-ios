@@ -8,8 +8,8 @@
 
 import Foundation
 import IGListKit
-import HTMLString
-import Kingfisher
+//import HTMLString
+//import Kingfisher
 
 class PostObject: NSObject, Codable, ListDiffable {
 

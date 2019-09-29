@@ -51,7 +51,8 @@ class MastheadViewController: UIViewController {
             make.width.lessThanOrEqualToSuperview()
         }
 
-        imageView.kf.setImage(with: imageURL)
+//        imageView.kf.setImage(with: imageURL)
+        //CHANGE ME
     }
 
 }

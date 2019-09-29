@@ -248,7 +248,8 @@ class ArticleStackViewController: UIViewController {
         let imageView = UIImageView()
         imageView.layer.masksToBounds = true
         imageView.contentMode = .scaleAspectFit
-        imageView.kf.setImage(with: URL(string: imageURLString))
+//        imageView.kf.setImage(with: URL(string: imageURLString))
+        //CHANGE ME
         view.addSubview(imageView)
         stackView.addArrangedSubview(view)
         imageView.snp.makeConstraints { make in

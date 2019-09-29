@@ -1,28 +1,44 @@
 PODS:
-  - Alamofire (4.7.3)
-  - Crashlytics (3.11.1):
-    - Fabric (~> 1.8.1)
-  - Fabric (1.8.2)
+  - Alamofire (4.9.0)
+  - Crashlytics (3.14.0):
+    - Fabric (~> 1.10.2)
+  - Fabric (1.10.2)
   - FLAnimatedImage (1.0.12)
-  - Google-Mobile-Ads-SDK (7.35.2)
-  - HTMLString (4.0.2)
+  - Google-Mobile-Ads-SDK (7.50.0):
+    - GoogleAppMeasurement (~> 6.0)
+  - GoogleAppMeasurement (6.1.2):
+    - GoogleUtilities/AppDelegateSwizzler (~> 6.0)
+    - GoogleUtilities/MethodSwizzler (~> 6.0)
+    - GoogleUtilities/Network (~> 6.0)
+    - "GoogleUtilities/NSData+zlib (~> 6.0)"
+    - nanopb (~> 0.3)
+  - GoogleUtilities/AppDelegateSwizzler (6.3.0):
+    - GoogleUtilities/Environment
+    - GoogleUtilities/Logger
+    - GoogleUtilities/Network
+  - GoogleUtilities/Environment (6.3.0)
+  - GoogleUtilities/Logger (6.3.0):
+    - GoogleUtilities/Environment
+  - GoogleUtilities/MethodSwizzler (6.3.0):
+    - GoogleUtilities/Logger
+  - GoogleUtilities/Network (6.3.0):
+    - GoogleUtilities/Logger
+    - "GoogleUtilities/NSData+zlib"
+    - GoogleUtilities/Reachability
+  - "GoogleUtilities/NSData+zlib (6.3.0)"
+  - GoogleUtilities/Reachability (6.3.0):
+    - GoogleUtilities/Logger
   - IGListKit (3.1.1):
     - IGListKit/Default (= 3.1.1)
   - IGListKit/Default (3.1.1):
     - IGListKit/Diffing
   - IGListKit/Diffing (3.1.1)
-  - ImageSlideshow (1.4.1):
-    - ImageSlideshow/Core (= 1.4.1)
-  - ImageSlideshow/Core (1.4.1)
-  - ImageSlideshow/Kingfisher (1.4.1):
-    - ImageSlideshow/Core
-    - Kingfisher (> 3.0)
-  - IQKeyboardManagerSwift (6.2.0)
-  - Kingfisher (4.7.0)
-  - ModelMapper (9.0.0)
-  - Motion (1.4.3):
-    - Motion/Core (= 1.4.3)
-  - Motion/Core (1.4.3)
+  - ModelMapper (10.0.0):
+    - ModelMapper/Core (= 10.0.0)
+  - ModelMapper/Core (10.0.0)
+  - Motion (3.1.0):
+    - Motion/Core (= 3.1.0)
+  - Motion/Core (3.1.0)
   - Moya (9.0.0):
     - Moya/Core (= 9.0.0)
   - Moya-ModelMapper (5.0.0):
@@ -33,7 +49,12 @@ PODS:
   - Moya/Core (9.0.0):
     - Alamofire (~> 4.1)
     - Result (~> 3.0)
-  - OneSignal (2.9.3)
+  - nanopb (0.3.901):
+    - nanopb/decode (= 0.3.901)
+    - nanopb/encode (= 0.3.901)
+  - nanopb/decode (0.3.901)
+  - nanopb/encode (0.3.901)
+  - OneSignal (2.11.1)
   - PINCache (2.3)
   - PINRemoteImage (2.1.4):
     - PINRemoteImage/FLAnimatedImage (= 2.1.4)
@@ -43,46 +64,41 @@ PODS:
     - FLAnimatedImage (>= 1.0)
     - PINRemoteImage/Core
   - Result (3.2.4)
-  - SkeletonView (1.4.1)
+  - SkeletonView (1.8.2)
   - SnapKit (4.2.0)
   - SwiftSoup (1.7.4)
-  - UICircularProgressRing (4.1.0)
+  - UICircularProgressRing (4.0.0)
 
 DEPENDENCIES:
   - Crashlytics
   - Fabric
   - Google-Mobile-Ads-SDK
-  - HTMLString (~> 4.0)
   - IGListKit (~> 3.1.1)
-  - ImageSlideshow (from `https://github.com/AAAstorga/ImageSlideshow.git`, commit `bec5f17bd71d32d289378e1ba787a55cfa80bcce`)
-  - ImageSlideshow/Kingfisher (from `https://github.com/AAAstorga/ImageSlideshow.git`, commit `bec5f17bd71d32d289378e1ba787a55cfa80bcce`)
-  - IQKeyboardManagerSwift
-  - Kingfisher (~> 4.7.0)
-  - Motion
+  - Motion (= 3.1.0)
   - Moya
   - Moya-ModelMapper (= 5.0.0)
   - OneSignal (< 3.0, >= 2.6.2)
   - PINRemoteImage
   - SkeletonView
   - SnapKit (~> 4.0)
-  - SwiftSoup
-  - UICircularProgressRing
+  - SwiftSoup (= 1.7.4)
+  - UICircularProgressRing (= 4.0.0)
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  trunk:
     - Alamofire
     - Crashlytics
     - Fabric
     - FLAnimatedImage
     - Google-Mobile-Ads-SDK
-    - HTMLString
+    - GoogleAppMeasurement
+    - GoogleUtilities
     - IGListKit
-    - IQKeyboardManagerSwift
-    - Kingfisher
     - ModelMapper
     - Motion
     - Moya
     - Moya-ModelMapper
+    - nanopb
     - OneSignal
     - PINCache
     - PINRemoteImage
@@ -92,40 +108,29 @@ SPEC REPOS:
     - SwiftSoup
     - UICircularProgressRing
 
-EXTERNAL SOURCES:
-  ImageSlideshow:
-    :commit: bec5f17bd71d32d289378e1ba787a55cfa80bcce
-    :git: https://github.com/AAAstorga/ImageSlideshow.git
-
-CHECKOUT OPTIONS:
-  ImageSlideshow:
-    :commit: bec5f17bd71d32d289378e1ba787a55cfa80bcce
-    :git: https://github.com/AAAstorga/ImageSlideshow.git
-
 SPEC CHECKSUMS:
-  Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
-  Crashlytics: ca7ab4bc304aa216bdc2e4c1a96389ee77252203
-  Fabric: d2b22f443ba195d8a7cc204da230977c72733b40
+  Alamofire: afc3e7c6db61476cb45cdd23fed06bad03bbc321
+  Crashlytics: 540b7e5f5da5a042647227a5e3ac51d85eed06df
+  Fabric: 706c8b8098fff96c33c0db69cbf81f9c551d0d74
   FLAnimatedImage: 4a0b56255d9b05f18b6dd7ee06871be5d3b89e31
-  Google-Mobile-Ads-SDK: 8f07cc8eac6649fe648cabc97d67c8d20173624a
-  HTMLString: d346ba551d1b7e687190c948ec0c2ddaf4057544
+  Google-Mobile-Ads-SDK: d48dbaf5bae1ab7a94a9786f493c26c454bc6f16
+  GoogleAppMeasurement: 0ae90be1cc4dad40f4a27fc767ef59fa032ec87b
+  GoogleUtilities: 9c2c544202301110b29f7974a82e77fdcf12bf51
   IGListKit: cb97f405ae43e59fe1da74271e19427ec20d3c07
-  ImageSlideshow: 1a742794b9e6fd388a3d2bd36cb063c6e564d6aa
-  IQKeyboardManagerSwift: b07ccf9d8cafe993dcd6cb794eb4ba34611a0c4e
-  Kingfisher: da6b005aa96d37698e3e4f1ccfe96a5b9bbf27d6
-  ModelMapper: d73910ce35d8dca0042bcea4cddc24050014e09a
-  Motion: 153ba49692997888556c7a95207278a8b1f8be95
+  ModelMapper: a8dbf2a2003bf626627b9fe7c9a22b3405a30404
+  Motion: adfaf0a123322dfde099f49cf6cbe3abfa8f3899
   Moya: cf5e6ee93af526532f92614004b8ad2ea60fd845
   Moya-ModelMapper: fc14d8c7d6466f11aea83e785c7f2c4c521fead6
-  OneSignal: a506e3bc61d2030f0757faf9bd783a9b211c6e3c
+  nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
+  OneSignal: d51d2ccf5176176eb057c1f3a9847e2dc0a43a64
   PINCache: ce36ed282031b92fc7733ffe831f474ff80fddc2
   PINRemoteImage: 4ac4011c5caefd6befd99758e09becede05d3226
   Result: d2d07204ce72856f1fd9130bbe42c35a7b0fea10
-  SkeletonView: 60d6ce7edb0cb4c7758db33c74add50392b3c475
+  SkeletonView: bb27c39857e5492136f02ee8a3aa78de55d12ecd
   SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
   SwiftSoup: 92f5b348c131aed8af04f4326db1579ab19fa08c
-  UICircularProgressRing: 5a32c01f54474571b1e66e8fa050c0f83d6d981b
+  UICircularProgressRing: dd448c3ff2176e3b2ba3f100f329c489a5389571
 
-PODFILE CHECKSUM: ad4fc88fea1fc843e9eb3e3f0308802bcc10c0c2
+PODFILE CHECKSUM: c9d8ce3ba9e1aae367d9dc2dead8bb2534ec4b1a
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.8.1

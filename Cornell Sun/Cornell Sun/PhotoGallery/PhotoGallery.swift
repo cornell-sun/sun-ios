@@ -9,7 +9,7 @@
 import UIKit
 import SnapKit
 import UICircularProgressRing
-import Kingfisher
+//import Kingfisher
 import Motion
 
 struct PhotoGalleryConstants {
@@ -120,10 +120,11 @@ extension PhotoGallery: UICollectionViewDataSource, UICollectionViewDelegate, UI
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "image-cell", for: indexPath) as? ImageCollectionCell else { return UICollectionViewCell() }
 
-        cell.imageView.kf.setImage(with: attachments[indexPath.item].url, progressBlock: { receivedSize, totalSize in
-            let percentage = (CGFloat(receivedSize) / CGFloat(totalSize)) * 100.0
-            cell.updatePercentage(percentage: percentage)
-        })
+//        cell.imageView.kf.setImage(with: attachments[indexPath.item].url, progressBlock: { receivedSize, totalSize in
+//            let percentage = (CGFloat(receivedSize) / CGFloat(totalSize)) * 100.0
+//            cell.updatePercentage(percentage: percentage)
+//        })
+        //CHANGE ME
         cell.imageView.motionIdentifier = "photo_\(attachments[indexPath.item].id!)"
         if pinchToZoom {
             cell.addPinchGesture()

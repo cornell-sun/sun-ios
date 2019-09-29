@@ -7,10 +7,10 @@
 //
 
 import UIKit
-import Kingfisher
+//import Kingfisher
 import GoogleMobileAds
 import OneSignal
-import IQKeyboardManagerSwift
+//import IQKeyboardManagerSwift
 import Fabric
 import Crashlytics
 
@@ -24,7 +24,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        IQKeyboardManager.shared.enable = true
+//        IQKeyboardManager.shared.enable = true
+        //CHANGE ME
 
         // Set all navigation bar attributes
         UINavigationBar.appearance().backgroundColor = .white
@@ -66,8 +67,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.rootViewController = rootVC
 
         //Image cache settings
-        ImageCache.default.maxDiskCacheSize = 100 * 1024 * 1024 //100 mb
-        ImageCache.default.maxCachePeriodInSecond = 60 * 60 * 24 * 4 //4 days until its removed
+//        ImageCache.default.maxDiskCacheSize = 100 * 1024 * 1024 //100 mb
+//        ImageCache.default.maxCachePeriodInSecond = 60 * 60 * 24 * 4 //4 days until its removed
+        //CHANGE ME
 
         let userDefaults = UserDefaults.standard
         if !userDefaults.bool(forKey: hasOnboardedKey) {

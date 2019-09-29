@@ -9,7 +9,7 @@
 import UIKit
 import IGListKit
 import SnapKit
-import Kingfisher
+//import Kingfisher
 
 final class VideoCell: UICollectionViewCell {
 

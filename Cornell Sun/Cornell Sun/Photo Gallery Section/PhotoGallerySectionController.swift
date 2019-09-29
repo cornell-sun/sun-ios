@@ -8,7 +8,7 @@
 
 import UIKit
 import IGListKit
-import ImageSlideshow
+//import ImageSlideshow
 
 // swiftlint:disable:next type_name
 enum photoGalleryCellType: Int {

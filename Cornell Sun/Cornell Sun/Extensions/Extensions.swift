@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Kingfisher
+//import Kingfisher
 
 let tempLabel = UILabel()
 
@@ -44,7 +44,8 @@ func taptic(style: UIImpactFeedbackGenerator.FeedbackStyle) {
 }
 
 func cacheImage(imageURL: URL) {
-    KingfisherManager.shared.retrieveImage(with: imageURL, options: nil, progressBlock: nil, completionHandler: nil)
+//    KingfisherManager.shared.retrieveImage(with: imageURL, options: nil, progressBlock: nil, completionHandler: nil)
+    //CHANGE ME
 }
 
 extension UITextView {

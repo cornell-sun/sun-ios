@@ -72,7 +72,8 @@ class CommentTableViewCell: UITableViewCell {
         timestampLabel.text = comment.date.timeAgoSinceNow()
         commentTextView.text = comment.comment
         if let url = comment.profileImageURL {
-            profileImageView.kf.setImage(with: url)
+//            profileImageView.kf.setImage(with: url)
+            //CHANGE ME
         }
         commentTextView.snp.makeConstraints { make in
             make.top.equalTo(profileImageView.snp.bottom).offset(textViewTopOffset)

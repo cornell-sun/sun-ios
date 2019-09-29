@@ -9,7 +9,7 @@
 import UIKit
 import IGListKit
 import SnapKit
-import Kingfisher
+//import Kingfisher
 
 final class ImageCell: UICollectionViewCell {
 
@@ -58,8 +58,9 @@ final class ImageCell: UICollectionViewCell {
     func setupHeroImage() {
         if let heroImageUrl = post?.featuredMediaImages?.mediumLarge?.url {
             //activityView.stopAnimating()
-            heroImageView.kf.indicatorType = .activity
-            heroImageView.kf.setImage(with: heroImageUrl)
+            //CHANGE ME
+//            heroImageView.kf.indicatorType = .activity
+//            heroImageView.kf.setImage(with: heroImageUrl)
         }
     }
 }
