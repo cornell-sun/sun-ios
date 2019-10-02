@@ -148,9 +148,8 @@ class ArticleHeaderView: UIView {
 
     func setupHeroImage(with post: PostObject) {
         if let heroImageUrl = post.featuredMediaImages?.mediumLarge?.url {
-//            heroImageView.kf.indicatorType = .activity
-//            heroImageView.kf.setImage(with: heroImageUrl)
-            //CHANGE ME
+            heroImageView.kf.indicatorType = .activity
+            heroImageView.kf.setImage(with: heroImageUrl)
         } else {
             heroImageView.snp.updateConstraints { make in
                 make.height.equalTo(0)

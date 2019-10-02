@@ -3,7 +3,6 @@ PODS:
   - Crashlytics (3.14.0):
     - Fabric (~> 1.10.2)
   - Fabric (1.10.2)
-  - FLAnimatedImage (1.0.12)
   - Google-Mobile-Ads-SDK (7.50.0):
     - GoogleAppMeasurement (~> 6.0)
   - GoogleAppMeasurement (6.1.2):
@@ -28,109 +27,128 @@ PODS:
   - "GoogleUtilities/NSData+zlib (6.3.0)"
   - GoogleUtilities/Reachability (6.3.0):
     - GoogleUtilities/Logger
-  - IGListKit (3.1.1):
-    - IGListKit/Default (= 3.1.1)
-  - IGListKit/Default (3.1.1):
+  - HTMLString (5.0.0)
+  - IGListKit (3.4.0):
+    - IGListKit/Default (= 3.4.0)
+  - IGListKit/Default (3.4.0):
     - IGListKit/Diffing
-  - IGListKit/Diffing (3.1.1)
+  - IGListKit/Diffing (3.4.0)
+  - ImageSlideshow (1.5.0):
+    - ImageSlideshow/Core (= 1.5.0)
+  - ImageSlideshow/Core (1.5.0)
+  - ImageSlideshow/Kingfisher (1.5.0):
+    - ImageSlideshow/Core
+    - Kingfisher (> 3.0)
+  - IQKeyboardManagerSwift (6.5.1)
+  - Kingfisher (5.8.1):
+    - Kingfisher/Core (= 5.8.1)
+  - Kingfisher/Core (5.8.1)
   - ModelMapper (10.0.0):
     - ModelMapper/Core (= 10.0.0)
   - ModelMapper/Core (10.0.0)
-  - Motion (3.1.0):
-    - Motion/Core (= 3.1.0)
-  - Motion/Core (3.1.0)
-  - Moya (9.0.0):
-    - Moya/Core (= 9.0.0)
-  - Moya-ModelMapper (5.0.0):
-    - Moya-ModelMapper/Core (= 5.0.0)
-  - Moya-ModelMapper/Core (5.0.0):
-    - ModelMapper
-    - Moya (~> 9.0.0)
-  - Moya/Core (9.0.0):
+  - Motion (3.1.3):
+    - Motion/Core (= 3.1.3)
+  - Motion/Core (3.1.3)
+  - Moya (13.0.1):
+    - Moya/Core (= 13.0.1)
+  - Moya-ModelMapper (9.0.0):
+    - Moya-ModelMapper/Core (= 9.0.0)
+  - Moya-ModelMapper/Core (9.0.0):
+    - ModelMapper (~> 10.0)
+    - Moya (~> 13.0)
+  - Moya/Core (13.0.1):
     - Alamofire (~> 4.1)
-    - Result (~> 3.0)
+    - Result (~> 4.1)
   - nanopb (0.3.901):
     - nanopb/decode (= 0.3.901)
     - nanopb/encode (= 0.3.901)
   - nanopb/decode (0.3.901)
   - nanopb/encode (0.3.901)
   - OneSignal (2.11.1)
-  - PINCache (2.3)
-  - PINRemoteImage (2.1.4):
-    - PINRemoteImage/FLAnimatedImage (= 2.1.4)
-  - PINRemoteImage/Core (2.1.4):
-    - PINCache (>= 2.1)
-  - PINRemoteImage/FLAnimatedImage (2.1.4):
-    - FLAnimatedImage (>= 1.0)
-    - PINRemoteImage/Core
-  - Result (3.2.4)
+  - Result (4.1.0)
   - SkeletonView (1.8.2)
-  - SnapKit (4.2.0)
-  - SwiftSoup (1.7.4)
-  - UICircularProgressRing (4.0.0)
+  - SnapKit (5.0.1)
+  - SwiftSoup (2.2.1)
+  - UICircularProgressRing (6.3.0)
 
 DEPENDENCIES:
   - Crashlytics
   - Fabric
   - Google-Mobile-Ads-SDK
-  - IGListKit (~> 3.1.1)
-  - Motion (= 3.1.0)
+  - HTMLString
+  - IGListKit
+  - ImageSlideshow (from `https://github.com/cornell-sun/ImageSlideshow`, commit `d63205b98d5e3bed3e4e1273eb2ae3f4c7d66790`)
+  - ImageSlideshow/Kingfisher (from `https://github.com/cornell-sun/ImageSlideshow`, commit `d63205b98d5e3bed3e4e1273eb2ae3f4c7d66790`)
+  - IQKeyboardManagerSwift
+  - Kingfisher
+  - Motion
   - Moya
-  - Moya-ModelMapper (= 5.0.0)
+  - Moya (>= 13.0.1)
+  - Moya-ModelMapper
   - OneSignal (< 3.0, >= 2.6.2)
-  - PINRemoteImage
   - SkeletonView
-  - SnapKit (~> 4.0)
-  - SwiftSoup (= 1.7.4)
-  - UICircularProgressRing (= 4.0.0)
+  - SnapKit
+  - SwiftSoup
+  - UICircularProgressRing
 
 SPEC REPOS:
   trunk:
     - Alamofire
     - Crashlytics
     - Fabric
-    - FLAnimatedImage
     - Google-Mobile-Ads-SDK
     - GoogleAppMeasurement
     - GoogleUtilities
+    - HTMLString
     - IGListKit
+    - IQKeyboardManagerSwift
+    - Kingfisher
     - ModelMapper
     - Motion
     - Moya
     - Moya-ModelMapper
     - nanopb
     - OneSignal
-    - PINCache
-    - PINRemoteImage
     - Result
     - SkeletonView
     - SnapKit
     - SwiftSoup
     - UICircularProgressRing
 
+EXTERNAL SOURCES:
+  ImageSlideshow:
+    :commit: d63205b98d5e3bed3e4e1273eb2ae3f4c7d66790
+    :git: https://github.com/cornell-sun/ImageSlideshow
+
+CHECKOUT OPTIONS:
+  ImageSlideshow:
+    :commit: d63205b98d5e3bed3e4e1273eb2ae3f4c7d66790
+    :git: https://github.com/cornell-sun/ImageSlideshow
+
 SPEC CHECKSUMS:
   Alamofire: afc3e7c6db61476cb45cdd23fed06bad03bbc321
   Crashlytics: 540b7e5f5da5a042647227a5e3ac51d85eed06df
   Fabric: 706c8b8098fff96c33c0db69cbf81f9c551d0d74
-  FLAnimatedImage: 4a0b56255d9b05f18b6dd7ee06871be5d3b89e31
   Google-Mobile-Ads-SDK: d48dbaf5bae1ab7a94a9786f493c26c454bc6f16
   GoogleAppMeasurement: 0ae90be1cc4dad40f4a27fc767ef59fa032ec87b
   GoogleUtilities: 9c2c544202301110b29f7974a82e77fdcf12bf51
-  IGListKit: cb97f405ae43e59fe1da74271e19427ec20d3c07
+  HTMLString: 20374dc0195423d02569e87561f01153fca0c364
+  IGListKit: 7a5d788e9fb746bcd402baa8e8b24bc3bd2a5a07
+  ImageSlideshow: 137bb409baaf6f6d5c0808ed559d304dfc40eba0
+  IQKeyboardManagerSwift: 9ac7524fad9f9fe9a3b98c927e7772471ca546d2
+  Kingfisher: de969e451c81ca6c07a454bc36fea84b8b08c3c7
   ModelMapper: a8dbf2a2003bf626627b9fe7c9a22b3405a30404
-  Motion: adfaf0a123322dfde099f49cf6cbe3abfa8f3899
-  Moya: cf5e6ee93af526532f92614004b8ad2ea60fd845
-  Moya-ModelMapper: fc14d8c7d6466f11aea83e785c7f2c4c521fead6
+  Motion: cf1e060e489f6661126374d5c60dbd2ed991605c
+  Moya: f4a4b80ff2f8a4ffc208dfb31cd91636622fee6e
+  Moya-ModelMapper: 4948625af7fc5eef41ad9fdfe0c3517170b50960
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   OneSignal: d51d2ccf5176176eb057c1f3a9847e2dc0a43a64
-  PINCache: ce36ed282031b92fc7733ffe831f474ff80fddc2
-  PINRemoteImage: 4ac4011c5caefd6befd99758e09becede05d3226
-  Result: d2d07204ce72856f1fd9130bbe42c35a7b0fea10
+  Result: bd966fac789cc6c1563440b348ab2598cc24d5c7
   SkeletonView: bb27c39857e5492136f02ee8a3aa78de55d12ecd
-  SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
-  SwiftSoup: 92f5b348c131aed8af04f4326db1579ab19fa08c
-  UICircularProgressRing: dd448c3ff2176e3b2ba3f100f329c489a5389571
+  SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
+  SwiftSoup: a91d3c96ecb6f8f13005552ef60f9075aae4a7f3
+  UICircularProgressRing: e700fb0505328e88ee53c4ed92bee6d1a5b8bbe3
 
-PODFILE CHECKSUM: c9d8ce3ba9e1aae367d9dc2dead8bb2534ec4b1a
+PODFILE CHECKSUM: 9914ae10f5571a64bc987d967b1493fa12138f7b
 
 COCOAPODS: 1.8.1

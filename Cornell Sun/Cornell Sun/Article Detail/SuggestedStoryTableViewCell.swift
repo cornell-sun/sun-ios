@@ -63,8 +63,7 @@ class SuggestedStoryTableViewCell: UITableViewCell {
 
     func setup(for suggestedStory: SuggestedStoryObject) {
         if let url = suggestedStory.featuredMediaImages?.mediumLarge?.url {
-//            storyImageView.kf.setImage(with: url)
-            //CHANGE ME
+            storyImageView.kf.setImage(with: url)
         } else {
             storyImageView.snp.updateConstraints { make in
                 make.width.height.equalTo(0)

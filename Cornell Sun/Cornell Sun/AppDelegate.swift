@@ -7,10 +7,10 @@
 //
 
 import UIKit
-//import Kingfisher
+import Kingfisher
 import GoogleMobileAds
 import OneSignal
-//import IQKeyboardManagerSwift
+import IQKeyboardManagerSwift
 import Fabric
 import Crashlytics
 
@@ -24,8 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-//        IQKeyboardManager.shared.enable = true
-        //CHANGE ME
+        IQKeyboardManager.shared.enable = true
 
         // Set all navigation bar attributes
         UINavigationBar.appearance().backgroundColor = .white
@@ -67,9 +66,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.rootViewController = rootVC
 
         //Image cache settings
-//        ImageCache.default.maxDiskCacheSize = 100 * 1024 * 1024 //100 mb
-//        ImageCache.default.maxCachePeriodInSecond = 60 * 60 * 24 * 4 //4 days until its removed
-        //CHANGE ME
+        ImageCache.default.maxDiskCacheSize = 100 * 1024 * 1024 //100 mb
+        ImageCache.default.maxCachePeriodInSecond = 60 * 60 * 24 * 4 //4 days until its removed
 
         let userDefaults = UserDefaults.standard
         if !userDefaults.bool(forKey: hasOnboardedKey) {
@@ -147,7 +145,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
 
         API.request(target: .urlToID(url: url)) { response in
-            guard let tryID = try? response?.mapString(), let idString = tryID, let id = Int(idString), id != 0 else { return }
+            guard let tryID = ((try? response?.mapString()) as String??), let idString = tryID, let id = Int(idString), id != 0 else { return }
             getDeeplinkedPostWithId(id, completion: { (posts, mainHeadlinePost, deeplinkedPost) in
                 guard let deeplinkedPost = deeplinkedPost else { return }
                 let tabBarController = TabBarViewController(with: posts, mainHeadlinePost: mainHeadlinePost)

@@ -9,8 +9,8 @@
 import UIKit
 import IGListKit
 import SnapKit
-//import Kingfisher
-//import ImageSlideshow
+import Kingfisher
+import ImageSlideshow
 import Motion
 
 protocol PhotoChangedDelegate: class {

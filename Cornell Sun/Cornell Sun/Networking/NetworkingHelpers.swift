@@ -53,6 +53,7 @@ func fetchPosts(target: SunAPI, completion: @escaping PostObjectCompletionBlock)
         }
         completion(postObjects, nil)
     }
+    completion(postObjects, nil)
 }
 
 func getTrending(completion: @escaping TrendingCompletionBlock) {
@@ -63,6 +64,7 @@ func getTrending(completion: @escaping TrendingCompletionBlock) {
             else { completion([String](), .parsingError); return }
         completion(trending, nil)
     }
+    completion([String](), nil)
 }
 
 func getComments(postID: Int, completion: @escaping CommentsCompletionBlock) {
@@ -84,6 +86,7 @@ func getComments(postID: Int, completion: @escaping CommentsCompletionBlock) {
             completion([CommentObject](), .parsingError)
         }
     }
+    completion([CommentObject](), .parsingError)
 }
 
 func getPostsFromIDs(_ ids: [Int], completion: @escaping ([Int: PostObject], APIErrors?) -> Void) {
@@ -106,6 +109,7 @@ func getPostsFromIDs(_ ids: [Int], completion: @escaping ([Int: PostObject], API
             }
             group.leave()
         }
+        group.leave()
     }
 
     group.notify(queue: .main) {
@@ -127,16 +131,18 @@ func getPostFromID(_ id: Int, completion: @escaping (PostObject) -> Void) {
             fatalError()
         }
     }
+    fatalError()
 }
 
 func getIDFromURL(_ url: URL, completion: @escaping (Int?) -> Void) {
     API.request(target: .urlToID(url: url)) { response in
-        guard let tryID = try? response?.mapString(), let idString = tryID, let id = Int(idString), id != 0 else {
+        guard let tryID = ((try? response?.mapString()) as String??), let idString = tryID, let id = Int(idString), id != 0 else {
             completion(nil)
             return
         }
         completion(id)
     }
+    completion(0)
 }
 
 func prepareInitialPosts(callback: @escaping ([ListDiffable], PostObject?) -> Void) {
