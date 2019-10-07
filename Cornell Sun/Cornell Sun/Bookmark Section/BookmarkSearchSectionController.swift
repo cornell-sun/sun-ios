@@ -56,7 +56,7 @@ extension BookmarkSearchSectionController: BookmarkPressedDelegate, SharePressed
     override func numberOfItems() -> Int {
         return 3
     }
-
+//
     override func sizeForItem(at index: Int) -> CGSize {
         guard let context = collectionContext, entry != nil else {return .zero}
         let width = context.containerSize.width

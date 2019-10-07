@@ -119,7 +119,7 @@ class SectionCollectionViewController: UIViewController, UIScrollViewDelegate {
     }
 
     fileprivate func isPostIdInBookmarks(post: PostObject, currListOfBookmarks: [PostObject]) -> PostObject? {
-        guard let index = currListOfBookmarks.index(where: {$0.id == post.id}) else { return nil }
+        guard let index = currListOfBookmarks.firstIndex(where: {$0.id == post.id}) else { return nil }
         return currListOfBookmarks[index]
     }
 

@@ -83,11 +83,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
         
-        //Initialize Google Mobile Ads SDKAds
-        //@TODO change ad ID from test ad to our specific ID
-        //our actual id ca-app-pub-4474706420182946~3782719574
-        //fake id ca-app-pub-3940256099942544/2934735716
-        GADMobileAds.configure(withApplicationID: "ca-app-pub-4474706420182946~3782719574")
+        GADMobileAds.sharedInstance().start(completionHandler: nil)
 
         //Set up Crashlytics
         Crashlytics.start(withAPIKey: fabricAPIKey())
@@ -145,7 +141,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
 
         API.request(target: .urlToID(url: url)) { response in
-            guard let tryID = try? response?.mapString(), let idString = tryID, let id = Int(idString), id != 0 else { return }
+            guard let tryID = ((try? response?.mapString()) as String??), let idString = tryID, let id = Int(idString), id != 0 else { return }
             getDeeplinkedPostWithId(id, completion: { (posts, mainHeadlinePost, deeplinkedPost) in
                 guard let deeplinkedPost = deeplinkedPost else { return }
                 let tabBarController = TabBarViewController(with: posts, mainHeadlinePost: mainHeadlinePost)
