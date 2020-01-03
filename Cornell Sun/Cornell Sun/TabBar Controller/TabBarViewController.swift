@@ -27,7 +27,6 @@ class TabBarViewController: UITabBarController {
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         // Do any additional setup after loading the view.
         view.backgroundColor = .white
-
         tabBar.backgroundColor = .white
         tabBar.backgroundImage = UIImage()
         tabBar.tintColor = .brick

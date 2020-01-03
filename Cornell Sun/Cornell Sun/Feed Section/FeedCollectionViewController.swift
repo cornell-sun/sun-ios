@@ -162,8 +162,7 @@ extension FeedCollectionViewController {
         fetchPosts(target: .posts(page: page)) { posts, error in
             if error == nil {
                 var postsWithAd: [ListDiffable] = posts
-                print(postsWithAd)
-                // postsWithAd.insert("adToken\(self.adCount)" as ListDiffable, at: 7)
+                postsWithAd.insert("adToken\(self.adCount)" as ListDiffable, at: 7)
                 self.adCount += 1
                 self.loading = false
                 self.feedData.append(contentsOf: postsWithAd)
