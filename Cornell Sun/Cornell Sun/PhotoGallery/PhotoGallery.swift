@@ -118,7 +118,9 @@ extension PhotoGallery: UICollectionViewDataSource, UICollectionViewDelegate, UI
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "image-cell", for: indexPath) as? ImageCollectionCell else { return UICollectionViewCell() }
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "image-cell", for: indexPath) as? ImageCollectionCell else {
+            return UICollectionViewCell()
+        }
 
         cell.imageView.kf.setImage(with: attachments[indexPath.item].url, progressBlock: { receivedSize, totalSize in
             let percentage = (CGFloat(receivedSize) / CGFloat(totalSize)) * 100.0
@@ -148,6 +150,6 @@ extension PhotoGallery: UICollectionViewDataSource, UICollectionViewDelegate, UI
 
 extension UIScrollView {
     var currentPage: Int {
-        return Int((self.contentOffset.x + (0.5*self.frame.size.width))/self.frame.width)
+        return Int((self.contentOffset.x + (0.5 * self.frame.size.width)) / self.frame.width)
     }
 }

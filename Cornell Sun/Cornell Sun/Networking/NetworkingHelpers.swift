@@ -91,7 +91,7 @@ func getComments(postID: Int, completion: @escaping CommentsCompletionBlock) {
 func getPostsFromIDs(_ ids: [Int], completion: @escaping ([Int: PostObject], APIErrors?) -> Void) {
     let group = DispatchGroup()
     var postsDict = [Int: PostObject]()
-
+    
     ids.forEach { id in
         group.enter()
         API.request(target: .post(postId: id)) { response in
@@ -107,11 +107,11 @@ func getPostsFromIDs(_ ids: [Int], completion: @escaping ([Int: PostObject], API
                 print(error)
                 return
             }
-
+            
         }
         group.leave()
     }
-
+    
     group.notify(queue: .main) {
         completion(postsDict, nil)
     }
@@ -148,9 +148,9 @@ func getIDFromURL(_ url: URL, completion: @escaping (Int?) -> Void) {
 func prepareInitialPosts(callback: @escaping ([ListDiffable], PostObject?) -> Void) {
     var headlinePost: PostObject?
     var postObjects: [ListDiffable] = []
-
+    
     let group = DispatchGroup()
-
+    
     group.enter()
     API.request(target: .featured) { (response) in
         if let response = response {
@@ -165,11 +165,11 @@ func prepareInitialPosts(callback: @escaping ([ListDiffable], PostObject?) -> Vo
         }
         group.leave()
     }
-
+    
     group.enter()
     API.request(target: .posts(page: 1)) { (response) in
         if let response = response {
-
+            
             do {
                 postObjects = try decoder.decode([PostObject].self, from: response.data)
                 postObjects.insert("adToken" as ListDiffable, at: 7)
@@ -178,10 +178,10 @@ func prepareInitialPosts(callback: @escaping ([ListDiffable], PostObject?) -> Vo
                 return
             }
         }
-
+        
         group.leave()
     }
-
+    
     group.notify(queue: .main) {
         //both network requests are done
         postObjects = postObjects.filter { post in
@@ -197,20 +197,20 @@ func getDeeplinkedPostWithId(_ id: Int, completion: @escaping ([ListDiffable], P
     var posts: [ListDiffable] = []
     var heroPost: PostObject?
     var deeplinkPost: PostObject?
-
+    
     group.enter()
     prepareInitialPosts { (postObjects, headlinePost) in
         posts = postObjects
         heroPost = headlinePost
         group.leave()
     }
-
+    
     group.enter()
     getPostFromID(id) { post in
         deeplinkPost = post
         group.leave()
     }
-
+    
     group.notify(queue: .main) {
         completion(posts, heroPost, deeplinkPost)
     }
