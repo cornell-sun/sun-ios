@@ -90,7 +90,7 @@ func getComments(postID: Int, completion: @escaping CommentsCompletionBlock) {
 }
 
 func getPostsFromIDs(_ ids: [Int], completion: @escaping ([Int: PostObject], APIErrors?) -> Void) {
-    let group = DispatchGroup()
+    let group = DispatchGroup.init()
     var postsDict = [Int: PostObject]()
 
     ids.forEach { id in
@@ -108,7 +108,6 @@ func getPostsFromIDs(_ ids: [Int], completion: @escaping ([Int: PostObject], API
                 print(error)
                 return
             }
-            group.leave()
         }
         group.leave()
     }
