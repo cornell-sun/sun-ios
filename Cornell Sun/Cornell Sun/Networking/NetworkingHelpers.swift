@@ -100,6 +100,7 @@ func getPostsFromIDs(_ ids: [Int], completion: @escaping ([Int: PostObject], API
                 print("error")
                 return
             }
+            
             do {
                 let post = try decoder.decode(PostObject.self, from: response.data)
                 postsDict[id] = post

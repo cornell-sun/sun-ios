@@ -1,48 +1,46 @@
 PODS:
-  - Alamofire (4.9.0)
+  - Alamofire (4.9.1)
   - Crashlytics (3.14.0):
     - Fabric (~> 1.10.2)
   - Fabric (1.10.2)
-  - Google-Mobile-Ads-SDK (7.50.0):
+  - Google-Mobile-Ads-SDK (7.53.1):
     - GoogleAppMeasurement (~> 6.0)
-  - GoogleAppMeasurement (6.1.2):
+  - GoogleAppMeasurement (6.1.7):
     - GoogleUtilities/AppDelegateSwizzler (~> 6.0)
     - GoogleUtilities/MethodSwizzler (~> 6.0)
     - GoogleUtilities/Network (~> 6.0)
     - "GoogleUtilities/NSData+zlib (~> 6.0)"
-    - nanopb (~> 0.3)
-  - GoogleUtilities/AppDelegateSwizzler (6.3.0):
+    - nanopb (= 0.3.9011)
+  - GoogleUtilities/AppDelegateSwizzler (6.4.0):
     - GoogleUtilities/Environment
     - GoogleUtilities/Logger
     - GoogleUtilities/Network
-  - GoogleUtilities/Environment (6.3.0)
-  - GoogleUtilities/Logger (6.3.0):
+  - GoogleUtilities/Environment (6.4.0)
+  - GoogleUtilities/Logger (6.4.0):
     - GoogleUtilities/Environment
-  - GoogleUtilities/MethodSwizzler (6.3.0):
+  - GoogleUtilities/MethodSwizzler (6.4.0):
     - GoogleUtilities/Logger
-  - GoogleUtilities/Network (6.3.0):
+  - GoogleUtilities/Network (6.4.0):
     - GoogleUtilities/Logger
     - "GoogleUtilities/NSData+zlib"
     - GoogleUtilities/Reachability
-  - "GoogleUtilities/NSData+zlib (6.3.0)"
-  - GoogleUtilities/Reachability (6.3.0):
+  - "GoogleUtilities/NSData+zlib (6.4.0)"
+  - GoogleUtilities/Reachability (6.4.0):
     - GoogleUtilities/Logger
   - HTMLString (5.0.0)
-  - IGListKit (3.4.0):
-    - IGListKit/Default (= 3.4.0)
-  - IGListKit/Default (3.4.0):
-    - IGListKit/Diffing
-  - IGListKit/Diffing (3.4.0)
+  - IGListDiffKit (4.0.0)
+  - IGListKit (4.0.0):
+    - IGListDiffKit (= 4.0.0)
   - ImageSlideshow (1.5.0):
     - ImageSlideshow/Core (= 1.5.0)
   - ImageSlideshow/Core (1.5.0)
   - ImageSlideshow/Kingfisher (1.5.0):
     - ImageSlideshow/Core
     - Kingfisher (> 3.0)
-  - IQKeyboardManagerSwift (6.5.1)
-  - Kingfisher (5.8.1):
-    - Kingfisher/Core (= 5.8.1)
-  - Kingfisher/Core (5.8.1)
+  - IQKeyboardManagerSwift (6.5.4)
+  - Kingfisher (5.12.0):
+    - Kingfisher/Core (= 5.12.0)
+  - Kingfisher/Core (5.12.0)
   - ModelMapper (10.0.0):
     - ModelMapper/Core (= 10.0.0)
   - ModelMapper/Core (10.0.0)
@@ -59,17 +57,17 @@ PODS:
   - Moya/Core (13.0.1):
     - Alamofire (~> 4.1)
     - Result (~> 4.1)
-  - nanopb (0.3.901):
-    - nanopb/decode (= 0.3.901)
-    - nanopb/encode (= 0.3.901)
-  - nanopb/decode (0.3.901)
-  - nanopb/encode (0.3.901)
-  - OneSignal (2.11.1)
+  - nanopb (0.3.9011):
+    - nanopb/decode (= 0.3.9011)
+    - nanopb/encode (= 0.3.9011)
+  - nanopb/decode (0.3.9011)
+  - nanopb/encode (0.3.9011)
+  - OneSignal (2.12.3)
   - Result (4.1.0)
   - SkeletonView (1.8.2)
   - SnapKit (5.0.1)
-  - SwiftSoup (2.2.1)
-  - UICircularProgressRing (6.3.0)
+  - SwiftSoup (2.3.0)
+  - UICircularProgressRing (6.4.0)
 
 DEPENDENCIES:
   - Crashlytics
@@ -83,7 +81,6 @@ DEPENDENCIES:
   - Kingfisher
   - Motion
   - Moya
-  - Moya (>= 13.0.1)
   - Moya-ModelMapper
   - OneSignal (< 3.0, >= 2.6.2)
   - SkeletonView
@@ -100,6 +97,7 @@ SPEC REPOS:
     - GoogleAppMeasurement
     - GoogleUtilities
     - HTMLString
+    - IGListDiffKit
     - IGListKit
     - IQKeyboardManagerSwift
     - Kingfisher
@@ -126,29 +124,30 @@ CHECKOUT OPTIONS:
     :git: https://github.com/cornell-sun/ImageSlideshow
 
 SPEC CHECKSUMS:
-  Alamofire: afc3e7c6db61476cb45cdd23fed06bad03bbc321
+  Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
   Crashlytics: 540b7e5f5da5a042647227a5e3ac51d85eed06df
   Fabric: 706c8b8098fff96c33c0db69cbf81f9c551d0d74
-  Google-Mobile-Ads-SDK: d48dbaf5bae1ab7a94a9786f493c26c454bc6f16
-  GoogleAppMeasurement: 0ae90be1cc4dad40f4a27fc767ef59fa032ec87b
-  GoogleUtilities: 9c2c544202301110b29f7974a82e77fdcf12bf51
+  Google-Mobile-Ads-SDK: fac081606dbd438d8db57198b83ba8b5f875a601
+  GoogleAppMeasurement: db118eb61a97dd8c4f7014e368d3c335cbbcf80a
+  GoogleUtilities: 29bd0d8f850efbd28cff6d99e8b7da1f8d236bcf
   HTMLString: 20374dc0195423d02569e87561f01153fca0c364
-  IGListKit: 7a5d788e9fb746bcd402baa8e8b24bc3bd2a5a07
+  IGListDiffKit: 665d6cf43ce726e676013db9c7d6c4294259b6b2
+  IGListKit: fd5a5d21935298f5849fa49d426843cff97b77c7
   ImageSlideshow: 137bb409baaf6f6d5c0808ed559d304dfc40eba0
-  IQKeyboardManagerSwift: 9ac7524fad9f9fe9a3b98c927e7772471ca546d2
-  Kingfisher: de969e451c81ca6c07a454bc36fea84b8b08c3c7
+  IQKeyboardManagerSwift: 2dde0fc70110e8eac7ccce2a46fdbec6a850b414
+  Kingfisher: dc6e0f53bb5b12c3e75bedb0e01bbd7a640eea69
   ModelMapper: a8dbf2a2003bf626627b9fe7c9a22b3405a30404
   Motion: cf1e060e489f6661126374d5c60dbd2ed991605c
   Moya: f4a4b80ff2f8a4ffc208dfb31cd91636622fee6e
   Moya-ModelMapper: 4948625af7fc5eef41ad9fdfe0c3517170b50960
-  nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
-  OneSignal: d51d2ccf5176176eb057c1f3a9847e2dc0a43a64
+  nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
+  OneSignal: 30b6e03a1f14169c4313e301a7b7bdf467b5a575
   Result: bd966fac789cc6c1563440b348ab2598cc24d5c7
   SkeletonView: bb27c39857e5492136f02ee8a3aa78de55d12ecd
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
-  SwiftSoup: a91d3c96ecb6f8f13005552ef60f9075aae4a7f3
-  UICircularProgressRing: e700fb0505328e88ee53c4ed92bee6d1a5b8bbe3
+  SwiftSoup: d78683f7ea0ae5733225a9e1d3bee5b256449df4
+  UICircularProgressRing: 907613633e76e561b972a3868c95517d14c71006
 
-PODFILE CHECKSUM: 9914ae10f5571a64bc987d967b1493fa12138f7b
+PODFILE CHECKSUM: bc9bb46cb935c88c6f058c6653e7894bfe2b12a9
 
-COCOAPODS: 1.8.1
+COCOAPODS: 1.8.4

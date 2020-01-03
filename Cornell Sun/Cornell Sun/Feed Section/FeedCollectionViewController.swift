@@ -159,10 +159,10 @@ extension FeedCollectionViewController: ListAdapterDataSource {
 extension FeedCollectionViewController {
 
     func getPosts(page: Int) {
-
         fetchPosts(target: .posts(page: page)) { posts, error in
             if error == nil {
                 var postsWithAd: [ListDiffable] = posts
+                print(postsWithAd)
                 postsWithAd.insert("adToken\(self.adCount)" as ListDiffable, at: 7)
                 self.adCount += 1
                 self.loading = false

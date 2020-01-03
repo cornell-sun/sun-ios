@@ -15,6 +15,7 @@ class BookmarkCollectionViewController: ViewController, UIScrollViewDelegate {
     var bookmarkPosts: [PostObject] = []
 
     let emptyBookmarkView = EmptyView(image: #imageLiteral(resourceName: "empty-bookmark-sun"), title: "No Bookmarks", description: "Running late? Save some articles for later")
+    
     let collectionView: UICollectionView = {
         let view = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
         view.alwaysBounceVertical = true
@@ -37,6 +38,7 @@ class BookmarkCollectionViewController: ViewController, UIScrollViewDelegate {
             isFirstRun = false
             return
         }
+        
         self.adapter.performUpdates(animated: true, completion: nil)
     }
 
