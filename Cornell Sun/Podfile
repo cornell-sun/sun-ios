@@ -14,7 +14,6 @@ target 'Cornell Sun' do
   pod 'Kingfisher'
   pod 'ImageSlideshow', :git=> 'https://github.com/cornell-sun/ImageSlideshow', :commit => 'd63205b98d5e3bed3e4e1273eb2ae3f4c7d66790'
   pod 'ImageSlideshow/Kingfisher', :git=> 'https://github.com/cornell-sun/ImageSlideshow', :commit => 'd63205b98d5e3bed3e4e1273eb2ae3f4c7d66790'
-  pod 'Google-Mobile-Ads-SDK'
   pod 'SwiftSoup'
   pod 'OneSignal', '>= 2.6.2', '< 3.0'
   pod 'IQKeyboardManagerSwift'
@@ -23,6 +22,10 @@ target 'Cornell Sun' do
   pod 'Motion'
   pod 'Fabric'
   pod 'Crashlytics'
+  pod 'Firebase/Analytics'
+  pod 'Firebase/Performance'
+  pod 'Firebase/AdMob'
+  pod 'Google-Mobile-Ads-SDK'
 end
 
 target 'SunNotificationServiceExtension' do
