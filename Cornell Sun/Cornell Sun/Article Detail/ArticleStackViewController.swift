@@ -235,7 +235,7 @@ class ArticleStackViewController: UIViewController {
         let label = UILabel()
         label.text = caption
         label.font = .photoCaption
-        label.textColor = .black90
+        label.textColor = darkModeEnabled ? .white90 : .black90
         label.numberOfLines = 0
         view.addSubview(label)
         stackView.addArrangedSubview(view)
@@ -267,7 +267,7 @@ class ArticleStackViewController: UIViewController {
         let creditLabel = UILabel()
         creditLabel.numberOfLines = 0
         creditLabel.text = credit
-        creditLabel.textColor = .black40
+        creditLabel.textColor = darkModeEnabled ? .white : .black40
         creditLabel.font = .photoCaptionCredit
         view.addSubview(creditLabel)
         stackView.addArrangedSubview(view)

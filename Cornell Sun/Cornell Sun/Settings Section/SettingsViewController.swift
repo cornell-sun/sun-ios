@@ -197,6 +197,10 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
         subscribeViewController.prevViewController = self
         settings[0].append(SettingObject(label: "Subscribe", next: subscribeViewController, setType: .nonSetting))
         
+        let themeViewController = ThemeViewController()
+        themeViewController.prevViewController = self
+        settings[0].append(SettingObject(label: "Theme", next: themeViewController, setType: .nonSetting))
+        
         //Initializing Support settings
         settings.append([])
         let feedBackViewController = ContactViewController()

@@ -185,6 +185,7 @@ extension FeedCollectionViewController {
     func setNavigationInformation() {
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         navigationController?.navigationBar.barTintColor = darkModeEnabled ? .darkCell : .white
+        navigationController?.navigationBar.tintColor = .white
         navigationController?.navigationBar.barStyle = UIBarStyle.blackOpaque
         navigationController?.navigationBar.titleTextAttributes = [
             NSAttributedString.Key.font: UIFont(name: "Sonnenstrahl-Ausgezeichnet", size: 30)!, NSAttributedString.Key.foregroundColor: (darkModeEnabled ? UIColor.white : UIColor.black)]

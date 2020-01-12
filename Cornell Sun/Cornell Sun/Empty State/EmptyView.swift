@@ -9,6 +9,8 @@
 import UIKit
 
 class EmptyView: UIView {
+    
+    let darkModeEnabled = UserDefaults.standard.bool(forKey: "darkModeEnabled")
 
     //Constants
     let emptyImageHeight: CGFloat = 77.5
@@ -48,7 +50,9 @@ class EmptyView: UIView {
         self.init(frame: .zero)
         emptyImage.image = image
         emptyTitle.text = title
+        emptyTitle.textColor = darkModeEnabled ? .white : .black
         emptyDescription.text = description
+        emptyDescription.textColor = darkModeEnabled ? .white : .black
     }
 
     func addViews() {

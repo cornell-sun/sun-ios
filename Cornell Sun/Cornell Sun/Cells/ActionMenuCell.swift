@@ -97,9 +97,9 @@ final class MenuActionCell: UICollectionViewCell {
         let image: UIImage!
         
         if darkModeEnabled {
-            image = !didSelectBookmark ? UIImage(named: "bookMarkIconSelectedDark") : UIImage(named: "bookMarkIconDark")
+            image = didSelectBookmark ? UIImage(named: "bookmarkIconSelectedDark") : UIImage(named: "bookmarkIconDark")
         } else {
-            image = didSelectBookmark ? UIImage(named: "bookMarkIconSelectedLight") : UIImage(named: "bookMarkIconLight")
+            image = didSelectBookmark ? UIImage(named: "bookmarkPressed") : UIImage(named: "bookMarkIconLight")
         }
         bookmarkButton.setImage(image, for: .normal)
     }

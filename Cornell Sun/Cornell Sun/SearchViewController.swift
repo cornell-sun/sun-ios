@@ -13,7 +13,7 @@ import Crashlytics
 class SearchViewController: UIViewController, UITableViewDelegate {
 
     var tableView: UITableView!
-    let emptySearchView = EmptyView(image: #imageLiteral(resourceName: "empty-search-sun"), title: "No Results", description: "Check your spelling?")
+    var emptySearchView: EmptyView!
     let searchController = UISearchController(searchResultsController: nil)
     let dimView = UIView()
     var currentQuery = ""
@@ -29,7 +29,6 @@ class SearchViewController: UIViewController, UITableViewDelegate {
     
     let darkModeEnabled = UserDefaults.standard.bool(forKey: "darkModeEnabled")
     
-
     let collectionView: UICollectionView = {
         let view = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
         view.alwaysBounceVertical = true
@@ -73,6 +72,9 @@ class SearchViewController: UIViewController, UITableViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .black5
+        
+        let emptyImage = darkModeEnabled ? "empty-search-sunDark" : "empty-search-sunLight"
+        emptySearchView = EmptyView(image: UIImage(named: emptyImage)!, title: "No Results", description: "Check your spelling?")
 
         tableView = UITableView()
         tableView.register(SearchTableViewCell.self, forCellReuseIdentifier: "SearchResultCell")
@@ -142,7 +144,7 @@ class SearchViewController: UIViewController, UITableViewDelegate {
             searchController.searchBar.backgroundColor = .darkTint
             searchController.searchBar.barStyle = .blackTranslucent
             tableView.backgroundColor = .darkCell
-            collectionView.backgroundColor = .darkCell
+            collectionView.backgroundColor = .black
             searchController.searchBar.tintColor = .darkText
             
         } else {

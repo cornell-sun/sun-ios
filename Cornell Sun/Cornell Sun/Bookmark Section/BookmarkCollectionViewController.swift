@@ -14,11 +14,13 @@ class BookmarkCollectionViewController: ViewController, UIScrollViewDelegate {
     var isFirstRun = true
     var bookmarkPosts: [PostObject] = []
 
-    let emptyBookmarkView = EmptyView(image: #imageLiteral(resourceName: "empty-bookmark-sun"), title: "No Bookmarks", description: "Running late? Save some articles for later")
+    var emptyBookmarkView: EmptyView!
+    
+    let darkModeEnabled = UserDefaults.standard.bool(forKey: "darkModeEnabled")
+    
     let collectionView: UICollectionView = {
         let view = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
         view.alwaysBounceVertical = true
-        view.backgroundColor = .white
         return view
     }()
 
@@ -28,7 +30,7 @@ class BookmarkCollectionViewController: ViewController, UIScrollViewDelegate {
 
     override func viewWillAppear(_ animated: Bool) {
         title = "Bookmarks"
-        navigationController?.navigationBar.barTintColor = .white
+        navigationController?.navigationBar.isTranslucent = false
         navigationController?.navigationBar.titleTextAttributes = [
             NSAttributedString.Key.font: UIFont.headerTitle
         ]
@@ -38,11 +40,16 @@ class BookmarkCollectionViewController: ViewController, UIScrollViewDelegate {
             return
         }
         self.adapter.performUpdates(animated: true, completion: nil)
+        
+        updateColors()
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Bookmarks"
+        
+        let emptyIcon = darkModeEnabled ? "empty-bookmark-sunDark" : "empty-bookmark-sunLight"
+        emptyBookmarkView = EmptyView(image: UIImage(named: emptyIcon)!, title: "No Bookmarks", description: "Running late? Save some articles for later")
 
         view.addSubview(collectionView)
         adapter.collectionView = collectionView
@@ -55,6 +62,24 @@ class BookmarkCollectionViewController: ViewController, UIScrollViewDelegate {
                 self.bookmarkPosts = newValue
                 self.adapter.performUpdates(animated: true, completion: nil)
             }
+        }
+        
+        updateColors()
+    }
+    
+    @objc func updateColors() {
+    
+        if(darkModeEnabled) {
+            navigationController?.navigationBar.barTintColor = .darkTint
+            navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.darkText]
+            navigationController?.navigationBar.barStyle = .blackTranslucent
+            collectionView.backgroundColor = .black
+            
+        } else {
+            navigationController?.navigationBar.barTintColor = .white
+            navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.lightText]
+            navigationController?.navigationBar.barStyle = .default
+             collectionView.backgroundColor = .white
         }
     }
 

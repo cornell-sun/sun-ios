@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		036FE5BBAB2DFBC062751005 /* Pods_Cornell_SunTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C38BCC6B38BFCC0EC16BF2B /* Pods_Cornell_SunTests.framework */; };
 		0C0D2FE72060462500BC77E9 /* OnboardingPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C0D2FE62060462500BC77E9 /* OnboardingPageViewController.swift */; };
 		0C0D2FE9206048BA00BC77E9 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C0D2FE8206048BA00BC77E9 /* OnboardingViewController.swift */; };
 		0C15F1871FBDD433009724DB /* ArticleHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C15F1861FBDD433009724DB /* ArticleHeaderView.swift */; };
@@ -24,12 +23,15 @@
 		0CEA0F7A1F99454600607CC7 /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CEA0F791F99454600607CC7 /* Date+.swift */; };
 		0CED4FAD1FAB523F0025EB91 /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CED4FAB1FAB523E0025EB91 /* UIColor+.swift */; };
 		0CED4FAE1FAB523F0025EB91 /* UIFont+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CED4FAC1FAB523F0025EB91 /* UIFont+.swift */; };
+		2705D0E8C88C6D451DF96402 /* libPods-Cornell SunTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 92553D1BC1D098B8F0A889D0 /* libPods-Cornell SunTests.a */; };
 		3441C78A2066C0CD00F58D5E /* Delegate+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3441C7892066C0CD00F58D5E /* Delegate+.swift */; };
 		344B71B820A0FFB800DF8081 /* SearchCellNoImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 344B71B720A0FFB800DF8081 /* SearchCellNoImage.swift */; };
 		34590494217D23DB009EAEFA /* Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 34590493217D23DB009EAEFA /* Keys.plist */; };
 		348716782041EAC8008CB9D5 /* AdImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348716772041EAC8008CB9D5 /* AdImageCell.swift */; };
 		3487167D2041F09D008CB9D5 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3487167C2041F09D008CB9D5 /* Launch Screen.storyboard */; };
 		34992232227E852000926B6D /* NotificationCenterExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34992231227E852000926B6D /* NotificationCenterExtension.swift */; };
+		34A481762384DD4E00FB168A /* ThemeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A481752384DD4E00FB168A /* ThemeViewController.swift */; };
+		34A481782384DF1800FB168A /* ThemeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A481772384DF1800FB168A /* ThemeCell.swift */; };
 		34C5582A2041E49E00E62CE8 /* AdSectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34C558292041E49E00E62CE8 /* AdSectionController.swift */; };
 		4029318520C58036000E1F4A /* TeamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4029318420C58036000E1F4A /* TeamViewController.swift */; };
 		4029318720C580D1000E1F4A /* TeamTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4029318620C580D1000E1F4A /* TeamTableViewCell.swift */; };
@@ -48,6 +50,7 @@
 		50A898121EAEC93B0099CFA9 /* AuthorObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50A898111EAEC93B0099CFA9 /* AuthorObject.swift */; };
 		61652CD21F6EF3A500EEFC29 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61652CD11F6EF3A500EEFC29 /* SearchViewController.swift */; };
 		61652CD41F6EF44900EEFC29 /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61652CD31F6EF44900EEFC29 /* SearchTableViewCell.swift */; };
+		CCBD31A76B9F283BAAD54976 /* Pods_SunNotificationServiceExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2B8CA467DE2268CAEDB54C0 /* Pods_SunNotificationServiceExtension.framework */; };
 		D91565CB2166A04900BCA466 /* SectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D91565CA2166A04900BCA466 /* SectionTableViewCell.swift */; };
 		DC0A883A1FBA2DEE00F2BCBB /* PhotoGalleryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0A88391FBA2DEE00F2BCBB /* PhotoGalleryCell.swift */; };
 		DC0A883C1FBA531000F2BCBB /* BookmarkCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0A883B1FBA531000F2BCBB /* BookmarkCollectionViewController.swift */; };
@@ -92,7 +95,6 @@
 		DCECA9901FBDFB7300BAB2EA /* BookmarkCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCECA98F1FBDFB7300BAB2EA /* BookmarkCell.swift */; };
 		DCFC88C41F86B50200A0D8A9 /* ActionMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFC88C31F86B50200A0D8A9 /* ActionMenuCell.swift */; };
 		DCFC88C61F86C03700A0D8A9 /* CommentObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFC88C51F86C03700A0D8A9 /* CommentObject.swift */; };
-		E89F9B870388A78A9CB83842 /* Pods_Cornell_Sun_SunNotificationServiceExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED70911BC31B1BB1FC7EE973 /* Pods_Cornell_Sun_SunNotificationServiceExtension.framework */; };
 		F252229F2922831926DB3A6C /* Pods_Cornell_Sun.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DBAAD519F3C5A2D044960CA /* Pods_Cornell_Sun.framework */; };
 /* End PBXBuildFile section */
 
@@ -128,6 +130,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		07948A7A768A851F49AC448B /* Pods-SunNotificationServiceExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SunNotificationServiceExtension.release.xcconfig"; path = "Pods/Target Support Files/Pods-SunNotificationServiceExtension/Pods-SunNotificationServiceExtension.release.xcconfig"; sourceTree = "<group>"; };
 		0C0D2FE62060462500BC77E9 /* OnboardingPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPageViewController.swift; sourceTree = "<group>"; };
 		0C0D2FE8206048BA00BC77E9 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		0C15F1861FBDD433009724DB /* ArticleHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleHeaderView.swift; sourceTree = "<group>"; };
@@ -151,9 +154,10 @@
 		348716772041EAC8008CB9D5 /* AdImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdImageCell.swift; sourceTree = "<group>"; };
 		3487167C2041F09D008CB9D5 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		34992231227E852000926B6D /* NotificationCenterExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCenterExtension.swift; sourceTree = "<group>"; };
+		34A481752384DD4E00FB168A /* ThemeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeViewController.swift; sourceTree = "<group>"; };
+		34A481772384DF1800FB168A /* ThemeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeCell.swift; sourceTree = "<group>"; };
 		34C558292041E49E00E62CE8 /* AdSectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdSectionController.swift; sourceTree = "<group>"; };
 		389771843ED115B12D456CDA /* Pods-Cornell SunTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cornell SunTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Cornell SunTests/Pods-Cornell SunTests.debug.xcconfig"; sourceTree = "<group>"; };
-		3C38BCC6B38BFCC0EC16BF2B /* Pods_Cornell_SunTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cornell_SunTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DBAAD519F3C5A2D044960CA /* Pods_Cornell_Sun.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cornell_Sun.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4029318420C58036000E1F4A /* TeamViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamViewController.swift; sourceTree = "<group>"; };
 		4029318620C580D1000E1F4A /* TeamTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamTableViewCell.swift; sourceTree = "<group>"; };
@@ -165,6 +169,7 @@
 		40B1D4912073107E00C1306E /* ContactViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactViewController.swift; sourceTree = "<group>"; };
 		40B1D4932073164800C1306E /* UIColor+1ptImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+1ptImage.swift"; sourceTree = "<group>"; };
 		40B1D4952074306600C1306E /* SubscribeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscribeViewController.swift; sourceTree = "<group>"; };
+		4D5198838967F64BFD04E703 /* Pods-SunNotificationServiceExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SunNotificationServiceExtension.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SunNotificationServiceExtension/Pods-SunNotificationServiceExtension.debug.xcconfig"; sourceTree = "<group>"; };
 		5006AFF81EA9625000F58549 /* Cornell Sun.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Cornell Sun.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5006AFFB1EA9625000F58549 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5006AFFD1EA9625000F58549 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -177,6 +182,7 @@
 		61652CD31F6EF44900EEFC29 /* SearchTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
 		79D08546F469CBFA91B516C4 /* Pods-Cornell Sun.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cornell Sun.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Cornell Sun/Pods-Cornell Sun.debug.xcconfig"; sourceTree = "<group>"; };
 		8D204AC28FA383322F3630A2 /* Pods-Cornell SunTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cornell SunTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Cornell SunTests/Pods-Cornell SunTests.release.xcconfig"; sourceTree = "<group>"; };
+		92553D1BC1D098B8F0A889D0 /* libPods-Cornell SunTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Cornell SunTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A733FA4C43777F59F6F0F8B3 /* Pods-Cornell Sun.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cornell Sun.release.xcconfig"; path = "Pods/Target Support Files/Pods-Cornell Sun/Pods-Cornell Sun.release.xcconfig"; sourceTree = "<group>"; };
 		D91565CA2166A04900BCA466 /* SectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionTableViewCell.swift; sourceTree = "<group>"; };
 		DA69BC56E568CC99632DAB34 /* Pods-Cornell Sun-SunNotificationServiceExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cornell Sun-SunNotificationServiceExtension.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Cornell Sun-SunNotificationServiceExtension/Pods-Cornell Sun-SunNotificationServiceExtension.debug.xcconfig"; sourceTree = "<group>"; };
@@ -229,7 +235,7 @@
 		DCFC88C31F86B50200A0D8A9 /* ActionMenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionMenuCell.swift; sourceTree = "<group>"; };
 		DCFC88C51F86C03700A0D8A9 /* CommentObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentObject.swift; sourceTree = "<group>"; };
 		DD303BF8F0052FBBDBBC06E3 /* Pods-Cornell Sun-SunNotificationServiceExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cornell Sun-SunNotificationServiceExtension.release.xcconfig"; path = "Pods/Target Support Files/Pods-Cornell Sun-SunNotificationServiceExtension/Pods-Cornell Sun-SunNotificationServiceExtension.release.xcconfig"; sourceTree = "<group>"; };
-		ED70911BC31B1BB1FC7EE973 /* Pods_Cornell_Sun_SunNotificationServiceExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cornell_Sun_SunNotificationServiceExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F2B8CA467DE2268CAEDB54C0 /* Pods_SunNotificationServiceExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SunNotificationServiceExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -245,7 +251,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E89F9B870388A78A9CB83842 /* Pods_Cornell_Sun_SunNotificationServiceExtension.framework in Frameworks */,
+				CCBD31A76B9F283BAAD54976 /* Pods_SunNotificationServiceExtension.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -253,7 +259,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				036FE5BBAB2DFBC062751005 /* Pods_Cornell_SunTests.framework in Frameworks */,
+				2705D0E8C88C6D451DF96402 /* libPods-Cornell SunTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -387,6 +393,8 @@
 				8D204AC28FA383322F3630A2 /* Pods-Cornell SunTests.release.xcconfig */,
 				DA69BC56E568CC99632DAB34 /* Pods-Cornell Sun-SunNotificationServiceExtension.debug.xcconfig */,
 				DD303BF8F0052FBBDBBC06E3 /* Pods-Cornell Sun-SunNotificationServiceExtension.release.xcconfig */,
+				4D5198838967F64BFD04E703 /* Pods-SunNotificationServiceExtension.debug.xcconfig */,
+				07948A7A768A851F49AC448B /* Pods-SunNotificationServiceExtension.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -395,8 +403,8 @@
 			isa = PBXGroup;
 			children = (
 				3DBAAD519F3C5A2D044960CA /* Pods_Cornell_Sun.framework */,
-				3C38BCC6B38BFCC0EC16BF2B /* Pods_Cornell_SunTests.framework */,
-				ED70911BC31B1BB1FC7EE973 /* Pods_Cornell_Sun_SunNotificationServiceExtension.framework */,
+				92553D1BC1D098B8F0A889D0 /* libPods-Cornell SunTests.a */,
+				F2B8CA467DE2268CAEDB54C0 /* Pods_SunNotificationServiceExtension.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -420,6 +428,7 @@
 				4047EA04207590450030067E /* NotificationViewController.swift */,
 				0C6E76C52094FF0D00F8710C /* MastheadViewController.swift */,
 				4029318420C58036000E1F4A /* TeamViewController.swift */,
+				34A481752384DD4E00FB168A /* ThemeViewController.swift */,
 			);
 			path = "Settings Section";
 			sourceTree = "<group>";
@@ -581,6 +590,7 @@
 				DC3CCB3220924288000A9A5B /* VideoCell.swift */,
 				4029318620C580D1000E1F4A /* TeamTableViewCell.swift */,
 				D91565CA2166A04900BCA466 /* SectionTableViewCell.swift */,
+				34A481772384DF1800FB168A /* ThemeCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -654,7 +664,6 @@
 				DCD870E81F256B7B00B98AF8 /* Sources */,
 				DCD870E91F256B7B00B98AF8 /* Frameworks */,
 				DCD870EA1F256B7B00B98AF8 /* Resources */,
-				257BDE34A42EF8D90E4C73AE /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -766,32 +775,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		257BDE34A42EF8D90E4C73AE /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Cornell SunTests/Pods-Cornell SunTests-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
-				"${BUILT_PRODUCTS_DIR}/ModelMapper/Mapper.framework",
-				"${BUILT_PRODUCTS_DIR}/Moya/Moya.framework",
-				"${BUILT_PRODUCTS_DIR}/Moya-ModelMapper/Moya_ModelMapper.framework",
-				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Mapper.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya_ModelMapper.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Cornell SunTests/Pods-Cornell SunTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		28AF993F02CE442DBACE904A /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -843,30 +826,29 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Cornell Sun/Pods-Cornell Sun-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
-				"${BUILT_PRODUCTS_DIR}/FLAnimatedImage/FLAnimatedImage.framework",
+				"${PODS_ROOT}/Target Support Files/Pods-Cornell Sun/Pods-Cornell Sun-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire-framework/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/HTMLString/HTMLString.framework",
 				"${BUILT_PRODUCTS_DIR}/IGListKit/IGListKit.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/ImageSlideshow/ImageSlideshow.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
-				"${BUILT_PRODUCTS_DIR}/ModelMapper/Mapper.framework",
+				"${BUILT_PRODUCTS_DIR}/ModelMapper-framework/Mapper.framework",
 				"${BUILT_PRODUCTS_DIR}/Motion/Motion.framework",
-				"${BUILT_PRODUCTS_DIR}/Moya/Moya.framework",
-				"${BUILT_PRODUCTS_DIR}/Moya-ModelMapper/Moya_ModelMapper.framework",
-				"${BUILT_PRODUCTS_DIR}/PINCache/PINCache.framework",
-				"${BUILT_PRODUCTS_DIR}/PINRemoteImage/PINRemoteImage.framework",
-				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
+				"${BUILT_PRODUCTS_DIR}/Moya-framework/Moya.framework",
+				"${BUILT_PRODUCTS_DIR}/Moya-ModelMapper-framework/Moya_ModelMapper.framework",
+				"${BUILT_PRODUCTS_DIR}/Result-framework/Result.framework",
 				"${BUILT_PRODUCTS_DIR}/SkeletonView/SkeletonView.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftSoup/SwiftSoup.framework",
 				"${BUILT_PRODUCTS_DIR}/UICircularProgressRing/UICircularProgressRing.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FLAnimatedImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HTMLString.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IGListKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
@@ -876,17 +858,16 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Motion.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya_ModelMapper.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PINCache.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PINRemoteImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SkeletonView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftSoup.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/UICircularProgressRing.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Cornell Sun/Pods-Cornell Sun-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Cornell Sun/Pods-Cornell Sun-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		9A98D18971B5E40B0126C24C /* [CP] Check Pods Manifest.lock */ = {
@@ -900,7 +881,7 @@
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Cornell Sun-SunNotificationServiceExtension-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-SunNotificationServiceExtension-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -959,6 +940,7 @@
 				5006B24D1EADA37F00F58549 /* PostObject.swift in Sources */,
 				DC34DEF520321C6D0010DF9A /* SectionCollectionViewController.swift in Sources */,
 				DCB1BB4D20893B0D002C11E2 /* SkeletonFeedCell.swift in Sources */,
+				34A481782384DF1800FB168A /* ThemeCell.swift in Sources */,
 				4029318720C580D1000E1F4A /* TeamTableViewCell.swift in Sources */,
 				DCB717161FBA016400BE4D26 /* TaglineCell.swift in Sources */,
 				0C49290520A14C4B004AF877 /* SettingObject.swift in Sources */,
@@ -1002,6 +984,7 @@
 				D91565CB2166A04900BCA466 /* SectionTableViewCell.swift in Sources */,
 				0C59AD44208D505700CF3A31 /* Button.swift in Sources */,
 				4047EA05207590450030067E /* NotificationViewController.swift in Sources */,
+				34A481762384DD4E00FB168A /* ThemeViewController.swift in Sources */,
 				34992232227E852000926B6D /* NotificationCenterExtension.swift in Sources */,
 				61652CD41F6EF44900EEFC29 /* SearchTableViewCell.swift in Sources */,
 				DCB717141FB9FE1700BE4D26 /* HeroSectionController.swift in Sources */,
@@ -1205,7 +1188,7 @@
 		};
 		DC3667D9206EB9D2002EB4F9 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = DA69BC56E568CC99632DAB34 /* Pods-Cornell Sun-SunNotificationServiceExtension.debug.xcconfig */;
+			baseConfigurationReference = 4D5198838967F64BFD04E703 /* Pods-SunNotificationServiceExtension.debug.xcconfig */;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -1229,7 +1212,7 @@
 		};
 		DC3667DA206EB9D2002EB4F9 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = DD303BF8F0052FBBDBBC06E3 /* Pods-Cornell Sun-SunNotificationServiceExtension.release.xcconfig */;
+			baseConfigurationReference = 07948A7A768A851F49AC448B /* Pods-SunNotificationServiceExtension.release.xcconfig */;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
