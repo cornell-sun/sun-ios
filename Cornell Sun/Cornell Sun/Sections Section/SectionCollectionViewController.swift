@@ -32,6 +32,7 @@ class SectionCollectionViewController: UIViewController, UIScrollViewDelegate {
     var adCount = 1
     var sectionID = 0
     let spinToken = "spinner"
+    var sectionTitle = ""
 
     let collectionView: UICollectionView = {
         let view = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
@@ -47,7 +48,7 @@ class SectionCollectionViewController: UIViewController, UIScrollViewDelegate {
     init(with section: Sections, sectionTitle: String) {
         super.init(nibName: nil, bundle: nil)
         sectionSelected = section
-        title = sectionTitle
+        self.sectionTitle = sectionTitle
         navigationController?.navigationBar.titleTextAttributes = [
             NSAttributedString.Key.font: UIFont.headerTitle
         ]
@@ -111,6 +112,7 @@ class SectionCollectionViewController: UIViewController, UIScrollViewDelegate {
         navigationController?.navigationBar.titleTextAttributes = [
             NSAttributedString.Key.font: UIFont.headerTitle
         ]
+        navigationItem.title = sectionTitle
     }
 
     override func didReceiveMemoryWarning() {

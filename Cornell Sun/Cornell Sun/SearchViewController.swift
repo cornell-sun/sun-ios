@@ -56,7 +56,7 @@ class SearchViewController: UIViewController, UITableViewDelegate {
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        title = "Search"
+        navigationItem.title = "Search"
         if #available(iOS 11, *) {
             navigationItem.searchController = searchController
             navigationItem.hidesSearchBarWhenScrolling = false
