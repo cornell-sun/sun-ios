@@ -13,6 +13,7 @@ import OneSignal
 import IQKeyboardManagerSwift
 import Fabric
 import Crashlytics
+import Firebase
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -65,9 +66,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let rootVC = storyboard?.instantiateInitialViewController()
         window?.rootViewController = rootVC
 
-        //Image cache settings
-        ImageCache.default.maxDiskCacheSize = 100 * 1024 * 1024 //100 mb
-        ImageCache.default.maxCachePeriodInSecond = 60 * 60 * 24 * 4 //4 days until its removed
+        // Image cache settings
+        ImageCache.default.diskStorage.config.sizeLimit = 100 * 1024 * 1024 //100 mb
+        ImageCache.default.diskStorage.config.expiration = StorageExpiration.days(4) //4 days until its removed
 
         let userDefaults = UserDefaults.standard
         if !userDefaults.bool(forKey: hasOnboardedKey) {
@@ -83,9 +84,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
         
+        // Init Firebase SDK
+        FirebaseApp.configure()
+        
+        // Init Google Mobile Ads SDK
         GADMobileAds.sharedInstance().start(completionHandler: nil)
 
-        //Set up Crashlytics
+        // Set up Crashlytics
         Crashlytics.start(withAPIKey: fabricAPIKey())
 
         return true
