@@ -103,13 +103,12 @@ func getPostsFromIDs(_ ids: [Int], completion: @escaping ([Int: PostObject], API
             do {
                 let post = try decoder.decode(PostObject.self, from: response.data)
                 postsDict[id] = post
+                group.leave()
             } catch let error {
                 print(error)
                 return
             }
-            
         }
-        group.leave()
     }
     
     group.notify(queue: .main) {
