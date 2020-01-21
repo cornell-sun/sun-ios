@@ -22,18 +22,20 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
     var darkModeEnabled = UserDefaults.standard.bool(forKey: "darkModeEnabled")
 
     override func viewWillAppear(_ animated: Bool) {
-        title = "Settings"
         navigationController?.navigationBar.isTranslucent = false
         navigationController?.navigationBar.titleTextAttributes = [
             NSAttributedString.Key.font: UIFont.headerTitle
         ]
+        updateColors()
+        navigationItem.title = "Settings"
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-
+        
         view.backgroundColor = .white
+        
         //Calling hardcoded populator
         if settings.count == 0 {
             testInit()
@@ -62,8 +64,7 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     @objc func updateColors() {
-        
-        if(darkModeEnabled) {
+        if (darkModeEnabled) {
             navigationController?.navigationBar.barTintColor = .darkTint
             navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.darkText]
             navigationController?.navigationBar.barStyle = .blackTranslucent

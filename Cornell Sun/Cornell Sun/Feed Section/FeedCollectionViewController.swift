@@ -9,7 +9,7 @@
 import UIKit
 import IGListKit
 
-class FeedCollectionViewController: UIViewController, UIScrollViewDelegate {
+class FeedCollectionViewController: ViewController, UIScrollViewDelegate {
     var loading = false
 
     fileprivate var observer: NSKeyValueObservation?
@@ -97,7 +97,7 @@ class FeedCollectionViewController: UIViewController, UIScrollViewDelegate {
     }
 
     fileprivate func isPostIdInBookmarks(post: PostObject, currListOfBookmarks: [PostObject]) -> PostObject? {
-        guard let index = currListOfBookmarks.index(where: {$0.id == post.id}) else { return nil }
+        guard let index = currListOfBookmarks.firstIndex(where: {$0.id == post.id}) else { return nil }
         return currListOfBookmarks[index]
     }
 
@@ -161,7 +161,6 @@ extension FeedCollectionViewController: ListAdapterDataSource {
 extension FeedCollectionViewController {
 
     func getPosts(page: Int) {
-
         fetchPosts(target: .posts(page: page)) { posts, error in
             if error == nil {
                 var postsWithAd: [ListDiffable] = posts

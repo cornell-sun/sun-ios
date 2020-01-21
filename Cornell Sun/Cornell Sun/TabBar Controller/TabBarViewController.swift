@@ -14,7 +14,12 @@ class TabBarViewController: UITabBarController {
     var posts: [ListDiffable]!
     var headlinePost: PostObject?
     var previousViewController: UIViewController?
-    
+    var currentViewController: ViewController? {
+        let navigationController = viewControllers?.first as? UINavigationController
+        return navigationController?.viewControllers.first as? ViewController
+    }
+
+
     let darkModeEnabled = UserDefaults.standard.bool(forKey: "darkModeEnabled")
 
     override func viewDidLoad() {
@@ -22,26 +27,26 @@ class TabBarViewController: UITabBarController {
 //        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
 //        navigationItem.backBarButtonItem?.tintColor = darkModeEnabled ? .white : .black
         // Do any additional setup after loading the view.
-        
 
-        
+
+
 //        tabBar.backgroundImage = UIImage()
         let normal = [NSAttributedString.Key.font: UIFont(name: "SanFranciscoText-Medium", size: 11) as Any, NSAttributedString.Key.strokeColor: darkModeEnabled ? UIColor.unselectedDark as Any : UIColor.black70 as Any] as [NSAttributedString.Key: Any]
         let selected = [NSAttributedString.Key.font: UIFont(name: "SanFranciscoText-Semibold", size: 11) as Any, NSAttributedString.Key.strokeColor: darkModeEnabled ? UIColor.white as Any : UIColor.brick as Any] as [NSAttributedString.Key: Any]
-        
+
         tabBarItem.setTitleTextAttributes(normal, for: .normal)
         tabBarItem.setTitleTextAttributes(selected, for: .selected)
         delegate = self
         setupTabs()
-        
+
         NotificationCenter.default.addObserver(self, selector: #selector(updateColors), name: .darkModeToggle, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(hideVC(notification:)), name: .darkModeToggle, object: nil)
-        
+
         updateColors()
     }
-    
+
     @objc func updateColors() {
-        
+
         if(darkModeEnabled) {
             view.backgroundColor = .darkTint
             tabBar.backgroundColor = .darkTint
@@ -55,9 +60,9 @@ class TabBarViewController: UITabBarController {
             tabBar.tintColor = .brick
             tabBar.unselectedItemTintColor = .black70
         }
-        
+
     }
-    
+
     @objc func hideVC(notification: NSNotification) {
         if(!darkModeEnabled) {
             if let hidden = notification.userInfo?["hidden"] as? Bool {
@@ -68,7 +73,7 @@ class TabBarViewController: UITabBarController {
                 }
             }
         }
-        
+
     }
 
     init(with postObjects: [ListDiffable], mainHeadlinePost: PostObject?) {
@@ -84,9 +89,9 @@ class TabBarViewController: UITabBarController {
     func setupTabs() {
         // replace each tab with a specified ViewController,
         // these are just placeholders
-        
+
         var imageChoice: String
-        
+
         if(darkModeEnabled) {
             imageChoice = "Dark"
         } else {

@@ -45,7 +45,7 @@ struct API {
             switch result {
             case .success(let response):
                 // 1:
-                if response.statusCode >= 200 && response.statusCode <= 300 {
+                if  response.statusCode >= 200 && response.statusCode <= 300 {
                     successCallback(response)
                 } else {
                     // 2:

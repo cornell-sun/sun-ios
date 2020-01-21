@@ -28,19 +28,18 @@ enum Sections {
 class SectionViewController: UIViewController {
     var tableView: UITableView!
     var sections: [Sections] = [.news(id: 2), .opinion(id: 3), .sports(id: 4), .arts(id: 5), .science(id: 6), .dining(id: 7), .multimedia(id: 9)]
-    
+
 //    var darkModeEnabled = UserDefaults.standard.bool(forKey: "darkModeEnabled")
     var darkModeEnabled = UserDefaults.standard.bool(forKey: "darkModeEnabled")
-    
-    
+
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        title = "Sections"
+        navigationItem.title = "Sections"
         navigationController?.navigationBar.isTranslucent = false
         navigationController?.navigationBar.titleTextAttributes = [
             NSAttributedString.Key.font: UIFont.headerTitle
         ]
-        
         updateColors()
     }
 
@@ -56,31 +55,30 @@ class SectionViewController: UIViewController {
         tableView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
-        
+
         NotificationCenter.default.addObserver(self, selector: #selector(updateColors), name: .darkModeToggle, object: nil)
-        
     }
-    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+
     @objc func updateColors() {
-        
+
         if(darkModeEnabled) {
             navigationController?.navigationBar.barTintColor = .darkTint
             navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.darkText]
             navigationController?.navigationBar.barStyle = .blackTranslucent
             tableView.backgroundColor = .darkCell
-            
+
         } else {
             navigationController?.navigationBar.barTintColor = .white
             navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.lightText]
             navigationController?.navigationBar.barStyle = .default
             tableView.backgroundColor = .white
         }
-        
+
         tableView.reloadData()
     }
 
@@ -112,7 +110,7 @@ class SectionViewController: UIViewController {
         //case .sunspots:
             //return "Sunspots"
         }
-        
+
         return SectionMeta(title: title, imageName: imageName)
     }
 }
@@ -130,7 +128,7 @@ extension SectionViewController: UITableViewDataSource, UITableViewDelegate {
         let sectionMeta = sectionToMeta(section: sections[indexPath.row])
         cell.titleLabel.text = sectionMeta.title
         cell.sectionImageView.image = UIImage(named: sectionMeta.imageName)
-        
+
         if(darkModeEnabled) {
             cell.backgroundColor = .darkCell
             cell.titleLabel.textColor = .darkText
@@ -142,7 +140,7 @@ extension SectionViewController: UITableViewDataSource, UITableViewDelegate {
             cell.detailImageView.image = UIImage(named: "disclosureArrowLight")
             cell.sectionImageView.image = UIImage(named: sectionMeta.imageName + "Light")
         }
-        
+
         return cell
     }
 

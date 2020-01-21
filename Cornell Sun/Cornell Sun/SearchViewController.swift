@@ -57,7 +57,7 @@ class SearchViewController: UIViewController, UITableViewDelegate {
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        title = "Search"
+        navigationItem.title = "Search"
         if #available(iOS 11, *) {
             navigationItem.searchController = searchController
             navigationItem.hidesSearchBarWhenScrolling = false
@@ -136,7 +136,6 @@ class SearchViewController: UIViewController, UITableViewDelegate {
     }
     
     @objc func updateColors() {
-        
         if(darkModeEnabled) {
             navigationController?.navigationBar.barTintColor = .darkTint
             navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.darkText]
@@ -156,9 +155,7 @@ class SearchViewController: UIViewController, UITableViewDelegate {
             tableView.backgroundColor = .white
             collectionView.backgroundColor = .white
             searchController.searchBar.tintColor = .blue
-
         }
-    
     }
 }
 
