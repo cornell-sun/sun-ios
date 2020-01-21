@@ -102,4 +102,7 @@ fastlane/screenshots
 /*.gcno
 *.xcworkspace/xcshareddata
 
+### IDE Settings ###
+.idea
+
 # End of https://www.gitignore.io/api/xcode,swift,fastlane,cocoapods

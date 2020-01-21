@@ -90,7 +90,7 @@ DEPENDENCIES:
   - UICircularProgressRing
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  trunk:
     - Alamofire
     - Crashlytics
     - Fabric
@@ -149,4 +149,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 52d397fec820e95575f9052628b0bec858b3125f
 
-COCOAPODS: 1.7.4
+COCOAPODS: 1.8.4
