@@ -44,7 +44,7 @@ final class AuthorCell: UICollectionViewCell {
     }
 
     func setupViews() {
-        self.backgroundColor = darkModeEnabled ? .darkCell : .white
+        self.backgroundColor = darkModeEnabled ? .black : .white
         authorLabel.textColor = darkModeEnabled ? .white90 : .black60
         addSubview(authorLabel)
         authorLabel.snp.makeConstraints { (make) in

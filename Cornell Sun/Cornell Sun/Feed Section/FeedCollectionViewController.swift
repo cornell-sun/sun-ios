@@ -76,7 +76,7 @@ class FeedCollectionViewController: ViewController, UIScrollViewDelegate {
         view.addSubview(collectionView)
 
         adapter.collectionView = collectionView
-        adapter.collectionView?.backgroundColor = darkModeEnabled ? .black : .black5
+        adapter.collectionView?.backgroundColor = darkModeEnabled ? .darkGray : .black5
         adapter.collectionView?.refreshControl = refreshControl
         adapter.dataSource = self
         adapter.scrollViewDelegate = self
@@ -183,7 +183,7 @@ extension FeedCollectionViewController {
 
     func setNavigationInformation() {
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-        navigationController?.navigationBar.barTintColor = darkModeEnabled ? .darkCell : .white
+        navigationController?.navigationBar.barTintColor = darkModeEnabled ? .black : .white
         navigationController?.navigationBar.tintColor = .white
         navigationController?.navigationBar.barStyle = UIBarStyle.blackOpaque
         navigationController?.navigationBar.titleTextAttributes = [
@@ -195,7 +195,6 @@ extension FeedCollectionViewController {
 extension FeedCollectionViewController: TabBarViewControllerDelegate {
     func articleSectionDidPressOnArticle(_ article: PostObject) {
         let articleVC = ArticleStackViewController(post: article)
-        
         navigationController?.pushViewController(articleVC, animated: true)
     }
 }

@@ -62,7 +62,7 @@ class BookmarkCollectionViewController: ViewController, UIScrollViewDelegate {
     }
 
     @objc func updateColors() {
-        if(darkModeEnabled) {
+        if (darkModeEnabled) {
             navigationController?.navigationBar.barTintColor = .darkTint
             navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.darkText]
             navigationController?.navigationBar.barStyle = .blackTranslucent

@@ -117,7 +117,7 @@ PODS:
   - ImageSlideshow/Kingfisher (1.5.0):
     - ImageSlideshow/Core
     - Kingfisher (> 3.0)
-  - IQKeyboardManagerSwift (6.5.4)
+  - IQKeyboardManagerSwift (6.5.5)
   - Kingfisher (5.13.0):
     - Kingfisher/Core (= 5.13.0)
   - Kingfisher/Core (5.13.0)
@@ -251,7 +251,7 @@ SPEC CHECKSUMS:
   IGListDiffKit: 665d6cf43ce726e676013db9c7d6c4294259b6b2
   IGListKit: fd5a5d21935298f5849fa49d426843cff97b77c7
   ImageSlideshow: 137bb409baaf6f6d5c0808ed559d304dfc40eba0
-  IQKeyboardManagerSwift: 2dde0fc70110e8eac7ccce2a46fdbec6a850b414
+  IQKeyboardManagerSwift: 0fb93310284665245591f50f7a5e38de615960b7
   Kingfisher: 0d334cada987fcddbe9b5cec516406e1ee9d4748
   ModelMapper: a8dbf2a2003bf626627b9fe7c9a22b3405a30404
   Motion: cf1e060e489f6661126374d5c60dbd2ed991605c

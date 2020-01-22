@@ -37,7 +37,7 @@ final class CategoryCell: UICollectionViewCell {
         return label
     }()
 
-    let divider: UIView = {
+    let bottomDivider: UIView = {
         let view = UIView()
         return view
     }()
@@ -52,16 +52,20 @@ final class CategoryCell: UICollectionViewCell {
     }
 
     func setupViews() {
-        self.backgroundColor = darkModeEnabled ? .darkCell : .white
+        self.backgroundColor = darkModeEnabled ? .black : .white
+        
         categoryLabel.textColor = darkModeEnabled ? .white90 : .black60
-        divider.backgroundColor = darkModeEnabled ? .white40 : .black40
+        bottomDivider.backgroundColor = darkModeEnabled ? .white40 : .black40
+        
         addSubview(categoryLabel)
-        addSubview(divider)
+        addSubview(bottomDivider)
+        
         categoryLabel.snp.makeConstraints { (make) in
             make.centerY.equalToSuperview()
             make.leading.equalTo(categoryLabelLeading)
         }
-        divider.snp.makeConstraints { (make) in
+        
+        bottomDivider.snp.makeConstraints { (make) in
             make.height.equalTo(1)
             make.width.equalToSuperview()
             make.bottom.equalToSuperview().inset(1)

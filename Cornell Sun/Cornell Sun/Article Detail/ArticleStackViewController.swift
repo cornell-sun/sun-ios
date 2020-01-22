@@ -13,6 +13,7 @@ import GoogleMobileAds
 
 class ArticleStackViewController: UIViewController {
 
+    
     let leadingOffset: CGFloat = 16
     let articleSeparatorOffset: CGFloat = 11.5
     let separatorHeight: CGFloat = 1.5
@@ -48,8 +49,9 @@ class ArticleStackViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        view.backgroundColor = darkModeEnabled ? .darkCell : .white
+        self.extendedLayoutIncludesOpaqueBars = true
+        self.edgesForExtendedLayout = [.bottom]
+        view.backgroundColor = darkModeEnabled ? .black : .white
         navigationController?.navigationBar.tintColor = .black
         if #available(iOS 11.0, *) {
             navigationController?.navigationBar.prefersLargeTitles = false
@@ -87,7 +89,6 @@ class ArticleStackViewController: UIViewController {
             make.height.equalTo(shareBarHeight)
             make.bottom.width.leading.trailing.equalToSuperview()
         }
-
         setup()
     }
 
@@ -283,7 +284,7 @@ class ArticleStackViewController: UIViewController {
         let textView = UITextView()
         textView.attributedText = text
         textView.textContainer.lineFragmentPadding = 0
-        textView.backgroundColor = darkModeEnabled ? .darkCell : .white
+        textView.backgroundColor = darkModeEnabled ? .black : .white
         textView.textColor = darkModeEnabled ? .white90 : .black
         textView.delegate = self
         textView.isScrollEnabled = false
@@ -522,7 +523,7 @@ extension ArticleStackViewController: ShareBarViewDelegate {
             iconUnSelected = UIImage(named: "bookmarkIconLight")
         }
         
-        let didBookmark = view.bookmarkButton.currentImage == iconSelected
+        let didBookmark = view.bookmarkButton.currentImage == iconUnSelected
         let correctBookmarkImage = view.bookmarkButton.currentImage == iconSelected ? iconUnSelected : iconSelected
         view.bookmarkButton.setImage(correctBookmarkImage, for: .normal)
         view.bookmarkButton.transform = CGAffineTransform(scaleX: 0.6, y: 0.6)
@@ -535,6 +536,7 @@ extension ArticleStackViewController: ShareBarViewDelegate {
                        animations: {
                         view.bookmarkButton.transform = CGAffineTransform.identity
         })
+        
         if didBookmark {
             PostOffice.instance.store(object: post)
         } else {

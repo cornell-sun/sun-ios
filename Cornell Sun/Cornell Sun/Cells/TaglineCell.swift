@@ -40,7 +40,7 @@ final class TaglineCell: UICollectionViewCell {
     }
 
     func setupViews() {
-        self.backgroundColor = darkModeEnabled ? .darkCell : .white
+        self.backgroundColor = darkModeEnabled ? .black : .white
         taglineLabel.textColor = darkModeEnabled ? .white90 : .black60
         addSubview(taglineLabel)
         taglineLabel.snp.makeConstraints { (make) in

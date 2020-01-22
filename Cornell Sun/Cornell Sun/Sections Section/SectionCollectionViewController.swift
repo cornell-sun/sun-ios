@@ -110,7 +110,7 @@ class SectionCollectionViewController: UIViewController, UIScrollViewDelegate {
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        navigationController?.navigationBar.barTintColor = darkModeEnabled ? .darkCell : .white
+        navigationController?.navigationBar.barTintColor = darkModeEnabled ? .black : .white
         navigationController?.navigationBar.titleTextAttributes = [
             NSAttributedString.Key.font: UIFont.headerTitle, NSAttributedString.Key.foregroundColor: darkModeEnabled ? UIColor.white : UIColor.black
         ]

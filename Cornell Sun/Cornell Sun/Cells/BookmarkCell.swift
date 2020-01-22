@@ -62,7 +62,7 @@ final class BookmarkCell: UICollectionViewCell {
     }
 
     func setupViews() {
-        self.backgroundColor = darkModeEnabled ? .darkCell : .white
+        self.backgroundColor = darkModeEnabled ? .black : .white
         titleLabel.textColor = darkModeEnabled ? .white90 : .black
         authorLabel.textColor = darkModeEnabled ? .white60 : .black60
         addSubview(imageView)

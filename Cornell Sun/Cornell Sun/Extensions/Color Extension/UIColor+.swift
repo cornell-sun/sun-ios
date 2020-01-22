@@ -59,6 +59,10 @@ extension UIColor {
     
     // New Color Scheme
     
+    @nonobjc class var darkGray: UIColor {
+        return UIColor(red: 14/255, green: 14/255, blue: 14/255, alpha: 1.0)
+    }
+    
     @nonobjc class var lightText: UIColor {
         return UIColor(red: 41/255, green: 41/255, blue: 41/255, alpha: 1.0)
     }

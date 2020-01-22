@@ -29,9 +29,7 @@ class SectionViewController: UIViewController {
     var tableView: UITableView!
     var sections: [Sections] = [.news(id: 2), .opinion(id: 3), .sports(id: 4), .arts(id: 5), .science(id: 6), .dining(id: 7), .multimedia(id: 9)]
 
-//    var darkModeEnabled = UserDefaults.standard.bool(forKey: "darkModeEnabled")
     var darkModeEnabled = UserDefaults.standard.bool(forKey: "darkModeEnabled")
-
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -70,7 +68,7 @@ class SectionViewController: UIViewController {
             navigationController?.navigationBar.barTintColor = .darkTint
             navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.darkText]
             navigationController?.navigationBar.barStyle = .blackTranslucent
-            tableView.backgroundColor = .darkCell
+            tableView.backgroundColor = .black
 
         } else {
             navigationController?.navigationBar.barTintColor = .white
@@ -130,7 +128,7 @@ extension SectionViewController: UITableViewDataSource, UITableViewDelegate {
         cell.sectionImageView.image = UIImage(named: sectionMeta.imageName)
 
         if(darkModeEnabled) {
-            cell.backgroundColor = .darkCell
+            cell.backgroundColor = .black
             cell.titleLabel.textColor = .darkText
             cell.detailImageView.image = UIImage(named: "disclosureArrowDark")
             cell.sectionImageView.image = UIImage(named: sectionMeta.imageName + "Dark")

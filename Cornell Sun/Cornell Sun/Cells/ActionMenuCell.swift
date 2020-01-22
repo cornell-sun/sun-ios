@@ -105,7 +105,7 @@ final class MenuActionCell: UICollectionViewCell {
     }
 
     func setupViews(forBookmarks: Bool) {
-        self.backgroundColor = darkModeEnabled ? .darkCell : .white
+        self.backgroundColor = darkModeEnabled ? .black : .white
 
         if forBookmarks {
             let bookmarkImage = darkModeEnabled ? "bookmarkIconSelectedDark" : "bookmarkIconSelectedLight"

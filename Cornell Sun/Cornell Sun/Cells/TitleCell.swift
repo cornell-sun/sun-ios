@@ -43,7 +43,7 @@ final class TitleCell: UICollectionViewCell {
     }
 
     func setupViews() {
-        self.backgroundColor = darkModeEnabled ? .darkCell : .white
+        self.backgroundColor = darkModeEnabled ? .black : .white
         titleLabel.textColor = darkModeEnabled ? .white90 : .black90
         addSubview(titleLabel)
         titleLabel.snp.makeConstraints { (make) in
