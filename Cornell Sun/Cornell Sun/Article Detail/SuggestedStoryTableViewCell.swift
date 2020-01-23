@@ -23,7 +23,7 @@ class SuggestedStoryTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
-        backgroundColor = darkModeEnabled ? .darkCell : .white
+        backgroundColor = darkModeEnabled ? .black : .white
         selectionStyle = .none
 
         storyImageView = UIImageView()

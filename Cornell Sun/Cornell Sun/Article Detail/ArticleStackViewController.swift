@@ -409,7 +409,7 @@ class ArticleStackViewController: UIViewController {
         suggestedTableView.isScrollEnabled = false
         suggestedTableView.allowsSelection = false
         suggestedTableView.rowHeight = 118
-        suggestedTableView.backgroundColor = darkModeEnabled ? .darkCell : .white
+        suggestedTableView.backgroundColor = darkModeEnabled ? .black : .white
         suggestedTableView.tableFooterView = UIView()
         suggestedTableView.register(SuggestedStoryTableViewCell.self, forCellReuseIdentifier: suggestedReuseIdentifier)
         scrollView.addSubview(suggestedTableView)
