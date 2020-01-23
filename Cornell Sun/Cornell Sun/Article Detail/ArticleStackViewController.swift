@@ -48,7 +48,8 @@ class ArticleStackViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.extendedLayoutIncludesOpaqueBars = true
+        self.edgesForExtendedLayout = [.bottom]
         view.backgroundColor = darkModeEnabled ? .darkCell : .white
         navigationController?.navigationBar.tintColor = .black
         if #available(iOS 11.0, *) {
@@ -522,7 +523,7 @@ extension ArticleStackViewController: ShareBarViewDelegate {
             iconUnSelected = UIImage(named: "bookmarkIconLight")
         }
         
-        let didBookmark = view.bookmarkButton.currentImage == iconSelected
+        let didBookmark = view.bookmarkButton.currentImage == iconUnSelected
         let correctBookmarkImage = view.bookmarkButton.currentImage == iconSelected ? iconUnSelected : iconSelected
         view.bookmarkButton.setImage(correctBookmarkImage, for: .normal)
         view.bookmarkButton.transform = CGAffineTransform(scaleX: 0.6, y: 0.6)
