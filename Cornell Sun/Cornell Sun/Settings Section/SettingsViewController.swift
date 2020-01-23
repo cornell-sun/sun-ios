@@ -64,18 +64,15 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     @objc func updateColors() {
-        if (darkModeEnabled) {
-            navigationController?.navigationBar.barTintColor = .darkTint
-            navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.darkText]
-            navigationController?.navigationBar.barStyle = .blackTranslucent
-            tableView.backgroundColor = .darkCell
-        } else {
-            navigationController?.navigationBar.barTintColor = .white
-            navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.lightText]
-            navigationController?.navigationBar.barStyle = .default
-            tableView.backgroundColor = .white
-        }
         
+        navigationController?.navigationBar.barTintColor = darkModeEnabled ? .darkTint : .white
+        navigationController?.navigationBar.barStyle = darkModeEnabled ? .blackTranslucent : .default
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        navigationItem.backBarButtonItem?.tintColor = darkModeEnabled ? .white : .black
+        let titleColor = darkModeEnabled ? UIColor.darkText : UIColor.lightText
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: titleColor]
+        
+        tableView.backgroundColor = darkModeEnabled ? .darkCell : .white
         tableView.reloadData()
     }
     

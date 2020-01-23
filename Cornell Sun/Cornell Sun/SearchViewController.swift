@@ -136,26 +136,22 @@ class SearchViewController: UIViewController, UITableViewDelegate {
     }
     
     @objc func updateColors() {
-        if(darkModeEnabled) {
-            navigationController?.navigationBar.barTintColor = .darkTint
-            navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.darkText]
-            navigationController?.navigationBar.barStyle = .blackTranslucent
-            searchController.searchBar.backgroundColor = .darkTint
-            searchController.searchBar.barStyle = .blackTranslucent
-            tableView.backgroundColor = .darkCell
-            collectionView.backgroundColor = .black
-            searchController.searchBar.tintColor = .darkText
-            
-        } else {
-            navigationController?.navigationBar.barTintColor = .white
-            navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.lightText]
-            navigationController?.navigationBar.barStyle = .default
-            searchController.searchBar.backgroundColor = .white
-            searchController.searchBar.barStyle = .default
-            tableView.backgroundColor = .white
-            collectionView.backgroundColor = .white
-            searchController.searchBar.tintColor = .blue
-        }
+        
+        navigationController?.navigationBar.barTintColor = darkModeEnabled ? .darkTint : .white
+        navigationController?.navigationBar.barStyle = darkModeEnabled ? .blackTranslucent : .default
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        navigationItem.backBarButtonItem?.tintColor = darkModeEnabled ? .white : .black
+        let titleColor = darkModeEnabled ? UIColor.darkText : UIColor.lightText
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: titleColor]
+        
+        searchController.searchBar.backgroundColor = darkModeEnabled ? .darkTint : .white
+        searchController.searchBar.barStyle = darkModeEnabled ? .blackTranslucent : .default
+        searchController.searchBar.tintColor = darkModeEnabled ? .darkText : .blue
+        
+        tableView.backgroundColor = darkModeEnabled ? .darkCell : .white
+        
+        collectionView.backgroundColor = darkModeEnabled ? .black : .white
+        
     }
 }
 
