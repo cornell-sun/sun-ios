@@ -63,6 +63,7 @@ func getTrending(completion: @escaping TrendingCompletionBlock) {
             else { completion([String](), .parsingError); return }
         completion(trending, nil)
     }
+    completion([String](), nil)
 }
 
 func getComments(postID: Int, completion: @escaping CommentsCompletionBlock) {
@@ -84,12 +85,13 @@ func getComments(postID: Int, completion: @escaping CommentsCompletionBlock) {
             completion([CommentObject](), .parsingError)
         }
     }
+    completion([CommentObject](), .parsingError)
 }
 
 func getPostsFromIDs(_ ids: [Int], completion: @escaping ([Int: PostObject], APIErrors?) -> Void) {
     let group = DispatchGroup()
     var postsDict = [Int: PostObject]()
-
+    
     ids.forEach { id in
         group.enter()
         API.request(target: .post(postId: id)) { response in
@@ -97,17 +99,18 @@ func getPostsFromIDs(_ ids: [Int], completion: @escaping ([Int: PostObject], API
                 print("error")
                 return
             }
+            
             do {
                 let post = try decoder.decode(PostObject.self, from: response.data)
                 postsDict[id] = post
+                group.leave()
             } catch let error {
                 print(error)
                 return
             }
-            group.leave()
         }
     }
-
+    
     group.notify(queue: .main) {
         completion(postsDict, nil)
     }
@@ -127,24 +130,26 @@ func getPostFromID(_ id: Int, completion: @escaping (PostObject) -> Void) {
             fatalError()
         }
     }
+    fatalError()
 }
 
 func getIDFromURL(_ url: URL, completion: @escaping (Int?) -> Void) {
     API.request(target: .urlToID(url: url)) { response in
-        guard let tryID = try? response?.mapString(), let idString = tryID, let id = Int(idString), id != 0 else {
+        guard let tryID = ((try? response?.mapString()) as String??), let idString = tryID, let id = Int(idString), id != 0 else {
             completion(nil)
             return
         }
         completion(id)
     }
+    completion(0)
 }
 
 func prepareInitialPosts(callback: @escaping ([ListDiffable], PostObject?) -> Void) {
     var headlinePost: PostObject?
     var postObjects: [ListDiffable] = []
-
+    
     let group = DispatchGroup()
-
+    
     group.enter()
     API.request(target: .featured) { (response) in
         if let response = response {
@@ -159,11 +164,11 @@ func prepareInitialPosts(callback: @escaping ([ListDiffable], PostObject?) -> Vo
         }
         group.leave()
     }
-
+    
     group.enter()
     API.request(target: .posts(page: 1)) { (response) in
         if let response = response {
-
+            
             do {
                 postObjects = try decoder.decode([PostObject].self, from: response.data)
                 postObjects.insert("adToken" as ListDiffable, at: 7)
@@ -172,10 +177,10 @@ func prepareInitialPosts(callback: @escaping ([ListDiffable], PostObject?) -> Vo
                 return
             }
         }
-
+        
         group.leave()
     }
-
+    
     group.notify(queue: .main) {
         //both network requests are done
         postObjects = postObjects.filter { post in
@@ -191,20 +196,20 @@ func getDeeplinkedPostWithId(_ id: Int, completion: @escaping ([ListDiffable], P
     var posts: [ListDiffable] = []
     var heroPost: PostObject?
     var deeplinkPost: PostObject?
-
+    
     group.enter()
     prepareInitialPosts { (postObjects, headlinePost) in
         posts = postObjects
         heroPost = headlinePost
         group.leave()
     }
-
+    
     group.enter()
     getPostFromID(id) { post in
         deeplinkPost = post
         group.leave()
     }
-
+    
     group.notify(queue: .main) {
         completion(posts, heroPost, deeplinkPost)
     }

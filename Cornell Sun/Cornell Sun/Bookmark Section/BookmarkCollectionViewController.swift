@@ -13,41 +13,37 @@ class BookmarkCollectionViewController: ViewController, UIScrollViewDelegate {
     fileprivate var observer: NSKeyValueObservation?
     var isFirstRun = true
     var bookmarkPosts: [PostObject] = []
-
     var emptyBookmarkView: EmptyView!
-    
     let darkModeEnabled = UserDefaults.standard.bool(forKey: "darkModeEnabled")
-    
+
     let collectionView: UICollectionView = {
         let view = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
         view.alwaysBounceVertical = true
         return view
     }()
-
+    
     lazy var adapter: ListAdapter  = {
         return ListAdapter(updater: ListAdapterUpdater(), viewController: self, workingRangeSize: 0)
     }()
 
     override func viewWillAppear(_ animated: Bool) {
-        title = "Bookmarks"
+        navigationItem.title = "Bookmarks"
         navigationController?.navigationBar.isTranslucent = false
         navigationController?.navigationBar.titleTextAttributes = [
             NSAttributedString.Key.font: UIFont.headerTitle
         ]
+        updateColors()
 
         guard !isFirstRun else {
             isFirstRun = false
             return
         }
         self.adapter.performUpdates(animated: true, completion: nil)
-        
-        updateColors()
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Bookmarks"
-        
+
         let emptyIcon = darkModeEnabled ? "empty-bookmark-sunDark" : "empty-bookmark-sunLight"
         emptyBookmarkView = EmptyView(image: UIImage(named: emptyIcon)!, title: "No Bookmarks", description: "Running late? Save some articles for later")
 
@@ -63,10 +59,8 @@ class BookmarkCollectionViewController: ViewController, UIScrollViewDelegate {
                 self.adapter.performUpdates(animated: true, completion: nil)
             }
         }
-        
-        updateColors()
     }
-    
+
     @objc func updateColors() {
         
         navigationController?.navigationBar.barTintColor = darkModeEnabled ? .darkTint : .white

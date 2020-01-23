@@ -97,4 +97,7 @@ fastlane/Preview.html
 fastlane/screenshots
 fastlane/test_output
 
+#IDE Related
+.idea
+
 # End of https://www.gitignore.io/api/macos,swift

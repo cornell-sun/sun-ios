@@ -1,52 +1,132 @@
 PODS:
-  - Alamofire (4.8.2)
-  - Crashlytics (3.13.4):
+  - Alamofire (4.9.1)
+  - Crashlytics (3.14.0):
     - Fabric (~> 1.10.2)
   - Fabric (1.10.2)
-  - Google-Mobile-Ads-SDK (7.47.0):
-    - GoogleAppMeasurement (~> 6.0)
-  - GoogleAppMeasurement (6.0.3):
+  - Firebase/AdMob (6.15.0):
+    - Firebase/CoreOnly
+    - Google-Mobile-Ads-SDK (~> 7.50)
+  - Firebase/Analytics (6.15.0):
+    - Firebase/Core
+  - Firebase/Core (6.15.0):
+    - Firebase/CoreOnly
+    - FirebaseAnalytics (= 6.2.1)
+  - Firebase/CoreOnly (6.15.0):
+    - FirebaseCore (= 6.6.0)
+  - Firebase/Performance (6.15.0):
+    - Firebase/CoreOnly
+    - FirebasePerformance (~> 3.1.9)
+  - FirebaseABTesting (3.1.2):
+    - FirebaseAnalyticsInterop (~> 1.3)
+    - FirebaseCore (~> 6.1)
+    - Protobuf (>= 3.9.2, ~> 3.9)
+  - FirebaseAnalytics (6.2.1):
+    - FirebaseCore (~> 6.6)
+    - FirebaseInstanceID (~> 4.3)
+    - GoogleAppMeasurement (= 6.2.1)
     - GoogleUtilities/AppDelegateSwizzler (~> 6.0)
     - GoogleUtilities/MethodSwizzler (~> 6.0)
     - GoogleUtilities/Network (~> 6.0)
     - "GoogleUtilities/NSData+zlib (~> 6.0)"
-    - nanopb (~> 0.3)
-  - GoogleUtilities/AppDelegateSwizzler (6.2.3):
+    - nanopb (= 0.3.9011)
+  - FirebaseAnalyticsInterop (1.5.0)
+  - FirebaseCore (6.6.0):
+    - FirebaseCoreDiagnostics (~> 1.2)
+    - FirebaseCoreDiagnosticsInterop (~> 1.2)
+    - GoogleUtilities/Environment (~> 6.5)
+    - GoogleUtilities/Logger (~> 6.5)
+  - FirebaseCoreDiagnostics (1.2.0):
+    - FirebaseCoreDiagnosticsInterop (~> 1.2)
+    - GoogleDataTransportCCTSupport (~> 1.3)
+    - GoogleUtilities/Environment (~> 6.5)
+    - GoogleUtilities/Logger (~> 6.5)
+    - nanopb (~> 0.3.901)
+  - FirebaseCoreDiagnosticsInterop (1.2.0)
+  - FirebaseInstallations (1.1.0):
+    - FirebaseCore (~> 6.6)
+    - GoogleUtilities/UserDefaults (~> 6.5)
+    - PromisesObjC (~> 1.2)
+  - FirebaseInstanceID (4.3.0):
+    - FirebaseCore (~> 6.6)
+    - FirebaseInstallations (~> 1.0)
+    - GoogleUtilities/Environment (~> 6.5)
+    - GoogleUtilities/UserDefaults (~> 6.5)
+  - FirebasePerformance (3.1.9):
+    - FirebaseCore (~> 6.6)
+    - FirebaseInstanceID (~> 4.3)
+    - FirebaseRemoteConfig (~> 4.4)
+    - GoogleToolboxForMac/Logger (~> 2.1)
+    - "GoogleToolboxForMac/NSData+zlib (~> 2.1)"
+    - GoogleUtilities/Environment (~> 6.2)
+    - GoogleUtilities/ISASwizzler (~> 6.2)
+    - GoogleUtilities/MethodSwizzler (~> 6.2)
+    - GTMSessionFetcher/Core (~> 1.1)
+    - Protobuf (~> 3.9)
+  - FirebaseRemoteConfig (4.4.6):
+    - FirebaseABTesting (~> 3.1)
+    - FirebaseAnalyticsInterop (~> 1.4)
+    - FirebaseCore (~> 6.2)
+    - FirebaseInstanceID (~> 4.2)
+    - GoogleUtilities/Environment (~> 6.2)
+    - "GoogleUtilities/NSData+zlib (~> 6.2)"
+    - Protobuf (>= 3.9.2, ~> 3.9)
+  - Google-Mobile-Ads-SDK (7.53.1):
+    - GoogleAppMeasurement (~> 6.0)
+  - GoogleAppMeasurement (6.2.1):
+    - GoogleUtilities/AppDelegateSwizzler (~> 6.0)
+    - GoogleUtilities/MethodSwizzler (~> 6.0)
+    - GoogleUtilities/Network (~> 6.0)
+    - "GoogleUtilities/NSData+zlib (~> 6.0)"
+    - nanopb (= 0.3.9011)
+  - GoogleDataTransport (3.3.0)
+  - GoogleDataTransportCCTSupport (1.3.0):
+    - GoogleDataTransport (~> 3.3)
+    - nanopb (~> 0.3.901)
+  - GoogleToolboxForMac/Defines (2.2.2)
+  - GoogleToolboxForMac/Logger (2.2.2):
+    - GoogleToolboxForMac/Defines (= 2.2.2)
+  - "GoogleToolboxForMac/NSData+zlib (2.2.2)":
+    - GoogleToolboxForMac/Defines (= 2.2.2)
+  - GoogleUtilities/AppDelegateSwizzler (6.5.0):
     - GoogleUtilities/Environment
     - GoogleUtilities/Logger
     - GoogleUtilities/Network
-  - GoogleUtilities/Environment (6.2.3)
-  - GoogleUtilities/Logger (6.2.3):
+  - GoogleUtilities/Environment (6.5.0)
+  - GoogleUtilities/ISASwizzler (6.5.0)
+  - GoogleUtilities/Logger (6.5.0):
     - GoogleUtilities/Environment
-  - GoogleUtilities/MethodSwizzler (6.2.3):
+  - GoogleUtilities/MethodSwizzler (6.5.0):
     - GoogleUtilities/Logger
-  - GoogleUtilities/Network (6.2.3):
+  - GoogleUtilities/Network (6.5.0):
     - GoogleUtilities/Logger
     - "GoogleUtilities/NSData+zlib"
     - GoogleUtilities/Reachability
-  - "GoogleUtilities/NSData+zlib (6.2.3)"
-  - GoogleUtilities/Reachability (6.2.3):
+  - "GoogleUtilities/NSData+zlib (6.5.0)"
+  - GoogleUtilities/Reachability (6.5.0):
     - GoogleUtilities/Logger
+  - GoogleUtilities/UserDefaults (6.5.0):
+    - GoogleUtilities/Logger
+  - GTMSessionFetcher/Core (1.3.1)
   - HTMLString (5.0.0)
-  - IGListKit (3.4.0):
-    - IGListKit/Default (= 3.4.0)
-  - IGListKit/Default (3.4.0):
-    - IGListKit/Diffing
-  - IGListKit/Diffing (3.4.0)
+  - IGListDiffKit (4.0.0)
+  - IGListKit (4.0.0):
+    - IGListDiffKit (= 4.0.0)
   - ImageSlideshow (1.5.0):
     - ImageSlideshow/Core (= 1.5.0)
   - ImageSlideshow/Core (1.5.0)
   - ImageSlideshow/Kingfisher (1.5.0):
     - ImageSlideshow/Core
     - Kingfisher (> 3.0)
-  - IQKeyboardManagerSwift (6.4.0)
-  - Kingfisher (5.7.0)
+  - IQKeyboardManagerSwift (6.5.4)
+  - Kingfisher (5.13.0):
+    - Kingfisher/Core (= 5.13.0)
+  - Kingfisher/Core (5.13.0)
   - ModelMapper (10.0.0):
     - ModelMapper/Core (= 10.0.0)
   - ModelMapper/Core (10.0.0)
-  - Motion (3.1.1):
-    - Motion/Core (= 3.1.1)
-  - Motion/Core (3.1.1)
+  - Motion (3.1.3):
+    - Motion/Core (= 3.1.3)
+  - Motion/Core (3.1.3)
   - Moya (13.0.1):
     - Moya/Core (= 13.0.1)
   - Moya-ModelMapper (9.0.0):
@@ -57,21 +137,26 @@ PODS:
   - Moya/Core (13.0.1):
     - Alamofire (~> 4.1)
     - Result (~> 4.1)
-  - nanopb (0.3.901):
-    - nanopb/decode (= 0.3.901)
-    - nanopb/encode (= 0.3.901)
-  - nanopb/decode (0.3.901)
-  - nanopb/encode (0.3.901)
-  - OneSignal (2.10.0)
+  - nanopb (0.3.9011):
+    - nanopb/decode (= 0.3.9011)
+    - nanopb/encode (= 0.3.9011)
+  - nanopb/decode (0.3.9011)
+  - nanopb/encode (0.3.9011)
+  - OneSignal (2.12.5)
+  - PromisesObjC (1.2.8)
+  - Protobuf (3.11.2)
   - Result (4.1.0)
-  - SkeletonView (1.7)
-  - SnapKit (5.0.0)
-  - SwiftSoup (2.2.0)
-  - UICircularProgressRing (6.2.0)
+  - SkeletonView (1.8.2)
+  - SnapKit (5.0.1)
+  - SwiftSoup (2.3.0)
+  - UICircularProgressRing (6.5.0)
 
 DEPENDENCIES:
   - Crashlytics
   - Fabric
+  - Firebase/AdMob
+  - Firebase/Analytics
+  - Firebase/Performance
   - Google-Mobile-Ads-SDK
   - HTMLString
   - IGListKit
@@ -81,7 +166,6 @@ DEPENDENCIES:
   - Kingfisher
   - Motion
   - Moya
-  - Moya (>= 13.0.1)
   - Moya-ModelMapper
   - OneSignal (< 3.0, >= 2.6.2)
   - SkeletonView
@@ -90,14 +174,30 @@ DEPENDENCIES:
   - UICircularProgressRing
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  trunk:
     - Alamofire
     - Crashlytics
     - Fabric
+    - Firebase
+    - FirebaseABTesting
+    - FirebaseAnalytics
+    - FirebaseAnalyticsInterop
+    - FirebaseCore
+    - FirebaseCoreDiagnostics
+    - FirebaseCoreDiagnosticsInterop
+    - FirebaseInstallations
+    - FirebaseInstanceID
+    - FirebasePerformance
+    - FirebaseRemoteConfig
     - Google-Mobile-Ads-SDK
     - GoogleAppMeasurement
+    - GoogleDataTransport
+    - GoogleDataTransportCCTSupport
+    - GoogleToolboxForMac
     - GoogleUtilities
+    - GTMSessionFetcher
     - HTMLString
+    - IGListDiffKit
     - IGListKit
     - IQKeyboardManagerSwift
     - Kingfisher
@@ -107,6 +207,8 @@ SPEC REPOS:
     - Moya-ModelMapper
     - nanopb
     - OneSignal
+    - PromisesObjC
+    - Protobuf
     - Result
     - SkeletonView
     - SnapKit
@@ -124,29 +226,47 @@ CHECKOUT OPTIONS:
     :git: https://github.com/cornell-sun/ImageSlideshow
 
 SPEC CHECKSUMS:
-  Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
-  Crashlytics: 2dfd686bcb918dc10ee0e76f7f853fe42c7bd552
+  Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
+  Crashlytics: 540b7e5f5da5a042647227a5e3ac51d85eed06df
   Fabric: 706c8b8098fff96c33c0db69cbf81f9c551d0d74
-  Google-Mobile-Ads-SDK: a10b30f4a51a3283df7df3c9ea7e84553b508e4b
-  GoogleAppMeasurement: 1e45fa601e6280c180880d57010390f6679cd971
-  GoogleUtilities: d2b0e277a95962e09bb27f5cd42f5f0b6a506c7d
+  Firebase: 5d77105d9740a07ca6b16927ca971db7e860faaf
+  FirebaseABTesting: 0d10f3cdc3fa00f3f175b5b56c1003c8e888299f
+  FirebaseAnalytics: e83e64b1231dedcd9ddd4bdecd9bcfd6ba341679
+  FirebaseAnalyticsInterop: 3f86269c38ae41f47afeb43ebf32a001f58fcdae
+  FirebaseCore: 4aeb81ff53dcd9a3634ca725dc1fb8c2a4622046
+  FirebaseCoreDiagnostics: 5e78803ab276bc5b50340e3c539c06c3de35c649
+  FirebaseCoreDiagnosticsInterop: 296e2c5f5314500a850ad0b83e9e7c10b011a850
+  FirebaseInstallations: 575cd32f2aec0feeb0e44f5d0110a09e5e60b47b
+  FirebaseInstanceID: 6668efc1655a4052c083f287a7141f1ead12f9c2
+  FirebasePerformance: 18ac5d515f0da0a96cde94b7fc5b1514b235e2d9
+  FirebaseRemoteConfig: c11d74d8b1ff8463b587fc8899d92ee089f9a691
+  Google-Mobile-Ads-SDK: fac081606dbd438d8db57198b83ba8b5f875a601
+  GoogleAppMeasurement: a08a43b8677b95ed51fcef880e36737334d804fd
+  GoogleDataTransport: 574a983e829327d7c18f2627f65d9e80164ea8a4
+  GoogleDataTransportCCTSupport: cad3cd6cdbdbad6b5c2c9206ec413402755faaaa
+  GoogleToolboxForMac: 800648f8b3127618c1b59c7f97684427630c5ea3
+  GoogleUtilities: f8de7ddf8c706f58e9b405d53e38bbdaa2731e5a
+  GTMSessionFetcher: cea130bbfe5a7edc8d06d3f0d17288c32ffe9925
   HTMLString: 20374dc0195423d02569e87561f01153fca0c364
-  IGListKit: 7a5d788e9fb746bcd402baa8e8b24bc3bd2a5a07
+  IGListDiffKit: 665d6cf43ce726e676013db9c7d6c4294259b6b2
+  IGListKit: fd5a5d21935298f5849fa49d426843cff97b77c7
   ImageSlideshow: 137bb409baaf6f6d5c0808ed559d304dfc40eba0
-  IQKeyboardManagerSwift: ed9b04ee0e3067ffba543283462d619f944b05e5
-  Kingfisher: c7d211b54f1f30d8060aadab177d52b4349c825b
+  IQKeyboardManagerSwift: 2dde0fc70110e8eac7ccce2a46fdbec6a850b414
+  Kingfisher: 0d334cada987fcddbe9b5cec516406e1ee9d4748
   ModelMapper: a8dbf2a2003bf626627b9fe7c9a22b3405a30404
-  Motion: f115b33f36cc52472a25a965daa89b3859817de0
+  Motion: cf1e060e489f6661126374d5c60dbd2ed991605c
   Moya: f4a4b80ff2f8a4ffc208dfb31cd91636622fee6e
   Moya-ModelMapper: 4948625af7fc5eef41ad9fdfe0c3517170b50960
-  nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
-  OneSignal: 0f5ff711d9f25da54885e4ab06ef0abc221a46ef
+  nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
+  OneSignal: 1de998c42bb06ed630bb38dd1bc933a667437dbb
+  PromisesObjC: c119f3cd559f50b7ae681fa59dc1acd19173b7e6
+  Protobuf: dd1aaea7140debfe4dd0683fb8ef208e527ae153
   Result: bd966fac789cc6c1563440b348ab2598cc24d5c7
-  SkeletonView: 7d7378731b708f8a6e6b1ffefb68cc3903f10a03
-  SnapKit: fd22d10eb9aff484d79a8724eab922c1ddf89bcf
-  SwiftSoup: 230991361c5ba249d140161860a3864a28b63860
-  UICircularProgressRing: 0ff679b05a17f15ad6301a7886686837b8c301a9
+  SkeletonView: bb27c39857e5492136f02ee8a3aa78de55d12ecd
+  SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
+  SwiftSoup: d78683f7ea0ae5733225a9e1d3bee5b256449df4
+  UICircularProgressRing: e6852e8f88e296cbbbe2720cccb55241acda6708
 
-PODFILE CHECKSUM: 52d397fec820e95575f9052628b0bec858b3125f
+PODFILE CHECKSUM: 9160ff8c6a5720b6d32dd1dbe8165bb5720c2aed
 
-COCOAPODS: 1.7.4
+COCOAPODS: 1.8.4

@@ -69,7 +69,7 @@ class OnboardingPageViewController: UIPageViewController {
     }
 
     @objc func pageNextTapped(_ sender: UIButton) {
-        if let viewController = viewControllers?.first, let index = pages.index(of: viewController) {
+        if let viewController = viewControllers?.first, let index = pages.firstIndex(of: viewController) {
             if index == 1 {
                 dismissOnboarding()
             } else {
@@ -104,21 +104,21 @@ class OnboardingPageViewController: UIPageViewController {
 extension OnboardingPageViewController: UIPageViewControllerDelegate, UIPageViewControllerDataSource {
 
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-        if let index = pages.index(of: viewController), index != 0 {
+        if let index = pages.firstIndex(of: viewController), index != 0 {
             return pages[index - 1]
         }
         return nil
     }
 
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        if let index = pages.index(of: viewController), index < pages.count - 1 {
+        if let index = pages.firstIndex(of: viewController), index < pages.count - 1 {
             return pages[index + 1]
         }
         return nil
     }
 
     func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
-        if let viewControllers = pageViewController.viewControllers, let index = pages.index(of: viewControllers[0]) {
+        if let viewControllers = pageViewController.viewControllers, let index = pages.firstIndex(of: viewControllers[0]) {
             pageControl.currentPage = index
         }
     }

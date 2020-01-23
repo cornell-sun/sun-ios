@@ -27,6 +27,7 @@ class PhotoGalleryDetailViewController: UIViewController {
         closeButton.tintColor = .white
 
         isMotionEnabled = true
+        
         photoGallery = PhotoGallery(attachments: attachments, height: view.bounds.width / 1.5, width: view.bounds.width, pinchToZoom: true, viewHeight: view.bounds.height)
         photoGallery.displayPageControl = false
         

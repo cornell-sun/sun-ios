@@ -392,6 +392,7 @@ class ArticleStackViewController: UIViewController {
     func setupSuggestedStories() {
         let headerHeight: CGFloat = 30
         let suggestedStoryPadding: CGFloat = 18
+        
         let headerView = UIView()
         let headerLabel = UILabel()
         headerLabel.font = .headerTitle

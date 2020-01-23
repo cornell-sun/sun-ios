@@ -32,7 +32,8 @@ class SectionCollectionViewController: UIViewController, UIScrollViewDelegate {
     var adCount = 1
     var sectionID = 0
     let spinToken = "spinner"
-    
+    var sectionTitle = ""
+
     let darkModeEnabled = UserDefaults.standard.bool(forKey: "darkModeEnabled")
 
     let collectionView: UICollectionView = {
@@ -49,11 +50,11 @@ class SectionCollectionViewController: UIViewController, UIScrollViewDelegate {
     init(with section: Sections, sectionTitle: String) {
         super.init(nibName: nil, bundle: nil)
         sectionSelected = section
-        title = sectionTitle
+        self.sectionTitle = sectionTitle
         navigationController?.navigationBar.titleTextAttributes = [
             NSAttributedString.Key.font: UIFont.headerTitle
         ]
-        
+
         switch section {
         case .news(let id), .opinion(let id), .arts(let id), .dining(let id), .multimedia(let id), .science(let id), .sports(let id):
             sectionID = id
@@ -91,7 +92,7 @@ class SectionCollectionViewController: UIViewController, UIScrollViewDelegate {
         }
 
         refreshControl.addTarget(self, action: #selector(refreshData), for: .valueChanged)
-        
+
         view.addSubview(collectionView)
         adapter.collectionView = collectionView
         adapter.collectionView?.backgroundColor = darkModeEnabled ? .black : .collectionBackground
@@ -113,6 +114,7 @@ class SectionCollectionViewController: UIViewController, UIScrollViewDelegate {
         navigationController?.navigationBar.titleTextAttributes = [
             NSAttributedString.Key.font: UIFont.headerTitle, NSAttributedString.Key.foregroundColor: darkModeEnabled ? UIColor.white : UIColor.black
         ]
+        navigationItem.title = sectionTitle
     }
 
     override func didReceiveMemoryWarning() {
@@ -121,7 +123,7 @@ class SectionCollectionViewController: UIViewController, UIScrollViewDelegate {
     }
 
     fileprivate func isPostIdInBookmarks(post: PostObject, currListOfBookmarks: [PostObject]) -> PostObject? {
-        guard let index = currListOfBookmarks.index(where: {$0.id == post.id}) else { return nil }
+        guard let index = currListOfBookmarks.firstIndex(where: {$0.id == post.id}) else { return nil }
         return currListOfBookmarks[index]
     }
 
@@ -133,7 +135,7 @@ class SectionCollectionViewController: UIViewController, UIScrollViewDelegate {
             return updatedBookmarkPost
         }
     }
-    
+
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         let distance = scrollView.contentSize.height - (targetContentOffset.pointee.y + scrollView.bounds.height)
         if !loading && distance < 300 {
@@ -182,9 +184,9 @@ extension SectionCollectionViewController: ListAdapterDataSource {
 }
 
 extension SectionCollectionViewController {
-    
+
     func getPosts(page: Int, sectionID: Int) {
-        
+
         fetchPosts(target: .section(section: sectionID, page: page)) { posts, error in
             if error == nil {
                 self.loading = false
@@ -197,7 +199,7 @@ extension SectionCollectionViewController {
             }
         }
     }
-    
+
     @objc func refreshData() {
         currentPage = 1
         feedData = []
