@@ -68,19 +68,15 @@ class BookmarkCollectionViewController: ViewController, UIScrollViewDelegate {
     }
     
     @objc func updateColors() {
-    
-        if(darkModeEnabled) {
-            navigationController?.navigationBar.barTintColor = .darkTint
-            navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.darkText]
-            navigationController?.navigationBar.barStyle = .blackTranslucent
-            collectionView.backgroundColor = .black
-            
-        } else {
-            navigationController?.navigationBar.barTintColor = .white
-            navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.lightText]
-            navigationController?.navigationBar.barStyle = .default
-             collectionView.backgroundColor = .white
-        }
+        
+        navigationController?.navigationBar.barTintColor = darkModeEnabled ? .darkTint : .white
+        navigationController?.navigationBar.barStyle = darkModeEnabled ? .blackTranslucent : .default
+        let textColor = darkModeEnabled ? UIColor.darkText : UIColor.lightText
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: textColor]
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        navigationItem.backBarButtonItem?.tintColor = darkModeEnabled ? .white : .black
+        collectionView.backgroundColor = darkModeEnabled ? .black : .white
+        
     }
 
     deinit {

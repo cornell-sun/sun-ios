@@ -184,6 +184,7 @@ extension FeedCollectionViewController {
 
     func setNavigationInformation() {
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        navigationItem.backBarButtonItem?.tintColor = darkModeEnabled ? .white : .black
         navigationController?.navigationBar.barTintColor = darkModeEnabled ? .darkCell : .white
         navigationController?.navigationBar.tintColor = .white
         navigationController?.navigationBar.barStyle = UIBarStyle.blackOpaque

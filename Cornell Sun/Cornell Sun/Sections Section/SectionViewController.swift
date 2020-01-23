@@ -68,18 +68,13 @@ class SectionViewController: UIViewController {
     
     @objc func updateColors() {
         
-        if(darkModeEnabled) {
-            navigationController?.navigationBar.barTintColor = .darkTint
-            navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.darkText]
-            navigationController?.navigationBar.barStyle = .blackTranslucent
-            tableView.backgroundColor = .darkCell
-            
-        } else {
-            navigationController?.navigationBar.barTintColor = .white
-            navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.lightText]
-            navigationController?.navigationBar.barStyle = .default
-            tableView.backgroundColor = .white
-        }
+        navigationController?.navigationBar.barTintColor = darkModeEnabled ? .darkTint : .white
+        navigationController?.navigationBar.barStyle = darkModeEnabled ? .blackTranslucent : .default
+        tableView.backgroundColor = darkModeEnabled ? .darkCell : .white
+        let textColor = darkModeEnabled ? UIColor.darkText : UIColor.lightText
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: textColor]
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        navigationItem.backBarButtonItem?.tintColor = darkModeEnabled ? .white : .black
         
         tableView.reloadData()
     }
