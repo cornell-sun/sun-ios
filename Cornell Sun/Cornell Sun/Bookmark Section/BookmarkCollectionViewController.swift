@@ -69,7 +69,7 @@ class BookmarkCollectionViewController: ViewController, UIScrollViewDelegate {
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: textColor]
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         navigationItem.backBarButtonItem?.tintColor = darkModeEnabled ? .white : .black
-        collectionView.backgroundColor = darkModeEnabled ? .black : .white
+        collectionView.backgroundColor = darkModeEnabled ? .darkTint : .white
         
     }
 
