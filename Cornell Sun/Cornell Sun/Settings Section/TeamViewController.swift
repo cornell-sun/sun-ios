@@ -66,13 +66,18 @@ class TeamViewController: UIViewController, UITableViewDataSource, UITableViewDe
         }
         
         // Set up table view for settings
-        tableView = UITableView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height))
+        tableView = UITableView()
         tableView.register(TeamTableViewCell.self, forCellReuseIdentifier: "TeamCell")
         tableView.tableFooterView = UIView()
         tableView.backgroundColor = darkModeEnabled ? .darkCell : .white
         tableView.delegate = self
         tableView.dataSource = self
         view.addSubview(tableView)
+        
+        tableView.snp.makeConstraints { (make) in
+            make.width.equalToSuperview()
+            make.height.equalToSuperview()
+        }
     }
     
     override func didReceiveMemoryWarning() {

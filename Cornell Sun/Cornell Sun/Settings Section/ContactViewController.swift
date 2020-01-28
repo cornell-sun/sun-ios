@@ -105,7 +105,7 @@ class ContactViewController: UIViewController, UITextFieldDelegate, MFMailCompos
         }
         subjectField = UITextField()
         subjectField.borderStyle = UITextField.BorderStyle.none
-        subjectLabel.textColor = darkModeEnabled ? .white90 : .black
+        subjectField.textColor = darkModeEnabled ? .white90 : .black
         subjectField.delegate = self
         subjectField.font = UIFont(name: "HelveticaNeue", size: 18.0)
         view.addSubview(subjectField)

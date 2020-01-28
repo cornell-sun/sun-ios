@@ -98,19 +98,10 @@ class DisplayViewController: UIViewController {
     
     @objc func updateColors() {
         
-        if(darkModeEnabled) {
-            view.backgroundColor = .darkCell
-            headerLabel.textColor = .darkText
-            descriptionTextView.textColor = .darkText
-            descriptionTextView.backgroundColor = .darkCell
-            tabBarController?.tabBar.barTintColor = .darkCell
-            tabBarController?.tabBar.tintColor = .darkCell
-        } else {
-            view.backgroundColor = .white
-            headerLabel.textColor = .black
-            descriptionTextView.textColor = .black
-            descriptionTextView.backgroundColor = .white
-        }
+        view.backgroundColor = darkModeEnabled ? .darkCell : .white
+        headerLabel.textColor = darkModeEnabled ? .darkText : .black
+        descriptionTextView.textColor = darkModeEnabled ? .darkText : .black
+        descriptionTextView.backgroundColor = darkModeEnabled ? .darkCell : .white
         
     }
     

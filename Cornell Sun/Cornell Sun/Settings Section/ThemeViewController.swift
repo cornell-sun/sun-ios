@@ -8,14 +8,8 @@
 
 import UIKit
 
-class ThemeSetting {
-    var name: String
-    var enabled: Bool
-    
-    init(name: String, enabled: Bool) {
-        self.name = name
-        self.enabled = enabled
-    }
+enum ThemeType: String {
+    case darkMode = "darkModeEnabled"
 }
 
 class ThemeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
@@ -24,7 +18,8 @@ class ThemeViewController: UIViewController, UITableViewDelegate, UITableViewDat
     var titleCache: String!
     
     var tableView: UITableView!
-    var themes: [ThemeSetting] = []
+    var themes: [(String, ThemeType)] = []
+    var themesDisplay: [(String, String)] = []
     
     let darkModeEnabled = UserDefaults.standard.bool(forKey: "darkModeEnabled")
     
@@ -47,13 +42,24 @@ class ThemeViewController: UIViewController, UITableViewDelegate, UITableViewDat
         view.backgroundColor = darkModeEnabled ? .darkCell : .white
         title = "Theme"
         
-        tableView = UITableView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height))
+        if themes.count == 0 {
+            themes = [("Dark Mode", .darkMode)]
+            
+            themesDisplay = [("Dark Mode", "Something a little easier on the eyes")]
+        }
+        
+        tableView = UITableView(frame: .zero)
         tableView.register(ThemeCell.self, forCellReuseIdentifier: "ThemeCell")
         tableView.tableFooterView = UIView()
         tableView.backgroundColor = darkModeEnabled ? .darkCell : .white
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.isScrollEnabled = false
         view.addSubview(tableView)
+        
+        tableView.snp.makeConstraints { (make) in
+            make.edges.equalToSuperview()
+        }
     }
     
 
@@ -62,7 +68,15 @@ class ThemeViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-       return UITableViewCell()
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "ThemeCell", for: indexPath) as? ThemeCell {
+            let isToggled = UserDefaults.standard.bool(forKey: themes[indexPath.row].1.rawValue)
+            cell.selectionStyle = .none
+            cell.setupCell(labelText: themesDisplay[indexPath.row].0, descriptionText: themesDisplay[indexPath.row].1, isToggled: isToggled)
+            cell.backgroundColor = .black
+            return cell
+        } else {
+            return UITableViewCell()
+        }
     }
 
 }

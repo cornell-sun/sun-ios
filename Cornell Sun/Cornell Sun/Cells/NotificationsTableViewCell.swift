@@ -23,6 +23,8 @@ class NotificationsTableViewCell: UITableViewCell {
     let offsetBottom = -4
 
     weak var delegate: NotificationsTableViewCellDelegate?
+    
+    var darkModeEnabled = UserDefaults.standard.bool(forKey: "darkModeEnabled")
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -30,6 +32,8 @@ class NotificationsTableViewCell: UITableViewCell {
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
+        contentView.backgroundColor = darkModeEnabled ? .darkCell : .white
 
         iconImageView = UIImageView()
         contentView.addSubview(iconImageView)
@@ -41,7 +45,7 @@ class NotificationsTableViewCell: UITableViewCell {
         label = UILabel()
         label.font = UIFont.systemFont(ofSize: 16, weight: .medium)
         label.textAlignment = .left
-        label.textColor = .black90
+        label.textColor = darkModeEnabled ? .white90 : .black90
         contentView.addSubview(label)
         label.snp.makeConstraints { make in
             make.height.equalTo(label.intrinsicContentSize.height)
@@ -51,12 +55,12 @@ class NotificationsTableViewCell: UITableViewCell {
 
         descriptionLabel = UILabel()
         descriptionLabel.font = UIFont.systemFont(ofSize: 14)
-        descriptionLabel.textColor = .black40
+        descriptionLabel.textColor = darkModeEnabled ? .white40 : .black40
         descriptionLabel.numberOfLines = 3
         contentView.addSubview(descriptionLabel)
 
         subscribeSwitch = UISwitch()
-        subscribeSwitch.onTintColor = .brick
+        subscribeSwitch.onTintColor = darkModeEnabled ? .white40 : .brick
         subscribeSwitch.addTarget(self, action: #selector(toggleSwitched), for: .valueChanged)
         contentView.addSubview(subscribeSwitch)
         subscribeSwitch.snp.makeConstraints { make in

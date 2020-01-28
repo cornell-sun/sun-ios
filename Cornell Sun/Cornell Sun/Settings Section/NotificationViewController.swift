@@ -35,6 +35,7 @@ class NotificationViewController: UIViewController, UITableViewDataSource, UITab
     var notificationsDisplay: [(String, UIImage)] = []
 
     let userDefaults = UserDefaults.standard
+    var darkModeEnabled = UserDefaults.standard.bool(forKey: "darkModeEnabled")
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -52,14 +53,16 @@ class NotificationViewController: UIViewController, UITableViewDataSource, UITab
     override func viewDidLoad() {
         super.viewDidLoad()
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = darkModeEnabled ? .darkCell : .white
         title = "Notifications"
     
         //Calling hardcoded populator
         if notifications.count == 0 {
             notifications = [("Breaking News", .breakingNews), ("Local News", .localNews), ("Opinion", .opinion), ("Sports", .sports), ("Multimedia", .multimedia), ("Arts and Entertainment", .artsAndEntertainment), ("Science", .science), ("Dining", .dining)]
             
-            notificationsDisplay = [("News you need to know as it happens", #imageLiteral(resourceName: "breakingNews")), ("Cornell and the surrounding Ithaca community", #imageLiteral(resourceName: "localNews")), ("Thoughts from your peers, professors, and alumni", #imageLiteral(resourceName: "opinion")), ("Scores, recaps, features and more about the Red", #imageLiteral(resourceName: "sports")), ("Photos, videos, and interviews about the Cornell community", #imageLiteral(resourceName: "multimedia")), ("Music, movies, fashion, and performance", #imageLiteral(resourceName: "arts")), ("What you need to know about research, Cornell Tech", #imageLiteral(resourceName: "science")), ("All the food news on campus and in the Ithaca area", #imageLiteral(resourceName: "dining"))]
+            let iconExt = darkModeEnabled ? "Dark" : "Light"
+            
+            notificationsDisplay = [("News you need to know as it happens", UIImage(named: "breakingNews" + iconExt)), ("Cornell and the surrounding Ithaca community", UIImage(named: "localNews" + iconExt)), ("Thoughts from your peers, professors, and alumni", UIImage(named: "opinion" + iconExt)), ("Scores, recaps, features and more about the Red", UIImage(named: "sports" + iconExt)), ("Photos, videos, and interviews about the Cornell community",UIImage(named: "multimedia" + iconExt)), ("Music, movies, fashion, and performance", UIImage(named: "arts" + iconExt)), ("What you need to know about research, Cornell Tech", UIImage(named: "science" + iconExt)), ("All the food news on campus and in the Ithaca area", UIImage(named: "dining" + iconExt))] as! [(String, UIImage)]
         }
         
         // Set up table view for settings
@@ -68,6 +71,8 @@ class NotificationViewController: UIViewController, UITableViewDataSource, UITab
         tableView.tableFooterView = UIView()
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.isScrollEnabled = false
+        tableView.backgroundColor = darkModeEnabled ? .darkCell : .white
         view.addSubview(tableView)
 
         tableView.snp.makeConstraints { make in
