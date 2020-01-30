@@ -62,7 +62,8 @@ class NotificationViewController: UIViewController, UITableViewDataSource, UITab
             
             let iconExt = darkModeEnabled ? "Dark" : "Light"
             
-            notificationsDisplay = [("News you need to know as it happens", UIImage(named: "breakingNews" + iconExt)), ("Cornell and the surrounding Ithaca community", UIImage(named: "localNews" + iconExt)), ("Thoughts from your peers, professors, and alumni", UIImage(named: "opinion" + iconExt)), ("Scores, recaps, features and more about the Red", UIImage(named: "sports" + iconExt)), ("Photos, videos, and interviews about the Cornell community",UIImage(named: "multimedia" + iconExt)), ("Music, movies, fashion, and performance", UIImage(named: "arts" + iconExt)), ("What you need to know about research, Cornell Tech", UIImage(named: "science" + iconExt)), ("All the food news on campus and in the Ithaca area", UIImage(named: "dining" + iconExt))] as! [(String, UIImage)]
+            //swiftlint:disable:next force_cast
+            notificationsDisplay = [("News you need to know as it happens", UIImage(named: "breakingNews" + iconExt)), ("Cornell and the surrounding Ithaca community", UIImage(named: "localNews" + iconExt)), ("Thoughts from your peers, professors, and alumni", UIImage(named: "opinion" + iconExt)), ("Scores, recaps, features and more about the Red", UIImage(named: "sports" + iconExt)), ("Photos, videos, and interviews about the Cornell community", UIImage(named: "multimedia" + iconExt)), ("Music, movies, fashion, and performance", UIImage(named: "arts" + iconExt)), ("What you need to know about research, Cornell Tech", UIImage(named: "science" + iconExt)), ("All the food news on campus and in the Ithaca area", UIImage(named: "dining" + iconExt))] as! [(String, UIImage)]
         }
         
         // Set up table view for settings
