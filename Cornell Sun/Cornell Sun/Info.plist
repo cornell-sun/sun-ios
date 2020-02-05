@@ -58,8 +58,6 @@
 	<array>
 		<string>remote-notification</string>
 	</array>
-	<key>UILaunchStoryboardName</key>
-	<string>Launch Screen</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
@@ -81,5 +79,7 @@
 		<key>test</key>
 		<string>key_test_ofMnh9jq38XZTWaRW21fKgigyCdPEDV9</string>
 	</dict>
+	<key>UILaunchStoryboardName</key>
+	<string>Launch Screen Dark2</string>
 </dict>
 </plist>

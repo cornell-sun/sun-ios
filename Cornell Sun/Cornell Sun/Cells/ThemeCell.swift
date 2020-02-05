@@ -38,9 +38,9 @@ class ThemeCell: UITableViewCell {
         label.textColor = darkModeEnabled ? .white90 : .black90
         contentView.addSubview(label)
         label.snp.makeConstraints { (make) in
-            make.height.equalTo(label.intrinsicContentSize.height)
-            make.left.equalTo(contentView.snp.left).offset(offsetLeft)
-            make.top.equalTo(contentView).offset(offsetTop)
+            make.height.equalTo(heightLabel)
+            make.left.equalTo(contentView).offset(offsetLeft)
+            make.top.equalTo(contentView).offset(2*offsetTop)
         }
         
         descriptionLabel = UILabel()

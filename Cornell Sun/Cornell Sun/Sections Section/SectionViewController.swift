@@ -67,7 +67,7 @@ class SectionViewController: UIViewController {
 
     @objc func updateColors() {
         
-        navigationController?.navigationBar.barTintColor = darkModeEnabled ? .darkTint : .white
+        navigationController?.navigationBar.barTintColor = darkModeEnabled ? .darkCell : .white
         navigationController?.navigationBar.barStyle = darkModeEnabled ? .blackTranslucent : .default
         tableView.backgroundColor = darkModeEnabled ? .darkCell : .white
         let textColor = darkModeEnabled ? UIColor.darkText : UIColor.lightText
