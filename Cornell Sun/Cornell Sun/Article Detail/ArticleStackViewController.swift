@@ -497,6 +497,8 @@ extension ArticleStackViewController: UITableViewDelegate, UITableViewDataSource
             if let suggestedID = post.suggestedStories[indexPath.row].postID, let suggestedStory = suggestedStories[suggestedID] {
                 let articleViewController = ArticleStackViewController(post: suggestedStory)
                 navigationController?.pushViewController(articleViewController, animated: true)
+                navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+                navigationItem.backBarButtonItem?.tintColor = darkModeEnabled ? .white : .black
             }
         }
     }

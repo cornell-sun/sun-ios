@@ -10,6 +10,7 @@ import UIKit
 
 class ThemeCell: UITableViewCell {
     
+    var iconImageView: UIImageView!
     var label: UILabel!
     var descriptionLabel: UILabel!
     var toggleSwitch: UISwitch!
@@ -21,6 +22,8 @@ class ThemeCell: UITableViewCell {
     let offsetBottom = -4
     
     var darkModeEnabled = UserDefaults.standard.bool(forKey: "darkModeEnabled")
+    
+    weak var delegate: ThemesCellDelegate?
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -32,6 +35,13 @@ class ThemeCell: UITableViewCell {
         
         contentView.backgroundColor = darkModeEnabled ? .darkCell : .white
         
+        iconImageView = UIImageView()
+        contentView.addSubview(iconImageView)
+        iconImageView.snp.makeConstraints { make in
+            make.left.equalTo(contentView.snp.left).offset(offsetLeft)
+            make.centerY.equalToSuperview()
+        }
+        
         label = UILabel()
         label.font = UIFont.systemFont(ofSize: 16, weight: .medium)
         label.textAlignment = .left
@@ -39,7 +49,7 @@ class ThemeCell: UITableViewCell {
         contentView.addSubview(label)
         label.snp.makeConstraints { (make) in
             make.height.equalTo(heightLabel)
-            make.left.equalTo(contentView).offset(offsetLeft)
+            make.leading.equalTo(iconImageView.snp.trailing).offset(offsetLeft)
             make.top.equalTo(contentView).offset(2*offsetTop)
         }
         
@@ -51,6 +61,7 @@ class ThemeCell: UITableViewCell {
         
         toggleSwitch = UISwitch()
         toggleSwitch.onTintColor = darkModeEnabled ? .white40 : .brick
+        toggleSwitch.isOn = darkModeEnabled
         toggleSwitch.addTarget(self, action: #selector(toggleSwitched), for: .valueChanged)
         contentView.addSubview(toggleSwitch)
         toggleSwitch.snp.makeConstraints { (make) in
@@ -69,11 +80,15 @@ class ThemeCell: UITableViewCell {
     }
     
     @objc func toggleSwitched(sender: UISwitch) {
-        
+        delegate?.switchToggled(for: self, isEnabled: toggleSwitch.isOn)
+        darkModeEnabled = toggleSwitch.isOn
+        print(darkModeEnabled)
+        contentView.reloadInputViews()
     }
     
-    func setupCell(labelText: String, descriptionText: String, isToggled: Bool) {
+    func setupCell(icon: UIImage, labelText: String, descriptionText: String, isToggled: Bool) {
         
+        iconImageView.image = icon
         label.text = labelText
         descriptionLabel.text = descriptionText
         toggleSwitch.setOn(isToggled, animated: true)
@@ -83,5 +98,4 @@ class ThemeCell: UITableViewCell {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
 }

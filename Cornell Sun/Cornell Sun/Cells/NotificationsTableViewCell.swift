@@ -50,11 +50,12 @@ class NotificationsTableViewCell: UITableViewCell {
         label.snp.makeConstraints { make in
             make.height.equalTo(label.intrinsicContentSize.height)
             make.leading.equalTo(iconImageView.snp.trailing).offset(offsetLeft)
-            make.top.equalTo(contentView).offset(offsetTop)
+            make.top.equalTo(contentView).offset(2*offsetTop)
         }
 
         descriptionLabel = UILabel()
-        descriptionLabel.font = UIFont.systemFont(ofSize: 14)
+        descriptionLabel.font = UIFont.systemFont(ofSize: 13)
+        descriptionLabel.adjustsFontSizeToFitWidth = true
         descriptionLabel.textColor = darkModeEnabled ? .white40 : .black40
         descriptionLabel.numberOfLines = 3
         contentView.addSubview(descriptionLabel)

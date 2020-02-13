@@ -68,7 +68,7 @@ final class MenuActionCell: UICollectionViewCell {
     lazy var shareImageView: UIButton = {
         let button = UIButton(type: .custom)
         button.imageView?.contentMode = .scaleAspectFit
-        let buttonImage = darkModeEnabled ? "shareIconDark" : "shareIconDark"
+        let buttonImage = darkModeEnabled ? "shareIconDark" : "shareIconLight"
         button.setImage(UIImage(named: buttonImage), for: .normal)
         button.addTarget(self, action: #selector(MenuActionCell.sharePressed(_:)), for: .touchUpInside)
         self.contentView.addSubview(button)
@@ -99,7 +99,7 @@ final class MenuActionCell: UICollectionViewCell {
         if darkModeEnabled {
             image = didSelectBookmark ? UIImage(named: "bookmarkIconSelectedDark") : UIImage(named: "bookmarkIconDark")
         } else {
-            image = didSelectBookmark ? UIImage(named: "bookmarkPressed") : UIImage(named: "bookMarkIconLight")
+            image = didSelectBookmark ? UIImage(named: "bookmarkPressed") : UIImage(named: "bookmarkIconLight")
         }
         bookmarkButton.setImage(image, for: .normal)
     }

@@ -83,6 +83,7 @@ class SearchViewController: UIViewController, UITableViewDelegate {
         tableView.dataSource = self
         tableView.layoutMargins = .zero
         tableView.separatorInset = .zero
+        tableView.isScrollEnabled = false
         view.addSubview(tableView)
 
         collectionView.isHidden = true
@@ -226,13 +227,8 @@ extension SearchViewController: UITableViewDataSource {
             make.trailing.lessThanOrEqualToSuperview().inset(TRENDINGLABEL_TOP_BOTTOM_TRAILING)
         }
         
-        if(darkModeEnabled) {
-            headerView.contentView.backgroundColor = .darkCell
-            trendingLabel.textColor = .darkText
-        } else {
-            headerView.contentView.backgroundColor = .white
-            trendingLabel.textColor = .white
-        }
+        headerView.contentView.backgroundColor = darkModeEnabled ? .darkCell : .white
+        trendingLabel.textColor = darkModeEnabled ? .darkText : .white
 
         return headerView
     }
@@ -243,12 +239,13 @@ extension SearchViewController: UITableViewDataSource {
         cell.textLabel?.text = trendingTopics[indexPath.row]
         cell.textLabel?.font = .secondaryHeader
         
+        cell.backgroundColor = darkModeEnabled ? .darkCell : .white
+        cell.textLabel?.textColor = darkModeEnabled ? .darkText : .black
+        
         if(darkModeEnabled) {
-            cell.backgroundColor = .darkCell
-            cell.textLabel?.textColor = .darkText
-        } else {
-            cell.backgroundColor = .white
-            cell.textLabel?.textColor = .black
+            let backgroundView = UIView()
+            backgroundView.backgroundColor = .gray
+            cell.selectedBackgroundView = backgroundView
         }
         
         return cell
