@@ -27,7 +27,6 @@ class TeamMember {
 class TeamViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     var prevViewController: UIViewController!
-    var titleCache: String!
     
     var tableView: UITableView!
     var members: [TeamMember] = []
@@ -36,14 +35,11 @@ class TeamViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        titleCache = prevViewController.title
-        prevViewController.title = "Settings"
         tabBarController?.tabBar.isHidden = true
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        prevViewController.title = titleCache
         tabBarController?.tabBar.isHidden = false
     }
     
@@ -66,13 +62,18 @@ class TeamViewController: UIViewController, UITableViewDataSource, UITableViewDe
         }
         
         // Set up table view for settings
-        tableView = UITableView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height))
+        tableView = UITableView()
         tableView.register(TeamTableViewCell.self, forCellReuseIdentifier: "TeamCell")
         tableView.tableFooterView = UIView()
         tableView.backgroundColor = darkModeEnabled ? .darkCell : .white
         tableView.delegate = self
         tableView.dataSource = self
         view.addSubview(tableView)
+        
+        tableView.snp.makeConstraints { (make) in
+            make.width.equalToSuperview()
+            make.height.equalToSuperview()
+        }
     }
     
     override func didReceiveMemoryWarning() {

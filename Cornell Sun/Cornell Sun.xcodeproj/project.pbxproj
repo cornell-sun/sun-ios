@@ -29,6 +29,8 @@
 		34590494217D23DB009EAEFA /* Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 34590493217D23DB009EAEFA /* Keys.plist */; };
 		348716782041EAC8008CB9D5 /* AdImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348716772041EAC8008CB9D5 /* AdImageCell.swift */; };
 		3487167D2041F09D008CB9D5 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3487167C2041F09D008CB9D5 /* Launch Screen.storyboard */; };
+		3491BAB123DCABC400BE1E4E /* Launch Screen Dark2.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3491BAB023DCABC400BE1E4E /* Launch Screen Dark2.storyboard */; };
+		3491BAB323DCABD700BE1E4E /* Launch Screen Dark1.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3491BAB223DCABD700BE1E4E /* Launch Screen Dark1.storyboard */; };
 		34992232227E852000926B6D /* NotificationCenterExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34992231227E852000926B6D /* NotificationCenterExtension.swift */; };
 		34A481762384DD4E00FB168A /* ThemeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A481752384DD4E00FB168A /* ThemeViewController.swift */; };
 		34A481782384DF1800FB168A /* ThemeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A481772384DF1800FB168A /* ThemeCell.swift */; };
@@ -158,6 +160,8 @@
 		34590493217D23DB009EAEFA /* Keys.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Keys.plist; sourceTree = "<group>"; };
 		348716772041EAC8008CB9D5 /* AdImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdImageCell.swift; sourceTree = "<group>"; };
 		3487167C2041F09D008CB9D5 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		3491BAB023DCABC400BE1E4E /* Launch Screen Dark2.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen Dark2.storyboard"; sourceTree = "<group>"; };
+		3491BAB223DCABD700BE1E4E /* Launch Screen Dark1.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen Dark1.storyboard"; sourceTree = "<group>"; };
 		34992231227E852000926B6D /* NotificationCenterExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCenterExtension.swift; sourceTree = "<group>"; };
 		34A481752384DD4E00FB168A /* ThemeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeViewController.swift; sourceTree = "<group>"; };
 		34A481772384DF1800FB168A /* ThemeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeCell.swift; sourceTree = "<group>"; };
@@ -346,6 +350,8 @@
 				0427821123C45FE8006FE55B /* GoogleService-Info.plist */,
 				DC3667DE206EBAC6002EB4F9 /* Cornell Sun.entitlements */,
 				3487167C2041F09D008CB9D5 /* Launch Screen.storyboard */,
+				3491BAB223DCABD700BE1E4E /* Launch Screen Dark1.storyboard */,
+				3491BAB023DCABC400BE1E4E /* Launch Screen Dark2.storyboard */,
 				5006AFFB1EA9625000F58549 /* AppDelegate.swift */,
 				DCC03FE02092A9940027D102 /* PhotoGallery */,
 				0C0D2FE52060461000BC77E9 /* Onboarding */,
@@ -751,7 +757,9 @@
 				34590494217D23DB009EAEFA /* Keys.plist in Resources */,
 				DCB717121FB94BCA00BE4D26 /* KeplerStd-Bold.otf in Resources */,
 				5006B0031EA9625000F58549 /* Assets.xcassets in Resources */,
+				3491BAB323DCABD700BE1E4E /* Launch Screen Dark1.storyboard in Resources */,
 				DC818DA31F75E0CF0064AFFA /* Sonnenstrahl-Ausgezeichnet.ttf in Resources */,
+				3491BAB123DCABC400BE1E4E /* Launch Screen Dark2.storyboard in Resources */,
 				3487167D2041F09D008CB9D5 /* Launch Screen.storyboard in Resources */,
 				0427821223C45FE8006FE55B /* GoogleService-Info.plist in Resources */,
 			);
@@ -835,7 +843,6 @@
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/HTMLString/HTMLString.framework",
-				"${BUILT_PRODUCTS_DIR}/IGListDiffKit/IGListDiffKit.framework",
 				"${BUILT_PRODUCTS_DIR}/IGListKit/IGListKit.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/ImageSlideshow/ImageSlideshow.framework",
@@ -844,7 +851,6 @@
 				"${BUILT_PRODUCTS_DIR}/Motion/Motion.framework",
 				"${BUILT_PRODUCTS_DIR}/Moya-framework/Moya.framework",
 				"${BUILT_PRODUCTS_DIR}/Moya-ModelMapper-framework/Moya_ModelMapper.framework",
-				"${BUILT_PRODUCTS_DIR}/PromisesObjC/FBLPromises.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/Result-framework/Result.framework",
 				"${BUILT_PRODUCTS_DIR}/SkeletonView/SkeletonView.framework",
@@ -860,7 +866,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HTMLString.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IGListDiffKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IGListKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ImageSlideshow.framework",
@@ -869,7 +874,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Motion.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya_ModelMapper.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBLPromises.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SkeletonView.framework",

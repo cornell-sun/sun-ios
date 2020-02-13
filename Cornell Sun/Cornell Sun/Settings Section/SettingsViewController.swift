@@ -48,6 +48,7 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
         tableView.tableFooterView = UIView()
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.isScrollEnabled = false
         view.addSubview(tableView)
         tableView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
@@ -172,6 +173,7 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
             case .masthead:
                 if let url = URL(string: "http://i1.wp.com/cornellsun.com/wp-content/uploads/2015/10/Screen-Shot-2018-03-07-at-10.10.55-AM.png?w=394") {
                     let mastheadViewController = MastheadViewController(url: url)
+                    mastheadViewController.hidesBottomBarWhenPushed = true
                     navigationController?.pushViewController(mastheadViewController, animated: true)
             }
             default:
@@ -188,20 +190,24 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
         //Initializing Account settings
         settings.append([])
         let notificationViewController = NotificationViewController()
+        notificationViewController.hidesBottomBarWhenPushed = true
         notificationViewController.prevViewController = self
         settings[0].append(SettingObject(label: "Notifications", next: notificationViewController, setType: .nonSetting))
         
         let subscribeViewController = SubscribeViewController()
+        subscribeViewController.hidesBottomBarWhenPushed = true
         subscribeViewController.prevViewController = self
         settings[0].append(SettingObject(label: "Subscribe", next: subscribeViewController, setType: .nonSetting))
         
         let themeViewController = ThemeViewController()
+        themeViewController.hidesBottomBarWhenPushed = true
         themeViewController.prevViewController = self
         settings[0].append(SettingObject(label: "Theme", next: themeViewController, setType: .nonSetting))
         
         //Initializing Support settings
         settings.append([])
         let feedBackViewController = ContactViewController()
+        feedBackViewController.hidesBottomBarWhenPushed = true
         feedBackViewController.prevViewController = self
         feedBackViewController.settingType = .feedback
         settings[1].append(SettingObject(label: "Send App Feedback", next: feedBackViewController, setType: .feedback))
@@ -210,17 +216,20 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
         //Initializing About settings
         settings.append([])
         let contactViewController = ContactViewController()
+        contactViewController.hidesBottomBarWhenPushed = true
         contactViewController.prevViewController = self
         contactViewController.settingType = .contactus
         settings[2].append(SettingObject(label: "Contact the Sun", next: contactViewController, setType: .contactus))
         
         let dispViewController = DisplayViewController()
+        dispViewController.hidesBottomBarWhenPushed = true
         dispViewController.prevViewController = self
         dispViewController.type = .history
         settings[2].append(SettingObject(label: "History", next: dispViewController, setType: .history))
         settings[2].append(SettingObject(label: "The Masthead", next: nil, setType: .masthead))
         
         let teamViewController = TeamViewController()
+        teamViewController.hidesBottomBarWhenPushed = true
         teamViewController.prevViewController = self
         //teamViewController.type = .appteam
         settings[2].append(SettingObject(label: "The App Team", next: teamViewController, setType: .appteam))

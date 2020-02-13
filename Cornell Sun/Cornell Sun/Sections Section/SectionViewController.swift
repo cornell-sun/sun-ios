@@ -50,6 +50,7 @@ class SectionViewController: UIViewController {
         tableView.tableFooterView = UIView()
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.isScrollEnabled = false
         view.addSubview(tableView)
 
         tableView.snp.makeConstraints { make in
@@ -66,7 +67,7 @@ class SectionViewController: UIViewController {
 
     @objc func updateColors() {
         
-        navigationController?.navigationBar.barTintColor = darkModeEnabled ? .darkTint : .white
+        navigationController?.navigationBar.barTintColor = darkModeEnabled ? .darkCell : .white
         navigationController?.navigationBar.barStyle = darkModeEnabled ? .blackTranslucent : .default
         tableView.backgroundColor = darkModeEnabled ? .darkCell : .white
         let textColor = darkModeEnabled ? UIColor.darkText : UIColor.lightText
@@ -121,22 +122,22 @@ extension SectionViewController: UITableViewDataSource, UITableViewDelegate {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "sectionCell") as? SectionTableViewCell else {
             return UITableViewCell()
         }
+        
         let sectionMeta = sectionToMeta(section: sections[indexPath.row])
         cell.titleLabel.text = sectionMeta.title
         cell.sectionImageView.image = UIImage(named: sectionMeta.imageName)
-
+        
+        cell.backgroundColor = darkModeEnabled ? .darkCell : .white
+        cell.titleLabel.textColor = darkModeEnabled ? .darkText : .black
+        cell.detailImageView.image = darkModeEnabled ? UIImage(named: "disclosureArrowDark") : UIImage(named: "disclosureArrowLight")
+        cell.sectionImageView.image = darkModeEnabled ? UIImage(named: sectionMeta.imageName + "Dark") : UIImage(named: sectionMeta.imageName + "Light")
+        
         if(darkModeEnabled) {
-            cell.backgroundColor = .darkCell
-            cell.titleLabel.textColor = .darkText
-            cell.detailImageView.image = UIImage(named: "disclosureArrowDark")
-            cell.sectionImageView.image = UIImage(named: sectionMeta.imageName + "Dark")
-        } else {
-            cell.backgroundColor = .white
-            cell.titleLabel.textColor = .black
-            cell.detailImageView.image = UIImage(named: "disclosureArrowLight")
-            cell.sectionImageView.image = UIImage(named: sectionMeta.imageName + "Light")
+            let backgroundView = UIView()
+            backgroundView.backgroundColor = .gray
+            cell.selectedBackgroundView = backgroundView
         }
-
+        
         return cell
     }
 

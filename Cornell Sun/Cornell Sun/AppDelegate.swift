@@ -62,7 +62,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
-        storyboard = UIStoryboard(name: "Launch Screen", bundle: nil)
+//        let sbName = darkModeEnabled ? "Launch Screen Dark2" : "Launch Screen"
+        let sbName = "Launch Screen Dark2"
+        storyboard = UIStoryboard(name: sbName, bundle: nil)
         let rootVC = storyboard?.instantiateInitialViewController()
         window?.rootViewController = rootVC
 

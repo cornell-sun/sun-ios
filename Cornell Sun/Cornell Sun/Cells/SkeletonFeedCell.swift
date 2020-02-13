@@ -29,8 +29,6 @@ class SkeletonFeedCell: UIView {
 
         let imageView = UIImageView()
         imageView.isSkeletonable = true
-//        let gradient = SkeletonGradient(baseColor: UIColor.red)
-//        imageView.showGradientSkeleton(usingGradient: gradient)
         addSubview(imageView)
         imageView.snp.makeConstraints { make in
             make.height.equalTo(imageHeight)
@@ -40,7 +38,6 @@ class SkeletonFeedCell: UIView {
 
         let titleLabel = UILabel()
         titleLabel.isSkeletonable = true
-//        titleLabel.showSkeleton(usingColor: UIColor.blue)
         titleLabel.numberOfLines = 2
         titleLabel.lastLineFillPercent = 40
         titleLabel.font = .articleTitle
@@ -54,8 +51,6 @@ class SkeletonFeedCell: UIView {
 
         let authorLabel = UILabel()
         authorLabel.isSkeletonable = true
-//        authorLabel.showGradientSkeleton(usingGradient: gradient)
-//        authorLabel.showSkeleton(usingColor: .red)
         authorLabel.font = .photoCaption
         addSubview(authorLabel)
         authorLabel.snp.makeConstraints { make in
@@ -69,8 +64,6 @@ class SkeletonFeedCell: UIView {
          adjusted using NSAtrributes in skeleton view */
         let contentLabel = UILabel()
         contentLabel.isSkeletonable = true
-//        contentLabel.showSkeleton(usingColor: .red)
-//        contentLabel.showGradientSkeleton(usingGradient: gradient)
         contentLabel.font = .photoCaption
         addSubview(contentLabel)
         contentLabel.snp.makeConstraints { make in
@@ -82,8 +75,6 @@ class SkeletonFeedCell: UIView {
 
         let contentLabel2 = UITextView()
         contentLabel2.isSkeletonable = true
-//        contentLabel2.showSkeleton(usingColor: .red)
-//        contentLabel2.showGradientSkeleton(usingGradient: gradient)
         contentLabel2.font = .photoCaption
         addSubview(contentLabel2)
         contentLabel2.snp.makeConstraints { make in
@@ -95,8 +86,6 @@ class SkeletonFeedCell: UIView {
 
         let timeStampLabel = UILabel()
         timeStampLabel.isSkeletonable = true
-//        timeStampLabel.showGradientSkeleton(usingGradient: gradient)
-//        timeStampLabel.showSkeleton(usingColor: .red)
         addSubview(timeStampLabel)
         timeStampLabel.snp.makeConstraints { make in
             make.height.equalTo(labelHeight*0.8)

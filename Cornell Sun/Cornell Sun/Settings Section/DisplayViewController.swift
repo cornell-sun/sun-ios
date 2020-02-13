@@ -11,7 +11,6 @@ import UIKit
 class DisplayViewController: UIViewController {
     
     var prevViewController: UIViewController!
-    var titleCache: String!
     var type: SettingType!
     
     var headerLabel: UILabel!
@@ -32,8 +31,6 @@ class DisplayViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        titleCache = prevViewController.title
-        prevViewController.title = "Settings"
         tabBarController?.tabBar.isHidden = true
         descriptionTextView.isScrollEnabled = true
         
@@ -46,7 +43,6 @@ class DisplayViewController: UIViewController {
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        prevViewController.title = titleCache
         tabBarController?.tabBar.isHidden = false
         tabHidden["hidden"] = false
         NotificationCenter.default.post(name: Notification.Name("hideTabBar"), object: nil, userInfo: tabHidden)
@@ -98,19 +94,10 @@ class DisplayViewController: UIViewController {
     
     @objc func updateColors() {
         
-        if(darkModeEnabled) {
-            view.backgroundColor = .darkCell
-            headerLabel.textColor = .darkText
-            descriptionTextView.textColor = .darkText
-            descriptionTextView.backgroundColor = .darkCell
-            tabBarController?.tabBar.barTintColor = .darkCell
-            tabBarController?.tabBar.tintColor = .darkCell
-        } else {
-            view.backgroundColor = .white
-            headerLabel.textColor = .black
-            descriptionTextView.textColor = .black
-            descriptionTextView.backgroundColor = .white
-        }
+        view.backgroundColor = darkModeEnabled ? .darkCell : .white
+        headerLabel.textColor = darkModeEnabled ? .darkText : .black
+        descriptionTextView.textColor = darkModeEnabled ? .darkText : .black
+        descriptionTextView.backgroundColor = darkModeEnabled ? .darkCell : .white
         
     }
     
