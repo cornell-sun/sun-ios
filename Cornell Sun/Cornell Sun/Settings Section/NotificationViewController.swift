@@ -28,7 +28,6 @@ protocol NotificationsTableViewCellDelegate: class {
 class NotificationViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     var prevViewController: UIViewController!
-    var titleCache: String!
     
     var tableView: UITableView!
     var notifications: [(String, NotificationType)] = []
@@ -39,14 +38,11 @@ class NotificationViewController: UIViewController, UITableViewDataSource, UITab
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        titleCache = prevViewController.title
-        prevViewController.title = "Settings"
         tabBarController?.tabBar.isHidden = true
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        prevViewController.title = titleCache
         tabBarController?.tabBar.isHidden = false
     }
     
