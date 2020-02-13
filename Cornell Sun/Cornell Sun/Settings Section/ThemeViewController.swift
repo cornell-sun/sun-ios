@@ -15,7 +15,6 @@ enum ThemeType: String {
 class ThemeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     var prevViewController: UIViewController!
-    var titleCache: String!
     
     var tableView: UITableView!
     var themes: [(String, ThemeType)] = []
@@ -25,14 +24,11 @@ class ThemeViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        titleCache = prevViewController.title
-        prevViewController.title = "Settings"
         tabBarController?.tabBar.isHidden = true
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        prevViewController.title = titleCache
         tabBarController?.tabBar.isHidden = false
     }
     
