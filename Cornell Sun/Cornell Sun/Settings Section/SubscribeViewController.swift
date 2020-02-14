@@ -11,7 +11,6 @@ import SafariServices
 class SubscribeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDataSource, UIPickerViewDelegate {
 
     var prevViewController: UIViewController!
-    var titleCache: String!
     var pickerList: [String] = ["Cornell Student", "Cornell Alumnus", "Parent", "Cornell staff", "Other"]
 
     var headerLabel: UILabel!
@@ -53,15 +52,12 @@ class SubscribeViewController: UIViewController, UITextFieldDelegate, UIPickerVi
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        titleCache = prevViewController.title
-        prevViewController.title = "Settings"
         tabBarController?.tabBar.isHidden = true
         updateColors()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        prevViewController.title = titleCache
         tabBarController?.tabBar.isHidden = false
     }
 

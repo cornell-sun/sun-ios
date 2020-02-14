@@ -27,7 +27,6 @@ class TeamMember {
 class TeamViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     var prevViewController: UIViewController!
-    var titleCache: String!
     
     var tableView: UITableView!
     var members: [TeamMember] = []
@@ -36,15 +35,12 @@ class TeamViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        titleCache = prevViewController.title
-        prevViewController.title = "Settings"
         tabBarController?.tabBar.isHidden = true
         updateColors()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        prevViewController.title = titleCache
         tabBarController?.tabBar.isHidden = false
     }
     

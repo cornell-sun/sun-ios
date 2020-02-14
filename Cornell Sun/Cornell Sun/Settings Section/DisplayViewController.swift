@@ -11,7 +11,6 @@ import UIKit
 class DisplayViewController: UIViewController {
     
     var prevViewController: UIViewController!
-    var titleCache: String!
     var type: SettingType!
     
     var headerLabel: UILabel!
@@ -31,8 +30,6 @@ class DisplayViewController: UIViewController {
    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        titleCache = prevViewController.title
-        prevViewController.title = "Settings"
         tabBarController?.tabBar.isHidden = true
         descriptionTextView.isScrollEnabled = true
         
@@ -45,7 +42,6 @@ class DisplayViewController: UIViewController {
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        prevViewController.title = titleCache
         tabBarController?.tabBar.isHidden = false
         tabHidden["hidden"] = false
         NotificationCenter.default.post(name: Notification.Name("hideTabBar"), object: nil, userInfo: tabHidden)

@@ -12,7 +12,6 @@ import MessageUI
 class ContactViewController: UIViewController, UITextFieldDelegate, MFMailComposeViewControllerDelegate, UITextViewDelegate {
     
     var prevViewController: UIViewController!
-    var titleCache: String!
     var settingType: SettingType!
     
     var headerLabel: UILabel!
@@ -53,15 +52,12 @@ class ContactViewController: UIViewController, UITextFieldDelegate, MFMailCompos
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        titleCache = prevViewController.title
-        prevViewController.title = "Settings"
         tabBarController?.tabBar.isHidden = true
         updateColors()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        prevViewController.title = titleCache
         tabBarController?.tabBar.isHidden = false
     }
 
