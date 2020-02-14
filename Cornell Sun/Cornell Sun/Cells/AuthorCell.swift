@@ -16,7 +16,7 @@ final class AuthorCell: UICollectionViewCell {
     let bottomInset: CGFloat = 10
     let height: CGFloat = 13
     
-    let darkModeEnabled = UserDefaults.standard.bool(forKey: "darkModeEnabled")
+    var darkModeEnabled: Bool!
 
     var post: PostObject? {
         didSet {
@@ -36,6 +36,7 @@ final class AuthorCell: UICollectionViewCell {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
         setupViews()
     }
 
@@ -44,6 +45,8 @@ final class AuthorCell: UICollectionViewCell {
     }
 
     func setupViews() {
+        darkModeEnabled = UserDefaults.standard.bool(forKey: "darkModeEnabled")
+        
         self.backgroundColor = darkModeEnabled ? .darkCell : .white
         authorLabel.textColor = darkModeEnabled ? .white90 : .black60
         addSubview(authorLabel)

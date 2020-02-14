@@ -40,6 +40,8 @@ class SectionViewController: UIViewController {
         navigationController?.navigationBar.titleTextAttributes = [
             NSAttributedString.Key.font: UIFont.headerTitle
         ]
+        
+        darkModeEnabled = UserDefaults.standard.bool(forKey: "darkModeEnabled")
         updateColors()
     }
 

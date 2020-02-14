@@ -14,7 +14,7 @@ final class TitleCell: UICollectionViewCell {
     var leftRightInset: CGFloat = 17
     var bottomInset: CGFloat = 5
     
-    let darkModeEnabled = UserDefaults.standard.bool(forKey: "darkModeEnabled")
+    var darkModeEnabled: Bool!
 
     var post: PostObject? {
         didSet {
@@ -43,6 +43,7 @@ final class TitleCell: UICollectionViewCell {
     }
 
     func setupViews() {
+        darkModeEnabled = UserDefaults.standard.bool(forKey: "darkModeEnabled")
         self.backgroundColor = darkModeEnabled ? .darkCell : .white
         titleLabel.textColor = darkModeEnabled ? .white90 : .black90
         addSubview(titleLabel)

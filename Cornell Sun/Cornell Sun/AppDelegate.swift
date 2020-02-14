@@ -62,8 +62,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
-//        let sbName = darkModeEnabled ? "Launch Screen Dark2" : "Launch Screen"
-        let sbName = "Launch Screen Dark2"
+        let sbName = darkModeEnabled ? "Launch Screen Dark2" : "Launch Screen"
         storyboard = UIStoryboard(name: sbName, bundle: nil)
         let rootVC = storyboard?.instantiateInitialViewController()
         window?.rootViewController = rootVC
@@ -73,7 +72,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         ImageCache.default.diskStorage.config.expiration = StorageExpiration.days(4) //4 days until its removed
 
         let userDefaults = UserDefaults.standard
-        userDefaults.set(true, forKey: "darkModeEnabled")
+        userDefaults.set(false, forKey: "darkModeEnabled")
         if !userDefaults.bool(forKey: hasOnboardedKey) {
             let onboardingViewController = OnboardingPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
             self.window?.rootViewController?.present(onboardingViewController, animated: false, completion: nil)

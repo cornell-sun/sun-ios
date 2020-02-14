@@ -27,9 +27,8 @@ class DisplayViewController: UIViewController {
     
     var tabHidden: [String : Bool] = ["hidden" : true]
     
-    let darkModeEnabled = UserDefaults.standard.bool(forKey: "darkModeEnabled")
+    var darkModeEnabled: Bool!
    
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         titleCache = prevViewController.title
@@ -40,7 +39,7 @@ class DisplayViewController: UIViewController {
         tabHidden["hidden"] = true
         
         NotificationCenter.default.post(name: Notification.Name("hideTabBar"), object: nil, userInfo: tabHidden)
-        
+    
         updateColors()
     }
 
@@ -54,7 +53,8 @@ class DisplayViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        super.viewDidLoad()
+        
+        darkModeEnabled = UserDefaults.standard.bool(forKey: "darkModeEnabled")
 
         self.title = ""
         let widthScale = view.frame.width/screenWidth //Scaling width
@@ -89,6 +89,8 @@ class DisplayViewController: UIViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(updateColors), name: .darkModeToggle, object: nil)
         
+        updateColors()
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -97,6 +99,8 @@ class DisplayViewController: UIViewController {
     }
     
     @objc func updateColors() {
+        
+        darkModeEnabled = UserDefaults.standard.bool(forKey: "darkModeEnabled")
         
         view.backgroundColor = darkModeEnabled ? .darkCell : .white
         headerLabel.textColor = darkModeEnabled ? .darkText : .black

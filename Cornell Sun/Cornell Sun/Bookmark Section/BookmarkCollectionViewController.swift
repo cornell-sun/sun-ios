@@ -14,7 +14,7 @@ class BookmarkCollectionViewController: ViewController, UIScrollViewDelegate {
     var isFirstRun = true
     var bookmarkPosts: [PostObject] = []
     var emptyBookmarkView: EmptyView!
-    let darkModeEnabled = UserDefaults.standard.bool(forKey: "darkModeEnabled")
+    var darkModeEnabled: Bool!
 
     let collectionView: UICollectionView = {
         let view = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
@@ -43,9 +43,8 @@ class BookmarkCollectionViewController: ViewController, UIScrollViewDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        let emptyIcon = darkModeEnabled ? "empty-bookmark-sunDark" : "empty-bookmark-sunLight"
-        emptyBookmarkView = EmptyView(image: UIImage(named: emptyIcon)!, title: "No Bookmarks", description: "Running late? Save some articles for later")
+        
+        darkModeEnabled = UserDefaults.standard.bool(forKey: "darkModeEnabled")
 
         view.addSubview(collectionView)
         adapter.collectionView = collectionView
@@ -59,9 +58,13 @@ class BookmarkCollectionViewController: ViewController, UIScrollViewDelegate {
                 self.adapter.performUpdates(animated: true, completion: nil)
             }
         }
+        
+        updateColors()
     }
 
     @objc func updateColors() {
+        
+        darkModeEnabled = UserDefaults.standard.bool(forKey: "darkModeEnabled")
         
         navigationController?.navigationBar.barTintColor = darkModeEnabled ? .darkTint : .white
         navigationController?.navigationBar.barStyle = darkModeEnabled ? .blackTranslucent : .default
@@ -70,6 +73,9 @@ class BookmarkCollectionViewController: ViewController, UIScrollViewDelegate {
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         navigationItem.backBarButtonItem?.tintColor = darkModeEnabled ? .white : .black
         collectionView.backgroundColor = darkModeEnabled ? .darkTint : .white
+        
+        let emptyIcon = darkModeEnabled ? "empty-bookmark-sunDark" : "empty-bookmark-sunLight"
+        emptyBookmarkView = EmptyView(image: UIImage(named: emptyIcon)!, title: "No Bookmarks", description: "Running late? Save some articles for later")
         
     }
 

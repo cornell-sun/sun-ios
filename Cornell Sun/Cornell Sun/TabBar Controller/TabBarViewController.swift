@@ -20,46 +20,48 @@ class TabBarViewController: UITabBarController {
     }
 
 
-    let darkModeEnabled = UserDefaults.standard.bool(forKey: "darkModeEnabled")
+    var darkModeEnabled: Bool!
+    
+    override func viewDidAppear(_ animated: Bool) {
+        updateColors()
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 //        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
 //        navigationItem.backBarButtonItem?.tintColor = darkModeEnabled ? .white : .black
         // Do any additional setup after loading the view.
-
+        
+        darkModeEnabled = UserDefaults.standard.bool(forKey: "darkModeEnabled")
 
 
 //        tabBar.backgroundImage = UIImage()
-        let normal = [NSAttributedString.Key.font: UIFont(name: "SanFranciscoText-Medium", size: 11) as Any, NSAttributedString.Key.strokeColor: darkModeEnabled ? UIColor.unselectedDark as Any : UIColor.black70 as Any] as [NSAttributedString.Key: Any]
-        let selected = [NSAttributedString.Key.font: UIFont(name: "SanFranciscoText-Semibold", size: 11) as Any, NSAttributedString.Key.strokeColor: darkModeEnabled ? UIColor.white as Any : UIColor.brick as Any] as [NSAttributedString.Key: Any]
-
-        tabBarItem.setTitleTextAttributes(normal, for: .normal)
-        tabBarItem.setTitleTextAttributes(selected, for: .selected)
+        
         delegate = self
+        updateColors()
         setupTabs()
 
         NotificationCenter.default.addObserver(self, selector: #selector(updateColors), name: .darkModeToggle, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(hideVC(notification:)), name: .darkModeToggle, object: nil)
-
-        updateColors()
+        
     }
 
     @objc func updateColors() {
-
-        if(darkModeEnabled) {
-            view.backgroundColor = .darkTint
-            tabBar.backgroundColor = .darkTint
-            tabBar.barTintColor = .darkTint
-            tabBar.isTranslucent = false
-            tabBar.tintColor = .white
-            tabBar.unselectedItemTintColor = .unselectedDark
-        } else {
-            view.backgroundColor = .white
-            tabBar.backgroundColor = .white
-            tabBar.tintColor = .brick
-            tabBar.unselectedItemTintColor = .black70
-        }
+        
+        darkModeEnabled = UserDefaults.standard.bool(forKey: "darkModeEnabled")
+        
+        let normal = [NSAttributedString.Key.font: UIFont(name: "SanFranciscoText-Medium", size: 11) as Any, NSAttributedString.Key.strokeColor: darkModeEnabled ? UIColor.unselectedDark as Any : UIColor.black70 as Any] as [NSAttributedString.Key: Any]
+        let selected = [NSAttributedString.Key.font: UIFont(name: "SanFranciscoText-Semibold", size: 11) as Any, NSAttributedString.Key.strokeColor: darkModeEnabled ? UIColor.white as Any : UIColor.brick as Any] as [NSAttributedString.Key: Any]
+        
+        tabBarItem.setTitleTextAttributes(normal, for: .normal)
+        tabBarItem.setTitleTextAttributes(selected, for: .selected)
+        
+        view.backgroundColor = darkModeEnabled ? .darkTint : .white
+        tabBar.backgroundColor = darkModeEnabled ? .red : .white
+        tabBar.tintColor = darkModeEnabled ? .white : .brick
+        tabBar.unselectedItemTintColor = darkModeEnabled ? .unselectedDark : .black70
+        tabBar.barTintColor = darkModeEnabled ? .darkTint : .white
+        tabBar.isTranslucent = false
 
     }
 
@@ -91,12 +93,7 @@ class TabBarViewController: UITabBarController {
         // these are just placeholders
 
         var imageChoice: String
-
-        if(darkModeEnabled) {
-            imageChoice = "Dark"
-        } else {
-            imageChoice = "Light"
-        }
+        imageChoice = darkModeEnabled ? "Dark" : "Light"
 
         let feedVC = FeedCollectionViewController()
         feedVC.feedData = posts

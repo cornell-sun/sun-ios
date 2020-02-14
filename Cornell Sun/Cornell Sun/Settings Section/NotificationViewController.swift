@@ -35,13 +35,14 @@ class NotificationViewController: UIViewController, UITableViewDataSource, UITab
     var notificationsDisplay: [(String, UIImage)] = []
 
     let userDefaults = UserDefaults.standard
-    var darkModeEnabled = UserDefaults.standard.bool(forKey: "darkModeEnabled")
+    var darkModeEnabled: Bool!
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         titleCache = prevViewController.title
         prevViewController.title = "Settings"
         tabBarController?.tabBar.isHidden = true
+        updateColors()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -52,8 +53,9 @@ class NotificationViewController: UIViewController, UITableViewDataSource, UITab
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        super.viewDidLoad()
-        view.backgroundColor = darkModeEnabled ? .darkCell : .white
+        
+        darkModeEnabled = UserDefaults.standard.bool(forKey: "darkModeEnabled")
+        
         title = "Notifications"
     
         //Calling hardcoded populator
@@ -73,12 +75,19 @@ class NotificationViewController: UIViewController, UITableViewDataSource, UITab
         tableView.delegate = self
         tableView.dataSource = self
         tableView.isScrollEnabled = false
-        tableView.backgroundColor = darkModeEnabled ? .darkCell : .white
         view.addSubview(tableView)
 
         tableView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
+    }
+    
+    @objc func updateColors() {
+        
+        darkModeEnabled = UserDefaults.standard.bool(forKey: "darkModeEnabled")
+        
+        view.backgroundColor = darkModeEnabled ? .darkCell : .white
+        tableView.backgroundColor = darkModeEnabled ? .darkCell : .white
     }
 
     override func didReceiveMemoryWarning() {

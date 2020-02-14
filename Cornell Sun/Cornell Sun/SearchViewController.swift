@@ -27,7 +27,7 @@ class SearchViewController: UIViewController, UITableViewDelegate {
     let TRENDINGLABEL_TOP_BOTTOM_TRAILING: CGFloat = 8
     let DISTANCE: CGFloat = 300.0
     
-    let darkModeEnabled = UserDefaults.standard.bool(forKey: "darkModeEnabled")
+    var darkModeEnabled: Bool!
     
     let collectionView: UICollectionView = {
         let view = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
@@ -73,8 +73,7 @@ class SearchViewController: UIViewController, UITableViewDelegate {
         super.viewDidLoad()
         view.backgroundColor = .black5
         
-        let emptyImage = darkModeEnabled ? "empty-search-sunDark" : "empty-search-sunLight"
-        emptySearchView = EmptyView(image: UIImage(named: emptyImage)!, title: "No Results", description: "Check your spelling?")
+        darkModeEnabled = UserDefaults.standard.bool(forKey: "darkModeEnabled")
 
         tableView = UITableView()
         tableView.register(SearchTableViewCell.self, forCellReuseIdentifier: "SearchResultCell")
@@ -138,6 +137,8 @@ class SearchViewController: UIViewController, UITableViewDelegate {
     
     @objc func updateColors() {
         
+        darkModeEnabled = UserDefaults.standard.bool(forKey: "darkModeEnabled")
+        
         navigationController?.navigationBar.barTintColor = darkModeEnabled ? .darkTint : .white
         navigationController?.navigationBar.barStyle = darkModeEnabled ? .blackTranslucent : .default
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
@@ -150,9 +151,13 @@ class SearchViewController: UIViewController, UITableViewDelegate {
         searchController.searchBar.tintColor = darkModeEnabled ? .darkText : .blue
         
         tableView.backgroundColor = darkModeEnabled ? .darkCell : .white
+        tableView.reloadData()
         
         collectionView.backgroundColor = darkModeEnabled ? .black : .white
+        collectionView.reloadData()
         
+        let emptyImage = darkModeEnabled ? "empty-search-sunDark" : "empty-search-sunLight"
+        emptySearchView = EmptyView(image: UIImage(named: emptyImage)!, title: "No Results", description: "Check your spelling?")
     }
 }
 

@@ -18,9 +18,17 @@ class ContactViewController: UIViewController, UITextFieldDelegate, MFMailCompos
     var headerLabel: UILabel!
     var descriptionTextView: UILabel!
     var actionButton: UIButton!
+    var subjectLabel: UILabel!
     var subjectField: UITextField!
+    var subjectBorder: CALayer!
     var emailField: UITextField!
     var messageField: UITextView!
+    var nameLabel: UILabel!
+    var nameField: UITextField!
+    var nameBorder: CALayer!
+    var emailLabel: UILabel!
+    var emailBorder: CALayer!
+    var messageLabel: UILabel!
     
     let contactEmail = "news@cornellsun.com"
     let feedbackEmail = "feedback@cornellsun.com"
@@ -41,13 +49,14 @@ class ContactViewController: UIViewController, UITextFieldDelegate, MFMailCompos
     let buttonHeight: CGFloat = 45.5
     let buttonOffset: CGFloat = 40
     
-    let darkModeEnabled = UserDefaults.standard.bool(forKey: "darkModeEnabled")
+    var darkModeEnabled: Bool!
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         titleCache = prevViewController.title
         prevViewController.title = "Settings"
         tabBarController?.tabBar.isHidden = true
+        updateColors()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -58,12 +67,12 @@ class ContactViewController: UIViewController, UITextFieldDelegate, MFMailCompos
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = darkModeEnabled ? .darkCell : .white
+        
+        darkModeEnabled = UserDefaults.standard.bool(forKey: "darkModeEnabled")
         self.title = ""
         let widthScale = view.frame.width/screenWidth //Scaling width
         headerLabel = UILabel()
         headerLabel.text = getHeader()
-        headerLabel.textColor = darkModeEnabled ? .white90 : .black
         headerLabel.font = UIFont(name: "HelveticaNeue-Bold", size: 36.0)
         view.addSubview(headerLabel)
         var topArea = view.layoutMarginsGuide.snp.top
@@ -72,6 +81,7 @@ class ContactViewController: UIViewController, UITextFieldDelegate, MFMailCompos
             topArea = view.safeAreaLayoutGuide.snp.top
             bottomArea = view.safeAreaLayoutGuide.snp.bottom
         }
+        
         headerLabel.snp.makeConstraints { make in
             make.width.equalTo(textWidth*widthScale)
             make.height.equalTo(headerHeight)
@@ -82,7 +92,6 @@ class ContactViewController: UIViewController, UITextFieldDelegate, MFMailCompos
         descriptionTextView = UILabel()
         descriptionTextView.text = getText()
         descriptionTextView.numberOfLines = 0
-        descriptionTextView.textColor = darkModeEnabled ? .white90 : .black
         descriptionTextView.font = UIFont(name: "HelveticaNeue", size: 16.0)
         view.addSubview(descriptionTextView)
         descriptionTextView.snp.makeConstraints { make in
@@ -92,10 +101,9 @@ class ContactViewController: UIViewController, UITextFieldDelegate, MFMailCompos
             make.top.equalTo(headerLabel.snp.bottom).offset(descriptionOffset)
         }
         
-        let subjectLabel = UILabel()
+        subjectLabel = UILabel()
         subjectLabel.text = "Subject"
         subjectLabel.font = UIFont(name: "HelveticaNeue", size: 14.0)
-        subjectLabel.textColor = darkModeEnabled ? .white60 : UIColor(red: 155/256, green: 155/256, blue: 155/256, alpha: 1)
         view.addSubview(subjectLabel)
         subjectLabel.snp.makeConstraints { make in
             make.width.equalTo(textWidth*widthScale)
@@ -103,9 +111,9 @@ class ContactViewController: UIViewController, UITextFieldDelegate, MFMailCompos
             make.centerX.equalTo(view.center.x)
             make.top.equalTo(descriptionTextView.snp.bottom).offset(labelOffsetTop)
         }
+        
         subjectField = UITextField()
         subjectField.borderStyle = UITextField.BorderStyle.none
-        subjectField.textColor = darkModeEnabled ? .white90 : .black
         subjectField.delegate = self
         subjectField.font = UIFont(name: "HelveticaNeue", size: 18.0)
         view.addSubview(subjectField)
@@ -115,18 +123,17 @@ class ContactViewController: UIViewController, UITextFieldDelegate, MFMailCompos
             make.centerX.equalTo(view.center.x)
             make.top.equalTo(subjectLabel.snp.bottom).offset(labelOffsetBottom)
         }
-        let subjectBorder = CALayer()
+        
+        subjectBorder = CALayer()
         let width = CGFloat(1.0)
-        subjectBorder.borderColor = darkModeEnabled ? UIColor.white60.cgColor : UIColor(red: 217/256, green: 217/256, blue: 217/256, alpha: 1).cgColor
         subjectBorder.frame = CGRect(x: 0, y: textHeight - width, width: textWidth*widthScale+2.0, height: textHeight+2)
         subjectBorder.borderWidth = width
         subjectField.layer.addSublayer(subjectBorder)
         subjectField.layer.masksToBounds = true
         
-        let nameLabel = UILabel()
+        nameLabel = UILabel()
         nameLabel.text = "Name"
         nameLabel.font = UIFont(name: "HelveticaNeue", size: 14.0)
-        nameLabel.textColor = darkModeEnabled ? .white60 : UIColor(red: 155/255, green: 155/255, blue: 155/255, alpha: 1)
         view.addSubview(nameLabel)
         nameLabel.snp.makeConstraints { make in
             make.width.equalTo(textWidth*widthScale)
@@ -134,9 +141,9 @@ class ContactViewController: UIViewController, UITextFieldDelegate, MFMailCompos
             make.centerX.equalTo(view.center.x)
             make.top.equalTo(subjectField.snp.bottom).offset(labelOffsetTop)
         }
-        let nameField = UITextField()
+        
+        nameField = UITextField()
         nameField.borderStyle = UITextField.BorderStyle.none
-        nameField.textColor = darkModeEnabled ? .white90 : .black
         nameField.delegate = self
         nameField.font = UIFont(name: "HelveticaNeue", size: 18.0)
         view.addSubview(nameField)
@@ -146,17 +153,16 @@ class ContactViewController: UIViewController, UITextFieldDelegate, MFMailCompos
             make.centerX.equalTo(view.center.x)
             make.top.equalTo(nameLabel.snp.bottom).offset(labelOffsetBottom)
         }
-        let nameBorder = CALayer()
-        nameBorder.borderColor = darkModeEnabled ? UIColor.white60.cgColor : UIColor(red: 217/256, green: 217/256, blue: 217/256, alpha: 1).cgColor
+        
+        nameBorder = CALayer()
         nameBorder.frame = CGRect(x: 0, y: textHeight - width, width: textWidth*widthScale+2.0, height: textHeight+2)
         nameBorder.borderWidth = width
         nameField.layer.addSublayer(nameBorder)
         nameField.layer.masksToBounds = true
         
-        let emailLabel = UILabel()
+        emailLabel = UILabel()
         emailLabel.text = "Email"
         emailLabel.font = UIFont(name: "HelveticaNeue", size: 14.0)
-        emailLabel.textColor = darkModeEnabled ? .white60 : UIColor(red: 155/256, green: 155/256, blue: 155/256, alpha: 1)
         view.addSubview(emailLabel)
         emailLabel.snp.makeConstraints { make in
             make.width.equalTo(textWidth*widthScale)
@@ -164,6 +170,7 @@ class ContactViewController: UIViewController, UITextFieldDelegate, MFMailCompos
             make.centerX.equalTo(view.center.x)
             make.top.equalTo(nameField.snp.bottom).offset(labelOffsetTop)
         }
+        
         emailField = UITextField()
         emailField.borderStyle = UITextField.BorderStyle.none
         emailField.textColor = darkModeEnabled ? .white90 : .black
@@ -176,17 +183,16 @@ class ContactViewController: UIViewController, UITextFieldDelegate, MFMailCompos
             make.centerX.equalTo(view.center.x)
             make.top.equalTo(emailLabel.snp.bottom).offset(labelOffsetBottom)
         }
-        let emailBorder = CALayer()
-        emailBorder.borderColor = darkModeEnabled ? UIColor.white60.cgColor : UIColor(red: 217/256, green: 217/256, blue: 217/256, alpha: 1).cgColor
+        
+        emailBorder = CALayer()
         emailBorder.frame = CGRect(x: 0, y: textHeight - width, width: textWidth*widthScale+2.0, height: textHeight+2)
         emailBorder.borderWidth = width
         emailField.layer.addSublayer(emailBorder)
         emailField.layer.masksToBounds = true
         
-        let messageLabel = UILabel()
+        messageLabel = UILabel()
         messageLabel.text = "Message"
         messageLabel.font = UIFont(name: "HelveticaNeue", size: 14.0)
-        messageLabel.textColor = darkModeEnabled ? .white60 : UIColor(red: 155/256, green: 155/256, blue: 155/256, alpha: 1)
         view.addSubview(messageLabel)
         messageLabel.snp.makeConstraints { make in
             make.width.equalTo(textWidth*widthScale)
@@ -194,22 +200,17 @@ class ContactViewController: UIViewController, UITextFieldDelegate, MFMailCompos
             make.centerX.equalTo(view.center.x)
             make.top.equalTo(emailField.snp.bottom).offset(labelOffsetTop)
         }
+        
         messageField = UITextView()
         messageField.addDoneButton()
-        messageField.backgroundColor = darkModeEnabled ? .darkCell : .white
-        messageField.textColor = darkModeEnabled ? .white90 : .black
         messageField.delegate = self
         messageField.font = UIFont(name: "HelveticaNeue", size: 18.0)
         view.addSubview(messageField)
         
         actionButton = UIButton()
-        actionButton.backgroundColor = darkModeEnabled ? .darkCell : .white
         actionButton.layer.cornerRadius = 20
-        let titleColor = darkModeEnabled ? UIColor.white90 : UIColor.brick
         actionButton.layer.borderWidth = 2.5
-        actionButton.layer.borderColor = titleColor.cgColor
         actionButton.setTitle("Send", for: .normal)
-        actionButton.setTitleColor(titleColor, for: .normal)
         actionButton.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
         actionButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
         view.addSubview(actionButton)
@@ -226,6 +227,33 @@ class ContactViewController: UIViewController, UITextFieldDelegate, MFMailCompos
             make.top.equalTo(messageLabel.snp.bottom).offset(labelOffsetBottom)
             make.bottom.equalTo(actionButton.snp.top).offset(-8)
         }
+        
+        updateColors()
+    }
+    
+    @objc func updateColors() {
+        
+        darkModeEnabled = UserDefaults.standard.bool(forKey: "darkModeEnabled")
+        
+        view.backgroundColor = darkModeEnabled ? .darkCell : .white
+        headerLabel.textColor = darkModeEnabled ? .white90 : .black
+        descriptionTextView.textColor = darkModeEnabled ? .white90 : .black
+        subjectLabel.textColor = darkModeEnabled ? .white60 : UIColor(red: 155/256, green: 155/256, blue: 155/256, alpha: 1)
+        subjectField.textColor = darkModeEnabled ? .white90 : .black
+        subjectBorder.borderColor = darkModeEnabled ? UIColor.white60.cgColor : UIColor(red: 217/256, green: 217/256, blue: 217/256, alpha: 1).cgColor
+        nameLabel.textColor = darkModeEnabled ? .white60 : UIColor(red: 155/255, green: 155/255, blue: 155/255, alpha: 1)
+        nameField.textColor = darkModeEnabled ? .white90 : .black
+        nameBorder.borderColor = darkModeEnabled ? UIColor.white60.cgColor : UIColor(red: 217/256, green: 217/256, blue: 217/256, alpha: 1).cgColor
+        emailLabel.textColor = darkModeEnabled ? .white60 : UIColor(red: 155/256, green: 155/256, blue: 155/256, alpha: 1)
+        emailBorder.borderColor = darkModeEnabled ? UIColor.white60.cgColor : UIColor(red: 217/256, green: 217/256, blue: 217/256, alpha: 1).cgColor
+        messageLabel.textColor = darkModeEnabled ? .white60 : UIColor(red: 155/256, green: 155/256, blue: 155/256, alpha: 1)
+        messageField.backgroundColor = darkModeEnabled ? .darkCell : .white
+        messageField.textColor = darkModeEnabled ? .white90 : .black
+        actionButton.backgroundColor = darkModeEnabled ? .darkCell : .white
+        let titleColor = darkModeEnabled ? UIColor.white90 : UIColor.brick
+        actionButton.layer.borderColor = titleColor.cgColor
+        actionButton.setTitleColor(titleColor, for: .normal)
+        
     }
 
     override func didReceiveMemoryWarning() {

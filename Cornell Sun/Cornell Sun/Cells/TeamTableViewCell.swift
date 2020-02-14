@@ -26,7 +26,7 @@ class TeamTableViewCell: UITableViewCell {
     var originLabel: UILabel!
     var linerLabel: UILabel!
     
-    let darkModeEnabled = UserDefaults.standard.bool(forKey: "darkModeEnabled")
+    var darkModeEnabled: Bool!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -35,7 +35,9 @@ class TeamTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        contentView.backgroundColor = .darkCell
+        darkModeEnabled = UserDefaults.standard.bool(forKey: "darkModeEnabled")
+        
+        contentView.backgroundColor = darkModeEnabled ? .darkCell : .white
 
         emojiLabel = UILabel()
         contentView.addSubview(emojiLabel)

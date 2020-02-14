@@ -23,7 +23,7 @@ class ThemeViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     var tableView: UITableView!
     var themes: [(String, ThemeType)] = []
-    var themesDisplay: [(String, UIImage)] = []
+    var themesDisplay: [(String, String)] = []
     
     let darkModeEnabled = UserDefaults.standard.bool(forKey: "darkModeEnabled")
     
@@ -42,16 +42,13 @@ class ThemeViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-//        view.backgroundColor = darkModeEnabled ? .darkCell : .white
+    
         title = "Theme"
         
         if themes.count == 0 {
             themes = [("Dark Mode", .darkMode)]
             
-            let iconExt = darkModeEnabled ? "Dark" : "Light"
-            
-            themesDisplay = [("Something a little easier on the eyes", UIImage(named: "moon" + iconExt))] as! [(String, UIImage)]
+            themesDisplay = [("Something a little easier on the eyes", "moon")]
         }
         
         tableView = UITableView(frame: .zero)
@@ -73,6 +70,8 @@ class ThemeViewController: UIViewController, UITableViewDelegate, UITableViewDat
     func updateColors(darkMode: Bool) {
         
         view.backgroundColor = darkMode ? .darkCell : .white
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        navigationItem.backBarButtonItem?.tintColor = darkMode ? .white : .black
         tableView.backgroundColor = darkMode ? .darkCell : .white
         tableView.reloadData()
         
@@ -88,6 +87,7 @@ class ThemeViewController: UIViewController, UITableViewDelegate, UITableViewDat
             let isToggled = UserDefaults.standard.bool(forKey: themes[indexPath.row].1.rawValue)
             cell.delegate = self
             cell.selectionStyle = .none
+            cell.icon = themesDisplay[indexPath.row].1
             cell.setupCell(icon: themesDisplay[indexPath.row].1, labelText: themes[indexPath.row].0, descriptionText: themesDisplay[indexPath.row].0, isToggled: isToggled)
 //            cell.backgroundColor = .black
             return cell
@@ -117,16 +117,6 @@ extension ThemeViewController: ThemesCellDelegate {
     func toggleDarkMode(isEnabled: Bool) {
         UserDefaults.standard.set(isEnabled, forKey: "darkModeEnabled")
         updateColors(darkMode: isEnabled)
+        NotificationCenter.default.post(.init(name: .darkModeToggle))
     }
-    
-//    func switchToggled(for cell: NotificationsTableViewCell, isSubscribed: Bool) {
-//        guard let indexPath = tableView.indexPath(for: cell) else { return }
-//        let notificationType = notifications[indexPath.row].1
-//        userDefaults.set(isSubscribed, forKey: notificationType.rawValue)
-//        if isSubscribed {
-//            OneSignal.sendTag(notificationType.rawValue, value: notificationType.rawValue)
-//        } else {
-//            OneSignal.deleteTag(notificationType.rawValue)
-//        }
-//    }
 }
