@@ -24,11 +24,12 @@ class ThemeViewController: UIViewController, UITableViewDelegate, UITableViewDat
     var themes: [(String, ThemeType)] = []
     var themesDisplay: [(String, String)] = []
     
-    let darkModeEnabled = UserDefaults.standard.bool(forKey: "darkModeEnabled")
+    var darkModeEnabled: Bool!
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tabBarController?.tabBar.isHidden = true
+        updateColors()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -38,6 +39,8 @@ class ThemeViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        darkModeEnabled = UserDefaults.standard.bool(forKey: "darkModeEnabled")
     
         title = "Theme"
         
@@ -50,7 +53,6 @@ class ThemeViewController: UIViewController, UITableViewDelegate, UITableViewDat
         tableView = UITableView(frame: .zero)
         tableView.register(ThemeCell.self, forCellReuseIdentifier: "ThemeCell")
         tableView.tableFooterView = UIView()
-//        tableView.backgroundColor = darkModeEnabled ? .darkCell : .white
         tableView.delegate = self
         tableView.dataSource = self
         tableView.isScrollEnabled = false
@@ -60,15 +62,19 @@ class ThemeViewController: UIViewController, UITableViewDelegate, UITableViewDat
             make.edges.equalToSuperview()
         }
         
-        updateColors(darkMode: darkModeEnabled)
+        updateColors()
     }
     
-    func updateColors(darkMode: Bool) {
+    func updateColors() {
         
-        view.backgroundColor = darkMode ? .darkCell : .white
+        darkModeEnabled = UserDefaults.standard.bool(forKey: "darkModeEnabled")
+        
+        view.backgroundColor = darkModeEnabled ? .darkCell : .white
+        navigationController?.navigationBar.barTintColor = darkModeEnabled ? .darkTint : .white
+        navigationController?.navigationBar.barStyle = darkModeEnabled ? .blackTranslucent : .default
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-        navigationItem.backBarButtonItem?.tintColor = darkMode ? .white : .black
-        tableView.backgroundColor = darkMode ? .darkCell : .white
+        navigationItem.backBarButtonItem?.tintColor = darkModeEnabled ? .red : .black
+        tableView.backgroundColor = darkModeEnabled ? .darkCell : .white
         tableView.reloadData()
         
     }
@@ -112,7 +118,7 @@ extension ThemeViewController: ThemesCellDelegate {
     
     func toggleDarkMode(isEnabled: Bool) {
         UserDefaults.standard.set(isEnabled, forKey: "darkModeEnabled")
-        updateColors(darkMode: isEnabled)
+        updateColors()
         NotificationCenter.default.post(.init(name: .darkModeToggle))
     }
 }

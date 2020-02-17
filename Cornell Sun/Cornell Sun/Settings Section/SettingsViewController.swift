@@ -33,9 +33,6 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-        
-        view.backgroundColor = .white
         
         //Calling hardcoded populator
         if settings.count == 0 {
@@ -108,13 +105,9 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
         }
         sectionLabel.text = sections[section]
         
-        if(darkModeEnabled) {
-            headerCell.contentView.backgroundColor = .darkTableHeader
-            sectionLabel.textColor = UIColor(red: 191/255, green: 191/255, blue: 191/255, alpha: 1.0)
-        } else {
-            headerCell.contentView.backgroundColor = .black5
-            sectionLabel.textColor = UIColor(white: 74/255, alpha: 1.0)
-        }
+        headerCell.contentView.backgroundColor = darkModeEnabled ? .darkTableHeader : .black5
+        let textColor = darkModeEnabled ? UIColor(red: 191/255, green: 191/255, blue: 191/255, alpha: 1.0) : UIColor(white: 74/255, alpha: 1.0)
+        sectionLabel.textColor = textColor
         
         return headerCell.contentView
     }

@@ -21,7 +21,7 @@ class FeedCollectionViewController: ViewController, UIScrollViewDelegate {
     var adDict = [String: Int]()
     var currAdToken = ""
     
-    let darkModeEnabled = UserDefaults.standard.bool(forKey: "darkModeEnabled")
+    var darkModeEnabled: Bool!
 
     var bookmarkPosts: [PostObject] = {
         return PostOffice.instance.get() ?? []
@@ -47,7 +47,7 @@ class FeedCollectionViewController: ViewController, UIScrollViewDelegate {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        setNavigationInformation()
+        updateColors()
         guard !isFirstRun else {
             isFirstRun = false
             return
@@ -58,8 +58,10 @@ class FeedCollectionViewController: ViewController, UIScrollViewDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        darkModeEnabled = UserDefaults.standard.bool(forKey: "darkModeEnabled")
 
-        view.backgroundColor = .white
+        navigationItem.title = "The Cornell Daily Sun"
 
         observer = PostOffice.instance.observe(\.packages, options: [.initial, .new]) { (postOffice, change) in
             if let newValue = change.newValue {
@@ -76,10 +78,12 @@ class FeedCollectionViewController: ViewController, UIScrollViewDelegate {
         view.addSubview(collectionView)
 
         adapter.collectionView = collectionView
-        adapter.collectionView?.backgroundColor = darkModeEnabled ? .black : .black5
+        
         adapter.collectionView?.refreshControl = refreshControl
         adapter.dataSource = self
         adapter.scrollViewDelegate = self
+        
+        updateColors()
     }
 
     override func viewDidLayoutSubviews() {
@@ -89,6 +93,20 @@ class FeedCollectionViewController: ViewController, UIScrollViewDelegate {
 
     deinit {
         observer?.invalidate()
+    }
+    
+    func updateColors() {
+        
+        darkModeEnabled = UserDefaults.standard.bool(forKey: "darkModeEnabled")
+        
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        navigationItem.backBarButtonItem?.tintColor = darkModeEnabled ? .white : .black
+        navigationController?.navigationBar.barTintColor = darkModeEnabled ? .darkCell : .white
+        navigationController?.navigationBar.barStyle = darkModeEnabled ? .blackTranslucent : .default
+        navigationController?.navigationBar.titleTextAttributes = [
+            NSAttributedString.Key.font: UIFont(name: "Sonnenstrahl-Ausgezeichnet", size: 30)!, NSAttributedString.Key.foregroundColor: (darkModeEnabled ? UIColor.white : UIColor.black)]
+        
+        adapter.collectionView?.backgroundColor = darkModeEnabled ? .black90 : .black5
     }
 
     override func didReceiveMemoryWarning() {
@@ -181,16 +199,6 @@ extension FeedCollectionViewController {
         getPosts(page: currentPage)
     }
 
-    func setNavigationInformation() {
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-        navigationItem.backBarButtonItem?.tintColor = darkModeEnabled ? .white : .black
-        navigationController?.navigationBar.barTintColor = darkModeEnabled ? .darkCell : .white
-        navigationController?.navigationBar.tintColor = .white
-        navigationController?.navigationBar.barStyle = UIBarStyle.blackOpaque
-        navigationController?.navigationBar.titleTextAttributes = [
-            NSAttributedString.Key.font: UIFont(name: "Sonnenstrahl-Ausgezeichnet", size: 30)!, NSAttributedString.Key.foregroundColor: (darkModeEnabled ? UIColor.white : UIColor.black)]
-        navigationItem.title = "The Cornell Daily Sun"
-    }
 }
 
 extension FeedCollectionViewController: TabBarViewControllerDelegate {
