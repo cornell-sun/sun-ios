@@ -59,7 +59,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         OneSignal.inFocusDisplayType = OSNotificationDisplayType.notification
 
         syncNotifications()
-
+        
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
         let sbName = darkModeEnabled ? "Launch Screen Dark2" : "Launch Screen"
@@ -73,6 +73,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         let userDefaults = UserDefaults.standard
         userDefaults.set(true, forKey: "darkModeEnabled")
+        
         if !userDefaults.bool(forKey: hasOnboardedKey) {
             let onboardingViewController = OnboardingPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
             self.window?.rootViewController?.present(onboardingViewController, animated: false, completion: nil)
