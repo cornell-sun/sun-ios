@@ -48,7 +48,7 @@ class BookmarkCollectionViewController: ViewController, UIScrollViewDelegate {
 
         view.addSubview(collectionView)
         adapter.collectionView = collectionView
-        adapter.collectionView?.backgroundColor = .black5
+//        adapter.collectionView?.backgroundColor = .black5
         adapter.dataSource = self
         adapter.scrollViewDelegate = self
 
@@ -62,7 +62,7 @@ class BookmarkCollectionViewController: ViewController, UIScrollViewDelegate {
         updateColors()
     }
 
-    @objc func updateColors() {
+    func updateColors() {
         
         darkModeEnabled = UserDefaults.standard.bool(forKey: "darkModeEnabled")
         
@@ -72,7 +72,8 @@ class BookmarkCollectionViewController: ViewController, UIScrollViewDelegate {
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: textColor]
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         navigationItem.backBarButtonItem?.tintColor = darkModeEnabled ? .white : .black
-        collectionView.backgroundColor = darkModeEnabled ? .darkTint : .white
+        collectionView.backgroundColor = darkModeEnabled ? .darkTint : .black5
+        collectionView.reloadData()
         
         let emptyIcon = darkModeEnabled ? "empty-bookmark-sunDark" : "empty-bookmark-sunLight"
         emptyBookmarkView = EmptyView(image: UIImage(named: emptyIcon)!, title: "No Bookmarks", description: "Running late? Save some articles for later")

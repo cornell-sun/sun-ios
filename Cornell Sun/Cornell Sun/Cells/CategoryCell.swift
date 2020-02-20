@@ -13,7 +13,7 @@ final class CategoryCell: UICollectionViewCell {
 
     var categoryLabelLeading = 17.0
     
-    let darkModeEnabled = UserDefaults.standard.bool(forKey: "darkModeEnabled")
+    var darkModeEnabled: Bool!
 
     var post: PostObject? {
         didSet {
@@ -46,12 +46,19 @@ final class CategoryCell: UICollectionViewCell {
         super.init(frame: frame)
         setupViews()
     }
+    
+    override func prepareForReuse() {
+        setupViews()
+    }
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
     func setupViews() {
+        
+        darkModeEnabled = UserDefaults.standard.bool(forKey: "darkModeEnabled")
+        
         self.backgroundColor = darkModeEnabled ? .darkCell : .white
         categoryLabel.textColor = darkModeEnabled ? .white90 : .black60
         divider.backgroundColor = darkModeEnabled ? .white40 : .black40

@@ -17,7 +17,7 @@ final class BookmarkCell: UICollectionViewCell {
     let titleBottomInset: CGFloat = 8.5
     let authorHeight: CGFloat = 13
     
-    let darkModeEnabled = UserDefaults.standard.bool(forKey: "darkModeEnabled")
+    var darkModeEnabled: Bool!
 
     var post: PostObject? {
         didSet {
@@ -60,8 +60,15 @@ final class BookmarkCell: UICollectionViewCell {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    override func prepareForReuse() {
+        setupViews()
+    }
 
     func setupViews() {
+        
+        darkModeEnabled = UserDefaults.standard.bool(forKey: "darkModeEnabled")
+        
         self.backgroundColor = darkModeEnabled ? .darkCell : .white
         titleLabel.textColor = darkModeEnabled ? .white90 : .black
         authorLabel.textColor = darkModeEnabled ? .white60 : .black60

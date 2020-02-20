@@ -36,14 +36,14 @@ final class MenuActionCell: UICollectionViewCell {
     let inset = 16
     let shareTrailingPadding = 28
     
-    let darkModeEnabled = UserDefaults.standard.bool(forKey: "darkModeEnabled")
+    var darkModeEnabled: Bool!
 
     lazy var timeStampLabel: UILabel = {
         let label = UILabel()
         label.text = ""
         label.numberOfLines = 1
         label.font = .subSecondaryHeader
-        label.textColor = darkModeEnabled ? .white60 : .black60
+//        label.textColor = darkModeEnabled ? .white60 : .black60
         self.contentView.addSubview(label)
         return label
     }()
@@ -51,8 +51,6 @@ final class MenuActionCell: UICollectionViewCell {
     lazy var bookmarkButton: UIButton = {
         let button = UIButton(type: .custom)
         button.imageView?.contentMode = .scaleToFill
-        let buttonImage = darkModeEnabled ? "bookmarkIconDark" : "bookmarkIconLight"
-        button.setImage(UIImage(named: buttonImage), for: .normal)
         button.addTarget(self, action: #selector(MenuActionCell.bookmarkPressed(_:)), for: .touchUpInside)
         self.contentView.addSubview(button)
         return button
@@ -68,8 +66,6 @@ final class MenuActionCell: UICollectionViewCell {
     lazy var shareImageView: UIButton = {
         let button = UIButton(type: .custom)
         button.imageView?.contentMode = .scaleAspectFit
-        let buttonImage = darkModeEnabled ? "shareIconDark" : "shareIconLight"
-        button.setImage(UIImage(named: buttonImage), for: .normal)
         button.addTarget(self, action: #selector(MenuActionCell.sharePressed(_:)), for: .touchUpInside)
         self.contentView.addSubview(button)
         return button
@@ -77,10 +73,16 @@ final class MenuActionCell: UICollectionViewCell {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
+        updateColors()
     }
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func prepareForReuse() {
+        updateColors()
     }
 
     @objc func bookmarkPressed(_ button: UIButton) {
@@ -101,11 +103,23 @@ final class MenuActionCell: UICollectionViewCell {
         } else {
             image = didSelectBookmark ? UIImage(named: "bookmarkPressed") : UIImage(named: "bookmarkIconLight")
         }
+        
         bookmarkButton.setImage(image, for: .normal)
+    }
+    
+    func updateColors() {
+        
+        darkModeEnabled = UserDefaults.standard.bool(forKey: "darkModeEnabled")
+        
+        self.backgroundColor = darkModeEnabled ? .darkCell : .white
+        timeStampLabel.textColor = darkModeEnabled ? .white60 : .black60
+        let shareImage = darkModeEnabled ? "shareIconDark" : "shareIconLight"
+        shareImageView.setImage(UIImage(named: shareImage), for: .normal)
+        
     }
 
     func setupViews(forBookmarks: Bool) {
-        self.backgroundColor = darkModeEnabled ? .darkCell : .white
+       
 
         if forBookmarks {
             let bookmarkImage = darkModeEnabled ? "bookmarkIconSelectedDark" : "bookmarkIconSelectedLight"

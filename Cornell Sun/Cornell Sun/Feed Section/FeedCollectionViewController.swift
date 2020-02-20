@@ -107,6 +107,7 @@ class FeedCollectionViewController: ViewController, UIScrollViewDelegate {
             NSAttributedString.Key.font: UIFont(name: "Sonnenstrahl-Ausgezeichnet", size: 30)!, NSAttributedString.Key.foregroundColor: (darkModeEnabled ? UIColor.white : UIColor.black)]
         
         adapter.collectionView?.backgroundColor = darkModeEnabled ? .black90 : .black5
+        collectionView.reloadData()
     }
 
     override func didReceiveMemoryWarning() {
