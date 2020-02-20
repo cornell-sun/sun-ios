@@ -87,15 +87,12 @@ class ThemeCell: UITableViewCell {
         updateColors()
     }
     
-    @objc func updateColors() {
+    func updateColors() {
         
         contentView.backgroundColor = darkModeEnabled ? .darkCell : .white
         label.textColor = darkModeEnabled ? .white90 : .black90
         descriptionLabel.textColor = darkModeEnabled ? .white40 : .black40
         toggleSwitch.onTintColor = darkModeEnabled ? .white40 : .brick
-        
-//        let iconExt = darkModeEnabled ? "Dark" : "Light"
-//        iconImageView.image = UIImage(named: icon + iconExt)
         
     }
     

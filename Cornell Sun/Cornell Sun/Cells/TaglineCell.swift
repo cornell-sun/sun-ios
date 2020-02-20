@@ -11,7 +11,7 @@ import SnapKit
 
 final class TaglineCell: UICollectionViewCell {
     
-    let darkModeEnabled = UserDefaults.standard.bool(forKey: "darkModeEnabled")
+    var darkModeEnabled: Bool!
 
     var post: PostObject? {
         didSet {
@@ -38,13 +38,19 @@ final class TaglineCell: UICollectionViewCell {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    override func prepareForReuse() {
+        setupViews()
+    }
 
     func setupViews() {
+        
+        darkModeEnabled = UserDefaults.standard.bool(forKey: "darkModeEnabled")
+        
         self.backgroundColor = darkModeEnabled ? .darkCell : .white
         taglineLabel.textColor = darkModeEnabled ? .white90 : .black60
         addSubview(taglineLabel)
         taglineLabel.snp.makeConstraints { (make) in
-//            make.centerY.equalToSuperview()
             make.edges.equalToSuperview().inset(UIEdgeInsets(top: 0, left: 17, bottom: 5, right: 5))
         }
     }
