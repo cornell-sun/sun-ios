@@ -76,8 +76,11 @@ class ThemeViewController: UIViewController, UITableViewDelegate, UITableViewDat
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         tableView.backgroundColor = darkModeEnabled ? .darkCell : .white
         tableView.reloadData()
+        if let tabBar = navigationController?.tabBarController as? TabBarViewController {
+            tabBar.setupTabIcons()
+        }
+        
     }
-    
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
          return themes.count
