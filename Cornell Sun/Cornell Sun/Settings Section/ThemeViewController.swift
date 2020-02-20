@@ -72,6 +72,7 @@ class ThemeViewController: UIViewController, UITableViewDelegate, UITableViewDat
         view.backgroundColor = darkModeEnabled ? .darkCell : .white
         navigationController?.navigationBar.barTintColor = darkModeEnabled ? .darkTint : .white
         navigationController?.navigationBar.barStyle = darkModeEnabled ? .blackTranslucent : .default
+        navigationController?.navigationBar.tintColor = darkModeEnabled ? .white : .darkTint
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         navigationItem.backBarButtonItem?.tintColor = darkModeEnabled ? .red : .black
         tableView.backgroundColor = darkModeEnabled ? .darkCell : .white
