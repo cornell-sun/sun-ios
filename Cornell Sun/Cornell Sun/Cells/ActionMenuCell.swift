@@ -73,7 +73,6 @@ final class MenuActionCell: UICollectionViewCell {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
         updateColors()
     }
 
@@ -119,8 +118,6 @@ final class MenuActionCell: UICollectionViewCell {
     }
 
     func setupViews(forBookmarks: Bool) {
-       
-
         if forBookmarks {
             let bookmarkImage = darkModeEnabled ? "bookmarkIconSelectedDark" : "bookmarkIconSelectedLight"
             bookmarkButton.setImage(UIImage(named: bookmarkImage), for: .normal)

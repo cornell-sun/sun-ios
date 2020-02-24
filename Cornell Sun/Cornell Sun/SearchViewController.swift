@@ -23,8 +23,8 @@ class SearchViewController: UIViewController, UITableViewDelegate {
     var endOfResults = false
     var loading = false
     var trendingTopics: [String] = []
-    let TRENDINGLABEL_LEADING: CGFloat = 18.0
-    let TRENDINGLABEL_TOP_BOTTOM_TRAILING: CGFloat = 8
+    let TRENDINGLABEL_LEADING: CGFloat = 7.0
+    let TRENDINGLABEL_TOP_BOTTOM_TRAILING: CGFloat = 9.0
     let DISTANCE: CGFloat = 300.0
     
     var darkModeEnabled: Bool!
@@ -72,8 +72,6 @@ class SearchViewController: UIViewController, UITableViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .black5
-        
-        darkModeEnabled = UserDefaults.standard.bool(forKey: "darkModeEnabled")
 
         tableView = UITableView()
         tableView.register(SearchTableViewCell.self, forCellReuseIdentifier: "SearchResultCell")
@@ -127,7 +125,6 @@ class SearchViewController: UIViewController, UITableViewDelegate {
         NotificationCenter.default.addObserver(self, selector: #selector(updateColors), name: .darkModeToggle, object: nil)
         
         updateColors()
-        
     }
 
     override func didReceiveMemoryWarning() {
@@ -136,7 +133,6 @@ class SearchViewController: UIViewController, UITableViewDelegate {
     }
     
     @objc func updateColors() {
-        
         darkModeEnabled = UserDefaults.standard.bool(forKey: "darkModeEnabled")
         
         navigationController?.navigationBar.barTintColor = darkModeEnabled ? .darkTint : .white
@@ -149,13 +145,11 @@ class SearchViewController: UIViewController, UITableViewDelegate {
         searchController.searchBar.backgroundColor = darkModeEnabled ? .darkTint : .white
         searchController.searchBar.barStyle = darkModeEnabled ? .blackTranslucent : .default
         searchController.searchBar.tintColor = darkModeEnabled ? .darkText : .blue
-        
+        searchController.searchBar.searchTextField.textColor = darkModeEnabled ? .white : .black
         tableView.backgroundColor = darkModeEnabled ? .darkCell : .white
         tableView.reloadData()
-        
         collectionView.backgroundColor = darkModeEnabled ? .black : .white
         collectionView.reloadData()
-        
         let emptyImage = darkModeEnabled ? "empty-search-sunDark" : "empty-search-sunLight"
         emptySearchView = EmptyView(image: UIImage(named: emptyImage)!, title: "No Results", description: "Check your spelling?")
     }
@@ -233,7 +227,7 @@ extension SearchViewController: UITableViewDataSource {
         }
         
         headerView.contentView.backgroundColor = darkModeEnabled ? .darkCell : .white
-        trendingLabel.textColor = darkModeEnabled ? .darkText : .white
+        trendingLabel.textColor = darkModeEnabled ? .white : .black
 
         return headerView
     }
@@ -247,7 +241,7 @@ extension SearchViewController: UITableViewDataSource {
         cell.backgroundColor = darkModeEnabled ? .darkCell : .white
         cell.textLabel?.textColor = darkModeEnabled ? .darkText : .black
         
-        if(darkModeEnabled) {
+        if (darkModeEnabled) {
             let backgroundView = UIView()
             backgroundView.backgroundColor = .gray
             cell.selectedBackgroundView = backgroundView

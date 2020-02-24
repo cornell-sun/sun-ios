@@ -101,12 +101,14 @@ class FeedCollectionViewController: ViewController, UIScrollViewDelegate {
         
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         navigationItem.backBarButtonItem?.tintColor = darkModeEnabled ? .white : .black
-        navigationController?.navigationBar.barTintColor = darkModeEnabled ? .darkCell : .white
+        navigationController?.navigationBar.barTintColor = darkModeEnabled ? .darkTint : .white
         navigationController?.navigationBar.barStyle = darkModeEnabled ? .blackTranslucent : .default
         navigationController?.navigationBar.titleTextAttributes = [
             NSAttributedString.Key.font: UIFont(name: "Sonnenstrahl-Ausgezeichnet", size: 30)!, NSAttributedString.Key.foregroundColor: (darkModeEnabled ? UIColor.white : UIColor.black)]
         
+        refreshControl.tintColor = darkModeEnabled ? .white : .black
         adapter.collectionView?.backgroundColor = darkModeEnabled ? .black90 : .black5
+        collectionView.backgroundColor = darkModeEnabled ? .darkTint : .black5
         collectionView.reloadData()
     }
 

@@ -34,7 +34,7 @@ class SectionCollectionViewController: UIViewController, UIScrollViewDelegate {
     let spinToken = "spinner"
     var sectionTitle = ""
 
-    let darkModeEnabled = UserDefaults.standard.bool(forKey: "darkModeEnabled")
+    var darkModeEnabled = UserDefaults.standard.bool(forKey: "darkModeEnabled")
 
     let collectionView: UICollectionView = {
         let view = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
@@ -75,9 +75,7 @@ class SectionCollectionViewController: UIViewController, UIScrollViewDelegate {
         super.viewDidLoad()
 
         navigationController?.setNavigationBarHidden(false, animated: false)
-        view.backgroundColor = .white
         navigationController?.navigationBar.topItem?.title = ""
-        navigationController?.navigationBar.tintColor = .black
 
         emptySpinnerView.addSubview(spinner)
 
@@ -107,14 +105,28 @@ class SectionCollectionViewController: UIViewController, UIScrollViewDelegate {
         spinner.snp.makeConstraints { make in
             make.center.equalToSuperview()
         }
+        updateColors()
     }
-
-    override func viewWillAppear(_ animated: Bool) {
+    
+    func updateColors() {
+        darkModeEnabled = UserDefaults.standard.bool(forKey: "darkModeEnabled")
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        refreshControl.tintColor = darkModeEnabled ? .white : .black
+        navigationItem.backBarButtonItem?.tintColor = darkModeEnabled ? .white : .black
         navigationController?.navigationBar.barTintColor = darkModeEnabled ? .darkCell : .white
+        navigationController?.navigationBar.barStyle = darkModeEnabled ? .blackTranslucent : .default
         navigationController?.navigationBar.titleTextAttributes = [
             NSAttributedString.Key.font: UIFont.headerTitle, NSAttributedString.Key.foregroundColor: darkModeEnabled ? UIColor.white : UIColor.black
         ]
+        refreshControl.tintColor = darkModeEnabled ? .white : .black
+        adapter.collectionView?.backgroundColor = darkModeEnabled ? .darkTint : .black5
+        collectionView.reloadData()
+        
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
         navigationItem.title = sectionTitle
+        updateColors()
     }
 
     override func didReceiveMemoryWarning() {

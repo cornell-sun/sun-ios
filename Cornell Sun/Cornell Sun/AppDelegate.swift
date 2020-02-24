@@ -60,6 +60,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         syncNotifications()
         
+        let userDefaults = UserDefaults.standard
+        userDefaults.set(false, forKey: "darkModeEnabled")
+        
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
         let sbName = darkModeEnabled ? "Launch Screen Dark2" : "Launch Screen"
@@ -70,9 +73,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Image cache settings
         ImageCache.default.diskStorage.config.sizeLimit = 100 * 1024 * 1024 //100 mb
         ImageCache.default.diskStorage.config.expiration = StorageExpiration.days(4) //4 days until its removed
-
-        let userDefaults = UserDefaults.standard
-        userDefaults.set(true, forKey: "darkModeEnabled")
         
         if !userDefaults.bool(forKey: hasOnboardedKey) {
             let onboardingViewController = OnboardingPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)

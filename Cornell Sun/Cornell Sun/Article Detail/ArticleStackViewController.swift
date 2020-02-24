@@ -51,7 +51,7 @@ class ArticleStackViewController: UIViewController {
         self.extendedLayoutIncludesOpaqueBars = true
         self.edgesForExtendedLayout = [.bottom]
         view.backgroundColor = darkModeEnabled ? .darkCell : .white
-        navigationController?.navigationBar.tintColor = .black
+        navigationController?.navigationBar.tintColor = darkModeEnabled ? .white : .darkTint
         if #available(iOS 11.0, *) {
             navigationController?.navigationBar.prefersLargeTitles = false
         }

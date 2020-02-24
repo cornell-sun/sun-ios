@@ -48,7 +48,6 @@ class BookmarkCollectionViewController: ViewController, UIScrollViewDelegate {
 
         view.addSubview(collectionView)
         adapter.collectionView = collectionView
-//        adapter.collectionView?.backgroundColor = .black5
         adapter.dataSource = self
         adapter.scrollViewDelegate = self
 
