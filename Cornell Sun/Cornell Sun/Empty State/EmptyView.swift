@@ -48,7 +48,9 @@ class EmptyView: UIView {
         self.init(frame: .zero)
         emptyImage.image = image
         emptyTitle.text = title
+        emptyTitle.textColor = darkModeEnabled ? .white : .black
         emptyDescription.text = description
+        emptyDescription.textColor = darkModeEnabled ? .white : .black
     }
 
     func addViews() {

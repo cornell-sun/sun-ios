@@ -33,13 +33,11 @@ final class CaptionCell: UICollectionViewCell {
         label.text = ""
         label.numberOfLines = 3
         label.font = .photoCaption
-        label.textColor = .black
         return label
     }()
 
     let divider: UIView = {
         let view = UIView()
-        view.backgroundColor = .black40
         return view
     }()
 
@@ -61,7 +59,7 @@ final class CaptionCell: UICollectionViewCell {
     }
 
     func setupViews() {
-        self.backgroundColor = .white
+        self.backgroundColor = darkModeEnabled ? .darkCell : .white
         addSubview(captionLabel)
         addSubview(divider)
         captionLabel.snp.makeConstraints { (make) in
@@ -74,5 +72,8 @@ final class CaptionCell: UICollectionViewCell {
             make.leading.trailing.equalToSuperview().inset(CaptionCellConstants.dividerHorizontalInset)
             make.bottom.equalToSuperview().inset(CaptionCellConstants.dividerBottom)
         }
+        
+        captionLabel.textColor = darkModeEnabled ? .white : .black
+        divider.backgroundColor = darkModeEnabled ? .white60 : .black40
     }
 }

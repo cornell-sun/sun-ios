@@ -29,6 +29,11 @@
 		34590494217D23DB009EAEFA /* Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 34590493217D23DB009EAEFA /* Keys.plist */; };
 		348716782041EAC8008CB9D5 /* AdImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348716772041EAC8008CB9D5 /* AdImageCell.swift */; };
 		3487167D2041F09D008CB9D5 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3487167C2041F09D008CB9D5 /* Launch Screen.storyboard */; };
+		3491BAB123DCABC400BE1E4E /* Launch Screen Dark2.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3491BAB023DCABC400BE1E4E /* Launch Screen Dark2.storyboard */; };
+		3491BAB323DCABD700BE1E4E /* Launch Screen Dark1.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3491BAB223DCABD700BE1E4E /* Launch Screen Dark1.storyboard */; };
+		34992232227E852000926B6D /* NotificationCenterExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34992231227E852000926B6D /* NotificationCenterExtension.swift */; };
+		34A481762384DD4E00FB168A /* ThemeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A481752384DD4E00FB168A /* ThemeViewController.swift */; };
+		34A481782384DF1800FB168A /* ThemeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A481772384DF1800FB168A /* ThemeCell.swift */; };
 		34C5582A2041E49E00E62CE8 /* AdSectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34C558292041E49E00E62CE8 /* AdSectionController.swift */; };
 		4029318520C58036000E1F4A /* TeamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4029318420C58036000E1F4A /* TeamViewController.swift */; };
 		4029318720C580D1000E1F4A /* TeamTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4029318620C580D1000E1F4A /* TeamTableViewCell.swift */; };
@@ -155,6 +160,11 @@
 		34590493217D23DB009EAEFA /* Keys.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Keys.plist; sourceTree = "<group>"; };
 		348716772041EAC8008CB9D5 /* AdImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdImageCell.swift; sourceTree = "<group>"; };
 		3487167C2041F09D008CB9D5 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		3491BAB023DCABC400BE1E4E /* Launch Screen Dark2.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen Dark2.storyboard"; sourceTree = "<group>"; };
+		3491BAB223DCABD700BE1E4E /* Launch Screen Dark1.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen Dark1.storyboard"; sourceTree = "<group>"; };
+		34992231227E852000926B6D /* NotificationCenterExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCenterExtension.swift; sourceTree = "<group>"; };
+		34A481752384DD4E00FB168A /* ThemeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeViewController.swift; sourceTree = "<group>"; };
+		34A481772384DF1800FB168A /* ThemeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeCell.swift; sourceTree = "<group>"; };
 		34C558292041E49E00E62CE8 /* AdSectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdSectionController.swift; sourceTree = "<group>"; };
 		4029318420C58036000E1F4A /* TeamViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamViewController.swift; sourceTree = "<group>"; };
 		4029318620C580D1000E1F4A /* TeamTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamTableViewCell.swift; sourceTree = "<group>"; };
@@ -340,6 +350,8 @@
 				0427821123C45FE8006FE55B /* GoogleService-Info.plist */,
 				DC3667DE206EBAC6002EB4F9 /* Cornell Sun.entitlements */,
 				3487167C2041F09D008CB9D5 /* Launch Screen.storyboard */,
+				3491BAB223DCABD700BE1E4E /* Launch Screen Dark1.storyboard */,
+				3491BAB023DCABC400BE1E4E /* Launch Screen Dark2.storyboard */,
 				5006AFFB1EA9625000F58549 /* AppDelegate.swift */,
 				DCC03FE02092A9940027D102 /* PhotoGallery */,
 				0C0D2FE52060461000BC77E9 /* Onboarding */,
@@ -421,6 +433,7 @@
 				4047EA04207590450030067E /* NotificationViewController.swift */,
 				0C6E76C52094FF0D00F8710C /* MastheadViewController.swift */,
 				4029318420C58036000E1F4A /* TeamViewController.swift */,
+				34A481752384DD4E00FB168A /* ThemeViewController.swift */,
 			);
 			path = "Settings Section";
 			sourceTree = "<group>";
@@ -474,6 +487,7 @@
 				DC446C351F5D0DFF00D68688 /* Extensions.swift */,
 				DC556AC420602E6900475B7D /* Constants.swift */,
 				0C59AD43208D505700CF3A31 /* Button.swift */,
+				34992231227E852000926B6D /* NotificationCenterExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -581,6 +595,7 @@
 				DC3CCB3220924288000A9A5B /* VideoCell.swift */,
 				4029318620C580D1000E1F4A /* TeamTableViewCell.swift */,
 				D91565CA2166A04900BCA466 /* SectionTableViewCell.swift */,
+				34A481772384DF1800FB168A /* ThemeCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -742,7 +757,9 @@
 				34590494217D23DB009EAEFA /* Keys.plist in Resources */,
 				DCB717121FB94BCA00BE4D26 /* KeplerStd-Bold.otf in Resources */,
 				5006B0031EA9625000F58549 /* Assets.xcassets in Resources */,
+				3491BAB323DCABD700BE1E4E /* Launch Screen Dark1.storyboard in Resources */,
 				DC818DA31F75E0CF0064AFFA /* Sonnenstrahl-Ausgezeichnet.ttf in Resources */,
+				3491BAB123DCABC400BE1E4E /* Launch Screen Dark2.storyboard in Resources */,
 				3487167D2041F09D008CB9D5 /* Launch Screen.storyboard in Resources */,
 				0427821223C45FE8006FE55B /* GoogleService-Info.plist in Resources */,
 			);
@@ -837,7 +854,6 @@
 				"${BUILT_PRODUCTS_DIR}/Moya-ModelMapper-framework/Moya_ModelMapper.framework",
 				"${BUILT_PRODUCTS_DIR}/PromisesObjC/FBLPromises.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/protobuf.framework",
-				"${BUILT_PRODUCTS_DIR}/Result-framework/Result.framework",
 				"${BUILT_PRODUCTS_DIR}/SkeletonView/SkeletonView.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftSoup/SwiftSoup.framework",
@@ -862,7 +878,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya_ModelMapper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBLPromises.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/protobuf.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SkeletonView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftSoup.framework",
@@ -952,6 +967,7 @@
 				5006B24D1EADA37F00F58549 /* PostObject.swift in Sources */,
 				DC34DEF520321C6D0010DF9A /* SectionCollectionViewController.swift in Sources */,
 				DCB1BB4D20893B0D002C11E2 /* SkeletonFeedCell.swift in Sources */,
+				34A481782384DF1800FB168A /* ThemeCell.swift in Sources */,
 				4029318720C580D1000E1F4A /* TeamTableViewCell.swift in Sources */,
 				DCB717161FBA016400BE4D26 /* TaglineCell.swift in Sources */,
 				0C49290520A14C4B004AF877 /* SettingObject.swift in Sources */,
@@ -995,6 +1011,8 @@
 				D91565CB2166A04900BCA466 /* SectionTableViewCell.swift in Sources */,
 				0C59AD44208D505700CF3A31 /* Button.swift in Sources */,
 				4047EA05207590450030067E /* NotificationViewController.swift in Sources */,
+				34A481762384DD4E00FB168A /* ThemeViewController.swift in Sources */,
+				34992232227E852000926B6D /* NotificationCenterExtension.swift in Sources */,
 				61652CD41F6EF44900EEFC29 /* SearchTableViewCell.swift in Sources */,
 				DCB717141FB9FE1700BE4D26 /* HeroSectionController.swift in Sources */,
 				DCECA9901FBDFB7300BAB2EA /* BookmarkCell.swift in Sources */,

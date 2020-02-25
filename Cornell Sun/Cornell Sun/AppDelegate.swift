@@ -57,20 +57,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                         settings: onesignalInitSettings)
 
         OneSignal.inFocusDisplayType = OSNotificationDisplayType.notification
-        
-        syncNotifications()
 
+        syncNotifications()
+        
+        let userDefaults = UserDefaults.standard
+        userDefaults.set(false, forKey: "darkModeEnabled")
+        
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
-        storyboard = UIStoryboard(name: "Launch Screen", bundle: nil)
+        let sbName = darkModeEnabled ? "Launch Screen Dark2" : "Launch Screen"
+        storyboard = UIStoryboard(name: sbName, bundle: nil)
         let rootVC = storyboard?.instantiateInitialViewController()
         window?.rootViewController = rootVC
 
         // Image cache settings
         ImageCache.default.diskStorage.config.sizeLimit = 100 * 1024 * 1024 //100 mb
         ImageCache.default.diskStorage.config.expiration = StorageExpiration.days(4) //4 days until its removed
-
-        let userDefaults = UserDefaults.standard
+        
         if !userDefaults.bool(forKey: hasOnboardedKey) {
             let onboardingViewController = OnboardingPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
             self.window?.rootViewController?.present(onboardingViewController, animated: false, completion: nil)
@@ -83,10 +86,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 }
             }
         }
-        
+
+        //Initialize Google Mobile Ads SDKAds
+        //@TODO change ad ID from test ad to our specific ID
+        //our actual id ca-app-pub-4474706420182946~3782719574
+        //fake id ca-app-pub-3940256099942544/2934735716
+
         // Init Firebase SDK
         FirebaseApp.configure()
-        
+
         // Init Google Mobile Ads SDK
         GADMobileAds.sharedInstance().start(completionHandler: nil)
 
@@ -95,14 +103,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         return true
     }
-    
+
     func fabricAPIKey() -> String {
-        
+
         var format = PropertyListSerialization.PropertyListFormat.xml
         var key: [String: AnyObject] = [:]
         let keyPath: String? = Bundle.main.path(forResource: "Keys", ofType: "plist")!
         let keyXML = FileManager.default.contents(atPath: keyPath!)
-        
+
         do {
             //swiftlint:disable:next force_cast
             key = try PropertyListSerialization.propertyList(from: keyXML!, options: .mutableContainersAndLeaves, format: &format) as! [String: AnyObject]
@@ -112,15 +120,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         //swiftlint:disable:next force_cast
         return key["APIKey"] as! String
-        
+
     }
-    
+
     func syncNotifications() {
-        
+
         let allNotificationTypes: [NotificationType] = [
             .breakingNews, .artsAndEntertainment, .dining, .localNews, .multimedia, .opinion, .science, .sports
         ]
-        
+
         for notificationType in allNotificationTypes {
             let isSubscribed = UserDefaults.standard.bool(forKey: notificationType.rawValue)
             if isSubscribed {

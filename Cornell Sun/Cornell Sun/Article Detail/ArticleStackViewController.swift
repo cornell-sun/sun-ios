@@ -46,9 +46,10 @@ class ArticleStackViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        view.backgroundColor = .white
-        navigationController?.navigationBar.tintColor = .black
+        self.extendedLayoutIncludesOpaqueBars = true
+        self.edgesForExtendedLayout = [.bottom]
+        view.backgroundColor = darkModeEnabled ? .darkCell : .white
+        navigationController?.navigationBar.tintColor = darkModeEnabled ? .white : .darkTint
         if #available(iOS 11.0, *) {
             navigationController?.navigationBar.prefersLargeTitles = false
         }
@@ -79,6 +80,7 @@ class ArticleStackViewController: UIViewController {
         shareBarView = ShareBarView()
         shareBarView.setBookmarkImage(didSelectBookmark: PostOffice.instance.isPostIdInBookmarks(post: post))
         shareBarView.delegate = self
+        shareBarView.backgroundColor = darkModeEnabled ? .darkCell : .white
         view.addSubview(shareBarView)
         shareBarView.snp.makeConstraints { make in
             make.height.equalTo(shareBarHeight)
@@ -232,7 +234,7 @@ class ArticleStackViewController: UIViewController {
         let label = UILabel()
         label.text = caption
         label.font = .photoCaption
-        label.textColor = .black90
+        label.textColor = darkModeEnabled ? .white90 : .black90
         label.numberOfLines = 0
         view.addSubview(label)
         stackView.addArrangedSubview(view)
@@ -264,7 +266,7 @@ class ArticleStackViewController: UIViewController {
         let creditLabel = UILabel()
         creditLabel.numberOfLines = 0
         creditLabel.text = credit
-        creditLabel.textColor = .black40
+        creditLabel.textColor = darkModeEnabled ? .white : .black40
         creditLabel.font = .photoCaptionCredit
         view.addSubview(creditLabel)
         stackView.addArrangedSubview(view)
@@ -280,7 +282,8 @@ class ArticleStackViewController: UIViewController {
         let textView = UITextView()
         textView.attributedText = text
         textView.textContainer.lineFragmentPadding = 0
-        textView.textColor = .black
+        textView.backgroundColor = darkModeEnabled ? .darkCell : .white
+        textView.textColor = darkModeEnabled ? .white90 : .black
         textView.delegate = self
         textView.isScrollEnabled = false
         textView.isEditable = false
@@ -392,7 +395,7 @@ class ArticleStackViewController: UIViewController {
         let headerView = UIView()
         let headerLabel = UILabel()
         headerLabel.font = .headerTitle
-        headerLabel.textColor = .black90
+        headerLabel.textColor = darkModeEnabled ? .white90 : .black90
         headerLabel.text = "Suggested Stories"
         headerView.addSubview(headerLabel)
 
@@ -404,6 +407,7 @@ class ArticleStackViewController: UIViewController {
         suggestedTableView.isScrollEnabled = false
         suggestedTableView.allowsSelection = false
         suggestedTableView.rowHeight = 118
+        suggestedTableView.backgroundColor = darkModeEnabled ? .darkCell : .white
         suggestedTableView.tableFooterView = UIView()
         suggestedTableView.register(SuggestedStoryTableViewCell.self, forCellReuseIdentifier: suggestedReuseIdentifier)
         scrollView.addSubview(suggestedTableView)
@@ -491,6 +495,8 @@ extension ArticleStackViewController: UITableViewDelegate, UITableViewDataSource
             if let suggestedID = post.suggestedStories[indexPath.row].postID, let suggestedStory = suggestedStories[suggestedID] {
                 let articleViewController = ArticleStackViewController(post: suggestedStory)
                 navigationController?.pushViewController(articleViewController, animated: true)
+                navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+                navigationItem.backBarButtonItem?.tintColor = darkModeEnabled ? .white : .black
             }
         }
     }
@@ -506,8 +512,19 @@ extension ArticleStackViewController: ShareBarViewDelegate {
     }
 
     func shareBarDidPressBookmark(_ view: ShareBarView) {
-        let didBookmark = view.bookmarkButton.currentImage == #imageLiteral(resourceName: "bookmark")
-        let correctBookmarkImage = view.bookmarkButton.currentImage == #imageLiteral(resourceName: "bookmarkPressed") ? #imageLiteral(resourceName: "bookmark") : #imageLiteral(resourceName: "bookmarkPressed")
+        let iconSelected: UIImage!
+        let iconUnSelected: UIImage!
+        
+        if darkModeEnabled {
+            iconSelected = UIImage(named: "bookmarkIconSelectedDark")
+            iconUnSelected = UIImage(named: "bookmarkIconDark")
+        } else {
+            iconSelected = UIImage(named: "bookmarkIconSelectedLight")
+            iconUnSelected = UIImage(named: "bookmarkIconLight")
+        }
+        
+        let didBookmark = view.bookmarkButton.currentImage == iconUnSelected
+        let correctBookmarkImage = view.bookmarkButton.currentImage == iconSelected ? iconUnSelected : iconSelected
         view.bookmarkButton.setImage(correctBookmarkImage, for: .normal)
         view.bookmarkButton.transform = CGAffineTransform(scaleX: 0.6, y: 0.6)
         taptic(style: .light)

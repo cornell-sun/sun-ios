@@ -33,7 +33,7 @@ class ImageCollectionCell: UICollectionViewCell {
         imageView = UIImageView()
         imageView.backgroundColor = .clear
         imageView.isUserInteractionEnabled = true
-        
+
         loadingIndicator = UICircularProgressRing()
 //        loadingIndicator.ringStyle = .ontop //TODO
         loadingIndicator.innerRingWidth = 2

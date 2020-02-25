@@ -44,6 +44,7 @@ func taptic(style: UIImpactFeedbackGenerator.FeedbackStyle) {
 }
 
 func cacheImage(imageURL: URL) {
+//    KingfisherManager.shared.retrieveImage(with: imageURL, options: nil, progressBlock: nil, completionHandler: nil)
 //    var imageResource = ImageResource(downloadURL: imageURL)
 //    KingfisherManager.shared.retrieveImage(with: imageResource, options: nil, progressBlock: nil, completionHandler: nil)
     //TODO

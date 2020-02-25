@@ -35,13 +35,12 @@ final class MenuActionCell: UICollectionViewCell {
     let imageHeight = 32
     let inset = 16
     let shareTrailingPadding = 28
-
+    
     lazy var timeStampLabel: UILabel = {
         let label = UILabel()
         label.text = ""
         label.numberOfLines = 1
         label.font = .subSecondaryHeader
-        label.textColor = .black60
         self.contentView.addSubview(label)
         return label
     }()
@@ -49,7 +48,6 @@ final class MenuActionCell: UICollectionViewCell {
     lazy var bookmarkButton: UIButton = {
         let button = UIButton(type: .custom)
         button.imageView?.contentMode = .scaleToFill
-        button.setImage(#imageLiteral(resourceName: "bookmark"), for: .normal)
         button.addTarget(self, action: #selector(MenuActionCell.bookmarkPressed(_:)), for: .touchUpInside)
         self.contentView.addSubview(button)
         return button
@@ -65,7 +63,6 @@ final class MenuActionCell: UICollectionViewCell {
     lazy var shareImageView: UIButton = {
         let button = UIButton(type: .custom)
         button.imageView?.contentMode = .scaleAspectFit
-        button.setImage(#imageLiteral(resourceName: "share"), for: .normal)
         button.addTarget(self, action: #selector(MenuActionCell.sharePressed(_:)), for: .touchUpInside)
         self.contentView.addSubview(button)
         return button
@@ -73,10 +70,15 @@ final class MenuActionCell: UICollectionViewCell {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
+        updateColors()
     }
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func prepareForReuse() {
+        updateColors()
     }
 
     @objc func bookmarkPressed(_ button: UIButton) {
@@ -90,15 +92,29 @@ final class MenuActionCell: UICollectionViewCell {
     }
 
     func setBookmarkImage(didSelectBookmark: Bool) {
-        let image = didSelectBookmark ? #imageLiteral(resourceName: "bookmarkPressed") : #imageLiteral(resourceName: "bookmark")
+        let image: UIImage!
+        
+        if darkModeEnabled {
+            image = didSelectBookmark ? UIImage(named: "bookmarkIconSelectedDark") : UIImage(named: "bookmarkIconDark")
+        } else {
+            image = didSelectBookmark ? UIImage(named: "bookmarkPressed") : UIImage(named: "bookmarkIconLight")
+        }
+        
         bookmarkButton.setImage(image, for: .normal)
+    }
+    
+    func updateColors() {
+        self.backgroundColor = darkModeEnabled ? .darkCell : .white
+        timeStampLabel.textColor = darkModeEnabled ? .white60 : .black60
+        let shareImage = darkModeEnabled ? "shareIconDark" : "shareIconLight"
+        shareImageView.setImage(UIImage(named: shareImage), for: .normal)
+        
     }
 
     func setupViews(forBookmarks: Bool) {
-        self.backgroundColor = .white
-
         if forBookmarks {
-            bookmarkButton.setImage(#imageLiteral(resourceName: "bookmarkPressed"), for: .normal)
+            let bookmarkImage = darkModeEnabled ? "bookmarkIconSelectedDark" : "bookmarkIconSelectedLight"
+            bookmarkButton.setImage(UIImage(named: bookmarkImage), for: .normal)
         }
 
         timeStampLabel.snp.makeConstraints { make in

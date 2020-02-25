@@ -13,7 +13,7 @@ final class TitleCell: UICollectionViewCell {
     var topOffset: CGFloat = 15
     var leftRightInset: CGFloat = 17
     var bottomInset: CGFloat = 5
-
+    
     var post: PostObject? {
         didSet {
             if let post = post {
@@ -27,7 +27,6 @@ final class TitleCell: UICollectionViewCell {
         let label = UILabel()
         label.text = ""
         label.numberOfLines = 4
-        label.textColor = .black90
         label.font = .articleTitle
         return label
     }()
@@ -36,13 +35,18 @@ final class TitleCell: UICollectionViewCell {
         super.init(frame: frame)
         setupViews()
     }
+    
+    override func prepareForReuse() {
+        setupViews()
+    }
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
     func setupViews() {
-        self.backgroundColor = .white
+        self.backgroundColor = darkModeEnabled ? .darkCell : .white
+        titleLabel.textColor = darkModeEnabled ? .white90 : .black90
         addSubview(titleLabel)
         titleLabel.snp.makeConstraints { (make) in
             make.leading.trailing.equalToSuperview().inset(leftRightInset)

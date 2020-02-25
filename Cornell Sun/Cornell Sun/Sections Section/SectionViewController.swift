@@ -31,11 +31,12 @@ class SectionViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.navigationBar.barTintColor = .white
+        navigationItem.title = "Sections"
+        navigationController?.navigationBar.isTranslucent = false
         navigationController?.navigationBar.titleTextAttributes = [
             NSAttributedString.Key.font: UIFont.headerTitle
         ]
-        navigationItem.title = "Sections"
+        updateColors()
     }
 
     override func viewDidLoad() {
@@ -45,16 +46,30 @@ class SectionViewController: UIViewController {
         tableView.tableFooterView = UIView()
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.isScrollEnabled = false
         view.addSubview(tableView)
 
         tableView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
+
+        NotificationCenter.default.addObserver(self, selector: #selector(updateColors), name: .darkModeToggle, object: nil)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+
+    @objc func updateColors() {
+        navigationController?.navigationBar.barTintColor = darkModeEnabled ? .darkTint : .white
+        navigationController?.navigationBar.barStyle = darkModeEnabled ? .blackTranslucent : .default
+        tableView.backgroundColor = darkModeEnabled ? .darkCell : .white
+        let textColor = darkModeEnabled ? UIColor.darkText : UIColor.lightText
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: textColor]
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        navigationItem.backBarButtonItem?.tintColor = darkModeEnabled ? .white : .black
+        tableView.reloadData()
     }
 
     func sectionToMeta(section: Sections) -> SectionMeta {
@@ -85,7 +100,7 @@ class SectionViewController: UIViewController {
         //case .sunspots:
             //return "Sunspots"
         }
-        
+
         return SectionMeta(title: title, imageName: imageName)
     }
 }
@@ -100,9 +115,22 @@ extension SectionViewController: UITableViewDataSource, UITableViewDelegate {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "sectionCell") as? SectionTableViewCell else {
             return UITableViewCell()
         }
+        
         let sectionMeta = sectionToMeta(section: sections[indexPath.row])
         cell.titleLabel.text = sectionMeta.title
         cell.sectionImageView.image = UIImage(named: sectionMeta.imageName)
+        
+        cell.backgroundColor = darkModeEnabled ? .darkCell : .white
+        cell.titleLabel.textColor = darkModeEnabled ? .darkText : .black
+        cell.detailImageView.image = darkModeEnabled ? UIImage(named: "disclosureArrowDark") : UIImage(named: "disclosureArrowLight")
+        cell.sectionImageView.image = darkModeEnabled ? UIImage(named: sectionMeta.imageName + "Dark") : UIImage(named: sectionMeta.imageName + "Light")
+        
+        if(darkModeEnabled) {
+            let backgroundView = UIView()
+            backgroundView.backgroundColor = .gray
+            cell.selectedBackgroundView = backgroundView
+        }
+        
         return cell
     }
 

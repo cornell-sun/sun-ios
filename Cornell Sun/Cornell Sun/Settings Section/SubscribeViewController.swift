@@ -11,7 +11,6 @@ import SafariServices
 class SubscribeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDataSource, UIPickerViewDelegate {
 
     var prevViewController: UIViewController!
-    var titleCache: String!
     var pickerList: [String] = ["Cornell Student", "Cornell Alumnus", "Parent", "Cornell staff", "Other"]
 
     var headerLabel: UILabel!
@@ -51,14 +50,12 @@ class SubscribeViewController: UIViewController, UITextFieldDelegate, UIPickerVi
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        titleCache = prevViewController.title
-        prevViewController.title = "Settings"
         tabBarController?.tabBar.isHidden = true
+        updateColors()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        prevViewController.title = titleCache
         tabBarController?.tabBar.isHidden = false
     }
 
@@ -131,12 +128,10 @@ class SubscribeViewController: UIViewController, UITextFieldDelegate, UIPickerVi
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        super.viewDidLoad()
-        view.backgroundColor = .white
+
         self.title = ""
         headerLabel = UILabel()
         headerLabel.text = "Daily Newsletters"
-        headerLabel.textColor = .black
         headerLabel.font = .systemFont(ofSize: 36, weight: .bold)
         headerLabel.adjustsFontSizeToFitWidth = true
         view.addSubview(headerLabel)
@@ -144,14 +139,12 @@ class SubscribeViewController: UIViewController, UITextFieldDelegate, UIPickerVi
         descriptionTextView = UITextView()
         let descriptionText = "Get Daily Sun headlines delivered to your inbox every day. You'll never miss a moment."
         descriptionTextView.text = descriptionText
-        descriptionTextView.textColor = .black
         descriptionTextView.font = .systemFont(ofSize: 16)
         descriptionTextView.isEditable = false
         descriptionTextView.isScrollEnabled = false
         view.addSubview(descriptionTextView)
 
         emailField = UITextField()
-        emailField.placeholder = "Email"
         emailField.borderStyle = .none
         emailField.keyboardType = .emailAddress
         emailField.autocapitalizationType = .none
@@ -159,7 +152,6 @@ class SubscribeViewController: UIViewController, UITextFieldDelegate, UIPickerVi
         view.addSubview(emailField)
 
         emailBorder = UIView()
-        emailBorder.backgroundColor = .subscribeTextField
         view.addSubview(emailBorder)
         emailBorder.snp.makeConstraints { make in
             make.leading.trailing.equalTo(emailField)
@@ -168,13 +160,12 @@ class SubscribeViewController: UIViewController, UITextFieldDelegate, UIPickerVi
         }
 
         firstNameField = UITextField()
-        firstNameField.placeholder = "First Name"
         firstNameField.borderStyle = .none
         firstNameField.delegate = self
         view.addSubview(firstNameField)
 
         firstNameBorder = UIView()
-        firstNameBorder.backgroundColor = .subscribeTextField
+        firstNameBorder.backgroundColor = darkModeEnabled ? .white60 : .subscribeTextField
         view.addSubview(firstNameBorder)
         firstNameBorder.snp.makeConstraints { make in
             make.leading.trailing.equalTo(firstNameField)
@@ -183,13 +174,11 @@ class SubscribeViewController: UIViewController, UITextFieldDelegate, UIPickerVi
         }
 
         lastNameField = UITextField()
-        lastNameField.placeholder = "Last Name"
         lastNameField.borderStyle = .none
         lastNameField.delegate = self
         view.addSubview(lastNameField)
 
         lastNameBorder = UIView()
-        lastNameBorder.backgroundColor = .subscribeTextField
         view.addSubview(lastNameBorder)
         lastNameBorder.snp.makeConstraints { make in
             make.leading.trailing.equalTo(lastNameField)
@@ -202,14 +191,12 @@ class SubscribeViewController: UIViewController, UITextFieldDelegate, UIPickerVi
         pickerView.delegate = self
 
         iAmAField = UITextField()
-        iAmAField.placeholder = "I am a:"
         iAmAField.borderStyle = .none
         iAmAField.inputView = pickerView
         iAmAField.delegate = self
         view.addSubview(iAmAField)
 
         iAmABorder = UIView()
-        iAmABorder.backgroundColor = .subscribeTextField
         view.addSubview(iAmABorder)
         iAmABorder.snp.makeConstraints { make in
             make.leading.trailing.equalTo(iAmAField)
@@ -220,15 +207,37 @@ class SubscribeViewController: UIViewController, UITextFieldDelegate, UIPickerVi
         actionButton = UIButton()
         actionButton.backgroundColor = UIColor.white// (red: 238/255, green: 68/255, blue: 68/255, alpha: 1)
         actionButton.layer.cornerRadius = buttonHeight / 2.0
-        let bigRed = UIColor(red: 179/255, green: 27/255, blue: 27/255, alpha: 1)
         actionButton.layer.borderWidth = 2.5
-        actionButton.layer.borderColor = bigRed.cgColor
         actionButton.setTitle("Subscribe", for: .normal)
-        actionButton.setTitleColor(bigRed, for: .normal)
         actionButton.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
         actionButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
         view.addSubview(actionButton)
-
+        
+        updateColors()
+    }
+    
+    @objc func updateColors() {
+        
+        view.backgroundColor = darkModeEnabled ? .darkCell : .white
+        headerLabel.textColor = darkModeEnabled ? .white90 : .black
+        descriptionTextView.textColor = darkModeEnabled ? .white90 : .black
+        descriptionTextView.backgroundColor = darkModeEnabled ? .darkCell : .white
+        emailField.attributedPlaceholder = NSAttributedString(string: "Email", attributes: [NSAttributedString.Key.foregroundColor: darkModeEnabled ? UIColor.white60 : UIColor.black40])
+        emailField.textColor = darkModeEnabled ? .white90 : .black
+        emailBorder.backgroundColor = darkModeEnabled ? .white60 : .subscribeTextField
+        firstNameField.attributedPlaceholder = NSAttributedString(string: "First Name", attributes: [NSAttributedString.Key.foregroundColor: darkModeEnabled ? UIColor.white60 : UIColor.black40])
+        firstNameField.textColor = darkModeEnabled ? .white90 : .black
+        lastNameField.attributedPlaceholder = NSAttributedString(string: "Last Name", attributes: [NSAttributedString.Key.foregroundColor: darkModeEnabled ? UIColor.white60 : UIColor.black40])
+        lastNameField.textColor = darkModeEnabled ? .white90 : .black
+        lastNameBorder.backgroundColor = darkModeEnabled ? .white60 : .subscribeTextField
+        iAmAField.attributedPlaceholder = NSAttributedString(string: "I am a:", attributes: [NSAttributedString.Key.foregroundColor: darkModeEnabled ? UIColor.white60 : UIColor.black40])
+        iAmAField.textColor = darkModeEnabled ? .white90 : .black
+        iAmABorder.backgroundColor = darkModeEnabled ? .white60 : .subscribeTextField
+        let titleColor = darkModeEnabled ? .white90 : UIColor(red: 179/255, green: 27/255, blue: 27/255, alpha: 1)
+        actionButton.layer.borderColor = titleColor.cgColor
+        actionButton.backgroundColor = darkModeEnabled ? .darkCell : .white
+        actionButton.setTitleColor(titleColor, for: .normal)
+        
     }
 
     override func didReceiveMemoryWarning() {
