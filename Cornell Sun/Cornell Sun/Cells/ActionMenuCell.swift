@@ -41,7 +41,6 @@ final class MenuActionCell: UICollectionViewCell {
         label.text = ""
         label.numberOfLines = 1
         label.font = .subSecondaryHeader
-//        label.textColor = darkModeEnabled ? .white60 : .black60
         self.contentView.addSubview(label)
         return label
     }()
