@@ -145,7 +145,7 @@ class SearchViewController: UIViewController, UITableViewDelegate {
         searchController.searchBar.searchTextField.textColor = darkModeEnabled ? .white : .black
         tableView.backgroundColor = darkModeEnabled ? .darkCell : .white
         tableView.reloadData()
-        collectionView.backgroundColor = darkModeEnabled ? .black : .white
+        collectionView.backgroundColor = darkModeEnabled ? .darkTint : .white
         collectionView.reloadData()
         let emptyImage = darkModeEnabled ? "empty-search-sunDark" : "empty-search-sunLight"
         emptySearchView = EmptyView(image: UIImage(named: emptyImage)!, title: "No Results", description: "Check your spelling?")
