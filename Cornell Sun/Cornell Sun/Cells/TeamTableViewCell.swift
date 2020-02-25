@@ -16,7 +16,7 @@ class TeamTableViewCell: UITableViewCell {
     let offsetLeft: CGFloat = 16
     let offsetRight: CGFloat = -13.5
     let offsetBottom: CGFloat = 3
-    
+
     let userDefaults = UserDefaults.standard
     var notificationType: NotificationType?
 
@@ -25,18 +25,14 @@ class TeamTableViewCell: UITableViewCell {
     var titleLabel: UILabel!
     var originLabel: UILabel!
     var linerLabel: UILabel!
-    
-    var darkModeEnabled: Bool!
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
     }
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
-        darkModeEnabled = UserDefaults.standard.bool(forKey: "darkModeEnabled")
-        
+
         contentView.backgroundColor = darkModeEnabled ? .darkCell : .white
 
         emojiLabel = UILabel()

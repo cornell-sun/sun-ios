@@ -8,7 +8,7 @@
 
 import UIKit
 
-let darkModeEnabled = UserDefaults.standard.bool(forKey: "darkModeEnabled")
+var darkModeEnabled = UserDefaults.standard.bool(forKey: "darkModeEnabled")
 
 func pressedShare(entry: PostObject) {
     taptic(style: .light)

@@ -26,8 +26,6 @@ class ShareBarView: UIView {
     let shareTrailingPadding: CGFloat = 28
     let shareWidth: CGFloat = 23
     let shareHeight: CGFloat = 32
-    
-    let darkModeEnabled = UserDefaults.standard.bool(forKey: "darkModeEnabled")
 
     init() {
         super.init(frame: .zero)

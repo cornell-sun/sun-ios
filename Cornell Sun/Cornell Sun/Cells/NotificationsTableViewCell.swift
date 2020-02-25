@@ -23,8 +23,6 @@ class NotificationsTableViewCell: UITableViewCell {
     let offsetBottom = -4
 
     weak var delegate: NotificationsTableViewCellDelegate?
-    
-    var darkModeEnabled: Bool!
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -32,9 +30,7 @@ class NotificationsTableViewCell: UITableViewCell {
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
-        darkModeEnabled = UserDefaults.standard.bool(forKey: "darkModeEnabled")
-        
+
         contentView.backgroundColor = darkModeEnabled ? .darkCell : .white
 
         iconImageView = UIImageView()

@@ -29,10 +29,6 @@ class SectionViewController: UIViewController {
     var tableView: UITableView!
     var sections: [Sections] = [.news(id: 2), .opinion(id: 3), .sports(id: 4), .arts(id: 5), .science(id: 6), .dining(id: 7), .multimedia(id: 9)]
 
-//    var darkModeEnabled = UserDefaults.standard.bool(forKey: "darkModeEnabled")
-    var darkModeEnabled = UserDefaults.standard.bool(forKey: "darkModeEnabled")
-
-
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationItem.title = "Sections"
@@ -40,8 +36,6 @@ class SectionViewController: UIViewController {
         navigationController?.navigationBar.titleTextAttributes = [
             NSAttributedString.Key.font: UIFont.headerTitle
         ]
-        
-        darkModeEnabled = UserDefaults.standard.bool(forKey: "darkModeEnabled")
         updateColors()
     }
 
@@ -68,7 +62,6 @@ class SectionViewController: UIViewController {
     }
 
     @objc func updateColors() {
-        darkModeEnabled = UserDefaults.standard.bool(forKey: "darkModeEnabled")
         navigationController?.navigationBar.barTintColor = darkModeEnabled ? .darkTint : .white
         navigationController?.navigationBar.barStyle = darkModeEnabled ? .blackTranslucent : .default
         tableView.backgroundColor = darkModeEnabled ? .darkCell : .white

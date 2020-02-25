@@ -48,8 +48,6 @@ class ContactViewController: UIViewController, UITextFieldDelegate, MFMailCompos
     let buttonHeight: CGFloat = 45.5
     let buttonOffset: CGFloat = 40
     
-    var darkModeEnabled: Bool!
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tabBarController?.tabBar.isHidden = true
@@ -64,7 +62,6 @@ class ContactViewController: UIViewController, UITextFieldDelegate, MFMailCompos
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        darkModeEnabled = UserDefaults.standard.bool(forKey: "darkModeEnabled")
         self.title = ""
         let widthScale = view.frame.width/screenWidth //Scaling width
         headerLabel = UILabel()
@@ -228,8 +225,6 @@ class ContactViewController: UIViewController, UITextFieldDelegate, MFMailCompos
     }
     
     @objc func updateColors() {
-        
-        darkModeEnabled = UserDefaults.standard.bool(forKey: "darkModeEnabled")
         
         view.backgroundColor = darkModeEnabled ? .darkCell : .white
         headerLabel.textColor = darkModeEnabled ? .white90 : .black

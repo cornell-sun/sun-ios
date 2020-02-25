@@ -18,8 +18,6 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
     let appID = "1375063933"
     let headerReuseIdentifier = "HeaderCell"
     let settingReuseIdentifier = "SettingCell"
-    
-    var darkModeEnabled: Bool!
 
     override func viewWillAppear(_ animated: Bool) {
         navigationItem.title = "Settings"
@@ -54,7 +52,6 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
         
         NotificationCenter.default.addObserver(self, selector: #selector(updateColors), name: .darkModeToggle, object: nil)
         
-        darkModeEnabled = UserDefaults.standard.bool(forKey: "darkModeEnabled")
         updateColors()
     }
 
@@ -64,8 +61,6 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     @objc func updateColors() {
-        
-        darkModeEnabled = UserDefaults.standard.bool(forKey: "darkModeEnabled")
         
         navigationController?.navigationBar.barTintColor = darkModeEnabled ? .darkTint : .white
         navigationController?.navigationBar.barStyle = darkModeEnabled ? .blackTranslucent : .default

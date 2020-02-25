@@ -24,8 +24,6 @@ class ArticleHeaderView: UIView {
     let captionLabelBottomOffset: CGFloat = 9.5
     let creditsLabelHeight: CGFloat = 15
     let creditsLabelInset: CGFloat = 10.5
-    
-    let darkModeEnabled = UserDefaults.standard.bool(forKey: "darkModeEnabled")
 
     var categoryLabel: UILabel!
     var titleLabel: UILabel!

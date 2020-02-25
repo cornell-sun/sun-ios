@@ -36,8 +36,6 @@ final class MenuActionCell: UICollectionViewCell {
     let inset = 16
     let shareTrailingPadding = 28
     
-    var darkModeEnabled: Bool!
-
     lazy var timeStampLabel: UILabel = {
         let label = UILabel()
         label.text = ""
@@ -107,9 +105,6 @@ final class MenuActionCell: UICollectionViewCell {
     }
     
     func updateColors() {
-        
-        darkModeEnabled = UserDefaults.standard.bool(forKey: "darkModeEnabled")
-        
         self.backgroundColor = darkModeEnabled ? .darkCell : .white
         timeStampLabel.textColor = darkModeEnabled ? .white60 : .black60
         let shareImage = darkModeEnabled ? "shareIconDark" : "shareIconLight"

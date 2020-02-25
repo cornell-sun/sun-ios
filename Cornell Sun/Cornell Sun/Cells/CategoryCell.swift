@@ -12,8 +12,6 @@ import SnapKit
 final class CategoryCell: UICollectionViewCell {
 
     var categoryLabelLeading = 17.0
-    
-    var darkModeEnabled: Bool!
 
     var post: PostObject? {
         didSet {
@@ -56,9 +54,6 @@ final class CategoryCell: UICollectionViewCell {
     }
 
     func setupViews() {
-        
-        darkModeEnabled = UserDefaults.standard.bool(forKey: "darkModeEnabled")
-        
         self.backgroundColor = darkModeEnabled ? .darkCell : .white
         categoryLabel.textColor = darkModeEnabled ? .white90 : .black60
         divider.backgroundColor = darkModeEnabled ? .white40 : .black40

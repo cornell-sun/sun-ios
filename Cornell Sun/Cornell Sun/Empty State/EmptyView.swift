@@ -9,8 +9,6 @@
 import UIKit
 
 class EmptyView: UIView {
-    
-    let darkModeEnabled = UserDefaults.standard.bool(forKey: "darkModeEnabled")
 
     //Constants
     let emptyImageHeight: CGFloat = 77.5

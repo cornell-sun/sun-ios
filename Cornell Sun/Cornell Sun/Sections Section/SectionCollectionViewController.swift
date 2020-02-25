@@ -34,8 +34,6 @@ class SectionCollectionViewController: UIViewController, UIScrollViewDelegate {
     let spinToken = "spinner"
     var sectionTitle = ""
 
-    var darkModeEnabled = UserDefaults.standard.bool(forKey: "darkModeEnabled")
-
     let collectionView: UICollectionView = {
         let view = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
         view.alwaysBounceVertical = true
@@ -109,7 +107,6 @@ class SectionCollectionViewController: UIViewController, UIScrollViewDelegate {
     }
     
     func updateColors() {
-        darkModeEnabled = UserDefaults.standard.bool(forKey: "darkModeEnabled")
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         refreshControl.tintColor = darkModeEnabled ? .white : .black
         navigationItem.backBarButtonItem?.tintColor = darkModeEnabled ? .white : .black

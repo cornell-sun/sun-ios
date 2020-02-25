@@ -21,8 +21,6 @@ class FeedCollectionViewController: ViewController, UIScrollViewDelegate {
     var adDict = [String: Int]()
     var currAdToken = ""
     
-    var darkModeEnabled: Bool!
-
     var bookmarkPosts: [PostObject] = {
         return PostOffice.instance.get() ?? []
     }()
@@ -59,8 +57,6 @@ class FeedCollectionViewController: ViewController, UIScrollViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        darkModeEnabled = UserDefaults.standard.bool(forKey: "darkModeEnabled")
-
         navigationItem.title = "The Cornell Daily Sun"
 
         observer = PostOffice.instance.observe(\.packages, options: [.initial, .new]) { (postOffice, change) in
@@ -96,8 +92,6 @@ class FeedCollectionViewController: ViewController, UIScrollViewDelegate {
     }
     
     func updateColors() {
-        
-        darkModeEnabled = UserDefaults.standard.bool(forKey: "darkModeEnabled")
         
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         navigationItem.backBarButtonItem?.tintColor = darkModeEnabled ? .white : .black

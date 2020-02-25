@@ -17,8 +17,6 @@ class SuggestedStoryTableViewCell: UITableViewCell {
     var storyImageView: UIImageView!
     var headlineLabel: UILabel!
     var bylineLabel: UILabel!
-    
-    let darkModeEnabled = UserDefaults.standard.bool(forKey: "darkModeEnabled")
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)

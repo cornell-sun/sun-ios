@@ -20,11 +20,9 @@ class ThemeCell: UITableViewCell {
     let offsetLeft = 18
     let offsetRight = -18
     let offsetBottom = -4
-    
-    var darkModeEnabled: Bool!
-    
+
     var icon: String!
-    
+
     weak var delegate: ThemesCellDelegate?
 
     override func awakeFromNib() {
@@ -34,9 +32,7 @@ class ThemeCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
-        darkModeEnabled = UserDefaults.standard.bool(forKey: "darkModeEnabled")
-        
+
         iconImageView = UIImageView()
         contentView.addSubview(iconImageView)
         iconImageView.snp.makeConstraints { make in

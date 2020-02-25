@@ -47,8 +47,6 @@ class SubscribeViewController: UIViewController, UITextFieldDelegate, UIPickerVi
     let buttonOffset: CGFloat = 40.0
 
     var didLayout = false
-    
-    var darkModeEnabled: Bool!
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -130,9 +128,7 @@ class SubscribeViewController: UIViewController, UITextFieldDelegate, UIPickerVi
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        darkModeEnabled = UserDefaults.standard.bool(forKey: "darkModeEnabled")
-        
+
         self.title = ""
         headerLabel = UILabel()
         headerLabel.text = "Daily Newsletters"
@@ -221,8 +217,6 @@ class SubscribeViewController: UIViewController, UITextFieldDelegate, UIPickerVi
     }
     
     @objc func updateColors() {
-        
-        darkModeEnabled = UserDefaults.standard.bool(forKey: "darkModeEnabled")
         
         view.backgroundColor = darkModeEnabled ? .darkCell : .white
         headerLabel.textColor = darkModeEnabled ? .white90 : .black

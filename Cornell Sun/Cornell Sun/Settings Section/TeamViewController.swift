@@ -25,14 +25,12 @@ class TeamMember {
 }
 
 class TeamViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-    
+
     var prevViewController: UIViewController!
-    
+
     var tableView: UITableView!
     var members: [TeamMember] = []
-    
-    var darkModeEnabled: Bool!
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tabBarController?.tabBar.isHidden = true
@@ -46,9 +44,7 @@ class TeamViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        darkModeEnabled = UserDefaults.standard.bool(forKey: "darkModeEnabled")
-        
+
         title = "App Team"
         
         //Calling hardcoded populator
@@ -78,9 +74,6 @@ class TeamViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     @objc func updateColors() {
-        
-        darkModeEnabled = UserDefaults.standard.bool(forKey: "darkModeEnabled")
-        
         view.backgroundColor = darkModeEnabled ? .darkCell : .white
         tableView.backgroundColor = darkModeEnabled ? .darkCell : .white
     }

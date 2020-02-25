@@ -27,8 +27,6 @@ class SearchViewController: UIViewController, UITableViewDelegate {
     let TRENDINGLABEL_TOP_BOTTOM_TRAILING: CGFloat = 9.0
     let DISTANCE: CGFloat = 300.0
     
-    var darkModeEnabled: Bool!
-    
     let collectionView: UICollectionView = {
         let view = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
         view.alwaysBounceVertical = true
@@ -110,6 +108,7 @@ class SearchViewController: UIViewController, UITableViewDelegate {
 
         // Set up the searchController delegate and the presentation view
         searchController.searchBar.delegate = self
+        searchController.searchBar.showsScopeBar = false
         searchController.definesPresentationContext = true
         searchController.dimsBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search For Articles"
@@ -133,8 +132,6 @@ class SearchViewController: UIViewController, UITableViewDelegate {
     }
     
     @objc func updateColors() {
-        darkModeEnabled = UserDefaults.standard.bool(forKey: "darkModeEnabled")
-        
         navigationController?.navigationBar.barTintColor = darkModeEnabled ? .darkTint : .white
         navigationController?.navigationBar.barStyle = darkModeEnabled ? .blackTranslucent : .default
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)

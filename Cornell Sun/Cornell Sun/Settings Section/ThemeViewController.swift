@@ -24,8 +24,6 @@ class ThemeViewController: UIViewController, UITableViewDelegate, UITableViewDat
     var themes: [(String, ThemeType)] = []
     var themesDisplay: [(String, String)] = []
     
-    var darkModeEnabled: Bool!
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tabBarController?.tabBar.isHidden = true
@@ -39,8 +37,6 @@ class ThemeViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        darkModeEnabled = UserDefaults.standard.bool(forKey: "darkModeEnabled")
     
         title = "Theme"
         
@@ -66,8 +62,6 @@ class ThemeViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func updateColors() {
-        
-        darkModeEnabled = UserDefaults.standard.bool(forKey: "darkModeEnabled")
         
         view.backgroundColor = darkModeEnabled ? .darkCell : .white
         navigationController?.navigationBar.barTintColor = darkModeEnabled ? .darkTint : .white
@@ -120,6 +114,7 @@ extension ThemeViewController: ThemesCellDelegate {
     
     func toggleDarkMode(isEnabled: Bool) {
         UserDefaults.standard.set(isEnabled, forKey: "darkModeEnabled")
+        darkModeEnabled = isEnabled
         updateColors()
         NotificationCenter.default.post(.init(name: .darkModeToggle))
     }

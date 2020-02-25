@@ -17,8 +17,6 @@ final class BookmarkCell: UICollectionViewCell {
     let titleBottomInset: CGFloat = 8.5
     let authorHeight: CGFloat = 13
     
-    var darkModeEnabled: Bool!
-
     var post: PostObject? {
         didSet {
             titleLabel.text = post?.title
@@ -66,9 +64,6 @@ final class BookmarkCell: UICollectionViewCell {
     }
 
     func setupViews() {
-        
-        darkModeEnabled = UserDefaults.standard.bool(forKey: "darkModeEnabled")
-        
         self.backgroundColor = darkModeEnabled ? .darkCell : .white
         titleLabel.textColor = darkModeEnabled ? .white90 : .black
         authorLabel.textColor = darkModeEnabled ? .white60 : .black60

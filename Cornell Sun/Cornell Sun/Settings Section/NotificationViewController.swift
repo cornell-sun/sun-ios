@@ -34,7 +34,6 @@ class NotificationViewController: UIViewController, UITableViewDataSource, UITab
     var notificationsDisplay: [(String, UIImage)] = []
 
     let userDefaults = UserDefaults.standard
-    var darkModeEnabled: Bool!
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -49,9 +48,7 @@ class NotificationViewController: UIViewController, UITableViewDataSource, UITab
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        darkModeEnabled = UserDefaults.standard.bool(forKey: "darkModeEnabled")
-        
+
         title = "Notifications"
     
         //Calling hardcoded populator
@@ -79,9 +76,6 @@ class NotificationViewController: UIViewController, UITableViewDataSource, UITab
     }
     
     @objc func updateColors() {
-        
-        darkModeEnabled = UserDefaults.standard.bool(forKey: "darkModeEnabled")
-        
         view.backgroundColor = darkModeEnabled ? .darkCell : .white
         tableView.backgroundColor = darkModeEnabled ? .darkCell : .white
     }

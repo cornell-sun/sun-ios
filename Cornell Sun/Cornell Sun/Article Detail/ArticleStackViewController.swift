@@ -38,8 +38,6 @@ class ArticleStackViewController: UIViewController {
     var shareBarView: ShareBarView!
     var commentsTableView: UITableView!
     var suggestedTableView: UITableView!
-    
-    let darkModeEnabled = UserDefaults.standard.bool(forKey: "darkModeEnabled")
 
     convenience init(post: PostObject) {
         self.init()

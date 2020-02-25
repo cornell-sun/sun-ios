@@ -14,7 +14,6 @@ class BookmarkCollectionViewController: ViewController, UIScrollViewDelegate {
     var isFirstRun = true
     var bookmarkPosts: [PostObject] = []
     var emptyBookmarkView: EmptyView!
-    var darkModeEnabled: Bool!
 
     let collectionView: UICollectionView = {
         let view = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
@@ -44,8 +43,6 @@ class BookmarkCollectionViewController: ViewController, UIScrollViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        darkModeEnabled = UserDefaults.standard.bool(forKey: "darkModeEnabled")
-
         view.addSubview(collectionView)
         adapter.collectionView = collectionView
         adapter.dataSource = self
@@ -62,8 +59,6 @@ class BookmarkCollectionViewController: ViewController, UIScrollViewDelegate {
     }
 
     func updateColors() {
-        
-        darkModeEnabled = UserDefaults.standard.bool(forKey: "darkModeEnabled")
         
         navigationController?.navigationBar.barTintColor = darkModeEnabled ? .darkTint : .white
         navigationController?.navigationBar.barStyle = darkModeEnabled ? .blackTranslucent : .default

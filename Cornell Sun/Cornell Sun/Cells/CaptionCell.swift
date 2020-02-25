@@ -19,8 +19,6 @@ struct CaptionCellConstants {
 }
 
 final class CaptionCell: UICollectionViewCell {
-    
-    let darkModeEnabled = UserDefaults.standard.bool(forKey: "darkModeEnabled")
 
     var post: PostObject? {
         didSet {

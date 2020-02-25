@@ -16,8 +16,6 @@ final class SearchCellNoImage: UICollectionViewCell {
     let imageViewWidthHeight: CGFloat = 90
     let timeLabelOffset: CGFloat = -8
     
-    let darkModeEnabled = UserDefaults.standard.bool(forKey: "darkModeEnabled")
-    
     var post: PostObject? {
         didSet {
             if let post = post {

@@ -24,10 +24,8 @@ class DisplayViewController: UIViewController {
     let screenWidth: CGFloat = 375
     let textWidth: CGFloat = 315
     
-    var tabHidden: [String : Bool] = ["hidden" : true]
-    
-    var darkModeEnabled: Bool!
-   
+    var tabHidden: [String: Bool] = ["hidden": true]
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tabBarController?.tabBar.isHidden = true
@@ -49,8 +47,6 @@ class DisplayViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        darkModeEnabled = UserDefaults.standard.bool(forKey: "darkModeEnabled")
 
         self.title = ""
         let widthScale = view.frame.width/screenWidth //Scaling width
@@ -95,9 +91,7 @@ class DisplayViewController: UIViewController {
     }
     
     @objc func updateColors() {
-        
-        darkModeEnabled = UserDefaults.standard.bool(forKey: "darkModeEnabled")
-        
+
         view.backgroundColor = darkModeEnabled ? .darkCell : .white
         headerLabel.textColor = darkModeEnabled ? .darkText : .black
         descriptionTextView.textColor = darkModeEnabled ? .darkText : .black
