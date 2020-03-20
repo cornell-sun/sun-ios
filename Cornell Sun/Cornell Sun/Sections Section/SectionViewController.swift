@@ -46,7 +46,6 @@ class SectionViewController: UIViewController {
         tableView.tableFooterView = UIView()
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.isScrollEnabled = false
         view.addSubview(tableView)
 
         tableView.snp.makeConstraints { make in

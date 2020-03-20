@@ -44,7 +44,6 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
         tableView.tableFooterView = UIView()
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.isScrollEnabled = false
         view.addSubview(tableView)
         tableView.snp.makeConstraints { make in
             make.edges.equalToSuperview()

@@ -78,7 +78,6 @@ class SearchViewController: UIViewController, UITableViewDelegate {
         tableView.dataSource = self
         tableView.layoutMargins = .zero
         tableView.separatorInset = .zero
-        tableView.isScrollEnabled = false
         view.addSubview(tableView)
 
         collectionView.isHidden = true
@@ -142,7 +141,7 @@ class SearchViewController: UIViewController, UITableViewDelegate {
         searchController.searchBar.backgroundColor = darkModeEnabled ? .darkTint : .white
         searchController.searchBar.barStyle = darkModeEnabled ? .blackTranslucent : .default
         searchController.searchBar.tintColor = darkModeEnabled ? .darkText : .blue
-        searchController.searchBar.searchTextField.textColor = darkModeEnabled ? .white : .black
+//        searchController.searchBar.searchTextField.textColor = darkModeEnabled ? .white : .black
         tableView.backgroundColor = darkModeEnabled ? .darkCell : .white
         tableView.reloadData()
         collectionView.backgroundColor = darkModeEnabled ? .darkTint : .white
