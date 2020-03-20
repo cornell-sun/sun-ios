@@ -61,7 +61,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         syncNotifications()
         
         let userDefaults = UserDefaults.standard
-        userDefaults.set(false, forKey: "darkModeEnabled")
+        
+        if UserDefaults.standard.object(forKey: "darkModeEnabled") == nil {
+            userDefaults.set(false, forKey: "darkModeEnabled")
+            darkModeEnabled = false
+        } else {
+            darkModeEnabled = userDefaults.bool(forKey: "darkModeEnabled")
+        }
         
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
