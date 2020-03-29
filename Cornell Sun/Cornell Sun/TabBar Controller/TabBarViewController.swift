@@ -49,7 +49,6 @@ class TabBarViewController: UITabBarController {
         tabBarItem.setTitleTextAttributes(selected, for: .selected)
         
         view.backgroundColor = darkModeEnabled ? .darkTint : .white
-        tabBar.backgroundColor = darkModeEnabled ? .red : .white
         tabBar.tintColor = darkModeEnabled ? .white : .brick
         tabBar.unselectedItemTintColor = darkModeEnabled ? .unselectedDark : .black70
         tabBar.barTintColor = darkModeEnabled ? .darkTint : .white
