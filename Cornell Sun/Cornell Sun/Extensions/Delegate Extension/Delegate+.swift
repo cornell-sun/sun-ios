@@ -34,9 +34,10 @@ func pressedBookmark(_ cell: MenuActionCell, entry: PostObject) {
                    animations: {
                     cell.bookmarkButton.transform = CGAffineTransform.identity
     })
+    
     if didBookmark {
-        PostOffice.instance.store(object: entry)
+        assert(PostOffice.instance.store(object: entry) == true)
     } else {
-        PostOffice.instance.remove(object: entry)
+        assert(PostOffice.instance.remove(object: entry) == true)
     }
 }

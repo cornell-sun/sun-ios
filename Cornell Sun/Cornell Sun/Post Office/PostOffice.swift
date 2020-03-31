@@ -10,7 +10,6 @@ import Foundation
 
 //Called PostOffice because it handles PostObjects
 final class PostOffice: NSObject {
-
     static let instance = PostOffice()
     @objc dynamic var packages: [PostObject]
     private let decoder = JSONDecoder()
@@ -62,5 +61,4 @@ final class PostOffice: NSObject {
     func isPostIdInBookmarks(post: PostObject) -> Bool {
         return packages.filter { $0.id == post.id }.count == 1
     }
-
 }

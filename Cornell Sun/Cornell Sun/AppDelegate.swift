@@ -60,13 +60,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         syncNotifications()
         
-        let userDefaults = UserDefaults.standard
         
         if UserDefaults.standard.object(forKey: "darkModeEnabled") == nil {
-            userDefaults.set(false, forKey: "darkModeEnabled")
+            UserDefaults.standard.set(false, forKey: "darkModeEnabled")
             darkModeEnabled = false
         } else {
-            darkModeEnabled = userDefaults.bool(forKey: "darkModeEnabled")
+            darkModeEnabled = UserDefaults.standard.bool(forKey: "darkModeEnabled")
         }
         
         window = UIWindow(frame: UIScreen.main.bounds)
@@ -80,7 +79,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         ImageCache.default.diskStorage.config.sizeLimit = 100 * 1024 * 1024 //100 mb
         ImageCache.default.diskStorage.config.expiration = StorageExpiration.days(4) //4 days until its removed
         
-        if !userDefaults.bool(forKey: hasOnboardedKey) {
+        if !UserDefaults.standard.bool(forKey: hasOnboardedKey) {
             let onboardingViewController = OnboardingPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
             self.window?.rootViewController?.present(onboardingViewController, animated: false, completion: nil)
         } else {
