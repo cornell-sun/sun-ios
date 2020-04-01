@@ -31,18 +31,15 @@ class BookmarkCollectionViewController: ViewController, UIScrollViewDelegate {
         navigationController?.navigationBar.titleTextAttributes = [
             NSAttributedString.Key.font: UIFont.headerTitle
         ]
-        updateColors()
-
         guard !isFirstRun else {
+            updateColors()
             isFirstRun = false
             return
         }
-        self.adapter.performUpdates(animated: true, completion: nil)
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         view.addSubview(collectionView)
         adapter.collectionView = collectionView
         adapter.dataSource = self
@@ -55,11 +52,11 @@ class BookmarkCollectionViewController: ViewController, UIScrollViewDelegate {
             }
         }
         
+        NotificationCenter.default.addObserver(self, selector: #selector(updateColors), name: .darkModeToggle, object: nil)
         updateColors()
     }
 
-    func updateColors() {
-        
+    @objc func updateColors() {
         navigationController?.navigationBar.barTintColor = darkModeEnabled ? .darkTint : .white
         navigationController?.navigationBar.barStyle = darkModeEnabled ? .blackTranslucent : .default
         let textColor = darkModeEnabled ? UIColor.darkText : UIColor.lightText
@@ -68,10 +65,9 @@ class BookmarkCollectionViewController: ViewController, UIScrollViewDelegate {
         navigationItem.backBarButtonItem?.tintColor = darkModeEnabled ? .white : .black
         collectionView.backgroundColor = darkModeEnabled ? .darkTint : .black5
         collectionView.reloadData()
-        
         let emptyIcon = darkModeEnabled ? "empty-bookmark-sunDark" : "empty-bookmark-sunLight"
         emptyBookmarkView = EmptyView(image: UIImage(named: emptyIcon)!, title: "No Bookmarks", description: "Running late? Save some articles for later")
-        
+        self.adapter.performUpdates(animated: true, completion: nil)
     }
 
     deinit {
@@ -107,6 +103,7 @@ extension BookmarkCollectionViewController: ListAdapterDataSource {
         } else if let obj = object as? PostObject, obj.postType == .video {
             return VideoSectionController()
         }
+        
         let bookmarkSC = BookmarkSearchSectionController(forBookmarks: true)
         bookmarkSC.delegate = self
         return bookmarkSC
