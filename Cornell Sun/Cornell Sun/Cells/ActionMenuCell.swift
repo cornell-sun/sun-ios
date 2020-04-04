@@ -115,6 +115,9 @@ final class MenuActionCell: UICollectionViewCell {
         if forBookmarks {
             let bookmarkImage = darkModeEnabled ? "bookmarkIconSelectedDark" : "bookmarkPressed"
             bookmarkButton.setImage(UIImage(named: bookmarkImage), for: .normal)
+        } else {
+            let bookmarkImage = darkModeEnabled ? "bookmarkIconDark" : "bookmarkIconLight"
+            bookmarkButton.setImage(UIImage(named: bookmarkImage), for: .normal)
         }
 
         timeStampLabel.snp.makeConstraints { make in
