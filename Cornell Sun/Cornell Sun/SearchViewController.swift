@@ -104,13 +104,13 @@ class SearchViewController: UIViewController, UITableViewDelegate {
         dimView.snp.makeConstraints { make in
             make.edges.equalTo(tableView)
         }
-
         // Set up the searchController delegate and the presentation view
         searchController.searchBar.delegate = self
         searchController.searchBar.showsScopeBar = false
         searchController.definesPresentationContext = true
-        searchController.dimsBackgroundDuringPresentation = false
+        searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search For Articles"
+        searchController.hidesNavigationBarDuringPresentation = false
         searchController.searchBar.setPositionAdjustment(UIOffset(horizontal: 10, vertical: 0), for: .search)
         if let textField = searchController.searchBar.subviews.first?.subviews.compactMap({$0 as? UITextField }).first {
             textField.subviews.first?.isHidden = true
@@ -119,9 +119,7 @@ class SearchViewController: UIViewController, UITableViewDelegate {
             textField.layer.masksToBounds = true
             textField.font = UIFont(name: "SanFranciscoDisplay-Medium", size: 14)
         }
-        
         NotificationCenter.default.addObserver(self, selector: #selector(updateColors), name: .darkModeToggle, object: nil)
-        
         updateColors()
     }
 
@@ -261,7 +259,7 @@ extension SearchViewController: UITableViewDataSource {
 extension SearchViewController: UISearchBarDelegate {
 
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        searchBar.setShowsCancelButton(searchBar.text == "", animated: false)
+        searchBar.setShowsCancelButton(searchBar.text == "", animated: true)
         if searchBar.text == "" {
             collectionView.isHidden = true
             tableView.isHidden = false
@@ -269,13 +267,14 @@ extension SearchViewController: UISearchBarDelegate {
     }
 
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        searchBar.setShowsCancelButton(searchBar.text == "", animated: false)
+        searchBar.setShowsCancelButton(searchBar.text == "", animated: true)
         UIView.animate(withDuration: 0.3) {
             self.dimView.alpha = 0.5
         }
     }
 
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.setShowsCancelButton(false, animated: true)
         dimView.alpha = 0.0
     }
 
@@ -293,7 +292,6 @@ extension SearchViewController: UISearchBarDelegate {
         currentQuery = query
         currentPage = 1
         endOfResults = false
-        searchBar.setShowsCancelButton(false, animated: true)
         dimView.alpha = 0.0
         searchData = []
         tableView.isHidden = true
