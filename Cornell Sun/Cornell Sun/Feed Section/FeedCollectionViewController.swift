@@ -92,7 +92,6 @@ class FeedCollectionViewController: ViewController, UIScrollViewDelegate {
     }
     
     func updateColors() {
-        
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         navigationItem.backBarButtonItem?.tintColor = darkModeEnabled ? .white : .black
         navigationController?.navigationBar.barTintColor = darkModeEnabled ? .darkTint : .white

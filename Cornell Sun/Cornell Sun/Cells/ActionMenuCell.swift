@@ -108,7 +108,6 @@ final class MenuActionCell: UICollectionViewCell {
         timeStampLabel.textColor = darkModeEnabled ? .white60 : .black60
         let shareImage = darkModeEnabled ? "shareIconDark" : "shareIconLight"
         shareImageView.setImage(UIImage(named: shareImage), for: .normal)
-        
     }
 
     func setupViews(forBookmarks: Bool) {
