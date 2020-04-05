@@ -127,15 +127,16 @@ PODS:
   - Motion (3.1.3):
     - Motion/Core (= 3.1.3)
   - Motion/Core (3.1.3)
-  - Moya (14.0.0):
-    - Moya/Core (= 14.0.0)
-  - Moya-ModelMapper (10.0.0):
-    - Moya-ModelMapper/Core (= 10.0.0)
-  - Moya-ModelMapper/Core (10.0.0):
+  - Moya (13.0.1):
+    - Moya/Core (= 13.0.1)
+  - Moya-ModelMapper (9.0.0):
+    - Moya-ModelMapper/Core (= 9.0.0)
+  - Moya-ModelMapper/Core (9.0.0):
     - ModelMapper (~> 10.0)
-    - Moya (~> 14.0)
-  - Moya/Core (14.0.0):
-    - Alamofire (~> 5.0)
+    - Moya (~> 13.0)
+  - Moya/Core (13.0.1):
+    - Alamofire (~> 4.1)
+    - Result (~> 4.1)
   - nanopb (0.3.9011):
     - nanopb/decode (= 0.3.9011)
     - nanopb/encode (= 0.3.9011)
@@ -207,6 +208,7 @@ SPEC REPOS:
     - OneSignal
     - PromisesObjC
     - Protobuf
+    - Result
     - SkeletonView
     - SnapKit
     - SwiftSoup
@@ -252,8 +254,8 @@ SPEC CHECKSUMS:
   Kingfisher: d342c8354c10c3d85a27d6d4c42c41285924b898
   ModelMapper: a8dbf2a2003bf626627b9fe7c9a22b3405a30404
   Motion: cf1e060e489f6661126374d5c60dbd2ed991605c
-  Moya: 5b45dacb75adb009f97fde91c204c1e565d31916
-  Moya-ModelMapper: e3a478500921e7299804dc1ac550f1ebf3228ade
+  Moya: f4a4b80ff2f8a4ffc208dfb31cd91636622fee6e
+  Moya-ModelMapper: 4948625af7fc5eef41ad9fdfe0c3517170b50960
   nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
   OneSignal: 09c9fe1e7a097af5fda94e00c1598c3c945552b9
   PromisesObjC: c119f3cd559f50b7ae681fa59dc1acd19173b7e6
