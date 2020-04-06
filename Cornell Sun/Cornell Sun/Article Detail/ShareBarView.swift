@@ -81,7 +81,7 @@ class ShareBarView: UIView {
         if darkModeEnabled {
             image = didSelectBookmark ? UIImage(named: "bookmarkIconSelectedDark") : UIImage(named: "bookmarkIconDark")
         } else {
-            image = didSelectBookmark ? UIImage(named: "bookmarkIconSelectedLight") : UIImage(named: "bookmarkIconLight")
+            image = didSelectBookmark ? UIImage(named: "bookmarkPressed") : UIImage(named: "bookmarkIconLight")
         }
         bookmarkButton.setImage(image, for: .normal)
     }

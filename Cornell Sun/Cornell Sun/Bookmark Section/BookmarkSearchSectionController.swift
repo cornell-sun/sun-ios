@@ -95,6 +95,7 @@ extension BookmarkSearchSectionController: BookmarkPressedDelegate, SharePressed
             cell.shareDelegate = self
             cell.post = entry
             cell.setupViews(forBookmarks: forBookmarks)
+            cell.setBookmarkImage(didSelectBookmark: entry.didSave)
             return cell
         }
     }
