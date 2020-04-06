@@ -36,8 +36,8 @@ func pressedBookmark(_ cell: MenuActionCell, entry: PostObject) {
     })
     
     if didBookmark {
-        assert(PostOffice.instance.store(object: entry) == true)
+        PostOffice.instance.store(object: entry)
     } else {
-        assert(PostOffice.instance.remove(object: entry) == true)
+        PostOffice.instance.remove(object: entry)
     }
 }
