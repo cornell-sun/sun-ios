@@ -21,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     var storyboard: UIStoryboard?
     var isLoadingFromDeeplink: Bool = false
-    let redirectScheme = "cornellsun"
+    let redirectScheme = "asdasdcornellsun"
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -152,25 +152,35 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
         isLoadingFromDeeplink = true
         guard let url = userActivity.webpageURL else { return false }
+        
+        var currentViewController: ViewController?
 
         // If app is already open
-        if let tabBarViewController = self.window?.rootViewController as? TabBarViewController, let currentViewController = tabBarViewController.currentViewController {
-            currentViewController.startAnimating()
+        if let tabBarViewController = self.window?.rootViewController as? TabBarViewController {
+            currentViewController = tabBarViewController.currentViewController
         }
+        
+        var isValidUrl = true
 
         API.request(target: .urlToID(url: url)) { response in
-            guard let tryID = ((try? response?.mapString()) as String??), let idString = tryID, let id = Int(idString), id != 0 else { return }
-            getDeeplinkedPostWithId(id, completion: { (posts, mainHeadlinePost, deeplinkedPost) in
-                guard let deeplinkedPost = deeplinkedPost else { return }
-                let tabBarController = TabBarViewController(with: posts, mainHeadlinePost: mainHeadlinePost)
-                self.window?.rootViewController = tabBarController
-                let articleViewController = ArticleStackViewController(post: deeplinkedPost)
-                if let navigationController = tabBarController.selectedViewController as? UINavigationController {
-                    navigationController.pushViewController(articleViewController, animated: true)
-                }
-            })
+            guard let tryID = ((try? response?.mapString()) as String??), let idString = tryID, let id = Int(idString), id != 0 else {
+                isValidUrl = false
+                return }
+            if isValidUrl {
+                currentViewController?.startAnimating()
+                getDeeplinkedPostWithId(id, completion: { (posts, mainHeadlinePost, deeplinkedPost) in
+                    guard let deeplinkedPost = deeplinkedPost else { return }
+                    let tabBarController = TabBarViewController(with: posts, mainHeadlinePost: mainHeadlinePost)
+                    self.window?.rootViewController = tabBarController
+                    let articleViewController = ArticleStackViewController(post: deeplinkedPost)
+                    currentViewController?.stopAnimating()
+                    if let navigationController = tabBarController.selectedViewController as? UINavigationController {
+                        navigationController.pushViewController(articleViewController, animated: true)
+                    }
+                })
+            }
         }
-        return true
+        return false//true
     }
 
     /**

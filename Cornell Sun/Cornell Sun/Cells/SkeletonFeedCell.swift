@@ -155,6 +155,9 @@ class SkeletonFeedCell: UIView {
             make.width.equalTo(frame.width)
             make.top.equalTo(secondAuthorLabel.snp.bottom).offset(topOffset)
         }
+        
+        SkeletonAppearance.default.tintColor = .clouds
+        SkeletonAppearance.default.gradient = SkeletonGradient(baseColor: .clouds)
     }
 
 }

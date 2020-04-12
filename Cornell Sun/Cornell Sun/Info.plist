@@ -19,9 +19,11 @@
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>cornellsun</string>
+				<string>cornell</string>
 			</array>
 		</dict>
 	</array>
