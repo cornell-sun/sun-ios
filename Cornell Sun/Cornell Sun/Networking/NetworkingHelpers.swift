@@ -130,7 +130,6 @@ func getPostFromID(_ id: Int, completion: @escaping (PostObject) -> Void) {
             fatalError()
         }
     }
-    fatalError()
 }
 
 func getIDFromURL(_ url: URL, completion: @escaping (Int?) -> Void) {
