@@ -56,6 +56,7 @@ class ViewController: UIViewController {
     func stopAnimating() {
         activityIndicatorView?.stopAnimating()
         activityIndicatorView?.removeFromSuperview()
+        activityIndicatorBackgroundView.removeFromSuperview()
     }
 
 }
