@@ -1,5 +1,6 @@
 # Uncomment the next line to define a global platform for your project
 # platform :ios, '10.0'
+source 'https://github.com/CocoaPods/Specs.git'
 
 target 'Cornell Sun' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
@@ -11,7 +12,7 @@ target 'Cornell Sun' do
   #pod 'PINRemoteImage'
   pod 'SnapKit'
   pod 'HTMLString'
-  pod 'Kingfisher'
+  pod 'Kingfisher', '~> 5.0'
   pod 'ImageSlideshow', :git=> 'https://github.com/cornell-sun/ImageSlideshow', :commit => 'd63205b98d5e3bed3e4e1273eb2ae3f4c7d66790'
   pod 'ImageSlideshow/Kingfisher', :git=> 'https://github.com/cornell-sun/ImageSlideshow', :commit => 'd63205b98d5e3bed3e4e1273eb2ae3f4c7d66790'
   pod 'SwiftSoup'

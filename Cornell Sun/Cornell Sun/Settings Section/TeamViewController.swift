@@ -56,7 +56,11 @@ class TeamViewController: UIViewController, UITableViewDataSource, UITableViewDe
                 TeamMember(nam: "Alexis Vinzons '19", titl: "Designer", home: "Mamaroneck, New York", liner: "The solution is in the framing of the problem", emoji: "💃"),
                 TeamMember(nam: "Aditya Dwivedi '20", titl: "Developer", home: "Lucknow, India", liner: "Waffles > Pancakes", emoji: "🐪"),
                 TeamMember(nam: "Theo Carrel '20", titl: "Developer", home: "New York, NY", liner: "It really do be like that sometimes", emoji: "🔥"),
-                TeamMember(nam: "Mike Fang '21", titl: "Developer", home: "San Jose, California", liner: "Do not fear mistakes. There are none", emoji: "🐺")]
+                TeamMember(nam: "Mike Fang '21", titl: "Developer", home: "San Jose, California", liner: "Do not fear mistakes. There are none", emoji: "🐺"),
+                TeamMember(nam: "Cameron Hamidi '21", titl: "Developer", home: "London, United Kingdom", liner: "Serenity now", emoji: "🍦"),
+                TeamMember(nam: "Connie Liu '23", titl: "Designer", home: "Ambler, Pennsylvania", liner: "We don't do things because they are easy but because they are hard", emoji: "🤠"),
+                TeamMember(nam: "SoYee Kim '22", titl: "Designer", home: "Seoul, South Korea", liner: "Smile while you still have teeth", emoji: "🌟")
+            ]
         }
         
         // Set up table view for settings
