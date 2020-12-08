@@ -60,7 +60,7 @@ extension HeroSectionController: BookmarkPressedDelegate, SharePressedDelegate {
             return CGSize(width: width, height: height + 10)
         case .taglineCell:
             let lineHeight: CGFloat = UIFont.photoCaption.lineHeight * 4.0
-            let height: CGFloat = entry.excerpt.removingHTMLEntities.height(withConstrainedWidth: width, font: .photoCaption)
+            let height: CGFloat = entry.excerpt.removingHTMLEntities().height(withConstrainedWidth: width, font: .photoCaption)
             let correctHeight = lineHeight <= height ? lineHeight : height
             return CGSize(width: width, height: correctHeight)
         case .actionMenuCell:

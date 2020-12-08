@@ -14,20 +14,9 @@ struct SectionMeta {
     let imageName: String
 }
 
-enum Sections {
-    case news(id: Int)
-    case opinion(id: Int)
-    case sports(id: Int)
-    case arts(id: Int)
-    case science(id: Int)
-    case dining(id: Int)
-    case multimedia(id: Int)
-    //case sunspots
-}
-
 class SectionViewController: UIViewController {
     var tableView: UITableView!
-    var sections: [Sections] = [.news(id: 2), .opinion(id: 3), .sports(id: 4), .arts(id: 5), .science(id: 6), .dining(id: 7), .multimedia(id: 9)]
+    var sections = Sections.allSections
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)

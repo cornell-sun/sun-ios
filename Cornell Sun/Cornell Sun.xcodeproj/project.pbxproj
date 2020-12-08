@@ -98,6 +98,13 @@
 		DCECA9901FBDFB7300BAB2EA /* BookmarkCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCECA98F1FBDFB7300BAB2EA /* BookmarkCell.swift */; };
 		DCFC88C41F86B50200A0D8A9 /* ActionMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFC88C31F86B50200A0D8A9 /* ActionMenuCell.swift */; };
 		DCFC88C61F86C03700A0D8A9 /* CommentObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFC88C51F86C03700A0D8A9 /* CommentObject.swift */; };
+		E699AEE9257F34050090A8FA /* OnboardingSubscribeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E699AEE8257F34050090A8FA /* OnboardingSubscribeViewController.swift */; };
+		E699AEF6257F36F40090A8FA /* OnboardingSubscribeInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E699AEF5257F36F40090A8FA /* OnboardingSubscribeInfoTableViewCell.swift */; };
+		E6BBD78F257DBC38002BE7C5 /* OnboardingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6BBD78E257DBC38002BE7C5 /* OnboardingTableViewCell.swift */; };
+		E6BBD794257DBE60002BE7C5 /* Sections.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6BBD793257DBE60002BE7C5 /* Sections.swift */; };
+		E6BBD799257DF3E0002BE7C5 /* OnboardingSectionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6BBD798257DF3E0002BE7C5 /* OnboardingSectionsViewController.swift */; };
+		E6CADD0C2569A03C00C0BE19 /* OnboardingPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6CADD0B2569A03C00C0BE19 /* OnboardingPageController.swift */; };
+		E6CADD112569A6E100C0BE19 /* OnboardingPageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6CADD102569A6E100C0BE19 /* OnboardingPageCollectionViewCell.swift */; };
 		FB2636A9E7C42C974338EBE0 /* Pods_SunNotificationServiceExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A95DF6C970C7F967623E60F /* Pods_SunNotificationServiceExtension.framework */; };
 /* End PBXBuildFile section */
 
@@ -240,6 +247,13 @@
 		DCECA98F1FBDFB7300BAB2EA /* BookmarkCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkCell.swift; sourceTree = "<group>"; };
 		DCFC88C31F86B50200A0D8A9 /* ActionMenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionMenuCell.swift; sourceTree = "<group>"; };
 		DCFC88C51F86C03700A0D8A9 /* CommentObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentObject.swift; sourceTree = "<group>"; };
+		E699AEE8257F34050090A8FA /* OnboardingSubscribeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingSubscribeViewController.swift; sourceTree = "<group>"; };
+		E699AEF5257F36F40090A8FA /* OnboardingSubscribeInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingSubscribeInfoTableViewCell.swift; sourceTree = "<group>"; };
+		E6BBD78E257DBC38002BE7C5 /* OnboardingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingTableViewCell.swift; sourceTree = "<group>"; };
+		E6BBD793257DBE60002BE7C5 /* Sections.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Sections.swift; path = "Cornell Sun/Sections.swift"; sourceTree = "<group>"; };
+		E6BBD798257DF3E0002BE7C5 /* OnboardingSectionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = OnboardingSectionsViewController.swift; path = "/Users/cameronhamidi/Documents/Daily Sun/sun-ios/Cornell Sun/Cornell Sun/Onboarding/OnboardingSectionsViewController.swift"; sourceTree = "<absolute>"; };
+		E6CADD0B2569A03C00C0BE19 /* OnboardingPageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = OnboardingPageController.swift; path = "/Users/cameronhamidi/Documents/Daily Sun/sun-ios/Cornell Sun/Cornell Sun/Onboarding/OnboardingPageController.swift"; sourceTree = "<absolute>"; };
+		E6CADD102569A6E100C0BE19 /* OnboardingPageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPageCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -273,6 +287,12 @@
 		0C0D2FE52060461000BC77E9 /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
+				E699AEF5257F36F40090A8FA /* OnboardingSubscribeInfoTableViewCell.swift */,
+				E699AEE8257F34050090A8FA /* OnboardingSubscribeViewController.swift */,
+				E6BBD78E257DBC38002BE7C5 /* OnboardingTableViewCell.swift */,
+				E6BBD798257DF3E0002BE7C5 /* OnboardingSectionsViewController.swift */,
+				E6CADD0B2569A03C00C0BE19 /* OnboardingPageController.swift */,
+				E6CADD102569A6E100C0BE19 /* OnboardingPageCollectionViewCell.swift */,
 				0C0D2FE62060462500BC77E9 /* OnboardingPageViewController.swift */,
 				0C0D2FE8206048BA00BC77E9 /* OnboardingViewController.swift */,
 			);
@@ -390,6 +410,7 @@
 				DC6561D21FBAC45900C5062D /* PhotoGalleryObject.swift */,
 				0CCD0BD6209D4A8B0042E17C /* SuggestedStoryObject.swift */,
 				0C49290420A14C4B004AF877 /* SettingObject.swift */,
+				E6BBD793257DBE60002BE7C5 /* Sections.swift */,
 			);
 			name = Models;
 			path = ..;
@@ -625,6 +646,7 @@
 			buildConfigurationList = 5006B00A1EA9625000F58549 /* Build configuration list for PBXNativeTarget "Cornell Sun" */;
 			buildPhases = (
 				C40712E69ADABD8664B67CEF /* [CP] Check Pods Manifest.lock */,
+				13559608DC328C86F671ADDB /* [CP] Prepare Artifacts */,
 				5006AFF41EA9625000F58549 /* Sources */,
 				5006AFF51EA9625000F58549 /* Frameworks */,
 				5006AFF61EA9625000F58549 /* Resources */,
@@ -782,6 +804,25 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		13559608DC328C86F671ADDB /* [CP] Prepare Artifacts */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Cornell Sun/Pods-Cornell Sun-artifacts.sh",
+				"${PODS_ROOT}/Google-Mobile-Ads-SDK/Frameworks/GoogleMobileAdsFramework-Current/GoogleMobileAds.xcframework",
+				"${PODS_ROOT}/GoogleUserMessagingPlatform/Frameworks/Release/UserMessagingPlatform.xcframework",
+			);
+			name = "[CP] Prepare Artifacts";
+			outputPaths = (
+				"${BUILT_PRODUCTS_DIR}/cocoapods-artifacts-${CONFIGURATION}.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Cornell Sun/Pods-Cornell Sun-artifacts.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		1E995BA56199CEC2C10F52C6 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -838,8 +879,15 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Cornell Sun/Pods-Cornell Sun-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/cocoapods-artifacts-${CONFIGURATION}.txt",
 				"${BUILT_PRODUCTS_DIR}/Alamofire-framework/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/FirebaseABTesting/FirebaseABTesting.framework",
+				"${BUILT_PRODUCTS_DIR}/FirebaseCore/FirebaseCore.framework",
+				"${BUILT_PRODUCTS_DIR}/FirebaseCoreDiagnostics/FirebaseCoreDiagnostics.framework",
+				"${BUILT_PRODUCTS_DIR}/FirebaseInstallations/FirebaseInstallations.framework",
+				"${BUILT_PRODUCTS_DIR}/FirebaseRemoteConfig/FirebaseRemoteConfig.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleDataTransport/GoogleDataTransport.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/HTMLString/HTMLString.framework",
@@ -863,7 +911,13 @@
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseABTesting.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseCore.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseCoreDiagnostics.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseInstallations.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseRemoteConfig.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleDataTransport.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HTMLString.framework",
@@ -954,6 +1008,7 @@
 				40B1D4962074306600C1306E /* SubscribeViewController.swift in Sources */,
 				40B1D4942073164800C1306E /* UIColor+1ptImage.swift in Sources */,
 				344B71B820A0FFB800DF8081 /* SearchCellNoImage.swift in Sources */,
+				E6BBD78F257DBC38002BE7C5 /* OnboardingTableViewCell.swift in Sources */,
 				40B1D4922073107E00C1306E /* ContactViewController.swift in Sources */,
 				DC0E7C4E208FFCBA00B1295F /* PostObjectHelpers.swift in Sources */,
 				DCA02C0A2027B18400CBE97F /* SearchSectionController.swift in Sources */,
@@ -966,12 +1021,14 @@
 				0CED4FAE1FAB523F0025EB91 /* UIFont+.swift in Sources */,
 				5006B24D1EADA37F00F58549 /* PostObject.swift in Sources */,
 				DC34DEF520321C6D0010DF9A /* SectionCollectionViewController.swift in Sources */,
+				E699AEE9257F34050090A8FA /* OnboardingSubscribeViewController.swift in Sources */,
 				DCB1BB4D20893B0D002C11E2 /* SkeletonFeedCell.swift in Sources */,
 				34A481782384DF1800FB168A /* ThemeCell.swift in Sources */,
 				4029318720C580D1000E1F4A /* TeamTableViewCell.swift in Sources */,
 				DCB717161FBA016400BE4D26 /* TaglineCell.swift in Sources */,
 				0C49290520A14C4B004AF877 /* SettingObject.swift in Sources */,
 				DC0A88401FBA84E700F2BCBB /* AuthorCell.swift in Sources */,
+				E6CADD112569A6E100C0BE19 /* OnboardingPageCollectionViewCell.swift in Sources */,
 				DCA75BA020B7B34C003A1D5C /* EmptyView.swift in Sources */,
 				0C15F1871FBDD433009724DB /* ArticleHeaderView.swift in Sources */,
 				DC79719F1F7B30540055A7B2 /* CategoryCell.swift in Sources */,
@@ -982,6 +1039,7 @@
 				0CBC2CEE1F5E3093003FBB38 /* TabBarViewController.swift in Sources */,
 				DC4324B920965D92004CAF23 /* ImageCollectionCell.swift in Sources */,
 				50A898121EAEC93B0099CFA9 /* AuthorObject.swift in Sources */,
+				E699AEF6257F36F40090A8FA /* OnboardingSubscribeInfoTableViewCell.swift in Sources */,
 				DC695D8B1FBB897600C6C62F /* PostOffice.swift in Sources */,
 				DC556AC520602E6900475B7D /* Constants.swift in Sources */,
 				0CCD0BD7209D4A8C0042E17C /* SuggestedStoryObject.swift in Sources */,
@@ -1017,6 +1075,9 @@
 				DCB717141FB9FE1700BE4D26 /* HeroSectionController.swift in Sources */,
 				DCECA9901FBDFB7300BAB2EA /* BookmarkCell.swift in Sources */,
 				4029318520C58036000E1F4A /* TeamViewController.swift in Sources */,
+				E6BBD794257DBE60002BE7C5 /* Sections.swift in Sources */,
+				E6CADD0C2569A03C00C0BE19 /* OnboardingPageController.swift in Sources */,
+				E6BBD799257DF3E0002BE7C5 /* OnboardingSectionsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
