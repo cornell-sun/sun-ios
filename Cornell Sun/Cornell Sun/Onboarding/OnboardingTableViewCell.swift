@@ -67,6 +67,7 @@ class OnboardingTableViewCell: UITableViewCell {
         let iconSize: CGFloat = 32
         let subscribeSwitchTrailing: CGFloat = -16
         let subtitleLabelTop: CGFloat = 3
+        let subtitleLabelTrailing: CGFloat = -10
         let titleLabelLeading: CGFloat = 13
         let titleLabelTop: CGFloat = 6
 
@@ -84,6 +85,7 @@ class OnboardingTableViewCell: UITableViewCell {
         subtitleLabel.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).offset(subtitleLabelTop)
             make.leading.equalTo(titleLabel.snp.leading)
+            make.trailing.equalTo(subscribeSwitch.snp.leading).offset(subtitleLabelTrailing)
         }
 
         subscribeSwitch.snp.makeConstraints { make in
