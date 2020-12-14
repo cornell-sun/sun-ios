@@ -98,12 +98,12 @@
 		DCECA9901FBDFB7300BAB2EA /* BookmarkCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCECA98F1FBDFB7300BAB2EA /* BookmarkCell.swift */; };
 		DCFC88C41F86B50200A0D8A9 /* ActionMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFC88C31F86B50200A0D8A9 /* ActionMenuCell.swift */; };
 		DCFC88C61F86C03700A0D8A9 /* CommentObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFC88C51F86C03700A0D8A9 /* CommentObject.swift */; };
+		E60483B02586F5880097A58E /* OnboardingSectionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6BBD798257DF3E0002BE7C5 /* OnboardingSectionsViewController.swift */; };
+		E60483B72586F5940097A58E /* OnboardingPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6CADD0B2569A03C00C0BE19 /* OnboardingPageController.swift */; };
 		E699AEE9257F34050090A8FA /* OnboardingSubscribeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E699AEE8257F34050090A8FA /* OnboardingSubscribeViewController.swift */; };
 		E699AEF6257F36F40090A8FA /* OnboardingSubscribeInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E699AEF5257F36F40090A8FA /* OnboardingSubscribeInfoTableViewCell.swift */; };
 		E6BBD78F257DBC38002BE7C5 /* OnboardingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6BBD78E257DBC38002BE7C5 /* OnboardingTableViewCell.swift */; };
 		E6BBD794257DBE60002BE7C5 /* Sections.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6BBD793257DBE60002BE7C5 /* Sections.swift */; };
-		E6BBD799257DF3E0002BE7C5 /* OnboardingSectionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6BBD798257DF3E0002BE7C5 /* OnboardingSectionsViewController.swift */; };
-		E6CADD0C2569A03C00C0BE19 /* OnboardingPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6CADD0B2569A03C00C0BE19 /* OnboardingPageController.swift */; };
 		E6CADD112569A6E100C0BE19 /* OnboardingPageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6CADD102569A6E100C0BE19 /* OnboardingPageCollectionViewCell.swift */; };
 		FB2636A9E7C42C974338EBE0 /* Pods_SunNotificationServiceExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A95DF6C970C7F967623E60F /* Pods_SunNotificationServiceExtension.framework */; };
 /* End PBXBuildFile section */
@@ -973,6 +973,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E60483B72586F5940097A58E /* OnboardingPageController.swift in Sources */,
+				E60483B02586F5880097A58E /* OnboardingSectionsViewController.swift in Sources */,
 				0CEA0F7A1F99454600607CC7 /* Date+.swift in Sources */,
 				DC446C321F5D05FF00D68688 /* ArticleSectionController.swift in Sources */,
 				5006AFFE1EA9625000F58549 /* ViewController.swift in Sources */,
@@ -1055,8 +1057,6 @@
 				DCECA9901FBDFB7300BAB2EA /* BookmarkCell.swift in Sources */,
 				4029318520C58036000E1F4A /* TeamViewController.swift in Sources */,
 				E6BBD794257DBE60002BE7C5 /* Sections.swift in Sources */,
-				E6CADD0C2569A03C00C0BE19 /* OnboardingPageController.swift in Sources */,
-				E6BBD799257DF3E0002BE7C5 /* OnboardingSectionsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
