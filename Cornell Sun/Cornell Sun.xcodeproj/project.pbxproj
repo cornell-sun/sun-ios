@@ -646,7 +646,6 @@
 			buildConfigurationList = 5006B00A1EA9625000F58549 /* Build configuration list for PBXNativeTarget "Cornell Sun" */;
 			buildPhases = (
 				C40712E69ADABD8664B67CEF /* [CP] Check Pods Manifest.lock */,
-				13559608DC328C86F671ADDB /* [CP] Prepare Artifacts */,
 				5006AFF41EA9625000F58549 /* Sources */,
 				5006AFF51EA9625000F58549 /* Frameworks */,
 				5006AFF61EA9625000F58549 /* Resources */,
@@ -804,25 +803,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		13559608DC328C86F671ADDB /* [CP] Prepare Artifacts */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Cornell Sun/Pods-Cornell Sun-artifacts.sh",
-				"${PODS_ROOT}/Google-Mobile-Ads-SDK/Frameworks/GoogleMobileAdsFramework-Current/GoogleMobileAds.xcframework",
-				"${PODS_ROOT}/GoogleUserMessagingPlatform/Frameworks/Release/UserMessagingPlatform.xcframework",
-			);
-			name = "[CP] Prepare Artifacts";
-			outputPaths = (
-				"${BUILT_PRODUCTS_DIR}/cocoapods-artifacts-${CONFIGURATION}.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Cornell Sun/Pods-Cornell Sun-artifacts.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		1E995BA56199CEC2C10F52C6 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -879,7 +859,6 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Cornell Sun/Pods-Cornell Sun-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/cocoapods-artifacts-${CONFIGURATION}.txt",
 				"${BUILT_PRODUCTS_DIR}/Alamofire-framework/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/FirebaseABTesting/FirebaseABTesting.framework",
 				"${BUILT_PRODUCTS_DIR}/FirebaseCore/FirebaseCore.framework",

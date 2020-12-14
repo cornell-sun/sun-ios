@@ -21,7 +21,6 @@ target 'Cornell Sun' do
   pod 'SkeletonView', :git=> 'https://github.com/cornell-sun/SkeletonView'
   pod 'UICircularProgressRing'
   pod 'Motion'
-  pod 'Crashlytics'
   pod 'Firebase/Analytics'
   pod 'Firebase/Performance'
   pod 'Firebase/AdMob'
