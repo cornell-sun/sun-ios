@@ -34,6 +34,7 @@ class OnboardingSubscribeInfoTableViewCell: UITableViewCell {
 
         backgroundColor = .clear
         contentView.backgroundColor = .clear
+        selectionStyle = .none
 
         textField.font = .systemFont(ofSize: 18)
         textField.textColor = .white

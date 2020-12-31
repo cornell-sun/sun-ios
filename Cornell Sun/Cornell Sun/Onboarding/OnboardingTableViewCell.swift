@@ -53,9 +53,13 @@ class OnboardingTableViewCell: UITableViewCell {
         contentView.addSubview(tintView)
 
         subscribeSwitch.onTintColor = .brick
+        subscribeSwitch.layer.borderColor = UIColor.white.cgColor
+        subscribeSwitch.layer.borderWidth = 1
         contentView.addSubview(subscribeSwitch)
 
         setConstraints()
+
+        subscribeSwitch.layer.cornerRadius = subscribeSwitch.bounds.height / 2.0
     }
 
     required init?(coder: NSCoder) {
@@ -114,31 +118,31 @@ class OnboardingTableViewCell: UITableViewCell {
         case .news:
             titleLabel.text = "News"
             subtitleLabel.text = "Subtitle"
-            imageName = "news-sectionLight"
+            imageName = "news-sectionWhite"
         case .opinion:
             titleLabel.text = "Opinions"
             subtitleLabel.text = "Subtitle"
-            imageName = "opinionLight"
+            imageName = "opinionWhite"
         case .sports:
             titleLabel.text = "Sports"
             subtitleLabel.text = "Subtitle"
-            imageName = "sportsLight"
+            imageName = "sportsWhite"
         case .arts:
             titleLabel.text = "Arts & Entertainment"
             subtitleLabel.text = "Subtitle"
-            imageName = "artsLight"
+            imageName = "artsWhite"
         case .science:
             titleLabel.text = "Science"
             subtitleLabel.text = "Subtitle"
-            imageName = "scienceLight"
+            imageName = "scienceWhite"
         case .dining:
             titleLabel.text = "Dining"
             subtitleLabel.text = "Subtitle"
-            imageName = "diningLight"
+            imageName = "diningWhite"
         case .multimedia:
             titleLabel.text = "Multimedia"
             subtitleLabel.text = "Subtitle"
-            imageName = "multimediaLight"
+            imageName = "multimediaWhite"
         }
         icon.image = UIImage(named: imageName)
         separatorBottom.isHidden = !isLastRow

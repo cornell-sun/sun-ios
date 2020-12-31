@@ -59,8 +59,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         OneSignal.inFocusDisplayType = OSNotificationDisplayType.notification
 
         syncNotifications()
-        
-        
+
         if UserDefaults.standard.object(forKey: "darkModeEnabled") == nil {
             UserDefaults.standard.set(false, forKey: "darkModeEnabled")
             darkModeEnabled = false
@@ -81,6 +80,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if !UserDefaults.standard.bool(forKey: hasOnboardedKey) {
             let onboardingViewController = OnboardingPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
+            if #available(iOS 13.0, *) {
+                    onboardingViewController.isModalInPresentation = true
+            }
             self.window?.rootViewController?.present(onboardingViewController, animated: false, completion: nil)
         } else {
             prepareInitialPosts { posts, mainHeadlinePost in
