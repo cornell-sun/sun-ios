@@ -31,14 +31,18 @@ class OnboardingSubscribeViewController: UIViewController {
         titleLabel.numberOfLines = 0
         titleLabel.textColor = .white
         titleLabel.textAlignment = .left
-        titleLabel.font = .systemFont(ofSize: 27, weight: .bold)
+        titleLabel.font = UIScreen.main.bounds.width <= 350
+            ? .systemFont(ofSize: 21, weight: .bold)
+            : .systemFont(ofSize: 27, weight: .bold)
         titleLabel.text = "Subscribe to Our Daily Newsletters"
         view.addSubview(titleLabel)
 
         descriptionLabel.textColor = .white
         descriptionLabel.textAlignment = .left
         descriptionLabel.numberOfLines = 0
-        descriptionLabel.font = .systemFont(ofSize: 16, weight: .medium)
+        descriptionLabel.font = UIScreen.main.bounds.width <= 350
+            ? .systemFont(ofSize: 14, weight: .medium)
+            : .systemFont(ofSize: 16, weight: .medium)
         descriptionLabel.text = "Get headlines delivered to your inbox everyday. You’ll never miss a moment."
         view.addSubview(descriptionLabel)
 
@@ -47,6 +51,7 @@ class OnboardingSubscribeViewController: UIViewController {
         infoTableView.dataSource = self
         infoTableView.delegate = self
         infoTableView.separatorStyle = .none
+        infoTableView.isScrollEnabled = false
         view.addSubview(infoTableView)
 
         subscribeButton.backgroundColor = .white
@@ -102,12 +107,22 @@ class OnboardingSubscribeViewController: UIViewController {
         let descriptionTopOffset: CGFloat = 10
         let notNowButtonBottom: CGFloat = 10
         let padding: CGFloat = 50
-        let subscribeButtonBottom: CGFloat = -86
-        let subscribeButtonHeight: CGFloat = 54
-        let subscribeButtonPadding: CGFloat = 43
-        let tableViewBottom: CGFloat = 179
+        let subscribeButtonBottom: CGFloat = UIScreen.main.bounds.width <= 350
+            ? -86
+            : -86
+        let subscribeButtonHeight: CGFloat = UIScreen.main.bounds.width <= 350
+            ? 44
+            : 54
+        let subscribeButtonPadding: CGFloat = UIScreen.main.bounds.width <= 350
+            ? 33
+            : 43
+        let tableViewBottom: CGFloat = UIScreen.main.bounds.width <= 350
+            ? 0
+            : -79
         let tableViewPadding: CGFloat = 42
-        let tableViewTop: CGFloat = 21
+        let tableViewTop: CGFloat = UIScreen.main.bounds.width <= 350
+            ? 5
+            : 21
         let titleLabelTop: CGFloat = 45
 
         titleLabel.snp.makeConstraints { make in

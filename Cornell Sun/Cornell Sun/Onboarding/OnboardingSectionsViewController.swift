@@ -31,14 +31,18 @@ class OnboardingSectionsViewController: UIViewController {
         titleLabel.numberOfLines = 0
         titleLabel.textColor = .white
         titleLabel.textAlignment = .left
-        titleLabel.font = .systemFont(ofSize: 27, weight: .bold)
+        titleLabel.font = UIScreen.main.bounds.width <= 350
+            ? .systemFont(ofSize: 21, weight: .bold)
+            : .systemFont(ofSize: 27, weight: .bold)
         titleLabel.text = "Stay up to date with Breaking News"
         view.addSubview(titleLabel)
 
         descriptionLabel.textColor = .white
         descriptionLabel.textAlignment = .left
         descriptionLabel.numberOfLines = 0
-        descriptionLabel.font = .systemFont(ofSize: 16, weight: .medium)
+        descriptionLabel.font = UIScreen.main.bounds.width <= 350
+            ? .systemFont(ofSize: 14, weight: .medium)
+            : .systemFont(ofSize: 16, weight: .medium)
         descriptionLabel.text = "Choose topics that interest you and get relevant updates"
         view.addSubview(descriptionLabel)
 
@@ -66,12 +70,22 @@ class OnboardingSectionsViewController: UIViewController {
 
     func setupConstraints() {
         let descriptionTopOffset: CGFloat = 10
-        let nextButtonBottom: CGFloat = -86
-        let nextButtonHeight: CGFloat = 54
-        let nextButtonPadding: CGFloat = 43
+        let nextButtonBottom: CGFloat = UIScreen.main.bounds.width <= 350
+            ? -86
+            : -86
+        let nextButtonHeight: CGFloat = UIScreen.main.bounds.width <= 350
+            ? 44
+            : 54
+        let nextButtonPadding: CGFloat = UIScreen.main.bounds.width <= 350
+            ? 33
+            : 43
         let padding: CGFloat = 50
-        let tableViewBottom: CGFloat = -73
-        let tableViewTop: CGFloat = 50
+        let tableViewBottom: CGFloat = UIScreen.main.bounds.width <= 350
+            ? -33
+            : -53
+        let tableViewTop: CGFloat = UIScreen.main.bounds.width <= 350
+            ? 30
+            : 40
         let titleLabelTop: CGFloat = 45
 
         titleLabel.snp.makeConstraints { make in

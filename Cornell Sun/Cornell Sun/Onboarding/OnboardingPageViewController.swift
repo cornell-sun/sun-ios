@@ -22,7 +22,7 @@ class OnboardingPageViewController: UIPageViewController {
     let nextButtonBottomInset: CGFloat = 20
 
     let onboardingBottomOffset: CGFloat = -22
-    let onboardingPageController = OnboardingPageController(3)
+    let onboardingPageIndicator = OnboardingPageControllerIndicator(3)
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
@@ -31,12 +31,13 @@ class OnboardingPageViewController: UIPageViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        let welcomeVc = OnboardingViewController(type: .welcome)
         let sectionsVc = OnboardingSectionsViewController()
         sectionsVc.delegate = self
         let subscribeVc = OnboardingSubscribeViewController()
         subscribeVc.delegate = self
 
-        pages = [OnboardingViewController(type: .welcome), sectionsVc, subscribeVc]
+        pages = [welcomeVc, sectionsVc, subscribeVc]
         setViewControllers([pages[0]], direction: .forward, animated: true, completion: nil)
         delegate = self
         dataSource = self
@@ -65,11 +66,11 @@ class OnboardingPageViewController: UIPageViewController {
             make.center.equalToSuperview()
         }
 
-        view.addSubview(onboardingPageController)
-        onboardingPageController.snp.makeConstraints { make in
+        view.addSubview(onboardingPageIndicator)
+        onboardingPageIndicator.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.width.equalTo(onboardingPageController.getWidth())
-            make.height.equalTo(onboardingPageController.cellHeight)
+            make.width.equalTo(onboardingPageIndicator.getWidth())
+            make.height.equalTo(onboardingPageIndicator.cellHeight)
             make.bottom.equalToSuperview().offset(onboardingBottomOffset)
         }
     }
@@ -81,7 +82,7 @@ class OnboardingPageViewController: UIPageViewController {
             } else {
                 setViewControllers([pages[index + 1]], direction: .forward, animated: true, completion: nil)
                 pageControl.currentPage = index + 1
-                onboardingPageController.selectCell(at: pageControl.currentPage)
+                onboardingPageIndicator.selectCell(at: pageControl.currentPage)
             }
         }
     }
@@ -127,7 +128,7 @@ extension OnboardingPageViewController: UIPageViewControllerDelegate, UIPageView
     func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
         if let viewControllers = pageViewController.viewControllers, let index = pages.firstIndex(of: viewControllers[0]) {
             pageControl.currentPage = index
-            onboardingPageController.selectCell(at: index)
+            onboardingPageIndicator.selectCell(at: index)
         }
     }
 

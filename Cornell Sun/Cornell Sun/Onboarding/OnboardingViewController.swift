@@ -88,13 +88,11 @@ class OnboardingViewController: UIViewController {
         onboardingTitleLabel.numberOfLines = 0
         onboardingTitleLabel.textColor = .white
         onboardingTitleLabel.textAlignment = .left
-        onboardingTitleLabel.font = .systemFont(ofSize: 27, weight: .bold)
 
         onboardingDescriptionLabel = UILabel()
         onboardingDescriptionLabel.textColor = .white
         onboardingDescriptionLabel.textAlignment = .left
         onboardingDescriptionLabel.numberOfLines = 0
-        onboardingDescriptionLabel.font = .systemFont(ofSize: 16, weight: .medium)
 
         onboardingImageView = UIImageView()
         onboardingImageView.clipsToBounds = true
@@ -138,8 +136,12 @@ class OnboardingViewController: UIViewController {
         onboardingDescriptionLabel.text = onboardingType.descriptionString
         if UIScreen.main.bounds.width <= 350 {
             onboardingImageView.image = onboardingType.smallImage
+            onboardingTitleLabel.font = UIFont.systemFont(ofSize: 21, weight: .bold)
+            onboardingDescriptionLabel.font = .systemFont(ofSize: 14, weight: .medium)
         } else {
             onboardingImageView.image = onboardingType.image
+            onboardingTitleLabel.font = .systemFont(ofSize: 27, weight: .bold)
+            onboardingDescriptionLabel.font = .systemFont(ofSize: 16, weight: .medium)
         }
     }
 

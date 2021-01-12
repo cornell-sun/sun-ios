@@ -1,5 +1,5 @@
 //
-//  OnboardingPageController.swift
+//  OnboardingPageControllerIndicator.swift
 //  Cornell Sun
 //
 //  Created by Cameron Hamidi on 11/21/20.
@@ -9,7 +9,7 @@
 import SnapKit
 import UIKit
 
-class OnboardingPageController: UIView {
+class OnboardingPageControllerIndicator: UIView {
 
     let cellHeight: CGFloat = 5
     let cellIdentifier = "onboardingCellIdentifier"
@@ -64,7 +64,7 @@ class OnboardingPageController: UIView {
 
 }
 
-extension OnboardingPageController: UICollectionViewDataSource {
+extension OnboardingPageControllerIndicator: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return cellCount
@@ -79,7 +79,7 @@ extension OnboardingPageController: UICollectionViewDataSource {
 
 }
 
-extension OnboardingPageController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+extension OnboardingPageControllerIndicator: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: cellWidth, height: cellHeight)
