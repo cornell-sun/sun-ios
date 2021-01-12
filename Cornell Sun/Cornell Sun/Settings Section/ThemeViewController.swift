@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseAnalytics
 
 enum ThemeType: String {
     case darkMode = "darkModeEnabled"
@@ -62,7 +63,6 @@ class ThemeViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func updateColors() {
-        
         view.backgroundColor = darkModeEnabled ? .darkCell : .white
         navigationController?.navigationBar.barTintColor = darkModeEnabled ? .darkTint : .white
         navigationController?.navigationBar.barStyle = darkModeEnabled ? .blackTranslucent : .default
@@ -87,7 +87,6 @@ class ThemeViewController: UIViewController, UITableViewDelegate, UITableViewDat
             cell.selectionStyle = .none
             cell.icon = themesDisplay[indexPath.row].1
             cell.setupCell(icon: themesDisplay[indexPath.row].1, labelText: themes[indexPath.row].0, descriptionText: themesDisplay[indexPath.row].0, isToggled: isToggled)
-//            cell.backgroundColor = .black
             return cell
         } else {
             return UITableViewCell()
@@ -102,7 +101,6 @@ class ThemeViewController: UIViewController, UITableViewDelegate, UITableViewDat
 // MARK: - NotificationTableViewCellDelegate
 extension ThemeViewController: ThemesCellDelegate {
     func switchToggled(for cell: ThemeCell, isEnabled: Bool) {
-        // TO DO
         guard let indexPath = tableView.indexPath(for: cell) else { return }
         let themeType = themes[indexPath.row].1
         
@@ -117,5 +115,6 @@ extension ThemeViewController: ThemesCellDelegate {
         darkModeEnabled = isEnabled
         updateColors()
         NotificationCenter.default.post(.init(name: .darkModeToggle))
+        Analytics.logEvent("Dark_Mode_Toggled", parameters: nil)
     }
 }

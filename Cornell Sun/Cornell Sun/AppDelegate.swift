@@ -11,8 +11,6 @@ import Kingfisher
 import GoogleMobileAds
 import OneSignal
 import IQKeyboardManagerSwift
-import Fabric
-import Crashlytics
 import Firebase
 
 @UIApplicationMain
@@ -26,7 +24,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         IQKeyboardManager.shared.enable = true
-
         // Set all navigation bar attributes
         UINavigationBar.appearance().backgroundColor = .white
         UINavigationBar.appearance().tintColor = .black70
@@ -101,33 +98,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         // Init Firebase SDK
         FirebaseApp.configure()
-
+        
         // Init Google Mobile Ads SDK
         GADMobileAds.sharedInstance().start(completionHandler: nil)
 
-        // Set up Crashlytics
-        Crashlytics.start(withAPIKey: fabricAPIKey())
-
         return true
-    }
-
-    func fabricAPIKey() -> String {
-
-        var format = PropertyListSerialization.PropertyListFormat.xml
-        var key: [String: AnyObject] = [:]
-        let keyPath: String? = Bundle.main.path(forResource: "Keys", ofType: "plist")!
-        let keyXML = FileManager.default.contents(atPath: keyPath!)
-
-        do {
-            //swiftlint:disable:next force_cast
-            key = try PropertyListSerialization.propertyList(from: keyXML!, options: .mutableContainersAndLeaves, format: &format) as! [String: AnyObject]
-        } catch {
-            print("Error reading plist: \(error), format: \(format)")
-        }
-
-        //swiftlint:disable:next force_cast
-        return key["APIKey"] as! String
-
     }
 
     func syncNotifications() {

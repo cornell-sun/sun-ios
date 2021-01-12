@@ -22,6 +22,7 @@ target 'Cornell Sun' do
   pod 'UICircularProgressRing'
   pod 'Motion'
   pod 'Firebase/Analytics'
+  pod 'Firebase/Crashlytics'
   pod 'Firebase/Performance'
   pod 'Firebase/AdMob'
   pod 'Google-Mobile-Ads-SDK'

@@ -29,18 +29,6 @@
 	</array>
 	<key>CFBundleVersion</key>
 	<string>2</string>
-	<key>Fabric</key>
-	<dict>
-		<key>Kits</key>
-		<array>
-			<dict>
-				<key>KitInfo</key>
-				<dict/>
-				<key>KitName</key>
-				<string>Crashlytics</string>
-			</dict>
-		</array>
-	</dict>
 	<key>GADApplicationIdentifier</key>
 	<string>ca-app-pub-1670191753042923~8362081263</string>
 	<key>LSRequiresIPhoneOS</key>
