@@ -8,7 +8,7 @@
 
 import UIKit
 import IGListKit
-import Crashlytics
+import FirebaseAnalytics
 
 class SearchViewController: UIViewController, UITableViewDelegate {
 
@@ -252,7 +252,7 @@ extension SearchViewController: UITableViewDataSource {
         let topic = trendingTopics[indexPath.row]
         searchController.searchBar.text = topic
         searchBarSearchButtonClicked(searchController.searchBar)
-        Answers.logCustomEvent(withName: "Trending Selected", customAttributes: ["Topic": topic])
+        Analytics.logEvent("Trending_Selected", parameters: ["Topic": topic])
     }
 }
 
@@ -309,9 +309,7 @@ extension SearchViewController: UISearchBarDelegate {
                 }
             }
         }
-        
-        //Set up search analytics
-        Answers.logSearch(withQuery: "Search", customAttributes: ["Searched For": query])
+        Analytics.logEvent("Search", parameters: ["Search_For": query])
     }
 }
 extension SearchViewController: TabBarViewControllerDelegate {

@@ -99,4 +99,22 @@ extension UIColor {
         return UIColor(red: 42/255, green: 42/255, blue: 55/255, alpha: 1.0)
     }
 
+
+    // New Onboarding Colors
+    @nonobjc class var onboardingGradientTop: UIColor {
+        return UIColor(red: 198.0/255.0, green: 94.0/255.0, blue: 94.0/255.0, alpha: 1.0)
+    }
+
+    @nonobjc class var onboardingGradientBottom: UIColor {
+        return UIColor(red: 108.0/255.0, green: 14.0/255.0, blue: 14.0/255.0, alpha: 1.0)
+    }
+
+    @nonobjc class var onboardingPageControllerDeselected: UIColor {
+        return UIColor(red: 196.0/255.0, green: 196.0/255.0, blue: 196.0/255.0, alpha: 1.0)
+    }
+
+    @nonobjc class var onboardingTableViewLabel: UIColor {
+        return UIColor(red: 242.0/255.0, green: 242.0/255.0, blue: 242.0/255.0, alpha: 1.0)
+    }
+
 }

@@ -12,7 +12,6 @@ import OneSignal
 class OnboardingPageViewController: UIPageViewController {
 
     var pageControl: UIPageControl!
-    var nextButton: Button!
     var loadingIndicator: UIActivityIndicatorView!
     var pages = [UIViewController]()
 
@@ -22,13 +21,23 @@ class OnboardingPageViewController: UIPageViewController {
     let nextButtonInset: CGFloat = 30
     let nextButtonBottomInset: CGFloat = 20
 
+    let onboardingBottomOffset: CGFloat = -22
+    let onboardingPageIndicator = OnboardingPageControllerIndicator(3)
+
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        pages = [OnboardingViewController(type: .welcome), OnboardingViewController(type: .notifications)]
+
+        let welcomeVc = OnboardingViewController(type: .welcome)
+        let sectionsVc = OnboardingSectionsViewController()
+        sectionsVc.delegate = self
+        let subscribeVc = OnboardingSubscribeViewController()
+        subscribeVc.delegate = self
+
+        pages = [welcomeVc, sectionsVc, subscribeVc]
         setViewControllers([pages[0]], direction: .forward, animated: true, completion: nil)
         delegate = self
         dataSource = self
@@ -50,31 +59,30 @@ class OnboardingPageViewController: UIPageViewController {
             make.bottom.equalTo(bottomArea).inset(pageControlBottomInset)
         }
 
-        nextButton = Button()
-        nextButton.setImage(#imageLiteral(resourceName: "arrowThinCopy"), for: .normal)
-        nextButton.addTarget(nil, action: #selector(pageNextTapped(_:)), for: .touchUpInside)
-        view.addSubview(nextButton)
-        nextButton.snp.makeConstraints { make in
-            make.trailing.equalToSuperview().inset(nextButtonInset)
-            make.size.equalTo(nextButtonSize)
-            make.bottom.equalTo(bottomArea).inset(nextButtonBottomInset)
-        }
-
         loadingIndicator = UIActivityIndicatorView()
         loadingIndicator.style = .whiteLarge
         view.addSubview(loadingIndicator)
         loadingIndicator.snp.makeConstraints { make in
             make.center.equalToSuperview()
         }
+
+        view.addSubview(onboardingPageIndicator)
+        onboardingPageIndicator.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.width.equalTo(onboardingPageIndicator.getWidth())
+            make.height.equalTo(onboardingPageIndicator.cellHeight)
+            make.bottom.equalToSuperview().offset(onboardingBottomOffset)
+        }
     }
 
-    @objc func pageNextTapped(_ sender: UIButton) {
+    @objc func pageNextTapped(_ sender: UIButton? = nil) {
         if let viewController = viewControllers?.first, let index = pages.firstIndex(of: viewController) {
-            if index == 1 {
+            if index == pages.count - 1 {
                 dismissOnboarding()
             } else {
                 setViewControllers([pages[index + 1]], direction: .forward, animated: true, completion: nil)
                 pageControl.currentPage = index + 1
+                onboardingPageIndicator.selectCell(at: pageControl.currentPage)
             }
         }
     }
@@ -120,6 +128,7 @@ extension OnboardingPageViewController: UIPageViewControllerDelegate, UIPageView
     func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
         if let viewControllers = pageViewController.viewControllers, let index = pages.firstIndex(of: viewControllers[0]) {
             pageControl.currentPage = index
+            onboardingPageIndicator.selectCell(at: index)
         }
     }
 
