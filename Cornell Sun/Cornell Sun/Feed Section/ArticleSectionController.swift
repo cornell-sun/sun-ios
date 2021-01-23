@@ -21,7 +21,6 @@ enum cellType: Int {
     case authorCell = 2
     case imageCell = 3
     case actionMenuCell = 4
-
 }
 
 class ArticleSectionController: ListSectionController {

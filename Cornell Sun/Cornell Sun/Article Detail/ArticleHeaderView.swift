@@ -60,7 +60,7 @@ class ArticleHeaderView: UIView {
         super.init(frame: frame)
 
         categoryLabel = UILabel(frame: .zero)
-        categoryLabel.textColor = .black60
+        categoryLabel.textColor = darkModeEnabled ? .white90 : .black60
         categoryLabel.font = .secondaryHeader
         addSubview(categoryLabel)
         categoryLabel.snp.makeConstraints { make in
@@ -70,7 +70,7 @@ class ArticleHeaderView: UIView {
         }
 
         titleLabel = UILabel(frame: .zero)
-        titleLabel.textColor = .black90
+        titleLabel.textColor = darkModeEnabled ? .white90 : .black90
         titleLabel.font = .articleTitle
         titleLabel.numberOfLines = 6
         titleLabel.lineBreakMode = .byTruncatingTail
@@ -78,13 +78,13 @@ class ArticleHeaderView: UIView {
 
         captionLabel = UILabel(frame: .zero)
         captionLabel.font = .photoCaption
-        captionLabel.textColor = .black90
+        captionLabel.textColor = darkModeEnabled ? .white90 : .black90
         captionLabel.numberOfLines = 0
         addSubview(captionLabel)
 
         creditsLabel = UILabel()
         creditsLabel.font = .photoCaptionCredit
-        creditsLabel.textColor = .black40
+        creditsLabel.textColor = darkModeEnabled ? .white40 : .black40
         addSubview(creditsLabel)
         creditsLabel.snp.makeConstraints { make in
             make.top.equalTo(captionLabel.snp.bottom)
@@ -115,7 +115,7 @@ class ArticleHeaderView: UIView {
         }
 
         timeStampLabel = UILabel(frame: .zero)
-        timeStampLabel.textColor = .black40
+        timeStampLabel.textColor = darkModeEnabled ? .white40 : .black40
         timeStampLabel.font = .subSecondaryHeader
         addSubview(timeStampLabel)
         timeStampLabel.snp.makeConstraints { make in

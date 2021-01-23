@@ -8,12 +8,12 @@
 
 import UIKit
 import IGListKit
-import Crashlytics
+import FirebaseAnalytics
 
 class SearchViewController: UIViewController, UITableViewDelegate {
 
     var tableView: UITableView!
-    let emptySearchView = EmptyView(image: #imageLiteral(resourceName: "empty-search-sun"), title: "No Results", description: "Check your spelling?")
+    var emptySearchView: EmptyView!
     let searchController = UISearchController(searchResultsController: nil)
     let dimView = UIView()
     var currentQuery = ""
@@ -23,14 +23,13 @@ class SearchViewController: UIViewController, UITableViewDelegate {
     var endOfResults = false
     var loading = false
     var trendingTopics: [String] = []
-    let TRENDINGLABEL_LEADING: CGFloat = 18.0
-    let TRENDINGLABEL_TOP_BOTTOM_TRAILING: CGFloat = 8
+    let TRENDINGLABEL_LEADING: CGFloat = 7.0
+    let TRENDINGLABEL_TOP_BOTTOM_TRAILING: CGFloat = 9.0
     let DISTANCE: CGFloat = 300.0
-
+    
     let collectionView: UICollectionView = {
         let view = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
         view.alwaysBounceVertical = true
-        view.backgroundColor = .white
         return view
     }()
 
@@ -56,7 +55,7 @@ class SearchViewController: UIViewController, UITableViewDelegate {
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        title = "Search"
+        navigationItem.title = "Search"
         if #available(iOS 11, *) {
             navigationItem.searchController = searchController
             navigationItem.hidesSearchBarWhenScrolling = false
@@ -105,12 +104,13 @@ class SearchViewController: UIViewController, UITableViewDelegate {
         dimView.snp.makeConstraints { make in
             make.edges.equalTo(tableView)
         }
-
         // Set up the searchController delegate and the presentation view
         searchController.searchBar.delegate = self
+        searchController.searchBar.showsScopeBar = false
         searchController.definesPresentationContext = true
-        searchController.dimsBackgroundDuringPresentation = false
+        searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search For Articles"
+        searchController.hidesNavigationBarDuringPresentation = false
         searchController.searchBar.setPositionAdjustment(UIOffset(horizontal: 10, vertical: 0), for: .search)
         if let textField = searchController.searchBar.subviews.first?.subviews.compactMap({$0 as? UITextField }).first {
             textField.subviews.first?.isHidden = true
@@ -119,12 +119,32 @@ class SearchViewController: UIViewController, UITableViewDelegate {
             textField.layer.masksToBounds = true
             textField.font = UIFont(name: "SanFranciscoDisplay-Medium", size: 14)
         }
-        
+        NotificationCenter.default.addObserver(self, selector: #selector(updateColors), name: .darkModeToggle, object: nil)
+        updateColors()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    @objc func updateColors() {
+        navigationController?.navigationBar.barTintColor = darkModeEnabled ? .darkTint : .white
+        navigationController?.navigationBar.barStyle = darkModeEnabled ? .blackTranslucent : .default
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        navigationItem.backBarButtonItem?.tintColor = darkModeEnabled ? .white : .black
+        let titleColor = darkModeEnabled ? UIColor.darkText : UIColor.lightText
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: titleColor]
+        
+        searchController.searchBar.backgroundColor = darkModeEnabled ? .darkTint : .white
+        searchController.searchBar.barStyle = darkModeEnabled ? .blackTranslucent : .default
+        searchController.searchBar.tintColor = darkModeEnabled ? .darkText : .blue
+        tableView.backgroundColor = darkModeEnabled ? .darkCell : .white
+        tableView.reloadData()
+        collectionView.backgroundColor = darkModeEnabled ? .darkTint : .white
+        collectionView.reloadData()
+        let emptyImage = darkModeEnabled ? "empty-search-sunDark" : "empty-search-sunLight"
+        emptySearchView = EmptyView(image: UIImage(named: emptyImage)!, title: "No Results", description: "Check your spelling?")
     }
 }
 
@@ -187,17 +207,20 @@ extension SearchViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = UITableViewHeaderFooterView()
-        headerView.contentView.backgroundColor = .white
+        
         let trendingLabel = UILabel()
         trendingLabel.text = "Trending Topics"
         trendingLabel.font = .headerTitle
         headerView.contentView.addSubview(trendingLabel)
-
+        
         trendingLabel.snp.makeConstraints { make in
             make.leading.equalToSuperview().inset(TRENDINGLABEL_LEADING)
             make.top.bottom.equalToSuperview().inset(TRENDINGLABEL_TOP_BOTTOM_TRAILING)
             make.trailing.lessThanOrEqualToSuperview().inset(TRENDINGLABEL_TOP_BOTTOM_TRAILING)
         }
+        
+        headerView.contentView.backgroundColor = darkModeEnabled ? .darkCell : .white
+        trendingLabel.textColor = darkModeEnabled ? .white : .black
 
         return headerView
     }
@@ -207,6 +230,16 @@ extension SearchViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SearchResultCell", for: indexPath)
         cell.textLabel?.text = trendingTopics[indexPath.row]
         cell.textLabel?.font = .secondaryHeader
+        
+        cell.backgroundColor = darkModeEnabled ? .darkCell : .white
+        cell.textLabel?.textColor = darkModeEnabled ? .darkText : .black
+        
+        if (darkModeEnabled) {
+            let backgroundView = UIView()
+            backgroundView.backgroundColor = .gray
+            cell.selectedBackgroundView = backgroundView
+        }
+        
         return cell
     }
 
@@ -219,14 +252,14 @@ extension SearchViewController: UITableViewDataSource {
         let topic = trendingTopics[indexPath.row]
         searchController.searchBar.text = topic
         searchBarSearchButtonClicked(searchController.searchBar)
-        Answers.logCustomEvent(withName: "Trending Selected", customAttributes: ["Topic": topic])
+        Analytics.logEvent("Trending_Selected", parameters: ["Topic": topic])
     }
 }
 
 extension SearchViewController: UISearchBarDelegate {
 
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        searchBar.setShowsCancelButton(searchBar.text == "", animated: false)
+        searchBar.setShowsCancelButton(searchBar.text == "", animated: true)
         if searchBar.text == "" {
             collectionView.isHidden = true
             tableView.isHidden = false
@@ -234,13 +267,14 @@ extension SearchViewController: UISearchBarDelegate {
     }
 
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        searchBar.setShowsCancelButton(searchBar.text == "", animated: false)
+        searchBar.setShowsCancelButton(searchBar.text == "", animated: true)
         UIView.animate(withDuration: 0.3) {
             self.dimView.alpha = 0.5
         }
     }
 
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.setShowsCancelButton(false, animated: true)
         dimView.alpha = 0.0
     }
 
@@ -258,7 +292,6 @@ extension SearchViewController: UISearchBarDelegate {
         currentQuery = query
         currentPage = 1
         endOfResults = false
-        searchBar.setShowsCancelButton(false, animated: true)
         dimView.alpha = 0.0
         searchData = []
         tableView.isHidden = true
@@ -276,9 +309,7 @@ extension SearchViewController: UISearchBarDelegate {
                 }
             }
         }
-        
-        //Set up search analytics
-        Answers.logSearch(withQuery: "Search", customAttributes: ["Searched For": query])
+        Analytics.logEvent("Search", parameters: ["Search_For": query])
     }
 }
 extension SearchViewController: TabBarViewControllerDelegate {

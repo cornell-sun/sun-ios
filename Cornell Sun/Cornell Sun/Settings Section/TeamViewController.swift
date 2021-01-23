@@ -25,30 +25,26 @@ class TeamMember {
 }
 
 class TeamViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-    
+
     var prevViewController: UIViewController!
-    var titleCache: String!
-    
+
     var tableView: UITableView!
     var members: [TeamMember] = []
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        titleCache = prevViewController.title
-        prevViewController.title = "Settings"
         tabBarController?.tabBar.isHidden = true
+        updateColors()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        prevViewController.title = titleCache
         tabBarController?.tabBar.isHidden = false
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        super.viewDidLoad()
-        view.backgroundColor = .white
+
         title = "App Team"
         
         //Calling hardcoded populator
@@ -59,17 +55,31 @@ class TeamViewController: UIViewController, UITableViewDataSource, UITableViewDe
                 TeamMember(nam: "Brendan Elliott '19", titl: "Designer", home: "Grand Rapids, Michigan", liner: "Ketchup should never be used before noon", emoji: "👨🏻‍💻"),
                 TeamMember(nam: "Alexis Vinzons '19", titl: "Designer", home: "Mamaroneck, New York", liner: "The solution is in the framing of the problem", emoji: "💃"),
                 TeamMember(nam: "Aditya Dwivedi '20", titl: "Developer", home: "Lucknow, India", liner: "Waffles > Pancakes", emoji: "🐪"),
-                TeamMember(nam: "Theo Carrel '20", titl: "Developer", home: "New York, NY", liner: "Is you not impressed?", emoji: "🔥"),
-                TeamMember(nam: "Mike Fang '21", titl: "Developer", home: "San Jose, California", liner: "Do not fear mistakes. There are none", emoji: "🐺")]
+                TeamMember(nam: "Theo Carrel '20", titl: "Developer", home: "New York, NY", liner: "It really do be like that sometimes", emoji: "🔥"),
+                TeamMember(nam: "Mike Fang '21", titl: "Developer", home: "San Jose, California", liner: "Do not fear mistakes. There are none", emoji: "🐺"),
+                TeamMember(nam: "Cameron Hamidi '21", titl: "Developer", home: "London, United Kingdom", liner: "Serenity now", emoji: "🍦"),
+                TeamMember(nam: "Connie Liu '23", titl: "Designer", home: "Ambler, Pennsylvania", liner: "We don't do things because they are easy but because they are hard", emoji: "🤠"),
+                TeamMember(nam: "SoYee Kim '22", titl: "Designer", home: "Seoul, South Korea", liner: "Smile while you still have teeth", emoji: "🌟")
+            ]
         }
         
         // Set up table view for settings
-        tableView = UITableView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height))
+        tableView = UITableView()
         tableView.register(TeamTableViewCell.self, forCellReuseIdentifier: "TeamCell")
         tableView.tableFooterView = UIView()
         tableView.delegate = self
         tableView.dataSource = self
         view.addSubview(tableView)
+        
+        tableView.snp.makeConstraints { (make) in
+            make.width.equalToSuperview()
+            make.height.equalToSuperview()
+        }
+    }
+    
+    @objc func updateColors() {
+        view.backgroundColor = darkModeEnabled ? .darkCell : .white
+        tableView.backgroundColor = darkModeEnabled ? .darkCell : .white
     }
     
     override func didReceiveMemoryWarning() {

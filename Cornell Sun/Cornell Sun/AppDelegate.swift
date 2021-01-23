@@ -11,20 +11,19 @@ import Kingfisher
 //import GoogleMobileAds
 import OneSignal
 import IQKeyboardManagerSwift
-import Fabric
-import Crashlytics
+import Firebase
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     var storyboard: UIStoryboard?
+    var isLoadingFromDeeplink: Bool = false
     let redirectScheme = "cornellsun"
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         IQKeyboardManager.shared.enable = true
-
         // Set all navigation bar attributes
         UINavigationBar.appearance().backgroundColor = .white
         UINavigationBar.appearance().tintColor = .black70
@@ -55,68 +54,63 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                         settings: onesignalInitSettings)
 
         OneSignal.inFocusDisplayType = OSNotificationDisplayType.notification
-        
+
         syncNotifications()
 
+        if UserDefaults.standard.object(forKey: "darkModeEnabled") == nil {
+            UserDefaults.standard.set(false, forKey: "darkModeEnabled")
+            darkModeEnabled = false
+        } else {
+            darkModeEnabled = UserDefaults.standard.bool(forKey: "darkModeEnabled")
+        }
+        
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
-        storyboard = UIStoryboard(name: "Launch Screen", bundle: nil)
+        let sbName = darkModeEnabled ? "Launch Screen Dark2" : "Launch Screen"
+        storyboard = UIStoryboard(name: sbName, bundle: nil)
         let rootVC = storyboard?.instantiateInitialViewController()
         window?.rootViewController = rootVC
 
-        //Image cache settings
-        ImageCache.default.maxDiskCacheSize = 100 * 1024 * 1024 //100 mb
-        ImageCache.default.maxCachePeriodInSecond = 60 * 60 * 24 * 4 //4 days until its removed
-
-        let userDefaults = UserDefaults.standard
-        if !userDefaults.bool(forKey: hasOnboardedKey) {
+        // Image cache settings
+        ImageCache.default.diskStorage.config.sizeLimit = 100 * 1024 * 1024 //100 mb
+        ImageCache.default.diskStorage.config.expiration = StorageExpiration.days(4) //4 days until its removed
+        
+        if !UserDefaults.standard.bool(forKey: hasOnboardedKey) {
             let onboardingViewController = OnboardingPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
+            if #available(iOS 13.0, *) {
+                    onboardingViewController.isModalInPresentation = true
+            }
             self.window?.rootViewController?.present(onboardingViewController, animated: false, completion: nil)
         } else {
-          prepareInitialPosts { posts, mainHeadlinePost in
-              let tabBarController = TabBarViewController(with: posts, mainHeadlinePost: mainHeadlinePost)
-              self.window!.rootViewController = tabBarController
-
-          }
+            prepareInitialPosts { posts, mainHeadlinePost in
+                let tabBarController = TabBarViewController(with: posts, mainHeadlinePost: mainHeadlinePost)
+                self.window!.rootViewController = tabBarController
+                if let currentViewController = tabBarController.currentViewController, self.isLoadingFromDeeplink {
+                    currentViewController.startAnimating()
+                }
+            }
         }
-        
+
         //Initialize Google Mobile Ads SDKAds
         //@TODO change ad ID from test ad to our specific ID
         //our actual id ca-app-pub-4474706420182946~3782719574
         //fake id ca-app-pub-3940256099942544/2934735716
-//        GADMobileAds.configure(withApplicationID: "ca-app-pub-4474706420182946~3782719574")
 
-        //Set up Crashlytics
-        Crashlytics.start(withAPIKey: fabricAPIKey())
+        // Init Firebase SDK
+        FirebaseApp.configure()
+        
+        // Init Google Mobile Ads SDK
+        GADMobileAds.sharedInstance().start(completionHandler: nil)
 
         return true
     }
-    
-    func fabricAPIKey() -> String {
-        
-        var format = PropertyListSerialization.PropertyListFormat.xml
-        var key: [String: AnyObject] = [:]
-        let keyPath: String? = Bundle.main.path(forResource: "Keys", ofType: "plist")!
-        let keyXML = FileManager.default.contents(atPath: keyPath!)
-        
-        do {
-            //swiftlint:disable:next force_cast
-            key = try PropertyListSerialization.propertyList(from: keyXML!, options: .mutableContainersAndLeaves, format: &format) as! [String: AnyObject]
-        } catch {
-            print("Error reading plist: \(error), format: \(format)")
-        }
 
-        //swiftlint:disable:next force_cast
-        return key["APIKey"] as! String
-        
-    }
-    
     func syncNotifications() {
-        
+
         let allNotificationTypes: [NotificationType] = [
             .breakingNews, .artsAndEntertainment, .dining, .localNews, .multimedia, .opinion, .science, .sports
         ]
-        
+
         for notificationType in allNotificationTypes {
             let isSubscribed = UserDefaults.standard.bool(forKey: notificationType.rawValue)
             if isSubscribed {
@@ -133,21 +127,37 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
      */
 
     func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
+        isLoadingFromDeeplink = true
         guard let url = userActivity.webpageURL else { return false }
-        API.request(target: .urlToID(url: url)) { response in
-            guard let tryID = try? response?.mapString(), let idString = tryID, let id = Int(idString), id != 0 else { return
-            }
-            getDeeplinkedPostWithId(id, completion: { (posts, mainHeadlinePost, deeplinkedPost) in
-                guard let deeplinkedPost = deeplinkedPost else { return }
-                let tabBarController = TabBarViewController(with: posts, mainHeadlinePost: mainHeadlinePost)
-                self.window?.rootViewController = tabBarController
-                let articleViewController = ArticleStackViewController(post: deeplinkedPost)
-                if let navigationController = tabBarController.selectedViewController as? UINavigationController {
-                    navigationController.pushViewController(articleViewController, animated: true)
-                }
-            })
+        
+        var currentViewController: ViewController?
+
+        // If app is already open
+        if let tabBarViewController = self.window?.rootViewController as? TabBarViewController {
+            currentViewController = tabBarViewController.currentViewController
         }
-        return true
+        
+        var isValidUrl = true
+
+        API.request(target: .urlToID(url: url)) { response in
+            guard let tryID = ((try? response?.mapString()) as String??), let idString = tryID, let id = Int(idString), id != 0 else {
+                isValidUrl = false
+                return }
+            if isValidUrl {
+                currentViewController?.startAnimating()
+                getDeeplinkedPostWithId(id, completion: { (posts, mainHeadlinePost, deeplinkedPost) in
+                    guard let deeplinkedPost = deeplinkedPost else { return }
+                    let tabBarController = TabBarViewController(with: posts, mainHeadlinePost: mainHeadlinePost)
+                    self.window?.rootViewController = tabBarController
+                    let articleViewController = ArticleStackViewController(post: deeplinkedPost)
+                    currentViewController?.stopAnimating()
+                    if let navigationController = tabBarController.selectedViewController as? UINavigationController {
+                        navigationController.pushViewController(articleViewController, animated: true)
+                    }
+                })
+            }
+        }
+        return false//true
     }
 
     /**

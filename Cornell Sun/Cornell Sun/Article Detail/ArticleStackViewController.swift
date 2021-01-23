@@ -46,9 +46,10 @@ class ArticleStackViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        view.backgroundColor = .white
-        navigationController?.navigationBar.tintColor = .black
+        self.extendedLayoutIncludesOpaqueBars = true
+        self.edgesForExtendedLayout = [.bottom]
+        view.backgroundColor = darkModeEnabled ? .darkCell : .white
+        navigationController?.navigationBar.tintColor = darkModeEnabled ? .white : .darkTint
         if #available(iOS 11.0, *) {
             navigationController?.navigationBar.prefersLargeTitles = false
         }
@@ -79,6 +80,7 @@ class ArticleStackViewController: UIViewController {
         shareBarView = ShareBarView()
         shareBarView.setBookmarkImage(didSelectBookmark: PostOffice.instance.isPostIdInBookmarks(post: post))
         shareBarView.delegate = self
+        shareBarView.backgroundColor = darkModeEnabled ? .darkCell : .white
         view.addSubview(shareBarView)
         shareBarView.snp.makeConstraints { make in
             make.height.equalTo(shareBarHeight)
@@ -132,11 +134,13 @@ class ArticleStackViewController: UIViewController {
         guard let elements = try? doc.getAllElements() else { return sections }
 
         var wordCount = 0
+        var swapImageAndText = false
 
         for i in 0..<elements.size() {
             let element = elements.array()[i]
             if element.tag().toString() == "p" {
-                guard let (pItem, count) = parsePTag(element: element) else { continue }
+                guard let (pItem, count, containsNestedImages) = parsePTag(element: element) else { continue }
+                swapImageAndText = containsNestedImages
                 // Swap image credit and caption
                 if let lastItem = sections.last,
                     case ArticleContentType.imageCredit(_) = lastItem,
@@ -156,6 +160,9 @@ class ArticleStackViewController: UIViewController {
             } else if element.tag().toString() == "img" {
                 guard let imgItem = parseImg(element: element) else { continue }
                 sections.append(imgItem)
+                if swapImageAndText {
+                    sections.swapAt(sections.count - 1, sections.count - 2)
+                }
             } else if element.tag().toString() == "aside" {
                 guard let blockquote = parseAside(element: element) else { continue }
                 sections.append(blockquote)
@@ -167,14 +174,18 @@ class ArticleStackViewController: UIViewController {
         return sections
     }
 
-    func parsePTag(element: Element) -> (ArticleContentType, Int)? {
+    /// Returns format (articleContentType, textLength, containsNestedImages)
+    func parsePTag(element: Element) -> (ArticleContentType, Int, Bool)? {
         guard let text = try? element.text(), !text.isEmpty else { return nil }
         if element.hasClass("wp-media-credit") {
-            return (.imageCredit(text), 0)
+            return (.imageCredit(text), 0, false)
         } else if element.hasClass("wp-caption-text") {
-            return (.caption(text), 0)
+            return (.caption(text), 0, false)
         } else {
             // replace <p> </p> with <span> </span> because of weird iOS html to string bugs
+            let children = element.children().filter { $0.tag().toString() == "img" }
+            let containsNestedImages = children.count > 0
+            children.forEach { try? element.removeChild($0) }
             guard let openPRegex = try? NSRegularExpression(pattern: "<p[^>]*>"),
                 let closePRegex = try? NSRegularExpression(pattern: "</p[^>]*>"),
                 let outerHtml = try? element.outerHtml() else { return nil }
@@ -187,7 +198,7 @@ class ArticleStackViewController: UIViewController {
             let attributedString = NSMutableAttributedString(attributedString: htmlString.htmlToAttributedString ?? NSAttributedString(string: ""))
             attributedString.addAttribute(.paragraphStyle, value: paragraphStyle, range: NSRange(location: 0, length: attributedString.length))
 
-            return (.text(attributedString), attributedString.string.getWordCount())
+            return (.text(attributedString), attributedString.string.getWordCount(), containsNestedImages)
         }
     }
 
@@ -223,7 +234,7 @@ class ArticleStackViewController: UIViewController {
         let label = UILabel()
         label.text = caption
         label.font = .photoCaption
-        label.textColor = .black90
+        label.textColor = darkModeEnabled ? .white90 : .black90
         label.numberOfLines = 0
         view.addSubview(label)
         stackView.addArrangedSubview(view)
@@ -255,7 +266,7 @@ class ArticleStackViewController: UIViewController {
         let creditLabel = UILabel()
         creditLabel.numberOfLines = 0
         creditLabel.text = credit
-        creditLabel.textColor = .black40
+        creditLabel.textColor = darkModeEnabled ? .white : .black40
         creditLabel.font = .photoCaptionCredit
         view.addSubview(creditLabel)
         stackView.addArrangedSubview(view)
@@ -271,7 +282,8 @@ class ArticleStackViewController: UIViewController {
         let textView = UITextView()
         textView.attributedText = text
         textView.textContainer.lineFragmentPadding = 0
-        textView.textColor = .black
+        textView.backgroundColor = darkModeEnabled ? .darkCell : .white
+        textView.textColor = darkModeEnabled ? .white90 : .black
         textView.delegate = self
         textView.isScrollEnabled = false
         textView.isEditable = false
@@ -379,10 +391,11 @@ class ArticleStackViewController: UIViewController {
     func setupSuggestedStories() {
         let headerHeight: CGFloat = 30
         let suggestedStoryPadding: CGFloat = 18
+        
         let headerView = UIView()
         let headerLabel = UILabel()
         headerLabel.font = .headerTitle
-        headerLabel.textColor = .black90
+        headerLabel.textColor = darkModeEnabled ? .white90 : .black90
         headerLabel.text = "Suggested Stories"
         headerView.addSubview(headerLabel)
 
@@ -394,6 +407,7 @@ class ArticleStackViewController: UIViewController {
         suggestedTableView.isScrollEnabled = false
         suggestedTableView.allowsSelection = false
         suggestedTableView.rowHeight = 118
+        suggestedTableView.backgroundColor = darkModeEnabled ? .darkCell : .white
         suggestedTableView.tableFooterView = UIView()
         suggestedTableView.register(SuggestedStoryTableViewCell.self, forCellReuseIdentifier: suggestedReuseIdentifier)
         scrollView.addSubview(suggestedTableView)
@@ -480,6 +494,8 @@ extension ArticleStackViewController: UITableViewDelegate, UITableViewDataSource
             if let suggestedID = post.suggestedStories[indexPath.row].postID, let suggestedStory = suggestedStories[suggestedID] {
                 let articleViewController = ArticleStackViewController(post: suggestedStory)
                 navigationController?.pushViewController(articleViewController, animated: true)
+                navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+                navigationItem.backBarButtonItem?.tintColor = darkModeEnabled ? .white : .black
             }
         }
     }
@@ -494,8 +510,19 @@ extension ArticleStackViewController: ShareBarViewDelegate {
     }
 
     func shareBarDidPressBookmark(_ view: ShareBarView) {
-        let didBookmark = view.bookmarkButton.currentImage == #imageLiteral(resourceName: "bookmark")
-        let correctBookmarkImage = view.bookmarkButton.currentImage == #imageLiteral(resourceName: "bookmarkPressed") ? #imageLiteral(resourceName: "bookmark") : #imageLiteral(resourceName: "bookmarkPressed")
+        let iconSelected: UIImage!
+        let iconUnSelected: UIImage!
+        
+        if darkModeEnabled {
+            iconSelected = UIImage(named: "bookmarkIconSelectedDark")
+            iconUnSelected = UIImage(named: "bookmarkIconDark")
+        } else {
+            iconSelected = UIImage(named: "bookmarkIconSelectedLight")
+            iconUnSelected = UIImage(named: "bookmarkIconLight")
+        }
+        
+        let didBookmark = view.bookmarkButton.currentImage == iconUnSelected
+        let correctBookmarkImage = view.bookmarkButton.currentImage == iconSelected ? iconUnSelected : iconSelected
         view.bookmarkButton.setImage(correctBookmarkImage, for: .normal)
         view.bookmarkButton.transform = CGAffineTransform(scaleX: 0.6, y: 0.6)
         taptic(style: .light)

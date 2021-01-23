@@ -13,40 +13,35 @@ class BookmarkCollectionViewController: ViewController, UIScrollViewDelegate {
     fileprivate var observer: NSKeyValueObservation?
     var isFirstRun = true
     var bookmarkPosts: [PostObject] = []
+    var emptyBookmarkView: EmptyView!
 
-    let emptyBookmarkView = EmptyView(image: #imageLiteral(resourceName: "empty-bookmark-sun"), title: "No Bookmarks", description: "Running late? Save some articles for later")
     let collectionView: UICollectionView = {
         let view = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
         view.alwaysBounceVertical = true
-        view.backgroundColor = .white
         return view
     }()
-
+    
     lazy var adapter: ListAdapter  = {
         return ListAdapter(updater: ListAdapterUpdater(), viewController: self, workingRangeSize: 0)
     }()
 
     override func viewWillAppear(_ animated: Bool) {
-        title = "Bookmarks"
-        navigationController?.navigationBar.barTintColor = .white
+        navigationItem.title = "Bookmarks"
+        navigationController?.navigationBar.isTranslucent = false
         navigationController?.navigationBar.titleTextAttributes = [
             NSAttributedString.Key.font: UIFont.headerTitle
         ]
-
         guard !isFirstRun else {
+            updateColors()
             isFirstRun = false
             return
         }
-        self.adapter.performUpdates(animated: true, completion: nil)
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Bookmarks"
-
         view.addSubview(collectionView)
         adapter.collectionView = collectionView
-        adapter.collectionView?.backgroundColor = .black5
         adapter.dataSource = self
         adapter.scrollViewDelegate = self
 
@@ -56,6 +51,23 @@ class BookmarkCollectionViewController: ViewController, UIScrollViewDelegate {
                 self.adapter.performUpdates(animated: true, completion: nil)
             }
         }
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(updateColors), name: .darkModeToggle, object: nil)
+        updateColors()
+    }
+
+    @objc func updateColors() {
+        navigationController?.navigationBar.barTintColor = darkModeEnabled ? .darkTint : .white
+        navigationController?.navigationBar.barStyle = darkModeEnabled ? .blackTranslucent : .default
+        let textColor = darkModeEnabled ? UIColor.darkText : UIColor.lightText
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: textColor]
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        navigationItem.backBarButtonItem?.tintColor = darkModeEnabled ? .white : .black
+        collectionView.backgroundColor = darkModeEnabled ? .darkTint : .black5
+        collectionView.reloadData()
+        let emptyIcon = darkModeEnabled ? "empty-bookmark-sunDark" : "empty-bookmark-sunLight"
+        emptyBookmarkView = EmptyView(image: UIImage(named: emptyIcon)!, title: "No Bookmarks", description: "Running late? Save some articles for later")
+        self.adapter.performUpdates(animated: true, completion: nil)
     }
 
     deinit {
@@ -91,6 +103,7 @@ extension BookmarkCollectionViewController: ListAdapterDataSource {
         } else if let obj = object as? PostObject, obj.postType == .video {
             return VideoSectionController()
         }
+        
         let bookmarkSC = BookmarkSearchSectionController(forBookmarks: true)
         bookmarkSC.delegate = self
         return bookmarkSC

@@ -16,7 +16,7 @@ final class BookmarkCell: UICollectionViewCell {
     let imageViewWidthHeight: CGFloat = 100
     let titleBottomInset: CGFloat = 8.5
     let authorHeight: CGFloat = 13
-
+    
     var post: PostObject? {
         didSet {
             titleLabel.text = post?.title
@@ -47,7 +47,6 @@ final class BookmarkCell: UICollectionViewCell {
         label.text = ""
         label.numberOfLines = 1
         label.font = .cellInformationText
-        label.textColor = .black60
         return label
     }()
 
@@ -59,9 +58,15 @@ final class BookmarkCell: UICollectionViewCell {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    override func prepareForReuse() {
+        setupViews()
+    }
 
     func setupViews() {
-        self.backgroundColor = .white
+        self.backgroundColor = darkModeEnabled ? .darkCell : .white
+        titleLabel.textColor = darkModeEnabled ? .white90 : .black
+        authorLabel.textColor = darkModeEnabled ? .white60 : .black60
         addSubview(imageView)
         addSubview(titleLabel)
         addSubview(authorLabel)

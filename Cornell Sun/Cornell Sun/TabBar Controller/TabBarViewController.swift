@@ -14,24 +14,58 @@ class TabBarViewController: UITabBarController {
     var posts: [ListDiffable]!
     var headlinePost: PostObject?
     var previousViewController: UIViewController?
+    var currentViewController: ViewController? {
+        let navigationController = viewControllers?.first as? UINavigationController
+        return navigationController?.viewControllers.first as? ViewController
+    }
 
-    let normal = [NSAttributedString.Key.font: UIFont(name: "SanFranciscoText-Medium", size: 11) as Any] as [NSAttributedString.Key: Any]
-    let selected = [NSAttributedString.Key.font: UIFont(name: "SanFranciscoText-Semibold", size: 11) as Any] as [NSAttributedString.Key: Any]
+    override func viewDidAppear(_ animated: Bool) {
+        updateColors()
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+//        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+//        navigationItem.backBarButtonItem?.tintColor = darkModeEnabled ? .white : .black
         // Do any additional setup after loading the view.
-        view.backgroundColor = .white
 
-        tabBar.backgroundColor = .white
-        tabBar.backgroundImage = UIImage()
-        tabBar.tintColor = .brick
-        tabBar.unselectedItemTintColor = .black70
+
+//        tabBar.backgroundImage = UIImage()
+        
+        delegate = self
+        updateColors()
+        setupTabs()
+
+        NotificationCenter.default.addObserver(self, selector: #selector(updateColors), name: .darkModeToggle, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(hideVC(notification:)), name: .darkModeToggle, object: nil)
+        
+    }
+
+    @objc func updateColors() {
+        let normal = [NSAttributedString.Key.font: UIFont(name: "SanFranciscoText-Medium", size: 11) as Any, NSAttributedString.Key.strokeColor: darkModeEnabled ? UIColor.unselectedDark as Any : UIColor.black70 as Any] as [NSAttributedString.Key: Any]
+        let selected = [NSAttributedString.Key.font: UIFont(name: "SanFranciscoText-Semibold", size: 11) as Any, NSAttributedString.Key.strokeColor: darkModeEnabled ? UIColor.white as Any : UIColor.brick as Any] as [NSAttributedString.Key: Any]
+        
         tabBarItem.setTitleTextAttributes(normal, for: .normal)
         tabBarItem.setTitleTextAttributes(selected, for: .selected)
-        delegate = self
-        setupTabs()
+        
+        view.backgroundColor = darkModeEnabled ? .darkTint : .white
+        tabBar.tintColor = darkModeEnabled ? .white : .brick
+        tabBar.unselectedItemTintColor = darkModeEnabled ? .unselectedDark : .black70
+        tabBar.barTintColor = darkModeEnabled ? .darkTint : .white
+        tabBar.isTranslucent = false
+    }
+
+    @objc func hideVC(notification: NSNotification) {
+        if !darkModeEnabled {
+            if let hidden = notification.userInfo?["hidden"] as? Bool {
+                if hidden {
+                    view.backgroundColor = .darkCell
+                } else {
+                    view.backgroundColor = .darkCell
+                }
+            }
+        }
+
     }
 
     init(with postObjects: [ListDiffable], mainHeadlinePost: PostObject?) {
@@ -45,8 +79,7 @@ class TabBarViewController: UITabBarController {
     }
 
     func setupTabs() {
-        // replace each tab with a specified ViewController,
-        // these are just placeholders
+        // replace each tab with a specified ViewController
 
         let feedVC = FeedCollectionViewController()
         feedVC.feedData = posts
@@ -55,29 +88,43 @@ class TabBarViewController: UITabBarController {
         }
         let tabOneNavigationController = UINavigationController(rootViewController: feedVC)
         tabOneNavigationController.navigationBar.isTranslucent = false
-        let tabOneTabBarItem = UITabBarItem(title: "Feed", image: #imageLiteral(resourceName: "feedIcon").withRenderingMode(.alwaysOriginal), selectedImage: #imageLiteral(resourceName: "feedIconRed").withRenderingMode(.alwaysOriginal))
-        tabOneNavigationController.tabBarItem = tabOneTabBarItem
 
         let tabTwoNavigationController = UINavigationController(rootViewController: SectionViewController())
-        let tabTwoTabBarItem = UITabBarItem(title: "Sections", image: #imageLiteral(resourceName: "sectionIcon").withRenderingMode(.alwaysOriginal), selectedImage: #imageLiteral(resourceName: "sectionIconRed").withRenderingMode(.alwaysOriginal))
-        tabTwoNavigationController.tabBarItem = tabTwoTabBarItem
 
         let tabThreeNavigationController = UINavigationController(rootViewController: BookmarkCollectionViewController())
-        let tabThreeTabBarItem = UITabBarItem(title: "Bookmarks", image: #imageLiteral(resourceName: "bookmarkIcon").withRenderingMode(.alwaysOriginal), selectedImage: #imageLiteral(resourceName: "bookmarkIconRed").withRenderingMode(.alwaysOriginal))
-        tabThreeNavigationController.tabBarItem = tabThreeTabBarItem
 
         let searchVC = SearchViewController(fetchTrending: true)
         let tabFourNavigationController = UINavigationController(rootViewController: searchVC)
-        let tabFourTabBarItem = UITabBarItem(title: "Search", image: #imageLiteral(resourceName: "searchIcon").withRenderingMode(.alwaysOriginal), selectedImage: #imageLiteral(resourceName: "searchIconRed").withRenderingMode(.alwaysOriginal))
-        tabFourNavigationController.tabBarItem = tabFourTabBarItem
 
         let tabFiveNavigationController = UINavigationController(rootViewController: SettingsViewController())
-        let tabFiveTabBarItem = UITabBarItem(title: "Settings", image: #imageLiteral(resourceName: "personSettingsIcon").withRenderingMode(.alwaysOriginal), selectedImage: #imageLiteral(resourceName: "personSettingsIconRed").withRenderingMode(.alwaysOriginal))
-        tabFiveNavigationController.tabBarItem = tabFiveTabBarItem
 
         self.viewControllers = [tabOneNavigationController, tabTwoNavigationController, tabThreeNavigationController, tabFourNavigationController, tabFiveNavigationController]
         selectedIndex = 0
-
+        setupTabIcons()
+    }
+    
+    func setupTabIcons() {
+        if let controllers = viewControllers {
+            var imageChoice: String
+            imageChoice = darkModeEnabled ? "Dark" : "Light"
+            
+            for i in 0...controllers.count {
+                switch i {
+                case 0:
+                    controllers[i].tabBarItem = UITabBarItem(title: "Feed", image: UIImage(named: "newsIcon" + imageChoice)!.withRenderingMode(.alwaysOriginal), selectedImage: UIImage(named: "newsIconSelected" + imageChoice)!.withRenderingMode(.alwaysOriginal))
+                case 1:
+                    controllers[i].tabBarItem = UITabBarItem(title: "Sections", image: UIImage(named: "sectionIcon" + imageChoice)!.withRenderingMode(.alwaysOriginal), selectedImage: UIImage(named: "sectionIconSelected" + imageChoice)!.withRenderingMode(.alwaysOriginal))
+                case 2:
+                    controllers[i].tabBarItem = UITabBarItem(title: "Bookmarks", image: UIImage(named: "bookmarkIcon" + imageChoice)!.withRenderingMode(.alwaysOriginal), selectedImage: UIImage(named: "bookmarkIconSelected" + imageChoice)!.withRenderingMode(.alwaysOriginal))
+                case 3:
+                    controllers[i].tabBarItem = UITabBarItem(title: "Search", image: UIImage(named: "searchIcon" + imageChoice)!.withRenderingMode(.alwaysOriginal), selectedImage: UIImage(named: "searchIconSelected" + imageChoice)!.withRenderingMode(.alwaysOriginal))
+                case 4:
+                    controllers[i].tabBarItem = UITabBarItem(title: "Settings", image: UIImage(named: "settingsIcon" + imageChoice)!.withRenderingMode(.alwaysOriginal), selectedImage: UIImage(named: "settingsIconSelected" + imageChoice)!.withRenderingMode(.alwaysOriginal))
+                default:
+                    return
+                }
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {

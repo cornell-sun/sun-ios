@@ -35,7 +35,7 @@ class ImageCollectionCell: UICollectionViewCell {
         imageView.isUserInteractionEnabled = true
 
         loadingIndicator = UICircularProgressRing()
-//        loadingIndicator.ringStyle = .ontop
+//        loadingIndicator.ringStyle = .ontop //TODO
         loadingIndicator.innerRingWidth = 2
         loadingIndicator.outerRingWidth = 2
         loadingIndicator.innerRingColor = .brick

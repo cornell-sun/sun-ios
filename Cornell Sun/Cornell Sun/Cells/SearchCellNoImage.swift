@@ -31,7 +31,6 @@ final class SearchCellNoImage: UICollectionViewCell {
         label.text = ""
         label.numberOfLines = 1
         label.font = .photoCaption
-        label.textColor = .black
         return label
     }()
     
@@ -40,7 +39,6 @@ final class SearchCellNoImage: UICollectionViewCell {
         label.text = ""
         label.numberOfLines = 1
         label.font = .photoCaption
-        label.textColor = .black
         return label
     }()
     
@@ -49,7 +47,6 @@ final class SearchCellNoImage: UICollectionViewCell {
         label.text = ""
         label.numberOfLines = 0
         label.font = .photoCaption
-        label.textColor = .black
         return label
     }()
     
@@ -63,7 +60,10 @@ final class SearchCellNoImage: UICollectionViewCell {
     }
     
     func setupViews() {
-        self.backgroundColor = .white
+        self.backgroundColor = darkModeEnabled ? .darkCell : .white
+        authorLabel.textColor = darkModeEnabled ? .white90 : .black
+        timeStampLabel.textColor = darkModeEnabled ? .white60 : .black
+        contentLabel.textColor = darkModeEnabled ? .white90 : .black
         addSubview(authorLabel)
         addSubview(timeStampLabel)
         addSubview(contentLabel)

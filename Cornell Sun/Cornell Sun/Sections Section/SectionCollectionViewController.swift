@@ -32,6 +32,7 @@ class SectionCollectionViewController: UIViewController, UIScrollViewDelegate {
     var adCount = 1
     var sectionID = 0
     let spinToken = "spinner"
+    var sectionTitle = ""
 
     let collectionView: UICollectionView = {
         let view = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
@@ -47,11 +48,11 @@ class SectionCollectionViewController: UIViewController, UIScrollViewDelegate {
     init(with section: Sections, sectionTitle: String) {
         super.init(nibName: nil, bundle: nil)
         sectionSelected = section
-        title = sectionTitle
+        self.sectionTitle = sectionTitle
         navigationController?.navigationBar.titleTextAttributes = [
             NSAttributedString.Key.font: UIFont.headerTitle
         ]
-        
+
         switch section {
         case .news(let id), .opinion(let id), .arts(let id), .dining(let id), .multimedia(let id), .science(let id), .sports(let id):
             sectionID = id
@@ -72,9 +73,7 @@ class SectionCollectionViewController: UIViewController, UIScrollViewDelegate {
         super.viewDidLoad()
 
         navigationController?.setNavigationBarHidden(false, animated: false)
-        view.backgroundColor = .white
         navigationController?.navigationBar.topItem?.title = ""
-        navigationController?.navigationBar.tintColor = .black
 
         emptySpinnerView.addSubview(spinner)
 
@@ -89,10 +88,10 @@ class SectionCollectionViewController: UIViewController, UIScrollViewDelegate {
         }
 
         refreshControl.addTarget(self, action: #selector(refreshData), for: .valueChanged)
-        
+
         view.addSubview(collectionView)
         adapter.collectionView = collectionView
-        adapter.collectionView?.backgroundColor = .collectionBackground
+        adapter.collectionView?.backgroundColor = darkModeEnabled ? .black : .collectionBackground
         adapter.collectionView?.refreshControl = refreshControl
         adapter.dataSource = self
         adapter.scrollViewDelegate = self
@@ -104,13 +103,28 @@ class SectionCollectionViewController: UIViewController, UIScrollViewDelegate {
         spinner.snp.makeConstraints { make in
             make.center.equalToSuperview()
         }
+        updateColors()
+    }
+    
+    func updateColors() {
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        refreshControl.tintColor = darkModeEnabled ? .white : .black
+        navigationItem.backBarButtonItem?.tintColor = darkModeEnabled ? .white : .black
+        navigationController?.navigationBar.barTintColor = darkModeEnabled ? .darkTint : .white
+        navigationController?.navigationBar.barStyle = darkModeEnabled ? .blackTranslucent : .default
+        navigationController?.navigationBar.titleTextAttributes = [
+            NSAttributedString.Key.font: UIFont.headerTitle, NSAttributedString.Key.foregroundColor: darkModeEnabled ? UIColor.white : UIColor.black
+        ]
+        refreshControl.tintColor = darkModeEnabled ? .white : .black
+        adapter.collectionView?.backgroundColor = darkModeEnabled ? .darkTint : .black5
+        collectionView.backgroundColor = darkModeEnabled ? .darkTint : .black5
+        collectionView.reloadData()
+        
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        navigationController?.navigationBar.barTintColor = .white
-        navigationController?.navigationBar.titleTextAttributes = [
-            NSAttributedString.Key.font: UIFont.headerTitle
-        ]
+        navigationItem.title = sectionTitle
+        updateColors()
     }
 
     override func didReceiveMemoryWarning() {
@@ -119,7 +133,7 @@ class SectionCollectionViewController: UIViewController, UIScrollViewDelegate {
     }
 
     fileprivate func isPostIdInBookmarks(post: PostObject, currListOfBookmarks: [PostObject]) -> PostObject? {
-        guard let index = currListOfBookmarks.index(where: {$0.id == post.id}) else { return nil }
+        guard let index = currListOfBookmarks.firstIndex(where: {$0.id == post.id}) else { return nil }
         return currListOfBookmarks[index]
     }
 
@@ -131,7 +145,7 @@ class SectionCollectionViewController: UIViewController, UIScrollViewDelegate {
             return updatedBookmarkPost
         }
     }
-    
+
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         let distance = scrollView.contentSize.height - (targetContentOffset.pointee.y + scrollView.bounds.height)
         if !loading && distance < 300 {
@@ -180,9 +194,9 @@ extension SectionCollectionViewController: ListAdapterDataSource {
 }
 
 extension SectionCollectionViewController {
-    
+
     func getPosts(page: Int, sectionID: Int) {
-        
+
         fetchPosts(target: .section(section: sectionID, page: page)) { posts, error in
             if error == nil {
                 self.loading = false
@@ -195,7 +209,7 @@ extension SectionCollectionViewController {
             }
         }
     }
-    
+
     @objc func refreshData() {
         currentPage = 1
         feedData = []

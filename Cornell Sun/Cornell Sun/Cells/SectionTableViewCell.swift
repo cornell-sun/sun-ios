@@ -32,7 +32,7 @@ class SectionTableViewCell: UITableViewCell {
     
     let detailImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "disclosureArrow")
+        imageView.image = UIImage(named: "disclosureArrowLight")
         imageView.contentMode = .scaleAspectFit
         return imageView
     }()

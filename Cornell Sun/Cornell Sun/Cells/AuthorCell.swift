@@ -15,7 +15,7 @@ final class AuthorCell: UICollectionViewCell {
     let topOffset: CGFloat = 2
     let bottomInset: CGFloat = 10
     let height: CGFloat = 13
-
+    
     var post: PostObject? {
         didSet {
             if let post = post, let authors = post.author {
@@ -29,12 +29,16 @@ final class AuthorCell: UICollectionViewCell {
         label.text = ""
         label.numberOfLines = 1
         label.font = .subSecondaryHeader
-        label.textColor = .black60
         return label
     }()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
+        setupViews()
+    }
+    
+    override func prepareForReuse() {
         setupViews()
     }
 
@@ -43,7 +47,9 @@ final class AuthorCell: UICollectionViewCell {
     }
 
     func setupViews() {
-        self.backgroundColor = .white
+        
+        self.backgroundColor = darkModeEnabled ? .darkCell : .white
+        authorLabel.textColor = darkModeEnabled ? .white90 : .black60
         addSubview(authorLabel)
         authorLabel.snp.makeConstraints { (make) in
             make.top.equalToSuperview().offset(topOffset)
