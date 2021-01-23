@@ -1,47 +1,49 @@
 # Uncomment the next line to define a global platform for your project
-# platform :ios, '9.0'
+# platform :ios, '10.0'
+source 'https://github.com/CocoaPods/Specs.git'
 
 target 'Cornell Sun' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
   # Pods for Cornell Sun
   pod 'Moya'
-  pod 'Moya-ModelMapper', '5.0.0'
-  pod 'IGListKit', '~> 3.1.1'
-  pod 'PINRemoteImage'
-  pod 'SnapKit', '~> 4.0'
-  pod 'HTMLString', '~> 4.0'
-  pod 'Kingfisher', '~> 4.7.0'
-  pod 'ImageSlideshow', :git=> 'https://github.com/AAAstorga/ImageSlideshow.git', :commit => 'bec5f17bd71d32d289378e1ba787a55cfa80bcce'
-  pod 'ImageSlideshow/Kingfisher', :git=> 'https://github.com/AAAstorga/ImageSlideshow.git', :commit => 'bec5f17bd71d32d289378e1ba787a55cfa80bcce'
-  pod 'Google-Mobile-Ads-SDK'
+  pod 'Moya-ModelMapper'
+  pod 'IGListKit'
+  #pod 'PINRemoteImage'
+  pod 'SnapKit'
+  pod 'HTMLString'
+  pod 'Kingfisher', '~> 5.0'
+  pod 'ImageSlideshow', :git=> 'https://github.com/cornell-sun/ImageSlideshow', :commit => 'd63205b98d5e3bed3e4e1273eb2ae3f4c7d66790'
+  pod 'ImageSlideshow/Kingfisher', :git=> 'https://github.com/cornell-sun/ImageSlideshow', :commit => 'd63205b98d5e3bed3e4e1273eb2ae3f4c7d66790'
   pod 'SwiftSoup'
   pod 'OneSignal', '>= 2.6.2', '< 3.0'
   pod 'IQKeyboardManagerSwift'
-  pod 'SkeletonView'
+  pod 'SkeletonView', :git=> 'https://github.com/cornell-sun/SkeletonView'
   pod 'UICircularProgressRing'
   pod 'Motion'
-  pod 'Fabric'
   pod 'Crashlytics'
+  pod 'Firebase/Analytics'
+  pod 'Firebase/Performance'
+  pod 'Firebase/AdMob'
+  pod 'Google-Mobile-Ads-SDK'
+end
 
 target 'SunNotificationServiceExtension' do
+    use_frameworks!
     pod 'OneSignal', '>= 2.6.2', '< 3.0'
 end
 
-  target 'Cornell SunTests' do
+target 'Cornell SunTests' do
       inherit! :search_paths
-      pod 'Moya'
-      pod 'Moya-ModelMapper', '5.0.0'
-
-      end
+      pod 'Moya-ModelMapper'
 end
 
 post_install do |installer|
     installer.pods_project.targets.each do |target|
         if target.name == "ImageSlideshow-ImageSlideshow"
         target.build_configurations.each do |config|
-            config.build_settings['SWIFT_VERSION'] = '4.0'
+            config.build_settings['SWIFT_VERSION'] = '5.0'
         end
-            #end
     end
 end
+    end

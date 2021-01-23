@@ -8,7 +8,7 @@
 
 import UIKit
 import Kingfisher
-import GoogleMobileAds
+//import GoogleMobileAds
 import OneSignal
 import IQKeyboardManagerSwift
 import Fabric
@@ -84,7 +84,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //@TODO change ad ID from test ad to our specific ID
         //our actual id ca-app-pub-4474706420182946~3782719574
         //fake id ca-app-pub-3940256099942544/2934735716
-        GADMobileAds.configure(withApplicationID: "ca-app-pub-4474706420182946~3782719574")
+//        GADMobileAds.configure(withApplicationID: "ca-app-pub-4474706420182946~3782719574")
 
         //Set up Crashlytics
         Crashlytics.start(withAPIKey: fabricAPIKey())
