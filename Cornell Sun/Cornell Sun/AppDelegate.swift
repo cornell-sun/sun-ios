@@ -8,7 +8,7 @@
 
 import UIKit
 import Kingfisher
-//import GoogleMobileAds
+import GoogleMobileAds
 import OneSignal
 import IQKeyboardManagerSwift
 import Firebase
