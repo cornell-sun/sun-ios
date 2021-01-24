@@ -17,7 +17,7 @@ class DisplayViewController: UIViewController {
     var descriptionTextView: UITextView!
     
     let headerHeight: CGFloat = 43
-    let headerOffset: CGFloat = 86.5
+    let headerOffset: CGFloat = 40
     let descriptionHeight: CGFloat = 258
     let descriptionOffset: CGFloat = 17.5
     let descriptionOffsetBottom: CGFloat = 20
@@ -91,33 +91,17 @@ class DisplayViewController: UIViewController {
     }
     
     @objc func updateColors() {
-
         view.backgroundColor = darkModeEnabled ? .darkCell : .white
         headerLabel.textColor = darkModeEnabled ? .darkText : .black
         descriptionTextView.textColor = darkModeEnabled ? .darkText : .black
         descriptionTextView.backgroundColor = darkModeEnabled ? .darkCell : .white
-        
     }
     
     func getText() -> String {
-        switch type! {
-        case .appteam:
-            return "Austin Astorga '19 \nChris Sciavolino '19 \nMindy Lou '19 \nAditya Dwivedi '20 \nTheo Carrel '20 \nMike Fang '21 \nBrendan Elliott '19 \nAlexis Vinzons '19"
-        case .history:
-            return "The Cornell Daily Sun is an independent, daily student-run newspaper serving the Cornell University and Ithaca, NY, communities.\n\nFounded in 1880, The Sun is the oldest continuously independent college daily in the United States.\n\nThe Sun publishes a print edition on Monday, Tuesday and Thursday during the academic year and is free on newsstands and online. The Sun is staffed entirely by Cornell students, aside from a few full-time production and business positions, and operates out of an office building in downtown Ithaca."
-        default:
-            return ""
-        }
+        return "The Cornell Daily Sun is an independent, daily student-run newspaper serving the Cornell University and Ithaca, NY, communities.\n\nFounded in 1880, The Sun is the oldest continuously independent college daily in the United States.\n\nThe Sun publishes a print edition on Monday, Tuesday and Thursday during the academic year and is free on newsstands and online. The Sun is staffed entirely by Cornell students, aside from a few full-time production and business positions, and operates out of an office building in downtown Ithaca."
     }
     
     func getHeader() -> String {
-        switch type! {
-        case .appteam:
-            return "App Team"
-        case .history:
-            return "The Cornell Daily Sun"
-        default:
-            return ""
-        }
+        return "The Cornell Daily Sun"
     }
 }
