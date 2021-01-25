@@ -77,8 +77,10 @@ class TeamTableViewCell: UITableViewCell {
         linerLabel = UILabel()
         linerLabel.textColor = darkModeEnabled ? .white90 : .black
         contentView.addSubview(linerLabel)
+        linerLabel.lineBreakMode = NSLineBreakMode.byWordWrapping
+        linerLabel.numberOfLines = 0
         linerLabel.snp.makeConstraints { make in
-            make.height.equalTo(heightLabel)
+            make.right.equalTo(layoutMargins.right - offsetLeft)
             make.left.equalTo(emojiLabel.snp.right).offset(offsetLeft*0.5)
             make.top.equalTo(originLabel.snp.bottom).offset(offsetBottom)
             make.bottomMargin.equalTo(-5)
