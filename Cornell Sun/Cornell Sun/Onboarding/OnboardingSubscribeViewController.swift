@@ -69,6 +69,7 @@ class OnboardingSubscribeViewController: UIViewController {
         let attributedString = NSAttributedString(string: "Not Now", attributes: buttonAttributes)
         notNowButton.setAttributedTitle(attributedString, for: .normal)
         notNowButton.addTarget(self, action: #selector(dismissPageController), for: .touchUpInside)
+        notNowButton.backgroundColor = .clear
         view.addSubview(notNowButton)
 
         setupConstraints()

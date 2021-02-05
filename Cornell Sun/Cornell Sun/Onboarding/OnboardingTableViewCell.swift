@@ -11,7 +11,7 @@ import UIKit
 
 class OnboardingTableViewCell: UITableViewCell {
 
-    static let height: CGFloat = 60
+    static let height: CGFloat = 75
     static let identifier = "OnboardingTableViewCell"
 
     let icon = UIImageView()
@@ -20,6 +20,7 @@ class OnboardingTableViewCell: UITableViewCell {
     let separatorTop = UIView()
     let subscribeSwitch = UISwitch()
     let subtitleLabel = UILabel()
+    let subtitleLabelSize: CGFloat = 16
     let tintView = UIView()
     let titleLabel = UILabel()
 
@@ -37,9 +38,10 @@ class OnboardingTableViewCell: UITableViewCell {
         titleLabel.textAlignment = .left
         contentView.addSubview(titleLabel)
 
-        subtitleLabel.font = UIFont.systemFont(ofSize: labelSize)
+        subtitleLabel.font = UIFont.systemFont(ofSize: subtitleLabelSize)
         subtitleLabel.textColor = .onboardingTableViewLabel
         subtitleLabel.textAlignment = .left
+        subtitleLabel.numberOfLines = 0
         contentView.addSubview(subtitleLabel)
 
         separatorTop.backgroundColor = .white
@@ -53,6 +55,7 @@ class OnboardingTableViewCell: UITableViewCell {
         contentView.addSubview(tintView)
 
         subscribeSwitch.onTintColor = .brick
+        subscribeSwitch.tintColor = .clear
         subscribeSwitch.layer.borderColor = UIColor.white.cgColor
         subscribeSwitch.layer.borderWidth = 1
         contentView.addSubview(subscribeSwitch)
@@ -70,6 +73,7 @@ class OnboardingTableViewCell: UITableViewCell {
         let iconLeading: CGFloat = 15
         let iconSize: CGFloat = 32
         let subscribeSwitchTrailing: CGFloat = -16
+        let subscribeSwitchWidth: CGFloat = 51
         let subtitleLabelTop: CGFloat = 3
         let subtitleLabelTrailing: CGFloat = -10
         let titleLabelLeading: CGFloat = 13
@@ -94,6 +98,7 @@ class OnboardingTableViewCell: UITableViewCell {
 
         subscribeSwitch.snp.makeConstraints { make in
             make.trailing.equalToSuperview().offset(subscribeSwitchTrailing)
+            make.width.equalTo(subscribeSwitchWidth)
             make.centerY.equalToSuperview()
         }
 
@@ -117,31 +122,31 @@ class OnboardingTableViewCell: UITableViewCell {
         switch section {
         case .news:
             titleLabel.text = "News"
-            subtitleLabel.text = "Subtitle"
+            subtitleLabel.text = "News you need to know as it happens"
             imageName = "news-sectionWhite"
         case .opinion:
             titleLabel.text = "Opinions"
-            subtitleLabel.text = "Subtitle"
+            subtitleLabel.text = "Thoughts from your peers"
             imageName = "opinionWhite"
         case .sports:
             titleLabel.text = "Sports"
-            subtitleLabel.text = "Subtitle"
+            subtitleLabel.text = "Recaps, features, and more about the Red"
             imageName = "sportsWhite"
         case .arts:
             titleLabel.text = "Arts & Entertainment"
-            subtitleLabel.text = "Subtitle"
+            subtitleLabel.text = "Music, movies, fashion, and performance"
             imageName = "artsWhite"
         case .science:
             titleLabel.text = "Science"
-            subtitleLabel.text = "Subtitle"
+            subtitleLabel.text = "What you need to know about research"
             imageName = "scienceWhite"
         case .dining:
             titleLabel.text = "Dining"
-            subtitleLabel.text = "Subtitle"
+            subtitleLabel.text = "All the food news on campus and in Ithaca"
             imageName = "diningWhite"
         case .multimedia:
             titleLabel.text = "Multimedia"
-            subtitleLabel.text = "Subtitle"
+            subtitleLabel.text = "Photos, videos, and interviews about the Cornell community"
             imageName = "multimediaWhite"
         }
         icon.image = UIImage(named: imageName)
