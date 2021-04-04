@@ -14,12 +14,20 @@ class AuthorDetailCell: UICollectionViewCell {
     // MARK: View vars
     var imageView: UIImageView!
     var nameLabel: UILabel!
-    var linkStackView: UIStackView!
     var underlineView: UIView!
     var bioTextView: UITextView!
+    var emailLabel: UILabel!
 
     // MARK: Constants
-    let imageViewWidth: CGFloat = 75
+    static let bioTextViewBottomPadding: CGFloat = -10
+    static let bioTextViewTopPadding: CGFloat = 15
+    static let bottomPadding: CGFloat = 15 // Padding from the bottom of the bio text view to the bottom of the cell
+    static let emailLabelTopPadding: CGFloat = 10
+    static let imageViewLeadingPadding: CGFloat = 36
+    static let imageViewTopPadding: CGFloat = 21
+    static let imageViewWidth: CGFloat = 75
+    static let nameLabelLeadingPadding: CGFloat = 22
+    static let nameLabelTopPadding: CGFloat = 24
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -28,23 +36,29 @@ class AuthorDetailCell: UICollectionViewCell {
 
         imageView = UIImageView()
         imageView.clipsToBounds = true
-        imageView.layer.cornerRadius = imageViewWidth / 2
+        imageView.layer.cornerRadius = AuthorDetailCell.imageViewWidth / 2
         imageView.backgroundColor = .black20
         contentView.addSubview(imageView)
 
         nameLabel = UILabel()
         nameLabel.textColor = .black90
-        nameLabel.font = .systemFont(ofSize: 26, weight: .bold)
-        nameLabel.numberOfLines = 2
+        nameLabel.font = UIFont.avenir24
+        nameLabel.numberOfLines = 0
         nameLabel.setLineSpacing(to: 6)
         contentView.addSubview(nameLabel)
 
-        linkStackView = UIStackView()
-        linkStackView.alignment = .center
-        linkStackView.axis = .horizontal
-        linkStackView.distribution = .equalSpacing
-        linkStackView.spacing = 0
-        contentView.addSubview(linkStackView)
+        emailLabel = UILabel()
+        emailLabel.textColor = .black90
+        emailLabel.font = UIFont.avenir16
+        emailLabel.numberOfLines = 1
+        contentView.addSubview(emailLabel)
+
+//        linkStackView = UIStackView()
+//        linkStackView.alignment = .center
+//        linkStackView.axis = .horizontal
+//        linkStackView.distribution = .equalSpacing
+//        linkStackView.spacing = 0
+//        contentView.addSubview(linkStackView)
 
         underlineView = UIView()
         underlineView.backgroundColor = .black20
@@ -52,71 +66,92 @@ class AuthorDetailCell: UICollectionViewCell {
 
         bioTextView = UITextView()
         bioTextView.textColor = .black90
-        bioTextView.font = UIFont.articleBody.withSize(14)
+        bioTextView.font = UIFont.avenir16
         bioTextView.textContainer.lineFragmentPadding = 0
+        bioTextView.isScrollEnabled = false
         contentView.addSubview(bioTextView)
 
         setupConstraints()
     }
 
     func setupConstraints() {
-        let imageViewTopPadding: CGFloat = 23
-        let imageViewLeadingPadding: CGFloat = 16
-        let nameLabelLeadingPadding: CGFloat = 12
-        let linkStackViewTopPadding: CGFloat = 5
-        let linkStackViewWidth: CGFloat = 212
-        let linkStackViewHeight: CGFloat = 56
-        let bioTextViewTopPadding: CGFloat = 17
-        let bioTextViewBottomPadding: CGFloat = 32
-
-        imageView.snp.makeConstraints { make in
-            make.height.width.equalTo(imageViewWidth)
-            make.top.equalToSuperview().offset(imageViewTopPadding)
-            make.leading.equalToSuperview().offset(imageViewLeadingPadding)
+        imageView.snp.remakeConstraints() { make in
+            make.height.width.equalTo(AuthorDetailCell.imageViewWidth)
+            make.top.equalToSuperview().offset(AuthorDetailCell.imageViewTopPadding)
+            make.leading.equalToSuperview().offset(AuthorDetailCell.imageViewLeadingPadding)
         }
 
-        nameLabel.snp.makeConstraints { make in
-            make.leading.equalTo(imageView.snp.trailing).offset(nameLabelLeadingPadding)
-            make.trailing.equalToSuperview().inset(imageViewLeadingPadding)
-            make.centerY.equalTo(imageView)
+        nameLabel.snp.remakeConstraints { make in
+            make.top.equalToSuperview().offset(AuthorDetailCell.nameLabelTopPadding)
+            make.leading.equalTo(imageView.snp.trailing).offset(AuthorDetailCell.nameLabelLeadingPadding)
+            make.trailing.equalToSuperview().inset(AuthorDetailCell.imageViewLeadingPadding)
         }
 
-        linkStackView.snp.makeConstraints { make in
-            make.width.equalTo(linkStackViewWidth)
-            make.top.equalTo(imageView.snp.bottom).offset(linkStackViewTopPadding)
-            make.height.equalTo(linkStackViewHeight)
-            make.centerX.equalToSuperview()
+        if emailLabel.text != "" {
+            emailLabel.snp.remakeConstraints { make in
+                make.leading.trailing.equalTo(nameLabel)
+                make.top.equalTo(nameLabel.snp.bottom).offset(AuthorDetailCell.emailLabelTopPadding)
+            }
+        } else {
+            emailLabel.snp.remakeConstraints { make in
+                make.height.equalTo(0)
+                make.top.equalTo(nameLabel.snp.bottom)
+            }
         }
 
-        underlineView.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview().inset(imageViewLeadingPadding)
-            make.top.equalTo(linkStackView.snp.bottom)
-            make.height.equalTo(1)
-        }
-
-        bioTextView.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview().inset(imageViewLeadingPadding)
-            make.top.equalTo(underlineView.snp.bottom).offset(bioTextViewTopPadding)
-            make.bottom.equalToSuperview().inset(bioTextViewBottomPadding)
+        if bioTextView.text != "" {
+            let imageBottom = imageView.frame.maxY
+            let emailBottom = emailLabel.frame.maxY
+            let lowestView: UIView = max(imageBottom, emailBottom) == imageBottom ? imageView : emailLabel
+            bioTextView.snp.remakeConstraints { make in
+                make.leading.trailing.equalToSuperview().inset(AuthorDetailCell.imageViewLeadingPadding)
+                make.top.equalTo(lowestView.snp.bottom).offset(AuthorDetailCell.bioTextViewTopPadding)
+            }
+        } else {
+            bioTextView.snp.remakeConstraints { make in
+                make.height.equalTo(0)
+            }
         }
     }
 
     func configure(for authorDetail: AuthorDetailObject) {
-        imageView.kf.setImage(with: authorDetail.imageURL)
+        if authorDetail.imageURL != nil {
+            imageView.kf.setImage(with: authorDetail.imageURL)
+        } else {
+            imageView.image = UIImage(named: "profilePictureDefault")
+        }
         nameLabel.text = authorDetail.name
-        bioTextView.text = authorDetail.bio
+        emailLabel.text = authorDetail.email ?? ""//test@cornell.edu"
+        bioTextView.text = authorDetail.bio ?? ""//Zachary is a senior in the College of Arts & Sciences studying computer science."
+        bioTextView.textContainerInset = UIEdgeInsets.zero
 
-        if let twitterURL = authorDetail.twitterLink {
-            linkStackView.addArrangedSubview(createLinkImageView(with: #imageLiteral(resourceName: "twitter")))
+        setupConstraints()
+    }
+
+    static func getHeight(for authorDetail: AuthorDetailObject, screenWidth: CGFloat) -> CGFloat {
+        let labelWidth = screenWidth - (imageViewLeadingPadding + imageViewWidth + nameLabelLeadingPadding + imageViewLeadingPadding)
+
+        var height = nameLabelTopPadding
+        height += authorDetail.name.height(withConstrainedWidth: labelWidth, font: UIFont.avenir24)
+
+        if let email = authorDetail.email, email != "" {
+            height = emailLabelTopPadding + email.height(withConstrainedWidth: labelWidth, font: UIFont.avenir16)
         }
 
-        if let linkedinURL = authorDetail.linkedInLink {
-            linkStackView.addArrangedSubview(createLinkImageView(with: #imageLiteral(resourceName: "linkedIn")))
+        let imageBottom: CGFloat = imageViewTopPadding + imageViewWidth
+
+        height = max(imageBottom, height)
+
+        if let bio = authorDetail.bio, bio != "" {
+            height += bioTextViewTopPadding
+            let bioWidth = screenWidth - (2 * imageViewLeadingPadding)
+            height += bio.height(withConstrainedWidth: bioWidth, font: UIFont.avenir16)
         }
 
-        if let emailURL = authorDetail.email {
-            linkStackView.addArrangedSubview(createLinkImageView(with: #imageLiteral(resourceName: "mail")))
-        }
+        height += authorDetail.bio == nil
+            ? bottomPadding
+            : bottomPadding * 2
+        return height
     }
 
     private func createLinkImageView(with image: UIImage) -> UIImageView {

@@ -22,6 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let redirectScheme = "cornellsun"
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+
         // Override point for customization after application launch.
         IQKeyboardManager.shared.enable = true
         // Set all navigation bar attributes

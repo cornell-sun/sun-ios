@@ -576,8 +576,8 @@ extension ArticleStackViewController: UITextViewDelegate {
 extension ArticleStackViewController: ArticleHeaderDelegate {
 
     func articleHeaderDidPressOnAuthor() {
-        guard let author = post.author?.first else { return }
-        let authorDetailViewController = AuthorDetailViewController(author: author, authorID: post.authorID)
+        guard let authors = post.author else { return }
+        let authorDetailViewController = AuthorDetailViewController(authors: authors)
         navigationController?.pushViewController(authorDetailViewController, animated: true)
     }
 

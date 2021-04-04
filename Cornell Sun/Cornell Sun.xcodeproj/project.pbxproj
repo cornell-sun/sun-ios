@@ -105,9 +105,14 @@
 		E60483CB2586F76F0097A58E /* OnboardingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E60483C32586F76F0097A58E /* OnboardingTableViewCell.swift */; };
 		E60483CC2586F76F0097A58E /* OnboardingSubscribeInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E60483C42586F76F0097A58E /* OnboardingSubscribeInfoTableViewCell.swift */; };
 		E60483CD2586F76F0097A58E /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E60483C52586F76F0097A58E /* OnboardingViewController.swift */; };
+		E61AC556261302F000CFFFBB /* AuthorSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E61AC555261302F000CFFFBB /* AuthorSelectView.swift */; };
+		E61D3C8C25EBFFFB0024C487 /* avenir_medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E61D3C8825EBFF960024C487 /* avenir_medium.ttf */; };
+		E636B87625FED8550009AEB9 /* UISegmentedControl+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E636B87525FED8550009AEB9 /* UISegmentedControl+.swift */; };
 		E67E12C825BCDF36000DB3A1 /* AuthorDetailSectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E67E12C625BCDF36000DB3A1 /* AuthorDetailSectionController.swift */; };
 		E67E12C925BCDF36000DB3A1 /* AuthorDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E67E12C725BCDF36000DB3A1 /* AuthorDetailViewController.swift */; };
+		E6B294E52613E78200B6659D /* PostPreviewObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6B294E42613E78200B6659D /* PostPreviewObject.swift */; };
 		E6BBD794257DBE60002BE7C5 /* Sections.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6BBD793257DBE60002BE7C5 /* Sections.swift */; };
+		E6BD9A54260A9C00004E4391 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6BD9A53260A9C00004E4391 /* String+.swift */; };
 		FB2636A9E7C42C974338EBE0 /* Pods_SunNotificationServiceExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A95DF6C970C7F967623E60F /* Pods_SunNotificationServiceExtension.framework */; };
 /* End PBXBuildFile section */
 
@@ -257,9 +262,14 @@
 		E60483C32586F76F0097A58E /* OnboardingTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingTableViewCell.swift; sourceTree = "<group>"; };
 		E60483C42586F76F0097A58E /* OnboardingSubscribeInfoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingSubscribeInfoTableViewCell.swift; sourceTree = "<group>"; };
 		E60483C52586F76F0097A58E /* OnboardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
+		E61AC555261302F000CFFFBB /* AuthorSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AuthorSelectView.swift; path = "/Users/cameronhamidi/Documents/Daily Sun/sun-ios/Cornell Sun/Cornell Sun/Author Detail/AuthorSelectView.swift"; sourceTree = "<absolute>"; };
+		E61D3C8825EBFF960024C487 /* avenir_medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = avenir_medium.ttf; sourceTree = "<group>"; };
+		E636B87525FED8550009AEB9 /* UISegmentedControl+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISegmentedControl+.swift"; sourceTree = "<group>"; };
 		E67E12C625BCDF36000DB3A1 /* AuthorDetailSectionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthorDetailSectionController.swift; sourceTree = "<group>"; };
 		E67E12C725BCDF36000DB3A1 /* AuthorDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthorDetailViewController.swift; sourceTree = "<group>"; };
+		E6B294E42613E78200B6659D /* PostPreviewObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PostPreviewObject.swift; path = "Cornell Sun/PostPreviewObject.swift"; sourceTree = "<group>"; };
 		E6BBD793257DBE60002BE7C5 /* Sections.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Sections.swift; path = "Cornell Sun/Sections.swift"; sourceTree = "<group>"; };
+		E6BD9A53260A9C00004E4391 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -373,6 +383,7 @@
 		5006AFFA1EA9625000F58549 /* Cornell Sun */ = {
 			isa = PBXGroup;
 			children = (
+				E600B40D25F84F6200D15D97 /* ArticleModalMenu */,
 				34C558282041E42A00E62CE8 /* Ad Section */,
 				5006AFFB1EA9625000F58549 /* AppDelegate.swift */,
 				0C15F1851FBDD1A5009724DB /* Article Detail */,
@@ -413,6 +424,7 @@
 				DC0E7C4D208FFCBA00B1295F /* PostObjectHelpers.swift */,
 				405F83D91FBE1E3000360AEB /* Enums.swift */,
 				50A898111EAEC93B0099CFA9 /* AuthorObject.swift */,
+				E6B294E42613E78200B6659D /* PostPreviewObject.swift */,
 				5006B24C1EADA37E00F58549 /* PostObject.swift */,
 				DCFC88C51F86C03700A0D8A9 /* CommentObject.swift */,
 				DC6561D21FBAC45900C5062D /* PhotoGalleryObject.swift */,
@@ -470,10 +482,11 @@
 		DC34DEEB203213A90010DF9A /* Font Extension */ = {
 			isa = PBXGroup;
 			children = (
-				0CED4FAC1FAB523F0025EB91 /* UIFont+.swift */,
+				E61D3C8825EBFF960024C487 /* avenir_medium.ttf */,
 				DCB717111FB94BCA00BE4D26 /* KeplerStd-Bold.otf */,
 				0C30CF802097AC4500015EF6 /* KeplerStd-Italic.otf */,
 				DC818DA21F75E08B0064AFFA /* Sonnenstrahl-Ausgezeichnet.ttf */,
+				0CED4FAC1FAB523F0025EB91 /* UIFont+.swift */,
 			);
 			path = "Font Extension";
 			sourceTree = "<group>";
@@ -517,6 +530,8 @@
 				DC556AC420602E6900475B7D /* Constants.swift */,
 				0C59AD43208D505700CF3A31 /* Button.swift */,
 				34992231227E852000926B6D /* NotificationCenterExtension.swift */,
+				E636B87525FED8550009AEB9 /* UISegmentedControl+.swift */,
+				E6BD9A53260A9C00004E4391 /* String+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -646,9 +661,17 @@
 			path = "Bookmark Section";
 			sourceTree = "<group>";
 		};
+		E600B40D25F84F6200D15D97 /* ArticleModalMenu */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ArticleModalMenu;
+			sourceTree = "<group>";
+		};
 		E67E12C525BCDF36000DB3A1 /* Author Detail */ = {
 			isa = PBXGroup;
 			children = (
+				E61AC555261302F000CFFFBB /* AuthorSelectView.swift */,
 				E67E12C625BCDF36000DB3A1 /* AuthorDetailSectionController.swift */,
 				E67E12C725BCDF36000DB3A1 /* AuthorDetailViewController.swift */,
 			);
@@ -797,6 +820,7 @@
 				5006B0031EA9625000F58549 /* Assets.xcassets in Resources */,
 				3491BAB323DCABD700BE1E4E /* Launch Screen Dark1.storyboard in Resources */,
 				DC818DA31F75E0CF0064AFFA /* Sonnenstrahl-Ausgezeichnet.ttf in Resources */,
+				E61D3C8C25EBFFFB0024C487 /* avenir_medium.ttf in Resources */,
 				3491BAB123DCABC400BE1E4E /* Launch Screen Dark2.storyboard in Resources */,
 				3487167D2041F09D008CB9D5 /* Launch Screen.storyboard in Resources */,
 				0427821223C45FE8006FE55B /* GoogleService-Info.plist in Resources */,
@@ -870,6 +894,7 @@
 				"${BUILT_PRODUCTS_DIR}/FirebaseCrashlytics/FirebaseCrashlytics.framework",
 				"${BUILT_PRODUCTS_DIR}/FirebaseInstallations/FirebaseInstallations.framework",
 				"${BUILT_PRODUCTS_DIR}/FirebaseRemoteConfig/FirebaseRemoteConfig.framework",
+				"${BUILT_PRODUCTS_DIR}/FloatingPanel/FloatingPanel.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleDataTransport/GoogleDataTransport.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
@@ -901,6 +926,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseCrashlytics.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseInstallations.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseRemoteConfig.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FloatingPanel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleDataTransport.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
@@ -1013,8 +1039,10 @@
 				DCB717161FBA016400BE4D26 /* TaglineCell.swift in Sources */,
 				0C49290520A14C4B004AF877 /* SettingObject.swift in Sources */,
 				DC0A88401FBA84E700F2BCBB /* AuthorCell.swift in Sources */,
+				E636B87625FED8550009AEB9 /* UISegmentedControl+.swift in Sources */,
 				E60483C82586F76F0097A58E /* OnboardingPageCollectionViewCell.swift in Sources */,
 				DCA75BA020B7B34C003A1D5C /* EmptyView.swift in Sources */,
+				E6B294E52613E78200B6659D /* PostPreviewObject.swift in Sources */,
 				0C15F1871FBDD433009724DB /* ArticleHeaderView.swift in Sources */,
 				DC79719F1F7B30540055A7B2 /* CategoryCell.swift in Sources */,
 				DC34DEF3203216690010DF9A /* SectionViewController.swift in Sources */,
@@ -1027,6 +1055,7 @@
 				50A898121EAEC93B0099CFA9 /* AuthorObject.swift in Sources */,
 				DC695D8B1FBB897600C6C62F /* PostOffice.swift in Sources */,
 				DC556AC520602E6900475B7D /* Constants.swift in Sources */,
+				E61AC556261302F000CFFFBB /* AuthorSelectView.swift in Sources */,
 				0CCD0BD7209D4A8C0042E17C /* SuggestedStoryObject.swift in Sources */,
 				61652CD21F6EF3A500EEFC29 /* SearchViewController.swift in Sources */,
 				4029BB0A2087B02300E8BAEB /* NotificationsTableViewCell.swift in Sources */,
@@ -1057,6 +1086,7 @@
 				DC4308EF1F2563FF00ABB31F /* API.swift in Sources */,
 				D91565CB2166A04900BCA466 /* SectionTableViewCell.swift in Sources */,
 				0C59AD44208D505700CF3A31 /* Button.swift in Sources */,
+				E6BD9A54260A9C00004E4391 /* String+.swift in Sources */,
 				4047EA05207590450030067E /* NotificationViewController.swift in Sources */,
 				34A481762384DD4E00FB168A /* ThemeViewController.swift in Sources */,
 				34992232227E852000926B6D /* NotificationCenterExtension.swift in Sources */,

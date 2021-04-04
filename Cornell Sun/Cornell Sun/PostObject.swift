@@ -62,6 +62,16 @@ class PostObject: NSObject, Codable, ListDiffable {
         self.content = try nested.decode(String.self, forKey: .content)
         self.author = try? nested.decode([AuthorObject].self, forKey: .author)
         self.authorID = try nested.decode(Int.self, forKey: .authorID)
+
+        if let authors = self.author, authors.count > 0 && authors[0].name.contains(" and ") {
+            let authorNames = authors[0].name.components(separatedBy: " and ")
+            authors[0].name = authorNames[0]
+            for i in (1..<authorNames.count) {
+                self.author?.append(AuthorObject(name: authorNames[i]))
+            }
+        }
+
+        self.authorID = try nested.decode(Int.self, forKey: .authorID)
         self.featuredMediaImages = try? nested.decode(FeaturedMediaImages.self, forKey: .featuredMediaImages)
         self.featuredMediaCaption = try nested.decode(String?.self, forKey: .featuredMediaCaption)
         self.featuredMediaCredit = try nested.decode(String?.self, forKey: .featuredMediaCredit)

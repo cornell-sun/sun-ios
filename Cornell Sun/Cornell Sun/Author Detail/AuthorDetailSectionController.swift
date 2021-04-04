@@ -11,15 +11,19 @@ import Foundation
 
 class AuthorDetailSectionController: ListSectionController {
     var authorDetailObject: AuthorDetailObject!
+    var screenWidth: CGFloat!
 
-    convenience init(authorDetail: AuthorDetailObject) {
+    convenience init(authorDetail: AuthorDetailObject, screenWidth: CGFloat) {
         self.init()
+        inset = UIEdgeInsets(top: 0, left: 0, bottom: 15, right: 0)
         self.authorDetailObject = authorDetail
+        self.screenWidth = screenWidth
     }
 
     override func sizeForItem(at index: Int) -> CGSize {
         guard let context = collectionContext?.containerSize else { return .zero }
-        return CGSize(width: context.width, height: 265)
+        let height = AuthorDetailCell.getHeight(for: authorDetailObject, screenWidth: screenWidth)
+        return CGSize(width: context.width, height: height)
     }
 
     override func cellForItem(at index: Int) -> UICollectionViewCell {

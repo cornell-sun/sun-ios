@@ -10,21 +10,22 @@ import IGListKit
 import Foundation
 
 class AuthorObject: Codable {
-    var id: Int?
     var name: String
     var avatarURL: URL?
     var bio: String?
-    var link: URL?
-    var twitter: URL?
-    var linkedin: URL?
+    var link: String?
+    var twitter: String?
+    var linkedin: String?
     var email: String?
+    var posts: [PostObject]?
+    var postsPage: Int = 1 // Used only in AuthorDetailViewController
 
     init(name: String) {
         self.name = name
     }
 
     enum CodingKeys: String, CodingKey {
-        case id, name, bio, link, twitter, linkedin, email
+        case name, bio, link, twitter, linkedin, email, posts
         case avatarURL = "avatar_url"
     }
 }
@@ -34,11 +35,11 @@ class AuthorDetailObject: ListDiffable {
     var email: String?
     private var identifier = UUID().uuidString // unless we get an id
     var imageURL: URL?
-    var linkedInLink: URL?
+    var linkedInLink: String?
     var name: String
-    var twitterLink: URL?
+    var twitterLink: String?
 
-    init(bio: String?, email: String?, imageURL: URL?, linkedIn: URL?, name: String, twitter: URL?) {
+    init(bio: String?, email: String?, imageURL: URL?, linkedIn: String?, name: String, twitter: String?) {
         self.bio = bio
         self.email = email
         self.imageURL = imageURL

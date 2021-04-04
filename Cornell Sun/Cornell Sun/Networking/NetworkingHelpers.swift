@@ -120,19 +120,24 @@ func getPostFromID(_ id: Int, completion: @escaping (PostObject) -> Void) {
     API.request(target: .post(postId: id)) { response in
         guard let response = response else {
             print("Error fetching post by id: \(id)")
-            fatalError()
+            return
         }
         do {
             let post = try decoder.decode(PostObject.self, from: response.data)
             completion(post)
         } catch let error {
             print("Error: \(error)")
-            fatalError()
+            return
         }
     }
 }
 
 func getIDFromURL(_ url: URL, completion: @escaping (Int?) -> Void) {
+    let urlString = url.absoluteString
+    if !urlString.contains("cornellsun.com") {
+        completion(nil)
+        return
+    }
     API.request(target: .urlToID(url: url)) { response in
         guard let tryID = ((try? response?.mapString()) as String??), let idString = tryID, let id = Int(idString), id != 0 else {
             completion(nil)
@@ -140,7 +145,7 @@ func getIDFromURL(_ url: URL, completion: @escaping (Int?) -> Void) {
         }
         completion(id)
     }
-    completion(0)
+    completion(nil)
 }
 
 func prepareInitialPosts(callback: @escaping ([ListDiffable], PostObject?) -> Void) {

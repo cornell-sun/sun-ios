@@ -11,7 +11,8 @@ import SnapKit
 
 final class CategoryCell: UICollectionViewCell {
 
-    var categoryLabelLeading = 17.0
+    let categoryLabelLeading = 16.0
+    let dividerPadding = 14.0
 
     var post: PostObject? {
         didSet {
@@ -30,8 +31,8 @@ final class CategoryCell: UICollectionViewCell {
     let categoryLabel: UILabel = {
         let label = UILabel()
         label.text = ""
-        label.font = .secondaryHeader
-        label.numberOfLines = 2
+        label.font = .avenir16
+        label.numberOfLines = 1
         return label
     }()
 
@@ -56,7 +57,7 @@ final class CategoryCell: UICollectionViewCell {
     func setupViews() {
         self.backgroundColor = darkModeEnabled ? .darkCell : .white
         categoryLabel.textColor = darkModeEnabled ? .white90 : .black60
-        divider.backgroundColor = darkModeEnabled ? .white40 : .black40
+        divider.backgroundColor = darkModeEnabled ? .white40 : .dividerGray
         addSubview(categoryLabel)
         addSubview(divider)
         categoryLabel.snp.makeConstraints { (make) in
@@ -65,7 +66,8 @@ final class CategoryCell: UICollectionViewCell {
         }
         divider.snp.makeConstraints { (make) in
             make.height.equalTo(1)
-            make.width.equalToSuperview()
+            make.leading.equalToSuperview().offset(dividerPadding)
+            make.trailing.equalToSuperview().offset(-dividerPadding)
             make.bottom.equalToSuperview().inset(1)
         }
     }
