@@ -262,7 +262,7 @@
 		E60483C32586F76F0097A58E /* OnboardingTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingTableViewCell.swift; sourceTree = "<group>"; };
 		E60483C42586F76F0097A58E /* OnboardingSubscribeInfoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingSubscribeInfoTableViewCell.swift; sourceTree = "<group>"; };
 		E60483C52586F76F0097A58E /* OnboardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
-		E61AC555261302F000CFFFBB /* AuthorSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AuthorSelectView.swift; path = "/Users/cameronhamidi/Documents/Daily Sun/sun-ios/Cornell Sun/Cornell Sun/Author Detail/AuthorSelectView.swift"; sourceTree = "<absolute>"; };
+		E61AC555261302F000CFFFBB /* AuthorSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorSelectView.swift; sourceTree = "<group>"; };
 		E61D3C8825EBFF960024C487 /* avenir_medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = avenir_medium.ttf; sourceTree = "<group>"; };
 		E636B87525FED8550009AEB9 /* UISegmentedControl+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISegmentedControl+.swift"; sourceTree = "<group>"; };
 		E67E12C625BCDF36000DB3A1 /* AuthorDetailSectionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthorDetailSectionController.swift; sourceTree = "<group>"; };
