@@ -14,8 +14,11 @@ class AuthorDetailViewController: UIViewController, UIScrollViewDelegate {
 
     // MARK: View vars
     let spinToken = "spinner"
-
+    let authorSwitchTitleClosed = "Choose Author ▼"
+    let authorSwitchTitleOpened = "Choose Author ▲"
+    
     private var loading = true
+    private var hasNextPage = true
     private var currentPage = 1
 
     var adapter: ListAdapter!
@@ -45,7 +48,7 @@ class AuthorDetailViewController: UIViewController, UIScrollViewDelegate {
 
         if authors.count > 1 {
             authorSwitchButton = UIButton()
-            authorSwitchButton.setTitle("Choose author ▼", for: .normal)
+            authorSwitchButton.setTitle(authorSwitchTitleClosed, for: .normal)
             authorSwitchButton.setTitleColor(.black, for: .normal)
             authorSwitchButton.showsTouchWhenHighlighted = false
             authorSwitchButton.adjustsImageWhenHighlighted = false
@@ -103,7 +106,7 @@ class AuthorDetailViewController: UIViewController, UIScrollViewDelegate {
 
     @objc func showHideAuthorSelect() {
         if authorSelectViewExtended {
-            authorSwitchButton.setTitle("Choose author ▼", for: .normal)
+            authorSwitchButton.setTitle(authorSwitchTitleClosed, for: .normal)
             navigationItem.titleView = authorSwitchButton
             UIView.animate(withDuration: 0.2, animations: {
                 self.tintView.isHidden = true
@@ -112,7 +115,7 @@ class AuthorDetailViewController: UIViewController, UIScrollViewDelegate {
                 self.view.layoutIfNeeded()
             })
         } else {
-            authorSwitchButton.setTitle("Choose author ▲", for: .normal)
+            authorSwitchButton.setTitle(authorSwitchTitleOpened, for: .normal)
             navigationItem.titleView = authorSwitchButton
             UIView.animate(withDuration: 0.2, animations: {
                 self.tintView.isHidden = false
@@ -132,6 +135,11 @@ class AuthorDetailViewController: UIViewController, UIScrollViewDelegate {
             if let response = response {
                 do {
                     let newPosts = try decoder.decode(AuthorObject.self, from: response.data).posts
+                    
+                    if (newPosts!.isEmpty) {
+                        self.hasNextPage = false
+                    }
+                    
                     if let posts = author.posts {
                         author.posts = posts + (newPosts ?? [])
                     } else {
@@ -178,14 +186,13 @@ class AuthorDetailViewController: UIViewController, UIScrollViewDelegate {
     }
 
     func networkRequestEnded() {
-        self.adapter.performUpdates(animated: true, completion: { _ in
-            self.loading = false
-        })
+        self.loading = false
+        self.adapter.performUpdates(animated: true, completion: nil)
     }
 
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         let distance = scrollView.contentSize.height - (targetContentOffset.pointee.y + scrollView.bounds.height)
-        if !loading && distance < 300 {
+        if !loading && distance < 300 && hasNextPage {
             getAuthorPosts(for: authors[selectedAuthor])
         }
     }

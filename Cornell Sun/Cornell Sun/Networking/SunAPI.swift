@@ -64,7 +64,7 @@ extension SunAPI: TargetType {
             return "\(defaultPath)/posts"
         case .postsFor(let authorName, let page):
             let cleanedAuthor = authorName.replacingOccurrences(of: " ", with: "+")
-            return "\(backendPath)/authors/\(cleanedAuthor)/\(page)"
+            return "\(backendPath)/author/\(cleanedAuthor)/\(page)"
         case .author(let authorName):
             let cleanedAuthor = authorName.replacingOccurrences(of: " ", with: "+")
             return "\(backendPath)/author/\(cleanedAuthor)"
