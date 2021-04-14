@@ -63,11 +63,22 @@ class PostObject: NSObject, Codable, ListDiffable {
         self.author = try? nested.decode([AuthorObject].self, forKey: .author)
         self.authorID = try nested.decode(Int.self, forKey: .authorID)
 
-        if let authors = self.author, authors.count > 0 && authors[0].name.contains(" and ") {
-            let authorNames = authors[0].name.components(separatedBy: " and ")
+        if let authors = self.author, authors.count > 0 {
+            var authorNames: [String] = authors[0].name.components(separatedBy: ", ")
+            if let lastName = authorNames.last {
+                if lastName.contains(" and ") {
+                    authorNames = authorNames.dropLast() + lastName.components(separatedBy: " and ")
+                } else if lastName.contains("and ") {
+                    authorNames = authorNames.dropLast() + lastName.components(separatedBy: "and ")
+                }
+                authorNames = authorNames.filter { $0 != "" }
+            }
+
             authors[0].name = authorNames[0]
-            for i in (1..<authorNames.count) {
-                self.author?.append(AuthorObject(name: authorNames[i]))
+            if authorNames.count > 1 {
+                for i in (1..<authorNames.count) {
+                    self.author?.append(AuthorObject(name: authorNames[i]))
+                }
             }
         }
 

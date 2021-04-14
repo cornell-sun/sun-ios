@@ -62,11 +62,11 @@ extension SunAPI: TargetType {
         switch self {
         case .posts, .search, .section:
             return "\(defaultPath)/posts"
-        case .postsFor(let authorName, let page):
-            let cleanedAuthor = authorName.replacingOccurrences(of: " ", with: "+")
-            return "\(backendPath)/author/\(cleanedAuthor)/\(page)"
+        case .postsFor(let authorName, _):
+            let cleanedAuthor = cleanString(authorName)
+            return "\(backendPath)/author/\(cleanedAuthor)"
         case .author(let authorName):
-            let cleanedAuthor = authorName.replacingOccurrences(of: " ", with: "+")
+            let cleanedAuthor = cleanString(authorName)
             return "\(backendPath)/author/\(cleanedAuthor)"
         case .media(let mediaId):
             return "\(defaultPath)/media/" + mediaId
@@ -103,6 +103,10 @@ extension SunAPI: TargetType {
             return .requestParameters(parameters: ["page": page], encoding: URLEncoding.default)
         case .posts(let page):
             return .requestParameters(parameters: ["page": page], encoding: URLEncoding.default)
+        case .postsFor(_, let page):
+            return .requestParameters(parameters: ["page": page], encoding: URLEncoding.default)
+        case .author:
+            return .requestParameters(parameters: ["page": 1], encoding: URLEncoding.default)
         case .comments(let postId):
             return .requestParameters(parameters: ["post": postId], encoding: URLEncoding.default)
         case .search(let query, let page):
@@ -114,5 +118,14 @@ extension SunAPI: TargetType {
         default:
             return .requestPlain
         }
+    }
+
+    func cleanString(_ string: String) -> String {
+//        let newString = string.replacingOccurrences(of: " ", with: "+")
+//        var cs = CharacterSet.urlQueryAllowed
+//        cs.remove("&")
+//        let cleanedString: String? = newString.addingPercentEncoding(withAllowedCharacters: cs)
+//        return cleanedString ?? string
+        return string.replacingOccurrences(of: " ", with: "+")
     }
 }

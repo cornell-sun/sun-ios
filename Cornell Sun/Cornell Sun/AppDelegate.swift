@@ -98,7 +98,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //fake id ca-app-pub-3940256099942544/2934735716
 
         // Init Firebase SDK
-        FirebaseApp.configure()
+        FirebaseConfiguration.shared.setLoggerLevel(.min)
+//        FirebaseApp.configure()
         
         // Init Google Mobile Ads SDK
         GADMobileAds.sharedInstance().start(completionHandler: nil)

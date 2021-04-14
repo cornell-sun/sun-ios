@@ -110,7 +110,6 @@
 		E636B87625FED8550009AEB9 /* UISegmentedControl+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E636B87525FED8550009AEB9 /* UISegmentedControl+.swift */; };
 		E67E12C825BCDF36000DB3A1 /* AuthorDetailSectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E67E12C625BCDF36000DB3A1 /* AuthorDetailSectionController.swift */; };
 		E67E12C925BCDF36000DB3A1 /* AuthorDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E67E12C725BCDF36000DB3A1 /* AuthorDetailViewController.swift */; };
-		E6B294E52613E78200B6659D /* PostPreviewObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6B294E42613E78200B6659D /* PostPreviewObject.swift */; };
 		E6BBD794257DBE60002BE7C5 /* Sections.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6BBD793257DBE60002BE7C5 /* Sections.swift */; };
 		E6BD9A54260A9C00004E4391 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6BD9A53260A9C00004E4391 /* String+.swift */; };
 		FB2636A9E7C42C974338EBE0 /* Pods_SunNotificationServiceExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A95DF6C970C7F967623E60F /* Pods_SunNotificationServiceExtension.framework */; };
@@ -267,7 +266,6 @@
 		E636B87525FED8550009AEB9 /* UISegmentedControl+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISegmentedControl+.swift"; sourceTree = "<group>"; };
 		E67E12C625BCDF36000DB3A1 /* AuthorDetailSectionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthorDetailSectionController.swift; sourceTree = "<group>"; };
 		E67E12C725BCDF36000DB3A1 /* AuthorDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthorDetailViewController.swift; sourceTree = "<group>"; };
-		E6B294E42613E78200B6659D /* PostPreviewObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PostPreviewObject.swift; path = "Cornell Sun/PostPreviewObject.swift"; sourceTree = "<group>"; };
 		E6BBD793257DBE60002BE7C5 /* Sections.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Sections.swift; path = "Cornell Sun/Sections.swift"; sourceTree = "<group>"; };
 		E6BD9A53260A9C00004E4391 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -424,7 +422,6 @@
 				DC0E7C4D208FFCBA00B1295F /* PostObjectHelpers.swift */,
 				405F83D91FBE1E3000360AEB /* Enums.swift */,
 				50A898111EAEC93B0099CFA9 /* AuthorObject.swift */,
-				E6B294E42613E78200B6659D /* PostPreviewObject.swift */,
 				5006B24C1EADA37E00F58549 /* PostObject.swift */,
 				DCFC88C51F86C03700A0D8A9 /* CommentObject.swift */,
 				DC6561D21FBAC45900C5062D /* PhotoGalleryObject.swift */,
@@ -1042,7 +1039,6 @@
 				E636B87625FED8550009AEB9 /* UISegmentedControl+.swift in Sources */,
 				E60483C82586F76F0097A58E /* OnboardingPageCollectionViewCell.swift in Sources */,
 				DCA75BA020B7B34C003A1D5C /* EmptyView.swift in Sources */,
-				E6B294E52613E78200B6659D /* PostPreviewObject.swift in Sources */,
 				0C15F1871FBDD433009724DB /* ArticleHeaderView.swift in Sources */,
 				DC79719F1F7B30540055A7B2 /* CategoryCell.swift in Sources */,
 				DC34DEF3203216690010DF9A /* SectionViewController.swift in Sources */,

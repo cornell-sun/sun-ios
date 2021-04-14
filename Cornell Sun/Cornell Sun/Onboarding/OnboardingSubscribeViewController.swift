@@ -64,10 +64,11 @@ class OnboardingSubscribeViewController: UIViewController {
 
         let buttonAttributes: [NSAttributedString.Key: Any] = [
             .font: UIFont.systemFont(ofSize: 14),
-            .foregroundColor: UIColor.white.cgColor,
-            .underlineStyle: NSUnderlineStyle.single.rawValue]
+            .foregroundColor: UIColor.white,
+            .underlineStyle: 1]
         let attributedString = NSAttributedString(string: "Not Now", attributes: buttonAttributes)
         notNowButton.setAttributedTitle(attributedString, for: .normal)
+//        notNowButton.setAttributedTitle(NSAttributedString(string: "Hello There"), for: .normal)
         notNowButton.addTarget(self, action: #selector(dismissPageController), for: .touchUpInside)
         view.addSubview(notNowButton)
 

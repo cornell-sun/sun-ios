@@ -14,8 +14,8 @@ class AuthorDetailViewController: UIViewController, UIScrollViewDelegate {
 
     // MARK: View vars
     let spinToken = "spinner"
-    let authorSwitchTitleClosed = "Choose Author ▼"
-    let authorSwitchTitleOpened = "Choose Author ▲"
+    let authorSwitchIconHeight: CGFloat = 8
+    let authorSwitchIconWidth: CGFloat = 14
     
     private var loading = true
     private var hasNextPage = true
@@ -27,6 +27,8 @@ class AuthorDetailViewController: UIViewController, UIScrollViewDelegate {
     var authorSelectTopUp: Constraint!
     var authorSelectViewExtended = false
     var authorSwitchButton: UIButton!
+    var authorSwitchIcon: UIImageView!
+    var authorSwitchLabel: UILabel!
     var collectionView: UICollectionView!
     var selectedAuthor = 0
     var tintView = UIView()
@@ -48,13 +50,32 @@ class AuthorDetailViewController: UIViewController, UIScrollViewDelegate {
 
         if authors.count > 1 {
             authorSwitchButton = UIButton()
-            authorSwitchButton.setTitle(authorSwitchTitleClosed, for: .normal)
-            authorSwitchButton.setTitleColor(.black, for: .normal)
             authorSwitchButton.showsTouchWhenHighlighted = false
             authorSwitchButton.adjustsImageWhenHighlighted = false
-            authorSwitchButton.titleLabel?.textColor = .black
-            authorSwitchButton.titleLabel?.font = .avenir18
             authorSwitchButton.addTarget(self, action: #selector(showHideAuthorSelect), for: .touchUpInside)
+
+            authorSwitchLabel = UILabel()
+            authorSwitchLabel.text = "Choose Author  "
+            authorSwitchLabel.textColor = .black
+            authorSwitchLabel.font = .avenir18
+
+            authorSwitchIcon = UIImageView(image: UIImage(named: "authorsDropdownArrowDown"))
+            authorSwitchIcon.contentMode = .scaleAspectFit
+
+            authorSwitchButton.addSubview(authorSwitchLabel)
+            authorSwitchButton.addSubview(authorSwitchIcon)
+
+            authorSwitchLabel.snp.makeConstraints { make in
+                make.leading.centerY.equalToSuperview()
+                make.trailing.equalTo(authorSwitchIcon.snp.leading).offset(5)
+            }
+
+            authorSwitchIcon.snp.makeConstraints { make in
+                make.trailing.centerY.equalToSuperview()
+                make.width.equalTo(authorSwitchIconWidth)
+                make.height.equalTo(authorSwitchIconHeight)
+            }
+
             navigationItem.titleView = authorSwitchButton
         }
 
@@ -106,21 +127,19 @@ class AuthorDetailViewController: UIViewController, UIScrollViewDelegate {
 
     @objc func showHideAuthorSelect() {
         if authorSelectViewExtended {
-            authorSwitchButton.setTitle(authorSwitchTitleClosed, for: .normal)
-            navigationItem.titleView = authorSwitchButton
             UIView.animate(withDuration: 0.2, animations: {
                 self.tintView.isHidden = true
                 self.authorSelectTopDown.deactivate()
                 self.authorSelectTopUp.activate()
+                self.authorSwitchIcon.transform = CGAffineTransform(rotationAngle: .pi * 2)
                 self.view.layoutIfNeeded()
             })
         } else {
-            authorSwitchButton.setTitle(authorSwitchTitleOpened, for: .normal)
-            navigationItem.titleView = authorSwitchButton
             UIView.animate(withDuration: 0.2, animations: {
                 self.tintView.isHidden = false
                 self.authorSelectTopUp.deactivate()
                 self.authorSelectTopDown.activate()
+                self.authorSwitchIcon.transform = CGAffineTransform(rotationAngle: -.pi)
                 self.view.layoutIfNeeded()
             })
         }

@@ -64,6 +64,8 @@ extension Array where Element: AuthorObject {
     var byline: String {
         let names = self.map { $0.name }
         guard let last = names.last else { return "" }
-        return names.count <= 2 ? names.joined(separator: " and ") : names.dropLast().joined(separator: ", ") + ", and " + last
+        return names.count <= 2
+            ? names.joined(separator: " and ")
+            : names.dropLast().joined(separator: ", ") + ", and " + last
     }
 }
