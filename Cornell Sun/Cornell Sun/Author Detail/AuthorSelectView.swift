@@ -12,15 +12,15 @@ class AuthorSelectView: UIView {
 
     let cellHeight: CGFloat = 41
     let cellIdentifier = "cellIdentifier"
-    let tableViewTopOffset: CGFloat = 18
-    let tableViewBottomOffset: CGFloat = 33
-    let tableViewSideOffset: CGFloat = 41
     let handleBottomOffset: CGFloat = -19
     let handleHeight: CGFloat = 7
     let handleWidth: CGFloat = 65
+    let tableViewBottomOffset: CGFloat = 33
+    let tableViewSideOffset: CGFloat = 41
+    let tableViewTopOffset: CGFloat = 18
 
-    let tableView = UITableView()
     let handle = UIView()
+    let tableView = UITableView()
 
     var authorNames: [String] = []
     var selectedIndex = 0

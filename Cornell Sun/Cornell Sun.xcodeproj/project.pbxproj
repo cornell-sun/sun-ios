@@ -107,7 +107,6 @@
 		E60483CD2586F76F0097A58E /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E60483C52586F76F0097A58E /* OnboardingViewController.swift */; };
 		E61AC556261302F000CFFFBB /* AuthorSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E61AC555261302F000CFFFBB /* AuthorSelectView.swift */; };
 		E61D3C8C25EBFFFB0024C487 /* avenir_medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E61D3C8825EBFF960024C487 /* avenir_medium.ttf */; };
-		E636B87625FED8550009AEB9 /* UISegmentedControl+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E636B87525FED8550009AEB9 /* UISegmentedControl+.swift */; };
 		E67E12C825BCDF36000DB3A1 /* AuthorDetailSectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E67E12C625BCDF36000DB3A1 /* AuthorDetailSectionController.swift */; };
 		E67E12C925BCDF36000DB3A1 /* AuthorDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E67E12C725BCDF36000DB3A1 /* AuthorDetailViewController.swift */; };
 		E6BBD794257DBE60002BE7C5 /* Sections.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6BBD793257DBE60002BE7C5 /* Sections.swift */; };
@@ -263,7 +262,6 @@
 		E60483C52586F76F0097A58E /* OnboardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		E61AC555261302F000CFFFBB /* AuthorSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorSelectView.swift; sourceTree = "<group>"; };
 		E61D3C8825EBFF960024C487 /* avenir_medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = avenir_medium.ttf; sourceTree = "<group>"; };
-		E636B87525FED8550009AEB9 /* UISegmentedControl+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISegmentedControl+.swift"; sourceTree = "<group>"; };
 		E67E12C625BCDF36000DB3A1 /* AuthorDetailSectionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthorDetailSectionController.swift; sourceTree = "<group>"; };
 		E67E12C725BCDF36000DB3A1 /* AuthorDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthorDetailViewController.swift; sourceTree = "<group>"; };
 		E6BBD793257DBE60002BE7C5 /* Sections.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Sections.swift; path = "Cornell Sun/Sections.swift"; sourceTree = "<group>"; };
@@ -527,7 +525,6 @@
 				DC556AC420602E6900475B7D /* Constants.swift */,
 				0C59AD43208D505700CF3A31 /* Button.swift */,
 				34992231227E852000926B6D /* NotificationCenterExtension.swift */,
-				E636B87525FED8550009AEB9 /* UISegmentedControl+.swift */,
 				E6BD9A53260A9C00004E4391 /* String+.swift */,
 			);
 			path = Extensions;
@@ -1036,7 +1033,6 @@
 				DCB717161FBA016400BE4D26 /* TaglineCell.swift in Sources */,
 				0C49290520A14C4B004AF877 /* SettingObject.swift in Sources */,
 				DC0A88401FBA84E700F2BCBB /* AuthorCell.swift in Sources */,
-				E636B87625FED8550009AEB9 /* UISegmentedControl+.swift in Sources */,
 				E60483C82586F76F0097A58E /* OnboardingPageCollectionViewCell.swift in Sources */,
 				DCA75BA020B7B34C003A1D5C /* EmptyView.swift in Sources */,
 				0C15F1871FBDD433009724DB /* ArticleHeaderView.swift in Sources */,

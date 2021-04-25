@@ -13,13 +13,13 @@ import UIKit
 class AuthorDetailViewController: UIViewController, UIScrollViewDelegate {
 
     // MARK: View vars
-    let spinToken = "spinner"
     let authorSwitchIconHeight: CGFloat = 8
     let authorSwitchIconWidth: CGFloat = 14
-    
-    private var loading = true
-    private var hasNextPage = true
+    let spinToken = "spinner"
+
     private var currentPage = 1
+    private var hasNextPage = true
+    private var loading = true
 
     var adapter: ListAdapter!
     var authorSelect: AuthorSelectView!

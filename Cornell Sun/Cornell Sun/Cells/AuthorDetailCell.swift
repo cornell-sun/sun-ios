@@ -12,11 +12,11 @@ import UIKit
 class AuthorDetailCell: UICollectionViewCell {
 
     // MARK: View vars
+    var bioTextView: UITextView!
+    var emailLabel: UILabel!
     var imageView: UIImageView!
     var nameLabel: UILabel!
     var underlineView: UIView!
-    var bioTextView: UITextView!
-    var emailLabel: UILabel!
 
     // MARK: Constants
     static let bioTextViewBottomPadding: CGFloat = -10

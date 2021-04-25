@@ -10,6 +10,7 @@ import IGListKit
 import Foundation
 
 class AuthorDetailSectionController: ListSectionController {
+    
     var authorDetailObject: AuthorDetailObject!
     var screenWidth: CGFloat!
 

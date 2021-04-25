@@ -70,8 +70,8 @@ class ArticleStackViewController: UIViewController {
         stackView.snp.makeConstraints { make in
             make.edges.width.equalToSuperview()
         }
-
-        headerView = ArticleHeaderView(article: post, frame: .zero, delegate: self)
+        
+        headerView = ArticleHeaderView(article: post, frame: .zero, delegate: self, width: view.bounds.width)
         stackView.addArrangedSubview(headerView)
         headerView.snp.makeConstraints { make in
             make.top.width.equalToSuperview()
