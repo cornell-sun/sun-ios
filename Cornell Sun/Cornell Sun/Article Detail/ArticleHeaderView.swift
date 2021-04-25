@@ -54,7 +54,6 @@ class ArticleHeaderView: UIView {
     weak var delegate: ArticleHeaderDelegate?
 
     convenience init(article: PostObject, frame: CGRect, delegate: ArticleHeaderDelegate?, width: CGFloat) {
-        print("Calling convenience init first")
         self.init(frame: frame)
         self.delegate = delegate
         self.width = width - 2 * leadingOffset
