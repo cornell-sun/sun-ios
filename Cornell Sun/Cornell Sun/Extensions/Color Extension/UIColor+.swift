@@ -99,6 +99,18 @@ extension UIColor {
         return UIColor(red: 42/255, green: 42/255, blue: 55/255, alpha: 1.0)
     }
 
+    @nonobjc class var dividerGray: UIColor {
+        UIColor(red: 0.941, green: 0.941, blue: 0.941, alpha: 1)
+    }
+
+    @nonobjc class var authorGray: UIColor {
+        UIColor(red: 0.463, green: 0.447, blue: 0.447, alpha: 1)
+    }
+
+    @nonobjc class var authorSelectGray: UIColor {
+        UIColor(red: 0.571, green: 0.571, blue: 0.571, alpha: 1)
+    }
+
 
     // New Onboarding Colors
     @nonobjc class var onboardingGradientTop: UIColor {

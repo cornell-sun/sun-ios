@@ -9,34 +9,41 @@
 import UIKit
 import SnapKit
 
+protocol ArticleHeaderDelegate: class {
+    func articleHeaderDidPressOnAuthor()
+}
+
 class ArticleHeaderView: UIView {
-    let leadingOffset: CGFloat = 16
-    let categoryLabelTopOffset: CGFloat = 18.5
-    let categoryLabelHeight: CGFloat = 20
-    let titleLabelTopOffset: CGFloat = 12.0
-    let titleLabelHeight: CGFloat = 100
-    let imageViewHeight: CGFloat = 250.0
-    let imageViewTopOffset: CGFloat = 10.5
-    let timeStampHeight: CGFloat = 15
+
+    let authorLabelFont: UIFont = .secondaryHeader
     let authorLabelHeight: CGFloat = 15
     let authorLabelTopOffset: CGFloat = 46
-    let captionLabelTopOffset: CGFloat = 4
     let captionLabelBottomOffset: CGFloat = 9.5
+    let captionLabelTopOffset: CGFloat = 4
+    let categoryLabelHeight: CGFloat = 20
+    let categoryLabelTopOffset: CGFloat = 18.5
     let creditsLabelHeight: CGFloat = 15
     let creditsLabelInset: CGFloat = 10.5
-
-    var categoryLabel: UILabel!
-    var titleLabel: UILabel!
-    var authorLabel: UILabel!
-    var timeStampLabel: UILabel!
-    var captionLabel: UILabel!
-    var creditsLabel: UILabel!
     let heroImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.layer.masksToBounds = true
         imageView.contentMode = .scaleAspectFill
         return imageView
     }()
+    let imageViewHeight: CGFloat = 250.0
+    let imageViewTopOffset: CGFloat = 10.5
+    let leadingOffset: CGFloat = 16
+    let timeStampHeight: CGFloat = 15
+    let titleLabelHeight: CGFloat = 100
+    let titleLabelTopOffset: CGFloat = 12.0
+
+    var authorButton: UIButton!
+    var captionLabel: UILabel!
+    var categoryLabel: UILabel!
+    var creditsLabel: UILabel!
+    var timeStampLabel: UILabel!
+    var titleLabel: UILabel!
+    var width: CGFloat = 0
 
     private let readableDateFormatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -44,8 +51,13 @@ class ArticleHeaderView: UIView {
         return formatter
     }()
 
-    convenience init(article: PostObject, frame: CGRect) {
+    weak var delegate: ArticleHeaderDelegate?
+
+    convenience init(article: PostObject, frame: CGRect, delegate: ArticleHeaderDelegate?, width: CGFloat) {
+        print("Calling convenience init first")
         self.init(frame: frame)
+        self.delegate = delegate
+        self.width = width - 2 * leadingOffset
         setupWithPost(article)
     }
 
@@ -54,7 +66,7 @@ class ArticleHeaderView: UIView {
 
         categoryLabel = UILabel(frame: .zero)
         categoryLabel.textColor = darkModeEnabled ? .white90 : .black60
-        categoryLabel.font = .secondaryHeader
+        categoryLabel.font = authorLabelFont
         addSubview(categoryLabel)
         categoryLabel.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(leadingOffset)
@@ -92,12 +104,17 @@ class ArticleHeaderView: UIView {
             make.height.equalTo(imageViewHeight)
         }
 
-        authorLabel = UILabel(frame: .zero)
-        authorLabel.textColor = darkModeEnabled ? .white90 : .black90
-        authorLabel.font = .secondaryHeader
-        authorLabel.numberOfLines = 0
-        addSubview(authorLabel)
-        authorLabel.snp.makeConstraints { make in
+        authorButton = UIButton()
+        authorButton.setTitleColor(.black90, for: .normal)
+        authorButton.titleLabel?.font = .secondaryHeader
+        authorButton.titleLabel?.numberOfLines = 0
+        if #available(iOS 11.0, *) {
+            authorButton.contentHorizontalAlignment = .leading
+            authorButton.contentVerticalAlignment = .top
+        }
+        authorButton.addTarget(self, action: #selector(authorButtonPressed), for: .touchUpInside)
+        addSubview(authorButton)
+        authorButton.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(leadingOffset)
             make.top.equalTo(captionLabel.snp.bottom).offset(authorLabelTopOffset)
         }
@@ -108,7 +125,7 @@ class ArticleHeaderView: UIView {
         addSubview(timeStampLabel)
         timeStampLabel.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(leadingOffset)
-            make.top.equalTo(authorLabel.snp.bottom)
+            make.top.equalTo(authorButton.snp.bottom)
             make.height.equalTo(timeStampHeight)
             make.bottom.equalToSuperview()
         }
@@ -129,7 +146,12 @@ class ArticleHeaderView: UIView {
 
         timeStampLabel.text = readableDateFormatter.string(from: post.date)
         if let authors = post.author {
-            authorLabel.text = "By \(authors.byline)"
+            let title = "By \(authors.byline)"
+            authorButton.setTitle(title, for: .normal)
+            let height = title.height(withConstrainedWidth: width, font: authorLabelFont)
+            authorButton.snp.makeConstraints { make in
+                make.height.equalTo(height + 12)
+            }
         }
         if let caption = post.featuredMediaCaption {
             captionLabel.text = caption.htmlToString
@@ -166,11 +188,21 @@ class ArticleHeaderView: UIView {
                 make.top.equalTo(captionLabel.snp.bottom)
                 make.leading.trailing.equalToSuperview()
             }
-            authorLabel.snp.remakeConstraints { make in
+
+            authorButton.snp.remakeConstraints { make in
                 make.leading.trailing.equalToSuperview().inset(leadingOffset)
                 make.top.equalTo(titleLabel.snp.bottom).offset(titleLabelTopOffset)
+                if let authors = authorButton.titleLabel?.text {
+                    let height = authors.height(withConstrainedWidth: authorButton.bounds.width, font: authorLabelFont)
+                    make.height.equalTo(height)
+                }
+
             }
         }
+    }
+
+    @objc func authorButtonPressed() {
+        delegate?.articleHeaderDidPressOnAuthor()
     }
 
 }

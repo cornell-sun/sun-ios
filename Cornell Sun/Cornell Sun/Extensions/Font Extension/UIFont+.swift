@@ -57,4 +57,20 @@ extension UIFont {
         return UIFont.systemFont(ofSize: 11, weight: .regular)
     }
 
+    class var avenir12: UIFont {
+        return UIFont(name: "Avenir-Medium", size: 12.0)!
+    }
+
+    class var avenir16: UIFont {
+        return UIFont(name: "Avenir-Medium", size: 16.0)!
+    }
+
+    class var avenir18: UIFont {
+        return UIFont(name: "Avenir-Medium", size: 18.0)!
+    }
+
+    class var avenir24: UIFont {
+        return UIFont(name: "Avenir-Medium", size: 24.0)!
+    }
+
 }

@@ -43,6 +43,7 @@
 		<string>KeplerStd-Italic.otf</string>
 		<string>KeplerStd-Bold.otf</string>
 		<string>Sonnenstrahl-Ausgezeichnet.ttf</string>
+		<string>avenir_medium.ttf</string>
 	</array>
 	<key>UIBackgroundModes</key>
 	<array>

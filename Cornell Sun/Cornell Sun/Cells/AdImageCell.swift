@@ -31,7 +31,7 @@ final class AdImageCell: UICollectionViewCell, GADBannerViewDelegate {
 
     func loadAd() {
         let request = GADRequest()
-        //request.testDevices = [kGADSimulatorID, "0950237e30cd97ec9d147df57b7f01de"]
+//        request.testDevices = [kGADSimulatorID, "0950237e30cd97ec9d147df57b7f01de"]
         adImageView.load(request)
     }
     

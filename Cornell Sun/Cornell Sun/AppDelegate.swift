@@ -22,6 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let redirectScheme = "cornellsun"
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+
         // Override point for customization after application launch.
         IQKeyboardManager.shared.enable = true
         // Set all navigation bar attributes
@@ -97,7 +98,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //fake id ca-app-pub-3940256099942544/2934735716
 
         // Init Firebase SDK
-        FirebaseApp.configure()
+        FirebaseConfiguration.shared.setLoggerLevel(.min)
+//        FirebaseApp.configure()
         
         // Init Google Mobile Ads SDK
         GADMobileAds.sharedInstance().start(completionHandler: nil)

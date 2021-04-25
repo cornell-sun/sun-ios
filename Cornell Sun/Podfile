@@ -26,6 +26,7 @@ target 'Cornell Sun' do
   pod 'Firebase/Performance'
   pod 'Firebase/AdMob'
   pod 'Google-Mobile-Ads-SDK'
+  pod 'FloatingPanel'
 end
 
 target 'SunNotificationServiceExtension' do

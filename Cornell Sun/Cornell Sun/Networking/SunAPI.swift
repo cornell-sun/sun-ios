@@ -17,12 +17,13 @@ enum SunAPI {
     //Posts
     case post(postId: Int)
     case posts(page: Int)
+    case postsFor(authorName: String, page: Int)
 
     //section
     case section(section: Int, page: Int)
 
     //Authors
-    case author(authorId: Int)
+    case author(authorName: String)
 
     //images
     case media(mediaId: String)
@@ -54,15 +55,19 @@ extension SunAPI: TargetType {
         }
     }
     
-    //    var baseURL: URL { return URL(string: "http://cornellsun.staging.wpengine.com/wp-json")! } //dev url
+//        var baseURL: URL { return URL(string: "http://cornellsun.staging.wpengine.com/wp-json")! } //dev url
     var baseURL: URL { return URL(string: "http://cornellsun.com/wp-json")! } //production url
     
     var path: String {
         switch self {
         case .posts, .search, .section:
             return "\(defaultPath)/posts"
-        case .author(let authorId):
-            return "\(defaultPath)/users/\(authorId)"
+        case .postsFor(let authorName, _):
+            let cleanedAuthor = cleanString(authorName)
+            return "\(backendPath)/author/\(cleanedAuthor)"
+        case .author(let authorName):
+            let cleanedAuthor = cleanString(authorName)
+            return "\(backendPath)/author/\(cleanedAuthor)"
         case .media(let mediaId):
             return "\(defaultPath)/media/" + mediaId
         case .category(let categoryId):
@@ -98,6 +103,10 @@ extension SunAPI: TargetType {
             return .requestParameters(parameters: ["page": page], encoding: URLEncoding.default)
         case .posts(let page):
             return .requestParameters(parameters: ["page": page], encoding: URLEncoding.default)
+        case .postsFor(_, let page):
+            return .requestParameters(parameters: ["page": page], encoding: URLEncoding.default)
+        case .author:
+            return .requestParameters(parameters: ["page": 1], encoding: URLEncoding.default)
         case .comments(let postId):
             return .requestParameters(parameters: ["post": postId], encoding: URLEncoding.default)
         case .search(let query, let page):
@@ -109,5 +118,14 @@ extension SunAPI: TargetType {
         default:
             return .requestPlain
         }
+    }
+
+    func cleanString(_ string: String) -> String {
+//        let newString = string.replacingOccurrences(of: " ", with: "+")
+//        var cs = CharacterSet.urlQueryAllowed
+//        cs.remove("&")
+//        let cleanedString: String? = newString.addingPercentEncoding(withAllowedCharacters: cs)
+//        return cleanedString ?? string
+        return string.replacingOccurrences(of: " ", with: "+")
     }
 }

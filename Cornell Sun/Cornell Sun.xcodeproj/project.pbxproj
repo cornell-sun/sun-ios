@@ -13,6 +13,7 @@
 		0C59AD44208D505700CF3A31 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C59AD43208D505700CF3A31 /* Button.swift */; };
 		0C6E76C62094FF0D00F8710C /* MastheadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C6E76C52094FF0D00F8710C /* MastheadViewController.swift */; };
 		0C736C54202F96E000E9D92E /* ImageAttachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C736C53202F96E000E9D92E /* ImageAttachment.swift */; };
+		0C7BB7502257EA1C00B41627 /* AuthorDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7BB74F2257EA1C00B41627 /* AuthorDetailCell.swift */; };
 		0CA26A1B205F41A6004759D1 /* ArticleStackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CA26A1A205F41A6004759D1 /* ArticleStackViewController.swift */; };
 		0CB00B261FBBAEE800376A94 /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CB00B251FBBAEE800376A94 /* CommentTableViewCell.swift */; };
 		0CB1EBCE2041ED9100DD8777 /* ShareBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CB1EBCD2041ED9100DD8777 /* ShareBarView.swift */; };
@@ -104,7 +105,12 @@
 		E60483CB2586F76F0097A58E /* OnboardingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E60483C32586F76F0097A58E /* OnboardingTableViewCell.swift */; };
 		E60483CC2586F76F0097A58E /* OnboardingSubscribeInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E60483C42586F76F0097A58E /* OnboardingSubscribeInfoTableViewCell.swift */; };
 		E60483CD2586F76F0097A58E /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E60483C52586F76F0097A58E /* OnboardingViewController.swift */; };
+		E61AC556261302F000CFFFBB /* AuthorSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E61AC555261302F000CFFFBB /* AuthorSelectView.swift */; };
+		E61D3C8C25EBFFFB0024C487 /* avenir_medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E61D3C8825EBFF960024C487 /* avenir_medium.ttf */; };
+		E67E12C825BCDF36000DB3A1 /* AuthorDetailSectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E67E12C625BCDF36000DB3A1 /* AuthorDetailSectionController.swift */; };
+		E67E12C925BCDF36000DB3A1 /* AuthorDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E67E12C725BCDF36000DB3A1 /* AuthorDetailViewController.swift */; };
 		E6BBD794257DBE60002BE7C5 /* Sections.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6BBD793257DBE60002BE7C5 /* Sections.swift */; };
+		E6BD9A54260A9C00004E4391 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6BD9A53260A9C00004E4391 /* String+.swift */; };
 		FB2636A9E7C42C974338EBE0 /* Pods_SunNotificationServiceExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A95DF6C970C7F967623E60F /* Pods_SunNotificationServiceExtension.framework */; };
 /* End PBXBuildFile section */
 
@@ -148,6 +154,7 @@
 		0C59AD43208D505700CF3A31 /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
 		0C6E76C52094FF0D00F8710C /* MastheadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MastheadViewController.swift; sourceTree = "<group>"; };
 		0C736C53202F96E000E9D92E /* ImageAttachment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageAttachment.swift; sourceTree = "<group>"; };
+		0C7BB74F2257EA1C00B41627 /* AuthorDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorDetailCell.swift; sourceTree = "<group>"; };
 		0CA26A1A205F41A6004759D1 /* ArticleStackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleStackViewController.swift; sourceTree = "<group>"; };
 		0CB00B251FBBAEE800376A94 /* CommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
 		0CB1EBCD2041ED9100DD8777 /* ShareBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareBarView.swift; sourceTree = "<group>"; };
@@ -253,7 +260,12 @@
 		E60483C32586F76F0097A58E /* OnboardingTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingTableViewCell.swift; sourceTree = "<group>"; };
 		E60483C42586F76F0097A58E /* OnboardingSubscribeInfoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingSubscribeInfoTableViewCell.swift; sourceTree = "<group>"; };
 		E60483C52586F76F0097A58E /* OnboardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
+		E61AC555261302F000CFFFBB /* AuthorSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorSelectView.swift; sourceTree = "<group>"; };
+		E61D3C8825EBFF960024C487 /* avenir_medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = avenir_medium.ttf; sourceTree = "<group>"; };
+		E67E12C625BCDF36000DB3A1 /* AuthorDetailSectionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthorDetailSectionController.swift; sourceTree = "<group>"; };
+		E67E12C725BCDF36000DB3A1 /* AuthorDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthorDetailViewController.swift; sourceTree = "<group>"; };
 		E6BBD793257DBE60002BE7C5 /* Sections.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Sections.swift; path = "Cornell Sun/Sections.swift"; sourceTree = "<group>"; };
+		E6BD9A53260A9C00004E4391 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -367,34 +379,37 @@
 		5006AFFA1EA9625000F58549 /* Cornell Sun */ = {
 			isa = PBXGroup;
 			children = (
-				0427821123C45FE8006FE55B /* GoogleService-Info.plist */,
-				DC3667DE206EBAC6002EB4F9 /* Cornell Sun.entitlements */,
-				3487167C2041F09D008CB9D5 /* Launch Screen.storyboard */,
-				3491BAB223DCABD700BE1E4E /* Launch Screen Dark1.storyboard */,
-				3491BAB023DCABC400BE1E4E /* Launch Screen Dark2.storyboard */,
-				5006AFFB1EA9625000F58549 /* AppDelegate.swift */,
-				DCC03FE02092A9940027D102 /* PhotoGallery */,
-				0C0D2FE52060461000BC77E9 /* Onboarding */,
+				E600B40D25F84F6200D15D97 /* ArticleModalMenu */,
 				34C558282041E42A00E62CE8 /* Ad Section */,
-				DCECA9931FBE2DDE00BAB2EA /* Hero Section */,
-				DCECA9911FBE2D8700BAB2EA /* Feed Section */,
-				DC34DEF1203215FE0010DF9A /* Sections Section */,
-				DCA02C062026580100CBE97F /* Search Section */,
-				DCECA9941FBE2E1D00BAB2EA /* Bookmark Section */,
-				DC34DEEA2032137C0010DF9A /* Settings Section */,
-				DC34DEE92032136A0010DF9A /* Photo Gallery Section */,
+				5006AFFB1EA9625000F58549 /* AppDelegate.swift */,
 				0C15F1851FBDD1A5009724DB /* Article Detail */,
+				5006B0021EA9625000F58549 /* Assets.xcassets */,
+				E67E12C525BCDF36000DB3A1 /* Author Detail */,
+				DCECA9941FBE2E1D00BAB2EA /* Bookmark Section */,
 				DCECA9921FBE2DAF00BAB2EA /* Cells */,
-				DC34DEED203213D90010DF9A /* Networking */,
+				DC3667DE206EBAC6002EB4F9 /* Cornell Sun.entitlements */,
 				DCA75BA120B848BB003A1D5C /* Empty State */,
 				DC34DEEF203214280010DF9A /* Extensions */,
-				507744F01EB5326D0079D80D /* PostOffice */,
-				5006B24E1EADA38400F58549 /* Models */,
-				DC34DEEC203213C20010DF9A /* TabBar Controller */,
-				5006AFFD1EA9625000F58549 /* ViewController.swift */,
-				5006B0021EA9625000F58549 /* Assets.xcassets */,
+				DCECA9911FBE2D8700BAB2EA /* Feed Section */,
+				0427821123C45FE8006FE55B /* GoogleService-Info.plist */,
+				DCECA9931FBE2DDE00BAB2EA /* Hero Section */,
+				0C736C53202F96E000E9D92E /* ImageAttachment.swift */,
 				5006B0071EA9625000F58549 /* Info.plist */,
 				34590493217D23DB009EAEFA /* Keys.plist */,
+				3491BAB223DCABD700BE1E4E /* Launch Screen Dark1.storyboard */,
+				3491BAB023DCABC400BE1E4E /* Launch Screen Dark2.storyboard */,
+				3487167C2041F09D008CB9D5 /* Launch Screen.storyboard */,
+				5006B24E1EADA38400F58549 /* Models */,
+				DC34DEED203213D90010DF9A /* Networking */,
+				0C0D2FE52060461000BC77E9 /* Onboarding */,
+				DC34DEE92032136A0010DF9A /* Photo Gallery Section */,
+				DCC03FE02092A9940027D102 /* PhotoGallery */,
+				507744F01EB5326D0079D80D /* PostOffice */,
+				DCA02C062026580100CBE97F /* Search Section */,
+				DC34DEF1203215FE0010DF9A /* Sections Section */,
+				DC34DEEA2032137C0010DF9A /* Settings Section */,
+				DC34DEEC203213C20010DF9A /* TabBar Controller */,
+				5006AFFD1EA9625000F58549 /* ViewController.swift */,
 			);
 			path = "Cornell Sun";
 			sourceTree = "<group>";
@@ -462,10 +477,11 @@
 		DC34DEEB203213A90010DF9A /* Font Extension */ = {
 			isa = PBXGroup;
 			children = (
-				0CED4FAC1FAB523F0025EB91 /* UIFont+.swift */,
+				E61D3C8825EBFF960024C487 /* avenir_medium.ttf */,
 				DCB717111FB94BCA00BE4D26 /* KeplerStd-Bold.otf */,
 				0C30CF802097AC4500015EF6 /* KeplerStd-Italic.otf */,
 				DC818DA21F75E08B0064AFFA /* Sonnenstrahl-Ausgezeichnet.ttf */,
+				0CED4FAC1FAB523F0025EB91 /* UIFont+.swift */,
 			);
 			path = "Font Extension";
 			sourceTree = "<group>";
@@ -509,6 +525,7 @@
 				DC556AC420602E6900475B7D /* Constants.swift */,
 				0C59AD43208D505700CF3A31 /* Button.swift */,
 				34992231227E852000926B6D /* NotificationCenterExtension.swift */,
+				E6BD9A53260A9C00004E4391 /* String+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -561,7 +578,6 @@
 		DCB1BB452088D28D002C11E2 /* Recovered References */ = {
 			isa = PBXGroup;
 			children = (
-				0C736C53202F96E000E9D92E /* ImageAttachment.swift */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";
@@ -599,6 +615,7 @@
 			isa = PBXGroup;
 			children = (
 				DC0A883F1FBA84E700F2BCBB /* AuthorCell.swift */,
+				0C7BB74F2257EA1C00B41627 /* AuthorDetailCell.swift */,
 				DC818D9A1F74CFBB0064AFFA /* SpinnerCell.swift */,
 				DC818D9C1F7553380064AFFA /* ImageCell.swift */,
 				DC0A88391FBA2DEE00F2BCBB /* PhotoGalleryCell.swift */,
@@ -636,6 +653,23 @@
 				DC0A883D1FBA6B8200F2BCBB /* BookmarkSearchSectionController.swift */,
 			);
 			path = "Bookmark Section";
+			sourceTree = "<group>";
+		};
+		E600B40D25F84F6200D15D97 /* ArticleModalMenu */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ArticleModalMenu;
+			sourceTree = "<group>";
+		};
+		E67E12C525BCDF36000DB3A1 /* Author Detail */ = {
+			isa = PBXGroup;
+			children = (
+				E61AC555261302F000CFFFBB /* AuthorSelectView.swift */,
+				E67E12C625BCDF36000DB3A1 /* AuthorDetailSectionController.swift */,
+				E67E12C725BCDF36000DB3A1 /* AuthorDetailViewController.swift */,
+			);
+			path = "Author Detail";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -754,6 +788,7 @@
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -779,6 +814,7 @@
 				5006B0031EA9625000F58549 /* Assets.xcassets in Resources */,
 				3491BAB323DCABD700BE1E4E /* Launch Screen Dark1.storyboard in Resources */,
 				DC818DA31F75E0CF0064AFFA /* Sonnenstrahl-Ausgezeichnet.ttf in Resources */,
+				E61D3C8C25EBFFFB0024C487 /* avenir_medium.ttf in Resources */,
 				3491BAB123DCABC400BE1E4E /* Launch Screen Dark2.storyboard in Resources */,
 				3487167D2041F09D008CB9D5 /* Launch Screen.storyboard in Resources */,
 				0427821223C45FE8006FE55B /* GoogleService-Info.plist in Resources */,
@@ -852,6 +888,7 @@
 				"${BUILT_PRODUCTS_DIR}/FirebaseCrashlytics/FirebaseCrashlytics.framework",
 				"${BUILT_PRODUCTS_DIR}/FirebaseInstallations/FirebaseInstallations.framework",
 				"${BUILT_PRODUCTS_DIR}/FirebaseRemoteConfig/FirebaseRemoteConfig.framework",
+				"${BUILT_PRODUCTS_DIR}/FloatingPanel/FloatingPanel.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleDataTransport/GoogleDataTransport.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
@@ -883,6 +920,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseCrashlytics.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseInstallations.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseRemoteConfig.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FloatingPanel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleDataTransport.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
@@ -1009,11 +1047,14 @@
 				50A898121EAEC93B0099CFA9 /* AuthorObject.swift in Sources */,
 				DC695D8B1FBB897600C6C62F /* PostOffice.swift in Sources */,
 				DC556AC520602E6900475B7D /* Constants.swift in Sources */,
+				E61AC556261302F000CFFFBB /* AuthorSelectView.swift in Sources */,
 				0CCD0BD7209D4A8C0042E17C /* SuggestedStoryObject.swift in Sources */,
 				61652CD21F6EF3A500EEFC29 /* SearchViewController.swift in Sources */,
 				4029BB0A2087B02300E8BAEB /* NotificationsTableViewCell.swift in Sources */,
 				E60483CC2586F76F0097A58E /* OnboardingSubscribeInfoTableViewCell.swift in Sources */,
+				E67E12C825BCDF36000DB3A1 /* AuthorDetailSectionController.swift in Sources */,
 				DC4308ED1F2558D500ABB31F /* SunAPI.swift in Sources */,
+				E67E12C925BCDF36000DB3A1 /* AuthorDetailViewController.swift in Sources */,
 				DCC03FE22092A9BF0027D102 /* PhotoGallery.swift in Sources */,
 				0CED4FAD1FAB523F0025EB91 /* UIColor+.swift in Sources */,
 				34C5582A2041E49E00E62CE8 /* AdSectionController.swift in Sources */,
@@ -1023,6 +1064,7 @@
 				E60483C62586F76F0097A58E /* OnboardingPageViewController.swift in Sources */,
 				DC4FED232027F05A004F435E /* SearchCell.swift in Sources */,
 				0CCD0BD0209D3D060042E17C /* SuggestedStoryTableViewCell.swift in Sources */,
+				0C7BB7502257EA1C00B41627 /* AuthorDetailCell.swift in Sources */,
 				0C6E76C62094FF0D00F8710C /* MastheadViewController.swift in Sources */,
 				405F83DC1FBE1E7C00360AEB /* SettingsViewController.swift in Sources */,
 				0C736C54202F96E000E9D92E /* ImageAttachment.swift in Sources */,
@@ -1036,6 +1078,7 @@
 				DC4308EF1F2563FF00ABB31F /* API.swift in Sources */,
 				D91565CB2166A04900BCA466 /* SectionTableViewCell.swift in Sources */,
 				0C59AD44208D505700CF3A31 /* Button.swift in Sources */,
+				E6BD9A54260A9C00004E4391 /* String+.swift in Sources */,
 				4047EA05207590450030067E /* NotificationViewController.swift in Sources */,
 				34A481762384DD4E00FB168A /* ThemeViewController.swift in Sources */,
 				34992232227E852000926B6D /* NotificationCenterExtension.swift in Sources */,

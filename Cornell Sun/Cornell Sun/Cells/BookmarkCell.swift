@@ -16,12 +16,16 @@ final class BookmarkCell: UICollectionViewCell {
     let imageViewWidthHeight: CGFloat = 100
     let titleBottomInset: CGFloat = 8.5
     let authorHeight: CGFloat = 13
+    let imageLeadingConstant: CGFloat = 16
     
     var post: PostObject? {
         didSet {
             titleLabel.text = post?.title
             titleLabel.setLineSpacing(to: 4.5)
-            authorLabel.text = post?.author?.byline.uppercased() ?? ""
+            authorLabel.text = ""
+            if let author = post?.author?.byline.uppercased() {
+                authorLabel.text = "BY " + author
+            }
             setupImage()
         }
     }
@@ -46,7 +50,7 @@ final class BookmarkCell: UICollectionViewCell {
         let label = UILabel()
         label.text = ""
         label.numberOfLines = 1
-        label.font = .cellInformationText
+        label.font = .avenir12
         return label
     }()
 
@@ -66,13 +70,13 @@ final class BookmarkCell: UICollectionViewCell {
     func setupViews() {
         self.backgroundColor = darkModeEnabled ? .darkCell : .white
         titleLabel.textColor = darkModeEnabled ? .white90 : .black
-        authorLabel.textColor = darkModeEnabled ? .white60 : .black60
+        authorLabel.textColor = darkModeEnabled ? .white60 : .authorGray
         addSubview(imageView)
         addSubview(titleLabel)
         addSubview(authorLabel)
         imageView.snp.makeConstraints { (make) in
             make.centerY.equalToSuperview()
-            make.left.equalToSuperview().inset(insetConstant)
+            make.leading.equalToSuperview().inset(imageLeadingConstant)
             make.width.height.equalTo(imageViewWidthHeight)
         }
 

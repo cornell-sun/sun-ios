@@ -41,6 +41,7 @@ struct API {
     }
 
     private static func requestHelper(target: SunAPI, success successCallback: @escaping (Response) -> Void, error errorCallback: @escaping (Swift.Error) -> Void, failure failureCallback: @escaping (MoyaError) -> Void) {
+        let targetURL = URL(target: target)
         provider.request(target) { (result) in
             switch result {
             case .success(let response):

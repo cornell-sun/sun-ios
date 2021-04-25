@@ -25,6 +25,7 @@ class PostObject: NSObject, Codable, ListDiffable {
     var excerpt: String!
     var link: URL!
     var author: [AuthorObject]?
+    var authorID: Int
     var featuredMediaImages: FeaturedMediaImages?
     var featuredMediaCaption: String?
     var featuredMediaCredit: String?
@@ -60,6 +61,33 @@ class PostObject: NSObject, Codable, ListDiffable {
         self.link = try nested.decode(URL.self, forKey: .link)
         self.content = try nested.decode(String.self, forKey: .content)
         self.author = try? nested.decode([AuthorObject].self, forKey: .author)
+        self.authorID = try nested.decode(Int.self, forKey: .authorID)
+
+        if let authors = self.author, authors.count > 0 {
+            var authorNames: [String] = authors[0].name.components(separatedBy: ", ")
+            if let lastName = authorNames.last {
+                if lastName.contains(" and ") {
+                    authorNames = authorNames.dropLast() + lastName.components(separatedBy: " and ")
+                } else if lastName.contains("and ") {
+                    authorNames = authorNames.dropLast() + lastName.components(separatedBy: "and ")
+                } else if lastName.contains(",") {
+                    authorNames = authorNames.dropLast() + [String(lastName.dropLast())]
+                }
+                authorNames = authorNames.filter { $0 != "" }
+            }
+
+            authors[0].name = authorNames[0]
+            var otherAuthors: [AuthorObject] = []
+            if authorNames.count > 1 {
+                for i in (1..<authorNames.count) {
+                    otherAuthors.append(AuthorObject(name: authorNames[i]))
+                }
+            }
+            self.author?.insert(contentsOf: otherAuthors, at: 1)
+
+        }
+
+        self.authorID = try nested.decode(Int.self, forKey: .authorID)
         self.featuredMediaImages = try? nested.decode(FeaturedMediaImages.self, forKey: .featuredMediaImages)
         self.featuredMediaCaption = try nested.decode(String?.self, forKey: .featuredMediaCaption)
         self.featuredMediaCredit = try nested.decode(String?.self, forKey: .featuredMediaCredit)
@@ -99,6 +127,7 @@ extension PostObject {
         case postType = "post_type_enum"
         case postAttachments = "post_attachments_meta"
         case suggested = "suggested_article_ids"
+        case authorID = "author"
     }
 
     func encode(to encoder: Encoder) throws {
