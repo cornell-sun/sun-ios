@@ -64,7 +64,6 @@ class ArticleHeaderView: UIView {
         super.init(frame: frame)
 
         categoryLabel = UILabel(frame: .zero)
-        categoryLabel.textColor = darkModeEnabled ? .white90 : .black60
         categoryLabel.font = authorLabelFont
         addSubview(categoryLabel)
         categoryLabel.snp.makeConstraints { make in
@@ -74,7 +73,6 @@ class ArticleHeaderView: UIView {
         }
 
         titleLabel = UILabel(frame: .zero)
-        titleLabel.textColor = darkModeEnabled ? .white90 : .black90
         titleLabel.font = .articleTitle
         titleLabel.numberOfLines = 6
         titleLabel.lineBreakMode = .byTruncatingTail
@@ -82,13 +80,11 @@ class ArticleHeaderView: UIView {
 
         captionLabel = UILabel(frame: .zero)
         captionLabel.font = .photoCaption
-        captionLabel.textColor = darkModeEnabled ? .white90 : .black90
         captionLabel.numberOfLines = 0
         addSubview(captionLabel)
 
         creditsLabel = UILabel()
         creditsLabel.font = .photoCaptionCredit
-        creditsLabel.textColor = darkModeEnabled ? .white40 : .black40
         addSubview(creditsLabel)
         creditsLabel.snp.makeConstraints { make in
             make.top.equalTo(captionLabel.snp.bottom)
@@ -104,7 +100,7 @@ class ArticleHeaderView: UIView {
         }
 
         authorButton = UIButton()
-        authorButton.setTitleColor(.black90, for: .normal)
+        print(darkModeEnabled)
         authorButton.titleLabel?.font = .secondaryHeader
         authorButton.titleLabel?.numberOfLines = 0
         if #available(iOS 11.0, *) {
@@ -119,7 +115,6 @@ class ArticleHeaderView: UIView {
         }
 
         timeStampLabel = UILabel(frame: .zero)
-        timeStampLabel.textColor = darkModeEnabled ? .white40 : .black40
         timeStampLabel.font = .subSecondaryHeader
         addSubview(timeStampLabel)
         timeStampLabel.snp.makeConstraints { make in
@@ -128,10 +123,21 @@ class ArticleHeaderView: UIView {
             make.height.equalTo(timeStampHeight)
             make.bottom.equalToSuperview()
         }
+
+        updateColors()
     }
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    func updateColors() {
+        categoryLabel.textColor = darkModeEnabled ? .white90 : .black60
+        titleLabel.textColor = darkModeEnabled ? .white90 : .black90
+        captionLabel.textColor = darkModeEnabled ? .white90 : .black90
+        creditsLabel.textColor = darkModeEnabled ? .white40 : .black40
+        authorButton.setTitleColor(darkModeEnabled ? .white90 : .black90, for: .normal)
+        timeStampLabel.textColor = darkModeEnabled ? .white40 : .black40
     }
 
     func setupWithPost(_ post: PostObject) {

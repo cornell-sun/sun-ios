@@ -16,7 +16,6 @@ class AuthorDetailCell: UICollectionViewCell {
     var emailLabel: UILabel!
     var imageView: UIImageView!
     var nameLabel: UILabel!
-    var underlineView: UIView!
 
     // MARK: Constants
     static let bioTextViewBottomPadding: CGFloat = -10
@@ -32,7 +31,7 @@ class AuthorDetailCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
 
-        contentView.backgroundColor = .white
+        contentView.backgroundColor = darkModeEnabled ? .darkCell : .white
 
         imageView = UIImageView()
         imageView.clipsToBounds = true
@@ -41,41 +40,32 @@ class AuthorDetailCell: UICollectionViewCell {
         contentView.addSubview(imageView)
 
         nameLabel = UILabel()
-        nameLabel.textColor = .black90
+        nameLabel.textColor = darkModeEnabled ? .white90 : .black90
         nameLabel.font = UIFont.avenir24
         nameLabel.numberOfLines = 0
         nameLabel.setLineSpacing(to: 6)
         contentView.addSubview(nameLabel)
 
         emailLabel = UILabel()
-        emailLabel.textColor = .black90
+        emailLabel.textColor = darkModeEnabled ? .white90 : .black90
         emailLabel.font = UIFont.avenir16
         emailLabel.numberOfLines = 1
         contentView.addSubview(emailLabel)
 
-//        linkStackView = UIStackView()
-//        linkStackView.alignment = .center
-//        linkStackView.axis = .horizontal
-//        linkStackView.distribution = .equalSpacing
-//        linkStackView.spacing = 0
-//        contentView.addSubview(linkStackView)
-
-        underlineView = UIView()
-        underlineView.backgroundColor = .black20
-        contentView.addSubview(underlineView)
-
         bioTextView = UITextView()
-        bioTextView.textColor = .black90
+        bioTextView.textColor = darkModeEnabled ? .white90 : .black90
+        bioTextView.backgroundColor = .clear
         bioTextView.font = UIFont.avenir16
         bioTextView.textContainer.lineFragmentPadding = 0
         bioTextView.isScrollEnabled = false
+        bioTextView.isEditable = false
         contentView.addSubview(bioTextView)
 
         setupConstraints()
     }
 
     func setupConstraints() {
-        imageView.snp.remakeConstraints() { make in
+        imageView.snp.remakeConstraints { make in
             make.height.width.equalTo(AuthorDetailCell.imageViewWidth)
             make.top.equalToSuperview().offset(AuthorDetailCell.imageViewTopPadding)
             make.leading.equalToSuperview().offset(AuthorDetailCell.imageViewLeadingPadding)
@@ -121,8 +111,8 @@ class AuthorDetailCell: UICollectionViewCell {
             imageView.image = UIImage(named: "profilePictureDefault")
         }
         nameLabel.text = authorDetail.name
-        emailLabel.text = authorDetail.email ?? ""//test@cornell.edu"
-        bioTextView.text = authorDetail.bio ?? ""//Zachary is a senior in the College of Arts & Sciences studying computer science."
+        emailLabel.text = authorDetail.email ?? ""
+        bioTextView.text = authorDetail.bio ?? ""
         bioTextView.textContainerInset = UIEdgeInsets.zero
 
         setupConstraints()

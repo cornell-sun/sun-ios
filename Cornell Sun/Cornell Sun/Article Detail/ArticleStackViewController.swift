@@ -13,31 +13,38 @@ import GoogleMobileAds
 
 class ArticleStackViewController: UIViewController {
 
-    let leadingOffset: CGFloat = 16
     let articleSeparatorOffset: CGFloat = 11.5
-    let separatorHeight: CGFloat = 1.5
     let articleTextViewOffset: CGFloat = 7
-    let shareBarHeight: CGFloat = 60
-    let imageViewHeight: CGFloat = 250
-    let captionTopOffset: CGFloat = 4
     let bottomInset: CGFloat = 24
+    let captionTopOffset: CGFloat = 4
+    let imageViewHeight: CGFloat = 250
+    let leadingOffset: CGFloat = 16
+    let separatorHeight: CGFloat = 1.5
+    let shareBarHeight: CGFloat = 60
     let wordCountLimit = 200
 
     let commentReuseIdentifier = "CommentReuseIdentifier"
     let suggestedReuseIdentifier = "SuggestedReuseIdentifier"
 
-    var post: PostObject!
     var comments: [CommentObject]! = []
+    var isLoadingDeeplink = false
+    var post: PostObject!
     var suggestedStories: [Int: PostObject] = [:] // map post id to post object
     var views: [UIView] = []
-    var isLoadingDeeplink = false
 
-    var scrollView: UIScrollView!
-    var stackView: UIStackView!
-    var headerView: ArticleHeaderView!
-    var shareBarView: ShareBarView!
+    var articleTextViews: [UITextView] = []
+    var captionLabels: [UILabel] = []
+    var quoteTextViews: [UITextView] = []
     var commentsTableView: UITableView!
+    var creditLabels: [UILabel] = []
+    var headerView: ArticleHeaderView!
+    var scrollView: UIScrollView!
+    var shareBarView: ShareBarView!
+    var stackView: UIStackView!
     var suggestedTableView: UITableView!
+    var headingLabels: [UILabel] = []
+    var suggestedStoriesHeaderLabels: [UILabel] = []
+    var suggestedStoriesTableViews: [UITableView] = []
 
     convenience init(post: PostObject) {
         self.init()
@@ -48,8 +55,6 @@ class ArticleStackViewController: UIViewController {
         super.viewDidLoad()
         self.extendedLayoutIncludesOpaqueBars = true
         self.edgesForExtendedLayout = [.bottom]
-        view.backgroundColor = darkModeEnabled ? .darkCell : .white
-        navigationController?.navigationBar.tintColor = darkModeEnabled ? .white : .darkTint
         if #available(iOS 11.0, *) {
             navigationController?.navigationBar.prefersLargeTitles = false
         }
@@ -80,7 +85,6 @@ class ArticleStackViewController: UIViewController {
         shareBarView = ShareBarView()
         shareBarView.setBookmarkImage(didSelectBookmark: PostOffice.instance.isPostIdInBookmarks(post: post))
         shareBarView.delegate = self
-        shareBarView.backgroundColor = darkModeEnabled ? .darkCell : .white
         view.addSubview(shareBarView)
         shareBarView.snp.makeConstraints { make in
             make.height.equalTo(shareBarHeight)
@@ -88,12 +92,42 @@ class ArticleStackViewController: UIViewController {
         }
 
         setup()
+        updateColors()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        tabBarController?.tabBar.isHidden = true
+//        tabBarController?.tabBar.isHidden = true
         navigationController?.navigationBar.topItem?.title = ""
+        headerView.updateColors()
+        updateColors()
+    }
+
+    func updateColors() {
+        view.backgroundColor = darkModeEnabled ? .darkCell : .white
+        captionLabels.forEach { label in
+            label.textColor = darkModeEnabled ? .white90 : .black90
+        }
+        shareBarView.backgroundColor = darkModeEnabled ? .darkCell : .white
+        creditLabels.forEach { label in
+            label.textColor = darkModeEnabled ? .white : .black40
+        }
+        articleTextViews.forEach { textView in
+            textView.backgroundColor = darkModeEnabled ? .darkCell : .white
+            textView.textColor = darkModeEnabled ? .white90 : .black
+        }
+        quoteTextViews.forEach { textView in
+            textView.textColor = .black90
+        }
+        headingLabels.forEach { label in
+            label.textColor = .black90
+        }
+        suggestedStoriesHeaderLabels.forEach { label in
+            label.textColor = darkModeEnabled ? .white90 : .black90
+        }
+        suggestedStoriesTableViews.forEach { tableView in
+            tableView.backgroundColor = darkModeEnabled ? .darkCell : .white
+        }
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -234,7 +268,6 @@ class ArticleStackViewController: UIViewController {
         let label = UILabel()
         label.text = caption
         label.font = .photoCaption
-        label.textColor = darkModeEnabled ? .white90 : .black90
         label.numberOfLines = 0
         view.addSubview(label)
         stackView.addArrangedSubview(view)
@@ -243,6 +276,7 @@ class ArticleStackViewController: UIViewController {
             make.leading.trailing.equalToSuperview().inset(leadingOffset)
             make.bottom.equalToSuperview()
         }
+        captionLabels.append(label)
     }
 
     func setupImageView(imageURLString: String) {
@@ -263,18 +297,18 @@ class ArticleStackViewController: UIViewController {
 
     func setupImageCredit(credit: String) {
         let view = UIView()
-        let creditLabel = UILabel()
-        creditLabel.numberOfLines = 0
-        creditLabel.text = credit
-        creditLabel.textColor = darkModeEnabled ? .white : .black40
-        creditLabel.font = .photoCaptionCredit
-        view.addSubview(creditLabel)
+        let label = UILabel()
+        label.numberOfLines = 0
+        label.text = credit
+        label.font = .photoCaptionCredit
+        view.addSubview(label)
         stackView.addArrangedSubview(view)
-        creditLabel.snp.makeConstraints { make in
+        label.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(captionTopOffset)
             make.bottom.equalToSuperview().inset(bottomInset)
             make.leading.trailing.equalToSuperview().inset(leadingOffset)
         }
+        creditLabels.append(label)
     }
 
     func setupArticleText(text: NSAttributedString) {
@@ -282,8 +316,6 @@ class ArticleStackViewController: UIViewController {
         let textView = UITextView()
         textView.attributedText = text
         textView.textContainer.lineFragmentPadding = 0
-        textView.backgroundColor = darkModeEnabled ? .darkCell : .white
-        textView.textColor = darkModeEnabled ? .white90 : .black
         textView.delegate = self
         textView.isScrollEnabled = false
         textView.isEditable = false
@@ -296,6 +328,7 @@ class ArticleStackViewController: UIViewController {
             make.top.bottom.equalToSuperview().inset(articleSeparatorOffset)
             make.leading.trailing.equalToSuperview().inset(leadingOffset)
         }
+        articleTextViews.append(textView)
     }
 
     func setupBlockquote(text: String) {
@@ -304,7 +337,6 @@ class ArticleStackViewController: UIViewController {
         textView.text = text
         textView.textContainer.lineFragmentPadding = 0
         textView.font = .blockQuote
-        textView.textColor = .black90
         textView.textAlignment = .left
         textView.isScrollEnabled = false
         textView.isEditable = false
@@ -327,6 +359,7 @@ class ArticleStackViewController: UIViewController {
             make.trailing.equalToSuperview().inset(leadingOffset)
             make.bottom.equalToSuperview().offset(-leadingOffset)
         }
+        quoteTextViews.append(textView)
     }
 
     func setupHeading(text: String) {
@@ -334,7 +367,6 @@ class ArticleStackViewController: UIViewController {
         let label = UILabel()
         label.text = text
         label.font = .blockQuote
-        label.textColor = .black90
         label.textAlignment = .center
         view.addSubview(label)
         stackView.addArrangedSubview(view)
@@ -343,6 +375,7 @@ class ArticleStackViewController: UIViewController {
             make.bottom.equalToSuperview()
             make.leading.trailing.equalToSuperview().inset(leadingOffset)
         }
+        headingLabels.append(label)
     }
 
     // MARK: - Comments
@@ -395,9 +428,9 @@ class ArticleStackViewController: UIViewController {
         let headerView = UIView()
         let headerLabel = UILabel()
         headerLabel.font = .headerTitle
-        headerLabel.textColor = darkModeEnabled ? .white90 : .black90
         headerLabel.text = "Suggested Stories"
         headerView.addSubview(headerLabel)
+        suggestedStoriesHeaderLabels.append(headerLabel)
 
         suggestedTableView = UITableView()
         suggestedTableView.tableHeaderView = headerView
@@ -407,11 +440,11 @@ class ArticleStackViewController: UIViewController {
         suggestedTableView.isScrollEnabled = false
         suggestedTableView.allowsSelection = false
         suggestedTableView.rowHeight = 118
-        suggestedTableView.backgroundColor = darkModeEnabled ? .darkCell : .white
         suggestedTableView.tableFooterView = UIView()
         suggestedTableView.register(SuggestedStoryTableViewCell.self, forCellReuseIdentifier: suggestedReuseIdentifier)
         scrollView.addSubview(suggestedTableView)
         suggestedTableView.reloadData()
+        suggestedStoriesTableViews.append(suggestedTableView)
 
         stackView.snp.remakeConstraints { make in
             make.leading.trailing.width.top.equalToSuperview()
