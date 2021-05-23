@@ -129,12 +129,14 @@ class AuthorDetailViewController: UIViewController, UIScrollViewDelegate {
     }
 
     func updateColors() {
-        navigationItem.backBarButtonItem?.tintColor = darkModeEnabled ? .darkCell : .white
-        view.backgroundColor = darkModeEnabled ? .darkCell : .white
+        navigationItem.backBarButtonItem?.tintColor = darkModeEnabled ? .green : .black
+        navigationItem.backBarButtonItem?.tintColor = darkModeEnabled ? .white : .black
+        navigationController?.navigationBar.barTintColor = darkModeEnabled ? .darkTint : .white
+        view.backgroundColor = darkModeEnabled ? .darkCell : .lightGray2
+        collectionView.backgroundColor = darkModeEnabled ? .darkCell : .white
         if authors.count > 1 {
             authorSwitchLabel.textColor = darkModeEnabled ? .white90 : .black90
         }
-        collectionView.backgroundColor = .lightGray2
         adapter.performUpdates(animated: false, completion: nil)
     }
 

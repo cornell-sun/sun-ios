@@ -121,11 +121,6 @@ extension SunAPI: TargetType {
     }
 
     func cleanString(_ string: String) -> String {
-//        let newString = string.replacingOccurrences(of: " ", with: "+")
-//        var cs = CharacterSet.urlQueryAllowed
-//        cs.remove("&")
-//        let cleanedString: String? = newString.addingPercentEncoding(withAllowedCharacters: cs)
-//        return cleanedString ?? string
         return string.replacingOccurrences(of: " ", with: "+")
     }
 }

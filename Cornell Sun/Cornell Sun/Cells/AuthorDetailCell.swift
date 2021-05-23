@@ -31,8 +31,6 @@ class AuthorDetailCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
 
-        contentView.backgroundColor = darkModeEnabled ? .darkCell : .white
-
         imageView = UIImageView()
         imageView.clipsToBounds = true
         imageView.layer.cornerRadius = AuthorDetailCell.imageViewWidth / 2
@@ -40,20 +38,17 @@ class AuthorDetailCell: UICollectionViewCell {
         contentView.addSubview(imageView)
 
         nameLabel = UILabel()
-        nameLabel.textColor = darkModeEnabled ? .white90 : .black90
         nameLabel.font = UIFont.avenir24
         nameLabel.numberOfLines = 0
         nameLabel.setLineSpacing(to: 6)
         contentView.addSubview(nameLabel)
 
         emailLabel = UILabel()
-        emailLabel.textColor = darkModeEnabled ? .white90 : .black90
         emailLabel.font = UIFont.avenir16
         emailLabel.numberOfLines = 1
         contentView.addSubview(emailLabel)
 
         bioTextView = UITextView()
-        bioTextView.textColor = darkModeEnabled ? .white90 : .black90
         bioTextView.backgroundColor = .clear
         bioTextView.font = UIFont.avenir16
         bioTextView.textContainer.lineFragmentPadding = 0
@@ -105,6 +100,11 @@ class AuthorDetailCell: UICollectionViewCell {
     }
 
     func configure(for authorDetail: AuthorDetailObject) {
+        contentView.backgroundColor = darkModeEnabled ? .darkCell : .white
+        nameLabel.textColor = darkModeEnabled ? .white90 : .black90
+        emailLabel.textColor = darkModeEnabled ? .white90 : .black90
+        bioTextView.textColor = darkModeEnabled ? .white90 : .black90
+
         if authorDetail.imageURL != nil {
             imageView.kf.setImage(with: authorDetail.imageURL)
         } else {

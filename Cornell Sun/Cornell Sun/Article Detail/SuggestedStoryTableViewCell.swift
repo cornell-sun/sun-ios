@@ -21,7 +21,6 @@ class SuggestedStoryTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
-        backgroundColor = darkModeEnabled ? .darkCell : .white
         selectionStyle = .none
 
         storyImageView = UIImageView()
@@ -37,7 +36,6 @@ class SuggestedStoryTableViewCell: UITableViewCell {
         headlineLabel = UILabel()
         headlineLabel.numberOfLines = 3
         headlineLabel.font = .articleTitle
-        headlineLabel.textColor = darkModeEnabled ? .white90 : .black90
         contentView.addSubview(headlineLabel)
 
         headlineLabel.snp.makeConstraints { make in
@@ -48,17 +46,24 @@ class SuggestedStoryTableViewCell: UITableViewCell {
 
         bylineLabel = UILabel()
         bylineLabel.font = .cellInformationText
-        bylineLabel.textColor = darkModeEnabled ? .white60 : .black60
         contentView.addSubview(bylineLabel)
 
         bylineLabel.snp.makeConstraints { make in
             make.leading.trailing.equalTo(headlineLabel)
             make.top.equalTo(headlineLabel.snp.bottom).offset(bylineTopOffset)
         }
+
+        setupColors()
     }
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    func setupColors() {
+        backgroundColor = darkModeEnabled ? .darkCell : .white
+        headlineLabel.textColor = darkModeEnabled ? .white90 : .black90
+        bylineLabel.textColor = darkModeEnabled ? .white60 : .black60
     }
 
     func setup(for suggestedStory: SuggestedStoryObject) {
@@ -80,6 +85,8 @@ class SuggestedStoryTableViewCell: UITableViewCell {
         if let byline = suggestedStory.authors?.byline {
             bylineLabel.text = "By \(byline)".uppercased()
         }
+
+        setupColors()
     }
 
     override func prepareForReuse() {
@@ -93,6 +100,8 @@ class SuggestedStoryTableViewCell: UITableViewCell {
         headlineLabel.snp.updateConstraints { make in
             make.leading.equalTo(storyImageView.snp.trailing).offset(articleLeadingOffset)
         }
+
+        setupColors()
     }
 
 }

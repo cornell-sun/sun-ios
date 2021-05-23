@@ -11,6 +11,7 @@ import SwiftSoup
 import SafariServices
 import GoogleMobileAds
 
+// swiftlint:disable:next type_body_length
 class ArticleStackViewController: UIViewController {
 
     let articleSeparatorOffset: CGFloat = 11.5
@@ -97,14 +98,26 @@ class ArticleStackViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-//        tabBarController?.tabBar.isHidden = true
         navigationController?.navigationBar.topItem?.title = ""
         headerView.updateColors()
         updateColors()
     }
 
     func updateColors() {
+        navigationItem.backBarButtonItem?.tintColor = darkModeEnabled ? .white : .black
+        navigationController?.navigationBar.barTintColor = darkModeEnabled ? .darkTint : .white
+        navigationController?.navigationBar.barStyle = darkModeEnabled ? .blackTranslucent : .default
+
+        if let _ = navigationItem.backBarButtonItem {
+            print("back bar item")
+        }
+
+        if let _ = navigationController {
+            print("navigation controller")
+        }
+
         view.backgroundColor = darkModeEnabled ? .darkCell : .white
+
         captionLabels.forEach { label in
             label.textColor = darkModeEnabled ? .white90 : .black90
         }
@@ -126,7 +139,7 @@ class ArticleStackViewController: UIViewController {
             label.textColor = darkModeEnabled ? .white90 : .black90
         }
         suggestedStoriesTableViews.forEach { tableView in
-            tableView.backgroundColor = darkModeEnabled ? .darkCell : .white
+            tableView.reloadData()
         }
     }
 
