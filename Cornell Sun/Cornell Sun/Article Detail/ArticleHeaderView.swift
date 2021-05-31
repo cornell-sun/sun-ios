@@ -100,7 +100,6 @@ class ArticleHeaderView: UIView {
         }
 
         authorButton = UIButton()
-        print(darkModeEnabled)
         authorButton.titleLabel?.font = .secondaryHeader
         authorButton.titleLabel?.numberOfLines = 0
         if #available(iOS 11.0, *) {

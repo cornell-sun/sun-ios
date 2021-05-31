@@ -60,6 +60,8 @@ class ArticleStackViewController: UIViewController {
             navigationController?.navigationBar.prefersLargeTitles = false
         }
 
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+
         scrollView = UIScrollView()
         view.addSubview(scrollView)
         scrollView.snp.makeConstraints { make in
@@ -104,17 +106,12 @@ class ArticleStackViewController: UIViewController {
     }
 
     func updateColors() {
+        navigationController?.navigationBar.items?.forEach { item in
+            item.backBarButtonItem?.tintColor = darkModeEnabled ? .white : .black
+        }
         navigationItem.backBarButtonItem?.tintColor = darkModeEnabled ? .white : .black
         navigationController?.navigationBar.barTintColor = darkModeEnabled ? .darkTint : .white
         navigationController?.navigationBar.barStyle = darkModeEnabled ? .blackTranslucent : .default
-
-        if let _ = navigationItem.backBarButtonItem {
-            print("back bar item")
-        }
-
-        if let _ = navigationController {
-            print("navigation controller")
-        }
 
         view.backgroundColor = darkModeEnabled ? .darkCell : .white
 

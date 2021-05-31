@@ -92,13 +92,15 @@ class SuggestedStoryTableViewCell: UITableViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
 
-        storyImageView.snp.updateConstraints { make in
+        storyImageView.snp.remakeConstraints { make in
             make.leading.top.equalToSuperview().offset(padding)
             make.width.height.equalTo(imageWidthHeight)
         }
 
-        headlineLabel.snp.updateConstraints { make in
+        headlineLabel.snp.remakeConstraints { make in
             make.leading.equalTo(storyImageView.snp.trailing).offset(articleLeadingOffset)
+            make.top.equalToSuperview().offset(padding)
+            make.trailing.equalToSuperview().inset(padding)
         }
 
         setupColors()

@@ -129,7 +129,9 @@ class AuthorDetailViewController: UIViewController, UIScrollViewDelegate {
     }
 
     func updateColors() {
-        navigationItem.backBarButtonItem?.tintColor = darkModeEnabled ? .green : .black
+        navigationController?.navigationBar.items?.forEach { item in
+            item.backBarButtonItem?.tintColor = darkModeEnabled ? .white : .black
+        }
         navigationItem.backBarButtonItem?.tintColor = darkModeEnabled ? .white : .black
         navigationController?.navigationBar.barTintColor = darkModeEnabled ? .darkTint : .white
         view.backgroundColor = darkModeEnabled ? .darkCell : .lightGray2
@@ -137,7 +139,7 @@ class AuthorDetailViewController: UIViewController, UIScrollViewDelegate {
         if authors.count > 1 {
             authorSwitchLabel.textColor = darkModeEnabled ? .white90 : .black90
         }
-        adapter.performUpdates(animated: false, completion: nil)
+        adapter.reloadData(completion: nil)
     }
 
     @objc func showHideAuthorSelect() {
@@ -170,7 +172,7 @@ class AuthorDetailViewController: UIViewController, UIScrollViewDelegate {
                 do {
                     let newPosts = try decoder.decode(AuthorObject.self, from: response.data).posts
                     
-                    if (newPosts!.isEmpty) {
+                    if newPosts!.isEmpty {
                         self.hasNextPage = false
                     }
                     

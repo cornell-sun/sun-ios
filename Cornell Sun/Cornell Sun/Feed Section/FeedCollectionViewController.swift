@@ -92,6 +92,9 @@ class FeedCollectionViewController: ViewController, UIScrollViewDelegate {
     }
     
     func updateColors() {
+        navigationController?.navigationBar.items?.forEach { item in
+            item.backBarButtonItem?.tintColor = darkModeEnabled ? .white : .black
+        }
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         navigationItem.backBarButtonItem?.tintColor = darkModeEnabled ? .white : .black
         navigationController?.navigationBar.barTintColor = darkModeEnabled ? .darkTint : .white
@@ -200,7 +203,6 @@ extension FeedCollectionViewController {
 extension FeedCollectionViewController: TabBarViewControllerDelegate {
     func articleSectionDidPressOnArticle(_ article: PostObject) {
         let articleVC = ArticleStackViewController(post: article)
-        
         navigationController?.pushViewController(articleVC, animated: true)
     }
 }
